@@ -1,6 +1,6 @@
 <?php
 /*
- Plugin Name:  WP OER LESSON PLAN
+ Plugin Name:  CURRICULUM PLUGIN
  Plugin URI:   https://www.wp-oer.com
  Description:  Open Educational Resource management and curation, metadata publishing, and alignment to Common Core State Standards.
  Version:      0.0.1
@@ -85,3 +85,19 @@ function my_plugin_activation_notice()
     <?php
 }
 
+/**
+ * Filter for adding Template for Plugin.
+ * @since 0.1.0
+ * @param $single_template
+ * @return string
+ */
+function get_single_lesson_plans_template($single_template)
+{
+    global $post;
+
+    if ($post->post_type == 'lesson-plans') {
+        $single_template = dirname( __FILE__ ) . '/templates/single-lesson-plans.php';
+    }
+    return $single_template;
+}
+add_filter( 'single_template', 'get_single_lesson_plans_template' );

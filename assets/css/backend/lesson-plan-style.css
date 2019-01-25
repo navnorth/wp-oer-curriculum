@@ -1,4 +1,2 @@
-/*.oer-lp-introduction-group > .panel-body > div > #wp-lesson_introduction-editor-container { border: none !important;}
-.oer-lp-introduction-group > .panel-body { padding: 0px !important; margin-top: -34px;}*/
-/*
-.oer-summative-checkbox input[type=checkbox], .oer-summative-checkbox input[type=radio] { margin: 0px !important;}*/
+.lesson_plan_meta_wrapper .lp-module-title { position: relative;}
+.lesson_plan_meta_wrapper .lp-remove-module { position: absolute;right: 0;top: -5px;vertical-align: middle;border-radius: 50%;padding: 4px 8px;}

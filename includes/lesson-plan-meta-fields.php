@@ -59,7 +59,11 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
             <!--For Introduction-->
             <div class="panel panel-default oer-lp-introduction-group" id="oer-lp-introduction-group">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php _e("Introduction", OER_LESSON_PLAN_SLUG); ?></h3>
+                    <div class="panel-title lp-module-title">
+                        <a class="btn btn-sm"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a>
+                        <span><?php _e("Introduction", OER_LESSON_PLAN_SLUG); ?></span>
+                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <?php
@@ -80,7 +84,10 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
             <!--For Lesson Times-->
             <div class="panel panel-default oer-lp-times-group" id="oer-lp-times-group">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php _e("Lesson Times", OER_LESSON_PLAN_SLUG); ?></h3>
+                    <h3 class="panel-title lp-module-title">
+                        <?php _e("Lesson Times", OER_LESSON_PLAN_SLUG); ?>
+                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                    </h3>
                 </div>
                 <div class="panel-body">
                     <?php
@@ -129,7 +136,7 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
                                         <button type="button"
                                                 class="btn btn-danger remove-time-element"
                                                 <?php if(count($oer_lp_times_label) == 1) echo 'disabled="disabled"';?>
-                                        ><i class="fa fa-times"></i> </button>
+                                        ><i class="fa fa-trash"></i> </button>
                                     </div>
                                 </div>
                             </div><!-- /.row -->
@@ -161,7 +168,7 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
                                     <button type="button"
                                             class="btn btn-danger remove-time-element"
                                             disabled="disabled"
-                                    ><i class="fa fa-times"></i> </button>
+                                    ><i class="fa fa-trash"></i> </button>
                                 </div>
                             </div>
                         </div><!-- /.row -->
@@ -179,7 +186,10 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
             <!--For industries/subject/grades-->
             <div class="panel panel-default oer-lp-industries-group" id="oer-lp-industries-group">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php _e("Industries / Subjects / Grades", OER_LESSON_PLAN_SLUG); ?></h3>
+                    <h3 class="panel-title lp-module-title">
+                        <?php _e("Industries / Subjects / Grades", OER_LESSON_PLAN_SLUG); ?>
+                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                    </h3>
                 </div>
                 <div class="panel-body">
                     <ul class="nav nav-tabs">
@@ -216,7 +226,16 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
                             s
                         </div>
                         <div class="tab-pane fade" id="lp-subjects-content" role="tabpanel" aria-labelledby="lp-subjects-tab">
-                            w
+                            <?php
+                           // echo the_terms( $post->ID, 'resource-subject-area', 'People: ', ', ', ' ' );
+                            $terms = get_terms( array(
+                                'taxonomy' => 'resource-subject-area',
+                                'hide_empty' => false,
+                                'orderby'           => 'term_id',
+                                'order'             => 'DESC',
+                                ) );
+                            //prepare_subject_areas($terms);
+                            ?>
                         </div>
                         <div class="tab-pane fade" id="lp-grades-content" role="tabpanel" aria-labelledby="lp-grades-tab">
                             <div class="row">
@@ -262,7 +281,10 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
             <!--For Standards and Objectives -->
             <div class="panel panel-default oer-lp-standards-group" id="oer-lp-standards-group">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php _e("Standards and Objectives", OER_LESSON_PLAN_SLUG); ?></h3>
+                    <h3 class="panel-title lp-module-title">
+                        <?php _e("Standards and Objectives", OER_LESSON_PLAN_SLUG); ?>
+                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                    </h3>
                 </div>
                 <div class="panel-body">
                     <h4 class="page-title-inner"><?php _e("Standards", OER_LESSON_PLAN_SLUG); ?></h4>
@@ -297,7 +319,7 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
                                         <button type="button"
                                                 class="btn btn-danger lp-remove-related-objective"
                                                 <?php if(count($oer_lp_related_objective) == 1) echo 'disabled="disabled"';?>
-                                        ><i class="fa fa-times"></i> </button>
+                                        ><i class="fa fa-trash"></i> </button>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -315,7 +337,7 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
                                     <button type="button"
                                             class="btn btn-danger lp-remove-related-objective"
                                             disabled="disabled"
-                                    ><i class="fa fa-times"></i> </button>
+                                    ><i class="fa fa-trash"></i> </button>
                                 </div>
                             </div>
                         <?php } ?>
@@ -333,10 +355,13 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
             <!--Activities in this lesson-->
             <div class="panel panel-default oer-lp-activities-group" id="oer-lp-activities-group">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php _e("Activities in this Lesson", OER_LESSON_PLAN_SLUG); ?></h3>
+                    <h3 class="panel-title lp-module-title">
+                        <?php _e("Activities in this Lesson", OER_LESSON_PLAN_SLUG); ?>
+                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                    </h3>
                 </div>
                 <div class="panel-body">
-                    <div class="panel-group">
+                    <div class="panel-group" id="lp-ac-inner-panel">
                         <?php
                         if(!empty($oer_lp_activity_title)) {
                             foreach ($oer_lp_activity_title as $key => $item) { ?>
@@ -351,6 +376,9 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
                                                        placeholder="Activity Title"
                                                        value="<?php echo $item; ?>"
                                                 >
+                                            </div>
+                                            <div class="col-md-2 lp-ac-delete-container">
+                                                <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -399,6 +427,9 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
                                             <div class="form-group col-md-8">
                                                 <label>Activity Title</label>
                                                 <input type="text" name="oer_lp_activity_title[]" class="form-control" placeholder="Activity Title">
+                                            </div>
+                                            <div class="col-md-2 lp-ac-delete-container">
+                                                <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -453,7 +484,10 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
             <!--Summative Assessment-->
             <div class="panel panel-default oer-lp-summative-group" id="oer-lp-summative-group">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><?php _e("Summative Assessment", OER_LESSON_PLAN_SLUG); ?></h3>
+                    <h3 class="panel-title lp-module-title">
+                        <?php _e("Summative Assessment", OER_LESSON_PLAN_SLUG); ?>
+                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                    </h3>
                 </div>
                 <div class="panel-body">
                     <h4><?php _e("Assessment Type(s):", OER_LESSON_PLAN_SLUG); ?></h4>
@@ -529,4 +563,32 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
             </div>
         </div>
     </div>
+    <!--Confirm Modal-->
+    <div id="lp-confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>Delete Module?</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">&nbsp;</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <strong>These items will be permanently deleted and cannot be recovered. Are you sure?</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="lp-delete-confirm">Yes, Delete</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 </div>

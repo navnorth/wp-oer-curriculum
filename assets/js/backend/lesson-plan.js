@@ -57,11 +57,19 @@
         // Add Activity in Lesson
         AddActivityInLesson: function () {
             $(document).on('click', '.lp-add-ac-item', function () {
-                var $TargetDiv = $('.lp-ac-item:last');
                 var total_form_box = parseInt($('.lp-ac-item').length, 10);
-
                 $.post(ajaxurl, {action:'lp_add_more_activity_callback', row_id: total_form_box}).done(function (response) {
-                    $(response).insertAfter('div.lp-ac-item:last');
+                    if($('div.lp-ac-item').length)
+                    {
+                        console.log('if');
+                        $(response).insertAfter('div.lp-ac-item:last');
+                    }
+                    else
+                    {
+                        console.log('else');
+                       $('.lp-ac-inner-panel').html(response);
+                    }
+
                     tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-activity-detail-' + total_form_box );
                     tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-activity-detail-' + total_form_box );
 
@@ -71,7 +79,24 @@
                     cloned.find('a').text('Unnamed Activity');
                     cloned.insertAfter('.sidebar-lesson-activities-title li:last');
                 });
-              
+            });
+        },
+
+        // Delete module
+        DeleteModule: function () {
+            $(document).on('click', '.lp-remove-module',function(e) {
+                var moduleId = $(this).closest('.panel-default').attr('id');
+                console.log('id',moduleId);
+                e.preventDefault();
+                $('#lp-confirm').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+                .on('click', '#lp-delete-confirm', function(e) {
+                    $('#' + moduleId).remove();
+                    $('a[href=#' + moduleId +']').parent('li').remove();
+                    $('#lp-confirm').modal('hide');
+                });
             });
         }
     };
@@ -83,5 +108,6 @@
     LessonPlan.AddMoreObjectives();
     LessonPlan.RemoveObjectives();
     LessonPlan.AddActivityInLesson();
+    LessonPlan.DeleteModule();
 
 })(jQuery);

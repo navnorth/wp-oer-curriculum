@@ -12,26 +12,33 @@ function oer_lesson_plan_creation()
 {
     global $_use_gutenberg;
     $labels = array(
-        'name'               => _x( 'Lesson Plans', 'post type general name' ),
-        'singular_name'      => _x( 'Lesson Plans', 'post type singular name' ),
-        'add_new'            => _x( 'Create Lesson', 'book' ),
-        'add_new_item'       => __( 'Create Lesson' ),
-        'edit_item'          => __( 'Edit Lesson Plan' ),
-        'new_item'           => __( 'Create Lesson' ),
-        'all_items'          => __( 'Lesson Plans' ),
-        'view_item'          => __( 'View Lesson Plan' ),
+        'name'               => _x( 'Curriculum', 'post type general name' ),
+        'singular_name'      => _x( 'Curriculum', 'post type singular name' ),
+        'add_new'            => _x( 'Create Curriculum', 'book' ),
+        'add_new_item'       => __( 'Create Curriculum' ),
+        'edit_item'          => __( 'Edit Curriculum' ),
+        'new_item'           => __( 'Create Curriculum' ),
+         'all_items'          => __( 'All Curriculum' ),
+        'view_item'          => __( 'View Curriculum' ),
         'search_items'       => __( 'Search' ),
-        'menu_name'          => 'OER Lesson Plan'
+        'menu_name'          => 'Curriculum'
     );
 
     $args =array(
-        'labels'        => $labels,
-        'public'        => true,
-        'has_archive'   => true,
-        'show_in_menu'  => 'edit.php?post_type=resource',
-        'taxonomies'    => array('post_tag', /*'resource-subject-area'*/),
-        'supports'      => array( 'title', 'editor', 'thumbnail', 'revisions' ),
-        'register_meta_box_cb' => 'oer_lesson_plan_custom_meta_boxes'
+        'labels'                => $labels,
+        'public'                => true,
+        'show_ui'               => true,
+        'has_archive'           => true,
+        'show_in_menu'          => true,//'edit.php?post_type=resource',
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'exclude_from_search'   => false,
+        'query_var'             => true,
+        'menu_position'         => 26,
+        'menu_icon'             => 'dashicons-welcome-learn-more',
+        'taxonomies'            => array('post_tag', 'resource-subject-area'),
+        'supports'              => array( 'title', 'editor', 'thumbnail', 'revisions' ),
+        'register_meta_box_cb'  => 'oer_lesson_plan_custom_meta_boxes'
     );
 
     if ($_use_gutenberg=="on" or $_use_gutenberg=="1")
