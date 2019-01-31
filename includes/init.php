@@ -14,11 +14,11 @@ function oer_lesson_plan_creation()
     $labels = array(
         'name'               => _x( 'Curriculum', 'post type general name' ),
         'singular_name'      => _x( 'Curriculum', 'post type singular name' ),
-        'add_new'            => _x( 'Create Curriculum', 'book' ),
-        'add_new_item'       => __( 'Create Curriculum' ),
+        'add_new'            => _x( 'Add New Curriculum', 'book' ),
+        'add_new_item'       => __( 'Add New Curriculum' ),
         'edit_item'          => __( 'Edit Curriculum' ),
         'new_item'           => __( 'Create Curriculum' ),
-         'all_items'          => __( 'All Curriculum' ),
+        'all_items'          => __( 'All Curriculum' ),
         'view_item'          => __( 'View Curriculum' ),
         'search_items'       => __( 'Search' ),
         'menu_name'          => 'Curriculum'
@@ -67,7 +67,6 @@ add_action('admin_enqueue_scripts', 'oer_lesson_plan_assets');
 function oer_lesson_plan_assets()
 {
     global $post;
-
     if(
         (isset($_GET['post_type']) && $_GET['post_type'] == 'lesson-plans') ||
         (isset($post->post_type) && $post->post_type=='lesson-plans')
@@ -78,8 +77,18 @@ function oer_lesson_plan_assets()
         wp_enqueue_style('admin-lesson-plan', OER_LESSON_PLAN_URL.'assets/css/backend/lesson-plan-style.css');
 
         //Enqueue script
+
         wp_enqueue_script('admin-lp-bootstrap', OER_LESSON_PLAN_URL.'assets/lib/bootstrap-3.3.7/js/bootstrap.min.js');
-        wp_enqueue_script('lesson-plan', OER_LESSON_PLAN_URL.'assets/js/backend/lesson-plan.js');
+        //wp_enqueue_script('drag-n--drop', 'https://code.jquery.com/ui/1.12.1/jquery-ui.js');
+        /*wp_enqueue_script('abc', OER_LESSON_PLAN_URL.'assets/js/backend/drag-drop-meta-boxes.js', array(
+            'jquery-ui-sortable',
+            'jquery'
+        ));*/
+        wp_enqueue_script('lesson-plan', OER_LESSON_PLAN_URL.'assets/js/backend/lesson-plan.js',  array(
+            'jquery-ui-sortable',
+            'jquery'
+        ));
+
     }
 }
 
@@ -155,6 +164,12 @@ function lp_save_custom_fields()
             if(isset($_POST['oer_lp_assessment']))
             {
                 update_post_meta( $post->ID , 'oer_lp_assessment' , $_POST['oer_lp_assessment']);
+            }
+
+            // Save elements Order
+            if(isset($_POST['lp_order']))
+            {
+                update_post_meta( $post->ID , 'lp_order' , $_POST['lp_order']);
             }
         }
     }

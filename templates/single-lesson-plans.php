@@ -3,12 +3,20 @@
  * The Template for displaying all single Curriculum
  */
 
-/***
+/**
  * Enqueue the assets
  */
 wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL.'assets/lib/font-awesome/css/font-awesome.min.css');
 wp_enqueue_style('lesson-plan-bootstrap', OER_LESSON_PLAN_URL.'assets/lib/bootstrap-3.3.7/css/bootstrap.min.css');
 
+//Add this hack to display top nav and head section on Eleganto theme
+/*$cur_theme = wp_get_theme();
+$theme = $cur_theme->get('Name');
+if ($theme == "Eleganto"){
+	get_template_part( 'template-part', 'topnav' );
+	get_template_part( 'template-part', 'head' );
+}
+*/
 get_header();
 
 global $post;

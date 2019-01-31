@@ -23,3 +23,13 @@ if( ! function_exists('oer_lp_show_selected'))
     }
 }
 
+if(!function_exists('prepare_subject_areas'))
+{
+    function prepare_subject_areas($terms)
+    {
+        foreach ($terms as $key => $term)
+        {
+            //echo "<pre>"; echo $key;print_r($term);
+        }
+    }
+}

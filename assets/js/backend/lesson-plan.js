@@ -2,7 +2,7 @@
  * All backend custom JavaScript code are here
  *
  */
-( function( $ ){
+jQuery(document).ready(function ($) {
 
     var LessonPlan = {
         UpdateActivityTitle: function () {
@@ -98,6 +98,72 @@
                     $('#lp-confirm').modal('hide');
                 });
             });
+        },
+
+        // Drag and drop elements
+        LessonElementSortable: function () {
+            // Sort the parents
+            $( "#oer-lp-sortable").sortable({
+                containment: "document",
+                connectWith: '#oer-lp-sortable',
+                items: "> div",
+                handle: ".lp-sortable-handle",
+                tolerance: "pointer",
+                cursor: "move",
+                opacity: 0.7,
+               // revert: 300,
+                //delay: 150,
+                placeholder: "movable-placeholder",
+                start: function(e, ui) {
+                    //$("#oer-lp-sortable .panel.panel-default").addClass('ui-sortable-start');
+                    $(".panel-body").addClass("hide");
+                    //ui.placeholder.height(ui.helper.outerHeight());
+                    ui.placeholder.height(37);
+                }
+            });
+
+            $('#oer-lp-sortable').on("sortstop", function (event, ui) {
+
+                $( "#oer-lp-sortable .panel.panel-default").removeClass('ui-sortable-start')
+                $(".panel-body").removeClass("hide");
+                console.log("Stop");
+
+                $("#oer-lp-sortable .lp-element-wrapper").each(function (index) {
+                    var count = index + 1;
+
+                    var position = $(this).find('.element-order').val();
+                    console.log("position value is"  + position);
+                    var newvalue = $(this).find('.element-order').val(count);
+                    // reassign all of the numbers once it's loaded.
+
+                    var textAreaId = $(this).find('textarea').attr('id');
+
+                    if (typeof textAreaId !== 'undefined') {
+                        console.log("Element id  " + textAreaId);
+                        tinymce.execCommand( 'mceRemoveEditor', false, textAreaId );
+                        tinymce.execCommand( 'mceAddEditor', false, textAreaId );
+                    }
+                })
+            });
+
+            // Inner child activities element sortable
+            $( "#lp-ac-inner-panel").sortable({
+                containment: "document",
+                items: "> div",
+                handle: ".lp-inner-sortable-handle",
+                tolerance: "pointer",
+                cursor: "move",
+                opacity: 0.7,
+                // revert: 300,
+                //delay: 150,
+                placeholder: "movable-placeholder",
+                start: function(e, ui) {
+                    //$("#oer-lp-sortable .panel.panel-default").addClass('ui-sortable-start');
+                    //$(".panel-body").addClass("hide");
+                    ui.placeholder.height(ui.helper.outerHeight());
+                    //ui.placeholder.height(37);
+                }
+            });
         }
     };
 
@@ -109,5 +175,5 @@
     LessonPlan.RemoveObjectives();
     LessonPlan.AddActivityInLesson();
     LessonPlan.DeleteModule();
-
-})(jQuery);
+    LessonPlan.LessonElementSortable();
+});
