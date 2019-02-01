@@ -166,18 +166,43 @@ function lp_save_custom_fields()
                 update_post_meta( $post->ID , 'oer_lp_assessment' , $_POST['oer_lp_assessment']);
             }
 
+            // Save custom editor fields
+            if(isset($_POST['oer_lp_custom_editor']))
+            {
+                update_post_meta( $post->ID , 'oer_lp_custom_editor' , $_POST['oer_lp_custom_editor']);
+            }
+
+            // Save custom editor fields
+            if(isset($_POST['oer_lp_custom_text_list']))
+            {
+                update_post_meta( $post->ID , 'oer_lp_custom_text_list' , $_POST['oer_lp_custom_text_list']);
+            }
+
+            if(isset($_POST['oer_lp_vocabulary_list_title']))
+            {
+                update_post_meta( $post->ID , 'oer_lp_vocabulary_list_title' , $_POST['oer_lp_vocabulary_list_title']);
+            }
+
+            if(isset($_POST['oer_lp_vocabulary_details']))
+            {
+                update_post_meta( $post->ID , 'oer_lp_vocabulary_details' , $_POST['oer_lp_vocabulary_details']);
+            }
+
+
             // Save elements Order
             if(isset($_POST['lp_order']))
             {
                 update_post_meta( $post->ID , 'lp_order' , $_POST['lp_order']);
             }
+
+
         }
     }
 }
 
 // Ajax Requests
 /**
- * chat form submit
+ * Create dynamic more activity editor
  */
 add_action('wp_ajax_lp_add_more_activity_callback', 'lp_add_more_activity_callback');
 add_action('wp_ajax_nopriv_lp_add_more_activity_callback','lp_add_more_activity_callback');
@@ -233,4 +258,140 @@ function lp_add_more_activity_callback()
 
     echo $content;
     exit();
+}
+
+/**
+ * Create dynamic module
+ */
+add_action('wp_ajax_lp_create_module_callback', 'lp_create_module_callback');
+add_action('wp_ajax_nopriv_lp_create_module_callback','lp_create_module_callback');
+
+function lp_create_module_callback()
+{
+    $module_type = isset($_REQUEST['module_type']) ? $_REQUEST['module_type'] : 'editor';
+    $element_id = isset($_REQUEST['row_id']) ? $_REQUEST['row_id'] : '15';
+
+    if ($module_type == 'editor') {
+        echo create_dynamic_editor($element_id);exit();
+       /* echo json_encode(
+            array(
+                'status' => 'ok',
+                'result' => create_dynamic_editor($element_id)
+            )
+        );*/
+    } elseif ($module_type == 'list') {
+        echo create_dynamic_text_list($element_id);
+    } elseif ($module_type == 'vocabulary') {
+        echo create_dynamic_vocabulary_list($element_id);
+    }
+    exit();
+}
+
+/**
+ * Create dynamic text editor
+ * @param $id
+ * @return string
+ */
+function create_dynamic_editor($id)
+{
+
+    $content = '<div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-'.$id.'">
+                    <input type="hidden" name="lp_order[lp_custom_editor_order]" class="element-order" value="1">
+                    <div class="panel-heading">
+                        <h3 class="panel-title lp-module-title">
+                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
+                            Text Editor
+                            <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">';
+                        ob_start(); // Start output buffer
+                        wp_editor( '',
+                            'oer-lp-custom-editor-'.$id,
+                            $settings = array(
+                                'textarea_name' => 'oer_lp_custom_editor[]',
+                                'media_buttons' => true,
+                                'textarea_rows' => 10,
+                                'drag_drop_upload' => true,
+                                'teeny' => true,
+                            )
+                        );
+                        $content .= ob_get_clean();
+        $content .= '</div>
+                </div>';
+
+        return $content;
+}
+
+/**
+ * Create dynamic text list
+ * @param $id
+ * @return string
+ */
+function create_dynamic_text_list($id)
+{
+    $content = '<div class="panel panel-default lp-element-wrapper" id="oer-lp-text-list-group'.$id.'">
+                    <input type="hidden" name="lp_order[lp_text_list_order]" class="element-order" value="'.$id.'">
+                    <div class="panel-heading">
+                        <h3 class="panel-title lp-module-title">
+                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
+                            Text List
+                            <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="lp-text-list-row" id="lp-text-list-row'.$id.'">
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <input type="text"
+                                               class="form-control"
+                                               name="oer_lp_custom_text_list[]"
+                                        >
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button"
+                                            class="btn btn-danger lp-remove-text-list"
+                                            disabled="disabled"
+                                    ><i class="fa fa-trash"></i> </button>
+                                </div>
+                            </div>   
+                        </div>
+                    </div>
+                </div>';
+
+    return $content;
+}
+
+/**
+ * Create dynamic vocabulary list
+ * @param $id
+ * @return string
+ */
+function create_dynamic_vocabulary_list($id)
+{
+    $content = '<div class="panel panel-default lp-element-wrapper" id="oer-lp-vocabulary-list-group'.$id.'">
+                    <input type="hidden" name="lp_order[lp_vocabulary_list_order]" class="element-order" value="'.$id.'">
+                    <div class="panel-heading">
+                        <h3 class="panel-title lp-module-title">
+                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
+                            Vocabulary List
+                            <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <input type="text"
+                                   class="form-control"
+                                   name="oer_lp_vocabulary_list_title[]"
+                            >
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="oer_lp_vocabulary_details[]" rows="6"></textarea>
+                        </div>   
+                    </div>
+                </div>';
+
+    return $content;
 }

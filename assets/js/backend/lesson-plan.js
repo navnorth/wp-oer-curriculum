@@ -59,14 +59,9 @@ jQuery(document).ready(function ($) {
             $(document).on('click', '.lp-add-ac-item', function () {
                 var total_form_box = parseInt($('.lp-ac-item').length, 10);
                 $.post(ajaxurl, {action:'lp_add_more_activity_callback', row_id: total_form_box}).done(function (response) {
-                    if($('div.lp-ac-item').length)
-                    {
-                        console.log('if');
+                    if($('div.lp-ac-item').length) {
                         $(response).insertAfter('div.lp-ac-item:last');
-                    }
-                    else
-                    {
-                        console.log('else');
+                    } else {
                        $('.lp-ac-inner-panel').html(response);
                     }
 
@@ -116,9 +111,9 @@ jQuery(document).ready(function ($) {
                 placeholder: "movable-placeholder",
                 start: function(e, ui) {
                     //$("#oer-lp-sortable .panel.panel-default").addClass('ui-sortable-start');
-                    $(".panel-body").addClass("hide");
-                    //ui.placeholder.height(ui.helper.outerHeight());
-                    ui.placeholder.height(37);
+                    //$(".panel-body").addClass("hide");
+                    ui.placeholder.height(ui.helper.outerHeight());
+                    //ui.placeholder.height(37);
                 }
             });
 
@@ -164,6 +159,34 @@ jQuery(document).ready(function ($) {
                     //ui.placeholder.height(37);
                 }
             });
+        },
+
+        // Create dynamic module
+        CreateDynamicModule: function () {
+            $(document).on('click','#lp-create-module-btn', function () {
+                var total_form_box = parseInt($('.lp-element-wrapper').length, 10);
+                var module_type = $('#module-type').val();
+
+
+                console.log(total_form_box, module_type);
+                $.post(ajaxurl, {action:'lp_create_module_callback', module_type: module_type, row_id: total_form_box}).done(function (response) {
+                    $(response).insertAfter('div.lp-element-wrapper:last');
+
+                    if (module_type == 'editor') {
+                        tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-custom-editor-' + total_form_box );
+                        tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-custom-editor-' + total_form_box );
+                    }
+
+
+                    // Create dynamic elements on sidebar
+                   /* var cloned = $('.sidebar-lesson-activities-title li:last').clone();
+                    cloned.find('a').attr('href', '#lp-ac-item-' + total_form_box);
+                    cloned.find('a').text('Unnamed Activity');
+                    cloned.insertAfter('.sidebar-lesson-activities-title li:last');*/
+
+                    $('#lp-dynamic-module-modal').modal('hide');
+                });
+            });
         }
     };
 
@@ -176,4 +199,5 @@ jQuery(document).ready(function ($) {
     LessonPlan.AddActivityInLesson();
     LessonPlan.DeleteModule();
     LessonPlan.LessonElementSortable();
+    LessonPlan.CreateDynamicModule();
 });

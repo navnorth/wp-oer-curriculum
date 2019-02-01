@@ -112,7 +112,7 @@ $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($p
                 foreach ($elements_orders as $elementKey => $value) {
                     if($elementKey == 'lp_introduction_order') {?>
                         <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-introduction-group">
-                            <input type="hidden" name="lp_order[lp_introduction_order]" class="element-order">
+                            <input type="hidden" name="lp_order[lp_introduction_order]" class="element-order" value="<?php $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
                                     <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
@@ -139,7 +139,7 @@ $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($p
                     <?php } elseif ($elementKey == 'lp_lesson_times_order') {?>
                         <!--For Lesson Times-->
                         <div class="panel panel-default lp-element-wrapper oer-lp-times-group" id="oer-lp-times-group">
-                            <input type="hidden" name="lp_order[lp_lesson_times_order]" class="element-order">
+                            <input type="hidden" name="lp_order[lp_lesson_times_order]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
                                     <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
@@ -243,7 +243,7 @@ $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($p
                     <?php } elseif ($elementKey == 'lp_industries_order') {?>
                         <!--For industries/subject/grades-->
                         <div class="panel panel-default lp-element-wrapper oer-lp-industries-group" id="oer-lp-industries-group">
-                            <input type="hidden" name="lp_order[lp_industries_order]" class="element-order">
+                            <input type="hidden" name="lp_order[lp_industries_order]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
                                     <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
@@ -319,7 +319,7 @@ $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($p
                     <?php } elseif ($elementKey == 'lp_standard_order') {?>
                         <!--For Standards and Objectives -->
                         <div class="panel panel-default lp-element-wrapper oer-lp-standards-group" id="oer-lp-standards-group">
-                            <input type="hidden" name="lp_order[lp_standard_order]" class="element-order">
+                            <input type="hidden" name="lp_order[lp_standard_order]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
                                     <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
@@ -395,7 +395,7 @@ $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($p
                     <?php } elseif ($elementKey == 'lp_activities_order') {?>
                         <!--Activities in this lesson-->
                         <div class="panel panel-default lp-element-wrapper oer-lp-activities-group" id="oer-lp-activities-group">
-                            <input type="hidden" name="lp_order[lp_activities_order]" class="element-order">
+                            <input type="hidden" name="lp_order[lp_activities_order]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
                                     <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
@@ -409,6 +409,7 @@ $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($p
                                     if(!empty($oer_lp_activity_title)) {
                                         foreach ($oer_lp_activity_title as $key => $item) { ?>
                                             <div class="panel panel-default lp-ac-item" id="lp-ac-item-<?php echo $key;?>">
+                                                <!--<span class="lp-inner-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>-->
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="form-group col-md-8">
@@ -526,7 +527,7 @@ $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($p
                     <?php } elseif ($elementKey == 'lp_summative_order') {?>
                         <!--Summative Assessment-->
                         <div class="panel panel-default lp-element-wrapper oer-lp-summative-group" id="oer-lp-summative-group">
-                            <input type="hidden" name="lp_order[lp_summative_order]" class="element-order">
+                            <input type="hidden" name="lp_order[lp_summative_order]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
                                     <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
@@ -597,7 +598,112 @@ $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($p
                                 </div>
                             </div>
                         </div>
+                    <?php } elseif ($elementKey == 'lp_custom_editor_order') {?>
+                        <?php
+                        $oer_lp_custom_editor = (isset($post_meta_data['oer_lp_custom_editor'][0]) ? unserialize($post_meta_data['oer_lp_custom_editor'][0]) : array());
+                        if (!empty($oer_lp_custom_editor)) {
+                            foreach ($oer_lp_custom_editor as $key => $editor) { ?>
+                                <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-<?php echo $key; ?>">
+                                    <input type="hidden" name="lp_order[lp_custom_editor_order]" class="element-order" value="<?php echo $value;?>" value="1">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title lp-module-title">
+                                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
+                                            Text Editor
+                                            <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body">';
+                                        <?php
+                                        wp_editor( $editor,
+                                            'oer-lp-custom-editor-'.$id,
+                                            $settings = array(
+                                                'textarea_name' => 'oer_lp_custom_editor[]',
+                                                'media_buttons' => true,
+                                                'textarea_rows' => 10,
+                                                'drag_drop_upload' => true,
+                                                'teeny' => true,
+                                            )
+                                        );
+                                        ?>
+                                    </div>
+                                </div>
+                            <?php }
+                        }
+                        ?>
+                    <?php } elseif ($elementKey == 'lp_text_list_order') {?>
+                        <?php
+                        $oer_lp_custom_text_list = (isset($post_meta_data['oer_lp_custom_text_list'][0]) ? unserialize($post_meta_data['oer_lp_custom_text_list'][0]) : array());
+                        if (!empty($oer_lp_custom_text_list)) {
+                            foreach ($oer_lp_custom_text_list as $key => $list) { ?>
+                                <div class="panel panel-default lp-element-wrapper" id="oer-lp-text-list-group-<?php echo $key;?>">
+                                    <input type="hidden" name="lp_order[lp_text_list_order]" class="element-order" value="<?php echo $value;?>">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title lp-module-title">
+                                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
+                                            Text List
+                                            <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="lp-text-list-row" id="lp-text-list-row'.$id.'">
+                                                <div class="col-md-9">
+                                                    <div class="form-group">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               name="oer_lp_custom_text_list[]"
+                                                               value="<?php echo $list;?>"
+                                                        >
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <button type="button"
+                                                            class="btn btn-danger lp-remove-text-list"
+                                                            disabled="disabled"
+                                                    ><i class="fa fa-trash"></i> </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php }
+                        }
+                        ?>
+
+                    <?php } elseif ($elementKey == 'lp_vocabulary_list_order') {?>
+                        <?php
+                        $oer_lp_vocabulary_list_title = (isset($post_meta_data['oer_lp_vocabulary_list_title'][0]) ? unserialize($post_meta_data['oer_lp_vocabulary_list_title'][0]) : array());
+                        $oer_lp_vocabulary_details = (isset($post_meta_data['oer_lp_vocabulary_details'][0]) ? unserialize($post_meta_data['oer_lp_vocabulary_details'][0]) : array());
+                        if (!empty($oer_lp_vocabulary_list_title)) {
+                            foreach ($oer_lp_vocabulary_list_title as $key => $vocabulary) { ?>
+                                <div class="panel panel-default lp-element-wrapper" id="oer-lp-vocabulary-list-group-<?php echo $key;?>">
+                                    <input type="hidden" name="lp_order[lp_vocabulary_list_order]" class="element-order" value="<?php echo $value;?>">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title lp-module-title">
+                                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
+                                            Vocabulary List
+                                            <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <input type="text"
+                                                   class="form-control"
+                                                   name="oer_lp_vocabulary_list_title[]"
+                                                   value="<?php echo $vocabulary;?>"
+                                            >
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="oer_lp_vocabulary_details[]" rows="6"><?php echo isset($oer_lp_vocabulary_details[$key]) ? $oer_lp_vocabulary_details[$key] : "";?></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php }
+                        }
+                        ?>
+
                     <?php }
+
                 }
             } else { ?>
                 <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-introduction-group">
@@ -1089,15 +1195,43 @@ $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($p
             <div class="row">
                 <div class="col-md-12">
                     <button type="button"
-                            class="btn btn-default"
+                            id="lp-create-dynamic-module"
+                            class="btn btn-default lp-create-dynamic-module"
+                            data-toggle="modal"
+                            data-target="#lp-dynamic-module-modal"
                     ><i class="fa fa-plus"></i> Add Module</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Dynamic module modal-->
+    <div class="modal fade" id="lp-dynamic-module-modal" tabindex="-1" role="dialog" aria-labelledby="lpDynamicModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="lpDynamicModalLabel">Add Module</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="module-type" class="control-label">Module Type</label>
+                        <select name="module-type" class="form-control" id="module-type">
+                            <option value="list">Text List</option>
+                            <option value="vocabulary">Vocabulary List</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="lp-create-module-btn">Create</button>
                 </div>
             </div>
         </div>
     </div>
     <!--Confirm Modal-->
     <div id="lp-confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
