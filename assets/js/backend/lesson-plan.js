@@ -106,8 +106,8 @@ jQuery(document).ready(function ($) {
                 tolerance: "pointer",
                 cursor: "move",
                 opacity: 0.7,
-               // revert: 300,
-                //delay: 150,
+                revert: 300,
+                delay: 150,
                 placeholder: "movable-placeholder",
                 start: function(e, ui) {
                     //$("#oer-lp-sortable .panel.panel-default").addClass('ui-sortable-start');

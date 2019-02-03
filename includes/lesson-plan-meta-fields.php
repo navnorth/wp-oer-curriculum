@@ -6,6 +6,7 @@ global $wpdb;
 
 // Get all post meta for the post
 $post_meta_data = get_post_meta($post->ID );
+//echo "<pre>"; print_r(get_post_meta($post->ID, '', true ));
 
 // Lesson activity data
 $oer_lp_activity_title  = isset($post_meta_data['oer_lp_activity_title'][0]) ? unserialize($post_meta_data['oer_lp_activity_title'][0]) : array();
@@ -13,6 +14,9 @@ $oer_lp_activity_type   = isset($post_meta_data['oer_lp_activity_type'][0]) ? un
 $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? unserialize($post_meta_data['oer_lp_activity_detail'][0]) : array();
 
 $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($post_meta_data['lp_order'][0]) : array();
+foreach ($elements_orders as $orderKey => $orderValue) {
+    //echo "Key -> " . $orderKey . "  value -> " . $orderValue ."<br/>";
+}
 ?>
 <div class="lesson_plan_meta_wrapper">
     <div class="row">
@@ -409,7 +413,8 @@ $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($p
                                     if(!empty($oer_lp_activity_title)) {
                                         foreach ($oer_lp_activity_title as $key => $item) { ?>
                                             <div class="panel panel-default lp-ac-item" id="lp-ac-item-<?php echo $key;?>">
-                                                <!--<span class="lp-inner-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>-->
+                                                <!--<input type="hidden" name="lp_activity_order[lp_activities_order]" class="element-activity-order" value="">-->
+                                                <span class="lp-inner-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="form-group col-md-8">
@@ -612,10 +617,10 @@ $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($p
                                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                         </h3>
                                     </div>
-                                    <div class="panel-body">';
+                                    <div class="panel-body">
                                         <?php
                                         wp_editor( $editor,
-                                            'oer-lp-custom-editor-'.$id,
+                                            'oer-lp-custom-editor-'.$key,
                                             $settings = array(
                                                 'textarea_name' => 'oer_lp_custom_editor[]',
                                                 'media_buttons' => true,
@@ -646,7 +651,7 @@ $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($p
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">
-                                            <div class="lp-text-list-row" id="lp-text-list-row'.$id.'">
+                                            <div class="lp-text-list-row" id="lp-text-list-row<?php echo $key;?>">
                                                 <div class="col-md-9">
                                                     <div class="form-group">
                                                         <input type="text"
@@ -1217,7 +1222,9 @@ $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($p
                     <div class="form-group">
                         <label for="module-type" class="control-label">Module Type</label>
                         <select name="module-type" class="form-control" id="module-type">
+                            <option value="editor">Text/Editor</option>
                             <option value="list">Text List</option>
+                            <!--<option value="resources">Resources and Materials</option>-->
                             <option value="vocabulary">Vocabulary List</option>
                         </select>
                     </div>
