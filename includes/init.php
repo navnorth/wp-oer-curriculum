@@ -77,17 +77,11 @@ function oer_lesson_plan_assets()
         wp_enqueue_style('admin-lesson-plan', OER_LESSON_PLAN_URL.'assets/css/backend/lesson-plan-style.css');
 
         //Enqueue script
+        if( ! wp_script_is( 'admin-lp-bootstrap', 'enqueued' ) ) {
+            wp_enqueue_script('admin-lp-bootstrap', OER_LESSON_PLAN_URL.'assets/lib/bootstrap-3.3.7/js/bootstrap.min.js');
+        }
 
-        wp_enqueue_script('admin-lp-bootstrap', OER_LESSON_PLAN_URL.'assets/lib/bootstrap-3.3.7/js/bootstrap.min.js');
-        //wp_enqueue_script('drag-n--drop', 'https://code.jquery.com/ui/1.12.1/jquery-ui.js');
-        /*wp_enqueue_script('abc', OER_LESSON_PLAN_URL.'assets/js/backend/drag-drop-meta-boxes.js', array(
-            'jquery-ui-sortable',
-            'jquery'
-        ));*/
-        wp_enqueue_script('lesson-plan', OER_LESSON_PLAN_URL.'assets/js/backend/lesson-plan.js',  array(
-            'jquery-ui-sortable',
-            'jquery'
-        ));
+        wp_enqueue_script('lesson-plan', OER_LESSON_PLAN_URL.'assets/js/backend/lesson-plan.js');
 
     }
 }
@@ -100,6 +94,9 @@ function lp_save_custom_fields()
 {
     global $post, $wpdb, $_oer_prefix;
 
+    //echo "<pre>";
+    //print_r($_POST['lp_order']);
+    //die;
     //Check first if $post is not empty
     if ($post)
     {
@@ -172,8 +169,23 @@ function lp_save_custom_fields()
                 update_post_meta( $post->ID , 'oer_lp_custom_editor' , $_POST['oer_lp_custom_editor']);
             }
 
-            // Save custom editor fields
-            if(isset($_POST['oer_lp_custom_text_list']))
+            // Save custom modules
+            if(isset($_POST['lp_order']))
+            {
+                foreach ($_POST['lp_order'] as $moduleKey => $order) {
+                    if (isset($_POST[$moduleKey])) {
+                        update_post_meta( $post->ID , $moduleKey , $_POST[$moduleKey]);
+                        // Check for vocabulary and save the vocabulary details
+                        if (strpos($moduleKey, 'oer_lp_vocabulary_list_title_') !== false) {
+                            $listOrder = end(explode('_', $moduleKey));
+                            if(isset($_POST['oer_lp_vocabulary_details_'.$listOrder])) {
+                                update_post_meta( $post->ID , 'oer_lp_vocabulary_details_'.$listOrder , $_POST['oer_lp_vocabulary_details_'.$listOrder]);
+                            }
+                        }
+                    }
+                }
+            }
+            /*if(isset($_POST['oer_lp_custom_text_list']))
             {
                 update_post_meta( $post->ID , 'oer_lp_custom_text_list' , $_POST['oer_lp_custom_text_list']);
             }
@@ -186,7 +198,7 @@ function lp_save_custom_fields()
             if(isset($_POST['oer_lp_vocabulary_details']))
             {
                 update_post_meta( $post->ID , 'oer_lp_vocabulary_details' , $_POST['oer_lp_vocabulary_details']);
-            }
+            }*/
 
 
             // Save elements Order
@@ -211,11 +223,18 @@ function lp_add_more_activity_callback()
 {
     $totalElements = isset($_REQUEST['row_id']) ? $_REQUEST['row_id'] : '15';
     $content = '<div class="panel panel-default lp-ac-item" id="lp-ac-item-'.$totalElements.'">
+                    <span class="lp-inner-sortable-handle">
+                        <i class="fa fa-arrow-down activity-reorder-down" aria-hidden="true"></i>
+                        <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
+                    </span>
                     <div class="panel-body">
                         <div class="row">
                             <div class="form-group col-md-8">
                                 <label>Activity Title</label>
                                 <input type="text" name="oer_lp_activity_title[]" class="form-control" placeholder="Activity Title">
+                            </div>
+                            <div class="col-md-2 lp-ac-delete-container">
+                                <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                             </div>
                         </div>
                         <div class="row">
@@ -296,11 +315,14 @@ function create_dynamic_editor($id)
 {
 
     $content = '<div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-'.$id.'">
-                    <input type="hidden" name="lp_order[lp_custom_editor_order]" class="element-order" value="1">
+                    <input type="hidden" name="lp_order[oer_lp_custom_editor_'.$id.']" class="element-order" value="'.$id.'">
                     <div class="panel-heading">
                         <h3 class="panel-title lp-module-title">
-                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                             Text Editor
+                            <span class="lp-sortable-handle">
+                                <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                            </span>
                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
@@ -309,7 +331,7 @@ function create_dynamic_editor($id)
                         wp_editor( '',
                             'oer-lp-custom-editor-'.$id,
                             $settings = array(
-                                'textarea_name' => 'oer_lp_custom_editor[]',
+                                'textarea_name' => 'oer_lp_custom_editor_'.$id,
                                 'media_buttons' => true,
                                 'textarea_rows' => 10,
                                 'drag_drop_upload' => true,
@@ -331,11 +353,14 @@ function create_dynamic_editor($id)
 function create_dynamic_text_list($id)
 {
     $content = '<div class="panel panel-default lp-element-wrapper" id="oer-lp-text-list-group'.$id.'">
-                    <input type="hidden" name="lp_order[lp_text_list_order]" class="element-order" value="'.$id.'">
+                    <input type="hidden" name="lp_order[oer_lp_custom_text_list_'.$id.']" class="element-order" value="'.$id.'">
                     <div class="panel-heading">
                         <h3 class="panel-title lp-module-title">
-                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                             Text List
+                            <span class="lp-sortable-handle">
+                                <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                            </span>
                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
@@ -346,7 +371,7 @@ function create_dynamic_text_list($id)
                                     <div class="form-group">
                                         <input type="text"
                                                class="form-control"
-                                               name="oer_lp_custom_text_list[]"
+                                               name="oer_lp_custom_text_list_'.$id.'[]"
                                         >
                                     </div>
                                 </div>
@@ -372,11 +397,14 @@ function create_dynamic_text_list($id)
 function create_dynamic_vocabulary_list($id)
 {
     $content = '<div class="panel panel-default lp-element-wrapper" id="oer-lp-vocabulary-list-group'.$id.'">
-                    <input type="hidden" name="lp_order[lp_vocabulary_list_order]" class="element-order" value="'.$id.'">
+                    <input type="hidden" name="lp_order[oer_lp_vocabulary_list_title_'.$id.']" class="element-order" value="'.$id.'">
                     <div class="panel-heading">
                         <h3 class="panel-title lp-module-title">
-                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                             Vocabulary List
+                            <span class="lp-sortable-handle">
+                                <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                            </span>
                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
@@ -384,14 +412,24 @@ function create_dynamic_vocabulary_list($id)
                         <div class="form-group">
                             <input type="text"
                                    class="form-control"
-                                   name="oer_lp_vocabulary_list_title[]"
+                                   name="oer_lp_vocabulary_list_title_'.$id.'"
                             >
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" name="oer_lp_vocabulary_details[]" rows="6"></textarea>
+                            <textarea class="form-control" name="oer_lp_vocabulary_details_'.$id.'" rows="6"></textarea>
                         </div>   
                     </div>
                 </div>';
 
     return $content;
+}
+
+/**
+ * Hide installation notice
+ */
+add_action('wp_ajax_lp_dismiss_notice_callback', 'lp_dismiss_notice_callback');
+add_action('wp_ajax_nopriv_lp_dismiss_notice_callback','lp_dismiss_notice_callback');
+
+function lp_dismiss_notice_callback() {
+    update_option('lp_setup_notification', true);
 }

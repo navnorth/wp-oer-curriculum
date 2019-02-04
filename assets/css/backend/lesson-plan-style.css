@@ -4,9 +4,5 @@
 .lesson_plan_meta_wrapper .ui-sortable-start { height: 37px !important;}
 .lesson_plan_meta_wrapper .movable-placeholder { background-color: #cccccc;}
 .lesson_plan_meta_wrapper .panel.panel-default.lp-ac-item { position: relative;}
-.lesson_plan_meta_wrapper .lp-inner-sortable-handle { position: absolute; left: -8px; cursor: pointer;}
+.lesson_plan_meta_wrapper .lp-inner-sortable-handle { position: absolute; right: 80px; top: 15px; cursor: pointer;}
 .lesson_plan_meta_wrapper .lp-inner-sortable-handle > i { font-size: 1.2em;}
-.movable-placeholder { opacity:0.0;transition:.2s height }
-.ui-sortable-helper {
-    transform:scale(.9)
-}

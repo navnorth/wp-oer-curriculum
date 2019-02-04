@@ -1,6 +1,6 @@
 <?php
 /*
- Plugin Name:  CURRICULUM PLUGIN
+ Plugin Name:  Curriculum Plugin
  Plugin URI:   https://www.wp-oer.com
  Description:  Open Educational Resource management and curation, metadata publishing, and alignment to Common Core State Standards.
  Version:      0.0.1
@@ -35,8 +35,8 @@ define( 'OER_LESSON_PLAN_PATH', plugin_dir_path(__FILE__) );
 define( 'OER_LESSON_PLAN_SLUG','lesson-plan' );
 define( 'OER_LESSON_PLAN_FILE',__FILE__);
 // Plugin Name and Version
-define( 'OER_LESSON_PLAN_PLUGIN_NAME', 'WP OER Lesson Plan Plugin' );
-define( 'OER_LESSON_PLAN_ADMIN_PLUGIN_NAME', 'WP OER Lesson Plan Plugin');
+define( 'OER_LESSON_PLAN_PLUGIN_NAME', 'WP OER Curriculum Plugin' );
+define( 'OER_LESSON_PLAN_ADMIN_PLUGIN_NAME', 'WP OER Curriculum Plugin');
 define( 'OER_LESSON_PLAN_VERSION', '0.0.1' );
 
 include_once(OER_LESSON_PLAN_PATH.'includes/oer-lp-functions.php');
@@ -78,11 +78,17 @@ register_activation_hook( __FILE__, 'oer_lp_plugin_activate' );
 add_action( 'admin_notices', 'my_plugin_activation_notice');
 function my_plugin_activation_notice()
 {
-   ?>
-    <div class="notice notice-success is-dismissible">
-        <p>Thank you for installing <strong>WP OER Lesson Plan</strong> plugin.</p>
-    </div>
-    <?php
+    global $post;
+    if(
+        (isset($post->post_type) && $post->post_type=='lesson-plans') &&
+        !get_option('lp_setup_notification')
+    )
+    {?>
+        <div class="notice notice-success is-dismissible" id="oep-lp-dismissible">
+            <p>Thank you for installing <strong>WP OER Lesson Plan</strong> plugin.</p>
+        </div>
+    <?php }
+
 }
 
 /**

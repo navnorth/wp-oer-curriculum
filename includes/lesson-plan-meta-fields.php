@@ -6,7 +6,7 @@ global $wpdb;
 
 // Get all post meta for the post
 $post_meta_data = get_post_meta($post->ID );
-//echo "<pre>"; print_r(get_post_meta($post->ID, '', true ));
+//echo "<pre>"; print_r(get_post_custom($post->ID, '', true ));
 
 // Lesson activity data
 $oer_lp_activity_title  = isset($post_meta_data['oer_lp_activity_title'][0]) ? unserialize($post_meta_data['oer_lp_activity_title'][0]) : array();
@@ -15,6 +15,9 @@ $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? 
 
 $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($post_meta_data['lp_order'][0]) : array();
 foreach ($elements_orders as $orderKey => $orderValue) {
+    if (isset($post_meta_data[$orderKey]) && strpos($orderKey, 'oer_lp_custom_text_list_') !== false) {
+      // print_r($post_meta_data[$orderKey]); echo  "<br/>";
+    }
     //echo "Key -> " . $orderKey . "  value -> " . $orderValue ."<br/>";
 }
 ?>
@@ -116,11 +119,14 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                 foreach ($elements_orders as $elementKey => $value) {
                     if($elementKey == 'lp_introduction_order') {?>
                         <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-introduction-group">
-                            <input type="hidden" name="lp_order[lp_introduction_order]" class="element-order" value="<?php $value;?>">
+                            <input type="hidden" name="lp_order[lp_introduction_order]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
-                                    <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                                     <?php _e("Introduction", OER_LESSON_PLAN_SLUG); ?>
+                                    <span class="lp-sortable-handle">
+                                        <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                        <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                    </span>
                                     <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
@@ -146,8 +152,11 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                             <input type="hidden" name="lp_order[lp_lesson_times_order]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
-                                    <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                                     <?php _e("Lesson Times", OER_LESSON_PLAN_SLUG); ?>
+                                    <span class="lp-sortable-handle">
+                                        <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                        <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                    </span>
                                     <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
@@ -250,8 +259,11 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                             <input type="hidden" name="lp_order[lp_industries_order]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
-                                    <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                                     <?php _e("Industries / Subjects / Grades", OER_LESSON_PLAN_SLUG); ?>
+                                    <span class="lp-sortable-handle">
+                                        <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                        <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                    </span>
                                     <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
@@ -326,8 +338,11 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                             <input type="hidden" name="lp_order[lp_standard_order]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
-                                    <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                                     <?php _e("Standards and Objectives", OER_LESSON_PLAN_SLUG); ?>
+                                    <span class="lp-sortable-handle">
+                                        <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                        <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                    </span>
                                     <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
@@ -402,8 +417,11 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                             <input type="hidden" name="lp_order[lp_activities_order]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
-                                    <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                                     <?php _e("Activities in this Lesson", OER_LESSON_PLAN_SLUG); ?>
+                                    <span class="lp-sortable-handle">
+                                        <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                        <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                    </span>
                                     <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
@@ -414,7 +432,10 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                         foreach ($oer_lp_activity_title as $key => $item) { ?>
                                             <div class="panel panel-default lp-ac-item" id="lp-ac-item-<?php echo $key;?>">
                                                 <!--<input type="hidden" name="lp_activity_order[lp_activities_order]" class="element-activity-order" value="">-->
-                                                <span class="lp-inner-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
+                                                <span class="lp-inner-sortable-handle">
+                                                    <i class="fa fa-arrow-down activity-reorder-down" aria-hidden="true"></i>
+                                                    <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
+                                                </span>
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="form-group col-md-8">
@@ -471,6 +492,10 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                     <?php } else {
                                         for ($i = 0; $i < 5; $i++) { ?>
                                             <div class="panel panel-default lp-ac-item" id="lp-ac-item-<?php echo $i;?>">
+                                                <span class="lp-inner-sortable-handle">
+                                                    <i class="fa fa-arrow-down activity-reorder-down" aria-hidden="true"></i>
+                                                    <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
+                                                </span>
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="form-group col-md-8">
@@ -535,8 +560,11 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                             <input type="hidden" name="lp_order[lp_summative_order]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
-                                    <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                                     <?php _e("Summative Assessment", OER_LESSON_PLAN_SLUG); ?>
+                                    <span class="lp-sortable-handle">
+                                        <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                        <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                    </span>
                                     <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
@@ -603,49 +631,53 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                 </div>
                             </div>
                         </div>
-                    <?php } elseif ($elementKey == 'lp_custom_editor_order') {?>
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_editor_') !== false) {?>
                         <?php
-                        $oer_lp_custom_editor = (isset($post_meta_data['oer_lp_custom_editor'][0]) ? unserialize($post_meta_data['oer_lp_custom_editor'][0]) : array());
-                        if (!empty($oer_lp_custom_editor)) {
-                            foreach ($oer_lp_custom_editor as $key => $editor) { ?>
-                                <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-<?php echo $key; ?>">
-                                    <input type="hidden" name="lp_order[lp_custom_editor_order]" class="element-order" value="<?php echo $value;?>" value="1">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title lp-module-title">
-                                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
-                                            Text Editor
-                                            <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
-                                        </h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <?php
-                                        wp_editor( $editor,
-                                            'oer-lp-custom-editor-'.$key,
-                                            $settings = array(
-                                                'textarea_name' => 'oer_lp_custom_editor[]',
-                                                'media_buttons' => true,
-                                                'textarea_rows' => 10,
-                                                'drag_drop_upload' => true,
-                                                'teeny' => true,
-                                            )
-                                        );
-                                        ?>
-                                    </div>
+                        $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
+                        if (!empty($oer_lp_custom_editor)) {?>
+                            <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-<?php echo $key; ?>">
+                                <input type="hidden" name="lp_order[<?php echo $elementKey;?>]" class="element-order" value="<?php echo $value;?>" value="1">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title lp-module-title">
+                                        <?php _e("Text Editor", OER_LESSON_PLAN_SLUG); ?>
+                                        <span class="lp-sortable-handle">
+                                            <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                            <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                                    </h3>
                                 </div>
-                            <?php }
-                        }
-                        ?>
-                    <?php } elseif ($elementKey == 'lp_text_list_order') {?>
+                                <div class="panel-body">
+                                    <?php
+                                    wp_editor( $oer_lp_custom_editor,
+                                        'oer-lp-custom-editor-'.$value,
+                                        $settings = array(
+                                            'textarea_name' => $elementKey,
+                                            'media_buttons' => true,
+                                            'textarea_rows' => 10,
+                                            'drag_drop_upload' => true,
+                                            'teeny' => true,
+                                        )
+                                    );
+                                    ?>
+                                </div>
+                            </div>
+                        <?php }?>
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_text_list_') !== false) {?>
                         <?php
-                        $oer_lp_custom_text_list = (isset($post_meta_data['oer_lp_custom_text_list'][0]) ? unserialize($post_meta_data['oer_lp_custom_text_list'][0]) : array());
+                        $oer_lp_custom_text_list = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : array());
+                        //echo "<pre>"; echo $elementKey; print_r($post_meta_data[$elementKey]);
                         if (!empty($oer_lp_custom_text_list)) {
                             foreach ($oer_lp_custom_text_list as $key => $list) { ?>
                                 <div class="panel panel-default lp-element-wrapper" id="oer-lp-text-list-group-<?php echo $key;?>">
-                                    <input type="hidden" name="lp_order[lp_text_list_order]" class="element-order" value="<?php echo $value;?>">
+                                    <input type="hidden" name="lp_order[<?php echo $elementKey;?>]" class="element-order" value="<?php echo $value;?>">
                                     <div class="panel-heading">
                                         <h3 class="panel-title lp-module-title">
-                                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
-                                            Text List
+                                            <?php _e("Text List", OER_LESSON_PLAN_SLUG); ?>
+                                            <span class="lp-sortable-handle">
+                                                <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                                <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                            </span>
                                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                         </h3>
                                     </div>
@@ -656,7 +688,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                                     <div class="form-group">
                                                         <input type="text"
                                                                class="form-control"
-                                                               name="oer_lp_custom_text_list[]"
+                                                               name="<?php echo $elementKey;?>[]"
                                                                value="<?php echo $list;?>"
                                                         >
                                                     </div>
@@ -675,37 +707,39 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                         }
                         ?>
 
-                    <?php } elseif ($elementKey == 'lp_vocabulary_list_order') {?>
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_vocabulary_list_title_') !== false) {?>
                         <?php
-                        $oer_lp_vocabulary_list_title = (isset($post_meta_data['oer_lp_vocabulary_list_title'][0]) ? unserialize($post_meta_data['oer_lp_vocabulary_list_title'][0]) : array());
-                        $oer_lp_vocabulary_details = (isset($post_meta_data['oer_lp_vocabulary_details'][0]) ? unserialize($post_meta_data['oer_lp_vocabulary_details'][0]) : array());
-                        if (!empty($oer_lp_vocabulary_list_title)) {
-                            foreach ($oer_lp_vocabulary_list_title as $key => $vocabulary) { ?>
-                                <div class="panel panel-default lp-element-wrapper" id="oer-lp-vocabulary-list-group-<?php echo $key;?>">
-                                    <input type="hidden" name="lp_order[lp_vocabulary_list_order]" class="element-order" value="<?php echo $value;?>">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title lp-module-title">
-                                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
-                                            Vocabulary List
-                                            <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
-                                        </h3>
+
+                        $oer_lp_vocabulary_list_title = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
+                        $listOrder = end(explode('_', $elementKey));
+                        $oer_lp_vocabulary_details = (isset($post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0] : "");
+                        if (!empty($oer_lp_vocabulary_list_title)) { ?>
+                            <div class="panel panel-default lp-element-wrapper" id="oer-lp-vocabulary-list-group-<?php echo $key;?>">
+                                <input type="hidden" name="lp_order[<?php echo $elementKey?>]" class="element-order" value="<?php echo $value;?>">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title lp-module-title">
+                                        <?php _e("Vocabulary List", OER_LESSON_PLAN_SLUG); ?>
+                                        <span class="lp-sortable-handle">
+                                            <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                            <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <input type="text"
+                                               class="form-control"
+                                               name="<?php echo $elementKey;?>"
+                                               value="<?php echo $oer_lp_vocabulary_list_title;?>"
+                                        >
                                     </div>
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <input type="text"
-                                                   class="form-control"
-                                                   name="oer_lp_vocabulary_list_title[]"
-                                                   value="<?php echo $vocabulary;?>"
-                                            >
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea class="form-control" name="oer_lp_vocabulary_details[]" rows="6"><?php echo isset($oer_lp_vocabulary_details[$key]) ? $oer_lp_vocabulary_details[$key] : "";?></textarea>
-                                        </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="oer_lp_vocabulary_details_<?php echo $listOrder;?>" rows="6"><?php echo $oer_lp_vocabulary_details;?></textarea>
                                     </div>
                                 </div>
-                            <?php }
-                        }
-                        ?>
+                            </div>
+                        <?php }?>
 
                     <?php }
 
@@ -715,8 +749,11 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                     <input type="hidden" name="lp_order[lp_introduction_order]" class="element-order" value="1">
                     <div class="panel-heading">
                         <h3 class="panel-title lp-module-title">
-                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                             <?php _e("Introduction", OER_LESSON_PLAN_SLUG); ?>
+                            <span class="lp-sortable-handle">
+                                <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                            </span>
                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
@@ -742,8 +779,11 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                     <input type="hidden" name="lp_order[lp_lesson_times_order]" class="element-order" value="2">
                     <div class="panel-heading">
                         <h3 class="panel-title lp-module-title">
-                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                             <?php _e("Lesson Times", OER_LESSON_PLAN_SLUG); ?>
+                            <span class="lp-sortable-handle">
+                                <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                            </span>
                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
@@ -846,8 +886,11 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                     <input type="hidden" name="lp_order[lp_industries_order]" class="element-order" value="3">
                     <div class="panel-heading">
                         <h3 class="panel-title lp-module-title">
-                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                             <?php _e("Industries / Subjects / Grades", OER_LESSON_PLAN_SLUG); ?>
+                            <span class="lp-sortable-handle">
+                                <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                            </span>
                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
@@ -921,8 +964,11 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                     <input type="hidden" name="lp_order[lp_standard_order]" class="element-order" value="4">
                     <div class="panel-heading">
                         <h3 class="panel-title lp-module-title">
-                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                             <?php _e("Standards and Objectives", OER_LESSON_PLAN_SLUG); ?>
+                            <span class="lp-sortable-handle">
+                                <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                            </span>
                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
@@ -996,8 +1042,11 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                     <input type="hidden" name="lp_order[lp_activities_order]" class="element-order" value="5">
                     <div class="panel-heading">
                         <h3 class="panel-title lp-module-title">
-                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                             <?php _e("Activities in this Lesson", OER_LESSON_PLAN_SLUG); ?>
+                            <span class="lp-sortable-handle">
+                                <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                            </span>
                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
@@ -1007,6 +1056,10 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                             if(!empty($oer_lp_activity_title)) {
                                 foreach ($oer_lp_activity_title as $key => $item) { ?>
                                     <div class="panel panel-default lp-ac-item" id="lp-ac-item-<?php echo $key;?>">
+                                        <span class="lp-inner-sortable-handle">
+                                            <i class="fa fa-arrow-down activity-reorder-down" aria-hidden="true"></i>
+                                            <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
+                                        </span>
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="form-group col-md-8">
@@ -1063,6 +1116,10 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                             <?php } else {
                                 for ($i = 0; $i < 5; $i++) { ?>
                                     <div class="panel panel-default lp-ac-item" id="lp-ac-item-<?php echo $i;?>">
+                                        <span class="lp-inner-sortable-handle">
+                                            <i class="fa fa-arrow-down activity-reorder-down" aria-hidden="true"></i>
+                                            <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
+                                        </span>
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="form-group col-md-8">
@@ -1126,8 +1183,11 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                     <input type="hidden" name="lp_order[lp_summative_order]" class="element-order" value="6">
                     <div class="panel-heading">
                         <h3 class="panel-title lp-module-title">
-                            <span class="lp-sortable-handle"><i class="fa fa-arrows" aria-hidden="true"></i></span>
                             <?php _e("Summative Assessment", OER_LESSON_PLAN_SLUG); ?>
+                            <span class="lp-sortable-handle">
+                                <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                            </span>
                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
@@ -1202,8 +1262,6 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                     <button type="button"
                             id="lp-create-dynamic-module"
                             class="btn btn-default lp-create-dynamic-module"
-                            data-toggle="modal"
-                            data-target="#lp-dynamic-module-modal"
                     ><i class="fa fa-plus"></i> Add Module</button>
                 </div>
             </div>

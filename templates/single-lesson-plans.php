@@ -198,29 +198,24 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 </div>
                             </div>
                         <?php }?>
-                    <?php } elseif ($elementKey == 'lp_custom_editor_order') {?>
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_editor_') !== false) {?>
                         <!--For custom editor-->
                         <?php
-                        $oer_lp_custom_editor = (isset($post_meta_data['oer_lp_custom_editor'][0]) ? unserialize($post_meta_data['oer_lp_custom_editor'][0]) : array());
-                        if(!empty($oer_lp_custom_editor)) {
-                            foreach ($oer_lp_custom_editor as $key => $editor) { ?>
-                                <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-<?php echo $key; ?>">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title lp-module-title">Text Editor</h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <?php
-                                        echo $editor;
-                                        ?>
-                                    </div>
+                        $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : array());
+                        if(!empty($oer_lp_custom_editor)) { ?>
+                            <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-<?php echo $key; ?>">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title lp-module-title">Text Editor</h3>
                                 </div>
-                            <?php }
-                        }
-                        ?>
-                    <?php } elseif ($elementKey == 'lp_text_list_order') {?>
+                                <div class="panel-body">
+                                    <?php echo $editor;?>
+                                </div>
+                            </div>
+                        <?php }?>
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_text_list_') !== false) {?>
                         <!--For list-->
                         <?php
-                        $oer_lp_custom_text_list = (isset($post_meta_data['oer_lp_custom_text_list'][0]) ? unserialize($post_meta_data['oer_lp_custom_text_list'][0]) : array());
+                        $oer_lp_custom_text_list = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : array());
                         if (!empty($oer_lp_custom_text_list)) {
                             foreach ($oer_lp_custom_text_list as $key => $list) { ?>
                                 <div class="panel panel-default lp-element-wrapper" id="oer-lp-text-list-group-<?php echo $key;?>">
@@ -234,29 +229,27 @@ if (have_posts()) : while (have_posts()) : the_post();
                             <?php }
                         }
                         ?>
-                    <?php } elseif ($elementKey == 'lp_vocabulary_list_order') {?>
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_vocabulary_list_title_') !== false) {?>
                         <!--For vocabulary-->
                         <?php
-                        $oer_lp_vocabulary_list_title = (isset($post_meta_data['oer_lp_vocabulary_list_title'][0]) ? unserialize($post_meta_data['oer_lp_vocabulary_list_title'][0]) : array());
-                        $oer_lp_vocabulary_details = (isset($post_meta_data['oer_lp_vocabulary_details'][0]) ? unserialize($post_meta_data['oer_lp_vocabulary_details'][0]) : array());
-                        if (!empty($oer_lp_vocabulary_list_title)) {
-                            foreach ($oer_lp_vocabulary_list_title as $key => $vocabulary) { ?>
-                                <div class="panel panel-default lp-element-wrapper" id="oer-lp-vocabulary-list-group-<?php echo $key;?>">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title lp-module-title">Vocabulary List</h3>
+                        $oer_lp_vocabulary_list_title = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
+                        $listOrder = end(explode('_', $elementKey));
+                        $oer_lp_vocabulary_details = (isset($post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0] : "");
+                        if (!empty($oer_lp_vocabulary_list_title)) { ?>
+                            <div class="panel panel-default lp-element-wrapper" id="oer-lp-vocabulary-list-group-<?php echo $key;?>">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title lp-module-title">Vocabulary List</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <p><?php echo $oer_lp_vocabulary_list_title;?></p>
                                     </div>
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <p><?php echo $vocabulary;?></p>
-                                        </div>
-                                        <div class="form-group">
-                                            <?php echo isset($oer_lp_vocabulary_details[$key]) ? $oer_lp_vocabulary_details[$key] : "";?>
-                                        </div>
+                                    <div class="form-group">
+                                        <?php echo $oer_lp_vocabulary_details;?>
                                     </div>
                                 </div>
-                            <?php }
-                        }
-                        ?>
+                            </div>
+                        <?php }?>
                     <?php }
                 }
             } else {?>

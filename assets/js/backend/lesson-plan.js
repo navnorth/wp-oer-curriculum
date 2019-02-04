@@ -81,7 +81,6 @@ jQuery(document).ready(function ($) {
         DeleteModule: function () {
             $(document).on('click', '.lp-remove-module',function(e) {
                 var moduleId = $(this).closest('.panel-default').attr('id');
-                console.log('id',moduleId);
                 e.preventDefault();
                 $('#lp-confirm').modal({
                     backdrop: 'static',
@@ -97,78 +96,110 @@ jQuery(document).ready(function ($) {
 
         // Drag and drop elements
         LessonElementSortable: function () {
-            // Sort the parents
-            $( "#oer-lp-sortable").sortable({
-                containment: "document",
-                connectWith: '#oer-lp-sortable',
-                items: "> div",
-                handle: ".lp-sortable-handle",
-                tolerance: "pointer",
-                cursor: "move",
-                opacity: 0.7,
-                revert: 300,
-                delay: 150,
-                placeholder: "movable-placeholder",
-                start: function(e, ui) {
-                    //$("#oer-lp-sortable .panel.panel-default").addClass('ui-sortable-start');
-                    //$(".panel-body").addClass("hide");
-                    ui.placeholder.height(ui.helper.outerHeight());
-                    //ui.placeholder.height(37);
+
+            $(document).on('click', '.reorder-up', function(){
+                var $current = $(this).closest('.lp-element-wrapper');
+                var $previous = $current.prev('.lp-element-wrapper');
+                if($previous.length !== 0){
+                    $current.insertBefore($previous);
+                    LessonPlan.ChangeElementOrder();
+                }
+                return false;
+            });
+
+            $(document).on('click', '.reorder-down', function(){
+                var $current = $(this).closest('.lp-element-wrapper');
+                var $next = $current.next('.lp-element-wrapper');
+                if($next.length !== 0){
+                    $current.insertAfter($next);
+                    LessonPlan.ChangeElementOrder();
+                }
+                return false;
+            });
+
+            // For move inner module activity
+            $(document).on('click', '.activity-reorder-up', function(){
+                var $current = $(this).closest('.lp-ac-item');
+                var $previous = $current.prev('.lp-ac-item');
+                if($previous.length !== 0){
+                    $current.insertBefore($previous);
+
+                    $(".lp-ac-item").each(function (index) {
+                        var textAreaId = $(this).find('textarea').attr('id');
+
+                        if (typeof textAreaId !== 'undefined') {
+                            tinymce.execCommand( 'mceRemoveEditor', false, textAreaId );
+                            tinymce.execCommand( 'mceAddEditor', false, textAreaId );
+                        }
+                    })
+                }
+                return false;
+            });
+
+            $(document).on('click', '.activity-reorder-down', function(){
+                var $current = $(this).closest('.lp-ac-item');
+                var $next = $current.next('.lp-ac-item');
+                if($next.length !== 0){
+                    $current.insertAfter($next);
+
+                    $(".lp-ac-item").each(function (index) {
+                        var textAreaId = $(this).find('textarea').attr('id');
+
+                        if (typeof textAreaId !== 'undefined') {
+                            tinymce.execCommand( 'mceRemoveEditor', false, textAreaId );
+                            tinymce.execCommand( 'mceAddEditor', false, textAreaId );
+                        }
+                    })
+                }
+                return false;
+            });
+        },
+
+        // Change order value in hidden field and reinitialize the text editor
+        ChangeElementOrder: function() {
+            $("#oer-lp-sortable .lp-element-wrapper").each(function (index) {
+                var count = index + 1;
+
+                var position = $(this).find('.element-order').val();
+                var newvalue = $(this).find('.element-order').val(count);
+                // reassign all of the numbers once it's loaded.
+
+                var textAreaId = $(this).find('textarea').attr('id');
+
+                if (typeof textAreaId !== 'undefined') {
+                    tinymce.execCommand( 'mceRemoveEditor', false, textAreaId );
+                    tinymce.execCommand( 'mceAddEditor', false, textAreaId );
                 }
             });
 
-            $('#oer-lp-sortable').on("sortstop", function (event, ui) {
+            LessonPlan.ToggleUpDownButton();
+        },
 
-                $( "#oer-lp-sortable .panel.panel-default").removeClass('ui-sortable-start')
-                $(".panel-body").removeClass("hide");
-                console.log("Stop");
-
-                $("#oer-lp-sortable .lp-element-wrapper").each(function (index) {
-                    var count = index + 1;
-
-                    var position = $(this).find('.element-order').val();
-                    console.log("position value is"  + position);
-                    var newvalue = $(this).find('.element-order').val(count);
-                    // reassign all of the numbers once it's loaded.
-
-                    var textAreaId = $(this).find('textarea').attr('id');
-
-                    if (typeof textAreaId !== 'undefined') {
-                        console.log("Element id  " + textAreaId);
-                        tinymce.execCommand( 'mceRemoveEditor', false, textAreaId );
-                        tinymce.execCommand( 'mceAddEditor', false, textAreaId );
-                    }
-                })
-            });
-
-            // Inner child activities element sortable
-            $( "#lp-ac-inner-panel").sortable({
-                containment: "document",
-                items: "> div",
-                handle: ".lp-inner-sortable-handle",
-                tolerance: "pointer",
-                cursor: "move",
-                opacity: 0.7,
-                // revert: 300,
-                //delay: 150,
-                placeholder: "movable-placeholder",
-                start: function(e, ui) {
-                    //$("#oer-lp-sortable .panel.panel-default").addClass('ui-sortable-start');
-                    //$(".panel-body").addClass("hide");
-                    ui.placeholder.height(ui.helper.outerHeight());
-                    //ui.placeholder.height(37);
-                }
-            });
+        // Show/Hide up/down button
+        ToggleUpDownButton: function() {
+            // Hide the up button in the first child
+            $('.reorder-up').removeClass('hide');
+            $('.reorder-down').removeClass('hide');
+            $('.reorder-up').first().addClass('hide');
+            $('.reorder-down').last().addClass('hide');
         },
 
         // Create dynamic module
         CreateDynamicModule: function () {
+
+            // Open modal when click one add module button
+            $(document).on('click', '#lp-create-dynamic-module', function (e) {
+                e.preventDefault();
+                $('#lp-dynamic-module-modal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+            });
+
             $(document).on('click','#lp-create-module-btn', function () {
                 var total_form_box = parseInt($('.lp-element-wrapper').length, 10);
                 var module_type = $('#module-type').val();
 
-
-                console.log(total_form_box, module_type);
                 $.post(ajaxurl, {action:'lp_create_module_callback', module_type: module_type, row_id: total_form_box}).done(function (response) {
                     $(response).insertAfter('div.lp-element-wrapper:last');
 
@@ -187,6 +218,15 @@ jQuery(document).ready(function ($) {
                     $('#lp-dynamic-module-modal').modal('hide');
                 });
             });
+        },
+
+        // Dismiss the plugin installation message
+        DismissInstalNotice: function () {
+            $(document).on('click', '#oep-lp-dismissible', function () {
+                $.post(ajaxurl, {action:'lp_dismiss_notice_callback'}).done(function (response) {
+
+                });
+            });
         }
     };
 
@@ -200,4 +240,6 @@ jQuery(document).ready(function ($) {
     LessonPlan.DeleteModule();
     LessonPlan.LessonElementSortable();
     LessonPlan.CreateDynamicModule();
+    LessonPlan.ToggleUpDownButton();
+    LessonPlan.DismissInstalNotice();
 });
