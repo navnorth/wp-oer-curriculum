@@ -5,7 +5,7 @@
 jQuery(document).ready(function ($) {
 
     var LessonPlan = {
-        UpdateActivityTitle: function () {
+        updateActivityTitle: function () {
             $(document).on('keyup', '.lp-ac-item input[type=text]', function () {
                 var InputValue = $(this).val();
                 var ContainerId = $(this).closest('.lp-ac-item').attr('id');
@@ -14,7 +14,7 @@ jQuery(document).ready(function ($) {
         },
 
         // Add more time elements
-        AddMoreTimeElements: function () {
+        addMoreTimeElements: function () {
             $(document).on('click', '.lp-add-time-element', function () {
                 var ClonedDiv = $('.lp-time-element-row:first').clone();
                 ClonedDiv.insertAfter('div.lp-time-element-row:last');
@@ -25,7 +25,7 @@ jQuery(document).ready(function ($) {
         },
 
         // Remove time elements
-        RemoveTimeElements: function () {
+        removeTimeElements: function () {
             $(document).on('click', '.remove-time-element', function () {
                 $(this).closest('.lp-time-element-row').remove();
                 if($('.lp-time-element-row').length == 1) {
@@ -35,7 +35,7 @@ jQuery(document).ready(function ($) {
         },
 
         // Add More Related Instructional Objectives
-        AddMoreObjectives: function () {
+        addMoreObjectives: function () {
             $(document).on('click', '.lp-add-related-objective', function () {
                 var ClonedDiv = $('.lp-related-objective-row:first').clone();
                 ClonedDiv.insertAfter('div.lp-related-objective-row:last');
@@ -45,7 +45,7 @@ jQuery(document).ready(function ($) {
         },
 
         // Remove time elements
-        RemoveObjectives: function () {
+        removeObjectives: function () {
             $(document).on('click', '.lp-remove-related-objective', function () {
                 $(this).closest('.lp-related-objective-row').remove();
                 if($('.lp-related-objective-row').length == 1) {
@@ -55,7 +55,7 @@ jQuery(document).ready(function ($) {
         },
 
         // Add Activity in Lesson
-        AddActivityInLesson: function () {
+        addActivityInLesson: function () {
             $(document).on('click', '.lp-add-ac-item', function () {
                 var total_form_box = parseInt($('.lp-ac-item').length, 10);
                 $.post(ajaxurl, {action:'lp_add_more_activity_callback', row_id: total_form_box}).done(function (response) {
@@ -78,7 +78,7 @@ jQuery(document).ready(function ($) {
         },
 
         // Delete module
-        DeleteModule: function () {
+        deleteModule: function () {
             $(document).on('click', '.lp-remove-module',function(e) {
                 var moduleId = $(this).closest('.panel-default').attr('id');
                 e.preventDefault();
@@ -95,14 +95,14 @@ jQuery(document).ready(function ($) {
         },
 
         // Drag and drop elements
-        LessonElementSortable: function () {
+        lessonElementSortable: function () {
 
             $(document).on('click', '.reorder-up', function(){
                 var $current = $(this).closest('.lp-element-wrapper');
                 var $previous = $current.prev('.lp-element-wrapper');
                 if($previous.length !== 0){
                     $current.insertBefore($previous);
-                    LessonPlan.ChangeElementOrder();
+                    LessonPlan.changeElementOrder();
                 }
                 return false;
             });
@@ -112,10 +112,32 @@ jQuery(document).ready(function ($) {
                 var $next = $current.next('.lp-element-wrapper');
                 if($next.length !== 0){
                     $current.insertAfter($next);
-                    LessonPlan.ChangeElementOrder();
+                    LessonPlan.changeElementOrder();
                 }
                 return false;
             });
+
+            // Author element reorder
+            $(document).on('click', '.author-reorder-up', function(){
+                var $current = $(this).closest('.lp-author-element-wrapper');
+                var $previous = $current.prev('.lp-author-element-wrapper');
+                if($previous.length !== 0){
+                    $current.insertBefore($previous);
+                    LessonPlan.toggleUpDownButton();
+                }
+                return false;
+            });
+
+            $(document).on('click', '.author-reorder-down', function(){
+                var $current = $(this).closest('.lp-author-element-wrapper');
+                var $next = $current.next('.lp-author-element-wrapper');
+                if($next.length !== 0){
+                    $current.insertAfter($next);
+                    LessonPlan.toggleUpDownButton();
+                }
+                return false;
+            });
+
 
             // For move inner module activity
             $(document).on('click', '.activity-reorder-up', function(){
@@ -156,7 +178,7 @@ jQuery(document).ready(function ($) {
         },
 
         // Change order value in hidden field and reinitialize the text editor
-        ChangeElementOrder: function() {
+        changeElementOrder: function() {
             $("#oer-lp-sortable .lp-element-wrapper").each(function (index) {
                 var count = index + 1;
 
@@ -172,20 +194,28 @@ jQuery(document).ready(function ($) {
                 }
             });
 
-            LessonPlan.ToggleUpDownButton();
+            LessonPlan.toggleUpDownButton();
         },
 
         // Show/Hide up/down button
-        ToggleUpDownButton: function() {
+        toggleUpDownButton: function() {
             // Hide the up button in the first child
             $('.reorder-up').removeClass('hide');
             $('.reorder-down').removeClass('hide');
             $('.reorder-up').first().addClass('hide');
             $('.reorder-down').last().addClass('hide');
+
+            // Toggle button from author module
+            // Hide up button from first element
+            // hide down button from last element
+            $('.author-reorder-up').removeClass('hide');
+            $('.author-reorder-down').removeClass('hide');
+            $('.author-reorder-up').first().addClass('hide');
+            $('.author-reorder-down').last().addClass('hide');
         },
 
         // Create dynamic module
-        CreateDynamicModule: function () {
+        createDynamicModule: function () {
 
             // Open modal when click one add module button
             $(document).on('click', '#lp-create-dynamic-module', function (e) {
@@ -208,38 +238,97 @@ jQuery(document).ready(function ($) {
                         tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-custom-editor-' + total_form_box );
                     }
 
-
-                    // Create dynamic elements on sidebar
-                   /* var cloned = $('.sidebar-lesson-activities-title li:last').clone();
-                    cloned.find('a').attr('href', '#lp-ac-item-' + total_form_box);
-                    cloned.find('a').text('Unnamed Activity');
-                    cloned.insertAfter('.sidebar-lesson-activities-title li:last');*/
-
                     $('#lp-dynamic-module-modal').modal('hide');
                 });
             });
         },
 
         // Dismiss the plugin installation message
-        DismissInstalNotice: function () {
+        dismissInstallNotice: function () {
             $(document).on('click', '#oep-lp-dismissible', function () {
                 $.post(ajaxurl, {action:'lp_dismiss_notice_callback'}).done(function (response) {
 
                 });
             });
+        },
+        // Add more author
+        AddMoreAuthor: function () {
+            $(document).on('click', '#lp-add-more-author', function () {
+                console.log("clicked");
+                var ClonedDiv = $('.lp-author-element-wrapper:last').clone();
+                ClonedDiv.insertAfter('div.lp-author-element-wrapper:last');
+                ClonedDiv.find('input[type=text]').val('');
+                $('.lp-remove-author').removeAttr('disabled');
+                LessonPlan.toggleUpDownButton();
+            });
+        },
+
+        // Delete author
+        deleteAuthor: function () {
+            $(document).on('click', '.lp-remove-author',function(e) {
+                var author = $(this).closest('.panel-default');
+                var elementId = author.attr('id');
+                e.preventDefault();
+                $('#lp-delete-author').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+                    .on('click', '#lp-author-delete-confirm', function(e) {
+                        author.remove();
+                        $('a[href=#' + elementId +']').parent('li').remove();
+                        $('#lp-delete-author').modal('hide');
+
+                        // Disable delete button for author
+                        if($('.lp-author-element-wrapper').length === 1) {
+                            $('.lp-remove-author').attr('disabled', 'disabled');
+                        }
+                    });
+            });
+        },
+
+        // Upload author image
+        lpUploadAuthorImage: function () {
+            $(document).on('click', '.lp-oer-person-placeholder', function (e) {
+                var frame;
+                e.preventDefault();
+                var dis = $(this);
+                if (frame) {
+                    frame.open();
+                    return;
+                }
+
+                frame = wp.media({
+                    title: 'Select Author Picture',
+                    button: { text: 'Use Picture' },
+                    library: { type: [ 'image' ] },
+                    multiple:false
+                });
+
+                frame.on('select', function(){
+                    var attachment = frame.state().get('selection').first().toJSON();
+                    var attachment_url = attachment.url;
+                    dis.prev('input').val(attachment_url);
+                    dis.attr('src', attachment_url);
+                });
+
+                frame.open();
+            });
         }
     };
 
     // Initialize all function on ready state
-    LessonPlan.UpdateActivityTitle();
-    LessonPlan.AddMoreTimeElements();
-    LessonPlan.RemoveTimeElements();
-    LessonPlan.AddMoreObjectives();
-    LessonPlan.RemoveObjectives();
-    LessonPlan.AddActivityInLesson();
-    LessonPlan.DeleteModule();
-    LessonPlan.LessonElementSortable();
-    LessonPlan.CreateDynamicModule();
-    LessonPlan.ToggleUpDownButton();
-    LessonPlan.DismissInstalNotice();
+    LessonPlan.updateActivityTitle();
+    LessonPlan.addMoreTimeElements();
+    LessonPlan.removeTimeElements();
+    LessonPlan.addMoreObjectives();
+    LessonPlan.removeObjectives();
+    LessonPlan.addActivityInLesson();
+    LessonPlan.deleteModule();
+    LessonPlan.lessonElementSortable();
+    LessonPlan.createDynamicModule();
+    LessonPlan.toggleUpDownButton();
+    LessonPlan.dismissInstallNotice();
+    LessonPlan.AddMoreAuthor();
+    LessonPlan.deleteAuthor();
+    LessonPlan.lpUploadAuthorImage();
 });

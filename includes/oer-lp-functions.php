@@ -33,3 +33,11 @@ if(!function_exists('prepare_subject_areas'))
         }
     }
 }
+
+if (! function_exists('addSchemeToUrl')) {
+    function addSchemeToUrl($url) {
+        if (strpos($url, '://') === false) {
+            return 'http://' . $url;
+        }
+    }
+}

@@ -9,14 +9,6 @@
 wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL.'assets/lib/font-awesome/css/font-awesome.min.css');
 wp_enqueue_style('lesson-plan-bootstrap', OER_LESSON_PLAN_URL.'assets/lib/bootstrap-3.3.7/css/bootstrap.min.css');
 
-//Add this hack to display top nav and head section on Eleganto theme
-/*$cur_theme = wp_get_theme();
-$theme = $cur_theme->get('Name');
-if ($theme == "Eleganto"){
-	get_template_part( 'template-part', 'topnav' );
-	get_template_part( 'template-part', 'head' );
-}
-*/
 get_header();
 
 global $post;
@@ -60,6 +52,89 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 </div>
                             </div>
                         <?php }?>
+                    <?php } elseif ($elementKey == 'lp_authors_order') {?>
+                        <?php
+                        $authors = (isset($post_meta_data['oer_lp_authors'][0]) ? unserialize($post_meta_data['oer_lp_authors'][0]) : array());
+                        if (!empty($authors)) { ?>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title lp-module-title">
+                                        <?php _e("Authors", OER_LESSON_PLAN_SLUG); ?>
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="panel-group">
+                                        <?php
+                                        if (isset($authors['name']) && !empty($authors['name'])) {
+                                            foreach ( $authors['name']as $authorKey => $authorName) { ?>
+                                                <?php
+                                                $role = isset($authors['role'][$authorKey]) ? $authors['role'][$authorKey] : "";
+                                                $author_url = isset($authors['author_url'][$authorKey]) ? $authors['author_url'][$authorKey] : "";
+                                                $institution = isset($authors['institution'][$authorKey]) ? $authors['institution'][$authorKey] : "";
+                                                $institution_url = isset($authors['institution_url'][$authorKey]) ? $authors['institution_url'][$authorKey] : "";
+                                                ?>
+                                                <div class="panel panel-default lp-author-element-wrapper" id="author-<?php echo $authorKey;?>">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title lp-module-title">
+                                                            <?php _e("Author " . $authorKey, OER_LESSON_PLAN_SLUG); ?>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body form-horizontal">
+                                                        <?php if (!empty($authorName)) { ?>
+                                                            <div class="form-group">
+                                                                <label class="col-md-2 control-label">Name</label>
+                                                                <div class="col-md-10">
+                                                                    <?php echo ucwords($authorName);?>
+                                                                    <?php
+                                                                    $image = (isset($authors['author_pic'][$authorKey]) ? $authors['author_pic'][$authorKey] : "");
+                                                                    if (!empty($image)) { ?>
+                                                                        <img src="<?php echo $image?>" class="img-circle img-responsive oer-lp-author-img" width="100" />
+                                                                    <?php }?>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <?php if (!empty($role)) { ?>
+                                                            <div class="form-group">
+                                                                <label class="col-md-2 control-label">Role</label>
+                                                                <div class="col-md-10">
+                                                                    <?php echo ucwords($role);?>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <?php if (!empty($author_url)) { ?>
+                                                            <div class="form-group">
+                                                                <label class="col-md-2 control-label">Author URL</label>
+                                                                <div class="col-md-10">
+                                                                    <a href="<?php echo addSchemeToUrl($author_url);?>" target="_blank"><?php echo $author_url;?></a>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <?php if (!empty($institution)) { ?>
+                                                            <div class="form-group">
+                                                                <label class="col-md-2 control-label">Institution</label>
+                                                                <div class="col-md-10">
+                                                                    <?php echo ucwords($institution);?>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
+                                                        <?php if (!empty($institution_url)) { ?>
+                                                            <div class="form-group">
+                                                                <label class="col-md-2 control-label">Institution URL</label>
+                                                                <div class="col-md-10">
+                                                                    <a href="<?php echo addSchemeToUrl($institution_url);?>" target="_blank"><?php echo $institution_url;?></a>
+                                                                </div>
+                                                            </div>
+                                                        <?php } ?>
+                                                    </div>
+                                                </div>
+                                            <?php }
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php }?>
+
                     <?php } elseif ($elementKey == 'lp_lesson_times_order') {?>
                         <!--For Lesson Times-->
                         <?php

@@ -93,85 +93,78 @@ add_action('save_post', 'lp_save_custom_fields');
 function lp_save_custom_fields()
 {
     global $post, $wpdb, $_oer_prefix;
-
-    //echo "<pre>";
-    //print_r($_POST['lp_order']);
-    //die;
     //Check first if $post is not empty
-    if ($post)
-    {
-        if($post->post_type == 'lesson-plans')
-        {
+    if ($post) {
+        if($post->post_type == 'lesson-plans') {
             //Save/update introduction
-            if(isset($_POST['oer_lp_introduction']))
-            {
+            if(isset($_POST['oer_lp_introduction'])) {
                 update_post_meta( $post->ID , 'oer_lp_introduction' , $_POST['oer_lp_introduction']);
             }
 
+            // Save authors data
+            if(isset($_POST['oer_lp_authors'])) {
+                update_post_meta( $post->ID , 'oer_lp_authors' , $_POST['oer_lp_authors']);
+            }
+
             //Save/update lesson times
-            if(isset($_POST['oer_lp_times_label']))
-            {
+            if(isset($_POST['oer_lp_times_label'])) {
                 update_post_meta( $post->ID , 'oer_lp_times_label' , $_POST['oer_lp_times_label']);
             }
 
-            if(isset($_POST['oer_lp_times_number']))
-            {
+            if(isset($_POST['oer_lp_times_number'])) {
                 update_post_meta( $post->ID , 'oer_lp_times_number' , $_POST['oer_lp_times_number']);
             }
 
-            if(isset($_POST['oer_lp_times_type']))
-            {
+            if(isset($_POST['oer_lp_times_type'])) {
                 update_post_meta( $post->ID , 'oer_lp_times_type' , $_POST['oer_lp_times_type']);
             }
 
-            if (isset($_POST['oer_lp_grades']))
-            {
+            if (isset($_POST['oer_lp_grades'])) {
                 update_post_meta( $post->ID , 'oer_lp_grades' , $_POST['oer_lp_grades']);
             }
 
             // Save / update Standard and Objectives
-            if(isset($_POST['oer_lp_related_objective']))
-            {
+            if(isset($_POST['oer_lp_related_objective'])) {
                 update_post_meta( $post->ID , 'oer_lp_related_objective' , $_POST['oer_lp_related_objective']);
             }
 
             // Save / update activity in this lesson
-            if(isset($_POST['oer_lp_activity_title']))
-            {
+            if(isset($_POST['oer_lp_activity_title'])) {
                 update_post_meta( $post->ID , 'oer_lp_activity_title' , $_POST['oer_lp_activity_title']);
             }
-            if(isset($_POST['oer_lp_activity_type']))
-            {
+
+            // Save activity types
+            if(isset($_POST['oer_lp_activity_type'])) {
                 update_post_meta( $post->ID , 'oer_lp_activity_type' , $_POST['oer_lp_activity_type']);
             }
-            if(isset($_POST['oer_lp_activity_detail']))
-            {
+
+            // Save activity details
+            if(isset($_POST['oer_lp_activity_detail'])) {
                 update_post_meta( $post->ID , 'oer_lp_activity_detail' , $_POST['oer_lp_activity_detail']);
             }
 
             // Save / update assessment
-            if(isset($_POST['oer_lp_assessment_type']))
-            {
+            if(isset($_POST['oer_lp_assessment_type'])) {
                 update_post_meta( $post->ID , 'oer_lp_assessment_type' , $_POST['oer_lp_assessment_type']);
             }
-            if(isset($_POST['oer_lp_other_assessment_type']))
-            {
+
+            // Save assessment type
+            if(isset($_POST['oer_lp_other_assessment_type'])) {
                 update_post_meta( $post->ID , 'oer_lp_other_assessment_type' , sanitize_text_field($_POST['oer_lp_other_assessment_type']));
             }
-            if(isset($_POST['oer_lp_assessment']))
-            {
+
+            // Save assessment
+            if(isset($_POST['oer_lp_assessment'])) {
                 update_post_meta( $post->ID , 'oer_lp_assessment' , $_POST['oer_lp_assessment']);
             }
 
             // Save custom editor fields
-            if(isset($_POST['oer_lp_custom_editor']))
-            {
+            if(isset($_POST['oer_lp_custom_editor'])) {
                 update_post_meta( $post->ID , 'oer_lp_custom_editor' , $_POST['oer_lp_custom_editor']);
             }
 
             // Save custom modules
-            if(isset($_POST['lp_order']))
-            {
+            if(isset($_POST['lp_order'])) {
                 foreach ($_POST['lp_order'] as $moduleKey => $order) {
                     if (isset($_POST[$moduleKey])) {
                         update_post_meta( $post->ID , $moduleKey , $_POST[$moduleKey]);
@@ -185,29 +178,11 @@ function lp_save_custom_fields()
                     }
                 }
             }
-            /*if(isset($_POST['oer_lp_custom_text_list']))
-            {
-                update_post_meta( $post->ID , 'oer_lp_custom_text_list' , $_POST['oer_lp_custom_text_list']);
-            }
-
-            if(isset($_POST['oer_lp_vocabulary_list_title']))
-            {
-                update_post_meta( $post->ID , 'oer_lp_vocabulary_list_title' , $_POST['oer_lp_vocabulary_list_title']);
-            }
-
-            if(isset($_POST['oer_lp_vocabulary_details']))
-            {
-                update_post_meta( $post->ID , 'oer_lp_vocabulary_details' , $_POST['oer_lp_vocabulary_details']);
-            }*/
-
 
             // Save elements Order
-            if(isset($_POST['lp_order']))
-            {
+            if(isset($_POST['lp_order'])) {
                 update_post_meta( $post->ID , 'lp_order' , $_POST['lp_order']);
             }
-
-
         }
     }
 }

@@ -1,8 +1,9 @@
 .lesson_plan_meta_wrapper .lp-module-title { position: relative;}
-.lesson_plan_meta_wrapper .lp-remove-module { position: absolute;right: 0;top: -5px;vertical-align: middle;border-radius: 50%;padding: 4px 8px;}
+.lesson_plan_meta_wrapper .lp-remove-module,.lesson_plan_meta_wrapper .lp-remove-author{ position: absolute;right: 0;top: -5px;vertical-align: middle;border-radius: 50%;padding: 4px 8px;}
 .lesson_plan_meta_wrapper .lp-sortable-handle { padding-right: 5px; cursor: pointer;}
 .lesson_plan_meta_wrapper .ui-sortable-start { height: 37px !important;}
 .lesson_plan_meta_wrapper .movable-placeholder { background-color: #cccccc;}
 .lesson_plan_meta_wrapper .panel.panel-default.lp-ac-item { position: relative;}
 .lesson_plan_meta_wrapper .lp-inner-sortable-handle { position: absolute; right: 80px; top: 15px; cursor: pointer;}
 .lesson_plan_meta_wrapper .lp-inner-sortable-handle > i { font-size: 1.2em;}
+.lesson_plan_meta_wrapper .lp-oer-person-placeholder { cursor: pointer; max-width: 50px; max-height: 50px;}
