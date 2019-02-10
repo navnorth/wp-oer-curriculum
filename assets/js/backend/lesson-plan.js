@@ -313,6 +313,59 @@ jQuery(document).ready(function ($) {
 
                 frame.open();
             });
+        },
+
+        // Select standards
+        lpSelectStandards: function () {
+            jQuery(document).on('click', '#lp-select-standard', function (e) {
+                e.preventDefault();
+                // Open modal
+                jQuery('#lpOerStandardModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+                .on('click', '#lpSelectStandardSaveBtn', function (e) {
+                    e.preventDefault();
+                    var selectedStandards = [];
+                    var selectedHtml = "";
+                    jQuery.each(jQuery('#lpOerStandardModal input[type=checkbox]:checked'), function(){
+                        var standardId = jQuery(this).val();
+                        selectedStandards.push(standardId);
+                        var standardTitle = jQuery(this).next().next('div.lp-notation-description').text();
+
+                        selectedHtml += '<span class="selected-standard-pill">';
+                        selectedHtml += standardTitle;
+                        selectedHtml += '<a href="javascript:void(0)" class="remove-ss-pill" data-id="'+standardId+'"><i class="fa fa-times"></i>';
+                        selectedHtml += '</a></span>';
+                    });
+                    jQuery('#selected-standard-wrapper').html(selectedHtml);
+                    var selectedStandardsIds = selectedStandards.join();
+                    jQuery("input[name='oer_lp_standards']").val(selectedStandardsIds);
+                    jQuery('#lpOerStandardModal').modal('hide');
+                });
+            });
+        },
+
+        // Remove selected standards from the list
+        lpRemoveStandardsFromList: function () {
+            jQuery(document).on('click', 'a.remove-ss-pill', function (e) {
+                e.preventDefault();
+                var dis = jQuery(this);
+                var pillId = dis.attr('data-id');
+                dis.parent().remove();
+
+                // Update the selected ids in input fields
+                var standardsIds =  jQuery("input[name='oer_lp_standards']").val();
+                var standardsArr = standardsIds.split(",");
+                standardsArr = jQuery.grep(standardsArr, function(value) {
+                    return value != pillId;
+                });
+
+                standardsIds = standardsArr.join();
+                jQuery("input[name='oer_lp_standards']").val(standardsIds);
+                // Unchecked the checkbox from popup
+                jQuery('#lpOerStandardModal input[value='+pillId+']').attr('checked', false);
+            });
         }
     };
 
@@ -331,4 +384,6 @@ jQuery(document).ready(function ($) {
     LessonPlan.AddMoreAuthor();
     LessonPlan.deleteAuthor();
     LessonPlan.lpUploadAuthorImage();
+    LessonPlan.lpSelectStandards();
+    LessonPlan.lpRemoveStandardsFromList();
 });

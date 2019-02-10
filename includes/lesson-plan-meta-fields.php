@@ -14,6 +14,7 @@ $oer_lp_activity_type   = isset($post_meta_data['oer_lp_activity_type'][0]) ? un
 $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? unserialize($post_meta_data['oer_lp_activity_detail'][0]) : array();
 
 $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($post_meta_data['lp_order'][0]) : array();
+//was_selectable_admin_standards($post->ID, "oer_standard");
 foreach ($elements_orders as $orderKey => $orderValue) {
     if (isset($post_meta_data[$orderKey]) && strpos($orderKey, 'oer_lp_custom_text_list_') !== false) {
       // print_r($post_meta_data[$orderKey]); echo  "<br/>";
@@ -156,7 +157,6 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                     <?php } elseif ($elementKey == 'lp_authors_order') {?>
                         <?php
                         $authors = (isset($post_meta_data['oer_lp_authors'][0]) ? unserialize($post_meta_data['oer_lp_authors'][0]) : array());
-                        //echo "<pre>"; print_r($authors);
                         if(!empty($authors)) { ?>
                             <div class="panel panel-default lp-element-wrapper oer-lp-authors-group" id="oer-lp-authors">
                                 <input type="hidden" name="lp_order[lp_authors_order]" class="element-order" value="2">
@@ -476,10 +476,18 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                             </div>
                             <div class="panel-body">
                                 <h4 class="page-title-inner"><?php _e("Standards", OER_LESSON_PLAN_SLUG); ?></h4>
-                                <p><?php _e("You have not selected any academic standards", OER_LESSON_PLAN_SLUG); ?></p>
+
+                                <div id="selected-standard-wrapper">
+                                    <?php
+                                    $standards = (isset($post_meta_data['oer_lp_standards'][0])? $post_meta_data['oer_lp_standards'][0] : "");
+                                    get_standard_notations_from_ids($standards);
+                                    ?>
+                                </div>
+                                <input type="hidden" name="oer_lp_standards" value="<?php echo $standards;?>">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <button type="button"
+                                                id="lp-select-standard"
                                                 class="btn btn-primary"
                                         >Select Standards</button>
                                     </div>
@@ -581,7 +589,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group col-md-8">
-                                                            <label for="activity-title">Activity Title</label>
+                                                            <label for="activity-title">Activity Type</label>
                                                             <select name="oer_lp_activity_type[]" class="form-control">
                                                                 <option value=""> - Activity Type -</option>
                                                                 <option value="hooks_set" <?php echo (isset($oer_lp_activity_type[$key]) ? oer_lp_show_selected('hooks_set', $oer_lp_activity_type[$key]) : "");?>>Hooks / Set</option>
@@ -617,60 +625,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                                 </div>
                                             </div>
                                         <?php } ?>
-                                    <?php } else {
-                                        for ($i = 0; $i < 5; $i++) { ?>
-                                            <div class="panel panel-default lp-ac-item" id="lp-ac-item-<?php echo $i;?>">
-                                                <span class="lp-inner-sortable-handle">
-                                                    <i class="fa fa-arrow-down activity-reorder-down" aria-hidden="true"></i>
-                                                    <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
-                                                </span>
-                                                <div class="panel-body">
-                                                    <div class="row">
-                                                        <div class="form-group col-md-8">
-                                                            <label>Activity Title</label>
-                                                            <input type="text" name="oer_lp_activity_title[]" class="form-control" placeholder="Activity Title">
-                                                        </div>
-                                                        <div class="col-md-2 lp-ac-delete-container">
-                                                            <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="form-group col-md-8">
-                                                            <label for="activity-title">Activity Title</label>
-                                                            <select name="oer_lp_activity_type[]" class="form-control">
-                                                                <option value=""> - Activity Type -</option>
-                                                                <option value="hooks_set">Hooks / Set</option>
-                                                                <option value="lecture">Lecture</option>
-                                                                <option value="demonstration">Demo / Modeling</option>
-                                                                <option value="independent_practice">Independent Practice</option>
-                                                                <option value="guided_practice">Guided Practice</option>
-                                                                <option value="check_understanding">Check Understanding</option>
-                                                                <option value="lab_shop">Lab / Shop</option>
-                                                                <option value="group_work">Group Work</option>
-                                                                <option value="projects">Projects</option>
-                                                                <option value="assessment">Formative Assessment</option>
-                                                                <option value="closure">Closure</option>
-                                                                <option value="research">Research / Annotate</option>
-                                                                <option value="other">Other</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <?php wp_editor( '',
-                                                            'oer-lp-activity-detail-'.$i,
-                                                            $settings = array(
-                                                                'textarea_name' => 'oer_lp_activity_detail[]',
-                                                                'media_buttons' => true,
-                                                                'textarea_rows' => 10,
-                                                                'drag_drop_upload' => true,
-                                                                'teeny' => true,
-                                                            )
-                                                        ); ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php }
-                                    } ?>
+                                    <?php }?>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -901,7 +856,6 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                         ?>
                     </div>
                 </div>
-
                 <!--Authors-->
                 <div class="panel panel-default lp-element-wrapper oer-lp-authors-group" id="oer-lp-authors">
                     <input type="hidden" name="lp_order[lp_authors_order]" class="element-order" value="2">
@@ -1033,7 +987,6 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                         </div>
                     </div>
                 </div>
-
                 <!--For industries/subject/grades-->
                 <div class="panel panel-default lp-element-wrapper oer-lp-industries-group" id="oer-lp-industries-group">
                     <input type="hidden" name="lp_order[lp_industries_order]" class="element-order" value="3">
@@ -1127,10 +1080,14 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                     </div>
                     <div class="panel-body">
                         <h4 class="page-title-inner"><?php _e("Standards", OER_LESSON_PLAN_SLUG); ?></h4>
-                        <p><?php _e("You have not selected any academic standards", OER_LESSON_PLAN_SLUG); ?></p>
+                        <div id="selected-standard-wrapper">
+                            <p><?php _e("You have not selected any academic standards", OER_LESSON_PLAN_SLUG); ?></p>
+                        </div>
+                        <input type="hidden" name="oer_lp_standards">
                         <div class="row">
                             <div class="col-md-12">
                                 <button type="button"
+                                        id="lp-select-standard"
                                         class="btn btn-primary"
                                 >Select Standards</button>
                             </div>
@@ -1337,86 +1294,10 @@ foreach ($elements_orders as $orderKey => $orderValue) {
     </div>
 
     <!--Dynamic module modal-->
-    <div class="modal fade" id="lp-dynamic-module-modal" tabindex="-1" role="dialog" aria-labelledby="lpDynamicModalLabel">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title" id="lpDynamicModalLabel">Add Module</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="module-type" class="control-label">Module Type</label>
-                        <select name="module-type" class="form-control" id="module-type">
-                            <option value="editor">Text/Editor</option>
-                            <option value="list">Text List</option>
-                            <!--<option value="resources">Resources and Materials</option>-->
-                            <option value="vocabulary">Vocabulary List</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" id="lp-create-module-btn">Create</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Confirm Modal-->
-    <div id="lp-confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3>Delete Module?</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">&nbsp;</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <strong>These items will be permanently deleted and cannot be recovered. Are you sure?</strong>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">&nbsp;</div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" id="lp-delete-confirm">Yes, Delete</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-    <!--Delete author-->
-    <div id="lp-delete-author" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3>Delete Author?</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">&nbsp;</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <strong>These items will be permanently deleted and cannot be recovered. Are you sure?</strong>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">&nbsp;</div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger" id="lp-author-delete-confirm">Yes, Delete</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/create-module.php');?>
+    <!--Delete module confirm popup-->
+    <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-module.php');?>
+    <!--Delete author confirm popup-->
+    <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-author.php');?>
+    <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/standard-selection.php');?>
 </div>
