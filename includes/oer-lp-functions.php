@@ -187,8 +187,9 @@ if (! function_exists('get_standard_notations_from_ids')) {
     /**
      * Get all standards notations with ids
      * @param $ids
+     * @param bool $admin
      */
-    function get_standard_notations_from_ids($ids) {
+    function get_standard_notations_from_ids($ids, $admin = false) {
         if(!is_array($ids)) {
             $ids = str_replace('standard_notation-', '', $ids);
             $ids = explode(',', $ids);
@@ -211,14 +212,18 @@ if (! function_exists('get_standard_notations_from_ids')) {
             foreach ($results as $result) {?>
                 <span class="selected-standard-pill">
                     <?php echo $result['description'];?>
-                    <a href="javascript:void(0)"
-                       class="remove-ss-pill"
-                       data-id="standard_notation-<?php echo $result['id']?>"
-                    ><i class="fa fa-times"></i></a>
+                    <?php if ($admin) {?>
+                        <a href="javascript:void(0)"
+                           class="remove-ss-pill"
+                           data-id="standard_notation-<?php echo $result['id']?>"
+                        ><i class="fa fa-times"></i></a>
+                    <?php }?>
                 </span>
             <?php }
         } else {
-            echo "<p>You have not selected any academic standards</p>";
+            if ($admin) {
+                echo "<p>You have not selected any academic standards</p>";
+            }
         }
     }
 }

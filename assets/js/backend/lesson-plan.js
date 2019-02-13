@@ -73,6 +73,8 @@ jQuery(document).ready(function ($) {
                     cloned.find('a').attr('href', '#lp-ac-item-' + total_form_box);
                     cloned.find('a').text('Unnamed Activity');
                     cloned.insertAfter('.sidebar-lesson-activities-title li:last');
+                    // Toggle reorder button
+                    LessonPlan.toggleUpDownButton();
                 });
             });
         },
@@ -200,18 +202,24 @@ jQuery(document).ready(function ($) {
         // Show/Hide up/down button
         toggleUpDownButton: function() {
             // Hide the up button in the first child
-            $('.reorder-up').removeClass('hide');
-            $('.reorder-down').removeClass('hide');
-            $('.reorder-up').first().addClass('hide');
-            $('.reorder-down').last().addClass('hide');
+            jQuery('.reorder-up').removeClass('hide');
+            jQuery('.reorder-down').removeClass('hide');
+            jQuery('.reorder-up').first().addClass('hide');
+            jQuery('.reorder-down').last().addClass('hide');
+
+            // Toggle Activity button order
+            jQuery('.activity-reorder-up').removeClass('hide');
+            jQuery('.activity-reorder-down').removeClass('hide');
+            jQuery('.activity-reorder-up').first().addClass('hide');
+            jQuery('.activity-reorder-down').last().addClass('hide');
 
             // Toggle button from author module
             // Hide up button from first element
             // hide down button from last element
-            $('.author-reorder-up').removeClass('hide');
-            $('.author-reorder-down').removeClass('hide');
-            $('.author-reorder-up').first().addClass('hide');
-            $('.author-reorder-down').last().addClass('hide');
+            jQuery('.author-reorder-up').removeClass('hide');
+            jQuery('.author-reorder-down').removeClass('hide');
+            jQuery('.author-reorder-up').first().addClass('hide');
+            jQuery('.author-reorder-down').last().addClass('hide');
         },
 
         // Create dynamic module
@@ -239,6 +247,8 @@ jQuery(document).ready(function ($) {
                     }
 
                     $('#lp-dynamic-module-modal').modal('hide');
+                    // Toggle reorder button
+                    LessonPlan.toggleUpDownButton();
                 });
             });
         },

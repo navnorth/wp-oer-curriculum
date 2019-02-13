@@ -8,37 +8,36 @@ if (!defined('ABSPATH')) exit; // Exit if accessed directly
 // Create menu item under the OER menu
 add_action('init', 'oer_lesson_plan_creation');
 
-function oer_lesson_plan_creation()
-{
+function oer_lesson_plan_creation() {
     global $_use_gutenberg;
     $labels = array(
-        'name' => _x('Curriculum', 'post type general name'),
+        'name'          => _x('Curriculum', 'post type general name'),
         'singular_name' => _x('Curriculum', 'post type singular name'),
-        'add_new' => _x('Add New Curriculum', 'book'),
-        'add_new_item' => __('Add New Curriculum'),
-        'edit_item' => __('Edit Curriculum'),
-        'new_item' => __('Create Curriculum'),
-        'all_items' => __('All Curriculum'),
-        'view_item' => __('View Curriculum'),
-        'search_items' => __('Search'),
-        'menu_name' => 'Curriculum'
+        'add_new'       => _x('Add New Curriculum', 'book'),
+        'add_new_item'  => __('Add New Curriculum'),
+        'edit_item'     => __('Edit Curriculum'),
+        'new_item'      => __('Create Curriculum'),
+        'all_items'     => __('All Curriculum'),
+        'view_item'     => __('View Curriculum'),
+        'search_items'  => __('Search'),
+        'menu_name'     => 'Curriculum'
     );
 
     $args = array(
-        'labels' => $labels,
-        'public' => true,
-        'show_ui' => true,
-        'has_archive' => true,
-        'show_in_menu' => true,//'edit.php?post_type=resource',
-        'public' => true,
-        'publicly_queryable' => true,
-        'exclude_from_search' => false,
-        'query_var' => true,
-        'menu_position' => 26,
-        'menu_icon' => 'dashicons-welcome-learn-more',
-        'taxonomies' => array('post_tag', 'resource-subject-area'),
-        'supports' => array('title', 'editor', 'thumbnail', 'revisions'),
-        'register_meta_box_cb' => 'oer_lesson_plan_custom_meta_boxes'
+        'labels'                => $labels,
+        'public'                => true,
+        'show_ui'               => true,
+        'has_archive'           => true,
+        'show_in_menu'          => true,//'edit.php?post_type=resource',
+        'public'                => true,
+        'publicly_queryable'    => true,
+        'exclude_from_search'   => false,
+        'query_var'             => true,
+        'menu_position'         => 26,
+        'menu_icon'             => 'dashicons-welcome-learn-more',
+        'taxonomies'            => array('post_tag', 'resource-subject-area'),
+        'supports'              => array('title', 'editor', 'thumbnail', 'revisions'),
+        'register_meta_box_cb'  => 'oer_lesson_plan_custom_meta_boxes'
     );
 
     if ($_use_gutenberg == "on" or $_use_gutenberg == "1")
@@ -47,14 +46,12 @@ function oer_lesson_plan_creation()
     register_post_type('lesson-plans', $args);
 }
 
-function oer_lesson_plan_custom_meta_boxes()
-{
+function oer_lesson_plan_custom_meta_boxes() {
     add_meta_box('oer_lesson_plan_meta_boxid', 'Lesson Meta Fields', 'oer_lesson_plan_meta_callback', 'lesson-plans', 'advanced');
 }
 
 //Meta fields callback
-function oer_lesson_plan_meta_callback()
-{
+function oer_lesson_plan_meta_callback() {
     include_once(OER_LESSON_PLAN_PATH . 'includes/lesson-plan-meta-fields.php');
 }
 
@@ -64,8 +61,7 @@ function oer_lesson_plan_meta_callback()
  */
 add_action('admin_enqueue_scripts', 'oer_lesson_plan_assets');
 
-function oer_lesson_plan_assets()
-{
+function oer_lesson_plan_assets() {
     global $post;
     if (
         (isset($_GET['post_type']) && $_GET['post_type'] == 'lesson-plans') ||
@@ -73,7 +69,7 @@ function oer_lesson_plan_assets()
     ) {
         wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL . 'assets/lib/font-awesome/css/font-awesome.min.css');
         wp_enqueue_style('lesson-plan-bootstrap', OER_LESSON_PLAN_URL . 'assets/lib/bootstrap-3.3.7/css/bootstrap.min.css');
-        wp_enqueue_style('admin-lesson-plan', OER_LESSON_PLAN_URL . 'assets/css/backend/lesson-plan-style.css');
+        wp_enqueue_style('admin-lesson-plan', OER_LESSON_PLAN_URL . 'assets/css/backend/lp-style.css');
 
         //Enqueue script
         if (!wp_script_is('admin-lp-bootstrap', 'enqueued')) {
@@ -86,11 +82,26 @@ function oer_lesson_plan_assets()
 }
 
 /**
+ * Enqueue the scripts and style into the frontend
+ */
+add_action('wp_enqueue_scripts', 'lp_enqueue_scripts_and_styles');
+if (!function_exists('lp_enqueue_scripts_and_styles')) {
+    function lp_enqueue_scripts_and_styles() {
+        global $post;
+        if (
+            (isset($_GET['post_type']) && $_GET['post_type'] == 'lesson-plans') ||
+            (isset($post->post_type) && $post->post_type == 'lesson-plans')
+        ) {
+            wp_enqueue_style('lp-style', OER_LESSON_PLAN_URL . 'assets/css/frontend/lp-style.css');
+        }
+    }
+}
+
+/**
  * Save post meta fields into the post meta table
  */
 add_action('save_post', 'lp_save_custom_fields');
-function lp_save_custom_fields()
-{
+function lp_save_custom_fields() {
     global $post, $wpdb, $_oer_prefix;
     //Check first if $post is not empty
     if ($post) {
@@ -197,12 +208,11 @@ function lp_save_custom_fields()
 add_action('wp_ajax_lp_add_more_activity_callback', 'lp_add_more_activity_callback');
 add_action('wp_ajax_nopriv_lp_add_more_activity_callback', 'lp_add_more_activity_callback');
 
-function lp_add_more_activity_callback()
-{
+function lp_add_more_activity_callback() {
     $totalElements = isset($_REQUEST['row_id']) ? $_REQUEST['row_id'] : '15';
     $content = '<div class="panel panel-default lp-ac-item" id="lp-ac-item-' . $totalElements . '">
                     <span class="lp-inner-sortable-handle">
-                        <i class="fa fa-arrow-down activity-reorder-down" aria-hidden="true"></i>
+                        <i class="fa fa-arrow-down activity-reorder-down hide" aria-hidden="true"></i>
                         <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
                     </span>
                     <div class="panel-body">
@@ -263,8 +273,7 @@ function lp_add_more_activity_callback()
 add_action('wp_ajax_lp_create_module_callback', 'lp_create_module_callback');
 add_action('wp_ajax_nopriv_lp_create_module_callback', 'lp_create_module_callback');
 
-function lp_create_module_callback()
-{
+function lp_create_module_callback() {
     $module_type = isset($_REQUEST['module_type']) ? $_REQUEST['module_type'] : 'editor';
     $element_id = isset($_REQUEST['row_id']) ? $_REQUEST['row_id'] : '15';
 
@@ -290,8 +299,7 @@ function lp_create_module_callback()
  * @param $id
  * @return string
  */
-function create_dynamic_editor($id)
-{
+function create_dynamic_editor($id) {
 
     $content = '<div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-' . $id . '">
                     <input type="hidden" name="lp_order[oer_lp_custom_editor_' . $id . ']" class="element-order" value="' . $id . '">
@@ -299,7 +307,7 @@ function create_dynamic_editor($id)
                         <h3 class="panel-title lp-module-title">
                             Text Editor
                             <span class="lp-sortable-handle">
-                                <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-down reorder-down hide" aria-hidden="true"></i>
                                 <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
                             </span>
                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
@@ -329,15 +337,14 @@ function create_dynamic_editor($id)
  * @param $id
  * @return string
  */
-function create_dynamic_text_list($id)
-{
+function create_dynamic_text_list($id) {
     $content = '<div class="panel panel-default lp-element-wrapper" id="oer-lp-text-list-group' . $id . '">
                     <input type="hidden" name="lp_order[oer_lp_custom_text_list_' . $id . ']" class="element-order" value="' . $id . '">
                     <div class="panel-heading">
                         <h3 class="panel-title lp-module-title">
                             Text List
                             <span class="lp-sortable-handle">
-                                <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-down reorder-down hide" aria-hidden="true"></i>
                                 <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
                             </span>
                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
@@ -373,15 +380,14 @@ function create_dynamic_text_list($id)
  * @param $id
  * @return string
  */
-function create_dynamic_vocabulary_list($id)
-{
+function create_dynamic_vocabulary_list($id) {
     $content = '<div class="panel panel-default lp-element-wrapper" id="oer-lp-vocabulary-list-group' . $id . '">
                     <input type="hidden" name="lp_order[oer_lp_vocabulary_list_title_' . $id . ']" class="element-order" value="' . $id . '">
                     <div class="panel-heading">
                         <h3 class="panel-title lp-module-title">
                             Vocabulary List
                             <span class="lp-sortable-handle">
-                                <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-down reorder-down hide" aria-hidden="true"></i>
                                 <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
                             </span>
                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>

@@ -480,7 +480,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                 <div id="selected-standard-wrapper">
                                     <?php
                                     $standards = (isset($post_meta_data['oer_lp_standards'][0])? $post_meta_data['oer_lp_standards'][0] : "");
-                                    get_standard_notations_from_ids($standards);
+                                    get_standard_notations_from_ids($standards, true);
                                     ?>
                                 </div>
                                 <input type="hidden" name="oer_lp_standards" value="<?php echo $standards;?>">
@@ -717,7 +717,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_editor_') !== false) {?>
                         <?php
                         $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
-                        if (!empty($oer_lp_custom_editor)) {?>
+                        ?>
                             <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-<?php echo $key; ?>">
                                 <input type="hidden" name="lp_order[<?php echo $elementKey;?>]" class="element-order" value="<?php echo $value;?>" value="1">
                                 <div class="panel-heading">
@@ -745,7 +745,6 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                     ?>
                                 </div>
                             </div>
-                        <?php }?>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_text_list_') !== false) {?>
                         <?php
                         $oer_lp_custom_text_list = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : array());
@@ -792,11 +791,10 @@ foreach ($elements_orders as $orderKey => $orderValue) {
 
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_vocabulary_list_title_') !== false) {?>
                         <?php
-
                         $oer_lp_vocabulary_list_title = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
                         $listOrder = end(explode('_', $elementKey));
                         $oer_lp_vocabulary_details = (isset($post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0] : "");
-                        if (!empty($oer_lp_vocabulary_list_title)) { ?>
+                        ?>
                             <div class="panel panel-default lp-element-wrapper" id="oer-lp-vocabulary-list-group-<?php echo $key;?>">
                                 <input type="hidden" name="lp_order[<?php echo $elementKey?>]" class="element-order" value="<?php echo $value;?>">
                                 <div class="panel-heading">
@@ -822,10 +820,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                     </div>
                                 </div>
                             </div>
-                        <?php }?>
-
                     <?php }
-
                 }
             } else { ?>
                 <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-introduction-group">
