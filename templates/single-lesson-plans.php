@@ -55,7 +55,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <?php } elseif ($elementKey == 'lp_authors_order') {?>
                         <?php
                         $authors = (isset($post_meta_data['oer_lp_authors'][0]) ? unserialize($post_meta_data['oer_lp_authors'][0]) : array());
-                        if (!empty($authors)) { ?>
+                        if (!empty($authors) && lp_scan_array($authors)) { ?>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title lp-module-title">
@@ -72,6 +72,15 @@ if (have_posts()) : while (have_posts()) : the_post();
                                                 $author_url = isset($authors['author_url'][$authorKey]) ? $authors['author_url'][$authorKey] : "";
                                                 $institution = isset($authors['institution'][$authorKey]) ? $authors['institution'][$authorKey] : "";
                                                 $institution_url = isset($authors['institution_url'][$authorKey]) ? $authors['institution_url'][$authorKey] : "";
+                                                if(
+                                                    empty($authorName) &&
+                                                    empty($role) &&
+                                                    empty($author_url) &&
+                                                    empty($institution) &&
+                                                    empty($institution_url)
+                                                ) {
+                                                    continue;
+                                                }
                                                 ?>
                                                 <div class="panel panel-default lp-author-element-wrapper" id="author-<?php echo $authorKey;?>">
                                                     <div class="panel-heading">
@@ -134,7 +143,57 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 </div>
                             </div>
                         <?php }?>
-
+                    <?php } elseif ($elementKey == 'lp_oer_materials') {?>
+                        <?php
+                        $materials = (isset($post_meta_data['lp_oer_materials'][0]) ? unserialize($post_meta_data['lp_oer_materials'][0]) : array());
+                        if (!empty($materials) && lp_scan_array($materials)) {?>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><?php _e("Materials", OER_LESSON_PLAN_SLUG); ?></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="panel-group">
+                                        <?php
+                                        if (!empty(array_filter($materials['url']))) {
+                                            foreach ($materials['url'] as $materialKey => $material) {
+                                                $file_response = get_file_type_from_url($material);
+                                                ?>
+                                                <div class="panel panel-default">
+                                                    <!--<div class="panel-heading">
+                                                        <h3 class="panel-title"></h3>
+                                                    </div>-->
+                                                    <div class="panel-body">
+                                                        <div class="form-group">
+                                                            <label>Material:</label>
+                                                            <a href="<?php echo $material?>" target="_blank"><?php echo $file_response['icon'];?></a>
+                                                        </div>
+                                                        <?php
+                                                        if (isset($materials['title'][$materialKey]) &&
+                                                            !empty($materials['title'][$materialKey])
+                                                        ) {?>
+                                                            <div class="form-group">
+                                                                <label>Title:</label>
+                                                                <span><?php echo $materials['title'][$materialKey];?></span>
+                                                            </div>
+                                                        <?php }?>
+                                                        <?php
+                                                        if (isset($materials['description'][$materialKey]) &&
+                                                            !empty($materials['description'][$materialKey])
+                                                        ) {?>
+                                                            <div class="form-group">
+                                                                <label>Title:</label>
+                                                                <span><?php echo $materials['description'][$materialKey];?></span>
+                                                            </div>
+                                                        <?php }?>
+                                                    </div>
+                                                </div>
+                                            <?php }
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php }?>
                     <?php } elseif ($elementKey == 'lp_lesson_times_order') {?>
                         <!--For Lesson Times-->
                         <?php
@@ -142,7 +201,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $oer_lp_times_number = isset($post_meta_data['oer_lp_times_number'][0]) ? unserialize($post_meta_data['oer_lp_times_number'][0]) : array();
                         $oer_lp_times_type   = isset($post_meta_data['oer_lp_times_type'][0]) ? unserialize($post_meta_data['oer_lp_times_type'][0]) : array();
                         ?>
-                        <?php if(!empty($oer_lp_times_label)) {?>
+                        <?php if(!empty(array_filter($oer_lp_times_label))) {?>
                             <div class="panel panel-default oer-lp-times-group" id="oer-lp-times-group">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
@@ -153,10 +212,21 @@ if (have_posts()) : while (have_posts()) : the_post();
                                     <ul class="list-group">
                                         <?php
                                         foreach ($oer_lp_times_label as $key => $item){?>
+                                            <?php
+                                            $times = ((isset($oer_lp_times_number[$key]) && (!empty($oer_lp_times_number[$key]))) ? $oer_lp_times_number[$key] : '0');
+                                            $minutes = (isset($oer_lp_times_type[$key]) ? $oer_lp_times_type[$key] : '');
+                                            if(
+                                                empty($item) &&
+                                                empty($times) &&
+                                                ($minutes == 'minutes')
+                                            ) {
+                                                continue;
+                                            }
+                                            ?>
                                             <li class="list-group-item">
                                                 <?php echo $item;?> -
-                                                <?php echo isset($oer_lp_times_number[$key]) ? $oer_lp_times_number[$key] : '';?>
-                                                <?php echo (isset($oer_lp_times_type[$key]) ? $oer_lp_times_type[$key] : '');?>
+                                                <?php echo $times;?>
+                                                <?php echo $minutes;?>
                                             </li>
                                         <?php }?>
                                     </ul>
@@ -166,8 +236,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <?php } elseif ($elementKey == 'lp_industries_order') {?>
                         <?php
                         $oer_lp_grades = (isset($post_meta_data['oer_lp_grades'][0]) ? unserialize($post_meta_data['oer_lp_grades'][0]) : array());
-                        if(!empty($oer_lp_grades))
-                        {?>
+                        if(!empty($oer_lp_grades)) {?>
                             <!--For industries/subject/grades-->
                             <div class="panel panel-default oer-lp-industries-group" id="oer-lp-industries-group">
                                 <div class="panel-heading">
@@ -188,8 +257,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         <!--For Standards and Objectives -->
                         <?php
                         $oer_lp_related_objective = isset($post_meta_data['oer_lp_related_objective'][0]) ? unserialize($post_meta_data['oer_lp_related_objective'][0]) : array();
-                        if(!empty($oer_lp_related_objective))
-                        {?>
+                        if(!empty(array_filter($oer_lp_related_objective))){?>
                             <div class="panel panel-default oer-lp-standards-group" id="oer-lp-standards-group">
                                 <div class="panel-heading">
                                     <h3 class="panel-title lp-module-title">
@@ -197,6 +265,12 @@ if (have_posts()) : while (have_posts()) : the_post();
                                     </h3>
                                 </div>
                                 <div class="panel-body">
+                                    <div id="selected-standard-wrapper">
+                                        <?php
+                                        $standards = (isset($post_meta_data['oer_lp_standards'][0])? $post_meta_data['oer_lp_standards'][0] : "");
+                                        get_standard_notations_from_ids($standards);
+                                        ?>
+                                    </div>
                                     <?php
                                     foreach ( $oer_lp_related_objective as $key => $item) { ?>
                                         <div class="lp-related-objective-row" id="lp-related-objective-row">
@@ -214,7 +288,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $oer_lp_activity_type   = isset($post_meta_data['oer_lp_activity_type'][0]) ? unserialize($post_meta_data['oer_lp_activity_type'][0]) : array();
                         $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? unserialize($post_meta_data['oer_lp_activity_detail'][0]) : array();
 
-                        if(!empty($oer_lp_activity_title))
+                        if(!empty(array_filter($oer_lp_activity_title)))
                         {?>
                             <div class="panel panel-default oer-lp-activities-group" id="oer-lp-activities-group">
                                 <div class="panel-heading">
@@ -225,19 +299,31 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 <div class="panel-body">
                                     <div class="panel-group" id="lp-ac-inner-panel">
                                         <?php foreach ($oer_lp_activity_title as $key => $item) { ?>
+                                            <?php
+                                            $title       = $item;
+                                            $type        = (isset($oer_lp_activity_type[$key]) ? $oer_lp_activity_type[$key] : "");
+                                            $description = (isset($oer_lp_activity_detail[$key]) ? $oer_lp_activity_detail[$key] : "");
+                                            if(
+                                                empty($title) &&
+                                                empty($type) &&
+                                                empty($description)
+                                            ) {
+                                                continue;
+                                            }
+                                            ?>
                                             <div class="panel panel-default lp-ac-item" id="lp-ac-item-<?php echo $key;?>">
                                                 <div class="panel-body">
                                                     <div class="form-group">
                                                         <label>Activity Title</label>
-                                                        <?php echo $item; ?>
+                                                        <?php echo $title; ?>
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Activity Type</label>
-                                                        <?php echo (isset($oer_lp_activity_type[$key]) ? $oer_lp_activity_type[$key] : "");?>
+                                                        <?php echo $type;?>
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Activity Description</label>
-                                                        <?php echo isset($oer_lp_activity_detail[$key]) ? $oer_lp_activity_detail[$key] : "";?>
+                                                        <?php echo $description;?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -264,7 +350,12 @@ if (have_posts()) : while (have_posts()) : the_post();
                                             <li><?php echo ucfirst($oer_lp_assessment); ?></li>
                                         <?php }?>
                                     </ul>
-                                    <?php echo "Others: " . $oer_lp_other_assessment_type = (isset($post_meta_data['oer_lp_other_assessment_type'][0]) ? $post_meta_data['oer_lp_other_assessment_type'][0] : '');?>
+                                    <?php
+                                    $oer_lp_other_assessment_type = (isset($post_meta_data['oer_lp_other_assessment_type'][0]) ? $post_meta_data['oer_lp_other_assessment_type'][0] : '');
+                                    if(!empty($oer_lp_other_assessment_type)) {
+                                        echo "Others: " . $oer_lp_other_assessment_type;
+                                    }
+                                    ?>
                                     <div class="form-group">
                                         <?php
                                         echo $oer_lp_assessment = (isset($post_meta_data['oer_lp_assessment'][0]) ? $post_meta_data['oer_lp_assessment'][0] : '');
@@ -276,14 +367,14 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_editor_') !== false) {?>
                         <!--For custom editor-->
                         <?php
-                        $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : array());
+                        $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
                         if(!empty($oer_lp_custom_editor)) { ?>
                             <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-<?php echo $key; ?>">
                                 <div class="panel-heading">
                                     <h3 class="panel-title lp-module-title">Text Editor</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <?php echo $editor;?>
+                                    <?php echo $oer_lp_custom_editor;?>
                                 </div>
                             </div>
                         <?php }?>
@@ -291,7 +382,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         <!--For list-->
                         <?php
                         $oer_lp_custom_text_list = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : array());
-                        if (!empty($oer_lp_custom_text_list)) {
+                        if (!empty(array_filter($oer_lp_custom_text_list))) {
                             foreach ($oer_lp_custom_text_list as $key => $list) { ?>
                                 <div class="panel panel-default lp-element-wrapper" id="oer-lp-text-list-group-<?php echo $key;?>">
                                     <div class="panel-heading">

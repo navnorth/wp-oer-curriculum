@@ -73,6 +73,8 @@ jQuery(document).ready(function ($) {
                     cloned.find('a').attr('href', '#lp-ac-item-' + total_form_box);
                     cloned.find('a').text('Unnamed Activity');
                     cloned.insertAfter('.sidebar-lesson-activities-title li:last');
+                    // Toggle reorder button
+                    LessonPlan.toggleUpDownButton();
                 });
             });
         },
@@ -175,6 +177,27 @@ jQuery(document).ready(function ($) {
                 }
                 return false;
             });
+
+            // Material element reorder
+            $(document).on('click', '.material-reorder-up', function(){
+                var $current = $(this).closest('.lp-material-element-wrapper');
+                var $previous = $current.prev('.lp-material-element-wrapper');
+                if($previous.length !== 0){
+                    $current.insertBefore($previous);
+                    LessonPlan.toggleUpDownButton();
+                }
+                return false;
+            });
+
+            $(document).on('click', '.material-reorder-down', function(){
+                var $current = $(this).closest('.lp-material-element-wrapper');
+                var $next = $current.next('.lp-material-element-wrapper');
+                if($next.length !== 0){
+                    $current.insertAfter($next);
+                    LessonPlan.toggleUpDownButton();
+                }
+                return false;
+            });
         },
 
         // Change order value in hidden field and reinitialize the text editor
@@ -205,6 +228,12 @@ jQuery(document).ready(function ($) {
             $('.reorder-up').first().addClass('hide');
             $('.reorder-down').last().addClass('hide');
 
+            // Toggle Activity button order
+            $('.activity-reorder-up').removeClass('hide');
+            $('.activity-reorder-down').removeClass('hide');
+            $('.activity-reorder-up').first().addClass('hide');
+            $('.activity-reorder-down').last().addClass('hide');
+
             // Toggle button from author module
             // Hide up button from first element
             // hide down button from last element
@@ -212,6 +241,12 @@ jQuery(document).ready(function ($) {
             $('.author-reorder-down').removeClass('hide');
             $('.author-reorder-up').first().addClass('hide');
             $('.author-reorder-down').last().addClass('hide');
+
+            // Show / Hide button on Materials module
+            $('.material-reorder-up').removeClass('hide');
+            $('.material-reorder-down').removeClass('hide');
+            $('.material-reorder-up').first().addClass('hide');
+            $('.material-reorder-down').last().addClass('hide');
         },
 
         // Create dynamic module
@@ -239,6 +274,8 @@ jQuery(document).ready(function ($) {
                     }
 
                     $('#lp-dynamic-module-modal').modal('hide');
+                    // Toggle reorder button
+                    LessonPlan.toggleUpDownButton();
                 });
             });
         },
@@ -252,9 +289,8 @@ jQuery(document).ready(function ($) {
             });
         },
         // Add more author
-        AddMoreAuthor: function () {
+        addMoreAuthor: function () {
             $(document).on('click', '#lp-add-more-author', function () {
-                console.log("clicked");
                 var ClonedDiv = $('.lp-author-element-wrapper:last').clone();
                 ClonedDiv.insertAfter('div.lp-author-element-wrapper:last');
                 ClonedDiv.find('input[type=text]').val('');
@@ -266,6 +302,7 @@ jQuery(document).ready(function ($) {
         // Delete author
         deleteAuthor: function () {
             $(document).on('click', '.lp-remove-author',function(e) {
+                console.log("Clocked");
                 var author = $(this).closest('.panel-default');
                 var elementId = author.attr('id');
                 e.preventDefault();
@@ -366,7 +403,109 @@ jQuery(document).ready(function ($) {
                 // Unchecked the checkbox from popup
                 jQuery('#lpOerStandardModal input[value='+pillId+']').attr('checked', false);
             });
-        }
+        },
+        
+        // Add materials to the module
+        lpAddMaterials: function () {
+            $(document).on('click', '#lp-add-materials', function (e) {
+                e.preventDefault();
+                var materialFrame;
+                if (materialFrame) {
+                    materialFrame.open();
+                    return;
+                }
+
+                materialFrame = wp.media({
+                    title: 'Select Materials',
+                    button: { text: 'Use Materials' },
+                    //library: { type: [ 'image' ] },
+                    multiple:'add'
+                });
+
+                // Get selected files
+                materialFrame.on('select', function(){
+                    var materialHTML = "";
+                    var selected = materialFrame.state().get('selection');
+                    selected.map(function (attachment) {
+                        attachment = attachment.toJSON();
+                        console.log(attachment.type, attachment.subtype, attachment.name, attachment);
+
+                        // Get the file type and pic the icon according to that
+                        var title = "";
+                        var icon = ""
+                        if ($.inArray(attachment.subtype, ['zip', 'x-7z-compressed']) !== -1) {
+                            title = 'Archived';
+                            icon = '<i class="fa fa-file-archive-o fa-2x"></i>';
+                        } else if($.inArray(attachment.subtype, ['plain']) !== -1) {
+                            title = 'Plain text';
+                            icon = '<i class="fa fa-file-text-o fa-2x"></i>';
+                        } else if($.inArray(attachment.subtype, ['pdf']) !== -1) {
+                            title = 'PDF';
+                            icon = '<i class="fa fa-file-pdf-o fa-2x"></i>';
+                        } else if($.inArray(attachment.type, ['image']) !== -1) {
+                            title = 'Image';
+                            icon = '<i class="fa fa-file-image-o fa-2x"></i>';
+                        } else if($.inArray(attachment.subtype, ['msword', 'vnd.ms-excel', 'vnd.openxmlformats-officedocument.wordprocessingml.document']) !== -1) {
+                            title = 'Microsoft Document';
+                            icon = '<i class="fa fa-file-word-o fa-2x"></i>';
+                        }
+                        materialHTML += '<div class="panel panel-default lp-material-element-wrapper">' +
+                                            '<div class="panel-heading">' +
+                                                '<h3 class="panel-title lp-module-title">' +
+                                                    '<span class="lp-sortable-handle">' +
+                                                        '<i class="fa fa-arrow-down material-reorder-down" aria-hidden="true"></i>' +
+                                                        '<i class="fa fa-arrow-up material-reorder-up" aria-hidden="true"></i>' +
+                                                    '</span>' +
+                                                    '<span class="btn btn-danger btn-sm lp-remove-material" title="Delete"><i class="fa fa-trash"></i></span>' +
+                                                '</h3>' +
+                                            '</div>' +
+                                            '<div class="panel-body">' +
+                                                '<div class="form-group">' +
+                                                    '<div class="input-group">' +
+                                                        '<input type="text" class="form-control" name="lp_oer_materials[url][]" placeholder="URL" value="' + attachment.url + '">' +
+                                                        '<div class="input-group-addon" title="'+ title +'">' + icon + '</div>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '<div class="form-group">' +
+                                                   '<input type="text" class="form-control" name="lp_oer_materials[title][]" placeholder="Title" value="' + attachment.name + '">' +
+                                                '</div>' +
+                                                '<div class="form-group">' +
+                                                    '<textarea class="form-control" name="lp_oer_materials[description][]" rows="6" placeholder="Description">' + attachment.description + '</textarea>' +
+                                                '</div>' +
+                                            '</div>' +
+                                        '</div>';
+
+                    });
+                    $('#lp-materials-container').html(materialHTML);
+                    LessonPlan.toggleUpDownButton();
+                });
+
+                materialFrame.open();
+            })
+        },
+
+        // Delete Material module
+        lpDeleteMaterials: function () {
+            $(document).on('click', '.lp-remove-material',function(e) {
+                var material = $(this).closest('.panel-default');
+                var elementId = material.attr('id');
+                e.preventDefault();
+                $('#lp-delete-confirm-popup').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+                    .on('click', '#lp-delete-confirm-popup-btn', function(e) {
+                        material.remove();
+                        $('a[href=#' + elementId +']').parent('li').remove();
+                        $('#lp-delete-confirm-popup').modal('hide');
+
+                        // Disable delete button for author
+                        if($('.lp-material-element-wrapper').length === 1) {
+                            $('.lp-remove-material').attr('disabled', 'disabled');
+                        }
+                    });
+            });
+        },
     };
 
     // Initialize all function on ready state
@@ -381,9 +520,11 @@ jQuery(document).ready(function ($) {
     LessonPlan.createDynamicModule();
     LessonPlan.toggleUpDownButton();
     LessonPlan.dismissInstallNotice();
-    LessonPlan.AddMoreAuthor();
+    LessonPlan.addMoreAuthor();
     LessonPlan.deleteAuthor();
     LessonPlan.lpUploadAuthorImage();
     LessonPlan.lpSelectStandards();
     LessonPlan.lpRemoveStandardsFromList();
+    LessonPlan.lpAddMaterials();
+    LessonPlan.lpDeleteMaterials();
 });

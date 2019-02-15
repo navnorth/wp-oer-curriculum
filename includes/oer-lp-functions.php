@@ -187,8 +187,9 @@ if (! function_exists('get_standard_notations_from_ids')) {
     /**
      * Get all standards notations with ids
      * @param $ids
+     * @param bool $admin
      */
-    function get_standard_notations_from_ids($ids) {
+    function get_standard_notations_from_ids($ids, $admin = false) {
         if(!is_array($ids)) {
             $ids = str_replace('standard_notation-', '', $ids);
             $ids = explode(',', $ids);
@@ -211,14 +212,74 @@ if (! function_exists('get_standard_notations_from_ids')) {
             foreach ($results as $result) {?>
                 <span class="selected-standard-pill">
                     <?php echo $result['description'];?>
-                    <a href="javascript:void(0)"
-                       class="remove-ss-pill"
-                       data-id="standard_notation-<?php echo $result['id']?>"
-                    ><i class="fa fa-times"></i></a>
+                    <?php if ($admin) {?>
+                        <a href="javascript:void(0)"
+                           class="remove-ss-pill"
+                           data-id="standard_notation-<?php echo $result['id']?>"
+                        ><i class="fa fa-times"></i></a>
+                    <?php }?>
                 </span>
             <?php }
         } else {
-            echo "<p>You have not selected any academic standards</p>";
+            if ($admin) {
+                echo "<p>You have not selected any academic standards</p>";
+            }
         }
+    }
+}
+
+if (! function_exists('get_file_type_from_url')) {
+    /**
+     * Check the file type form the url
+     * @param $url
+     * @param string $class
+     * @return array|bool
+     */
+    function get_file_type_from_url($url, $class = 'fa-2x') {
+        if(empty($url)) {
+            return false;
+        }
+
+        $response = array();
+        $file_type = strtolower(end(explode('.', $url)));
+        if(in_array($file_type, ['jpg', 'jpeg', 'gif', 'png'])) {
+            $response['title'] = 'Image';
+            $response['icon'] = '<i class="fa '.$class.' fa-file-image-o"></i>';
+        } elseif($file_type == 'pdf') {
+            $response['title'] = 'PDF';
+            $response['icon'] = '<i class="fa '.$class.' fa-file-pdf-o"></i>';
+        } elseif(in_array($file_type, ['txt'])) {
+            $response['title'] = 'Plain Text';
+            $response['icon'] = '<i class="fa '.$class.' fa-file-text-o"></i>';
+        } elseif(in_array($file_type, ['7z', 'zip', 'rar'])) {
+            $response['title'] = 'Archive';
+            $response['icon'] = '<i class="fa '.$class.' fa-file-archive-o"></i>';
+        } elseif(in_array($file_type, ['docx', 'doc', 'xls'])) {
+            $response['title'] = 'Microsoft Document';
+            $response['icon'] = '<i class="fa '.$class.' fa-file-word-o"></i>';
+        }
+
+        return $response;
+    }
+}
+
+if (! function_exists('lp_scan_array')) {
+    /**
+     * multi array scan
+     *
+     * @param $array array
+     *
+     * @return bool
+     */
+    function lp_scan_array($array = array()){
+        if (empty($array)) return false;
+
+        foreach ($array as $sarray) {
+            if (!empty(array_filter($sarray))) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
