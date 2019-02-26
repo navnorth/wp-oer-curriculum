@@ -37,13 +37,13 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                             <li class="list-group-item">
                                 <a href="#oer-lp-authors" title="Lesson Times">Authors</a>
                             </li>
+                        <?php } elseif ($elementKey == 'lp_oer_materials') {?>
+                            <li class="list-group-item">
+                                <a href="#oer-lp-materials" class="js-scroll-trigger" title="Materials"><?php _e("Materials", OER_LESSON_PLAN_SLUG); ?></a>
+                            </li>
                         <?php } elseif ($elementKey == 'lp_lesson_times_order') {?>
                             <li class="list-group-item">
                                 <a href="#oer-lp-times-group" title="Lesson Times">Lesson Times</a>
-                            </li>
-                        <?php } elseif ($elementKey == 'lp_industries_order') {?>
-                            <li class="list-group-item">
-                                <a href="#oer-lp-industries-group" title="Industries / Subjects / Grades">Industries / Subjects / Grades</a>
                             </li>
                         <?php } elseif ($elementKey == 'lp_standard_order') {?>
                             <li class="list-group-item">
@@ -85,10 +85,10 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                         <a href="#oer-lp-authors" title="Introduction">Authors</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#oer-lp-times-group" title="Lesson Times">Lesson Times</a>
+                        <a href="#oer-lp-materials" title="Materials"><?php _e("Materials", OER_LESSON_PLAN_SLUG); ?></a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#oer-lp-industries-group" title="Industries / Subjects / Grades">Industries / Subjects / Grades</a>
+                        <a href="#oer-lp-times-group" title="Lesson Times">Lesson Times</a>
                     </li>
                     <li class="list-group-item">
                         <a href="#oer-lp-standards-group" title="Standards and Objectives">Standards and Objectives</a>
@@ -287,7 +287,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <div class="panel-group" id="lp-materials-container">
+                                <div class="panel-group lp-materials-container" id="lp-materials-container">
                                     <?php
                                     $materials = (isset($post_meta_data['lp_oer_materials'][0]) ? unserialize($post_meta_data['lp_oer_materials'][0]) : array());
                                     if (!empty($materials['url'])) {
@@ -446,85 +446,6 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                         <button type="button"
                                                 class="btn btn-default lp-add-time-element"
                                         ><i class="fa fa-plus"></i> Add Time Element</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } elseif ($elementKey == 'lp_industries_order') {?>
-                        <!--For industries/subject/grades-->
-                        <div class="panel panel-default lp-element-wrapper oer-lp-industries-group" id="oer-lp-industries-group">
-                            <input type="hidden" name="lp_order[lp_industries_order]" class="element-order" value="<?php echo $value;?>">
-                            <div class="panel-heading">
-                                <h3 class="panel-title lp-module-title">
-                                    <?php _e("Industries / Subjects / Grades", OER_LESSON_PLAN_SLUG); ?>
-                                    <span class="lp-sortable-handle">
-                                        <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
-                                        <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
-                                    </span>
-                                    <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
-                                </h3>
-                            </div>
-                            <div class="panel-body">
-                                <ul class="nav nav-tabs">
-                                    <li class="active">
-                                        <a href="#lp-industries-content"
-                                           id="lp-industries-tab"
-                                           data-toggle="tab"
-                                           role="tab"
-                                           aria-controls="lp-industries-content"
-                                           aria-selected="true"
-                                        >Industries / Pathways</a>
-                                    </li>
-                                    <li>
-                                        <a href="#lp-grades-content"
-                                           id="lp-grades-tab"
-                                           data-toggle="tab"
-                                           role="tab"
-                                           aria-controls="lp-grades-content"
-                                           aria-selected="false"
-                                        >Grade Levels</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content" id="nav-tab-content">
-                                    <div class="tab-pane active" id="lp-industries-content" role="tabpanel" aria-labelledby="lp-industries-tab">
-                                        <!--s-->
-                                    </div>
-                                    <div class="tab-pane fade" id="lp-grades-content" role="tabpanel" aria-labelledby="lp-grades-tab">
-                                        <div class="row">
-                                            <?php
-                                            $oer_lp_grade_options = array(
-                                                'pre-k' => 'Pre-K',
-                                                'k' => 'K (Kindergarten)',
-                                                '1' => '1',
-                                                '2' => '2',
-                                                '3' => '3',
-                                                '4' => '4',
-                                                '5' => '5',
-                                                '6' => '6',
-                                                '7' => '7',
-                                                '8' => '8',
-                                                '9' => '9',
-                                                '10' => '10',
-                                                '11' => '11',
-                                                '12' => '12'
-                                            );
-
-                                            // Display options
-                                            $oer_lp_grades = (isset($post_meta_data['oer_lp_grades'][0]) ? unserialize($post_meta_data['oer_lp_grades'][0]) : array());
-                                            foreach ($oer_lp_grade_options as $key => $oer_lp_grade_option) { ?>
-                                                <div class="col-md-3">
-                                                    <div class="checkbox oer-summative-checkbox">
-                                                        <label>
-                                                            <input name="oer_lp_grades[]"
-                                                                   type="checkbox"
-                                                                   value="<?php echo $key;?>"
-                                                                <?php echo oer_lp_show_selected($key, $oer_lp_grades, 'checkbox')?>
-                                                            > <?php echo $oer_lp_grade_option; ?>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            <?php }?>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -857,7 +778,76 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                             <?php }
                         }
                         ?>
-
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'lp_oer_materials_list_') !== false) {?>
+                        <div class="panel panel-default lp-element-wrapper" id="oer-lp-materials-<?php echo $value;?>">
+                            <input type="hidden" name="<?php echo $elementKey?>" class="element-order" value="<?php echo $value?>">
+                            <div class="panel-heading">
+                                <h3 class="panel-title lp-module-title">
+                                    <?php _e("Materials", OER_LESSON_PLAN_SLUG); ?>
+                                    <span class="lp-sortable-handle">
+                                        <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                        <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i></span>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="panel-group lp-materials-container" id="lp-materials-container-<?php echo $value;?>">
+                                    <?php
+                                    $materials = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : array());
+                                    if (!empty($materials['url'])) {
+                                        foreach ($materials['url'] as $materialKey => $material) {?>
+                                            <?php
+                                            $file_response = get_file_type_from_url($material);
+                                            ?>
+                                            <div class="panel panel-default lp-material-element-wrapper">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title lp-module-title">
+                                                        <span class="lp-sortable-handle">
+                                                            <i class="fa fa-arrow-down material-reorder-down" aria-hidden="true"></i>
+                                                            <i class="fa fa-arrow-up material-reorder-up" aria-hidden="true"></i>
+                                                        </span>
+                                                        <span class="btn btn-danger btn-sm lp-remove-material" title="Delete"><i class="fa fa-trash"></i></span>
+                                                    </h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <input type="text"
+                                                                   class="form-control"
+                                                                   name="<?php echo $elementKey;?>[url][]"
+                                                                   placeholder="URL"
+                                                                   value="<?php echo $material;?>">
+                                                            <div class="input-group-addon"
+                                                                 title="<?php echo isset($file_response['title']) ? $file_response['title'] : "";?>"
+                                                            ><?php echo isset($file_response['icon']) ? $file_response['icon'] : "";?></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text"
+                                                               class="form-control"
+                                                               name="<?php echo $elementKey;?>[title][]"
+                                                               placeholder="Title"
+                                                               value="<?php echo $materials['title'][$materialKey]?>">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <textarea class="form-control"
+                                                                  name="<?php echo $elementKey;?>[description][]"
+                                                                  rows="6"
+                                                                  placeholder="Description"
+                                                        ><?php echo $materials['description'][$materialKey]?></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php }
+                                    }?>
+                                </div>
+                                <button type="button"
+                                        id="lp-add-materials"
+                                        class="btn btn-default lp-add-materials"
+                                ><i class="fa fa-plus"></i> Add Materials</button>
+                            </div>
+                        </div>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_vocabulary_list_title_') !== false) {?>
                         <?php
                         $oer_lp_vocabulary_list_title = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
@@ -1012,7 +1002,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <div class="panel-group" id="lp-materials-container">
+                    <div class="panel-group lp-materials-container" id="lp-materials-container">
                     </div>
                     <button type="button"
                             id="lp-add-materials"
@@ -1073,84 +1063,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                     </div>
                 </div>
             </div>
-            <!--For industries/subject/grades-->
-            <div class="panel panel-default lp-element-wrapper oer-lp-industries-group" id="oer-lp-industries-group">
-                <input type="hidden" name="lp_order[lp_industries_order]" class="element-order" value="5">
-                <div class="panel-heading">
-                    <h3 class="panel-title lp-module-title">
-                        <?php _e("Industries / Subjects / Grades", OER_LESSON_PLAN_SLUG); ?>
-                        <span class="lp-sortable-handle">
-                            <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
-                            <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
-                        </span>
-                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a href="#lp-industries-content"
-                               id="lp-industries-tab"
-                               data-toggle="tab"
-                               role="tab"
-                               aria-controls="lp-industries-content"
-                               aria-selected="true"
-                            >Industries / Pathways</a>
-                        </li>
-                        <li>
-                            <a href="#lp-grades-content"
-                               id="lp-grades-tab"
-                               data-toggle="tab"
-                               role="tab"
-                               aria-controls="lp-grades-content"
-                               aria-selected="false"
-                            >Grade Levels</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="nav-tab-content">
-                        <div class="tab-pane active" id="lp-industries-content" role="tabpanel" aria-labelledby="lp-industries-tab">
-                            <!--s-->
-                        </div>
-                        <div class="tab-pane fade" id="lp-grades-content" role="tabpanel" aria-labelledby="lp-grades-tab">
-                            <div class="row">
-                                <?php
-                                $oer_lp_grade_options = array(
-                                    'pre-k' => 'Pre-K',
-                                    'k' => 'K (Kindergarten)',
-                                    '1' => '1',
-                                    '2' => '2',
-                                    '3' => '3',
-                                    '4' => '4',
-                                    '5' => '5',
-                                    '6' => '6',
-                                    '7' => '7',
-                                    '8' => '8',
-                                    '9' => '9',
-                                    '10' => '10',
-                                    '11' => '11',
-                                    '12' => '12'
-                                );
 
-                                // Display options
-                                $oer_lp_grades = (isset($post_meta_data['oer_lp_grades'][0]) ? unserialize($post_meta_data['oer_lp_grades'][0]) : array());
-                                foreach ($oer_lp_grade_options as $key => $oer_lp_grade_option) { ?>
-                                    <div class="col-md-3">
-                                        <div class="checkbox oer-summative-checkbox">
-                                            <label>
-                                                <input name="oer_lp_grades[]"
-                                                       type="checkbox"
-                                                       value="<?php echo $key;?>"
-                                                    <?php echo oer_lp_show_selected($key, $oer_lp_grades, 'checkbox')?>
-                                                > <?php echo $oer_lp_grade_option; ?>
-                                            </label>
-                                        </div>
-                                    </div>
-                                <?php }?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!--For Standards and Objectives -->
             <div class="panel panel-default lp-element-wrapper oer-lp-standards-group" id="oer-lp-standards-group">
                 <input type="hidden" name="lp_order[lp_standard_order]" class="element-order" value="6">

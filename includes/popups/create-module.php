@@ -12,7 +12,7 @@
                     <select name="module-type" class="form-control" id="module-type">
                         <option value="editor">Text/Editor</option>
                         <option value="list">Text List</option>
-                        <!--<option value="resources">Resources and Materials</option>-->
+                        <option value="materials">Materials</option>
                         <option value="vocabulary">Vocabulary List</option>
                     </select>
                 </div>

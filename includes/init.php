@@ -47,12 +47,45 @@ function oer_lesson_plan_creation() {
 }
 
 function oer_lesson_plan_custom_meta_boxes() {
+    add_meta_box( 'oer_lesson_plan_grades', 'Grade Level', 'oer_lp_grade_level_cb', 'lesson-plans', 'side', 'high' );
     add_meta_box('oer_lesson_plan_meta_boxid', 'Lesson Meta Fields', 'oer_lesson_plan_meta_callback', 'lesson-plans', 'advanced');
 }
 
 //Meta fields callback
 function oer_lesson_plan_meta_callback() {
     include_once(OER_LESSON_PLAN_PATH . 'includes/lesson-plan-meta-fields.php');
+}
+
+/**
+ * Display the grade level into the side bar
+ */
+function oer_lp_grade_level_cb() {
+    global $post;
+    $post_meta_data = get_post_meta($post->ID );
+    $oer_lp_grade_options = array(
+        'pre-k' => 'Pre-K',
+        'k' => 'K (Kindergarten)',
+        '1' => '1',
+        '2' => '2',
+        '3' => '3',
+        '4' => '4',
+        '5' => '5',
+        '6' => '6',
+        '7' => '7',
+        '8' => '8',
+        '9' => '9',
+        '10' => '10',
+        '11' => '11',
+        '12' => '12'
+    );
+    $oer_lp_grades = (isset($post_meta_data['oer_lp_grades'][0]) ? unserialize($post_meta_data['oer_lp_grades'][0]) : array());
+    foreach ($oer_lp_grade_options as $key => $oer_lp_grade_option) {
+        $checkbox = '<div class="form-checkbox">';
+        $checkbox .= '<input type="checkbox" name="oer_lp_grades[]" value="'.$key.'" id="oer_lp_grade_'.$key.'" '.oer_lp_show_selected($key, $oer_lp_grades, 'checkbox').'>';
+        $checkbox .= '<label for="oer_lp_grade_'.$key.'">'.$oer_lp_grade_option.'</label>';
+        $checkbox .= '</div>';
+        echo $checkbox;
+    }
 }
 
 /**
@@ -295,6 +328,8 @@ function lp_create_module_callback() {
         echo create_dynamic_text_list($element_id);
     } elseif ($module_type == 'vocabulary') {
         echo create_dynamic_vocabulary_list($element_id);
+    } elseif ($module_type == 'materials') {
+        echo create_dynamic_materials_module($element_id);
     }
     exit();
 }
@@ -414,6 +449,34 @@ function create_dynamic_vocabulary_list($id) {
     return $content;
 }
 
+if (! function_exists('create_dynamic_materials_module')) {
+    /**
+     * Create dynamic vocabulary list
+     * @param $id
+     * @return string
+     */
+    function create_dynamic_materials_module($id) {
+        $content = '<div class="panel panel-default lp-element-wrapper" id="oer-lp-materials-'.$id.'">
+                        <input type="hidden" name="lp_order[lp_oer_materials_list_'.$id.']" class="element-order" value="'.$id.'">
+                        <div class="panel-heading">
+                            <h3 class="panel-title lp-module-title">
+                                Materials
+                                <span class="lp-sortable-handle">
+                                    <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                    <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                </span>
+                                <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i></span>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="panel-group lp-materials-container" id="lp-materials-container">
+                            </div>
+                            <button type="button" data-type="custom" data-name="lp_oer_materials_list_'.$id.'" class="btn btn-default lp-add-materials"><i class="fa fa-plus"></i> Add Materials</button>
+                        </div>
+                    </div>';
+        return $content;
+    }
+}
 /**
  * Hide installation notice
  */

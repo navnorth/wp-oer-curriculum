@@ -407,14 +407,25 @@ jQuery(document).ready(function ($) {
         
         // Add materials to the module
         lpAddMaterials: function () {
-            $(document).on('click', '#lp-add-materials', function (e) {
+            $(document).on('click', '.lp-add-materials', function (e) {
                 e.preventDefault();
+                var moduleName = $(this).attr('data-name');
+                var materialsContainer = $(this).prev('.lp-materials-container');
+
+                // Prepare input field name for the filed
+                // Called this code on main materials module file selection
+                // And When select file form the custom material module
+                if (typeof moduleName !== 'undefined') {
+                    var lp_oer_materials_input = moduleName;
+                } else {
+                    var lp_oer_materials_input = 'lp_oer_materials';
+                }
+
                 var materialFrame;
                 if (materialFrame) {
                     materialFrame.open();
                     return;
                 }
-
                 materialFrame = wp.media({
                     title: 'Select Materials',
                     button: { text: 'Use Materials' },
@@ -428,11 +439,9 @@ jQuery(document).ready(function ($) {
                     var selected = materialFrame.state().get('selection');
                     selected.map(function (attachment) {
                         attachment = attachment.toJSON();
-                        console.log(attachment.type, attachment.subtype, attachment.name, attachment);
-
                         // Get the file type and pic the icon according to that
                         var title = "";
-                        var icon = ""
+                        var icon = "";
                         if ($.inArray(attachment.subtype, ['zip', 'x-7z-compressed']) !== -1) {
                             title = 'Archived';
                             icon = '<i class="fa fa-file-archive-o fa-2x"></i>';
@@ -445,10 +454,17 @@ jQuery(document).ready(function ($) {
                         } else if($.inArray(attachment.type, ['image']) !== -1) {
                             title = 'Image';
                             icon = '<i class="fa fa-file-image-o fa-2x"></i>';
-                        } else if($.inArray(attachment.subtype, ['msword', 'vnd.ms-excel', 'vnd.openxmlformats-officedocument.wordprocessingml.document']) !== -1) {
+                        } else if($.inArray(attachment.subtype, ['msword', 'vnd.openxmlformats-officedocument.wordprocessingml.document']) !== -1) {
                             title = 'Microsoft Document';
                             icon = '<i class="fa fa-file-word-o fa-2x"></i>';
+                        } else if($.inArray(attachment.subtype,['vnd.ms-excel'])) {
+                            title = 'Microsoft Excel';
+                            icon = '<i class="fa fa-file-excel-o fa-2x"></i>';
+                        } else if($.inArray(attachment.subtype,['vnd.ms-powerpoint'])) {
+                            title = 'Microsoft Powerpoint';
+                            icon = '<i class="fa fa-file-powerpoint-o fa-2x"></i>';
                         }
+
                         materialHTML += '<div class="panel panel-default lp-material-element-wrapper">' +
                                             '<div class="panel-heading">' +
                                                 '<h3 class="panel-title lp-module-title">' +
@@ -462,21 +478,31 @@ jQuery(document).ready(function ($) {
                                             '<div class="panel-body">' +
                                                 '<div class="form-group">' +
                                                     '<div class="input-group">' +
-                                                        '<input type="text" class="form-control" name="lp_oer_materials[url][]" placeholder="URL" value="' + attachment.url + '">' +
+                                                        '<input type="text" class="form-control" name="' + lp_oer_materials_input + '[url][]" placeholder="URL" value="' + attachment.url + '">' +
                                                         '<div class="input-group-addon" title="'+ title +'">' + icon + '</div>' +
                                                     '</div>' +
                                                 '</div>' +
                                                 '<div class="form-group">' +
-                                                   '<input type="text" class="form-control" name="lp_oer_materials[title][]" placeholder="Title" value="' + attachment.name + '">' +
+                                                   '<input type="text" class="form-control" name="' + lp_oer_materials_input + '[title][]" placeholder="Title" value="' + attachment.name + '">' +
                                                 '</div>' +
                                                 '<div class="form-group">' +
-                                                    '<textarea class="form-control" name="lp_oer_materials[description][]" rows="6" placeholder="Description">' + attachment.description + '</textarea>' +
+                                                    '<textarea class="form-control" name="' + lp_oer_materials_input + '[description][]" rows="6" placeholder="Description">' + attachment.description + '</textarea>' +
                                                 '</div>' +
                                             '</div>' +
                                         '</div>';
 
                     });
-                    $('#lp-materials-container').html(materialHTML);
+                    if (materialsContainer.has('.lp-material-element-wrapper').length) {
+                        $(materialHTML).appendTo(materialsContainer);
+                    } else {
+                        materialsContainer.html(materialHTML);
+                    }
+
+                    /*if($('.lp-material-element-wrapper').length) {
+                        $(materialHTML).insertAfter('.lp-material-element-wrapper:last');
+                    } else {
+                        $('#lp-materials-container').html(materialHTML);
+                    }*/
                     LessonPlan.toggleUpDownButton();
                 });
 
