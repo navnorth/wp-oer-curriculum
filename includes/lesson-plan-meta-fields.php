@@ -312,8 +312,9 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                                                    class="form-control"
                                                                    name="lp_oer_materials[url][]"
                                                                    placeholder="URL"
-                                                                   value="<?php echo $material;?>">
-                                                            <div class="input-group-addon"
+                                                                   value="<?php echo $material;?>"
+                                                            >
+                                                            <div class="input-group-addon oer-lp-material-icon"
                                                                  title="<?php echo isset($file_response['title']) ? $file_response['title'] : "";?>"
                                                             ><?php echo isset($file_response['icon']) ? $file_response['icon'] : "";?></div>
                                                         </div>
@@ -323,7 +324,8 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                                                class="form-control"
                                                                name="lp_oer_materials[title][]"
                                                                placeholder="Title"
-                                                               value="<?php echo $materials['title'][$materialKey]?>">
+                                                               value="<?php echo $materials['title'][$materialKey]?>"
+                                                        >
                                                     </div>
                                                     <div class="form-group">
                                                         <textarea class="form-control"
@@ -558,24 +560,28 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                         foreach ($oer_lp_activity_title as $key => $item) { ?>
                                             <div class="panel panel-default lp-ac-item" id="lp-ac-item-<?php echo $key;?>">
                                                 <!--<input type="hidden" name="lp_activity_order[lp_activities_order]" class="element-activity-order" value="">-->
-                                                <span class="lp-inner-sortable-handle">
+                                                <!--<span class="lp-inner-sortable-handle">
                                                     <i class="fa fa-arrow-down activity-reorder-down" aria-hidden="true"></i>
                                                     <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
-                                                </span>
+                                                </span>-->
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title lp-module-title">
+                                                        <span class="lp-sortable-handle">
+                                                            <i class="fa fa-arrow-down activity-reorder-down" aria-hidden="true"></i>
+                                                            <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
+                                                        </span>
+                                                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                                                    </h3>
+                                                </div>
                                                 <div class="panel-body">
-                                                    <div class="row">
-                                                        <div class="form-group col-md-8">
-                                                            <label>Activity Title</label>
-                                                            <input type="text"
-                                                                   name="oer_lp_activity_title[]"
-                                                                   class="form-control"
-                                                                   placeholder="Activity Title"
-                                                                   value="<?php echo $item; ?>"
-                                                            >
-                                                        </div>
-                                                        <div class="col-md-2 lp-ac-delete-container">
-                                                            <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
-                                                        </div>
+                                                    <div class="form-group">
+                                                        <label>Activity Title</label>
+                                                        <input type="text"
+                                                               name="oer_lp_activity_title[]"
+                                                               class="form-control"
+                                                               placeholder="Activity Title"
+                                                               value="<?php echo $item; ?>"
+                                                        >
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group col-md-8">
@@ -818,7 +824,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                                                    name="<?php echo $elementKey;?>[url][]"
                                                                    placeholder="URL"
                                                                    value="<?php echo $material;?>">
-                                                            <div class="input-group-addon"
+                                                            <div class="input-group-addon oer-lp-material-icon"
                                                                  title="<?php echo isset($file_response['title']) ? $file_response['title'] : "";?>"
                                                             ><?php echo isset($file_response['icon']) ? $file_response['icon'] : "";?></div>
                                                         </div>

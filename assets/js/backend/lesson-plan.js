@@ -479,7 +479,7 @@ jQuery(document).ready(function ($) {
                                                 '<div class="form-group">' +
                                                     '<div class="input-group">' +
                                                         '<input type="text" class="form-control" name="' + lp_oer_materials_input + '[url][]" placeholder="URL" value="' + attachment.url + '">' +
-                                                        '<div class="input-group-addon" title="'+ title +'">' + icon + '</div>' +
+                                                        '<div class="input-group-addon oer-lp-material-icon" title="'+ title +'">' + icon + '</div>' +
                                                     '</div>' +
                                                 '</div>' +
                                                 '<div class="form-group">' +
@@ -508,6 +508,82 @@ jQuery(document).ready(function ($) {
 
                 materialFrame.open();
             })
+        },
+
+        // Prepare the material icon based on the type of selected file
+        lpPrepareMaterialIcon: function(attachment) {
+            // Get the file type and pic the icon according to that
+            var title = "";
+            var icon = "";
+            if ($.inArray(attachment.subtype, ['zip', 'x-7z-compressed']) !== -1) {
+                title = 'Archived';
+                icon = '<i class="fa fa-file-archive-o fa-2x"></i>';
+            } else if($.inArray(attachment.subtype, ['plain']) !== -1) {
+                title = 'Plain text';
+                icon = '<i class="fa fa-file-text-o fa-2x"></i>';
+            } else if($.inArray(attachment.subtype, ['pdf']) !== -1) {
+                title = 'PDF';
+                icon = '<i class="fa fa-file-pdf-o fa-2x"></i>';
+            } else if($.inArray(attachment.type, ['image']) !== -1) {
+                title = 'Image';
+                icon = '<i class="fa fa-file-image-o fa-2x"></i>';
+            } else if($.inArray(attachment.subtype, ['msword', 'vnd.openxmlformats-officedocument.wordprocessingml.document']) !== -1) {
+                title = 'Microsoft Document';
+                icon = '<i class="fa fa-file-word-o fa-2x"></i>';
+            } else if($.inArray(attachment.subtype,['vnd.ms-excel'])) {
+                title = 'Microsoft Excel';
+                icon = '<i class="fa fa-file-excel-o fa-2x"></i>';
+            } else if($.inArray(attachment.subtype,['vnd.ms-powerpoint'])) {
+                title = 'Microsoft Powerpoint';
+                icon = '<i class="fa fa-file-powerpoint-o fa-2x"></i>';
+            }
+
+            return {title, icon};
+        },
+
+        // Update material
+        lpUpdateMaterial: function() {
+            $(document).on('click', '.oer-lp-material-icon', function (e) {
+                e.preventDefault();
+                var dis = $(this);
+                var elementWrapper = dis.closest('.lp-material-element-wrapper');
+                var wraperElementId = dis.closest('.lp-element-wrapper').attr('id');
+                    wraperElementId = wraperElementId.split("-");
+                var elementNumber = wraperElementId[wraperElementId.length-1];
+
+                var inputUrl = "input[name='lp_oer_materials[url][]']";
+                var inputTitle = "input[name='lp_oer_materials[title][]']";
+                var inputDescription = "textarea[name='lp_oer_materials[description][]']";
+
+                if ($.isNumeric(elementNumber)) {
+                    inputUrl = "input[name='lp_oer_materials_list_"+elementNumber+"[url][]']";
+                    inputTitle = "input[name='lp_oer_materials_list_"+elementNumber+"[title][]']";
+                    inputDescription = "textarea[name='lp_oer_materials_list_"+elementNumber+"[description][]']";
+                }
+                
+                var materialFrame;
+                if (materialFrame) {
+                    materialFrame.open();
+                    return;
+                }
+                materialFrame = wp.media({
+                    title: 'Select Material',
+                    button: { text: 'Use Material' },
+                    multiple: false
+                });
+
+                materialFrame.on('select', function(){
+                    var attachment = materialFrame.state().get('selection').first().toJSON();
+                    var response = LessonPlan.lpPrepareMaterialIcon(attachment);
+
+                    dis.html(response.icon);
+                    $(elementWrapper).find(inputUrl).val(attachment.url);
+                    $(elementWrapper).find(inputTitle).val(attachment.name);
+                    $(elementWrapper).find(inputDescription).val(attachment.description);
+                });
+
+                materialFrame.open();
+            });
         },
 
         // Delete Material module
@@ -552,5 +628,6 @@ jQuery(document).ready(function ($) {
     LessonPlan.lpSelectStandards();
     LessonPlan.lpRemoveStandardsFromList();
     LessonPlan.lpAddMaterials();
+    LessonPlan.lpUpdateMaterial();
     LessonPlan.lpDeleteMaterials();
 });

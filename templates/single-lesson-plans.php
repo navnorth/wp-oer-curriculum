@@ -181,7 +181,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                                                             !empty($materials['description'][$materialKey])
                                                         ) {?>
                                                             <div class="form-group">
-                                                                <label>Title:</label>
+                                                                <label>Description:</label>
                                                                 <span><?php echo $materials['description'][$materialKey];?></span>
                                                             </div>
                                                         <?php }?>
@@ -412,6 +412,57 @@ if (have_posts()) : while (have_posts()) : the_post();
                                     </div>
                                     <div class="form-group">
                                         <?php echo $oer_lp_vocabulary_details;?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php }?>
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'lp_oer_materials_list_') !== false) {?>
+                        <?php
+                        $materials = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : array());
+                        if (!empty($materials) && lp_scan_array($materials)) {?>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><?php _e("Materials", OER_LESSON_PLAN_SLUG); ?></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="panel-group">
+                                        <?php
+                                        if (!empty(array_filter($materials['url']))) {
+                                            foreach ($materials['url'] as $materialKey => $material) {
+                                                $file_response = get_file_type_from_url($material);
+                                                ?>
+                                                <div class="panel panel-default">
+                                                    <!--<div class="panel-heading">
+                                                        <h3 class="panel-title"></h3>
+                                                    </div>-->
+                                                    <div class="panel-body">
+                                                        <div class="form-group">
+                                                            <label>Material:</label>
+                                                            <a href="<?php echo $material?>" target="_blank"><?php echo $file_response['icon'];?></a>
+                                                        </div>
+                                                        <?php
+                                                        if (isset($materials['title'][$materialKey]) &&
+                                                            !empty($materials['title'][$materialKey])
+                                                        ) {?>
+                                                            <div class="form-group">
+                                                                <label>Title:</label>
+                                                                <span><?php echo $materials['title'][$materialKey];?></span>
+                                                            </div>
+                                                        <?php }?>
+                                                        <?php
+                                                        if (isset($materials['description'][$materialKey]) &&
+                                                            !empty($materials['description'][$materialKey])
+                                                        ) {?>
+                                                            <div class="form-group">
+                                                                <label>Description:</label>
+                                                                <span><?php echo $materials['description'][$materialKey];?></span>
+                                                            </div>
+                                                        <?php }?>
+                                                    </div>
+                                                </div>
+                                            <?php }
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                             </div>
