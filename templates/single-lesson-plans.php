@@ -172,7 +172,6 @@ if (have_posts()) : while (have_posts()) : the_post();
                                                             <?php } else { ?>
                                                                 <a href="javascript:void(0)"><?php echo $file_response['icon'];?></a>
                                                             <?php } ?>
-
                                                         </div>
                                                         <?php
                                                         if (isset($materials['title'][$materialKey]) &&
@@ -445,7 +444,12 @@ if (have_posts()) : while (have_posts()) : the_post();
                                                     <div class="panel-body">
                                                         <div class="form-group">
                                                             <label>Material:</label>
-                                                            <a href="<?php echo $material?>" target="_blank"><?php echo $file_response['icon'];?></a>
+                                                            <?php
+                                                            if($oer_lp_download_copy == 'yes') { ?>
+                                                                <a href="<?php echo $material?>" target="_blank"><?php echo $file_response['icon'];?></a>
+                                                            <?php } else { ?>
+                                                                <a href="javascript:void(0)"><?php echo $file_response['icon'];?></a>
+                                                            <?php } ?>
                                                         </div>
                                                         <?php
                                                         if (isset($materials['title'][$materialKey]) &&
