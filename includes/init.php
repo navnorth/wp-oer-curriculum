@@ -49,6 +49,9 @@ function oer_lesson_plan_creation() {
 function oer_lesson_plan_custom_meta_boxes() {
     add_meta_box( 'oer_lesson_plan_grades', 'Grade Level', 'oer_lp_grade_level_cb', 'lesson-plans', 'side', 'high' );
     add_meta_box('oer_lesson_plan_meta_boxid', 'Lesson Meta Fields', 'oer_lesson_plan_meta_callback', 'lesson-plans', 'advanced');
+
+    // Add a download copy option
+    add_meta_box( 'oer_lesson_plan_download_copy', 'Download Copy', 'oer_lp_download_copy_cb', 'lesson-plans', 'side', 'high' );
 }
 
 //Meta fields callback
@@ -86,6 +89,23 @@ function oer_lp_grade_level_cb() {
         $checkbox .= '</div>';
         echo $checkbox;
     }
+}
+
+/**
+ * Add a checkbox option to the sidebar
+ * To download file
+ */
+function oer_lp_download_copy_cb() {
+    global $post;
+    $post_meta_data = get_post_meta($post->ID );
+
+    $oer_lp_download_copy = (isset($post_meta_data['oer_lp_download_copy'][0]) ? $post_meta_data['oer_lp_download_copy'][0] : 'yes');
+    $is_checked = (($oer_lp_download_copy == 'yes') ? 'checked="checked"' : '');
+    $checkbox = '<div class="form-checkbox">';
+    $checkbox .= '<input type="checkbox" name="oer_lp_download_copy" value="yes" id="oer_lp_download_copy" ' . $is_checked . '>';
+    $checkbox .= '<label for="oer_lp_download_copy">Download Copy</label>';
+    $checkbox .= '</div>';
+    echo $checkbox;
 }
 
 /**
@@ -235,6 +255,14 @@ function lp_save_custom_fields() {
             if (isset($_POST['lp_order'])) {
                 update_post_meta($post->ID, 'lp_order', $_POST['lp_order']);
             }
+
+            //Save download file options
+            if (isset($_POST['oer_lp_download_copy'])) {
+                $oer_lp_download_copy = sanitize_text_field($_POST['oer_lp_download_copy']);
+            } else {
+                $oer_lp_download_copy = 'no';
+            }
+            update_post_meta($post->ID, 'oer_lp_download_copy', $oer_lp_download_copy);
         }
     }
 }

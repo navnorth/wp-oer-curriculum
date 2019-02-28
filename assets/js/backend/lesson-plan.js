@@ -560,7 +560,7 @@ jQuery(document).ready(function ($) {
                     inputTitle = "input[name='lp_oer_materials_list_"+elementNumber+"[title][]']";
                     inputDescription = "textarea[name='lp_oer_materials_list_"+elementNumber+"[description][]']";
                 }
-                
+
                 var materialFrame;
                 if (materialFrame) {
                     materialFrame.open();

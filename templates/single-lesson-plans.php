@@ -15,6 +15,7 @@ global $post;
 global $wpdb;
 $post_meta_data = get_post_meta($post->ID );
 $elements_orders = isset($post_meta_data['lp_order'][0]) ? unserialize($post_meta_data['lp_order'][0]) : array();
+$oer_lp_download_copy = (isset($post_meta_data['oer_lp_download_copy'][0]) ? $post_meta_data['oer_lp_download_copy'][0] : 'yes');
 
 if (have_posts()) : while (have_posts()) : the_post();
 ?>
@@ -165,7 +166,13 @@ if (have_posts()) : while (have_posts()) : the_post();
                                                     <div class="panel-body">
                                                         <div class="form-group">
                                                             <label>Material:</label>
-                                                            <a href="<?php echo $material?>" target="_blank"><?php echo $file_response['icon'];?></a>
+                                                            <?php
+                                                            if($oer_lp_download_copy == 'yes') { ?>
+                                                                <a href="<?php echo $material?>" target="_blank"><?php echo $file_response['icon'];?></a>
+                                                            <?php } else { ?>
+                                                                <a href="javascript:void(0)"><?php echo $file_response['icon'];?></a>
+                                                            <?php } ?>
+
                                                         </div>
                                                         <?php
                                                         if (isset($materials['title'][$materialKey]) &&
