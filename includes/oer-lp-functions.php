@@ -235,7 +235,7 @@ if (! function_exists('get_file_type_from_url')) {
      * @param string $class
      * @return array|bool
      */
-    function get_file_type_from_url($url, $class = 'fa-2x') {
+    function get_file_type_from_url($url, $class = 'fa-1x') {
         if(empty($url)) {
             return false;
         }

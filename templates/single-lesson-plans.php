@@ -33,6 +33,13 @@ if (have_posts()) : while (have_posts()) : the_post();
     <div class="row">
         <div class="col-md-12">
             <?php
+            if ($oer_lp_download_copy == 'yes') {
+                $download_resource_url = (isset($post_meta_data['oer_lp_download_copy_document'][0]) ? $post_meta_data['oer_lp_download_copy_document'][0] : '');
+                $download_resource = get_file_type_from_url($download_resource_url);
+
+                echo 'Download Lesson Copy: <a href="'.$download_resource_url.'" target="_blank">'.$download_resource['icon'].'</a>';
+            }
+
             if (!empty($elements_orders)) {
                 foreach ($elements_orders as $elementKey => $value) {
                     if($elementKey == 'lp_introduction_order') {?>
@@ -444,12 +451,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                                                     <div class="panel-body">
                                                         <div class="form-group">
                                                             <label>Material:</label>
-                                                            <?php
-                                                            if($oer_lp_download_copy == 'yes') { ?>
-                                                                <a href="<?php echo $material?>" target="_blank"><?php echo $file_response['icon'];?></a>
-                                                            <?php } else { ?>
-                                                                <a href="javascript:void(0)"><?php echo $file_response['icon'];?></a>
-                                                            <?php } ?>
+                                                            <a href="<?php echo $material?>" target="_blank"><?php echo $file_response['icon'];?></a>
                                                         </div>
                                                         <?php
                                                         if (isset($materials['title'][$materialKey]) &&

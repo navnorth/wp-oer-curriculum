@@ -74,3 +74,7 @@
 .lesson_plan_meta_wrapper .lp-material-element-wrapper .input-group-addon {
     padding: 1px 10px;
 }
+#lpOerStandardModal #oer-lp-standards-list{
+    max-height: 400px;
+    overflow-y: scroll;
+}

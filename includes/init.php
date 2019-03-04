@@ -101,10 +101,25 @@ function oer_lp_download_copy_cb() {
 
     $oer_lp_download_copy = (isset($post_meta_data['oer_lp_download_copy'][0]) ? $post_meta_data['oer_lp_download_copy'][0] : 'yes');
     $is_checked = (($oer_lp_download_copy == 'yes') ? 'checked="checked"' : '');
-    $checkbox = '<div class="form-checkbox">';
-    $checkbox .= '<input type="checkbox" name="oer_lp_download_copy" value="yes" id="oer_lp_download_copy" ' . $is_checked . '>';
+
+    // Upload document
+    $oer_lp_download_copy_document = (isset($post_meta_data['oer_lp_download_copy_document'][0]) ? $post_meta_data['oer_lp_download_copy_document'][0] : '');
+    // Icon
+    if (!empty($oer_lp_download_copy_document)) {
+        $icon = get_file_type_from_url($oer_lp_download_copy_document);
+        $icon = $icon['icon'];
+    } else {
+        $icon = '<i class="fa fa-upload"></i>';
+    }
+    $checkbox = '<div class="form-checkbox form-group">';
+    $checkbox .= '<input type="checkbox" class="form-control" name="oer_lp_download_copy" value="yes" id="oer_lp_download_copy" ' . $is_checked . '>';
     $checkbox .= '<label for="oer_lp_download_copy">Download Copy</label>';
     $checkbox .= '</div>';
+    $checkbox .= '<div class="form-group">';
+    $checkbox .= '<div class="input-group">';
+    $checkbox .= '<input type="text" class="form-control" name="oer_lp_download_copy_document" placeholder="Select Document" value="'.$oer_lp_download_copy_document.'">';
+    $checkbox .= '<div class="input-group-addon oer-lp-download-copy-icon" title="Select Material">'.$icon.'</div>';
+    $checkbox .= '</div></div>';
     echo $checkbox;
 }
 
@@ -263,6 +278,11 @@ function lp_save_custom_fields() {
                 $oer_lp_download_copy = 'no';
             }
             update_post_meta($post->ID, 'oer_lp_download_copy', $oer_lp_download_copy);
+
+            // Save download copy document
+            if (isset($_POST['oer_lp_download_copy_document'])) {
+                update_post_meta($post->ID, 'oer_lp_download_copy_document', sanitize_text_field($_POST['oer_lp_download_copy_document']));
+            }
         }
     }
 }
@@ -511,7 +531,40 @@ if (! function_exists('create_dynamic_materials_module')) {
 add_action('wp_ajax_lp_dismiss_notice_callback', 'lp_dismiss_notice_callback');
 add_action('wp_ajax_nopriv_lp_dismiss_notice_callback', 'lp_dismiss_notice_callback');
 
-function lp_dismiss_notice_callback()
-{
+function lp_dismiss_notice_callback() {
     update_option('lp_setup_notification', true);
+}
+
+/**
+ * Search standards in modal
+ */
+add_action('wp_ajax_lp_searched_standards_callback', 'lp_searched_standards_callback');
+add_action('wp_ajax_nopriv_lp_searched_standards_callback', 'lp_searched_standards_callback');
+
+function lp_searched_standards_callback() {
+    $post_id = null;
+    $keyword = null;
+    $meta_key = "oer_lp_standards";
+
+    if (isset($_POST['post_id'])){
+        $post_id = $_POST['post_id'];
+    }
+    if (isset($_POST['keyword'])){
+        $keyword = $_POST['keyword'];
+    }
+
+    if (!$post_id){
+        echo "Invalid Post ID";
+        die();
+    }
+
+    if (!$keyword){
+        was_selectable_admin_standards($post_id);
+        die();
+    }
+
+    if (function_exists('was_search_standards')){
+        was_search_standards($post_id,$keyword,$meta_key);
+    }
+    die();
 }

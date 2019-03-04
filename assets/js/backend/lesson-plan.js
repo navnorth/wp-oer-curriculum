@@ -368,7 +368,8 @@ jQuery(document).ready(function ($) {
                     jQuery.each(jQuery('#lpOerStandardModal input[type=checkbox]:checked'), function(){
                         var standardId = jQuery(this).val();
                         selectedStandards.push(standardId);
-                        var standardTitle = jQuery(this).next().next('div.lp-notation-description').text();
+                        //var standardTitle = jQuery(this).next().next('div.lp-notation-description').text();
+                        var standardTitle = jQuery(this).next('.oer_stndrd_desc').text();
 
                         selectedHtml += '<span class="selected-standard-pill">';
                         selectedHtml += standardTitle;
@@ -608,6 +609,96 @@ jQuery(document).ready(function ($) {
                     });
             });
         },
+
+        // Search standards on modal
+        lpSearchStandards: function () {
+
+            //setup before functions
+            var typingTimer;                //timer identifier
+            var doneTypingInterval = 1000;  //time in ms, 5 second for example
+            var $input = $('#oerLpSearchStandardInput');
+
+            //on keyup, start the countdown
+            $input.on('keyup', function () {
+                clearTimeout(typingTimer);
+                typingTimer = setTimeout(LessonPlan.lpProcessingStandardSearch, doneTypingInterval);
+            });
+
+            //on keydown, clear the countdown
+            $input.on('keydown', function () {
+                clearTimeout(typingTimer);
+            });
+
+            $input.on('keypress', function (e) {
+                if (e.which == 13) {
+                    if ($(this).val() !== '') {
+                        LessonPlan.lpProcessingStandardSearch();
+                    } else {
+                        $('.oer-lp-standard-search-result').addClass('hide');
+                        $('.oer-lp-standard-default-result').removeClass('hide');
+                    }
+                }
+            });
+        },
+        
+        // Process the standard search
+        lpProcessingStandardSearch: function () {
+            var $input = $('#oerLpSearchStandardInput');
+
+            if($input.val() == '') {
+                $('.oer-lp-standard-search-result').addClass('hide');
+                $('.oer-lp-standard-default-result').removeClass('hide');
+                return false;
+            }
+
+            var data = {
+                action: 'lp_searched_standards_callback',
+                post_id: $input.attr('data-post'),
+                keyword: $input.val()
+            };
+            $.post(
+                ajaxurl,
+                data
+            ).done(function (response) {
+                var $resultContainer = $(".oer-lp-standard-search-result");
+                $resultContainer.html(response);
+                $resultContainer.removeClass('hide');
+                $('.oer-lp-standard-default-result').addClass('hide');
+            });
+        },
+
+        // Select lesson document for download copy
+        lpDownloadCopyLesson: function() {
+            $(document).on('click', 'input[name="oer_lp_download_copy_document"], .oer-lp-download-copy-icon', function (e) {
+                e.preventDefault();
+                var dis = $(this);
+
+                var materialFrame;
+                if (materialFrame) {
+                    materialFrame.open();
+                    return;
+                }
+                materialFrame = wp.media({
+                    title: 'Select Material',
+                    library: { type: [ 'application/msword', 'application/pdf' ] },
+                    button: { text: 'Use Material' },
+                    multiple: false
+                });
+
+                materialFrame.on('select', function(){
+                    var attachment = materialFrame.state().get('selection').first().toJSON();
+                    var response = LessonPlan.lpPrepareMaterialIcon(attachment);
+
+                    var icon = response.icon;
+                        icon = icon.replace('fa-2x', '');
+
+                    $('.oer-lp-download-copy-icon').html(icon);
+                    $('input[name="oer_lp_download_copy_document"]').val(attachment.url);
+                });
+
+                materialFrame.open();
+            });
+        },
     };
 
     // Initialize all function on ready state
@@ -630,4 +721,6 @@ jQuery(document).ready(function ($) {
     LessonPlan.lpAddMaterials();
     LessonPlan.lpUpdateMaterial();
     LessonPlan.lpDeleteMaterials();
+    LessonPlan.lpSearchStandards();
+    LessonPlan.lpDownloadCopyLesson();
 });
