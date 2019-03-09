@@ -247,6 +247,12 @@ jQuery(document).ready(function ($) {
             $('.material-reorder-down').removeClass('hide');
             $('.material-reorder-up').first().addClass('hide');
             $('.material-reorder-down').last().addClass('hide');
+
+            // Show / Hide button on Resource module
+            $('.resource-reorder-up').removeClass('hide');
+            $('.resource-reorder-down').removeClass('hide');
+            $('.resource-reorder-up').first().addClass('hide');
+            $('.resource-reorder-down').last().addClass('hide');
         },
 
         // Create dynamic module
@@ -699,6 +705,29 @@ jQuery(document).ready(function ($) {
                 materialFrame.open();
             });
         },
+
+        // Add More Primary resources
+        addMorePrimaryResource: function () {
+            $(document).on('click', '.lp-add-more-resource', function () {
+                var total_form_box = parseInt($('.lp-author-element-wrapper').length, 10);
+                $.post(ajaxurl, {action:'lp_add_more_pr_callback', row_id: total_form_box}).done(function (response) {
+                    if($('div.lp-author-element-wrapper').length) {
+                        $(response).insertAfter('div.lp-author-element-wrapper:last');
+                    } else {
+                        $('.lp-author-element-panel').html(response);
+                    }
+
+                    tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-resource-teacher-' + total_form_box );
+                    tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-resource-teacher-' + total_form_box );
+
+                    tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-resource-student-' + total_form_box );
+                    tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-resource-student-' + total_form_box );
+
+                    // Toggle reorder button
+                    LessonPlan.toggleUpDownButton();
+                });
+            });
+        },
     };
 
     // Initialize all function on ready state
@@ -723,4 +752,5 @@ jQuery(document).ready(function ($) {
     LessonPlan.lpDeleteMaterials();
     LessonPlan.lpSearchStandards();
     LessonPlan.lpDownloadCopyLesson();
+    LessonPlan.addMorePrimaryResource();
 });

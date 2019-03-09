@@ -151,6 +151,61 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 </div>
                             </div>
                         <?php }?>
+                    <?php } elseif ($elementKey == 'lp_primary_resources') {?>
+                        <?php
+                        $primary_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
+                        if (!empty($primary_resources) && lp_scan_array($primary_resources)) {?>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><?php _e("Primary Resources", OER_LESSON_PLAN_SLUG); ?></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="panel-group">
+                                        <?php
+                                        if (!empty(array_filter($primary_resources['resource']))) {
+                                            foreach ($primary_resources['resource'] as $resourceKey => $resource) {
+                                                $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
+                                                $teacherInfo = (isset($primary_resources['teacher_info'][$resourceKey]) ? $primary_resources['teacher_info'][$resourceKey]: "");
+                                                $studentInfo = (isset($primary_resources['student_info'][$resourceKey]) ? $primary_resources['student_info'][$resourceKey]: "");
+                                                ?>
+                                                <div class="panel panel-default">
+                                                    <!--<div class="panel-heading">
+                                                        <h3 class="panel-title"></h3>
+                                                    </div>-->
+                                                    <div class="panel-body">
+                                                        <?php
+                                                        if ($sensitiveMaterial == 'yes') {
+                                                            echo 'Sensitive Material';
+                                                        }
+                                                        ?>
+                                                        <?php if (!empty($resource)) { ?>
+                                                            <div class="form-group">
+                                                                <label>OER Resource:</label>
+                                                                <?php echo $resource; ?>
+                                                            </div>
+                                                        <?php }?>
+                                                        <?php if (!empty($teacherInfo)) { ?>
+                                                            <div class="form-group">
+                                                                <label>Teacher Information:</label>
+                                                                <?php echo $teacherInfo; ?>
+                                                            </div>
+                                                        <?php }?>
+                                                        <?php if (!empty($studentInfo)) { ?>
+                                                            <div class="form-group">
+                                                                <label>Student Information:</label>
+                                                                <?php echo $studentInfo; ?>
+                                                            </div>
+                                                        <?php }?>
+
+                                                    </div>
+                                                </div>
+                                            <?php }
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php }?>
                     <?php } elseif ($elementKey == 'lp_oer_materials') {?>
                         <?php
                         $materials = (isset($post_meta_data['lp_oer_materials'][0]) ? unserialize($post_meta_data['lp_oer_materials'][0]) : array());

@@ -37,6 +37,10 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                             <li class="list-group-item">
                                 <a href="#oer-lp-authors" title="Lesson Times">Authors</a>
                             </li>
+                        <?php } elseif ($elementKey == 'lp_primary_resources') {?>
+                            <li class="list-group-item">
+                                <a href="#oer-lp-primary-resources" title="Primary Resources">Primary Resources</a>
+                            </li>
                         <?php } elseif ($elementKey == 'lp_oer_materials') {?>
                             <li class="list-group-item">
                                 <a href="#oer-lp-materials" class="js-scroll-trigger" title="Materials"><?php _e("Materials", OER_LESSON_PLAN_SLUG); ?></a>
@@ -82,7 +86,10 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                         <a href="#oer-lp-introduction-group" title="Introduction">Introduction</a>
                     </li>
                     <li class="list-group-item">
-                        <a href="#oer-lp-authors" title="Introduction">Authors</a>
+                        <a href="#oer-lp-authors" title="Authors">Authors</a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#oer-lp-primary-resources" title="Primary Resources">Primary Resources</a>
                     </li>
                     <li class="list-group-item">
                         <a href="#oer-lp-materials" title="Materials"><?php _e("Materials", OER_LESSON_PLAN_SLUG); ?></a>
@@ -158,7 +165,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                         $authors = (isset($post_meta_data['oer_lp_authors'][0]) ? unserialize($post_meta_data['oer_lp_authors'][0]) : array());
                         if(!empty($authors)) { ?>
                             <div class="panel panel-default lp-element-wrapper oer-lp-authors-group" id="oer-lp-authors">
-                                <input type="hidden" name="lp_order[lp_authors_order]" class="element-order" value="2">
+                                <input type="hidden" name="lp_order[lp_authors_order]" class="element-order" value="<?php echo $value;?>">
                                 <div class="panel-heading">
                                     <h3 class="panel-title lp-module-title">
                                         <?php _e("Authors", OER_LESSON_PLAN_SLUG); ?>
@@ -273,6 +280,198 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                 </div>
                             </div>
                         <?php }?>
+                    <?php } elseif ($elementKey == 'lp_primary_resources') {?>
+                        <!-- Primary Sources -->
+                        <div class="panel panel-default lp-element-wrapper oer-lp-primary-resources" id="oer-lp-primary-resources">
+                            <input type="hidden" name="lp_order[lp_primary_resources]" class="element-order" value="<?php echo $value;?>">
+                            <div class="panel-heading">
+                                <h3 class="panel-title lp-module-title">
+                                    <?php _e("Primary Resources", OER_LESSON_PLAN_SLUG); ?>
+                                    <span class="lp-sortable-handle">
+                                        <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                        <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="panel-group lp-author-element-panel">
+                                    <?php
+                                    $posts = get_posts([
+                                        'post_type' => 'resource',
+                                        'post_status' => 'publish',
+                                        'numberposts' => 250,
+                                        'orderby' => 'title',
+                                        'order'    => 'ASC'
+                                    ]);
+                                    $primary_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
+                                    if (count($primary_resources) && isset($primary_resources['resource'])) {
+                                        foreach ($primary_resources['resource'] as $resourceKey => $resource) { ?>
+                                            <?php
+                                            $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
+                                            $teacherInfo = (isset($primary_resources['teacher_info'][$resourceKey]) ? $primary_resources['teacher_info'][$resourceKey]: "");
+                                            $studentInfo = (isset($primary_resources['student_info'][$resourceKey]) ? $primary_resources['student_info'][$resourceKey]: "");
+                                            ?>
+                                            <div class="panel panel-default lp-author-element-wrapper">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title lp-module-title">
+                                                        <?php _e("Resource", OER_LESSON_PLAN_SLUG); ?>
+                                                        <span class="lp-sortable-handle">
+                                                            <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
+                                                            <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
+                                                        </span>
+                                                        <span class="btn btn-danger btn-sm lp-remove-author"
+                                                              title="Delete"
+                                                              <?php echo ((count($primary_resources) == 1) ? 'disabled="disabled"' : '');?>
+                                                        ><i class="fa fa-trash"></i> </span>
+                                                    </h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <select name="oer_lp_primary_resources[resource][]" class="form-control">
+                                                                    <option>Select Resource</option>
+                                                                    <?php
+                                                                    if (count($posts)) {
+                                                                        foreach ($posts as $post) {?>
+                                                                            <option value="<?php echo $post->post_title;?>" <?php echo (($resource == $post->post_title) ? 'selected="selected"' : "");?>><?php echo $post->post_title;?></option>
+                                                                        <?php }
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="checkbox pull-right">
+                                                                <label>
+                                                                    <input type="checkbox"
+                                                                           name="oer_lp_primary_resources[sensitive_material][]"
+                                                                           value="yes"
+                                                                           <?php echo (($sensitiveMaterial == 'yes')? 'checked="checked"' : '');?>
+                                                                    >
+                                                                    Sensitive Material
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Teacher Information</label>
+                                                        <?php wp_editor( $teacherInfo,
+                                                            'oer-lp-resource-teacher-' . $resourceKey,
+                                                            $settings = array(
+                                                                'textarea_name' => 'oer_lp_primary_resources[teacher_info][]',
+                                                                'media_buttons' => true,
+                                                                'textarea_rows' => 6,
+                                                                'drag_drop_upload' => true,
+                                                                'teeny' => true,
+                                                            )
+                                                        ); ?>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Student Information</label>
+                                                        <?php wp_editor( $studentInfo,
+                                                            'oer-lp-resource-student-' . $resourceKey,
+                                                            $settings = array(
+                                                                'textarea_name' => 'oer_lp_primary_resources[student_info][]',
+                                                                'media_buttons' => true,
+                                                                'textarea_rows' => 6,
+                                                                'drag_drop_upload' => true,
+                                                                'teeny' => true,
+                                                            )
+                                                        ); ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php }
+                                    } else {?>
+                                        <div class="panel panel-default lp-author-element-wrapper">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title lp-module-title">
+                                                    <?php _e("Resource", OER_LESSON_PLAN_SLUG); ?>
+                                                    <span class="lp-sortable-handle">
+                                                    <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
+                                                    <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
+                                                </span>
+                                                    <span class="btn btn-danger btn-sm lp-remove-author"
+                                                          title="Delete"
+                                                          disabled="disabled"
+                                                    ><i class="fa fa-trash"></i> </span>
+                                                </h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                    <?php
+                                                    $posts = get_posts([
+                                                        'post_type' => 'resource',
+                                                        'post_status' => 'publish',
+                                                        'numberposts' => 250,
+                                                        'orderby' => 'title',
+                                                        'order'    => 'ASC'
+                                                    ]);
+                                                    ?>
+                                                    <select name="oer_lp_primary_resources[resource][]" class="form-control">
+                                                        <option>Select Resource</option>
+                                                        <?php
+                                                        if (count($posts)) {
+                                                            foreach ($posts as $post) {
+                                                                echo '<option value="'.$post->post_title.'">'.$post->post_title.'</option>';
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="checkbox pull-right">
+                                                        <label>
+                                                            <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
+                                                            Sensitive Material
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Teacher Information</label>
+                                                    <?php wp_editor( '',
+                                                        'oer-lp-resource-teacher-1',
+                                                        $settings = array(
+                                                            'textarea_name' => 'oer_lp_primary_resources[teacher_info][]',
+                                                            'media_buttons' => true,
+                                                            'textarea_rows' => 6,
+                                                            'drag_drop_upload' => true,
+                                                            'teeny' => true,
+                                                        )
+                                                    ); ?>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Student Information</label>
+                                                    <?php wp_editor( '',
+                                                        'oer-lp-resource-student-1',
+                                                        $settings = array(
+                                                            'textarea_name' => 'oer_lp_primary_resources[student_info][]',
+                                                            'media_buttons' => true,
+                                                            'textarea_rows' => 6,
+                                                            'drag_drop_upload' => true,
+                                                            'teeny' => true,
+                                                        )
+                                                    ); ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php }?>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button"
+                                                id="lp-add-more-resource"
+                                                class="btn btn-default lp-add-more-resource"
+                                        ><i class="fa fa-plus"></i> Add More</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <?php } elseif ($elementKey == 'lp_oer_materials') {?>
                         <div class="panel panel-default lp-element-wrapper" id="oer-lp-materials">
                             <input type="hidden" name="lp_order[lp_oer_materials]" class="element-order" value="3">
@@ -994,9 +1193,110 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                     </div>
                 </div>
             </div>
+            <!-- Primary Sources -->
+            <div class="panel panel-default lp-element-wrapper oer-lp-primary-resources" id="oer-lp-primary-resources">
+                <input type="hidden" name="lp_order[lp_primary_resources]" class="element-order" value="3">
+                <div class="panel-heading">
+                    <h3 class="panel-title lp-module-title">
+                        <?php _e("Primary Resources", OER_LESSON_PLAN_SLUG); ?>
+                        <span class="lp-sortable-handle">
+                            <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                            <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                        </span>
+                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="panel-group lp-author-element-panel">
+                        <div class="panel panel-default lp-author-element-wrapper">
+                            <div class="panel-heading">
+                                <h3 class="panel-title lp-module-title">
+                                    <?php _e("Resource", OER_LESSON_PLAN_SLUG); ?>
+                                    <span class="lp-sortable-handle">
+                                    <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
+                                    <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
+                                </span>
+                                    <span class="btn btn-danger btn-sm lp-remove-author"
+                                          title="Delete"
+                                          disabled="disabled"
+                                    ><i class="fa fa-trash"></i> </span>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Resource</label>
+                                        <?php
+                                        $posts = get_posts([
+                                            'post_type' => 'resource',
+                                            'post_status' => 'publish',
+                                            'numberposts' => 250,
+                                            'orderby' => 'title',
+                                            'order'    => 'ASC'
+                                        ]);
+                                        ?>
+                                        <select name="oer_lp_primary_resources[resource][]" class="form-control">
+                                            <option>Select Resource</option>
+                                            <?php
+                                            if (count($posts)) {
+                                                foreach ($posts as $post) {
+                                                    echo '<option value="'.$post->post_title.'">'.$post->post_title.'</option>';
+                                                }
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="checkbox pull-right">
+                                        <label>
+                                            <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
+                                            Sensitive Material
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Teacher Information</label>
+                                    <?php wp_editor( '',
+                                        'oer-lp-resource-teacher-1',
+                                        $settings = array(
+                                            'textarea_name' => 'oer_lp_primary_resources[teacher_info][]',
+                                            'media_buttons' => true,
+                                            'textarea_rows' => 6,
+                                            'drag_drop_upload' => true,
+                                            'teeny' => true,
+                                        )
+                                    ); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label>Student Information</label>
+                                    <?php wp_editor( '',
+                                        'oer-lp-resource-student-1',
+                                        $settings = array(
+                                            'textarea_name' => 'oer_lp_primary_resources[student_info][]',
+                                            'media_buttons' => true,
+                                            'textarea_rows' => 6,
+                                            'drag_drop_upload' => true,
+                                            'teeny' => true,
+                                        )
+                                    ); ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button"
+                                    id="lp-add-more-resource"
+                                    class="btn btn-default lp-add-more-resource"
+                            ><i class="fa fa-plus"></i> Add More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!--Materials module-->
             <div class="panel panel-default lp-element-wrapper" id="oer-lp-materials">
-                <input type="hidden" name="lp_order[lp_oer_materials]" class="element-order" value="3">
+                <input type="hidden" name="lp_order[lp_oer_materials]" class="element-order" value="4">
                 <div class="panel-heading">
                     <h3 class="panel-title lp-module-title">
                         <?php _e("Materials", OER_LESSON_PLAN_SLUG); ?>
@@ -1018,7 +1318,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
             </div>
             <!--For Lesson Times-->
             <div class="panel panel-default lp-element-wrapper oer-lp-times-group" id="oer-lp-times-group">
-                <input type="hidden" name="lp_order[lp_lesson_times_order]" class="element-order" value="4">
+                <input type="hidden" name="lp_order[lp_lesson_times_order]" class="element-order" value="5">
                 <div class="panel-heading">
                     <h3 class="panel-title lp-module-title">
                         <?php _e("Lesson Times", OER_LESSON_PLAN_SLUG); ?>
@@ -1210,80 +1510,80 @@ foreach ($elements_orders as $orderKey => $orderValue) {
             </div>
             <!--Summative Assessment-->
             <div class="panel panel-default lp-element-wrapper oer-lp-summative-group" id="oer-lp-summative-group">
-                    <input type="hidden" name="lp_order[lp_summative_order]" class="element-order" value="8">
-                    <div class="panel-heading">
-                        <h3 class="panel-title lp-module-title">
-                            <?php _e("Summative Assessment", OER_LESSON_PLAN_SLUG); ?>
-                            <span class="lp-sortable-handle">
-                                <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
-                                <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
-                            </span>
-                            <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <h4><?php _e("Assessment Type(s):", OER_LESSON_PLAN_SLUG); ?></h4>
-                        <div class="row">
-                            <?php
-                            $oer_lp_assessment_type = (isset($post_meta_data['oer_lp_assessment_type'][0]) ? unserialize($post_meta_data['oer_lp_assessment_type'][0]) : array());
-                            // Prepare array for the Assessment options checkboxes
-                            $assessment_options = array(
-                                'demonstrations' => 'Demonstrations',
-                                'interviews' => 'Interviews',
-                                'journals' => 'Journals',
-                                'observations' => 'Observations',
-                                'portfolios' => 'Portfolios',
-                                'projects' => 'Projects',
-                                'rubrics' => 'Rubrics',
-                                'surveys' => 'surveys',
-                                'teacher_made_test' => 'Teacher-Made Test',
-                                'writing_samples' => 'Writing Samples',
-                            );
+                <input type="hidden" name="lp_order[lp_summative_order]" class="element-order" value="8">
+                <div class="panel-heading">
+                    <h3 class="panel-title lp-module-title">
+                        <?php _e("Summative Assessment", OER_LESSON_PLAN_SLUG); ?>
+                        <span class="lp-sortable-handle">
+                            <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                            <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                        </span>
+                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <h4><?php _e("Assessment Type(s):", OER_LESSON_PLAN_SLUG); ?></h4>
+                    <div class="row">
+                        <?php
+                        $oer_lp_assessment_type = (isset($post_meta_data['oer_lp_assessment_type'][0]) ? unserialize($post_meta_data['oer_lp_assessment_type'][0]) : array());
+                        // Prepare array for the Assessment options checkboxes
+                        $assessment_options = array(
+                            'demonstrations' => 'Demonstrations',
+                            'interviews' => 'Interviews',
+                            'journals' => 'Journals',
+                            'observations' => 'Observations',
+                            'portfolios' => 'Portfolios',
+                            'projects' => 'Projects',
+                            'rubrics' => 'Rubrics',
+                            'surveys' => 'surveys',
+                            'teacher_made_test' => 'Teacher-Made Test',
+                            'writing_samples' => 'Writing Samples',
+                        );
 
-                            foreach ($assessment_options as $key => $assessment_option) { ?>
-                                <div class="col-md-3">
-                                    <div class="checkbox oer-summative-checkbox">
-                                        <label>
-                                            <input name="oer_lp_assessment_type[]"
-                                                   type="checkbox"
-                                                   value="<?php echo $key;?>"
-                                                <?php echo oer_lp_show_selected($key, $oer_lp_assessment_type, 'checkbox')?>
-                                            > <?php echo $assessment_option; ?>
-                                        </label>
-                                    </div>
+                        foreach ($assessment_options as $key => $assessment_option) { ?>
+                            <div class="col-md-3">
+                                <div class="checkbox oer-summative-checkbox">
+                                    <label>
+                                        <input name="oer_lp_assessment_type[]"
+                                               type="checkbox"
+                                               value="<?php echo $key;?>"
+                                            <?php echo oer_lp_show_selected($key, $oer_lp_assessment_type, 'checkbox')?>
+                                        > <?php echo $assessment_option; ?>
+                                    </label>
                                 </div>
-                            <?php }?>
-                        </div>
-                        <div class="row">
-                            <?php
-                            $oer_lp_other_assessment_type = (isset($post_meta_data['oer_lp_other_assessment_type'][0]) ? $post_meta_data['oer_lp_other_assessment_type'][0] : '');
-                            ?>
-                            <div class="form-group col-md-8">
-                                <label><?php _e("Other", OER_LESSON_PLAN_SLUG); ?></label>
-                                <input type="text"
-                                       name="oer_lp_other_assessment_type"
-                                       class="form-control"
-                                       placeholder="Other Assessment Type(s)"
-                                       value="<?php echo $oer_lp_other_assessment_type;?>"
-                                >
                             </div>
+                        <?php }?>
+                    </div>
+                    <div class="row">
+                        <?php
+                        $oer_lp_other_assessment_type = (isset($post_meta_data['oer_lp_other_assessment_type'][0]) ? $post_meta_data['oer_lp_other_assessment_type'][0] : '');
+                        ?>
+                        <div class="form-group col-md-8">
+                            <label><?php _e("Other", OER_LESSON_PLAN_SLUG); ?></label>
+                            <input type="text"
+                                   name="oer_lp_other_assessment_type"
+                                   class="form-control"
+                                   placeholder="Other Assessment Type(s)"
+                                   value="<?php echo $oer_lp_other_assessment_type;?>"
+                            >
                         </div>
-                        <div class="form-group">
-                            <?php
-                            $oer_lp_assessment = (isset($post_meta_data['oer_lp_assessment'][0]) ? $post_meta_data['oer_lp_assessment'][0] : '');
-                            wp_editor( $oer_lp_assessment,
-                                'oer-lp-other-assessment',
-                                $settings = array(
-                                    'textarea_name' => 'oer_lp_assessment',
-                                    'media_buttons' => true,
-                                    'textarea_rows' => 10,
-                                    'drag_drop_upload' => true,
-                                    'teeny' => true,
-                                )
-                            ); ?>
-                        </div>
+                    </div>
+                    <div class="form-group">
+                        <?php
+                        $oer_lp_assessment = (isset($post_meta_data['oer_lp_assessment'][0]) ? $post_meta_data['oer_lp_assessment'][0] : '');
+                        wp_editor( $oer_lp_assessment,
+                            'oer-lp-other-assessment',
+                            $settings = array(
+                                'textarea_name' => 'oer_lp_assessment',
+                                'media_buttons' => true,
+                                'textarea_rows' => 10,
+                                'drag_drop_upload' => true,
+                                'teeny' => true,
+                            )
+                        ); ?>
                     </div>
                 </div>
+            </div>
             <?php }?>
 
             <!--Add Extra Module-->

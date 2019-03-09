@@ -184,6 +184,10 @@ function lp_save_custom_fields() {
                 update_post_meta($post->ID, 'oer_lp_authors', $_POST['oer_lp_authors']);
             }
 
+            // Save primary resource
+            if (isset($_POST['oer_lp_primary_resources'])) {
+                update_post_meta($post->ID, 'oer_lp_primary_resources', $_POST['oer_lp_primary_resources']);
+            }
             // Save materials
             if (isset($_POST['lp_oer_materials'])) {
                 update_post_meta($post->ID, 'lp_oer_materials', $_POST['lp_oer_materials']);
@@ -354,6 +358,73 @@ function lp_add_more_activity_callback() {
 }
 
 /**
+ * Add more primary resource
+ */
+add_action('wp_ajax_lp_add_more_pr_callback', 'lp_add_more_pr_callback');
+add_action('wp_ajax_nopriv_lp_add_more_pr_callback', 'lp_add_more_pr_callback');
+
+function lp_add_more_pr_callback() {
+    $totalElements = isset($_REQUEST['row_id']) ? $_REQUEST['row_id'] : '15';
+    $content = '<div class="panel panel-default lp-author-element-wrapper" id="lp-author-element-wrapper-' . $totalElements . '">
+                    <div class="panel-heading">
+                        <h3 class="panel-title lp-module-title">
+                            Resource
+                            <span class="lp-sortable-handle">
+                                <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
+                                <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
+                            </span>
+                            <span class="btn btn-danger btn-sm lp-remove-author"
+                                  title="Delete"
+                                  disabled="disabled"
+                            ><i class="fa fa-trash"></i> </span>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label>Resource</label>
+                            <select name="oer_lp_primary_resources[resource][]" class="form-control">';
+                                $content .= oer_lp_primary_resource_dropdown();
+                $content .= '</select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Teacher Information</label>';
+                            ob_start(); // Start output buffer
+                            wp_editor('',
+                                'oer-lp-resource-teacher-' . $totalElements,
+                                $settings = array(
+                                    'textarea_name' => 'oer_lp_primary_resources[teacher_info][]',
+                                    'media_buttons' => true,
+                                    'textarea_rows' => 6,
+                                    'drag_drop_upload' => true,
+                                    'teeny' => true,
+                                )
+                            );
+                        $content .= ob_get_clean();
+                        $content .= '</div>';
+                        $content .= '<div class="form-group">
+                            <label>Teacher Information</label>';
+                            ob_start(); // Start output buffer
+                            wp_editor('',
+                                'oer-lp-resource-student-' . $totalElements,
+                                $settings = array(
+                                    'textarea_name' => 'oer_lp_primary_resources[student_info][]',
+                                    'media_buttons' => true,
+                                    'textarea_rows' => 6,
+                                    'drag_drop_upload' => true,
+                                    'teeny' => true,
+                                )
+                            );
+                            $content .= ob_get_clean();
+                        $content .= '</div>
+                    </div>
+                </div>';
+
+    echo $content;
+    exit();
+}
+
+/**
  * Create dynamic module
  */
 add_action('wp_ajax_lp_create_module_callback', 'lp_create_module_callback');
@@ -402,17 +473,17 @@ function create_dynamic_editor($id) {
                         </h3>
                     </div>
                     <div class="panel-body">';
-    ob_start(); // Start output buffer
-    wp_editor('',
-        'oer-lp-custom-editor-' . $id,
-        $settings = array(
-            'textarea_name' => 'oer_lp_custom_editor_' . $id,
-            'media_buttons' => true,
-            'textarea_rows' => 10,
-            'drag_drop_upload' => true,
-            'teeny' => true,
-        )
-    );
+                        ob_start(); // Start output buffer
+                        wp_editor('',
+                            'oer-lp-custom-editor-' . $id,
+                            $settings = array(
+                                'textarea_name' => 'oer_lp_custom_editor_' . $id,
+                                'media_buttons' => true,
+                                'textarea_rows' => 10,
+                                'drag_drop_upload' => true,
+                                'teeny' => true,
+                            )
+                        );
     $content .= ob_get_clean();
     $content .= '</div>
                 </div>';
