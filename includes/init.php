@@ -193,6 +193,11 @@ function lp_save_custom_fields() {
                 update_post_meta($post->ID, 'lp_oer_materials', $_POST['lp_oer_materials']);
             }
 
+            // Save Investigative Question
+            if (isset($_POST['oer_lp_iq'])) {
+                update_post_meta($post->ID, 'oer_lp_iq', $_POST['oer_lp_iq']);
+            }
+
             //Save/update lesson times
             if (isset($_POST['oer_lp_times_label'])) {
                 update_post_meta($post->ID, 'oer_lp_times_label', $_POST['oer_lp_times_label']);
@@ -380,12 +385,25 @@ function lp_add_more_pr_callback() {
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <div class="form-group">
-                            <label>Resource</label>
-                            <select name="oer_lp_primary_resources[resource][]" class="form-control">';
-                                $content .= oer_lp_primary_resource_dropdown();
-                $content .= '</select>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Resource</label>
+                                    <select name="oer_lp_primary_resources[resource][]" class="form-control">';
+                                        $content .= oer_lp_primary_resource_dropdown();
+                        $content .= '</select>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="checkbox pull-right">
+                                    <label>
+                                        <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
+                                        Sensitive Material
+                                    </label>
+                                </div>
+                            </div>
                         </div>
+                        
                         
                         <div class="form-group">
                             <label>Teacher Information</label>';
