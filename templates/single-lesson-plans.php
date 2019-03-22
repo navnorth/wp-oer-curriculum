@@ -325,7 +325,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                         <!--For Standards and Objectives -->
                         <?php
                         $oer_lp_related_objective = isset($post_meta_data['oer_lp_related_objective'][0]) ? unserialize($post_meta_data['oer_lp_related_objective'][0]) : array();
-                        if(!empty(array_filter($oer_lp_related_objective))){?>
+                        $standards = (isset($post_meta_data['oer_lp_standards'][0])? $post_meta_data['oer_lp_standards'][0] : "");
+                        if(!empty(array_filter($oer_lp_related_objective)) || !empty($standards)){?>
                             <div class="panel panel-default oer-lp-standards-group" id="oer-lp-standards-group">
                                 <div class="panel-heading">
                                     <h3 class="panel-title lp-module-title">
@@ -335,7 +336,6 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 <div class="panel-body">
                                     <div id="selected-standard-wrapper">
                                         <?php
-                                        $standards = (isset($post_meta_data['oer_lp_standards'][0])? $post_meta_data['oer_lp_standards'][0] : "");
                                         get_standard_notations_from_ids($standards);
                                         ?>
                                     </div>

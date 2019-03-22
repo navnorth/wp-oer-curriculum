@@ -1695,5 +1695,5 @@ foreach ($elements_orders as $orderKey => $orderValue) {
     <!--Delete author confirm popup-->
     <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-author.php');?>
     <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-confirm-popup.php');?>
-    <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/standard-selection.php');?>
-</div>
+    <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/standard-selection.php');?>  
+</div>  

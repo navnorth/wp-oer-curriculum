@@ -190,11 +190,18 @@ if (! function_exists('get_standard_notations_from_ids')) {
      * @param bool $admin
      */
     function get_standard_notations_from_ids($ids, $admin = false) {
+        $stds = null;
+        $ids = unserialize($ids);
         if(!is_array($ids)) {
             $ids = str_replace('standard_notation-', '', $ids);
-            $ids = explode(',', $ids);
+            $stds = explode(',', $ids);
+        } else {
+            foreach($ids as $id){
+                $id = str_replace('standard_notation-', '', $id);
+                $stds[] = $id;
+            }
         }
-
+        
         // Count the number of ids
         $idsCount = count($ids);
 
@@ -205,9 +212,9 @@ if (! function_exists('get_standard_notations_from_ids')) {
 
         // Put all the placeholders in one string ‘%s, %s, %s, %s, %s,…’
         $placeholdersForIds = implode(',', $stringPlaceholders);
-
+        
         global $wpdb;
-        $results = $wpdb->get_results( $wpdb->prepare( "SELECT * from " . $wpdb->prefix. "oer_standard_notation where id in (" . $placeholdersForIds .")" , $ids ) , ARRAY_A);
+        $results = $wpdb->get_results( $wpdb->prepare( "SELECT * from " . $wpdb->prefix. "oer_standard_notation where id in (" . $placeholdersForIds .")" , $stds ) , ARRAY_A);
         if (!empty($results)) {
             foreach ($results as $result) {?>
                 <span class="selected-standard-pill">
