@@ -3,7 +3,8 @@
 }
 .lesson_plan_meta_wrapper .lp-remove-module,
 .lesson_plan_meta_wrapper .lp-remove-author,
-.lesson_plan_meta_wrapper .lp-remove-material {
+.lesson_plan_meta_wrapper .lp-remove-material,
+.lesson_plan_meta_wrapper .lp-remove-source{
     position: absolute;
     right: 0;
     top: -5px;

@@ -302,7 +302,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <div class="panel-group lp-author-element-panel">
+                                <div class="panel-group lp-primary-resource-element-panel">
                                     <?php
                                     $posts = get_posts([
                                         'post_type' => 'resource',
@@ -319,7 +319,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                             $teacherInfo = (isset($primary_resources['teacher_info'][$resourceKey]) ? $primary_resources['teacher_info'][$resourceKey]: "");
                                             $studentInfo = (isset($primary_resources['student_info'][$resourceKey]) ? $primary_resources['student_info'][$resourceKey]: "");
                                             ?>
-                                            <div class="panel panel-default lp-author-element-wrapper">
+                                            <div class="panel panel-default lp-primary-resource-element-wrapper">
                                                 <div class="panel-heading">
                                                     <h3 class="panel-title lp-module-title">
                                                         <?php _e("Resource", OER_LESSON_PLAN_SLUG); ?>
@@ -327,7 +327,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                                             <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
                                                             <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
                                                         </span>
-                                                        <span class="btn btn-danger btn-sm lp-remove-author"
+                                                        <span class="btn btn-danger btn-sm lp-remove-source"
                                                               title="Delete"
                                                               <?php echo ((count($primary_resources) == 1) ? 'disabled="disabled"' : '');?>
                                                         ><i class="fa fa-trash"></i> </span>
@@ -341,8 +341,9 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                                                     <option>Select Resource</option>
                                                                     <?php
                                                                     if (count($posts)) {
-                                                                        foreach ($posts as $post) {?>
-                                                                            <option value="<?php echo $post->post_title;?>" <?php echo (($resource == $post->post_title) ? 'selected="selected"' : "");?>><?php echo $post->post_title;?></option>
+                                                                        foreach ($posts as $post) {
+                                                                            ?>
+                                                                            <option value="<?php echo $post->post_title;?>" <?php echo ((htmlspecialchars($resource) == $post->post_title) ? 'selected="selected"' : "");?>><?php echo $post->post_title;?></option>
                                                                         <?php }
                                                                     }
                                                                     ?>
@@ -1694,6 +1695,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
     <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-module.php');?>
     <!--Delete author confirm popup-->
     <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-author.php');?>
+    <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-source.php');?>
     <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-confirm-popup.php');?>
     <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/standard-selection.php');?>  
 </div>  

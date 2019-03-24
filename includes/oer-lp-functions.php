@@ -295,3 +295,25 @@ if (! function_exists('lp_scan_array')) {
         return false;
     }
 }
+
+if (! function_exists('oer_lp_primary_resource_dropdown')){
+    function oer_lp_primary_resource_dropdown(){
+        $resource_options = "";
+        $posts = get_posts([
+            'post_type' => 'resource',
+            'post_status' => 'publish',
+            'numberposts' => 250,
+            'orderby' => 'title',
+            'order'    => 'ASC'
+        ]);
+        
+        $resource_options .= "<option>Select Resource</option>";
+        
+        if (count($posts)) {
+            foreach ($posts as $post) {
+                $resource_options .= '<option value="' . $post->post_title . '" ' . (($resource == $post->post_title) ? 'selected="selected"' : "") . '>' . $post->post_title . '</option>';
+            }
+        }
+        return $resource_options;
+    }
+}

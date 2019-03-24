@@ -370,7 +370,7 @@ add_action('wp_ajax_nopriv_lp_add_more_pr_callback', 'lp_add_more_pr_callback');
 
 function lp_add_more_pr_callback() {
     $totalElements = isset($_REQUEST['row_id']) ? $_REQUEST['row_id'] : '15';
-    $content = '<div class="panel panel-default lp-author-element-wrapper" id="lp-author-element-wrapper-' . $totalElements . '">
+    $content = '<div class="panel panel-default lp-primary-source-element-wrapper" id="lp-primary-source-element-wrapper-' . $totalElements . '">
                     <div class="panel-heading">
                         <h3 class="panel-title lp-module-title">
                             Resource
@@ -421,7 +421,7 @@ function lp_add_more_pr_callback() {
                         $content .= ob_get_clean();
                         $content .= '</div>';
                         $content .= '<div class="form-group">
-                            <label>Teacher Information</label>';
+                            <label>Student Information</label>';
                             ob_start(); // Start output buffer
                             wp_editor('',
                                 'oer-lp-resource-student-' . $totalElements,

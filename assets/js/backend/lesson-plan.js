@@ -328,7 +328,7 @@ jQuery(document).ready(function ($) {
                     });
             });
         },
-
+        
         // Upload author image
         lpUploadAuthorImage: function () {
             $(document).on('click', '.lp-oer-person-placeholder', function (e) {
@@ -709,12 +709,13 @@ jQuery(document).ready(function ($) {
         // Add More Primary resources
         addMorePrimaryResource: function () {
             $(document).on('click', '.lp-add-more-resource', function () {
-                var total_form_box = parseInt($('.lp-author-element-wrapper').length, 10);
+                var total_form_box = parseInt($('.lp-primary-resource-element-wrapper').length, 10);
                 $.post(ajaxurl, {action:'lp_add_more_pr_callback', row_id: total_form_box}).done(function (response) {
-                    if($('div.lp-author-element-wrapper').length) {
-                        $(response).insertAfter('div.lp-author-element-wrapper:last');
+                    console.log(response);
+                    if($('div.lp-primary-resource-element-wrapper').length) {
+                        $(response).insertAfter('div.lp-primary-resource-element-wrapper:last');
                     } else {
-                        $('.lp-author-element-panel').html(response);
+                        $('.lp-primary-resource-element-panel').html(response);
                     }
 
                     tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-resource-teacher-' + total_form_box );
@@ -726,6 +727,29 @@ jQuery(document).ready(function ($) {
                     // Toggle reorder button
                     LessonPlan.toggleUpDownButton();
                 });
+            });
+        },
+
+        // Delete source
+        deletePrimarySource: function () {
+            $(document).on('click', '.lp-remove-source',function(e) {
+                var source = $(this).closest('.panel-default');
+                var elementId = source.attr('id');
+                e.preventDefault();
+                $('#lp-delete-source').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+                    .on('click', '#lp-source-delete-confirm', function(e) {
+                        source.remove();
+                        $('a[href=#' + elementId +']').parent('li').remove();
+                        $('#lp-delete-source').modal('hide');
+
+                        // Disable delete button for author
+                        if($('.lp-primary-source-element-wrapper').length === 1) {
+                            $('.lp-remove-source').attr('disabled', 'disabled');
+                        }
+                    });
             });
         },
     };
@@ -753,4 +777,5 @@ jQuery(document).ready(function ($) {
     LessonPlan.lpSearchStandards();
     LessonPlan.lpDownloadCopyLesson();
     LessonPlan.addMorePrimaryResource();
+    LessonPlan.deletePrimarySource();
 });
