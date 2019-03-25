@@ -986,7 +986,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                     wp_editor( $oer_lp_custom_editor['description'],
                                         'oer-lp-custom-editor-'.$value,
                                         $settings = array(
-                                            'textarea_name' => $elementKey['description'],
+                                            'textarea_name' => "oer_lp_custom_editor_" . $value ."[description]",
                                             'media_buttons' => true,
                                             'textarea_rows' => 10,
                                             'drag_drop_upload' => true,

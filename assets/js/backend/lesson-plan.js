@@ -752,6 +752,32 @@ jQuery(document).ready(function ($) {
                     });
             });
         },
+        
+        requireModuleTitle: function(){
+            $(document).on('click', '#publishing-action #publish',function(e) {
+                e.preventDefault();
+                var validated = false;
+                var custom_editor = $(".oer-lp-introduction-group[id^=oer-lp-custom-editor-group");
+                $.each(custom_editor, function(index, value){
+                    var id = $(this).attr('id');
+                    if ($(this).is(":visible")){
+                        title = $(this).find("input[name$='[title]']");
+                        if (title.val()!=="") {
+                            validated = true;
+                        } else {
+                            $(document).scrollTop = title.scrollTop;
+                            title.after("<span class='error' style='color:#ff0000;'>Please enter a title</span>")
+                            title.focus();
+                            validated = false;
+                            return;
+                        }
+                    }
+                });
+                if (validated==true) {
+                    $(this).closest("form").submit();
+                }
+            });
+        }
     };
 
     // Initialize all function on ready state
@@ -778,4 +804,5 @@ jQuery(document).ready(function ($) {
     LessonPlan.lpDownloadCopyLesson();
     LessonPlan.addMorePrimaryResource();
     LessonPlan.deletePrimarySource();
+    LessonPlan.requireModuleTitle();
 });
