@@ -490,12 +490,17 @@ function create_dynamic_editor($id) {
                             <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
-                    <div class="panel-body">';
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" name="oer_lp_custom_editor_'. $id.'[title]" maxlength="512" class="form-control" placeholder="Text Module Title" />
+                        </div>
+                        <div class="form-group">';
                         ob_start(); // Start output buffer
                         wp_editor('',
                             'oer-lp-custom-editor-' . $id,
                             $settings = array(
-                                'textarea_name' => 'oer_lp_custom_editor_' . $id,
+                                'textarea_name' => 'oer_lp_custom_editor_' . $id . '[description]',
                                 'media_buttons' => true,
                                 'textarea_rows' => 10,
                                 'drag_drop_upload' => true,
@@ -503,7 +508,7 @@ function create_dynamic_editor($id) {
                             )
                         );
     $content .= ob_get_clean();
-    $content .= '</div>
+    $content .= '</div></div>
                 </div>';
 
     return $content;

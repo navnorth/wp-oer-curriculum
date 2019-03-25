@@ -435,14 +435,14 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_editor_') !== false) {?>
                         <!--For custom editor-->
                         <?php
-                        $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
+                        $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                         if(!empty($oer_lp_custom_editor)) { ?>
                             <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-<?php echo $key; ?>">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title lp-module-title">Text Editor</h3>
+                                    <h3 class="panel-title lp-module-title"><?php echo $oer_lp_custom_editor['title']; ?></h3>
                                 </div>
                                 <div class="panel-body">
-                                    <?php echo $oer_lp_custom_editor;?>
+                                    <?php echo $oer_lp_custom_editor['description'];?>
                                 </div>
                             </div>
                         <?php }?>

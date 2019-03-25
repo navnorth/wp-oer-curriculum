@@ -962,7 +962,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                         </div>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_editor_') !== false) {?>
                         <?php
-                        $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
+                        $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                         ?>
                             <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-<?php echo $key; ?>">
                                 <input type="hidden" name="lp_order[<?php echo $elementKey;?>]" class="element-order" value="<?php echo $value;?>" value="1">
@@ -977,11 +977,16 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                     </h3>
                                 </div>
                                 <div class="panel-body">
+                                     <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" name="oer_lp_custom_editor_<?php echo $value; ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" value="<?php echo $oer_lp_custom_editor['title']; ?>" />
+                                    </div>
+                                    <div class="form-group">
                                     <?php
-                                    wp_editor( $oer_lp_custom_editor,
+                                    wp_editor( $oer_lp_custom_editor['description'],
                                         'oer-lp-custom-editor-'.$value,
                                         $settings = array(
-                                            'textarea_name' => $elementKey,
+                                            'textarea_name' => $elementKey['description'],
                                             'media_buttons' => true,
                                             'textarea_rows' => 10,
                                             'drag_drop_upload' => true,
@@ -989,6 +994,7 @@ foreach ($elements_orders as $orderKey => $orderValue) {
                                         )
                                     );
                                     ?>
+                                    </div>
                                 </div>
                             </div>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_text_list_') !== false) {?>
