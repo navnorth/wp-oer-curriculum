@@ -709,9 +709,9 @@ jQuery(document).ready(function ($) {
         // Add More Primary resources
         addMorePrimaryResource: function () {
             $(document).on('click', '.lp-add-more-resource', function () {
-                var total_form_box = parseInt($('.lp-primary-resource-element-wrapper').length, 10);
+                var total_form_box = parseInt($('.lp-primary-resource-element-panel').find('.lp-primary-resource-element-wrapper').length, 10);
+                total_form_box += 1;
                 $.post(ajaxurl, {action:'lp_add_more_pr_callback', row_id: total_form_box}).done(function (response) {
-                    console.log(response);
                     if($('div.lp-primary-resource-element-wrapper').length) {
                         $(response).insertAfter('div.lp-primary-resource-element-wrapper:last');
                     } else {
@@ -755,26 +755,28 @@ jQuery(document).ready(function ($) {
         
         requireModuleTitle: function(){
             $(document).on('click', '#publishing-action #publish',function(e) {
-                e.preventDefault();
-                var validated = false;
                 var custom_editor = $(".oer-lp-introduction-group[id^=oer-lp-custom-editor-group");
-                $.each(custom_editor, function(index, value){
-                    var id = $(this).attr('id');
-                    if ($(this).is(":visible")){
-                        title = $(this).find("input[name$='[title]']");
-                        if (title.val()!=="") {
-                            validated = true;
-                        } else {
-                            $(document).scrollTop = title.scrollTop;
-                            title.after("<span class='error' style='color:#ff0000;'>Please enter a title</span>")
-                            title.focus();
-                            validated = false;
-                            return;
+                if (custom_editor.length>0) {
+                    e.preventDefault();
+                    var validated = false;
+                    $.each(custom_editor, function(index, value){
+                        var id = $(this).attr('id');
+                        if ($(this).is(":visible")){
+                            title = $(this).find("input[name$='[title]']");
+                            if (title.val()!=="") {
+                                validated = true;
+                            } else {
+                                $(document).scrollTop = title.scrollTop;
+                                title.after("<span class='error' style='color:#ff0000;'>Please enter a title</span>")
+                                title.focus();
+                                validated = false;
+                                return;
+                            }
                         }
+                    });
+                    if (validated==true) {
+                        $(this).closest("form").submit();
                     }
-                });
-                if (validated==true) {
-                    $(this).closest("form").submit();
                 }
             });
         }

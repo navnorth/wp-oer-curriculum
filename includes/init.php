@@ -370,7 +370,7 @@ add_action('wp_ajax_nopriv_lp_add_more_pr_callback', 'lp_add_more_pr_callback');
 
 function lp_add_more_pr_callback() {
     $totalElements = isset($_REQUEST['row_id']) ? $_REQUEST['row_id'] : '15';
-    $content = '<div class="panel panel-default lp-primary-source-element-wrapper" id="lp-primary-source-element-wrapper-' . $totalElements . '">
+    $content = '<div class="panel panel-default lp-primary-resource-element-wrapper" id="lp-primary-resource-element-wrapper-' . $totalElements . '">
                     <div class="panel-heading">
                         <h3 class="panel-title lp-module-title">
                             Resource
@@ -378,7 +378,7 @@ function lp_add_more_pr_callback() {
                                 <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
                                 <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
                             </span>
-                            <span class="btn btn-danger btn-sm lp-remove-author"
+                            <span class="btn btn-danger btn-sm lp-remove-source"
                                   title="Delete"
                                   disabled="disabled"
                             ><i class="fa fa-trash"></i> </span>
