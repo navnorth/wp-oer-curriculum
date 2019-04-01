@@ -96,11 +96,11 @@ $default = false;
                             </li>
                         <?php } elseif (strpos($elementKey, 'oer_lp_custom_editor_teacher_background') !== false) {?>
                             <li class="list-group-item">
-                                <a href="#oer-lp-custom-editor-teacher-background" title="Teacher Background">Teacher Background</a>
+                                <a href="#oer-lp-custom-editor-group-teacher-background" title="Teacher Background">Teacher Background</a>
                             </li>
                         <?php } elseif (strpos($elementKey, 'oer_lp_custom_editor_student_background') !== false) {?>
                             <li class="list-group-item">
-                                <a href="#oer-lp-custom-editor-student-background" title="Student Background">Student Background</a>
+                                <a href="#oer-lp-custom-editor-group-student-background" title="Student Background">Student Background</a>
                             </li>
                        <?php }
                     }
