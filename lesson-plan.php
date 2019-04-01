@@ -42,6 +42,17 @@ define( 'OER_LESSON_PLAN_VERSION', '0.0.1' );
 include_once(OER_LESSON_PLAN_PATH.'includes/oer-lp-functions.php');
 include_once(OER_LESSON_PLAN_PATH.'includes/init.php');
 
+global $oer_lp_default_structure;
+$oer_lp_default_structure = array(
+    'lp_authors_order',
+    'lp_standard_order',
+    'lp_iq',
+    'lp_primary_resources',
+    'oer_lp_custom_editor_teacher_background',
+    'oer_lp_custom_editor_student_background',
+    'lp_oer_materials'
+);
+
 /**
  * Parent plugin (WP OER) required to activate WP OER Lesson Plan Plugin
  * Check if WP OER plugin already installed or not
