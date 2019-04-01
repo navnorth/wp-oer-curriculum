@@ -37,8 +37,17 @@ if (have_posts()) : while (have_posts()) : the_post();
             </div>
         </div>
         <div class="col-md-6 col-sm-12 curriculum-detail padding-0">
-            <h1><?php echo the_title(); ?></h1>
-            <p><?php echo the_content(); ?></p>
+            <div class="tc-lp-details">
+                <div class="tc-lp-details-header">
+                    <h1 class="tc-lp-title"><?php echo the_title(); ?></h1>
+                    <div class="tc-lp-authors-list">
+                        
+                    </div>
+                </div>
+                <div class="tc-lp-details-description">
+                    <p><?php echo the_content(); ?></p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

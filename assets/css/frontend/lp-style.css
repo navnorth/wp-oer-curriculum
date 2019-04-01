@@ -1,4 +1,8 @@
-body.single-lesson-plans { font-size:16px; }
+body.single-lesson-plans {
+    font-size:16px;
+    box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
 /** Curriculum Frontend Styles **/
 .single-lesson-plans .container .site-content { margin-top:0; }
 .single-lesson-plans #page.container, .site-content .container { width:100%; max-width:100%; padding:0; }
@@ -27,6 +31,24 @@ body.single-lesson-plans { font-size:16px; }
     font-weight: 700;
     color: #fff;
     font-size: 28px !important;
+}
+.tc-lp-details {
+    padding: 60px 75px;
+}
+.single-lesson-plans .row { margin-right:0; margin-left:0; }
+.tc-lp-details-header .tc-lp-title {
+    color: #fff;
+    margin-top: 15px;
+}
+.tc-lp-authors-list .tc-post-author {
+    color: #FFB904;
+    font-weight: 600;
+    font-size: 24px !important;
+}
+.tc-lp-details-description {
+    padding: 50px 0 20px 0;
+    color: #fff !important;
+    font-size: 24px;
 }
 span.selected-standard-pill {
     padding: 5px 10px;
