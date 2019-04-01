@@ -15,18 +15,29 @@ global $post;
 global $wpdb;
 $post_meta_data = get_post_meta($post->ID );
 $elements_orders = isset($post_meta_data['lp_order'][0]) ? unserialize($post_meta_data['lp_order'][0]) : array();
-$oer_lp_download_copy = (isset($post_meta_data['oer_lp_download_copy'][0]) ? $post_meta_data['oer_lp_download_copy'][0] : 'yes');
-
+//Grade Level
+$lp_grade = isset($post_meta_data['oer_lp_grades'][0])? unserialize($post_meta_data['oer_lp_grades'][0])[0]:"";
+if ($lp_grade!=="pre-k" && $lp_grade!=="k")
+    $lp_grade = "Grade ".$lp_grade;
+    
+// Download Copy
+$download_copy = isset($post_meta_data['oer_lp_download_copy'][0])? true:false;
 if (have_posts()) : while (have_posts()) : the_post();
 ?>
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1><?php echo the_title(); ?></h1>
+    <div class="row lp-featured-section">
+        <div class="col-md-6 col-sm-12 featured-image padding-0">
+            <?php the_post_thumbnail(); ?>
+            <div class="tc-lp-grade"><?php echo $lp_grade ?></div>
+            <div class="tc-lp-controls">
+                <a href=""><i class="fa fa-share-alt"></i></a>
+                <?php if ($download_copy): ?>
+                <a href=""><i class="fa fa-download"></i></a>
+                <?php endif; ?>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6 col-sm-12 curriculum-detail padding-0">
+            <h1><?php echo the_title(); ?></h1>
             <p><?php echo the_content(); ?></p>
         </div>
     </div>

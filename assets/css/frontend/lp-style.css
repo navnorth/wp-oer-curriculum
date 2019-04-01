@@ -1,3 +1,33 @@
+body.single-lesson-plans { font-size:16px; }
+/** Curriculum Frontend Styles **/
+.single-lesson-plans .container .site-content { margin-top:0; }
+.single-lesson-plans #page.container, .site-content .container { width:100%; max-width:100%; padding:0; }
+.lp-featured-section { background:#436677; }
+.padding-0 { padding:0 !important; }
+.tc-lp-controls {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #283d47 !important;
+    padding: 12px 0;
+}
+.tc-lp-controls a {
+    display: block;
+    padding: 15px 14px 15px 14px;
+}
+.tc-lp-controls a i {
+    color: #ffb802;
+    font-size: 28px !important;
+}
+.tc-lp-grade {
+    position: absolute;
+    top: 0;
+    background: rgba(181,59,89,0.8);
+    padding: 10px 25px;
+    font-weight: 700;
+    color: #fff;
+    font-size: 28px !important;
+}
 span.selected-standard-pill {
     padding: 5px 10px;
     background: #f1f1f1;
