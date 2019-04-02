@@ -754,11 +754,16 @@ jQuery(document).ready(function ($) {
         },
         
         requireModuleTitle: function(){
+            var validated = false;
             $(document).on('click', '#publishing-action #publish',function(e) {
+                if (validated==true) {
+                    console.log(validated);
+                    validated = false;
+                    return;
+                }
+                e.preventDefault();
                 var custom_editor = $(".oer-lp-introduction-group[id^=oer-lp-custom-editor-group");
                 if (custom_editor.length>0) {
-                    e.preventDefault();
-                    var validated = false;
                     $.each(custom_editor, function(index, value){
                         var id = $(this).attr('id');
                         if ($(this).is(":visible")){
@@ -770,12 +775,12 @@ jQuery(document).ready(function ($) {
                                 title.after("<span class='error' style='color:#ff0000;'>Please enter a title</span>")
                                 title.focus();
                                 validated = false;
-                                return;
+                                return false;
                             }
                         }
                     });
                     if (validated==true) {
-                        $(this).closest("form").submit();
+                        $(this).trigger("click");
                     }
                 }
             });
