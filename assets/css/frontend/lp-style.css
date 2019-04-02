@@ -4,6 +4,7 @@ body.single-lesson-plans {
     -webkit-box-sizing:border-box;
 }
 /** Curriculum Frontend Styles **/
+.single-lesson-plans .container { width:100%; max-width:100%; }
 .single-lesson-plans .container .site-content { margin-top:0; }
 .single-lesson-plans #page.container, .site-content .container { width:100%; max-width:100%; padding:0; }
 .lp-featured-section { background:#436677; }
@@ -39,16 +40,72 @@ body.single-lesson-plans {
 .tc-lp-details-header .tc-lp-title {
     color: #fff;
     margin-top: 15px;
+    margin-bottom:0;
 }
-.tc-lp-authors-list .tc-post-author {
+.tc-lp-authors-list {
     color: #FFB904;
     font-weight: 600;
-    font-size: 24px !important;
+    font-size: 18px !important;
 }
 .tc-lp-details-description {
     padding: 50px 0 20px 0;
     color: #fff !important;
-    font-size: 24px;
+    font-size: 16px;
+}
+.tc-lp-details-description p { color:#fff !important; font-size:18px; }
+.tc-lp-details-standards-list { padding:20px 0; }
+.tc-lp-details-standards-list .tc-lp-details-standard {
+    display: inline-block;
+    margin-right: 35px;
+    margin-bottom: 10px;
+}
+.tc-lp-details-standards-list .tc-lp-details-standard a {
+    color: #fff;
+    text-decoration: underline;
+    font-size: 18px;
+}
+.tc-lp-details-tags-list {
+    padding: 8px 0 0 0;
+}
+.tc-lp-details-tags-list .tc-lp-details-tag {
+    display: inline-block;
+    margin-right: 35px;
+    border-radius: 50px;
+    padding: 2px 15px;
+    background: #30424a;
+    color: #fff;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+.tc-sensitive-material-section {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.tc-sensitive-material-section p {
+    display: inline-block;
+    background: #2b424d;
+    margin-bottom: 0 !important;
+    padding: 10px 20px;
+}
+.sensitive-material-text {
+    color: #fff;
+    font-weight: 600 !important;
+    vertical-align: middle;
+    margin-left: 15px !important;
+}
+.tc-sensitive-material-section i {
+    color: #fff;
+    font-size: 28px !important;
+    vertical-align: middle;
+}
+.tc-sensitive-material-section .question-popup-button {
+    background: #23353d;
+    border: unset !important;
+    margin-left: -5px !important;
+    padding: 11.5px 12px;
+    vertical-align:top;
 }
 span.selected-standard-pill {
     padding: 5px 10px;

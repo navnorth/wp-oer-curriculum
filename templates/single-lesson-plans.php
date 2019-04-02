@@ -22,6 +22,8 @@ if ($lp_grade!=="pre-k" && $lp_grade!=="k")
     
 // Download Copy
 $download_copy = isset($post_meta_data['oer_lp_download_copy'][0])? true:false;
+$oer_lp_standards = isset($post_meta_data['oer_lp_standards'][0])?unserialize($post_meta_data['oer_lp_standards'][0]):"";
+$tags = get_the_terms($post->ID,"post_tag");
 if (have_posts()) : while (have_posts()) : the_post();
 ?>
 <div class="container">
@@ -41,11 +43,42 @@ if (have_posts()) : while (have_posts()) : the_post();
                 <div class="tc-lp-details-header">
                     <h1 class="tc-lp-title"><?php echo the_title(); ?></h1>
                     <div class="tc-lp-authors-list">
-                        
+                        <?php the_author_link(); ?>
                     </div>
                 </div>
                 <div class="tc-lp-details-description">
-                    <p><?php echo the_content(); ?></p>
+                    <?php echo the_content(); ?>
+                </div>
+                <div class="tc-lp-details-standards-list">
+                    <?php
+                    if (is_array($oer_lp_standards)):
+                        foreach($oer_lp_standards as $standard){
+                            $standard_details = "";
+                            if (function_exists('was_standard_details'))
+                                $standard_details = was_standard_details($standard);
+                        ?>
+                        <div class="tc-lp-details-standard">
+                            <a href="javascript:void(0)"><?php if ($standard_details): echo $standard_details->description; endif; ?></a>
+                        </div>
+                        <?php
+                        }
+                    endif;
+                    ?>
+                </div>
+                <div class="tc-lp-details-tags-list">
+                    <?php
+                    if ($tags):
+                    foreach($tags as $tag){
+                    ?>
+                    <a href="javascript:void(0)" class="tc-lp-details-tag"><?php echo $tag->name; ?></a>
+                    <?php
+                    }
+                    endif;
+                    ?>
+                </div>
+                <div class="tc-sensitive-material-section">
+                    <p><i class="fa fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
+                    <button class="question-popup-button"><i class="fa fa-question-circle-o"></i></button>
                 </div>
             </div>
         </div>
