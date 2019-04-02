@@ -7,7 +7,7 @@ body.single-lesson-plans {
 .single-lesson-plans .container { width:100%; max-width:100%; }
 .single-lesson-plans .container .site-content { margin-top:0; }
 .single-lesson-plans #page.container, .site-content .container { width:100%; max-width:100%; padding:0; }
-.lp-featured-section { background:#436677; }
+.lp-featured-section { background:#436677; max-height:440px; }
 .padding-0 { padding:0 !important; }
 .tc-lp-controls {
     position: absolute;
@@ -39,7 +39,7 @@ body.single-lesson-plans {
 .single-lesson-plans .row { margin-right:0; margin-left:0; }
 .tc-lp-details-header .tc-lp-title {
     color: #fff;
-    margin-top: 15px;
+    margin-top: 0;
     margin-bottom:0;
 }
 .tc-lp-authors-list {
