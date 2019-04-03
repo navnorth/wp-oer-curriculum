@@ -21,9 +21,10 @@ if ($lp_grade!=="pre-k" && $lp_grade!=="k")
     $lp_grade = "Grade ".$lp_grade;
     
 // Download Copy
-$download_copy = isset($post_meta_data['oer_lp_download_copy'][0])? true:false;
+$download_copy = ($post_meta_data['oer_lp_download_copy'][0]=="yes")? true:false;
 $oer_lp_standards = isset($post_meta_data['oer_lp_standards'][0])?unserialize($post_meta_data['oer_lp_standards'][0]):"";
 $tags = get_the_terms($post->ID,"post_tag");
+$authors = (isset($post_meta_data['oer_lp_authors'][0]) ? unserialize($post_meta_data['oer_lp_authors'][0]) : array());
 if (have_posts()) : while (have_posts()) : the_post();
 ?>
 <div class="container">
@@ -43,7 +44,22 @@ if (have_posts()) : while (have_posts()) : the_post();
                 <div class="tc-lp-details-header">
                     <h1 class="tc-lp-title"><?php echo the_title(); ?></h1>
                     <div class="tc-lp-authors-list">
-                        <?php the_author_link(); ?>
+                        <?php
+                        if (!empty($authors)){
+                            $aIndex = 0;
+                            
+                            foreach($authors['name'] as $author){
+                                $author_url = $authors['author_url'][$aIndex];
+                                
+                                if (isset($author_url))
+                                    echo "<span class='tc-lp-author'><a href='".$author_url."'>".$authors['name'][$aIndex]."</a></span>";
+                                else
+                                    echo "<span class='tc-lp-author'>".$authors['name'][$aIndex]."</span>";
+                                    
+                                $aIndex++;
+                            }
+                        } 
+                        ?>
                     </div>
                 </div>
                 <div class="tc-lp-details-description">
@@ -141,15 +157,85 @@ if (have_posts()) : while (have_posts()) : the_post();
         </div>
     </div>
     <div class="row">
+        <div class="col-md-3 col-sm-3 padding-0">
+            <div class="media-image">
+                <div class="image-thumbnail">
+                    <div class="image-section">
+                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 padding-0">
+            <div class="media-image">
+                <div class="image-thumbnail">
+                    <div class="image-section">
+                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 padding-0">
+            <div class="media-image">
+                <div class="image-thumbnail">
+                    <div class="image-section">
+                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 padding-0">
+            <div class="media-image">
+                <div class="image-thumbnail">
+                    <div class="image-section">
+                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 padding-0">
+            <div class="media-image">
+                <div class="image-thumbnail">
+                    <div class="image-section">
+                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 padding-0">
+            <div class="media-image">
+                <div class="image-thumbnail">
+                    <div class="image-section">
+                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 padding-0">
+            <div class="media-image">
+                <div class="image-thumbnail">
+                    <div class="image-section">
+                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 padding-0">
+            <div class="media-image">
+                <div class="image-thumbnail">
+                    <div class="image-section">
+                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                    </div>
+                </div>
+            </div>
+            <div class="sensitive-source">
+                <p><i class="fa fa-exclamation-triangle"></i></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12">
             <?php
-            if ($oer_lp_download_copy == 'yes') {
-                $download_resource_url = (isset($post_meta_data['oer_lp_download_copy_document'][0]) ? $post_meta_data['oer_lp_download_copy_document'][0] : '');
-                $download_resource = get_file_type_from_url($download_resource_url);
-
-                echo 'Download Lesson Copy: <a href="'.$download_resource_url.'" target="_blank">'.$download_resource['icon'].'</a>';
-            }
-
             if (!empty($elements_orders)) {
                 foreach ($elements_orders as $elementKey => $value) {
                     if($elementKey == 'lp_introduction_order') {?>
@@ -167,97 +253,6 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 </div>
                                 <div class="panel-body">
                                     <?php echo $post_meta_data['oer_lp_introduction'][0];?>
-                                </div>
-                            </div>
-                        <?php }?>
-                    <?php } elseif ($elementKey == 'lp_authors_order') {?>
-                        <?php
-                        $authors = (isset($post_meta_data['oer_lp_authors'][0]) ? unserialize($post_meta_data['oer_lp_authors'][0]) : array());
-                        if (!empty($authors) && lp_scan_array($authors)) { ?>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title lp-module-title">
-                                        <?php _e("Authors", OER_LESSON_PLAN_SLUG); ?>
-                                    </h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="panel-group">
-                                        <?php
-                                        if (isset($authors['name']) && !empty($authors['name'])) {
-                                            foreach ( $authors['name']as $authorKey => $authorName) { ?>
-                                                <?php
-                                                $role = isset($authors['role'][$authorKey]) ? $authors['role'][$authorKey] : "";
-                                                $author_url = isset($authors['author_url'][$authorKey]) ? $authors['author_url'][$authorKey] : "";
-                                                $institution = isset($authors['institution'][$authorKey]) ? $authors['institution'][$authorKey] : "";
-                                                $institution_url = isset($authors['institution_url'][$authorKey]) ? $authors['institution_url'][$authorKey] : "";
-                                                if(
-                                                    empty($authorName) &&
-                                                    empty($role) &&
-                                                    empty($author_url) &&
-                                                    empty($institution) &&
-                                                    empty($institution_url)
-                                                ) {
-                                                    continue;
-                                                }
-                                                ?>
-                                                <div class="panel panel-default lp-author-element-wrapper" id="author-<?php echo $authorKey;?>">
-                                                    <div class="panel-heading">
-                                                        <h3 class="panel-title lp-module-title">
-                                                            <?php _e("Author " . $authorKey, OER_LESSON_PLAN_SLUG); ?>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="panel-body form-horizontal">
-                                                        <?php if (!empty($authorName)) { ?>
-                                                            <div class="form-group">
-                                                                <label class="col-md-2 control-label">Name</label>
-                                                                <div class="col-md-10">
-                                                                    <?php echo ucwords($authorName);?>
-                                                                    <?php
-                                                                    $image = (isset($authors['author_pic'][$authorKey]) ? $authors['author_pic'][$authorKey] : "");
-                                                                    if (!empty($image)) { ?>
-                                                                        <img src="<?php echo $image?>" class="img-circle img-responsive oer-lp-author-img" width="100" />
-                                                                    <?php }?>
-                                                                </div>
-                                                            </div>
-                                                        <?php } ?>
-                                                        <?php if (!empty($role)) { ?>
-                                                            <div class="form-group">
-                                                                <label class="col-md-2 control-label">Role</label>
-                                                                <div class="col-md-10">
-                                                                    <?php echo ucwords($role);?>
-                                                                </div>
-                                                            </div>
-                                                        <?php } ?>
-                                                        <?php if (!empty($author_url)) { ?>
-                                                            <div class="form-group">
-                                                                <label class="col-md-2 control-label">Author URL</label>
-                                                                <div class="col-md-10">
-                                                                    <a href="<?php echo addSchemeToUrl($author_url);?>" target="_blank"><?php echo $author_url;?></a>
-                                                                </div>
-                                                            </div>
-                                                        <?php } ?>
-                                                        <?php if (!empty($institution)) { ?>
-                                                            <div class="form-group">
-                                                                <label class="col-md-2 control-label">Institution</label>
-                                                                <div class="col-md-10">
-                                                                    <?php echo ucwords($institution);?>
-                                                                </div>
-                                                            </div>
-                                                        <?php } ?>
-                                                        <?php if (!empty($institution_url)) { ?>
-                                                            <div class="form-group">
-                                                                <label class="col-md-2 control-label">Institution URL</label>
-                                                                <div class="col-md-10">
-                                                                    <a href="<?php echo addSchemeToUrl($institution_url);?>" target="_blank"><?php echo $institution_url;?></a>
-                                                                </div>
-                                                            </div>
-                                                        <?php } ?>
-                                                    </div>
-                                                </div>
-                                            <?php }
-                                        }
-                                        ?>
-                                    </div>
                                 </div>
                             </div>
                         <?php }?>

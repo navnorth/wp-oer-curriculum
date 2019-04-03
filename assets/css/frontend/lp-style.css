@@ -177,6 +177,15 @@ span.selected-standard-pill:last-child {
     box-shadow: none!important;
     border-radius: 0;
 }
+.tc-lp-author { margin:0 3px; }
+.tc-lp-author a{
+    color: #FFB904;
+    font-weight: 600;
+    font-size: 18px !important;
+}
+.tc-lp-author a:hover {
+    color: #FFB904;
+}
 @media (min-width: 1364px) and (max-width: 1442px){
     .investigate-question-section {
         padding: 21.9% 15%;
