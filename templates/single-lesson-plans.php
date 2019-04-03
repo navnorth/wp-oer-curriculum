@@ -83,6 +83,63 @@ if (have_posts()) : while (have_posts()) : the_post();
             </div>
         </div>
     </div>
+    <div class="row tc-investigative-section">
+        <div class="col-md-3 col-sm-3 col-xs-12 padding-0 custom-pink-bg investigate-section-custom-width">
+            <div class="investigate-question-section">
+                <p>Investigate Question</p>
+            </div>
+        </div>
+        <div class="col-md-9 col-sm-9 col-xs-12 padding-0 custom-dark-pink-bg excerpt-section-custom-width">
+            <div class="col-md-1 col-sm-1 hidden-xs padding-0">
+                <div class="tc-pink-triangle"></div>
+            </div>
+            <div class="col-md-11 col-sm-11">
+                <div class="excerpt-section">
+                    <h2>Lorem ipsum dolor sit amet, consectetur ?</h2>
+                    <div class="show-excerpt-section text-right">
+                        <button type="button" class="excerpt-button" data-toggle="collapse" data-target="#demo1">Framework Excerpt<i class="fa fa-angle-right"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 tc-padding-0">
+                <div id="demo1" class="investigative-section-answer custom-dark-pink-bg collapse">
+                    <div class="excerpt-content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit qui,
+                            reprehenderit! Accusamus fugiat incidunt nihil officia perferendis repudiandae
+                            similique soluta tenetur. Adipisci aspernatur corporis mollitia, nemo obcaecati perferendis quod recusandae!</p>
+                        <br>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Amet assumenda delectus deleniti dolor doloremque, esse eum eveniet
+                            ex excepturi exercitationem iusto, molestias omnis pariatur quos repellat tempora ullam veritatis vitae.
+                        </p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit qui,
+                            reprehenderit! Accusamus fugiat incidunt nihil officia perferendis repudiandae
+                            similique soluta tenetur. Adipisci aspernatur corporis mollitia, nemo obcaecati perferendis quod recusandae!</p>
+                        <br>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Amet assumenda delectus deleniti dolor doloremque, esse eum eveniet
+                            ex excepturi exercitationem iusto, molestias omnis pariatur quos repellat tempora ullam veritatis vitae.
+                        </p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit qui,
+                            reprehenderit! Accusamus fugiat incidunt nihil officia perferendis repudiandae
+                            similique soluta tenetur. Adipisci aspernatur corporis mollitia, nemo obcaecati perferendis quod recusandae!</p>
+                        <br>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            Amet assumenda delectus deleniti dolor doloremque, esse eum eveniet
+                            ex excepturi exercitationem iusto, molestias omnis pariatur quos repellat tempora ullam veritatis vitae.
+                        </p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="close-excerpt text-right ">
+                                <button type="button" class="excerpt-button" data-toggle="collapse" data-target="#demo1">CLOSE<i class="fa fa-angle-up"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <?php

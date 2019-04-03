@@ -757,7 +757,6 @@ jQuery(document).ready(function ($) {
             var validated = false;
             $(document).on('click', '#publishing-action #publish',function(e) {
                 if (validated==true) {
-                    console.log(validated);
                     validated = false;
                     return;
                 }

@@ -107,6 +107,17 @@ body.single-lesson-plans {
     padding: 11.5px 12px;
     vertical-align:top;
 }
+.tc-investigative-section {
+    min-height: 100px;
+    background: #851738;
+}
+.custom-pink-bg {
+    background: #851738;
+}
+.investigate-section-custom-width {
+    width: 23% !important;
+}
+.lp-featured-section { max-height:435px; overflow:hidden; }
 span.selected-standard-pill {
     padding: 5px 10px;
     background: #f1f1f1;
@@ -117,7 +128,60 @@ span.selected-standard-pill {
     margin: 3px 3px 3px 0px;
     line-height: normal;
 }
-
+.investigate-question-section {
+    padding: 19.9%;
+}
 span.selected-standard-pill:last-child {
     margin-bottom: 15px;
+}
+.investigate-question-section p {
+    margin-bottom: 0;
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+}
+.custom-dark-pink-bg {
+    background: #5c0f26;
+}
+.excerpt-section-custom-width {
+    width: 77% !important;
+}
+.tc-pink-triangle {
+    border-left: 115px solid #851738;
+    border-top: 89px solid transparent;
+    border-bottom: 89px solid transparent;
+}
+.excerpt-section {
+    padding: 3%;
+    color: #fff;
+}
+.excerpt-section h2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 0;
+    margin-top: 3px;
+    padding-left: 5%;
+    font-size:30px;
+}
+.show-excerpt-section {
+    margin-top: 30px;
+}
+.excerpt-button {
+    font-size: 22px;
+    padding: 7px 18px;
+    text-transform: uppercase;
+    background-color: #87213B;
+    color: white;
+    border: none;
+    box-shadow: none!important;
+    border-radius: 0;
+}
+@media (min-width: 1364px) and (max-width: 1442px){
+    .investigate-question-section {
+        padding: 21.9% 15%;
+    }
+    .tc-related-inquiry-section p {
+        font-size: 42px;
+    }
 }
