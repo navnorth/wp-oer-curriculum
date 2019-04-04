@@ -140,6 +140,7 @@ span.selected-standard-pill:last-child {
     font-weight: 600;
     color: #fff;
 }
+.investigate-question-section h2 { font-size:24px; font-weight:bold; color:#fff; letter-spacing:1px;}
 .custom-dark-pink-bg {
     background: #5c0f26;
 }
@@ -186,9 +187,60 @@ span.selected-standard-pill:last-child {
 .tc-lp-author a:hover {
     color: #FFB904;
 }
+.investigative-section-answer {
+    color: #fff;
+    font-size: 24px;
+    padding: 4% 4% 4% 9%;
+}
+.excerpt-content {
+    max-height: 430px;
+    overflow-y: auto;
+}
+.excerpt-content p { color:#fff; }
+.close-excerpt {
+    margin-top: 30px;
+}
+.media-image {
+    background: rgba(255,255,255,.25);
+}
+.media-image .image-thumbnail {
+    height: 0;
+    overflow: hidden;
+    border-top: none;
+    text-align: center;
+    display: block;
+    padding: 0;
+    padding-bottom: 75%;
+    position: relative;
+}
+.media-image .image-section {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #7f7f7f;
+}
+.sensitive-source {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: rgba(56,71,77,0.9);
+    padding: 10px 14px 1px 14px;
+}
+.sensitive-source i {
+    color: #fff;
+    font-size: 34px !important;
+}
+.sensitive-source p { margin-bottom:10px; }
+.custom-bg-dark {
+    background: #283d47 !important;
+}
+.custom-bg-dark-row {
+    height: 22px;
+}
 @media (min-width: 1364px) and (max-width: 1442px){
     .investigate-question-section {
-        padding: 21.9% 15%;
+        padding: 21.9% 5% 21.9% 12%;
     }
     .tc-related-inquiry-section p {
         font-size: 42px;

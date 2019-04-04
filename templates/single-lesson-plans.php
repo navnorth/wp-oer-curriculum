@@ -102,7 +102,7 @@ if (have_posts()) : while (have_posts()) : the_post();
     <div class="row tc-investigative-section">
         <div class="col-md-3 col-sm-3 col-xs-12 padding-0 custom-pink-bg investigate-section-custom-width">
             <div class="investigate-question-section">
-                <p>Investigate Question</p>
+                <h2>Investigative Question</h2>
             </div>
         </div>
         <div class="col-md-9 col-sm-9 col-xs-12 padding-0 custom-dark-pink-bg excerpt-section-custom-width">
@@ -136,14 +136,6 @@ if (have_posts()) : while (have_posts()) : the_post();
                             Amet assumenda delectus deleniti dolor doloremque, esse eum eveniet
                             ex excepturi exercitationem iusto, molestias omnis pariatur quos repellat tempora ullam veritatis vitae.
                         </p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit qui,
-                            reprehenderit! Accusamus fugiat incidunt nihil officia perferendis repudiandae
-                            similique soluta tenetur. Adipisci aspernatur corporis mollitia, nemo obcaecati perferendis quod recusandae!</p>
-                        <br>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Amet assumenda delectus deleniti dolor doloremque, esse eum eveniet
-                            ex excepturi exercitationem iusto, molestias omnis pariatur quos repellat tempora ullam veritatis vitae.
-                        </p>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -157,86 +149,110 @@ if (have_posts()) : while (have_posts()) : the_post();
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3 col-sm-3 padding-0">
-            <div class="media-image">
-                <div class="image-thumbnail">
-                    <div class="image-section">
-                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
+        <?php
+        $primary_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
+        if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
+            if (!empty(array_filter($primary_resources['resource']))) {
+                foreach ($primary_resources['resource'] as $resourceKey => $resource) {
+                    $resource = get_page_by_title($resource,OBJECT,"resource");
+                    $resource_img = get_the_post_thumbnail_url($resource);
+                    $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
+                ?>
+                <div class="col-md-3 col-sm-3 padding-0">
+                    <div class="media-image">
+                        <div class="image-thumbnail">
+                            <div class="image-section">
+                                <?php if ($resource_img!==""): ?>
+                                <img src="<?php echo $resource_img; ?>" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-3 padding-0">
-            <div class="media-image">
-                <div class="image-thumbnail">
-                    <div class="image-section">
-                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                    <?php if ($sensitiveMaterial!==""): ?>
+                    <div class="sensitive-source">
+                        <p><i class="fa fa-exclamation-triangle"></i></p>
                     </div>
+                    <?php endif; ?>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-3 padding-0">
-            <div class="media-image">
-                <div class="image-thumbnail">
-                    <div class="image-section">
-                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-3 padding-0">
-            <div class="media-image">
-                <div class="image-thumbnail">
-                    <div class="image-section">
-                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-3 padding-0">
-            <div class="media-image">
-                <div class="image-thumbnail">
-                    <div class="image-section">
-                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-3 padding-0">
-            <div class="media-image">
-                <div class="image-thumbnail">
-                    <div class="image-section">
-                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-3 padding-0">
-            <div class="media-image">
-                <div class="image-thumbnail">
-                    <div class="image-section">
-                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-3 padding-0">
-            <div class="media-image">
-                <div class="image-thumbnail">
-                    <div class="image-section">
-                        <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
-                    </div>
-                </div>
-            </div>
-            <div class="sensitive-source">
-                <p><i class="fa fa-exclamation-triangle"></i></p>
-            </div>
-        </div>
+                <?php
+                }
+            }
+        }
+        ?>
+    </div>
+    <div class="row custom-bg-dark custom-bg-dark-row"></div>
+    <div class="row">
+        <ul class="nav nav-tabs tc-home-tabs" id="tc-home-tabs-section" role="tablist">
+            <?php
+            if (!empty($elements_orders)) {
+                $keys = array(
+                    "lp_introduction_order",
+                    "lp_primary_resources",
+                    "lp_oer_materials",
+                    "lp_lesson_times_order",
+                    "lp_industries_order",
+                    "lp_standard_order",
+                    "lp_activities_order",
+                    "lp_summative_order"
+                );
+                foreach ($elements_orders as $elementKey => $value) {
+                    if (strpos($elementKey, 'oer_lp_custom_editor_teacher_background') !== false) {
+                    ?>
+                    <li class="nav-item col-md-3 col-sm-3 padding-0">
+                        <a class="nav-link" id="tc-teacher-background-tab" data-toggle="tab" href="#tc-teacher-background-tab-content" role="tab" aria-controls="tc-teacher-background-tab" aria-selected="true" aria-expanded="false">
+                            <p>Teacher Background</p>
+                        </a>
+                    </li>
+                    <?php  } elseif (strpos($elementKey, 'oer_lp_custom_editor_student_background') !== false) { ?>
+                    <li class="nav-item col-md-3 col-sm-3 padding-0">
+                        <a class="nav-link" id="tc-student-background-tab" data-toggle="tab" href="#tc-student-background-tab-content" role="tab" aria-controls="tc-student-background-tab" aria-selected="false" aria-expanded="false">
+                            <p>Student Background</p>
+                        </a>
+                    </li>
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_editor_') !== false) {
+                        $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
+                        if(!empty($oer_lp_custom_editor)) {
+                        ?>
+                        <li class="nav-item col-md-3 col-sm-3 padding-0">
+                            <a class="nav-link" id="tc-<?php echo sanitize_title($oer_lp_custom_editor['title']); ?>-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
+                                <p><?php echo $oer_lp_custom_editor['title']; ?></p>
+                            </a>
+                        </li>
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_text_list_') !== false) {?>
+                        <li class="nav-item col-md-3 col-sm-3 padding-0">
+                            <a class="nav-link" id="tc-text-list-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
+                                <p>Text List</p>
+                            </a>
+                        </li>
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_vocabulary_list_title_') !== false) {
+                        $oer_lp_vocabulary_list_title = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
+                        $listOrder = end(explode('_', $elementKey));
+                        $oer_lp_vocabulary_details = (isset($post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0] : "");
+                        if (!empty($oer_lp_vocabulary_list_title)) { ?>
+                        <li class="nav-item col-md-3 col-sm-3 padding-0">
+                            <a class="nav-link" id="tc-<?php echo sanitize_title($oer_lp_vocabulary_list_title); ?>-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
+                                <p><?php echo $oer_lp_vocabulary_list_title; ?></p>
+                            </a>
+                        </li>
+                        <?php } ?>
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'lp_oer_materials_list_') !== false) {?>
+                        <li class="nav-item col-md-3 col-sm-3 padding-0">
+                            <a class="nav-link" id="tc-materials-list-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
+                                <p>Materials</p>
+                            </a>
+                        </li>
+                        <?php
+                        }
+                    }
+                }
+            }
+            ?>
+        </ul>
     </div>
     <div class="row">
         <div class="col-md-12">
             <?php
-            if (!empty($elements_orders)) {
+            /*if (!empty($elements_orders)) {
                 foreach ($elements_orders as $elementKey => $value) {
                     if($elementKey == 'lp_introduction_order') {?>
                         <?php
@@ -857,7 +873,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <?php }
                 }
                 ?>
-            <?php }?>
+            <?php }*/?>
 
         </div>
     </div>
