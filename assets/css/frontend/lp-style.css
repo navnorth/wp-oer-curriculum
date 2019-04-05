@@ -238,6 +238,110 @@ span.selected-standard-pill:last-child {
 .custom-bg-dark-row {
     height: 22px;
 }
+.tc-home-tabs {
+    background: #dedede;
+    width: 100%;
+    margin-left: 0;
+}
+.tc-home-tabs-content {
+    background: #fff;
+}
+.tc-home-tabs-content .tab-pane {
+    padding: 10%;
+}
+.tc-tab-content {
+    font-size: 28px !important;
+    max-height: 360px;
+    overflow-y: hidden;
+}
+.tc-read-more {
+    text-transform: uppercase;
+    display: inline-block;
+    background: #283d47;
+    padding: 5px 20px;
+    float: right;
+}
+.tc-read-more a {
+    color: #fff;
+    font-size: 24px;
+}
+.tc-read-more a:hover {
+    color:#fff;
+}
+.tc-home-tabs .nav-item {
+    display: inline;
+    background-color: #DFDFDF;
+    color: #B3B3B3;
+    padding: 20px 30px;
+    position: relative;
+}
+.tc-home-tabs li.nav-item {
+    text-align: center;
+    text-transform: uppercase;
+}
+.tc-home-tabs li.nav-item.active {
+    background: #4a6e7f;
+    box-shadow: 0 7px 10px 0px #c0c0c0;
+    z-index: 1;
+}
+.tc-home-tabs li.nav-item.active a {
+    background:transparent !important;
+    outline:0;
+    border:none !important;
+}
+.tc-home-tabs li a {
+    font-size: 24px;
+    color: #7f7f7f;
+    border: unset;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    background:transparent;
+}
+.tc-home-tabs li.nav-item.active a {
+    background:transparent;
+    color:#fff !important;
+    border:unset;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+.tc-home-tabs li a p {
+    margin-bottom: 0 !important;
+}
+.tc-home-tabs li.nav-item.active a p {
+    color:#fff !important;
+}
+.tc-home-tabs .nav-item.active:after {
+    border-left: 71px solid transparent;
+    border-right: 71px solid transparent;
+    border-top: 40px solid #4a6e7f;
+    content: " ";
+    position: absolute;
+    bottom: -40px;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 35%;
+    filter: drop-shadow(0 8px 3px rgba(0,0,0,0.2));
+}
+.top-navbar-links li:hover a{
+    border-bottom: 4px solid #ffd204;
+    text-decoration: none !important;
+}
+.top-navbar-links li a:hover{
+    text-decoration: none !important;
+}
+.tc-home-tabs li a:hover,
+.tc-home-tabs li.nav-item.active a:hover,
+.tc-home-tabs li.nav-item.active a:active{
+    color: #fff;
+    background: #4a6e7f;
+    border-radius: 0 !important;
+    border:none; 
+}
+.tc-home-tabs .nav-item .nav-link:hover{
+    color: #fff;
+}
 @media (min-width: 1364px) and (max-width: 1442px){
     .investigate-question-section {
         padding: 21.9% 5% 21.9% 12%;
