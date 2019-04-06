@@ -282,12 +282,9 @@ span.selected-standard-pill:last-child {
 .tc-home-tabs li.nav-item a.active{
     background: #4a6e7f;
     box-shadow: 0 7px 10px 0px #c0c0c0;
-    z-index: 1;
-}
-.tc-home-tabs li.nav-item a.active {
-    background:transparent !important;
     outline:0;
     border:none !important;
+    z-index: 1;
 }
 .tc-home-tabs li a {
     font-size: 24px;
