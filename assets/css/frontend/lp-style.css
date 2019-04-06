@@ -326,7 +326,7 @@ span.selected-standard-pill:last-child {
     border-bottom: 4px solid #ffd204;
     color:#fff;
 }
-.tc-home-tabs li a:hover,
+.tc-home-tabs li.nav-item a:hover,
 .tc-home-tabs li.nav-item a.active:hover,
 .tc-home-tabs li.nav-item a.active:active{
     color: #fff !important;
@@ -335,7 +335,7 @@ span.selected-standard-pill:last-child {
     border:none; 
 }
 .tc-home-tabs .nav-item .nav-link:hover{
-    color: #fff;
+    color: #fff !important;
 }
 @media (min-width: 1364px) and (max-width: 1442px){
     .investigate-question-section {
