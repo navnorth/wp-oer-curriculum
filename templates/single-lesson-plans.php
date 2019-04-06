@@ -249,7 +249,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             ?>
         </ul>
     </div>
-    <div class="tab-content tc-home-tabs-content col-md-12 padding-0">
+    <div class="row tab-content tc-home-tabs-content col-md-12 padding-0">
         <?php
         if (!empty($elements_orders)) {
             foreach ($elements_orders as $elementKey => $value) {
@@ -360,6 +360,65 @@ if (have_posts()) : while (have_posts()) : the_post();
             }
         }
         ?>
+    </div>
+    <div class="row">
+        <div class="tc-related-inquiry-sets-topbar clearfix">
+            <div class="col-md-6 col-sm-6 col-xs-6 padding-0 tc-custom-bg-orange"></div>
+            <div class="col-md-6 col-sm-6 col-xs-6 padding-0 tc-custom-bg-pink"></div>
+            <div class="tc-related-inquiry-section">
+                <p>Related Inquiry Sets</p>
+            </div>
+        </div>
+        <div class="tc-related-inquiry-grids-section clearfix">
+            <div class="col-md-4 col-sm-6 tc-related-inquiry-blocks-padding">
+                <div class="media-image">
+                    <div class="image-thumbnail">
+                        <div class="image-section">
+                            <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                        </div>
+                    </div>
+                </div>
+                <div class="tc-related-inquiry-grades">
+                    <span>Grade 1</span>
+                </div>
+                <div class="custom-bg-dark custom-bg-dark-inquiry-sets"></div>
+                <div class="tc-related-inquiry-set-description">
+                    <p>Lorem ipsum dolor sit amet</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 tc-related-inquiry-blocks-padding">
+                <div class="media-image">
+                    <div class="image-thumbnail">
+                        <div class="image-section">
+                            <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                        </div>
+                    </div>
+                </div>
+                <div class="tc-related-inquiry-grades">
+                    <span>Grade 2</span>
+                </div>
+                <div class="custom-bg-dark custom-bg-dark-inquiry-sets"></div>
+                <div class="tc-related-inquiry-set-description">
+                    <p>Lorem ipsum dolor sit amet</p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 tc-related-inquiry-blocks-padding">
+                <div class="media-image">
+                    <div class="image-thumbnail">
+                        <div class="image-section">
+                            <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                        </div>
+                    </div>
+                </div>
+                <div class="tc-related-inquiry-grades">
+                    <span>Grade 3</span>
+                </div>
+                <div class="custom-bg-dark custom-bg-dark-inquiry-sets"></div>
+                <div class="tc-related-inquiry-set-description">
+                    <p>Lorem ipsum dolor sit amet</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <?php
