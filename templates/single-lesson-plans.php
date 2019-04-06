@@ -198,8 +198,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                 foreach ($elements_orders as $elementKey => $value) {
                     if (strpos($elementKey, 'oer_lp_custom_editor_teacher_background') !== false) {
                     ?>
-                    <li class="nav-item col-md-3 col-sm-3 padding-0 active">
-                        <a class="nav-link" id="tc-teacher-background-tab" data-toggle="tab" href="#tc-teacher-background-tab-content" role="tab" aria-controls="tc-teacher-background-tab" aria-selected="true" aria-expanded="false">
+                    <li class="nav-item col-md-3 col-sm-3 padding-0">
+                        <a class="nav-link active" id="tc-teacher-background-tab" data-toggle="tab" href="#tc-teacher-background-tab-content" role="tab" aria-controls="tc-teacher-background-tab" aria-selected="true" aria-expanded="false">
                             <p>Teacher Background</p>
                         </a>
                     </li>
