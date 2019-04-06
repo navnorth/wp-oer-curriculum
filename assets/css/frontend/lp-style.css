@@ -279,13 +279,6 @@ span.selected-standard-pill:last-child {
     text-align: center;
     text-transform: uppercase;
 }
-.tc-home-tabs li.nav-item a.active{
-    background: #4a6e7f;
-    box-shadow: 0 7px 10px 0px #c0c0c0;
-    outline:0;
-    border:none !important;
-    z-index: 1;
-}
 .tc-home-tabs li a {
     font-size: 24px;
     color: #7f7f7f;
@@ -295,11 +288,14 @@ span.selected-standard-pill:last-child {
     background:transparent;
 }
 .tc-home-tabs li.nav-item a.active {
-    background:transparent;
     color:#fff !important;
-    border:unset;
     padding-top: 15px !important;
     padding-bottom: 15px !important;
+    background: #4a6e7f;
+    box-shadow: 0 7px 10px 0px #c0c0c0;
+    outline:0;
+    border:none !important;
+    z-index: 1;
 }
 .tc-home-tabs li a p {
     margin-bottom: 0 !important;
