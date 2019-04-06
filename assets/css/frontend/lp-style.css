@@ -323,11 +323,13 @@ span.selected-standard-pill:last-child {
 }
 .top-navbar-links li a:hover{
     text-decoration: none !important;
+    border-bottom: 4px solid #ffd204;
+    color:#fff;
 }
 .tc-home-tabs li a:hover,
 .tc-home-tabs li.nav-item a.active:hover,
 .tc-home-tabs li.nav-item a.active:active{
-    color: #fff;
+    color: #fff !important;
     background: #4a6e7f;
     border-radius: 0 !important;
     border:none; 
