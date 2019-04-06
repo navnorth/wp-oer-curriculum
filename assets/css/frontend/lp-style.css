@@ -284,7 +284,8 @@ span.selected-standard-pill:last-child {
     box-shadow: 0 7px 10px 0px #c0c0c0;
     z-index: 1;
 }
-.tc-home-tabs li.nav-item.active a {
+.tc-home-tabs li.nav-item.active a,
+.tc-home-tabs li.nav-item a.active {
     background:transparent !important;
     outline:0;
     border:none !important;
@@ -297,7 +298,7 @@ span.selected-standard-pill:last-child {
     padding-bottom: 15px !important;
     background:transparent;
 }
-.tc-home-tabs li.nav-item.active a {
+.tc-home-tabs li.nav-item a.active {
     background:transparent;
     color:#fff !important;
     border:unset;
@@ -307,10 +308,12 @@ span.selected-standard-pill:last-child {
 .tc-home-tabs li a p {
     margin-bottom: 0 !important;
 }
-.tc-home-tabs li.nav-item.active a p {
+.tc-home-tabs li.nav-item.active a p,
+.tc-home-tabs li.nav-item a.active p{
     color:#fff !important;
 }
-.tc-home-tabs .nav-item.active:after {
+.tc-home-tabs .nav-item.active:after,
+.tc-home-tabs .nav-item .active:after{
     border-left: 71px solid transparent;
     border-right: 71px solid transparent;
     border-top: 40px solid #4a6e7f;
@@ -333,7 +336,9 @@ span.selected-standard-pill:last-child {
 }
 .tc-home-tabs li a:hover,
 .tc-home-tabs li.nav-item.active a:hover,
-.tc-home-tabs li.nav-item.active a:active{
+.tc-home-tabs li.nav-item.active a:active,
+.tc-home-tabs li.nav-item a.active:hover,
+.tc-home-tabs li.nav-item a.active:active{
     color: #fff;
     background: #4a6e7f;
     border-radius: 0 !important;
