@@ -334,7 +334,7 @@ span.selected-standard-pill:last-child {
     border-radius: 0 !important;
     border:none; 
 }
-.tc-home-tabs .nav-item .nav-link:hover{
+.tc-home-tabs .nav-item .nav-link:hover p{
     color: #fff !important;
 }
 @media (min-width: 1364px) and (max-width: 1442px){
