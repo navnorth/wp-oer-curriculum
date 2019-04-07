@@ -420,3 +420,19 @@ span.selected-standard-pill:last-child {
         max-height: 449px;
     }
 }
+@media (min-width: 320px) and (max-width: 767px){
+    .investigate-section-custom-width,
+    .excerpt-section-custom-width{
+        width:100% !important;
+        float:none;
+    }
+    .investigate-question-section {
+        padding:7%;
+        text-align:center;
+    }
+    .lp-featured-section {
+        max-height:100%;
+    }
+    .tc-home-tabs .nav-item .active:after { border:none; }
+    .tc-related-inquiry-section { width:90%; }
+}
