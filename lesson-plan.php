@@ -133,7 +133,6 @@ function lp_add_rewrites()
 	global $wp_rewrite;
         add_rewrite_tag( '%curriculum%', '([^/]*)' );
 	add_rewrite_tag( '%source%', '([^&]+)' );
-        add_rewrite_rule( '^'.$root_slug.'/([^/]*)/?$', 'index.php?post_type=lesson-plans&curriculum=$matches[1]', 'top' );
 	add_rewrite_rule( '^'.$root_slug.'/([^/]*)/source/([^&]+)/?$', 'index.php?post_type=lesson-plans&curriculum=$matches[1]&source=$matches[2]', 'top' );
         add_rewrite_endpoint( 'curriculum', EP_PERMALINK | EP_PAGES );
 	add_rewrite_endpoint( 'source', EP_PERMALINK | EP_PAGES );
@@ -171,6 +170,5 @@ function lp_assign_standard_template($template) {
                     $template = dirname(__FILE__) . '/templates/primary-source.php';
             }
         }
-        
         return $template;
 }
