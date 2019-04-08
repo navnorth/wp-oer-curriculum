@@ -185,6 +185,7 @@ if (have_posts()) : while (have_posts()) : the_post();
         <ul class="nav nav-tabs tc-home-tabs" id="tc-home-tabs-section" role="tablist">
             <?php
             if (!empty($elements_orders)) {
+                $col = 0;
                 $keys = array(
                     "lp_introduction_order",
                     "lp_primary_resources",
@@ -193,18 +194,25 @@ if (have_posts()) : while (have_posts()) : the_post();
                     "lp_industries_order",
                     "lp_standard_order",
                     "lp_activities_order",
-                    "lp_summative_order"
+                    "lp_summative_order",
+                    "lp_authors_order",
+                    "lp_iq"
                 );
+                foreach($elements_orders as $element=>$order){
+                    if (!in_array($element,$keys))
+                        $col++;
+                }
+                $_col = abs(12/$col);
                 foreach ($elements_orders as $elementKey => $value) {
                     if (strpos($elementKey, 'oer_lp_custom_editor_teacher_background') !== false) {
                     ?>
-                    <li class="nav-item col-md-3 col-sm-3 padding-0">
+                    <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                         <a class="nav-link active" id="tc-teacher-background-tab" data-toggle="tab" href="#tc-teacher-background-tab-content" role="tab" aria-controls="tc-teacher-background-tab" aria-selected="true" aria-expanded="false">
                             <p>Teacher Background</p>
                         </a>
                     </li>
                     <?php  } elseif (strpos($elementKey, 'oer_lp_custom_editor_student_background') !== false) { ?>
-                    <li class="nav-item col-md-3 col-sm-3 padding-0">
+                    <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                         <a class="nav-link" id="tc-student-background-tab" data-toggle="tab" href="#tc-student-background-tab-content" role="tab" aria-controls="tc-student-background-tab" aria-selected="false" aria-expanded="false">
                             <p>Student Background</p>
                         </a>
@@ -213,13 +221,13 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                         if(!empty($oer_lp_custom_editor)) {
                         ?>
-                        <li class="nav-item col-md-3 col-sm-3 padding-0">
+                        <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                             <a class="nav-link" id="tc-<?php echo sanitize_title($oer_lp_custom_editor['title']); ?>-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
                                 <p><?php echo $oer_lp_custom_editor['title']; ?></p>
                             </a>
                         </li>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_text_list_') !== false) {?>
-                        <li class="nav-item col-md-3 col-sm-3 padding-0">
+                        <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                             <a class="nav-link" id="tc-text-list-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
                                 <p>Text List</p>
                             </a>
@@ -229,14 +237,14 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $listOrder = end(explode('_', $elementKey));
                         $oer_lp_vocabulary_details = (isset($post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0] : "");
                         if (!empty($oer_lp_vocabulary_list_title)) { ?>
-                        <li class="nav-item col-md-3 col-sm-3 padding-0">
+                        <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                             <a class="nav-link" id="tc-<?php echo sanitize_title($oer_lp_vocabulary_list_title); ?>-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
                                 <p><?php echo $oer_lp_vocabulary_list_title; ?></p>
                             </a>
                         </li>
                         <?php } ?>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'lp_oer_materials_list_') !== false) {?>
-                        <li class="nav-item col-md-3 col-sm-3 padding-0">
+                        <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                             <a class="nav-link" id="tc-materials-list-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
                                 <p>Materials</p>
                             </a>
