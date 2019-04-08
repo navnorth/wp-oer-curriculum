@@ -124,3 +124,53 @@ function get_single_lesson_plans_template($single_template)
     return $single_template;
 }
 add_filter( 'single_template', 'get_single_lesson_plans_template' );
+
+// Add rewrite rule for substandards
+add_action( 'init', 'lp_add_rewrites', 10, 0 );
+function lp_add_rewrites()
+{
+        $root_slug = "lesson-plans";
+	global $wp_rewrite;
+        add_rewrite_tag( '%curriculum%', '([^/]*)' );
+	add_rewrite_tag( '%source%', '([^&]+)' );
+        add_rewrite_rule( '^'.$root_slug.'/([^/]*)/?$', 'index.php?post_type=lesson-plans&curriculum=$matches[1]', 'top' );
+	add_rewrite_rule( '^'.$root_slug.'/([^/]*)/source/([^&]+)/?$', 'index.php?post_type=lesson-plans&curriculum=$matches[1]&source=$matches[2]', 'top' );
+        add_rewrite_endpoint( 'curriculum', EP_PERMALINK | EP_PAGES );
+	add_rewrite_endpoint( 'source', EP_PERMALINK | EP_PAGES );
+
+	$flush_rewrite = get_option('lp_rewrite_rules');
+        if (empty($flush_rewrite)){
+            add_option('lp_rewrite_rules', false);
+        }
+        
+        $wp_rewrite->init();
+        $wp_rewrite->flush_rules();
+        update_option('lp_rewrite_rules', true);
+}
+
+add_filter( 'query_vars', 'lp_add_query_vars' );
+function lp_add_query_vars( $vars ){
+	$vars[] = "source";
+	return $vars;
+}
+
+add_action( 'template_include' , 'lp_assign_standard_template' );
+function lp_assign_standard_template($template) {
+	global $wp_query;
+        
+        $url_path = trim(parse_url(add_query_arg(array()), PHP_URL_PATH), '/');
+        
+        status_header(200);
+        
+        $root_slug = "lesson-plans";
+        
+        if ( strpos( $url_path, $root_slug ) !== false && get_query_var('curriculum') && get_query_var('source')) {
+            $wp_query->is_404 = false;
+            $template = locate_template('templates/primary-source.php', true);
+            if (!$template) {
+                    $template = dirname(__FILE__) . '/templates/primary-source.php';
+            }
+        }
+        
+        return $template;
+}
