@@ -430,6 +430,14 @@ span.selected-standard-pill:last-child {
 .tc-related-inquiry-set-description p {
     margin-bottom: 0;
 }
+.lp-back-button {
+    background-color: #5c5c5c;
+    padding: 15px 30px;
+    color: #ffffff !important;
+    display: inline-block;
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
 @media (min-width: 1443px){
     .investigate-question-section {
         padding: 17.3% 10%;
