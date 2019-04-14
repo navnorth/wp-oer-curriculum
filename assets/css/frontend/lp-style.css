@@ -438,6 +438,17 @@ span.selected-standard-pill:last-child {
     margin-left: 5%;
     margin-bottom: 5%;
 }
+.ps-header {
+    background-size:cover !important;
+    height: 530px;
+    overflow: hidden;
+    width: 100%;
+}
+
+/** Primary Source Template Styles **/
+.primary-source-template .container { padding:0; }
+.primary-source-template .container .row { margin-right:0; margin-left:0; }
+/** End of Primary Source Template Styles **/
 @media (min-width: 1443px){
     .investigate-question-section {
         padding: 17.3% 10%;

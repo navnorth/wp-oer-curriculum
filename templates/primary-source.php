@@ -8,9 +8,18 @@ add_filter('body_class', function($classes){
 get_header();
 
 $back_url = "";
+$source_id = 0;
 $curriculum = get_query_var('curriculum');
 if ($curriculum)
     $back_url = "lesson-plans/".$curriculum;
+$psource = get_query_var('source');
+$sources = explode("-",$psource);
+if ($sources)
+    $source_id = $sources[count($sources)-1];
+
+$resource = get_post($source_id);
+$featured_image_url = get_the_post_thumbnail_url($resource->ID, "full");
+
 ?>
 <div class="container">
     <div class="row">
@@ -20,7 +29,7 @@ if ($curriculum)
         <div class="col-md-8"></div>
     </div>
 </div>
-<div class="ps-header"></div>
+<div class="ps-header" style="background:url(<?php echo $featured_image_url; ?>) no-repeat top left;"></div>
 <?php
 get_footer();
 ?>
