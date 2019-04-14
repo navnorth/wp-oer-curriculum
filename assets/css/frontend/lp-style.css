@@ -465,6 +465,9 @@ a.lp-nav-left, a.lp-nav-right, a.lp-expand-img { color:#a9a9a9 !important; -webk
     right: 2.5%;
     bottom: 2.5%;
 }
+ul.ps-info-tabs { margin:0; background-color: #dedede !important; }
+ul.ps-info-tabs .nav-link { color:#9a9a9a; background-color: #dedede !important; text-transform:uppercase; text-align:center; margin:0; }
+ul.ps-info-tabs .nav-link.active { background-color:#c4c4c4 !important; }
 /** End of Primary Source Template Styles **/
 @media (min-width: 1443px){
     .investigate-question-section {
