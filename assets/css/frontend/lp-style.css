@@ -448,6 +448,23 @@ span.selected-standard-pill:last-child {
 /** Primary Source Template Styles **/
 .primary-source-template .container { padding:0; }
 .primary-source-template .container .row { margin-right:0; margin-left:0; }
+.ps-header { position:relative; }
+.ps-nav-left {
+    position: absolute;
+    left: 2.5%;
+    top: 45%;
+}
+a.lp-nav-left, a.lp-nav-right, a.lp-expand-img { color:#a9a9a9 !important; -webkit-font-smoothing:antialiased; display:block; cursor:pointer; }
+.ps-nav-right {
+    position: absolute;
+    right: 2.5%;
+    top: 45%;
+}
+.ps-expand {
+    position: absolute;
+    right: 2.5%;
+    bottom: 2.5%;
+}
 /** End of Primary Source Template Styles **/
 @media (min-width: 1443px){
     .investigate-question-section {

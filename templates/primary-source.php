@@ -29,7 +29,11 @@ $featured_image_url = get_the_post_thumbnail_url($resource->ID, "full");
         <div class="col-md-8"></div>
     </div>
 </div>
-<div class="ps-header" style="background:url(<?php echo $featured_image_url; ?>) no-repeat top left;"></div>
+<div class="ps-header" style="background:url(<?php echo $featured_image_url; ?>) no-repeat top left;">
+    <span class="ps-nav-left"><a class="lp-nav-left"><i class="fas fa-chevron-left fa-2x"></i></a></span>
+    <span class="ps-nav-right"><a class="lp-nav-right"><i class="fas fa-chevron-right fa-2x"></i></a></span>
+    <span class="ps-expand"><a class="lp-expand-img"><i class="fas fa-expand-arrows-alt"></i></a></span>
+</div>
 <?php
 get_footer();
 ?>
