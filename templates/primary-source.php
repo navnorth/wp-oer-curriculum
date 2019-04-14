@@ -9,16 +9,44 @@ get_header();
 
 $back_url = "";
 $source_id = 0;
+
+// Back Button URL
 $curriculum = get_query_var('curriculum');
+$curriculum_details = get_page_by_path($curriculum, OBJECT, "lesson-plans");
+$curriculum_id = $curriculum_details->ID;
 if ($curriculum)
     $back_url = "lesson-plans/".$curriculum;
+
+// Get Resource ID
 $psource = get_query_var('source');
 $sources = explode("-",$psource);
 if ($sources)
     $source_id = $sources[count($sources)-1];
 
 $resource = get_post($source_id);
+
+// Get Featured Image Url
 $featured_image_url = get_the_post_thumbnail_url($resource->ID, "full");
+
+// Get Curriculum Meta for Primary Sources
+$post_meta_data = get_post_meta($curriculum_id);
+$primary_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
+$index = 0;
+$teacher_info = "";
+$student_info = "";
+if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
+    if (!empty(array_filter($primary_resources['resource']))) {
+        foreach ($primary_resources['resource'] as $resourceKey => $source) {
+            if ($source==$resource->post_title)
+                break;
+            $index++;
+        }
+        if (isset($primary_resources['teacher_info']))
+            $teacher_info = $primary_resources['teacher_info'][$index];
+        if (isset($primary_resources['student_info']))
+            $student_info = $primary_resources['student_info'][$index];
+    }
+}
 
 ?>
 <div class="container">
@@ -37,24 +65,72 @@ $featured_image_url = get_the_post_thumbnail_url($resource->ID, "full");
 <div class="ps-info">
     <ul class="nav nav-tabs ps-info-tabs" id="ps-info-tabs-section" role="tablist">
         <li class="nav-item col-md-4 col-sm-4 padding-0">
-            <a class="nav-link active" id="ps-information-tab" data-toggle="tab" href="#ps-information-tab-content" role="tabs" aria-controls="ps-information-tab" aria-selected="true" aria-expanded="false">
+            <a class="nav-link active" id="ps-information-tab" data-toggle="tab" href="#ps-information-tab-content" role="tabs" aria-controls="ps-information-tab-content" aria-selected="true" aria-expanded="false">
                 Information    
             </a>
         </li>
         <li class="nav-item col-md-4 col-sm-4 padding-0">
-            <a class="nav-link" id="ps-information-tab" data-toggle="tab" href="#ps-information-tab-content" role="tabs" aria-controls="ps-information-tab" aria-selected="true" aria-expanded="false">
+            <a class="nav-link" id="ps-student-info-tab" data-toggle="tab" href="#ps-student-info-tab-content" role="tabs" aria-controls="ps-student-info-tab-content" aria-selected="true" aria-expanded="false">
                 For The Student    
             </a>
         </li>
         <li class="nav-item col-md-4 col-sm-4 padding-0">
-            <a class="nav-link" id="ps-information-tab" data-toggle="tab" href="#ps-information-tab-content" role="tabs" aria-controls="ps-information-tab" aria-selected="true" aria-expanded="false">
+            <a class="nav-link" id="ps-teacher-info-tab" data-toggle="tab" href="#ps-teacher-info-tab-content" role="tabs" aria-controls="ps-teacher-info-tab-content" aria-selected="true" aria-expanded="false">
                 For The Teacher    
             </a>
         </li>
     </ul>
 </div>
 <div class="ps-info-tabs-content">
-    
+    <div class="tab-pane clearfix fade active in" id="ps-information-tab-content" role="tabpanel" aria-labelledby="ps-information-tab">
+        <?php
+        $resource_meta = null;
+        $subject_areas = null;
+        if (function_exists('oer_get_resource_metadata')){
+            $resource_meta = oer_get_resource_metadata($resource->ID);
+        }
+        ?>
+        <div class="col-md-8">
+            <h1 class="ps-info-title"><?php echo $resource->post_title; ?></h1>
+            <div class="ps-info-description">
+                <?php echo $resource->post_content; ?>
+            </div>
+            <?php if (isset($resource_meta['oer_resourceurl'])) { ?>
+            <div class="ps-meta-group">
+                <label class="ps-label">Original Resource:</label>
+                <span class="ps-value"><a href="<?php echo $resource_meta['oer_resourceurl'][0]; ?>"><?php echo $resource_meta['oer_resourceurl'][0]; ?></a></span>
+            </div>
+            <?php } ?>
+        </div>
+        <div class="col-md-4">
+            <div class="ps-meta-icons">
+                <span class="ps-download-source ps-meta-icon"><a class="ps-download"><i class="fas fa-download"></i></a></span>
+                <span class="ps-share-source ps-meta-icon"><a class="ps-share"><i class="fas fa-share-alt"></i></a></span>
+            </div>
+            <div style="display:none">
+                <?php var_dump($resource_meta); ?>
+            </div>
+            <?php
+            if (function_exists('oer_get_subject_areas')){
+                $subject_areas = oer_get_subject_areas($resource->ID);
+            }
+            if (is_array($subject_areas) && count($subject_areas)>0) {
+                $subjects = array_unique($subject_areas, SORT_REGULAR);
+            ?>
+            <div class="tagcloud">
+                <?php foreach($subjects as $subject){ ?>
+                    <span><a class="button"><?php echo ucwords($subject->name); ?></a></span>
+                <?php } ?>
+            </div>
+            <?php } ?>
+        </div>
+    </div>
+    <div class="tab-pane clearfix fade in" id="ps-student-info-tab-content" role="tabpanel" aria-labelledby="ps-student-info-tab">
+        <?php echo $student_info; ?>
+    </div>
+    <div class="tab-pane clearfix fade in" id="ps-teacher-info-tab-content" role="tabpanel" aria-labelledby="ps-teacher-info-tab">
+        <?php echo $teacher_info; ?>
+    </div>
 </div>
 <?php
 get_footer();
