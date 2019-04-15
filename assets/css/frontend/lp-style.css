@@ -482,6 +482,7 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; }
 .ps-button:hover { background-color:#2a3e48; color:#fff !important; }
 .ps-tagcloud.ps-keywords { margin-top:0; }
 .ps-info-tabs-content .tab-pane .col-md-8, .ps-info-tabs-content .tab-pane .col-md-4 { float:left; }
+.ps-label { font-weight:700; }
 /** End of Primary Source Template Styles **/
 @media (min-width: 1443px){
     .investigate-question-section {
