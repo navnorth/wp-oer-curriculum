@@ -96,7 +96,7 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
                 <?php echo $resource->post_content; ?>
             </div>
             <?php if (isset($resource_meta['oer_resourceurl'])) { ?>
-            <div class="ps-meta-group">
+            <div class="ps-meta-group ps-resource-url">
                 <label class="ps-label">Original Resource:</label>
                 <span class="ps-value"><a href="<?php echo $resource_meta['oer_resourceurl'][0]; ?>"><?php echo $resource_meta['oer_resourceurl'][0]; ?></a></span>
             </div>
@@ -117,9 +117,71 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             if (is_array($subject_areas) && count($subject_areas)>0) {
                 $subjects = array_unique($subject_areas, SORT_REGULAR);
             ?>
-            <div class="tagcloud">
+            <div class="ps-tagcloud">
                 <?php foreach($subjects as $subject){ ?>
-                    <span><a class="button"><?php echo ucwords($subject->name); ?></a></span>
+                    <span><a class="ps-button"><?php echo ucwords($subject->name); ?></a></span>
+                <?php } ?>
+            </div>
+            <?php } ?>
+            <?php if (isset($resource_meta['oer_authorname'])) {
+                $author_url = "";
+                if (isset($resource_meta['oer_authorurl']))
+                    $author_url = $resource_meta['oer_authorurl'][0];
+            ?>
+            <div class="ps-meta-group">
+                <label class="ps-label">Author:</label>
+                <?php if ($author_url=="") : ?>
+                    <span class="ps-value"><?php echo $resource_meta['oer_authorname'][0]; ?></span>
+                <?php else: ?>
+                    <span class="ps-value"><a href="<?php echo $author_url; ?>" target="_blank"><?php echo $resource_meta['oer_authorname'][0]; ?></a></span>
+                <?php endif; ?>
+            </div>
+            <?php } ?>
+            <?php if (isset($resource_meta['oer_publishername'])) {
+                $publisher_url = "";
+                if (isset($resource_meta['oer_publisherurl']))
+                    $publisher_url = $resource_meta['oer_publisherurl'][0];
+            ?>
+            <div class="ps-meta-group">
+                <label class="ps-label">Publisher:</label>
+                <?php if ($publisher_url=="") : ?>
+                <span class="ps-value"><?php echo $resource_meta['oer_publishername'][0]; ?></span>
+                <?php else: ?>
+                <span class="ps-value"><a href="<?php echo $publisher_url;  ?>" target="_blank"><?php echo $resource_meta['oer_publishername'][0]; ?></a></span>
+                <?php endif; ?>
+            </div>
+            <?php } ?>
+            <?php if (isset($resource_meta['oer_mediatype'])) { ?>
+            <div class="ps-meta-group">
+                <label class="ps-label">Type:</label>
+                <span class="ps-value"><?php echo ucwords($resource_meta['oer_mediatype'][0]); ?></span>
+            </div>
+            <?php } ?>
+            <?php if (isset($resource_meta['oer_interactivity'])) { ?>
+            <div class="ps-meta-group">
+                <label class="ps-label">Interactivity:</label>
+                <span class="ps-value"><?php echo ucwords($resource_meta['oer_interactivity'][0]); ?></span>
+            </div>
+            <?php } ?>
+            <?php if (isset($resource_meta['oer_grade'])) {
+                $grades = explode(",",$resource_meta['oer_grade'][0]);
+                if (function_exists('oer_grade_levels'))
+                    $grades = oer_grade_levels($grades);
+            ?>
+            <div class="ps-meta-group">
+                <label class="ps-label">Grades:</label>
+                <span class="ps-value"><?php echo $grades; ?></span>
+            </div>
+            <?php } ?>
+            <div class="ps-meta-group">
+                <label class="ps-label">Keywords:</label>
+            </div>
+            <?php
+            $keywords = wp_get_post_tags($resource->ID);
+            if(!empty($keywords)) { ?>
+            <div class="ps-tagcloud ps-keywords">
+                <?php foreach($keywords as $keyword){ ?>
+                    <span><a href="<?php echo esc_url(get_tag_link($keyword->term_id)); ?>" class="ps-button"><?php echo ucwords($keyword->name); ?></a></span>
                 <?php } ?>
             </div>
             <?php } ?>
