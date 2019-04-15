@@ -481,6 +481,7 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; }
 .ps-button { padding:5px 10px; border:1px solid #2a3e48; cursor:pointer; margin:3px; display:inline-block; font-size:18px; }
 .ps-button:hover { background-color:#2a3e48; color:#fff !important; }
 .ps-tagcloud.ps-keywords { margin-top:0; }
+.ps-info-tabs-content .tab-pane .col-md-8, .ps-info-tabs-content .tab-pane .col-md-4 { float:left; }
 /** End of Primary Source Template Styles **/
 @media (min-width: 1443px){
     .investigate-question-section {
