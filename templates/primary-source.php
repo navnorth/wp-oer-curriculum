@@ -47,7 +47,6 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             $student_info = $primary_resources['student_info'][$index];
     }
 }
-
 ?>
 <div class="container">
     <div class="row">
@@ -89,6 +88,9 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
         if (function_exists('oer_get_resource_metadata')){
             $resource_meta = oer_get_resource_metadata($resource->ID);
         }
+        $isFile = false;
+        if (!function_exists('is_file_resource'))
+            $isFile = is_file_resource($resource_meta['oer_resourceurl'][0]);
         ?>
         <div class="col-md-8">
             <h1 class="ps-info-title"><?php echo $resource->post_title; ?></h1>
@@ -104,11 +106,10 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
         </div>
         <div class="col-md-4">
             <div class="ps-meta-icons">
+                <?php if ($isFile==true) : ?>
                 <span class="ps-download-source ps-meta-icon"><a class="ps-download"><i class="fas fa-download"></i></a></span>
+                <?php endif; ?>
                 <span class="ps-share-source ps-meta-icon"><a class="ps-share"><i class="fas fa-share-alt"></i></a></span>
-            </div>
-            <div style="display:none">
-                <?php var_dump($resource_meta); ?>
             </div>
             <?php
             if (function_exists('oer_get_subject_areas')){
