@@ -123,7 +123,7 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
                 <?php } ?>
             </div>
             <?php } ?>
-            <?php if (isset($resource_meta['oer_authorname']) && $resource_meta['oer_authorname']!=="") {
+            <?php if (isset($resource_meta['oer_authorname']) && $resource_meta['oer_authorname'][0]!=="") {
                 $author_url = "";
                 if (isset($resource_meta['oer_authorurl']))
                     $author_url = $resource_meta['oer_authorurl'][0];
@@ -137,7 +137,7 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
                 <?php endif; ?>
             </div>
             <?php } ?>
-            <?php if (isset($resource_meta['oer_publishername']) && $resource_meta['oer_publishername']!=="") {
+            <?php if (isset($resource_meta['oer_publishername']) && $resource_meta['oer_publishername'][0]!=="") {
                 $publisher_url = "";
                 if (isset($resource_meta['oer_publisherurl']))
                     $publisher_url = $resource_meta['oer_publisherurl'][0];
