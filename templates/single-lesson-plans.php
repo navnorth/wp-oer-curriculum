@@ -8,7 +8,7 @@
  */
 wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL.'assets/lib/font-awesome/css/font-awesome.min.css');
 wp_enqueue_style('lesson-plan-bootstrap', OER_LESSON_PLAN_URL.'assets/lib/bootstrap-3.3.7/css/bootstrap.min.css');
-wp_enqueue_script('lesson-plan-frontend', OER_LESSON_PLAN_URL.'assets/js/frontend/script.js', array('jquery'), null, true);
+wp_enqueue_script('lesson-plan-frontend', OER_LESSON_PLAN_URL.'assets/js/frontend/lesson-plan.js', array('jquery'), null, true);
 
 get_header();
 
@@ -101,12 +101,12 @@ if (have_posts()) : while (have_posts()) : the_post();
         </div>
     </div>
     <div class="row tc-investigative-section">
-        <div class="col-md-3 col-sm-3 col-xs-12 padding-0 custom-pink-bg investigate-section-custom-width">
+        <div class="col-md-2 col-sm-2 col-xs-12 padding-0 custom-pink-bg investigate-section-custom-width">
             <div class="investigate-question-section">
                 <h2>Investigative Question</h2>
             </div>
         </div>
-        <div class="col-md-9 col-sm-9 col-xs-12 padding-0 custom-dark-pink-bg excerpt-section-custom-width">
+        <div class="col-md-10 col-sm-10 col-xs-12 padding-0 custom-dark-pink-bg excerpt-section-custom-width">
             <div class="col-md-1 col-sm-1 hidden-xs padding-0">
                 <div class="tc-pink-triangle"></div>
             </div>
@@ -121,8 +121,8 @@ if (have_posts()) : while (have_posts()) : the_post();
             </div>
         </div>
         <div id="framework-excerpt" class="investigative-section-answer custom-dark-pink-bg">
-            <div class="custom-pink-bg col-md-3 col-sm-3 col-xs-12"></div>
-            <div class="excerpt-content">
+            <div class="col-md-3 col-sm-3 col-xs-12"></div>
+            <div class="excerpt-content col-md-9 col-sm-9 col-xs-12">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit qui,
                     reprehenderit! Accusamus fugiat incidunt nihil officia perferendis repudiandae
                     similique soluta tenetur. Adipisci aspernatur corporis mollitia, nemo obcaecati perferendis quod recusandae!</p>
@@ -139,6 +139,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     Amet assumenda delectus deleniti dolor doloremque, esse eum eveniet
                     ex excepturi exercitationem iusto, molestias omnis pariatur quos repellat tempora ullam veritatis vitae.
                 </p>
+                <button type="button" id="close-excerpt" class="excerpt-button float-right">CLOSE<i class="fa fa-angle-up"></i></button>
             </div>
         </div>
     </div>

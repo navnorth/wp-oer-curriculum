@@ -183,11 +183,10 @@ span.selected-standard-pill:last-child {
 }
 .tc-pink-triangle {
     border-left: 75px solid #851738;
-    border-top: 45px solid transparent;
-    border-bottom: 45px solid transparent;
+    border-top: 52px solid transparent;
+    border-bottom: 52px solid transparent;
 }
 .excerpt-section {
-    /* padding: 3%; */
     color: #fff;
 }
 
@@ -203,6 +202,7 @@ span.selected-standard-pill:last-child {
     font-weight: 400;
 }
 .show-excerpt-section {
+    margin: 10px 55px 15px 0; 
     margin-top: 10px;
     margin-right: 55px;
 }
@@ -216,10 +216,15 @@ span.selected-standard-pill:last-child {
     border: none;
     box-shadow: none!important;
     border-radius: 0;
+    transition: all .2s ease-in;
 }
 .excerpt-button i {
     margin-left: 15px;
     font-size: 20px;
+}
+
+.excerpt-button:hover {
+    background-color: #851738;
 }
 .tc-lp-author { margin-right: 15px; }
 .tc-lp-author a {
@@ -241,11 +246,9 @@ span.selected-standard-pill:last-child {
     display: none;
 }
 
-.excerpt-side-block {
-}
-
 .excerpt-content {
-    overflow-y: auto;
+    overflow-y: hidden;
+    padding: 50px 100px 50px 50px !important;
 }
 
 .excerpt-content p { 
