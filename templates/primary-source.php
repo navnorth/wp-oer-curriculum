@@ -111,9 +111,9 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
         <div class="col-md-4">
             <div class="ps-meta-icons">
                 <?php if ($isFile==true) : ?>
-                <span class="ps-download-source ps-meta-icon"><a class="ps-download"><i class="fas fa-download"></i></a></span>
+                <span class="ps-download-source ps-meta-icon"><a href="<?php echo $resource_meta['oer_resourceurl'][0]; ?>" class="ps-download"><i class="fas fa-download"></i></a></span>
                 <?php endif; ?>
-                <span class="ps-share-source ps-meta-icon"><a class="ps-share"><i class="fas fa-share-alt"></i></a></span>
+                <div class="sharethis-inline-share-buttons"></div>
             </div>
             <?php
             if (function_exists('oer_get_subject_areas')){
@@ -170,8 +170,10 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             <?php } ?>
             <?php if (isset($resource_meta['oer_grade'])) {
                 $grades = explode(",",$resource_meta['oer_grade'][0]);
-                if (function_exists('oer_grade_levels'))
-                    $grades = oer_grade_levels($grades);
+                if ($grades!==""){
+                    if (function_exists('oer_grade_levels'))
+                        $grades = oer_grade_levels($grades);
+                }
             ?>
             <div class="ps-meta-group">
                 <label class="ps-label">Grades:</label>
