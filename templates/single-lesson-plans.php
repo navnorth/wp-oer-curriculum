@@ -8,6 +8,7 @@
  */
 wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL.'assets/lib/font-awesome/css/font-awesome.min.css');
 wp_enqueue_style('lesson-plan-bootstrap', OER_LESSON_PLAN_URL.'assets/lib/bootstrap-3.3.7/css/bootstrap.min.css');
+wp_enqueue_script('lesson-plan-frontend', OER_LESSON_PLAN_URL.'assets/js/frontend/script.js', array('jquery'), null, true);
 
 get_header();
 
@@ -111,40 +112,33 @@ if (have_posts()) : while (have_posts()) : the_post();
             </div>
             <div class="col-md-11 col-sm-11">
                 <div class="excerpt-section">
-                    <h2>Lorem ipsum dolor sit amet, consectetur ?</h2>
+                    <h2>Lorem ipsum dolor sit amet, consectetur?</h2>
                     <div class="show-excerpt-section text-right">
-                        <button type="button" class="excerpt-button" data-toggle="collapse" data-target="#demo1">Framework Excerpt<i class="fa fa-angle-right"></i></button>
+                        <button id="show-excerpt" type="button" class="excerpt-button">Framework Excerpt<i class="fa fa-angle-right"></i></button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 col-sm-12 tc-padding-0">
-                <div id="demo1" class="investigative-section-answer custom-dark-pink-bg collapse">
-                    <div class="excerpt-content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit qui,
-                            reprehenderit! Accusamus fugiat incidunt nihil officia perferendis repudiandae
-                            similique soluta tenetur. Adipisci aspernatur corporis mollitia, nemo obcaecati perferendis quod recusandae!</p>
-                        <br>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Amet assumenda delectus deleniti dolor doloremque, esse eum eveniet
-                            ex excepturi exercitationem iusto, molestias omnis pariatur quos repellat tempora ullam veritatis vitae.
-                        </p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit qui,
-                            reprehenderit! Accusamus fugiat incidunt nihil officia perferendis repudiandae
-                            similique soluta tenetur. Adipisci aspernatur corporis mollitia, nemo obcaecati perferendis quod recusandae!</p>
-                        <br>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Amet assumenda delectus deleniti dolor doloremque, esse eum eveniet
-                            ex excepturi exercitationem iusto, molestias omnis pariatur quos repellat tempora ullam veritatis vitae.
-                        </p>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="close-excerpt text-right ">
-                                <button type="button" class="excerpt-button" data-toggle="collapse" data-target="#demo1">CLOSE<i class="fa fa-angle-up"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+        </div>
+        <div id="framework-excerpt" class="investigative-section-answer custom-dark-pink-bg">
+            <div class="custom-pink-bg col-md-3 col-sm-3 col-xs-12"></div>
+            <div class="excerpt-content">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit qui,
+                    reprehenderit! Accusamus fugiat incidunt nihil officia perferendis repudiandae
+                    similique soluta tenetur. Adipisci aspernatur corporis mollitia, nemo obcaecati perferendis quod recusandae!</p>
+                <br>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Amet assumenda delectus deleniti dolor doloremque, esse eum eveniet
+                    ex excepturi exercitationem iusto, molestias omnis pariatur quos repellat tempora ullam veritatis vitae.
+                </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit qui,
+                    reprehenderit! Accusamus fugiat incidunt nihil officia perferendis repudiandae
+                    similique soluta tenetur. Adipisci aspernatur corporis mollitia, nemo obcaecati perferendis quod recusandae!</p>
+                <br>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Amet assumenda delectus deleniti dolor doloremque, esse eum eveniet
+                    ex excepturi exercitationem iusto, molestias omnis pariatur quos repellat tempora ullam veritatis vitae.
+                </p>
             </div>
         </div>
     </div>
