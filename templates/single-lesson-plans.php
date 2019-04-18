@@ -160,7 +160,9 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 <?php if ($resource_img!==""):
                                 $ps_url = site_url("lesson-plans/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID);
                                 ?>
-                                <a href="<?php echo $ps_url;  ?>"><img src="<?php echo $resource_img; ?>" alt="" class="img-thumbnail-square img-responsive img-loaded"></a>
+                                <a href="<?php echo $ps_url;  ?>">
+                                    <img src="<?php echo $resource_img; ?>" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                                </a>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -208,13 +210,13 @@ if (have_posts()) : while (have_posts()) : the_post();
                     ?>
                     <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                         <a class="nav-link active" id="tc-teacher-background-tab" data-toggle="tab" href="#tc-teacher-background-tab-content" role="tab" aria-controls="tc-teacher-background-tab" aria-selected="true" aria-expanded="false">
-                            <p>Teacher Background</p>
+                            Historical Background
                         </a>
                     </li>
                     <?php  } elseif (strpos($elementKey, 'oer_lp_custom_editor_student_background') !== false) { ?>
                     <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                         <a class="nav-link" id="tc-student-background-tab" data-toggle="tab" href="#tc-student-background-tab-content" role="tab" aria-controls="tc-student-background-tab" aria-selected="false" aria-expanded="false">
-                            <p>Student Background</p>
+                            Sensitive Material
                         </a>
                     </li>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_editor_') !== false) {
@@ -223,13 +225,13 @@ if (have_posts()) : while (have_posts()) : the_post();
                         ?>
                         <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                             <a class="nav-link" id="tc-<?php echo sanitize_title($oer_lp_custom_editor['title']); ?>-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
-                                <p><?php echo $oer_lp_custom_editor['title']; ?></p>
+                                <?php echo $oer_lp_custom_editor['title']; ?>
                             </a>
                         </li>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_text_list_') !== false) {?>
                         <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                             <a class="nav-link" id="tc-text-list-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
-                                <p>Text List</p>
+                                Text List
                             </a>
                         </li>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_vocabulary_list_title_') !== false) {
@@ -239,14 +241,14 @@ if (have_posts()) : while (have_posts()) : the_post();
                         if (!empty($oer_lp_vocabulary_list_title)) { ?>
                         <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                             <a class="nav-link" id="tc-<?php echo sanitize_title($oer_lp_vocabulary_list_title); ?>-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
-                                <p><?php echo $oer_lp_vocabulary_list_title; ?></p>
+                                <?php echo $oer_lp_vocabulary_list_title; ?>
                             </a>
                         </li>
                         <?php } ?>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'lp_oer_materials_list_') !== false) {?>
                         <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                             <a class="nav-link" id="tc-materials-list-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
-                                <p>Materials</p>
+                                Materials
                             </a>
                         </li>
                         <?php
@@ -281,9 +283,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         <div class="tc-tab-content">
                             <p><?php echo $oer_lp_custom_editor['description'];?></p>
                         </div>
-                        <div class="tc-read-more">
-                            <a href="javascript:void(0)">Read More</a>
-                        </div>
+                    <button class="tc-read-more">Read More</button>
                     </div>
                     <?php
                     } ?>
@@ -299,9 +299,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                             <?php } ?>
                             </ul>
                         </div>
-                        <div class="tc-read-more">
-                            <a href="javascript:void(0)">Read More</a>
-                        </div>
+                        <button class="tc-read-more">Read More</button>
                     </div>
                     <?php
                     }
@@ -317,9 +315,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         <div class="tc-tab-content">
                             <p><?php echo $oer_lp_vocabulary_details;?></p>
                         </div>
-                        <div class="tc-read-more">
-                            <a href="javascript:void(0)">Read More</a>
-                        </div>
+                        <button class="tc-read-more">Read More</button>
                     </div>
                     <?php } ?>
                 <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'lp_oer_materials_list_') !== false) {
@@ -359,9 +355,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         }
                         ?>
                         </div>
-                        <div class="tc-read-more">
-                            <a href="javascript:void(0)">Read More</a>
-                        </div>
+                        <button class="tc-read-more">Read More</button>
                     </div>
                     <?php } ?>
                 <?php }
