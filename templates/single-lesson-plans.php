@@ -216,7 +216,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <?php  } elseif (strpos($elementKey, 'oer_lp_custom_editor_student_background') !== false) { ?>
                     <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                         <a class="nav-link" id="tc-student-background-tab" data-toggle="tab" href="#tc-student-background-tab-content" role="tab" aria-controls="tc-student-background-tab" aria-selected="false" aria-expanded="false">
-                            Sensitive Material
+                            ELD Extension
                         </a>
                     </li>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_editor_') !== false) {

@@ -411,7 +411,7 @@ span.selected-standard-pill:last-child {
     left: 0;
     right: 0;
     margin: auto;
-    width: 35%;
+    width: 30%;
     filter: drop-shadow(0 5px 3px rgba(0,0,0,0.1));
 }
 .tc-home-tabs .col-md-4.nav-item .active:after {
@@ -426,7 +426,7 @@ span.selected-standard-pill:last-child {
     left: 0;
     right: 0;
     margin: auto;
-    width: 35%;
+    width: 30%;
     filter: drop-shadow(0 5px 3px rgba(0,0,0,0.1));
 }
 .tc-home-tabs .col-md-6.nav-item .active:after {
@@ -441,7 +441,7 @@ span.selected-standard-pill:last-child {
     left: 0;
     right: 0;
     margin: auto;
-    width: 35%;
+    width: 30%;
     filter: drop-shadow(0 5px 3px rgba(0,0,0,0.1));
 }
 .top-navbar-links li:hover a{
@@ -541,7 +541,7 @@ span.selected-standard-pill:last-child {
 }
 @media (min-width: 1700px){
     .investigate-question-section {
-        /* padding: 16% 10%; */
+        /* padding: 16% 10%; */ 
     }
     .tc-home-tabs .col-md-3.nav-item .active:after {
         border-left-width:4em;
@@ -584,10 +584,10 @@ span.selected-standard-pill:last-child {
 }
 @media (min-width: 1200px) and (max-width: 1400px){
     .tc-related-inquiry-section {
-        width: 40%;
+        width: 27%;
     }
     .tc-related-inquiry-section p {
-        font-size: 40px;
+        font-size: 34px;
         padding-top: 8px;
     }
     .tc-post-details-section {
