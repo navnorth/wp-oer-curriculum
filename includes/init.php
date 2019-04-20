@@ -135,7 +135,7 @@ function oer_lesson_plan_assets() {
         (isset($_GET['post_type']) && $_GET['post_type'] == 'lesson-plans') ||
         (isset($post->post_type) && $post->post_type == 'lesson-plans')
     ) {
-        wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL . 'assets/lib/font-awesome/css/font-awesome.min.css');
+        wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL . 'assets/lib/font-awesome/css/all.min.css');
         wp_enqueue_style('lesson-plan-bootstrap', OER_LESSON_PLAN_URL . 'assets/lib/bootstrap-3.3.7/css/bootstrap.min.css');
         wp_enqueue_style('admin-lesson-plan', OER_LESSON_PLAN_URL . 'assets/css/backend/lp-style.css');
 
@@ -161,6 +161,8 @@ if (!function_exists('lp_enqueue_scripts_and_styles')) {
             (isset($post->post_type) && $post->post_type == 'lesson-plans')
         ) {
             wp_enqueue_style('lp-style', OER_LESSON_PLAN_URL . 'assets/css/frontend/lp-style.css');
+            wp_enqueue_script('lp-script', OER_LESSON_PLAN_URL . 'assets/js/frontend/lp-script.js', array('jquery'));
+            wp_localize_script( 'lp-script', 'lp_ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
         }
         wp_enqueue_script( 'jquery-ui-dialog' );
     }
@@ -662,5 +664,30 @@ function lp_searched_standards_callback() {
     if (function_exists('was_search_standards')){
         was_search_standards($post_id,$keyword,$meta_key);
     }
+    die();
+}
+
+add_action('wp_ajax_lp_get_source_callback', 'lp_get_source_callback');
+add_action('wp_ajax_nopriv_lp_get_source_callback', 'lp_get_source_callback');
+function lp_get_source_callback(){
+    $source = null;
+    $curriculum_id = null;
+    $data = null;
+    
+    if (isset($_POST['next_source'])){
+        $source = $_POST['next_source'];
+    }
+    
+    if (isset($_POST['curriculum'])){
+        $curriculum_id = $_POST['curriculum'];
+    }
+    
+    $resource = get_page_by_title($source,OBJECT,"resource");
+    $resource_img = get_the_post_thumbnail_url($resource);
+    
+    $data['resource'] = $resource;
+    $data['featured_image'] = esc_url($resource_img);
+    
+    echo json_encode($data);
     die();
 }

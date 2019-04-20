@@ -9,6 +9,8 @@ get_header();
 
 $back_url = "";
 $source_id = 0;
+$lp_prev_class = "";
+$lp_next_class = "";
 
 // Back Button URL
 $curriculum = get_query_var('curriculum');
@@ -41,6 +43,10 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
                 break;
             $index++;
         }
+        if ($index==0)
+            $lp_prev_class = "ps-nav-hidden";
+        if ($index==count($primary_resources['resource'])-1)
+            $lp_next_class = "ps-nav-hidden";
         if (isset($primary_resources['teacher_info']))
             $teacher_info = $primary_resources['teacher_info'][$index];
         if (isset($primary_resources['student_info']))
@@ -57,8 +63,8 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
     </div>
 </div>
 <div class="ps-header" style="background:url(<?php echo $featured_image_url; ?>) no-repeat top left;">
-    <span class="ps-nav-left"><a class="lp-nav-left"><i class="fas fa-chevron-left fa-2x"></i></a></span>
-    <span class="ps-nav-right"><a class="lp-nav-right"><i class="fas fa-chevron-right fa-2x"></i></a></span>
+    <span class="ps-nav-left <?php echo $lp_prev_class; ?>"><a class="lp-nav-left" data-id="<?php echo $index; ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>"><i class="fas fa-chevron-left fa-2x"></i></a></span>
+    <span class="ps-nav-right <?php echo $lp_next_class; ?>"><a class="lp-nav-right" data-id="<?php echo $index; ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>"><i class="fas fa-chevron-right fa-2x"></i></a></span>
     <span class="ps-expand"><a href="<?php echo $featured_image_url; ?>" class="lp-expand-img" target="_blank"><i class="fas fa-expand-arrows-alt"></i></a></span>
 </div>
 <div class="ps-info">
@@ -156,30 +162,30 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
                 <?php endif; ?>
             </div>
             <?php } ?>
-            <?php if (isset($resource_meta['oer_mediatype'])) { ?>
+            <?php if (isset($resource_meta['oer_mediatype'][0])) { ?>
             <div class="ps-meta-group">
                 <label class="ps-label">Type:</label>
                 <span class="ps-value"><?php echo ucwords($resource_meta['oer_mediatype'][0]); ?></span>
             </div>
             <?php } ?>
-            <?php if (isset($resource_meta['oer_interactivity'])) { ?>
+            <?php if (isset($resource_meta['oer_interactivity'][0])) { ?>
             <div class="ps-meta-group">
                 <label class="ps-label">Interactivity:</label>
                 <span class="ps-value"><?php echo ucwords($resource_meta['oer_interactivity'][0]); ?></span>
             </div>
             <?php } ?>
-            <?php if (isset($resource_meta['oer_grade'])) {
+            <?php if (isset($resource_meta['oer_grade'][0])) {
                 $grades = explode(",",$resource_meta['oer_grade'][0]);
-                if ($grades!==""){
+                if (is_array($grades) && !empty($grades) && $grades[0]!=="" ){
                     if (function_exists('oer_grade_levels'))
                         $grades = oer_grade_levels($grades);
-                }
             ?>
             <div class="ps-meta-group">
                 <label class="ps-label">Grades:</label>
                 <span class="ps-value"><?php echo $grades; ?></span>
             </div>
-            <?php } ?>
+            <?php }
+            } ?>
             <div class="ps-meta-group">
                 <label class="ps-label">Keywords:</label>
             </div>
@@ -200,6 +206,9 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
     <div class="tab-pane clearfix fade in" id="ps-teacher-info-tab-content" role="tabpanel" aria-labelledby="ps-teacher-info-tab">
         <?php echo $teacher_info; ?>
     </div>
+</div>
+<div class="lp-ajax-loader spinner-border text-primary" role="status">
+  <span class="sr-only">Loading...</span>
 </div>
 <?php
 get_footer();
