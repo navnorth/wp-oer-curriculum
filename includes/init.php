@@ -722,3 +722,14 @@ function lp_get_source_callback(){
     echo json_encode($data);
     die();
 }
+
+function change_post_types_slug( $args, $post_type ) {
+
+   /*item post type slug*/   
+   if ( 'lesson-plans' === $post_type ) {
+      $args['rewrite']['slug'] = 'inquiry-sets';
+   }
+
+   return $args;
+}
+add_filter( 'register_post_type_args', 'change_post_types_slug', 10, 2 );

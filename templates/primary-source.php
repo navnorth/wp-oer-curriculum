@@ -23,7 +23,7 @@ $curriculum = get_query_var('curriculum');
 $curriculum_details = get_page_by_path($curriculum, OBJECT, "lesson-plans");
 $curriculum_id = $curriculum_details->ID;
 if ($curriculum)
-    $back_url = site_url("lesson-plans/".$curriculum);
+    $back_url = site_url("inquiry-sets/".$curriculum);
 
 // Get Resource ID
 $psource = get_query_var('source');

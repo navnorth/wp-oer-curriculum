@@ -160,7 +160,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         <div class="image-thumbnail">
                             <div class="image-section">
                                 <?php if ($resource_img!==""):
-                                $ps_url = site_url("lesson-plans/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID);
+                                $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID);
                                 ?>
                                 <a href="<?php echo $ps_url;  ?>">
                                     <img src="<?php echo $resource_img; ?>" alt="" class="img-thumbnail-square img-responsive img-loaded">
