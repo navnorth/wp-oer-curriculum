@@ -673,20 +673,51 @@ function lp_get_source_callback(){
     $source = null;
     $curriculum_id = null;
     $data = null;
+    $source_id = null;
+    $teacher_info = "";
+    $student_info = "";
+    $resource_meta = null;
+    $subject_areas = null;
+    $subjects = null;
     
-    if (isset($_POST['next_source'])){
+    if (isset($_POST['next_source']))
         $source = $_POST['next_source'];
-    }
     
-    if (isset($_POST['curriculum'])){
+    if (isset($_POST['curriculum']))
         $curriculum_id = $_POST['curriculum'];
-    }
     
+    if (isset($_POST['index']))
+        $source_id = $_POST['index'];
+    
+    // Get Resource Details
     $resource = get_page_by_title($source,OBJECT,"resource");
     $resource_img = get_the_post_thumbnail_url($resource);
     
+    // Get Resource Meta
+    if (function_exists('oer_get_resource_metadata')){
+        $resource_meta = oer_get_resource_metadata($resource->ID);
+    }
+    
+    if (function_exists('oer_get_subject_areas')){
+        $subject_areas = oer_get_subject_areas($resource->ID);
+    }
+    if (is_array($subject_areas) && count($subject_areas)>0) {
+        $subjects = array_unique($subject_areas, SORT_REGULAR);
+    }
+    
+    // Get Curriculum Details
+    $post_meta_data = get_post_meta($curriculum_id);
+    $primary_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
+     if (isset($primary_resources['teacher_info']))
+        $teacher_info = $primary_resources['teacher_info'][$source_id];
+    if (isset($primary_resources['student_info']))
+        $student_info = $primary_resources['student_info'][$source_id];
+    
     $data['resource'] = $resource;
     $data['featured_image'] = esc_url($resource_img);
+    $data['teacher_info'] = $teacher_info;
+    $data['student_info'] = $student_info;
+    $data['resource_meta'] = $resource_meta;
     
     echo json_encode($data);
     die();

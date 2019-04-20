@@ -317,3 +317,10 @@ if (! function_exists('oer_lp_primary_resource_dropdown')){
         return $resource_options;
     }
 }
+
+if (! function_exists('oer_lp_get_resource_details')){
+    function oer_lp_get_resource_details($source_title){
+        $resource = get_page_by_title($source_title,OBJECT,"resource");
+        return $resource;
+    }
+}
