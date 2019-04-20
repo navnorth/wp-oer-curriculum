@@ -6,7 +6,7 @@ body.single-lesson-plans {
 /** Curriculum Frontend Styles **/
 .single-lesson-plans .container { width:100%; max-width:100%; }
 .single-lesson-plans .container .site-content { margin-top:0; }
-.single-lesson-plans #page.container, .site-content .container { width:100%; max-width:100%; padding:0; }
+.single-lesson-plans #page.container, .site-content .container { width:100%; max-width: 1440px; padding:0; }
 .lp-featured-section { 
     background: linear-gradient(180deg, #4A6F81 0%, #436576 71.27%);
     max-height:440px; }
