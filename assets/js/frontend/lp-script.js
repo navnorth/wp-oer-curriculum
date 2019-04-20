@@ -46,7 +46,6 @@ jQuery(document).ready(function($){
     });
     
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        $(this).removeClass('active');
         $('.lp-nav-right,.lp-nav-left').attr('data-activetab', e.target.id);
     });
     
