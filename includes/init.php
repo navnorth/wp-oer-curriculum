@@ -162,6 +162,7 @@ if (!function_exists('lp_enqueue_scripts_and_styles')) {
         ) {
             wp_enqueue_style('lp-style', OER_LESSON_PLAN_URL . 'assets/css/frontend/lp-style.css');
         }
+        wp_enqueue_script( 'jquery-ui-dialog' );
     }
 }
 

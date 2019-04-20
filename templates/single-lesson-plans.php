@@ -9,6 +9,7 @@
 wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL.'assets/lib/font-awesome/css/font-awesome.min.css');
 wp_enqueue_style('lesson-plan-bootstrap', OER_LESSON_PLAN_URL.'assets/lib/bootstrap-3.3.7/css/bootstrap.min.css');
 wp_enqueue_script('lesson-plan-frontend', OER_LESSON_PLAN_URL.'assets/js/frontend/lesson-plan.js', array('jquery'), null, true);
+wp_enqueue_script( 'jquery-ui-slider' );
 
 get_header();
 
@@ -66,7 +67,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                 <div class="tc-lp-details-description">
                     <?php echo the_content(); ?>
                 </div>
-                <div class="tc-lp-details-standards-list">
+                <button class="open-standards">Standards</button>
+                <div id="standards-dialog" class="tc-lp-details-standards-list">
                     <?php
                     if (is_array($oer_lp_standards)):
                         foreach($oer_lp_standards as $standard){

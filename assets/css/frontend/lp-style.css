@@ -337,11 +337,13 @@ span.selected-standard-pill:last-child {
     font-size: 20px;
 }
 .tc-read-more {
+    float: right;
+}
+.tc-read-more, .open-standards {
     font-family: "Biko", Arial, Helvetica, sans-serif;
     text-transform: uppercase;
     background: #283d47;
     padding: 10px 18px 7px 18px;
-    float: right;
     border: none;
     transition: all .2s ease-in;
     color: #fff;
@@ -349,7 +351,7 @@ span.selected-standard-pill:last-child {
     border-radius: 0;
     text-decoration: none;
 }
-.tc-read-more:hover {
+.tc-read-more:hover, .open-standards:hover {
     background-color: #851738;
     text-decoration: none;
 }
@@ -609,4 +611,40 @@ span.selected-standard-pill:last-child {
     }
     .tc-home-tabs .nav-item .active:after { border:none; }
     .tc-related-inquiry-section { width:90%; }
+}
+
+/** JQUERY UI DIALOG OVERRIDES **/
+.ui-widget.standards-dialog {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.ui-dialog.standards-dialog {
+    padding: 0 !important;
+    border: 0 !important;
+}
+.ui-widget .ui-dialog-titlebar button {
+    background-image: none;
+}
+.standards-dialog .ui-widget-content {
+    background: #2b424d !important;
+    border: 0 !important;
+    border-radius: 0;
+}
+
+.ui-dialog.standards-dialog .ui-dialog-titlebar {
+    background: #2A3E48 !important;
+    border-radius: 0;
+    border: 0 !important;
+}
+.ui-dialog.standards-dialog {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.ui-widget-overlay {
+    background: #000 !important;
+    opacity: .7 !important;
+}
+#standards-dialog {
+    display: none;
 }
