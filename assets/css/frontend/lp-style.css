@@ -265,7 +265,7 @@ span.selected-standard-pill:last-child {
 }
 .image-thumbnail {
     height: auto;
-    min-height: 200px;
+    min-height: 150px;
     width: 100%;
     overflow: hidden;
     border-top: none;
