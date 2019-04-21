@@ -102,6 +102,10 @@ if (have_posts()) : while (have_posts()) : the_post();
             </div>
         </div>
     </div>
+    <?php
+    $oer_lp_iq = isset($post_meta_data['oer_lp_iq'][0])?unserialize($post_meta_data['oer_lp_iq'][0]):array();
+    if (!empty($oer_lp_iq)){
+    ?>
     <div class="row tc-investigative-section">
         <div class="col-md-2 col-sm-2 col-xs-12 padding-0 custom-pink-bg investigate-section-custom-width">
             <div class="investigate-question-section">
@@ -114,7 +118,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             </div>
             <div class="col-md-11 col-sm-11">
                 <div class="excerpt-section">
-                    <h2>Lorem ipsum dolor sit amet, consectetur?</h2>
+                    <h2><?php echo $oer_lp_iq['question']; ?></h2>
                     <div class="show-excerpt-section text-right">
                         <button id="show-excerpt" type="button" class="excerpt-button">Framework Excerpt<i class="fa fa-angle-right"></i></button>
                     </div>
@@ -125,26 +129,12 @@ if (have_posts()) : while (have_posts()) : the_post();
         <div id="framework-excerpt" class="investigative-section-answer custom-dark-pink-bg">
             <div class="col-md-3 col-sm-3 col-xs-12"></div>
             <div class="excerpt-content col-md-9 col-sm-9 col-xs-12">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit qui,
-                    reprehenderit! Accusamus fugiat incidunt nihil officia perferendis repudiandae
-                    similique soluta tenetur. Adipisci aspernatur corporis mollitia, nemo obcaecati perferendis quod recusandae!</p>
-                <br>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Amet assumenda delectus deleniti dolor doloremque, esse eum eveniet
-                    ex excepturi exercitationem iusto, molestias omnis pariatur quos repellat tempora ullam veritatis vitae.
-                </p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit qui,
-                    reprehenderit! Accusamus fugiat incidunt nihil officia perferendis repudiandae
-                    similique soluta tenetur. Adipisci aspernatur corporis mollitia, nemo obcaecati perferendis quod recusandae!</p>
-                <br>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Amet assumenda delectus deleniti dolor doloremque, esse eum eveniet
-                    ex excepturi exercitationem iusto, molestias omnis pariatur quos repellat tempora ullam veritatis vitae.
-                </p>
+                <?php echo $oer_lp_iq['excerpt']; ?>
                 <button type="button" id="close-excerpt" class="excerpt-button float-right">CLOSE<i class="fa fa-angle-up"></i></button>
             </div>
         </div>
     </div>
+    <?php } ?>
     <div class="row">
         <?php
         $primary_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
