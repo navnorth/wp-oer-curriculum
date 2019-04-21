@@ -216,13 +216,15 @@ if (have_posts()) : while (have_posts()) : the_post();
                         if(!empty($oer_lp_custom_editor)) {
                         ?>
                         <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
-                            <a class="nav-link" id="tc-<?php echo sanitize_title($oer_lp_custom_editor['title']); ?>-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
+                            <a class="nav-link" id="tc-<?php echo sanitize_title($oer_lp_custom_editor['title']); ?>-tab" data-toggle="tab" href="#tc-<?php echo sanitize_title($oer_lp_custom_editor['title']); ?>-tab-content" role="tab" aria-controls="tc-<?php echo sanitize_title($oer_lp_custom_editor['title']); ?>-tab" aria-selected="false" aria-expanded="false">
                                 <?php echo $oer_lp_custom_editor['title']; ?>
                             </a>
                         </li>
-                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_text_list_') !== false) {?>
+                        <?php } ?>
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_text_list_') !== false) {
+                        ?>
                         <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
-                            <a class="nav-link" id="tc-text-list-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
+                            <a class="nav-link" id="tc-text-list-tab" data-toggle="tab" href="#tc-text-list-tab-content" role="tab" aria-controls="tc-text-list-tab" aria-selected="false" aria-expanded="false">
                                 Text List
                             </a>
                         </li>
@@ -232,20 +234,20 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $oer_lp_vocabulary_details = (isset($post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0] : "");
                         if (!empty($oer_lp_vocabulary_list_title)) { ?>
                         <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
-                            <a class="nav-link" id="tc-<?php echo sanitize_title($oer_lp_vocabulary_list_title); ?>-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
+                            <a class="nav-link" id="tc-<?php echo sanitize_title($oer_lp_vocabulary_list_title); ?>-tab" data-toggle="tab" href="#tc-<?php echo sanitize_title($oer_lp_vocabulary_list_title); ?>-tab-content" role="tab" aria-controls="tc-<?php echo sanitize_title($oer_lp_vocabulary_list_title); ?>-tab" aria-selected="false" aria-expanded="false">
                                 <?php echo $oer_lp_vocabulary_list_title; ?>
                             </a>
                         </li>
                         <?php } ?>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'lp_oer_materials_list_') !== false) {?>
                         <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
-                            <a class="nav-link" id="tc-materials-list-tab" data-toggle="tab" href="#tc-learning-guide-tab-content" role="tab" aria-controls="tc-learning-guide-tab" aria-selected="false" aria-expanded="false">
+                            <a class="nav-link" id="tc-materials-list-tab" data-toggle="tab" href="#tc-materials-list-tab-content" role="tab" aria-controls="tc-materials-list-tab" aria-selected="false" aria-expanded="false">
                                 Materials
                             </a>
                         </li>
                         <?php
                         }
-                    }
+                    //}
                 }
             }
             ?>
