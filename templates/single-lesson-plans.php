@@ -196,7 +196,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                 if($col==0)
                     $_col = 12;
                 else
-                    $_col = abs(12/$col);
+                    $_col = floor(12/$col);
                 foreach ($elements_orders as $elementKey => $value) {
                     if (strpos($elementKey, 'oer_lp_custom_editor_teacher_background') !== false) {
                     ?>
