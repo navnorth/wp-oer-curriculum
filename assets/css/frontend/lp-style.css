@@ -371,6 +371,7 @@ span.selected-standard-pill:last-child {
 
 .tc-home-tabs li.nav-item .nav-link {
     border: none !important;
+    height:100%;
 }
 .tc-home-tabs li a {
     font-size: 24px;
