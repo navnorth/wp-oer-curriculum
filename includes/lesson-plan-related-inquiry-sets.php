@@ -11,7 +11,7 @@ $inquiry = (is_array($inquiry)?$inquiry[0]:array());
 <div class="lesson_plan_meta_wrapper">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default lp-element-wrapper oer-related-inquiry-sets" id="oer-related-inquiry-sets-group">
+            <div class="panel panel-default lp-related-inquiry-wrapper oer-related-inquiry-sets" id="oer-related-inquiry-sets-group">
                 <div class="panel-body">
                     <?php
                     for ($i=1;$i<=3;$i++){
