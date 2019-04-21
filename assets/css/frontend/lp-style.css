@@ -264,14 +264,14 @@ span.selected-standard-pill:last-child {
     background: rgba(255,255,255,.25);
 }
 .image-thumbnail {
-    height: 300px;
-    width: auto;
+    height: auto;
+    min-height: 200px;
+    width: 100%;
     overflow: hidden;
     border-top: none;
     text-align: center;
     display: block;
     padding: 0;
-    padding-bottom: 75%;
     position: relative;
 }
 .image-section {

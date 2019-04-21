@@ -4,7 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $post;
 global $wpdb;
 global $oer_lp_default_structure;
+global $inquiryset_post;
 
+$inquiryset_post = $post;
 // Get all post meta for the post
 $post_meta_data = get_post_meta($post->ID );
 //echo "<pre>"; print_r(get_post_custom($post->ID, '', true ));

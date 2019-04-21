@@ -365,6 +365,10 @@ if (have_posts()) : while (have_posts()) : the_post();
         }
         ?>
     </div>
+    <?php
+    $related_inquiry_sets = (isset($post_meta_data['oer_lp_related_inquiry_set'][0]) ? unserialize($post_meta_data['oer_lp_related_inquiry_set'][0]) : array());
+    if (count($related_inquiry_sets)>0) {
+    ?>
     <div class="row">
         <div class="tc-related-inquiry-sets-topbar clearfix">
             <div class="col-md-6 col-sm-6 col-xs-6 padding-0 tc-custom-bg-orange"></div>
@@ -374,56 +378,50 @@ if (have_posts()) : while (have_posts()) : the_post();
             </div>
         </div>
         <div class="tc-related-inquiry-grids-section clearfix">
+            <?php
+            foreach($related_inquiry_sets as $inquiry_set) {
+                $inquiry = oer_lp_get_inquiry_set_details($inquiry_set);
+                $inquiry_link = get_permalink($inquiry_set);
+                $inquiry_img = get_the_post_thumbnail_url($inquiry);
+                $inquiry_meta_data = oer_lp_get_inquiry_set_metadata($inquiry_set);
+            ?>
             <div class="col-md-4 col-sm-6 tc-related-inquiry-blocks-padding">
                 <div class="media-image">
                     <div class="image-thumbnail">
                         <div class="image-section">
-                            <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                            <img src="<?php echo $inquiry_img; ?>" alt="" class="img-thumbnail-square img-responsive img-loaded">
                         </div>
                     </div>
                 </div>
+                <?php
+                $grades = (isset($inquiry_meta_data['oer_lp_grades'][0]) ? unserialize($inquiry_meta_data['oer_lp_grades'][0]) : array());
+                if (count($grades)>0){
+                    $grade = "";
+                    if ($grades) {
+                        if ($grades=="pre-k")
+                            $grade = "Pre-K";
+                        elseif ($grades=="k")
+                            $grade = "Kindergarten";
+                        else {
+                            if (function_exists('oer_grade_levels'))
+                                $grades = oer_grade_levels($grades);
+                            $grade = "Grade ".$grades;
+                        }
+                ?>
                 <div class="tc-related-inquiry-grades">
-                    <span>Grade 1</span>
+                    <span><?php echo $grade; ?></span>
                 </div>
+                <?php }
+                } ?>
                 <div class="custom-bg-dark custom-bg-dark-inquiry-sets"></div>
                 <div class="tc-related-inquiry-set-description">
-                    <p>Lorem ipsum dolor sit amet</p>
+                   <h4><a href="<?php echo $inquiry_link; ?>"><?php echo $inquiry->post_title; ?></a></h4>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 tc-related-inquiry-blocks-padding">
-                <div class="media-image">
-                    <div class="image-thumbnail">
-                        <div class="image-section">
-                            <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
-                        </div>
-                    </div>
-                </div>
-                <div class="tc-related-inquiry-grades">
-                    <span>Grade 2</span>
-                </div>
-                <div class="custom-bg-dark custom-bg-dark-inquiry-sets"></div>
-                <div class="tc-related-inquiry-set-description">
-                    <p>Lorem ipsum dolor sit amet</p>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 tc-related-inquiry-blocks-padding">
-                <div class="media-image">
-                    <div class="image-thumbnail">
-                        <div class="image-section">
-                            <img src="images/machine_works.jpg" alt="" class="img-thumbnail-square img-responsive img-loaded">
-                        </div>
-                    </div>
-                </div>
-                <div class="tc-related-inquiry-grades">
-                    <span>Grade 3</span>
-                </div>
-                <div class="custom-bg-dark custom-bg-dark-inquiry-sets"></div>
-                <div class="tc-related-inquiry-set-description">
-                    <p>Lorem ipsum dolor sit amet</p>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
+    <?php } ?>
 </div>
 <?php
 	// Display Activity Objects

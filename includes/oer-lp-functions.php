@@ -324,3 +324,31 @@ if (! function_exists('oer_lp_get_resource_details')){
         return $resource;
     }
 }
+
+if (! function_exists('oer_lp_related_inquiry_sets')){
+    function oer_lp_related_inquiry_sets($id=null){
+        $args = [
+            'post_type' => 'lesson-plans',
+            'post_status' => 'publish',
+            'numberposts' => 250,
+            'orderby' => 'title',
+            'order'    => 'ASC'
+        ];
+        if ($id)
+            $args['exclude'] = array($id);
+        $posts = get_posts($args);
+        return $posts;
+    }
+}
+
+if (! function_exists('oer_lp_get_inquiry_set_details')){
+    function oer_lp_get_inquiry_set_details($id){
+        return get_post($id);
+    }
+}
+
+if (! function_exists('oer_lp_get_inquiry_set_metadata')){
+    function oer_lp_get_inquiry_set_metadata($id){
+        return get_post_meta($id);
+    }
+}

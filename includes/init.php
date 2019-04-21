@@ -52,11 +52,19 @@ function oer_lesson_plan_custom_meta_boxes() {
 
     // Add a download copy option
     add_meta_box( 'oer_lesson_plan_download_copy', 'Download Copy', 'oer_lp_download_copy_cb', 'lesson-plans', 'side', 'high' );
+    
+    // Add Related Inquiry Sets metabox
+    add_meta_box('oer_lesson_plan_related_inquiry', 'Related Inquiry Sets', 'oer_lesson_plan_related_inquiry_callback', 'lesson-plans', 'advanced');
 }
 
 //Meta fields callback
 function oer_lesson_plan_meta_callback() {
     include_once(OER_LESSON_PLAN_PATH . 'includes/lesson-plan-meta-fields.php');
+}
+
+// Related Inquiry Sets Callback
+function oer_lesson_plan_related_inquiry_callback(){
+    include_once(OER_LESSON_PLAN_PATH . 'includes/lesson-plan-related-inquiry-sets.php');
 }
 
 /**
@@ -174,6 +182,7 @@ if (!function_exists('lp_enqueue_scripts_and_styles')) {
 add_action('save_post', 'lp_save_custom_fields');
 function lp_save_custom_fields() {
     global $post, $wpdb, $_oer_prefix;
+    
     //Check first if $post is not empty
     if ($post) {
         if ($post->post_type == 'lesson-plans') {
@@ -294,6 +303,11 @@ function lp_save_custom_fields() {
             // Save download copy document
             if (isset($_POST['oer_lp_download_copy_document'])) {
                 update_post_meta($post->ID, 'oer_lp_download_copy_document', sanitize_text_field($_POST['oer_lp_download_copy_document']));
+            }
+
+            // Save related inquiry sets
+            if (isset($_POST['oer_lp_related_inquiry_set'])) {
+                update_post_meta($post->ID, 'oer_lp_related_inquiry_set', $_POST['oer_lp_related_inquiry_set']);
             }
         }
         
