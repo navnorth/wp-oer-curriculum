@@ -129,7 +129,7 @@ add_filter( 'single_template', 'get_single_lesson_plans_template' );
 add_action( 'init', 'lp_add_rewrites', 10, 0 );
 function lp_add_rewrites()
 {
-        $root_slug = "lesson-plans";
+        $root_slug = "inquiry-sets";
 	global $wp_rewrite;
         add_rewrite_tag( '%curriculum%', '([^/]*)' );
 	add_rewrite_tag( '%source%', '([^&]+)' );
@@ -161,7 +161,7 @@ function lp_assign_standard_template($template) {
         
         status_header(200);
         
-        $root_slug = "lesson-plans";
+        $root_slug = "inquiry-sets";
         
         if ( strpos( $url_path, $root_slug ) !== false && get_query_var('curriculum') && get_query_var('source')) {
             $wp_query->is_404 = false;
