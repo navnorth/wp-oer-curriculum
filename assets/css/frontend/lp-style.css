@@ -58,8 +58,9 @@ body.single-lesson-plans {
     padding: 20px 0;
     color: #fff !important;
     font-size: 16px;
+    line-height: 18px;
 }
-.tc-lp-details-description p { color:#fff !important; font-size:16px; }
+.tc-lp-details-description p { color:#fff !important; font-size:16px; line-height: 20px; }
 .tc-lp-details-standards-list { padding:20px 0; }
 .tc-lp-details-standards-list .tc-lp-details-standard {
     display: inline-block;
@@ -139,7 +140,7 @@ body.single-lesson-plans {
 .investigate-section-custom-width {
     width: 23% !important;
 }
-.lp-featured-section { max-height:435px; overflow:hidden; }
+.lp-featured-section { max-height:480px; overflow:hidden; }
 .lp-featured-section .featured-image img {
     height: 100%;
     width: 100%;
@@ -350,6 +351,7 @@ span.selected-standard-pill:last-child {
     font-size: 16px;
     border-radius: 0;
     text-decoration: none;
+    margin-bottom: 15px;
 }
 .tc-read-more:hover, .open-standards:hover {
     background-color: #851738;
