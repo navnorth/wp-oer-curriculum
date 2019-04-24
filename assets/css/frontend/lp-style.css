@@ -540,17 +540,37 @@ span.selected-standard-pill:last-child {
     font-size: 16px;
 }
 /** Primary Source Template Styling **/
-.primary-source-template .site-content { position:relative; margin-top:0 !important; padding-top:25px; }
+.primary-source-template .site-header { display: none; }
+.primary-source-template .site-content { position:relative; margin-top:0 !important; }
 .primary-source-template .container { padding:0; }
 .primary-source-template .container .row { margin-right:0; margin-left:0; }
-.lp-back-button {
-    background-color: #5c5c5c;
-    padding: 15px 30px;
-    color: #ffffff !important;
-    display: inline-block;
-    margin-left: 5%;
-    margin-bottom: 5%;
+.back-button-wrapper {
+    background-color: rgb(19,29,33, .95);
+    width: 235px;
+    height: 60px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.back-button-wrapper a {
+    color: #fff;
+    transition: all .2s ease-in;
+}
+
+.back-button-wrapper i {
+    margin-right: 15px;
+}
+
+.back-button-wrapper a:hover, .back-button-wrapper i:hover {
+    color: #FFB904;
+}
+
 .ps-header {
     background-size:cover !important;
     height: 530px;

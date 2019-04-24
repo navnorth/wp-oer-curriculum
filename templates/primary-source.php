@@ -68,13 +68,9 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
     }
 }
 ?>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <a href="<?php echo $back_url; ?>" class="lp-back-button"><i class="fas fa-chevron-left"></i> <?php _e("Back to Inquiry Set", OER_LESSON_PLAN_SLUG)?></a>
-        </div>
-        <div class="col-md-8"></div>
-    </div>
+
+<div class="back-button-wrapper">
+    <a href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php _e("Back to Inquiry Set", OER_LESSON_PLAN_SLUG)?></a>
 </div>
 <div class="ps-header" style="background:url(<?php echo $featured_image_url; ?>) no-repeat top left;" data-curid="<?php echo $index; ?>">
     <span class="ps-nav-left <?php echo $lp_prev_class; ?>"><a class="lp-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>"><i class="fas fa-chevron-left fa-2x"></i></a></span>
