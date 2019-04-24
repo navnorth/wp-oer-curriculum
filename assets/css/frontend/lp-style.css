@@ -560,7 +560,7 @@ span.selected-standard-pill:last-child {
     margin-left: 5%;
     margin-bottom: 5%;
 }
-.back-button-wrapper {
+.back-button {
     background-color: rgb(19,29,33, .95);
     width: 235px;
     height: 60px;
@@ -572,17 +572,17 @@ span.selected-standard-pill:last-child {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-.back-button-wrapper a {
-    color: #fff;
     transition: all .2s ease-in;
     font-weight: 300;
 }
-.back-button-wrapper i {
+.back-button i {
     margin-right: 15px;
 }
-.back-button-wrapper a:hover, .back-button-wrapper i:hover {
+.back-button:hover, .back-button i:hover {
     color: #FFB904;
+    cursor: pointer;
+    background-color: #5c0f26;
+    text-decoration: none;
 }
 .ps-header {
     background-size:cover !important;
@@ -596,23 +596,37 @@ span.selected-standard-pill:last-child {
     left: 2.5%;
     top: 45%;
     background-color: rgb(19,29,33, .95);
-    padding: 10px;
+    transition: all .2s ease-in;
 }
-a.lp-nav-left, a.lp-nav-right, a.lp-expand-img { color:#ffffff !important; -webkit-font-smoothing:antialiased; display:block; cursor:pointer; }
+a.lp-nav-left, a.lp-nav-right, a.lp-expand-img { 
+    color:#ffffff; 
+    -webkit-font-smoothing:antialiased; 
+    display:block; 
+    cursor:pointer; 
+    padding: 10px;
+    transition: all .2s ease-in;
+}
+a.lp-nav-left:hover, a.lp-nav-right:hover, a.lp-expand-img:hover {
+    color: #FFB904;
+}
 .ps-nav-right {
     position: absolute;
     right: 2.5%;
     top: 45%;
     background-color: rgb(19,29,33, .95);
-    padding: 10px;
+    transition: all .2s ease-in;lp-
 }
 .ps-expand {
     position: absolute;
     right: 2.5%;
     bottom: 2.5%;
-    background-color: rgb(19,29,33, .95);
+    background-color: rgb(19,29,33, .95);    
+    transition: all .2s ease-in;
 }
 
+.ps-nav-left:hover, .ps-nav-right:hover, .ps-expand:hover {
+    background-color: #5c0f26;
+}
 
 ul.ps-info-tabs { margin:0; background-color: #dedede !important; }
 ul.ps-info-tabs .nav-link { color:#9a9a9a; background-color: #dedede !important; text-transform:uppercase; text-align:center; margin:0; }
