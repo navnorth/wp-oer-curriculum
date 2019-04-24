@@ -58,9 +58,9 @@ body.single-lesson-plans {
     padding: 20px 0;
     color: #fff !important;
     font-size: 16px;
-    line-height: 18px;
+    line-height:18px;
 }
-.tc-lp-details-description p { color:#fff !important; font-size:16px; line-height: 20px; }
+.tc-lp-details-description p { color:#fff !important; font-size:16px; line-height:20px; }
 .tc-lp-details-standards-list { padding:20px 0; }
 .tc-lp-details-standards-list .tc-lp-details-standard {
     display: inline-block;
@@ -330,16 +330,24 @@ span.selected-standard-pill:last-child {
 }
 .tc-tab-content {
     font-size: 20px !important;
-    max-height: 360px;
+    max-height: 340px;
+    height:100%;
     overflow-y: hidden;
+    -webkit-transition:all 1s ease;
+    -moz-transition:all 1s ease;
+    -o-transition:all 1s ease;
+    transition:all 1s ease;
 }
-
+.tc-tab-content.slidedown {
+    max-height:none;
+}
 .tc-tab-content p {
     font-size: 20px;
 }
 .tc-read-more {
     float: right;
 }
+.tc-btn-hide { display:none; }
 .tc-read-more, .open-standards {
     font-family: "Biko", Arial, Helvetica, sans-serif;
     text-transform: uppercase;
@@ -351,7 +359,7 @@ span.selected-standard-pill:last-child {
     font-size: 16px;
     border-radius: 0;
     text-decoration: none;
-    margin-bottom: 15px;
+    margin-bottom:15px;
 }
 .tc-read-more:hover, .open-standards:hover {
     background-color: #851738;
@@ -544,6 +552,14 @@ span.selected-standard-pill:last-child {
 .primary-source-template .site-content { position:relative; margin-top:0 !important; }
 .primary-source-template .container { padding:0; }
 .primary-source-template .container .row { margin-right:0; margin-left:0; }
+.lp-back-button {
+    background-color: #5c5c5c;
+    padding: 15px 30px;
+    color: #ffffff !important;
+    display: inline-block;
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
 .back-button-wrapper {
     background-color: rgb(19,29,33, .95);
     width: 235px;
@@ -557,21 +573,17 @@ span.selected-standard-pill:last-child {
     align-items: center;
     justify-content: center;
 }
-
 .back-button-wrapper a {
     color: #fff;
     transition: all .2s ease-in;
     font-weight: 300;
 }
-
 .back-button-wrapper i {
     margin-right: 15px;
 }
-
 .back-button-wrapper a:hover, .back-button-wrapper i:hover {
     color: #FFB904;
 }
-
 .ps-header {
     background-size:cover !important;
     height: 85vh;
