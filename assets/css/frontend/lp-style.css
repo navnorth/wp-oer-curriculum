@@ -339,7 +339,7 @@ span.selected-standard-pill:last-child {
     transition:all 1s ease;
 }
 .tc-tab-content.slidedown {
-    max-height:auto;
+    max-height:none;
 }
 .tc-tab-content p {
     font-size: 20px;
