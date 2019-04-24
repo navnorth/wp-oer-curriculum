@@ -97,7 +97,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                 </div>
                 <div class="tc-sensitive-material-section">
                     <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
-                    <button class="question-popup-button"><i class="fal fa-question-circle-o"></i></button>
+                    <button class="question-popup-button"><i class="fal fa-question-circle"></i></button>
                 </div>
             </div>
         </div>
