@@ -69,7 +69,7 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
 }
 ?>
 <a class="back-button" href="<?php echo $back_url; ?>"><i class="fal fa-arrow-left"></i><?php _e("Back to Inquiry Set", OER_LESSON_PLAN_SLUG)?></a>
-<div class="ps-header" style="background:url(<?php echo $featured_image_url; ?>) no-repeat top left;" data-curid="<?php echo $index; ?>">
+<div class="ps-header" style="background:url(<?php echo $featured_image_url; ?>) no-repeat center center #9C9C9C;" data-curid="<?php echo $index; ?>">
     <span class="ps-nav-left <?php echo $lp_prev_class; ?>"><a class="lp-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>"><i class="fal fa-chevron-left fa-2x"></i></a></span>
     <span class="ps-nav-right <?php echo $lp_next_class; ?>"><a class="lp-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>"><i class="fal fa-chevron-right fa-2x"></i></a></span>
     <span class="ps-expand"><a href="<?php echo $featured_image_url; ?>" class="lp-expand-img" target="_blank"><i class="fal fa-expand-arrows-alt"></i></a></span>

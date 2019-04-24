@@ -574,6 +574,7 @@ span.selected-standard-pill:last-child {
     justify-content: center;
     transition: all .2s ease-in;
     font-weight: 300;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
 }
 .back-button i {
     margin-right: 15px;
@@ -585,7 +586,7 @@ span.selected-standard-pill:last-child {
     text-decoration: none;
 }
 .ps-header {
-    background-size:cover !important;
+    background-size: contain !important;
     height: 85vh;
     overflow: hidden;
     width: 100%;
@@ -597,6 +598,7 @@ span.selected-standard-pill:last-child {
     top: 45%;
     background-color: rgb(19,29,33, .95);
     transition: all .2s ease-in;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
 }
 a.lp-nav-left, a.lp-nav-right, a.lp-expand-img { 
     color:#ffffff; 
@@ -614,7 +616,8 @@ a.lp-nav-left:hover, a.lp-nav-right:hover, a.lp-expand-img:hover {
     right: 2.5%;
     top: 45%;
     background-color: rgb(19,29,33, .95);
-    transition: all .2s ease-in;lp-
+    transition: all .2s ease-in;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
 }
 .ps-expand {
     position: absolute;
@@ -622,6 +625,7 @@ a.lp-nav-left:hover, a.lp-nav-right:hover, a.lp-expand-img:hover {
     bottom: 2.5%;
     background-color: rgb(19,29,33, .95);    
     transition: all .2s ease-in;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .ps-nav-left:hover, .ps-nav-right:hover, .ps-expand:hover {
