@@ -26,7 +26,7 @@ $(document).ready(function() {
     });
     
     if ($('.tc-home-tabs-content .active .tc-tab-content').height()<340) {
-        $('.tc-home-tabs-content .active .tc-read-more').addClass('btn-hide');
+        $('.tc-home-tabs-content .active .tc-read-more').addClass('tc-btn-hide');
     }
     $(".tc-read-more").on("click",function(e){
         var tabContent = $(this).parent().find('.tc-tab-content');
