@@ -68,7 +68,6 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
     }
 }
 ?>
-
 <div class="back-button-wrapper">
     <a href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php _e("Back to Inquiry Set", OER_LESSON_PLAN_SLUG)?></a>
 </div>

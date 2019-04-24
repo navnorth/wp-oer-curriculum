@@ -24,4 +24,19 @@ $(document).ready(function() {
         });
         return false;
     });
+    
+    if ($('.tc-home-tabs-content .active .tc-tab-content').height()<340) {
+        $('.tc-home-tabs-content .active .tc-read-more').addClass('btn-hide');
+    }
+    $(".tc-read-more").on("click",function(e){
+        var tabContent = $(this).parent().find('.tc-tab-content');
+        var minHeight = 340;
+        if (tabContent.height()<=minHeight) {
+            tabContent.addClass("slidedown");
+            $(this).text("Close");
+        } else {
+            tabContent.removeClass("slidedown");
+            $(this).text("Read More");
+        }
+    });
 })

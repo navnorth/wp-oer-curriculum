@@ -47,6 +47,10 @@ jQuery(document).ready(function($){
     
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         $('.lp-nav-right,.lp-nav-left').attr('data-activetab', e.target.id);
+        var activeContent = $(e.target).attr('href');
+        if ($(activeContent).find('.tc-tab-content').height()<340){
+            $(activeContent).find('.tc-read-more').addClass('tc-btn-hide');
+        }
     });
     
     $('.lp-nav-right,.lp-nav-left').on("click", function(e){
