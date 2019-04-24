@@ -70,12 +70,12 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
 ?>
 
 <div class="back-button-wrapper">
-    <a href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php _e("Back to Inquiry Set", OER_LESSON_PLAN_SLUG)?></a>
+    <a href="<?php echo $back_url; ?>"><i class="fal fa-arrow-left"></i><?php _e("Back to Inquiry Set", OER_LESSON_PLAN_SLUG)?></a>
 </div>
 <div class="ps-header" style="background:url(<?php echo $featured_image_url; ?>) no-repeat top left;" data-curid="<?php echo $index; ?>">
-    <span class="ps-nav-left <?php echo $lp_prev_class; ?>"><a class="lp-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>"><i class="fas fa-chevron-left fa-2x"></i></a></span>
-    <span class="ps-nav-right <?php echo $lp_next_class; ?>"><a class="lp-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>"><i class="fas fa-chevron-right fa-2x"></i></a></span>
-    <span class="ps-expand"><a href="<?php echo $featured_image_url; ?>" class="lp-expand-img" target="_blank"><i class="fas fa-expand-arrows-alt"></i></a></span>
+    <span class="ps-nav-left <?php echo $lp_prev_class; ?>"><a class="lp-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>"><i class="fal fa-chevron-left fa-2x"></i></a></span>
+    <span class="ps-nav-right <?php echo $lp_next_class; ?>"><a class="lp-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>"><i class="fal fa-chevron-right fa-2x"></i></a></span>
+    <span class="ps-expand"><a href="<?php echo $featured_image_url; ?>" class="lp-expand-img" target="_blank"><i class="fal fa-expand-arrows-alt"></i></a></span>
 </div>
 <div class="ps-info">
     <ul class="nav nav-tabs ps-info-tabs" id="ps-info-tabs-section" role="tablist">
@@ -127,7 +127,7 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
         <div class="col-md-4">
             <div class="ps-meta-icons">
                 <?php if ($isFile==true) : ?>
-                <span class="ps-download-source ps-meta-icon"><a href="<?php echo $resource_meta['oer_resourceurl'][0]; ?>" class="ps-download"><i class="fas fa-download"></i></a></span>
+                <span class="ps-download-source ps-meta-icon"><a href="<?php echo $resource_meta['oer_resourceurl'][0]; ?>" class="ps-download"><i class="fal fa-download"></i></a></span>
                 <?php endif; ?>
                 <div class="sharethis-inline-share-buttons"></div>
             </div>

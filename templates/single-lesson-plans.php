@@ -35,9 +35,9 @@ if (have_posts()) : while (have_posts()) : the_post();
             <?php the_post_thumbnail(); ?>
             <div class="tc-lp-grade"><?php echo $lp_grade ?></div>
             <div class="tc-lp-controls">
-                <a href=""><i class="fa fa-share-alt"></i></a>
+                <a href=""><i class="fal fa-share-alt"></i></a>
                 <?php if ($download_copy): ?>
-                <a href=""><i class="fa fa-download"></i></a>
+                <a href=""><i class="fal fa-download"></i></a>
                 <?php endif; ?>
             </div>
         </div>
@@ -96,8 +96,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                     ?>
                 </div>
                 <div class="tc-sensitive-material-section">
-                    <p><i class="fa fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
-                    <button class="question-popup-button"><i class="fa fa-question-circle-o"></i></button>
+                    <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
+                    <button class="question-popup-button"><i class="fal fa-question-circle-o"></i></button>
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                 <div class="excerpt-section">
                     <h2><?php echo $oer_lp_iq['question']; ?></h2>
                     <div class="show-excerpt-section text-right">
-                        <button id="show-excerpt" type="button" class="excerpt-button">Framework Excerpt<i class="fa fa-angle-right"></i></button>
+                        <button id="show-excerpt" type="button" class="excerpt-button">Framework Excerpt<i class="fal fa-angle-right"></i></button>
                     </div>
                 </div>
             </div>
@@ -130,7 +130,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             <div class="col-md-3 col-sm-3 col-xs-12"></div>
             <div class="excerpt-content col-md-9 col-sm-9 col-xs-12">
                 <?php echo $oer_lp_iq['excerpt']; ?>
-                <button type="button" id="close-excerpt" class="excerpt-button float-right">CLOSE<i class="fa fa-angle-up"></i></button>
+                <button type="button" id="close-excerpt" class="excerpt-button float-right">CLOSE<i class="fal fa-angle-up"></i></button>
             </div>
         </div>
     </div>
@@ -161,7 +161,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     </div>
                     <?php if ($sensitiveMaterial!==""): ?>
                     <div class="sensitive-source">
-                        <p><i class="fa fa-exclamation-triangle"></i></p>
+                        <p><i class="fal fa-exclamation-triangle"></i></p>
                     </div>
                     <?php endif; ?>
                 </div>
