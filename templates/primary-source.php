@@ -77,24 +77,24 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
 <div class="ps-info">
     <ul class="nav nav-tabs ps-info-tabs" id="ps-info-tabs-section" role="tablist">
         <li class="nav-item col-md-4 col-sm-4 padding-0">
-            <a class="nav-link <?php if ($active_tab=="ps-information-tab" || !$active_tab): ?>active<?php endif; ?>" id="ps-information-tab" data-toggle="tab" href="#ps-information-tab-content" role="tabs" aria-controls="ps-information-tab-content" aria-selected="true" aria-expanded="false">
+            <a class="nav-link active" id="ps-information-tab" data-toggle="tab" href="#ps-information-tab-content" role="tabs" aria-controls="ps-information-tab-content" aria-selected="true" aria-expanded="false">
                 Information    
             </a>
         </li>
         <li class="nav-item col-md-4 col-sm-4 padding-0">
-            <a class="nav-link <?php if ($active_tab=="ps-student-info-tab"): ?>active<?php endif; ?>" id="ps-student-info-tab" data-toggle="tab" href="#ps-student-info-tab-content" role="tabs" aria-controls="ps-student-info-tab-content" aria-selected="true" aria-expanded="false">
+            <a class="nav-link" id="ps-student-info-tab" data-toggle="tab" href="#ps-student-info-tab-content" role="tabs" aria-controls="ps-student-info-tab-content" aria-selected="true" aria-expanded="false">
                 For The Student    
             </a>
         </li>
         <li class="nav-item col-md-4 col-sm-4 padding-0">
-            <a class="nav-link <?php if ($active_tab=="ps-teacher-info-tab"): ?>active<?php endif; ?>" id="ps-teacher-info-tab" data-toggle="tab" href="#ps-teacher-info-tab-content" role="tabs" aria-controls="ps-teacher-info-tab-content" aria-selected="true" aria-expanded="false">
+            <a class="nav-link" id="ps-teacher-info-tab" data-toggle="tab" href="#ps-teacher-info-tab-content" role="tabs" aria-controls="ps-teacher-info-tab-content" aria-selected="true" aria-expanded="false">
                 For The Teacher    
             </a>
         </li>
     </ul>
 </div>
 <div class="ps-info-tabs-content">
-    <div class="tab-pane clearfix fade <?php if ($active_tab=="ps-information-tab" || !$active_tab): ?>active<?php endif; ?> in" id="ps-information-tab-content" role="tabpanel" aria-labelledby="ps-information-tab">
+    <div class="tab-pane clearfix fade active in" id="ps-information-tab-content" role="tabpanel" aria-labelledby="ps-information-tab">
         <?php
         $resource_meta = null;
         $subject_areas = null;
@@ -207,10 +207,10 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             <?php } ?>
         </div>
     </div>
-    <div class="tab-pane clearfix fade <?php if ($active_tab=="ps-student-info-tab" || !$active_tab): ?>active<?php endif; ?> in" id="ps-student-info-tab-content" role="tabpanel" aria-labelledby="ps-student-info-tab">
+    <div class="tab-pane clearfix fade in" id="ps-student-info-tab-content" role="tabpanel" aria-labelledby="ps-student-info-tab">
         <?php echo $student_info; ?>
     </div>
-    <div class="tab-pane clearfix fade <?php if ($active_tab=="ps-teacher-info-tab" || !$active_tab): ?>active<?php endif; ?> in" id="ps-teacher-info-tab-content" role="tabpanel" aria-labelledby="ps-teacher-info-tab">
+    <div class="tab-pane clearfix fade in" id="ps-teacher-info-tab-content" role="tabpanel" aria-labelledby="ps-teacher-info-tab">
         <?php echo $teacher_info; ?>
     </div>
 </div>

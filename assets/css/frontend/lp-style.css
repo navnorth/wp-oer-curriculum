@@ -3,6 +3,7 @@ body.single-lesson-plans {
     box-sizing:border-box;
     -webkit-box-sizing:border-box;
 }
+
 /** Curriculum Frontend Styles **/
 .single-lesson-plans .container { width:100%; max-width:100%; }
 .single-lesson-plans .container .site-content { margin-top:0; }
@@ -365,7 +366,7 @@ span.selected-standard-pill:last-child {
     background-color: #851738;
     text-decoration: none;
 }
-.tc-home-tabs .nav-item {
+.tc-home-tabs .nav-item, .ps-info-tabs .nav-item {
     display: inline;
     background-color: #DFDFDF;
     color: #B3B3B3;
@@ -374,16 +375,16 @@ span.selected-standard-pill:last-child {
     border: none !important;
 }
 
-.tc-home-tabs li.nav-item {
+.tc-home-tabs li.nav-item, .ps-info-tabs li.nav-item {
     text-align: center;
     text-transform: uppercase;
 }
 
-.tc-home-tabs li.nav-item .nav-link {
+.tc-home-tabs li.nav-item .nav-link, .ps-info-tabs li.nav-item .nav-link {
     border: none !important;
     height:100%;
 }
-.tc-home-tabs li a {
+.tc-home-tabs li a, .ps-info-tabs li a {
     font-size: 24px;
     color: #828282;
     border: none;
@@ -392,6 +393,7 @@ span.selected-standard-pill:last-child {
     background:transparent;
     border-radius: 0 !important;
     margin-right: 0;
+    transition: all .2s ease-in;
 }
 .tc-home-tabs li.nav-item a.active {
     color:#fff !important;
@@ -403,16 +405,16 @@ span.selected-standard-pill:last-child {
     border:none !important;
     z-index: 1;
 }
-.tc-home-tabs li a {
+.tc-home-tabs li a, .ps-info-tabs li a {
     margin-bottom: 0 !important;
     font-family: "Biko", Arial, Helvetica, sans-serif;
     font-size: 18px;
     line-height: 20px;
 }
-.tc-home-tabs li.nav-item a.active {
+.tc-home-tabs li.nav-item a.active, .ps-info-tabs li.nav-item a.active {
     color:#fff !important;
 }
-.tc-home-tabs .col-md-3.nav-item .active:after{
+.tc-home-tabs .col-md-3.nav-item .active:after {
     transition: all .2s ease-in;
     border-left: 3.5em solid transparent;
     border-right: 3.5em solid transparent;
@@ -467,12 +469,16 @@ span.selected-standard-pill:last-child {
     color:#fff;
 }
 
-.tc-home-tabs li.nav-item a {
-    transition: all .2s ease-in;
-}
 .tc-home-tabs li.nav-item a:hover,
 .tc-home-tabs li.nav-item a.active:hover,
 .tc-home-tabs li.nav-item a.active:active{
+    color: #fff !important;
+    background: #4a6e7f;
+    border-radius: 0 !important;
+}
+.ps-info-tabs li.nav-item a:hover,
+.ps-info-tabs li.nav-item a.active:hover,
+.ps-info-tabs li.nav-item a.active:active{
     color: #fff !important;
     background: #4a6e7f;
     border-radius: 0 !important;
@@ -633,9 +639,9 @@ a.lp-nav-left:hover, a.lp-nav-right:hover, a.lp-expand-img:hover {
 }
 
 ul.ps-info-tabs { margin:0; background-color: #dedede !important; }
-ul.ps-info-tabs .nav-link { color:#9a9a9a; background-color: #dedede !important; text-transform:uppercase; text-align:center; margin:0; }
-ul.ps-info-tabs .nav-link.active, ul.ps-info-tabs .nav-link.show { background-color:#c4c4c4 !important; }
-ul.ps-info-tabs .nav-link.active, ul.ps-info-tabs .active .nav-link { background-color:#c4c4c4 !important; }
+ul.ps-info-tabs .nav-link { color:#9a9a9a; background-color: #dedede; text-transform:uppercase; text-align:center; margin:0; }
+ul.ps-info-tabs .nav-link.active, ul.ps-info-tabs .nav-link.show { background-color: #4a6e7f; !important; }
+/* ul.ps-info-tabs .nav-link.active, ul.ps-info-tabs .active .nav-link { background-color:#c4c4c4 !important; } */
 .ps-info-tabs-content .tab-pane { display:none; padding:70px 40px; font-size:16px; }
 .ps-info-tabs-content .tab-pane p { font-size:16px; }
 .ps-info-tabs-content .tab-pane.active { display:block; }
@@ -747,14 +753,14 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; }
     }
     .tc-home-tabs .nav-item .active:after { border:none; }
     .tc-related-inquiry-section { width:90%; }
-    .back-button-wrapper {
+    .back-button {
         height: 45px;
         width: 150px;
     }
-    .back-button-wrapper i {
+    .back-button i {
         margin-right: 7px;
     }
-    .back-button-wrapper a {
+    .back-button {
         font-size: 14px;
     }
 }
