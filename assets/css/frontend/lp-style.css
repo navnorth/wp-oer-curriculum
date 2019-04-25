@@ -644,11 +644,12 @@ ul.ps-info-tabs .nav-link.active, ul.ps-info-tabs .nav-link.show { background-co
 /* ul.ps-info-tabs .nav-link.active, ul.ps-info-tabs .active .nav-link { background-color:#c4c4c4 !important; } */
 .ps-info-tabs-content {
     min-height: 500px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 .ps-info-tabs-content .tab-pane { display:none; padding:70px 10%; font-size:16px; }
 .ps-info-tabs-content .tab-pane p { font-size:16px; }
 .ps-info-tabs-content .tab-pane.active { display:block; }
-h1.ps-info-title { margin-bottom:40px; margin-top:0; }
+h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
 .ps-meta-icons { text-align:right; }
 .ps-meta-icon { margin:0 3px; }
 .ps-value, .ps-value a{ font-size:14px; word-break:break-all; }
