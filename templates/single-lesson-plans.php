@@ -199,16 +199,19 @@ if (have_posts()) : while (have_posts()) : the_post();
                     $_col = floor(12/$col);
                 foreach ($elements_orders as $elementKey => $value) {
                     if (strpos($elementKey, 'oer_lp_custom_editor_teacher_background') !== false) {
+                        $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                     ?>
                     <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                         <a class="nav-link active" id="tc-teacher-background-tab" data-toggle="tab" href="#tc-teacher-background-tab-content" role="tab" aria-controls="tc-teacher-background-tab" aria-selected="true" aria-expanded="false">
-                            Historical Background
+                            <?php echo $oer_lp_custom_editor['title']; ?>
                         </a>
                     </li>
-                    <?php  } elseif (strpos($elementKey, 'oer_lp_custom_editor_student_background') !== false) { ?>
+                    <?php  } elseif (strpos($elementKey, 'oer_lp_custom_editor_student_background') !== false) {
+                        $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
+                    ?>
                     <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
                         <a class="nav-link" id="tc-student-background-tab" data-toggle="tab" href="#tc-student-background-tab-content" role="tab" aria-controls="tc-student-background-tab" aria-selected="false" aria-expanded="false">
-                            ELD Extension
+                            <?php echo $oer_lp_custom_editor['title']; ?>
                         </a>
                     </li>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_editor_') !== false) {
