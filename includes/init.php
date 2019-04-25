@@ -90,13 +90,26 @@ function oer_lp_grade_level_cb() {
         '12' => '12'
     );
     $oer_lp_grades = (isset($post_meta_data['oer_lp_grades'][0]) ? unserialize($post_meta_data['oer_lp_grades'][0]) : array());
+    $index = 0;
+    echo '<div class="row oer_lp_grades">';
     foreach ($oer_lp_grade_options as $key => $oer_lp_grade_option) {
-        $checkbox = '<div class="form-checkbox">';
-        $checkbox .= '<input type="checkbox" name="oer_lp_grades[]" value="'.$key.'" id="oer_lp_grade_'.$key.'" '.oer_lp_show_selected($key, $oer_lp_grades, 'checkbox').'>';
-        $checkbox .= '<label for="oer_lp_grade_'.$key.'">'.$oer_lp_grade_option.'</label>';
+        $index++;
+        $checkbox = "";
+        if ($index % 7 == 1){
+            if ($index<7)
+                $checkbox .= '<div class="col-md-7 span2">';
+            else
+                $checkbox .= '<div class="col-md-5 span2">';
+        }
+        $checkbox .= '<div class="form-checkbox">';
+        $checkbox .= '<input type="radio" name="oer_lp_grades[]" value="'.$key.'" id="oer_lp_grade_'.$key.'" '.oer_lp_show_selected($key, $oer_lp_grades, 'checkbox').'>';
+        $checkbox .= '<label class="oer_lp_radio_label" for="oer_lp_grade_'.$key.'">'.$oer_lp_grade_option.'</label>';
         $checkbox .= '</div>';
+        if ($index % 7 == 0 )
+            $checkbox .= '</div>';
         echo $checkbox;
     }
+    echo '</div>';
 }
 
 /**
