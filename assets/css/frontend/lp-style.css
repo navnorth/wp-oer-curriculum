@@ -642,7 +642,7 @@ ul.ps-info-tabs { margin:0; background-color: #dedede !important; }
 ul.ps-info-tabs .nav-link { color:#9a9a9a; background-color: #dedede; text-transform:uppercase; text-align:center; margin:0; }
 ul.ps-info-tabs .nav-link.active, ul.ps-info-tabs .nav-link.show { background-color: #4a6e7f; !important; }
 /* ul.ps-info-tabs .nav-link.active, ul.ps-info-tabs .active .nav-link { background-color:#c4c4c4 !important; } */
-.ps-info-tabs-content .tab-pane { display:none; padding:70px 40px; font-size:16px; }
+.ps-info-tabs-content .tab-pane { display:none; padding:70px 10%; font-size:16px; }
 .ps-info-tabs-content .tab-pane p { font-size:16px; }
 .ps-info-tabs-content .tab-pane.active { display:block; }
 h1.ps-info-title { margin-bottom:40px; margin-top:0; }
