@@ -586,7 +586,7 @@ span.selected-standard-pill:last-child {
     margin-right: 15px;
 }
 .back-button:hover, .back-button i:hover {
-    color: #FFB904;
+    color: #FFFFFF;
     cursor: pointer;
     background-color: #5c0f26;
     text-decoration: none;
@@ -615,7 +615,7 @@ a.lp-nav-left, a.lp-nav-right, a.lp-expand-img {
     transition: all .2s ease-in;
 }
 a.lp-nav-left:hover, a.lp-nav-right:hover, a.lp-expand-img:hover {
-    color: #FFB904;
+    color: #FFFFFF;
 }
 .ps-nav-right {
     position: absolute;
