@@ -699,7 +699,15 @@ jQuery(document).ready(function ($) {
                         icon = icon.replace('fa-2x', '');
 
                     $('.oer-lp-download-copy-icon').html(icon);
+                    
                     $('input[name="oer_lp_download_copy_document"]').val(attachment.url);
+                    if (dis.parent().find('.lp-selected-section')) {
+                        dis.parent().find('.lp-selected-section a').attr('href',attachment.url);
+                        dis.parent().find('.lp-selected-section a').text(attachment.url);
+                        dis.parent().find('.lp-selected-section').removeClass('lp-hidden');
+                        dis.parent().find('.oer-lp-select-label').addClass('lp-hidden');
+                        dis.parent().find('.oer-lp-download-copy-icon').addClass('lp-hidden');
+                    }
                 });
 
                 materialFrame.open();
@@ -783,6 +791,51 @@ jQuery(document).ready(function ($) {
                     }
                 }
             });
+        },
+        // Select lesson document for download copy
+        lpRemoveCopyLesson: function() {
+            $(document).on('click', '.lp-remove-download-copy', function (e) {
+                e.preventDefault();
+                var dis = $('input[name="oer_lp_download_copy_document"]');
+
+                $('.lp-selected-section').addClass('lp-hidden');
+                $('input[name="oer_lp_download_copy_document"]').val("");
+                $('.oer-lp-select-label').removeClass('lp-hidden');
+                $('.oer-lp-download-copy-icon').removeClass('lp-hidden').html('<i class="fa fa-upload"></i>');
+                
+                var materialFrame;
+                if (materialFrame) {
+                    materialFrame.open();
+                    return;
+                }
+                materialFrame = wp.media({
+                    title: 'Select Material',
+                    library: { type: [ 'application/msword', 'application/pdf' ] },
+                    button: { text: 'Use Material' },
+                    multiple: false
+                });
+
+                materialFrame.on('select', function(){
+                    var attachment = materialFrame.state().get('selection').first().toJSON();
+                    var response = LessonPlan.lpPrepareMaterialIcon(attachment);
+
+                    var icon = response.icon;
+                        icon = icon.replace('fa-2x', '');
+
+                    $('.oer-lp-download-copy-icon').html(icon);
+                    
+                    $('input[name="oer_lp_download_copy_document"]').val(attachment.url);
+                    if (dis.parent().find('.lp-selected-section')) {
+                        dis.parent().find('.lp-selected-section a').attr('href',attachment.url);
+                        dis.parent().find('.lp-selected-section a').text(attachment.url);
+                        dis.parent().find('.lp-selected-section').removeClass('lp-hidden');
+                        dis.parent().find('.oer-lp-select-label').addClass('lp-hidden');
+                        dis.parent().find('.oer-lp-download-copy-icon').addClass('lp-hidden');
+                    }
+                });
+
+                materialFrame.open();
+            });
         }
     };
 
@@ -811,4 +864,5 @@ jQuery(document).ready(function ($) {
     LessonPlan.addMorePrimaryResource();
     LessonPlan.deletePrimarySource();
     LessonPlan.requireModuleTitle();
+    LessonPlan.lpRemoveCopyLesson();
 });

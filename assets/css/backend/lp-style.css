@@ -82,3 +82,21 @@
 .oer_lp_grades .form-checkbox { margin-bottom:5px; }
 .oer_lp_grades .form-checkbox input[type=radio] { margin:0; }
 .oer_lp_radio_label { margin-bottom:0; margin-left:5px; }
+.full-width { width:100%; }
+.oer-lp-download-copy-icon {
+    display: inline-block;
+    margin-left: 3px;
+    border: 1px solid #cccccc;
+    width: 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 15px auto;
+}
+.oer-lp-select-label {
+    padding: 4px 10px;
+    display: inline-block;
+    border: 1px solid #cccccc;
+}
+.lp-hidden { display:none; }
+.lp-remove-download-copy { cursor:pointer; }
+.lp-selected-section a { word-break:break-all; }

@@ -51,7 +51,7 @@ function oer_lesson_plan_custom_meta_boxes() {
     add_meta_box('oer_lesson_plan_meta_boxid', 'Lesson Meta Fields', 'oer_lesson_plan_meta_callback', 'lesson-plans', 'advanced');
 
     // Add a download copy option
-    add_meta_box( 'oer_lesson_plan_download_copy', 'Download Copy', 'oer_lp_download_copy_cb', 'lesson-plans', 'side', 'high' );
+    add_meta_box( 'oer_lesson_plan_download_copy', 'Downloadable Copy', 'oer_lp_download_copy_cb', 'lesson-plans', 'side', 'high' );
     
     // Add Related Inquiry Sets metabox
     add_meta_box('oer_lesson_plan_related_inquiry', 'Related Inquiry Sets', 'oer_lesson_plan_related_inquiry_callback', 'lesson-plans', 'advanced');
@@ -119,10 +119,8 @@ function oer_lp_grade_level_cb() {
 function oer_lp_download_copy_cb() {
     global $post;
     $post_meta_data = get_post_meta($post->ID );
-
-    $oer_lp_download_copy = (isset($post_meta_data['oer_lp_download_copy'][0]) ? $post_meta_data['oer_lp_download_copy'][0] : 'yes');
-    $is_checked = (($oer_lp_download_copy == 'yes') ? 'checked="checked"' : '');
-
+    $icon = null;
+    
     // Upload document
     $oer_lp_download_copy_document = (isset($post_meta_data['oer_lp_download_copy_document'][0]) ? $post_meta_data['oer_lp_download_copy_document'][0] : '');
     // Icon
@@ -132,14 +130,16 @@ function oer_lp_download_copy_cb() {
     } else {
         $icon = '<i class="fa fa-upload"></i>';
     }
-    $checkbox = '<div class="form-checkbox form-group">';
-    $checkbox .= '<input type="checkbox" class="form-control" name="oer_lp_download_copy" value="yes" id="oer_lp_download_copy" ' . $is_checked . '>';
-    $checkbox .= '<label for="oer_lp_download_copy">Download Copy</label>';
-    $checkbox .= '</div>';
-    $checkbox .= '<div class="form-group">';
-    $checkbox .= '<div class="input-group">';
-    $checkbox .= '<input type="text" class="form-control" name="oer_lp_download_copy_document" placeholder="Select Document" value="'.$oer_lp_download_copy_document.'">';
-    $checkbox .= '<div class="input-group-addon oer-lp-download-copy-icon" title="Select Material">'.$icon.'</div>';
+    $checkbox = '<div class="form-group">';
+    $checkbox .= '<div class="input-group full-width">';
+    $checkbox .= '<input type="hidden" class="form-control" name="oer_lp_download_copy_document" placeholder="Select Document" value="'.$oer_lp_download_copy_document.'">';
+    if (!empty($oer_lp_download_copy_document)){
+        $checkbox .= '<div class="lp-selected-section"><a href="'.$oer_lp_download_copy_document.'" target="_blank">'.$oer_lp_download_copy_document.'</a> <span class="lp-remove-download-copy" title="Remove copy"><i class="fas fa-trash-alt"></i></span></div>';
+        $checkbox .= '<span class="oer-lp-select-label lp-hidden">Select Document</span> <div class="input-group-addon oer-lp-download-copy-icon lp-hidden" title="Select Material">'.$icon.'</div>';   
+    } else {
+        $checkbox .= '<div class="lp-selected-section lp-hidden"><a href="" target="_blank"></a> <span class="lp-remove-download-copy"><i class="fas fa-trash-alt"></i></span></div>';
+        $checkbox .= '<span class="oer-lp-select-label">Select Document</span> <div class="input-group-addon oer-lp-download-copy-icon" title="Select Material">'.$icon.'</div>';
+    }
     $checkbox .= '</div></div>';
     echo $checkbox;
 }
