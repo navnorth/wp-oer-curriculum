@@ -803,7 +803,7 @@ jQuery(document).ready(function ($) {
                 $('.oer-lp-select-label').removeClass('lp-hidden');
                 $('.oer-lp-download-copy-icon').removeClass('lp-hidden').html('<i class="fa fa-upload"></i>');
                 
-                var materialFrame;
+                /*var materialFrame;
                 if (materialFrame) {
                     materialFrame.open();
                     return;
@@ -834,7 +834,7 @@ jQuery(document).ready(function ($) {
                     }
                 });
 
-                materialFrame.open();
+                materialFrame.open();*/
             });
         }
     };
