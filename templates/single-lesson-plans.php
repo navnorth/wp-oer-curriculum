@@ -23,7 +23,7 @@ if ($lp_grade!=="pre-k" && $lp_grade!=="k")
     $lp_grade = "Grade ".$lp_grade;
     
 // Download Copy
-$download_copy = ($post_meta_data['oer_lp_download_copy'][0]=="yes")? true:false;
+$oer_lp_download_copy_document = (isset($post_meta_data['oer_lp_download_copy_document'][0]) ? $post_meta_data['oer_lp_download_copy_document'][0] : '');
 $oer_lp_standards = isset($post_meta_data['oer_lp_standards'][0])?unserialize($post_meta_data['oer_lp_standards'][0]):"";
 $tags = get_the_terms($post->ID,"post_tag");
 $authors = (isset($post_meta_data['oer_lp_authors'][0]) ? unserialize($post_meta_data['oer_lp_authors'][0]) : array());
@@ -36,8 +36,8 @@ if (have_posts()) : while (have_posts()) : the_post();
             <div class="tc-lp-grade"><?php echo $lp_grade ?></div>
             <div class="tc-lp-controls">
                 <a href=""><i class="fal fa-share-alt"></i></a>
-                <?php if ($download_copy): ?>
-                <a href=""><i class="fal fa-download"></i></a>
+                <?php if ($oer_lp_download_copy_document): ?>
+                <a href="<?php echo $oer_lp_download_copy_document; ?>"><i class="fal fa-download"></i></a>
                 <?php endif; ?>
             </div>
         </div>
