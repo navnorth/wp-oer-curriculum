@@ -27,7 +27,7 @@ function oer_lesson_plan_creation() {
         'labels'                => $labels,
         'public'                => true,
         'show_ui'               => true,
-        'has_archive'           => true,
+        'has_archive'           => false,
         'show_in_menu'          => true,//'edit.php?post_type=resource',
         'public'                => true,
         'publicly_queryable'    => true,
