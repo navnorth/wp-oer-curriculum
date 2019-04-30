@@ -377,7 +377,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             foreach($related_inquiry_sets as $inquiry_set) {
                 $inquiry = oer_lp_get_inquiry_set_details($inquiry_set);
                 ?>
-                <div style="display:none"><?php var_dump($inquiry); ?></div>
+                <div style="display:none"><?php var_dump($inquiry_set); ?></div>
                 <?php
                 $inquiry_link = get_permalink($inquiry_set);
                 $inquiry_img = get_the_post_thumbnail_url($inquiry);
