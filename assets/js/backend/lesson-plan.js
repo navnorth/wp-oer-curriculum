@@ -198,6 +198,27 @@ jQuery(document).ready(function ($) {
                 }
                 return false;
             });
+            
+            // Primary Source element reorder
+            $(document).on('click', '.resource-reorder-up', function(){
+                var $current = $(this).closest('.lp-primary-resource-element-wrapper');
+                var $previous = $current.prev('.lp-primary-resource-element-wrapper');
+                if($previous.length !== 0){
+                    $current.insertBefore($previous);
+                    LessonPlan.toggleUpDownButton();
+                }
+                return false;
+            });
+
+            $(document).on('click', '.resource-reorder-down', function(){
+                var $current = $(this).closest('.lp-primary-resource-element-wrapper');
+                var $next = $current.next('.lp-primary-resource-element-wrapper');
+                if($next.length !== 0){
+                    $current.insertAfter($next);
+                    LessonPlan.toggleUpDownButton();
+                }
+                return false;
+            });
         },
 
         // Change order value in hidden field and reinitialize the text editor
