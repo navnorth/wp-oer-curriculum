@@ -379,6 +379,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                 $inquiry_link = get_permalink($inquiry_set);
                 $inquiry_img = get_the_post_thumbnail_url($inquiry);
                 $inquiry_meta_data = oer_lp_get_inquiry_set_metadata($inquiry_set);
+                if ($inquiry) {
             ?>
             <div class="col-md-4 col-sm-6 tc-related-inquiry-blocks-padding">
                 <div class="media-image">
@@ -413,7 +414,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                    <h4><a href="<?php echo $inquiry_link; ?>"><?php echo $inquiry->post_title; ?></a></h4>
                 </div>
             </div>
-            <?php } ?>
+            <?php }
+            } ?>
         </div>
     </div>
     <?php } ?>
