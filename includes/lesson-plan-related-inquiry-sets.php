@@ -7,6 +7,7 @@ global $inquiryset_post;
 
 $inquiry = get_post_meta($inquiryset_post->ID,'oer_lp_related_inquiry_set');
 $inquiry = (is_array($inquiry)?$inquiry[0]:array());
+var_dump($inquiry);
 ?>
 <div class="lesson_plan_meta_wrapper">
     <div class="row">
