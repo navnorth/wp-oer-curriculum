@@ -144,6 +144,9 @@ if (have_posts()) : while (have_posts()) : the_post();
                     $resource = get_page_by_title($resource,OBJECT,"resource");
                     $resource_img = get_the_post_thumbnail_url($resource);
                     $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
+                    $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
+                    if ($sensitiveMaterialValue!=="")
+                        $sensitiveMaterial = $sensitiveMaterialValue;
                 ?>
                 <div class="col-md-3 col-sm-3 padding-0">
                     <div class="media-image">
@@ -159,7 +162,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                             </div>
                         </div>
                     </div>
-                    <?php if ($sensitiveMaterial!==""): ?>
+                    <?php if ($sensitiveMaterial!=="" && $sensitiveMaterial!=="no"): ?>
                     <div class="sensitive-source">
                         <p><i class="fal fa-exclamation-triangle"></i></p>
                     </div>

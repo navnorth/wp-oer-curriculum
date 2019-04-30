@@ -339,6 +339,10 @@ $default = false;
                                         foreach ($primary_resources['resource'] as $resourceKey => $resource) { ?>
                                             <?php
                                             $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
+                                            $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
+                                            if ($sensitiveMaterialValue!=="")
+                                                $sensitiveMaterial = $sensitiveMaterialValue;
+                                                
                                             $teacherInfo = (isset($primary_resources['teacher_info'][$resourceKey]) ? $primary_resources['teacher_info'][$resourceKey]: "");
                                             $studentInfo = (isset($primary_resources['student_info'][$resourceKey]) ? $primary_resources['student_info'][$resourceKey]: "");
                                             ?>
@@ -376,6 +380,10 @@ $default = false;
                                                         <div class="col-md-5">
                                                             <div class="checkbox pull-right">
                                                                 <label>
+                                                                    <input type="hidden"
+                                                                           name="oer_lp_primary_resources[sensitive_material_value][]"
+                                                                           value="<?php echo (($sensitiveMaterial == 'yes')? 'yes' : 'no'); ?>"
+                                                                    >
                                                                     <input type="checkbox"
                                                                            name="oer_lp_primary_resources[sensitive_material][]"
                                                                            value="yes"

@@ -836,6 +836,19 @@ jQuery(document).ready(function ($) {
 
                 materialFrame.open();*/
             });
+        },
+        
+        // Select lesson document for download copy
+        lpPrimarySourceSensitiveMaterial: function() {
+            $(document).on('change', 'input[name="oer_lp_primary_resources[sensitive_material][]"]', function (e) {
+                e.preventDefault();
+                var dis = $(this);
+                var val = "no";
+                if (dis.is(":checked")) {
+                    val = "yes"
+                } 
+                dis.parent().find('input[name="oer_lp_primary_resources[sensitive_material_value][]"]').val(val);
+            });
         }
     };
 
@@ -865,4 +878,5 @@ jQuery(document).ready(function ($) {
     LessonPlan.deletePrimarySource();
     LessonPlan.requireModuleTitle();
     LessonPlan.lpRemoveCopyLesson();
+    LessonPlan.lpPrimarySourceSensitiveMaterial();
 });
