@@ -20,7 +20,7 @@ $inquiry = (is_array($inquiry)?$inquiry[0]:array());
                     <div class="form-group">
                         <label for="relatedInquirySet<?php echo $i; ?>">Inquiry Set <?php echo $i; ?></label>
                         <select name="oer_lp_related_inquiry_set[]" id="relatedInquirySet<?php echo $i; ?>" class="form-control">
-                            <option value="">-- Select Inquiry Set --</option>
+                            <option value="0">-- Select Inquiry Set --</option>
                             <?php if (count($inquirysets)>0) {
                                 foreach($inquirysets as $inquiryset) {
                             ?>

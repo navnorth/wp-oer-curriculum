@@ -372,7 +372,6 @@ if (have_posts()) : while (have_posts()) : the_post();
                 <p>Related Inquiry Sets</p>
             </div>
         </div>
-        <div style="display:none"><?php var_dump($related_inquiry_sets); ?></div>
         <div class="tc-related-inquiry-grids-section clearfix">
             <?php
             foreach($related_inquiry_sets as $inquiry_set) {
