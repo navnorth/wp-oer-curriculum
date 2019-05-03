@@ -131,7 +131,7 @@ var myInquirySets = function (_Component) {
                 title: post.title.rendered,
                 link: post.link,
                 grade: post.oer_lp_grades,
-                featuredImage: post.featured_image_url
+                featuredImage: image_url
             });
         }
     }, {
