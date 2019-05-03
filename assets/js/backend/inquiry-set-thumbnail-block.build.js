@@ -118,8 +118,13 @@ var myInquirySets = function (_Component) {
             var post = this.state.posts.find(function (item) {
                 return item.id == parseInt(value);
             });
+            var image_url = wp_nn_theme.theme_path + '/images/default-image.png';
 
             this.setState({ selectedInquirySet: parseInt(value), post: post });
+
+            if (post.featured_image_url) {
+                image_url = post.featured_image_url;
+            }
 
             this.props.setAttributes({
                 selectedInquirySet: parseInt(value),
