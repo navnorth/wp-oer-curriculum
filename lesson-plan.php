@@ -172,3 +172,87 @@ function lp_assign_standard_template($template) {
         }
         return $template;
 }
+
+add_action( 'init', 'lp_add_inquiry_set_rest_args', 30 );
+function lp_add_inquiry_set_rest_args() {
+    global $wp_post_types;
+
+    $wp_post_types['lesson-plans']->show_in_rest = true;
+    $wp_post_types['lesson-plans']->rest_base = 'inquiryset';
+    $wp_post_types['lesson-plans']->rest_controller_class = 'WP_REST_Posts_Controller';
+}
+
+/* Enqueue script and css for Gutenberg Inquiry Set Thumbnail block */
+add_action('enqueue_block_editor_assets', 'lp_enqueue_inquiry_set_block');
+function lp_enqueue_inquiry_set_block(){
+	wp_enqueue_script(
+            'inquiry-set-thumbnail-block-js', 
+            OER_LESSON_PLAN_URL . "/assets/js/backend/inquiry-set-thumbnail-block.build.js",
+            array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-components', 'wp-editor', 'wp-api')
+	);
+        wp_localize_script(
+            'inquiry-set-thumbnail-block-js',
+            'wp_nn_theme',
+            array(
+                "theme_path" => get_template_directory_uri()
+            )
+        );
+	wp_enqueue_style(
+            'inquiry-set-thumbnail-block-css', 
+            OER_LESSON_PLAN_URL . "/assets/css/backend/inquiry-set-thumbnail-block.css",
+            array('wp-edit-blocks')
+	);
+	/* Register Thumbnail Block */
+	register_block_type('wp-curriculum/inquiry-set-thumbnail-block', array(
+            'editor_script' => 'inquiry-set-thumbnail-block-js',
+            'editor_style' => 'inquiry-set-thumbnail-block-css'
+	));
+}
+
+add_action( 'rest_api_init', 'lp_add_meta_to_api');
+function lp_add_meta_to_api() {
+	// Register Grade Levels to REST API
+	register_rest_field( 'lesson-plans',
+			    'oer_lp_grades',
+			    array(
+				'get_callback' => 'lp_rest_get_meta_field',
+				'update_callback' => null,
+				'schema' => null
+				  ) );
+	
+	// Register Featured Image to REST API
+	register_rest_field( 'lesson-plans',
+			'featured_image_url',
+			array(
+			    'get_callback'    => 'lp_get_rest_featured_image',
+			    'update_callback' => null,
+			    'schema'          => null,
+			) );
+	
+}
+
+function lp_rest_get_meta_field($inquiryset, $field, $request){
+	if ($field=="oer_lp_grades") {
+		$grades = get_post_meta($inquiryset['id'], $field, true);
+                $grades = $grades[0];
+		$grade_level = "";
+                
+                if ($grades == "pre-k")
+                    $grade_level = "Pre-Kindergarten";
+                elseif ($grades == "k")
+                    $grade_level = "Kindergarten";
+                else
+                    $grade_level = "Grade ".$grades;
+                    
+                return $grade_level;
+	} else
+		return get_post_meta($inquiryset['id'], $field, true);
+}
+
+function lp_get_rest_featured_image($inquiryset, $field, $request) {
+	if( $inquiryset['featured_media'] ){
+		$img = wp_get_attachment_image_src( $inquiryset['featured_media'], 'app-thumb' );
+		return $img[0];
+	}
+	return false;
+}

@@ -37,11 +37,9 @@ function oer_lesson_plan_creation() {
         'menu_icon'             => 'dashicons-welcome-learn-more',
         'taxonomies'            => array('post_tag', 'resource-subject-area'),
         'supports'              => array('title', 'editor', 'thumbnail', 'revisions'),
-        'register_meta_box_cb'  => 'oer_lesson_plan_custom_meta_boxes'
+        'register_meta_box_cb'  => 'oer_lesson_plan_custom_meta_boxes',
+        'show_in_rest'          => true
     );
-
-    if ($_use_gutenberg == "on" or $_use_gutenberg == "1")
-        $args['show_in_rest'] = true;
 
     register_post_type('lesson-plans', $args);
 }
