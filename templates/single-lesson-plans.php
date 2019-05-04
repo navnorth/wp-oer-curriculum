@@ -15,6 +15,8 @@ get_header();
 
 global $post;
 global $wpdb;
+$oer_sensitive = false;
+
 $post_meta_data = get_post_meta($post->ID );
 $elements_orders = isset($post_meta_data['lp_order'][0]) ? unserialize($post_meta_data['lp_order'][0]) : array();
 //Grade Level
@@ -27,6 +29,14 @@ $oer_lp_download_copy_document = (isset($post_meta_data['oer_lp_download_copy_do
 $oer_lp_standards = isset($post_meta_data['oer_lp_standards'][0])?unserialize($post_meta_data['oer_lp_standards'][0]):"";
 $tags = get_the_terms($post->ID,"post_tag");
 $authors = (isset($post_meta_data['oer_lp_authors'][0]) ? unserialize($post_meta_data['oer_lp_authors'][0]) : array());
+
+// check if there is a resource with sensitive material set
+$oer_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
+$sensitive_material = $oer_resources['sensitive_material'];
+if (!empty($sensitive_material) && count($sensitive_material)>0) {
+    $oer_sensitive = true;
+}
+
 if (have_posts()) : while (have_posts()) : the_post();
 ?>
 <div class="container">
@@ -95,10 +105,12 @@ if (have_posts()) : while (have_posts()) : the_post();
                     endif;
                     ?>
                 </div>
+                <?php if ($oer_sensitive) : ?>
                 <div class="tc-sensitive-material-section">
                     <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
                     <button class="question-popup-button"><i class="fal fa-question-circle"></i></button>
                 </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
