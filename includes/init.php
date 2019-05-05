@@ -758,3 +758,13 @@ function change_post_types_slug( $args, $post_type ) {
    return $args;
 }
 add_filter( 'register_post_type_args', 'change_post_types_slug', 10, 2 );
+
+function add_modals_to_footer(){
+    include_once(OER_LESSON_PLAN_PATH.'includes/popups/create-module.php');
+    include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-module.php');
+    include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-author.php');
+    include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-source.php');
+    include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-confirm-popup.php');
+    include_once(OER_LESSON_PLAN_PATH.'includes/popups/standard-selection.php'); 
+}
+add_action( 'admin_footer', 'add_modals_to_footer', 10 );
