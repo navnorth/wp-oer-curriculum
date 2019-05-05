@@ -2414,14 +2414,16 @@ $default = false;
             </div>
         </div>
     </div>
+</div>
 
-    <!--Dynamic module modal-->
-    <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/create-module.php');?>
-    <!--Delete module confirm popup-->
-    <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-module.php');?>
-    <!--Delete author confirm popup-->
-    <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-author.php');?>
-    <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-source.php');?>
-    <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-confirm-popup.php');?>
-    <?php include_once(OER_LESSON_PLAN_PATH.'includes/popups/standard-selection.php');?>  
-</div>  
+<?php
+
+add_action( 'admin_footer', 'add_modals_to_footer' );
+function add_modals_to_footer(){
+    include_once(OER_LESSON_PLAN_PATH.'includes/popups/create-module.php');
+    include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-module.php');
+    include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-author.php');
+    include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-source.php');
+    include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-confirm-popup.php');
+    include_once(OER_LESSON_PLAN_PATH.'includes/popups/standard-selection.php');  
+}
