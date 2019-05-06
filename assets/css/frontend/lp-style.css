@@ -686,7 +686,9 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     height:24px;
     width:24px;
     top:2px;
+    fill: #ffb802;
 }
+.tc-lp-controls .sharethis-inline-share-buttons#st-1 .st-btn[data-network='sharethis']:hover svg{ fill:#fff; }
 /** End of Primary Source Template Styling **/
 @media (min-width: 1443px){
     .investigate-question-section {
