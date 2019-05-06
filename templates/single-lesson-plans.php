@@ -16,6 +16,7 @@ get_header();
 global $post;
 global $wpdb;
 $oer_sensitive = false;
+$sensitive_material = null;
 
 $post_meta_data = get_post_meta($post->ID );
 $elements_orders = isset($post_meta_data['lp_order'][0]) ? unserialize($post_meta_data['lp_order'][0]) : array();
@@ -27,13 +28,16 @@ if ($lp_grade!=="pre-k" && $lp_grade!=="k")
     
 // Download Copy
 $oer_lp_download_copy_document = (isset($post_meta_data['oer_lp_download_copy_document'][0]) ? $post_meta_data['oer_lp_download_copy_document'][0] : '');
-$oer_lp_standards = isset($post_meta_data['oer_lp_standards'][0])?unserialize($post_meta_data['oer_lp_standards'][0]):"";
+$oer_lp_standards = isset($post_meta_data['oer_lp_standards'][0])?$post_meta_data['oer_lp_standards'][0]:"";
 $tags = get_the_terms($post->ID,"post_tag");
 $authors = (isset($post_meta_data['oer_lp_authors'][0]) ? unserialize($post_meta_data['oer_lp_authors'][0]) : array());
 
 // check if there is a resource with sensitive material set
 $oer_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
-$sensitive_material = $oer_resources['sensitive_material'];
+
+if (isset($oer_resources['sensitive_material']))
+    $sensitive_material = $oer_resources['sensitive_material'];
+    
 if (!empty($sensitive_material) && count($sensitive_material)>0) {
     $oer_sensitive = true;
 }
@@ -81,6 +85,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                 <button class="open-standards">Standards</button>
                 <div id="standards-dialog" class="tc-lp-details-standards-list">
                     <?php
+                    $oer_lp_standards = explode(",",$oer_lp_standards);
                     if (is_array($oer_lp_standards)):
                         foreach($oer_lp_standards as $standard){
                             $standard_details = "";
@@ -249,7 +254,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                         </li>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_vocabulary_list_title_') !== false) {
                         $oer_lp_vocabulary_list_title = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
-                        $listOrder = end(explode('_', $elementKey));
+                        $oer_keys = explode('_', $elementKey); 
+                        $listOrder = end($oer_keys);
                         $oer_lp_vocabulary_details = (isset($post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0] : "");
                         if (!empty($oer_lp_vocabulary_list_title)) { ?>
                         <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
@@ -319,7 +325,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                     ?>
                 <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_vocabulary_list_title_') !== false) {
                     $oer_lp_vocabulary_list_title = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
-                    $listOrder = end(explode('_', $elementKey));
+                    $oer_keys = explode('_', $elementKey);
+                    $listOrder = end($oer_keys);
                     $oer_lp_vocabulary_details = (isset($post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0] : "");
                     if (!empty($oer_lp_vocabulary_list_title)) {
                         $tab_id = "tc-".sanitize_title($oer_lp_vocabulary_list_title)."-tab-content"
