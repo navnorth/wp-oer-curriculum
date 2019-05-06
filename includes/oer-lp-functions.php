@@ -191,7 +191,7 @@ if (! function_exists('get_standard_notations_from_ids')) {
      */
     function get_standard_notations_from_ids($ids, $admin = false) {
         $stds = null;
-        $ids = unserialize($ids);
+       
         if(!is_array($ids)) {
             $ids = str_replace('standard_notation-', '', $ids);
             $stds = explode(',', $ids);
@@ -203,7 +203,7 @@ if (! function_exists('get_standard_notations_from_ids')) {
         }
         
         // Count the number of ids
-        $idsCount = count($ids);
+        $idsCount = count($stds);
 
         // Prepare the right amount of placeholders, in an array
 

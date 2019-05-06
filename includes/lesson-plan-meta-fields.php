@@ -2204,7 +2204,7 @@ $default = false;
                         <div id="selected-standard-wrapper">
                             <p><?php _e("You have not selected any academic standards", OER_LESSON_PLAN_SLUG); ?></p>
                         </div>
-                        <input type="hidden" name="oer_lp_standards">
+                        <input type="hidden" name="oer_lp_standards" value="">
                         <div class="row">
                             <div class="col-md-12">
                                 <button type="button"

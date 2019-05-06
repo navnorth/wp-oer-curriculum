@@ -1,5 +1,5 @@
 <!-- Modal -->
-<?php global $post;?>
+<?php global $inquiryset_post, $post;?>
 <div class="modal fade" id="lpOerStandardModal" tabindex="-1" role="dialog" aria-labelledby="lpOerStandardModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -25,9 +25,8 @@
                 <div class="oer-lp-standard-search-result hide" id="oer-lp-standard-search-result"></div>
                 <div class="oer-lp-standard-default-result">
                     <?php
-                    //lp_oer_display_standards();
                     if (function_exists('was_selectable_admin_standards')){
-                        was_selectable_admin_standards($post->ID, 'oer_lp_standards');
+                        was_selectable_admin_standards($inquiryset_post->ID, 'oer_lp_standards');
                     }?>
                 </div>
             </div>

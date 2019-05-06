@@ -19,6 +19,7 @@ $oer_sensitive = false;
 
 $post_meta_data = get_post_meta($post->ID );
 $elements_orders = isset($post_meta_data['lp_order'][0]) ? unserialize($post_meta_data['lp_order'][0]) : array();
+
 //Grade Level
 $lp_grade = isset($post_meta_data['oer_lp_grades'][0])? unserialize($post_meta_data['oer_lp_grades'][0])[0]:"";
 if ($lp_grade!=="pre-k" && $lp_grade!=="k")
