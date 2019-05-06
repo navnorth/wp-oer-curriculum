@@ -26,6 +26,7 @@ if ($lp_grade!=="pre-k" && $lp_grade!=="k")
     
 // Download Copy
 $oer_lp_download_copy_document = (isset($post_meta_data['oer_lp_download_copy_document'][0]) ? $post_meta_data['oer_lp_download_copy_document'][0] : '');
+var_dump($post_meta_data['oer_lp_standards'][0]);
 $oer_lp_standards = isset($post_meta_data['oer_lp_standards'][0])?unserialize($post_meta_data['oer_lp_standards'][0]):"";
 $tags = get_the_terms($post->ID,"post_tag");
 $authors = (isset($post_meta_data['oer_lp_authors'][0]) ? unserialize($post_meta_data['oer_lp_authors'][0]) : array());
@@ -45,7 +46,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             <?php the_post_thumbnail(); ?>
             <div class="tc-lp-grade"><?php echo $lp_grade ?></div>
             <div class="tc-lp-controls">
-                <a href=""><i class="fal fa-share-alt"></i></a>
+                <div class="sharethis-inline-share-buttons"></div>
                 <?php if ($oer_lp_download_copy_document): ?>
                 <a href="<?php echo $oer_lp_download_copy_document; ?>"><i class="fal fa-download"></i></a>
                 <?php endif; ?>

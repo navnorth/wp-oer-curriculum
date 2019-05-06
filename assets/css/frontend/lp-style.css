@@ -681,6 +681,12 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     position:absolute;
     top:43%;
 }
+.tc-lp-controls .sharethis-inline-share-buttons#st-1 .st-btn[data-network='sharethis'] { background-color:transparent; }
+.tc-lp-controls .sharethis-inline-share-buttons#st-1 .st-btn[data-network='sharethis'] svg {
+    height:24px;
+    width:24px;
+    top:2px;
+}
 /** End of Primary Source Template Styling **/
 @media (min-width: 1443px){
     .investigate-question-section {
