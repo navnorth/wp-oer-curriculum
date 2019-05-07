@@ -60,6 +60,13 @@ jQuery(document).ready(function($){
         var tab = nav.attr('data-activetab');
         lp_redirect_with_post(url, tab);
     });
+    
+    $('.question-popup-button').on("click", function(e){
+        e.preventDefault();
+        tab_content = $(this).attr('href');
+        $('.ps-info-tabs a[href="' + tab_content + '"]').tab("show");
+        $('.ps-info-tabs a[href="' + tab_content + '"]').removeClass*('show');
+    });
 });
 
 function lp_redirect_with_post(url, tab) {

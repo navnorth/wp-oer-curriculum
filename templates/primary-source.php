@@ -74,33 +74,69 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
     <span class="ps-nav-right <?php echo $lp_next_class; ?>"><a class="lp-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>"><i class="fal fa-chevron-right fa-2x"></i></a></span>
     <span class="ps-expand"><a href="<?php echo $featured_image_url; ?>" class="lp-expand-img" target="_blank"><i class="fal fa-expand-arrows-alt"></i></a></span>
 </div>
+<?php
+$resource_meta = null;
+$subject_areas = null;
+$transcription_display = false;
+$sensitive_material_display = false;
+$tab_count = 3;
+if (function_exists('oer_get_resource_metadata')){
+    $resource_meta = oer_get_resource_metadata($resource->ID);
+}
+if (isset($resource_meta['oer_transcription']) && $resource_meta['oer_transcription'][0]!==""){
+    $transcription_display = true;
+    $tab_count++;
+}
+
+if (isset($resource_meta['oer_sensitive_material']) && $resource_meta['oer_sensitive_material'][0]!==""){
+    $sensitive_material_display = true;
+    $tab_count++;
+}
+$tabs = floor(12/$tab_count);   
+
+if ($sensitive_material_display==true) : ?>
+<div class="tc-sensitive-material-section tc-primary-source-sensitive-material-section">
+    <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
+    <button class="question-popup-button" role="button" data-toggle="tab" data-tabid="ps-sensitive-info-tab" href="#ps-sensitive-info-tab-content"><i class="fal fa-question-circle"></i></button>
+</div>
+<?php endif; ?>
 <div class="ps-info">
     <ul class="nav nav-tabs ps-info-tabs" id="ps-info-tabs-section" role="tablist">
-        <li class="nav-item col-md-4 col-sm-4 padding-0">
+        <li class="nav-item col-md-<?php echo $tabs; ?> col-sm-6 padding-0">
             <a class="nav-link active" id="ps-information-tab" data-toggle="tab" href="#ps-information-tab-content" role="tabs" aria-controls="ps-information-tab-content" aria-selected="true" aria-expanded="false">
-                Information    
+                <?php _e("Resource Info.", OER_LESSON_PLAN_SLUG); ?>    
             </a>
         </li>
-        <li class="nav-item col-md-4 col-sm-4 padding-0">
+        <li class="nav-item col-md-<?php echo $tabs; ?> col-sm-6 padding-0">
             <a class="nav-link" id="ps-student-info-tab" data-toggle="tab" href="#ps-student-info-tab-content" role="tabs" aria-controls="ps-student-info-tab-content" aria-selected="true" aria-expanded="false">
                 For The Student    
             </a>
         </li>
-        <li class="nav-item col-md-4 col-sm-4 padding-0">
+        <li class="nav-item col-md-<?php echo $tabs; ?> col-sm-6 padding-0">
             <a class="nav-link" id="ps-teacher-info-tab" data-toggle="tab" href="#ps-teacher-info-tab-content" role="tabs" aria-controls="ps-teacher-info-tab-content" aria-selected="true" aria-expanded="false">
                 For The Teacher    
             </a>
         </li>
+        <?php if ($transcription_display==true) : ?>
+        <li class="nav-item col-md-<?php echo $tabs; ?> col-sm-6 padding-0">
+            <a class="nav-link" id="ps-transcription-info-tab" data-toggle="tab" href="#ps-transcription-info-tab-content" role="tabs" aria-controls="ps-transcription-info-tab-content" aria-selected="true" aria-expanded="false">
+                <?php _e("Transcription", OER_LESSON_PLAN_SLUG); ?>    
+            </a>
+        </li>
+        <?php endif; ?>
+        <?php if ($sensitive_material_display==true) : ?>
+        <li class="nav-item col-md-<?php echo $tabs; ?> col-sm-6 padding-0">
+            <a class="nav-link" id="ps-sensitive-info-tab" data-toggle="tab" href="#ps-sensitive-info-tab-content" role="tabs" aria-controls="ps-sensitive-info-tab-content" aria-selected="true" aria-expanded="false">
+                <?php _e("Sensitive Material Warning", OER_LESSON_PLAN_SLUG); ?>    
+            </a>
+        </li>
+        <?php endif; ?>
     </ul>
 </div>
 <div class="ps-info-tabs-content">
     <div class="tab-pane clearfix fade active in" id="ps-information-tab-content" role="tabpanel" aria-labelledby="ps-information-tab">
         <?php
-        $resource_meta = null;
-        $subject_areas = null;
-        if (function_exists('oer_get_resource_metadata')){
-            $resource_meta = oer_get_resource_metadata($resource->ID);
-        }
+        
         $isFile = false;
         if (!function_exists('is_file_resource'))
             $isFile = is_file_resource($resource_meta['oer_resourceurl'][0]);
@@ -116,8 +152,7 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             </div>
             <?php if (isset($resource_meta['oer_resourceurl'])) { ?>
             <div class="ps-meta-group ps-resource-url">
-                <label class="ps-label">Original Resource:</label>
-                <span class="ps-value"><a href="<?php echo $resource_meta['oer_resourceurl'][0]; ?>"><?php echo $resource_meta['oer_resourceurl'][0]; ?></a></span>
+                <a href="<?php echo $resource_meta['oer_resourceurl'][0]; ?>" class="tc-view-button" target="_blank">Full Resource View</a>
             </div>
             <?php } ?>
         </div>
@@ -155,6 +190,13 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
                 <?php endif; ?>
             </div>
             <?php } ?>
+            <?php if (isset($resource_meta['oer_datecreated_estimate']) && $resource_meta['oer_datecreated_estimate'][0]!=="") {
+            ?>
+            <div class="ps-meta-group">
+                <label class="ps-label">Date Created Estimate:</label>
+                <span class="ps-value"><?php echo $resource_meta['oer_datecreated_estimate'][0]; ?></span>
+            </div>
+            <?php } ?>
             <?php if (isset($resource_meta['oer_publishername']) && $resource_meta['oer_publishername'][0]!=="") {
                 $publisher_url = "";
                 if (isset($resource_meta['oer_publisherurl']))
@@ -169,42 +211,48 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
                 <?php endif; ?>
             </div>
             <?php } ?>
-            <?php if (isset($resource_meta['oer_mediatype'][0])) { ?>
+            <?php if (isset($resource_meta['oer_mediatype'][0]) && $resource_meta['oer_mediatype'][0]!=="") { ?>
             <div class="ps-meta-group">
-                <label class="ps-label">Type:</label>
+                <label class="ps-label">Format:</label>
                 <span class="ps-value"><?php echo ucwords($resource_meta['oer_mediatype'][0]); ?></span>
             </div>
             <?php } ?>
-            <?php if (isset($resource_meta['oer_interactivity'][0])) { ?>
+            <?php if (isset($resource_meta['oer_citation'][0]) && $resource_meta['oer_citation'][0]!=="") { ?>
             <div class="ps-meta-group">
-                <label class="ps-label">Interactivity:</label>
-                <span class="ps-value"><?php echo ucwords($resource_meta['oer_interactivity'][0]); ?></span>
+                <label class="ps-label">Citation:</label>
+                <span class="ps-value"><?php echo $resource_meta['oer_citation'][0]; ?></span>
             </div>
             <?php } ?>
-            <?php if (isset($resource_meta['oer_grade'][0])) {
+            <?php //if (isset($resource_meta['oer_interactivity'][0]) && $resource_meta['oer_interactivity'][0]!=="") { ?>
+            <!--<div class="ps-meta-group">
+                <label class="ps-label">Interactivity:</label>
+                <span class="ps-value"><?php echo ucwords($resource_meta['oer_interactivity'][0]); ?></span>
+            </div>-->
+            <?php //} ?>
+            <?php /*if (isset($resource_meta['oer_grade'][0]) && $resource_meta['oer_interactivity'][0]!=="") {
                 $grades = explode(",",$resource_meta['oer_grade'][0]);
                 if (is_array($grades) && !empty($grades) && $grades[0]!=="" ){
                     if (function_exists('oer_grade_levels'))
-                        $grades = oer_grade_levels($grades);
+                        $grades = oer_grade_levels($grades);*/
             ?>
-            <div class="ps-meta-group">
+            <!--<div class="ps-meta-group">
                 <label class="ps-label">Grades:</label>
-                <span class="ps-value"><?php echo $grades; ?></span>
-            </div>
-            <?php }
-            } ?>
-            <div class="ps-meta-group">
+                <span class="ps-value"><?php //echo $grades; ?></span>
+            </div>-->
+            <?php //}
+            //} ?>
+            <!--<div class="ps-meta-group">
                 <label class="ps-label">Keywords:</label>
-            </div>
+            </div>-->
             <?php
-            $keywords = wp_get_post_tags($resource->ID);
-            if(!empty($keywords)) { ?>
-            <div class="ps-tagcloud ps-keywords">
-                <?php foreach($keywords as $keyword){ ?>
-                    <span><a href="<?php echo esc_url(get_tag_link($keyword->term_id)); ?>" class="ps-button"><?php echo ucwords($keyword->name); ?></a></span>
-                <?php } ?>
-            </div>
-            <?php } ?>
+            //$keywords = wp_get_post_tags($resource->ID);
+            //if(!empty($keywords)) { ?>
+            <!--<div class="ps-tagcloud ps-keywords">-->
+                <?php //foreach($keywords as $keyword){ ?>
+                    <!--<span><a href="<?php //echo esc_url(get_tag_link($keyword->term_id)); ?>" class="ps-button"><?php //echo ucwords($keyword->name); ?></a></span>-->
+                <?php //} ?>
+            <!--</div>-->
+            <?php //} ?>
         </div>
     </div>
     <div class="tab-pane clearfix fade in" id="ps-student-info-tab-content" role="tabpanel" aria-labelledby="ps-student-info-tab">
@@ -213,6 +261,16 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
     <div class="tab-pane clearfix fade in" id="ps-teacher-info-tab-content" role="tabpanel" aria-labelledby="ps-teacher-info-tab">
         <?php echo $teacher_info; ?>
     </div>
+    <?php if ($transcription_display==true) : ?>
+    <div class="tab-pane clearfix fade in" id="ps-transcription-info-tab-content" role="tabpanel" aria-labelledby="ps-transcription-info-tab">
+        <?php echo $resource_meta['oer_transcription'][0]; ?>
+    </div>
+    <?php endif; ?>
+    <?php if ($sensitive_material_display==true) : ?>
+    <div class="tab-pane clearfix fade in" id="ps-sensitive-info-tab-content" role="tabpanel" aria-labelledby="ps-sensitive-info-tab">
+        <?php echo $resource_meta['oer_sensitive_material'][0]; ?>
+    </div>
+    <?php endif; ?>
 </div>
 <div class="lp-ajax-loader" role="status">
     <div class="lp-ajax-loader-img">
