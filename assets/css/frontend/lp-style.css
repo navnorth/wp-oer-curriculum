@@ -221,6 +221,7 @@ span.selected-standard-pill:last-child {
     box-shadow: none!important;
     border-radius: 0;
     transition: all .2s ease-in;
+    margin-top:35px;
 }
 .excerpt-button i {
     margin-left: 15px;
