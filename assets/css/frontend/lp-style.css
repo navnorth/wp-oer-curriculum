@@ -414,6 +414,36 @@ span.selected-standard-pill:last-child {
 .tc-home-tabs li.nav-item a.active, .ps-info-tabs li.nav-item a.active {
     color:#fff !important;
 }
+.tc-home-tabs .col-md-1.nav-item .active:after {
+    transition: all .2s ease-in;
+    border-left: 2.5em solid transparent;
+    border-right: 2.5em solid transparent;
+    border-top: 40px solid #4a6e7f;
+    content: " ";
+    position: absolute;
+    bottom: -40px;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 30%;
+    filter: drop-shadow(0 5px 3px rgba(0,0,0,0.1));
+}
+.tc-home-tabs .col-md-2.nav-item .active:after {
+    transition: all .2s ease-in;
+    border-left: 3em solid transparent;
+    border-right: 3em solid transparent;
+    border-top: 40px solid #4a6e7f;
+    content: " ";
+    position: absolute;
+    bottom: -40px;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 30%;
+    filter: drop-shadow(0 5px 3px rgba(0,0,0,0.1));
+}
 .tc-home-tabs .col-md-3.nav-item .active:after {
     transition: all .2s ease-in;
     border-left: 3.5em solid transparent;
