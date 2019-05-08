@@ -248,7 +248,8 @@ if (! function_exists('get_file_type_from_url')) {
         }
 
         $response = array();
-        $file_type = strtolower(end(explode('.', $url)));
+        $oer_urls = explode('.', $url);
+        $file_type = strtolower(end($oer_urls));
         if(in_array($file_type, ['jpg', 'jpeg', 'gif', 'png'])) {
             $response['title'] = 'Image';
             $response['icon'] = '<i class="fa fa-file-image-o '.$class.'"></i>';

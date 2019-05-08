@@ -201,7 +201,6 @@ if (have_posts()) : while (have_posts()) : the_post();
                 $keys = array(
                     "lp_introduction_order",
                     "lp_primary_resources",
-                    "lp_oer_materials",
                     "lp_lesson_times_order",
                     "lp_industries_order",
                     "lp_standard_order",
@@ -235,7 +234,17 @@ if (have_posts()) : while (have_posts()) : the_post();
                             <?php echo $oer_lp_custom_editor['title']; ?>
                         </a>
                     </li>
-                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_editor_') !== false) {
+                    <?php  } elseif (strpos($elementKey, 'lp_oer_materials') !== false) {
+                        $materials = (isset($post_meta_data['lp_oer_materials'][0]) ? unserialize($post_meta_data['lp_oer_materials'][0]) : array());
+                        if (count($materials)>0) {
+                    ?>
+                    <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
+                        <a class="nav-link" id="tc-materials-tab" data-toggle="tab" href="#tc-materials-tab-content" role="tab" aria-controls="tc-materials-tab" aria-selected="false" aria-expanded="false">
+                            <?php _e("Materials",OER_LESSON_PLAN_SLUG); ?>
+                        </a>
+                    </li>
+                    <?php }
+                    } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_editor_') !== false) {
                         $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                         if(!empty($oer_lp_custom_editor)) {
                         ?>
@@ -306,6 +315,72 @@ if (have_posts()) : while (have_posts()) : the_post();
                     </div>
                     <?php
                     } ?>
+                <?php  } elseif (strpos($elementKey, 'lp_oer_materials') !== false) {
+                        $materials = (isset($post_meta_data['lp_oer_materials'][0]) ? unserialize($post_meta_data['lp_oer_materials'][0]) : array());
+                        $block_size = 12;
+                        if (count($materials)>0) {
+                            $arr_materials = array();
+                            $urls = $materials['url'];
+                            $titles = $materials['title'];
+                            $descriptions = $materials['description'];
+                            $block_size = floor(12/count($urls));
+                            for($i=0;$i<count($urls);$i++){
+                                $arr_materials[$i] = array("url" => $urls[$i],
+                                                           "title" => $titles[$i],
+                                                           "description" => $descriptions[$i]);
+                            }
+                    ?>
+                    <div class="tab-pane clearfix fade" id="tc-materials-tab-content" role="tabpanel" aria-labelledby="tc-materials-list-tab">
+                        <div class="tc-tab-content">
+                            <?php foreach($arr_materials as $material){ ?>
+                                <a href="<?php echo $material['url']; ?>" class="tc-material-block-link" target="_blank">
+                                <div class="tc-material-block col-md-<?php echo $block_size; ?> col-sm-6">
+                                    <?php if (isset($material['title']) && ($material['title']!="")): ?>
+                                    <h4><?php echo $material['title']; ?></h4>
+                                    <?php endif; ?>
+                                    <?php if (isset($material['url']) && ($material['url']!="")): ?>
+                                    <div class="tc-material-icon">
+                                        <?php
+                                            $icon = "";
+                                            $file_type = get_file_type_from_url($material['url']);
+                                            switch ($file_type['title']){
+                                                case "Image":
+                                                    $icon = '<i class="far fa-file-image fa-6x"></i>';
+                                                    break;
+                                                case "PDF":
+                                                    $icon = '<i class="far fa-file-pdf fa-6x"></i>';
+                                                    break;
+                                                case "Plain Text":
+                                                    $icon = '<i class="far fa-file-alt fa-6x"></i>';
+                                                    break;
+                                                case "Archive":
+                                                    $icon = '<i class="far fa-file-archive fa-6x"></i>';
+                                                    break;
+                                                case "Microsoft Document":
+                                                    $icon = '<i class="far fa-file-word fa-6x"></i>';
+                                                    break;
+                                                case "Microsoft Excel":
+                                                    $icon = '<i class="far fa-file-excel fa-6x"></i>';
+                                                    break;
+                                                case "Microsoft Powerpoint":
+                                                    $icon = '<i class="far fa-file-powerpoint fa-6x"></i>';
+                                                    break;
+                                            }
+                                        ?>
+                                        <span><?php echo $icon; ?></span>
+                                    </div>
+                                    <?php endif; ?>
+                                    <div class="custom-bg-dark custom-bg-dark-inquiry-sets"></div>
+                                    <div class="tc-material-description">
+                                        <?php if (isset($material['description']) && ($material['description']!="")): ?>
+                                            <?php echo $material['description']; ?>
+                                        <?php endif; ?>
+                                    </div>
+                                </div></a>
+                            <?php } ?>
+                        </div>
+                    </div>
+                <?php } ?>
                 <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_text_list_') !== false) {
                     $oer_lp_custom_text_list = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : array());
                     if (!empty(array_filter($oer_lp_custom_text_list))) {

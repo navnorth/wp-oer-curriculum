@@ -584,6 +584,25 @@ span.selected-standard-pill:last-child {
     margin-bottom: 0;
     font-size: 16px;
 }
+.tc-material-block { text-align:center; width:350px !important; }
+.tc-material-block h4 {
+    background: #f0f0f0;
+    padding: 10px;
+    margin-bottom:0;
+}
+.tc-material-icon {
+    background: #E0E0E0;
+    min-height:200px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.tc-material-description {
+    padding: 20px;
+    font-weight: 500;
+    background: #f0f0f0;
+}
 /** Primary Source Template Styling **/
 .primary-source-template .site-header { display: none; }
 .primary-source-template .site-content { position:relative; margin-top:0 !important; }
