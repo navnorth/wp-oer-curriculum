@@ -322,7 +322,9 @@ span.selected-standard-pill:last-child {
     width: 100%;
     margin-left: 0;
 }
-
+.tc-home-tabs .nav-link {
+    margin: 0;
+}
 .tc-home-tabs-content {
     background: #fff;
     margin-bottom: 20px;
