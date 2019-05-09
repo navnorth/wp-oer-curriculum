@@ -353,3 +353,26 @@ if (! function_exists('oer_lp_get_inquiry_set_metadata')){
         return get_post_meta($id);
     }
 }
+
+if (! function_exists('oer_lp_title_from_slug')){
+    function oer_lp_title_from_slug($slug){
+        return str_replace("-"," ",$slug);
+    }
+}
+
+if (! function_exists('oer_inquiry_set_grade_level')){
+    function oer_inquiry_set_grade_level($inquiry_set_id){
+        $grades = get_post_meta($inquiry_set_id, "oer_lp_grades", true);
+        $grades = $grades[0];
+        $grade_level = "";
+        
+        if ($grades == "pre-k")
+            $grade_level = "Pre-Kindergarten";
+        elseif ($grades == "k")
+            $grade_level = "Kindergarten";
+        else
+            $grade_level = "Grade ".$grades;
+            
+        return $grade_level;
+    }
+}
