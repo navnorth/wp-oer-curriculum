@@ -1825,6 +1825,42 @@ $default = false;
                                 </div>
                             </div>
                             <?php
+                        } elseif($module=="oer_lp_custom_editor_historical_background"){
+                            ?>
+                            <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-historical-background">
+                                <input type="hidden" name="lp_order[<?php echo $module; ?>]" class="element-order" value="<?php echo $index;?>">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title lp-module-title">
+                                        <?php _e("Historical Background", OER_LESSON_PLAN_SLUG); ?>
+                                        <span class="lp-sortable-handle">
+                                            <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                            <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                     <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" name="<?php echo $module; ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" />
+                                    </div>
+                                    <div class="form-group">
+                                    <?php
+                                    wp_editor( '',
+                                        'oer-lp-custom-editor-historical-background',
+                                        $settings = array(
+                                            'textarea_name' => "" . $module ."[description]",
+                                            'media_buttons' => true,
+                                            'textarea_rows' => 10,
+                                            'drag_drop_upload' => true,
+                                            'teeny' => true,
+                                        )
+                                    );
+                                    ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
                          } elseif($module=="oer_lp_custom_editor_student_background"){
                             ?>
                             <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-student-background">

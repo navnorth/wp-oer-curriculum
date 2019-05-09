@@ -48,8 +48,9 @@ $oer_lp_default_structure = array(
     'lp_standard_order',
     'lp_iq',
     'lp_primary_resources',
-    'oer_lp_custom_editor_teacher_background',
-    'oer_lp_custom_editor_student_background',
+    // 'oer_lp_custom_editor_teacher_background',
+    // 'oer_lp_custom_editor_student_background',
+    'oer_lp_custom_editor_historical_background',
     'lp_oer_materials'
 );
 
