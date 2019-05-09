@@ -755,6 +755,15 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
 }
 .tc-lp-controls .sharethis-inline-share-buttons#st-1 .st-btn[data-network='sharethis']:hover svg{ fill:#fff; }
 /** End of Primary Source Template Styling **/
+/** Topic Template Styling **/
+.topic-template #page.site { padding-left:0; padding-right:0; }
+.topic-template #page.site .site-content { margin-top:0; }
+.tc-topic-wrapper {
+    margin: 75px auto 50px;
+    max-width: 1200px;
+    overflow:hidden; 
+}
+/** End of Topic Template Styling **/
 @media (min-width: 1443px){
     .investigate-question-section {
         /* padding: 17.3% 10%; */

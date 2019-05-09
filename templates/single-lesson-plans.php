@@ -105,7 +105,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     if ($tags):
                     foreach($tags as $tag){
                     ?>
-                    <a href="javascript:void(0)" class="tc-lp-details-tag"><?php echo $tag->name; ?></a>
+                    <a href="<?php echo site_url("inquiry-sets/topic/".sanitize_title($tag->name)) ?>" class="tc-lp-details-tag"><?php echo $tag->name; ?></a>
                     <?php
                     }
                     endif;
