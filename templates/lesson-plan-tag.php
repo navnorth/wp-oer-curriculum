@@ -2,7 +2,6 @@
 
 $tag = get_query_var('topic');
 $term = get_term_by("slug",$tag);
-var_dump($term);
 add_filter('body_class', function($classes){
     $classes[] = 'topic-template';
     return $classes;
