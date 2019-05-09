@@ -175,7 +175,7 @@ var myInquirySets = function (_Component) {
                 wp.element.createElement(SelectControl, { onChange: this.onChangeSelectInquirySet, value: this.props.attributes.selectedInquirySet, label: __('Inquiry Set:'), options: options })
             ), wp.element.createElement(
                 'a',
-                { href: this.props.attributes.link, target: '_blank', className: 'lp-tc-related-inquiry-block-link' },
+                { href: this.props.attributes.link, target: '_blank', className: 'lp-tc-related-inquiry-block-link', rel: 'noopener noreferrer' },
                 wp.element.createElement(
                     'div',
                     { className: 'lp-tc-related-inquiry-blocks-padding' },
@@ -240,7 +240,7 @@ wp.blocks.registerBlockType('wp-curriculum/inquiry-set-thumbnail-block', {
 
         return wp.element.createElement(
             'a',
-            { href: attributes.link, target: '_blank', className: 'lp-tc-related-inquiry-block-link' },
+            { href: attributes.link, target: '_blank', className: 'lp-tc-related-inquiry-block-link', rel: 'noopener noreferrer' },
             wp.element.createElement(
                 'div',
                 { className: 'lp-tc-related-inquiry-blocks-padding' },
