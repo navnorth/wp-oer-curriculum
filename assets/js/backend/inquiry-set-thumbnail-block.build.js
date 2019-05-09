@@ -174,40 +174,40 @@ var myInquirySets = function (_Component) {
                 { key: 'inspectorset' },
                 wp.element.createElement(SelectControl, { onChange: this.onChangeSelectInquirySet, value: this.props.attributes.selectedInquirySet, label: __('Inquiry Set:'), options: options })
             ), wp.element.createElement(
-                'div',
-                { className: 'lp-tc-related-inquiry-blocks-padding' },
+                'a',
+                { href: this.props.attributes.link, target: '_blank', className: 'lp-tc-related-inquiry-block-link' },
                 wp.element.createElement(
                     'div',
-                    { className: 'media-image' },
+                    { className: 'lp-tc-related-inquiry-blocks-padding' },
                     wp.element.createElement(
                         'div',
-                        { className: 'image-thumbnail' },
+                        { className: 'media-image' },
                         wp.element.createElement(
                             'div',
-                            { className: 'image-section' },
-                            wp.element.createElement('img', { src: this.props.attributes.featuredImage, alt: '', className: 'img-thumbnail-square img-responsive img-loaded' })
+                            { className: 'image-thumbnail' },
+                            wp.element.createElement(
+                                'div',
+                                { className: 'image-section' },
+                                wp.element.createElement('img', { src: this.props.attributes.featuredImage, alt: '', className: 'img-thumbnail-square img-responsive img-loaded' })
+                            )
                         )
-                    )
-                ),
-                wp.element.createElement(
-                    'div',
-                    { className: 'lp-tc-related-inquiry-grades' },
+                    ),
                     wp.element.createElement(
-                        'span',
-                        null,
-                        this.props.attributes.grade
-                    )
-                ),
-                wp.element.createElement('div', { className: 'custom-bg-dark custom-bg-dark-inquiry-sets' }),
-                wp.element.createElement(
-                    'div',
-                    { className: 'lp-tc-related-inquiry-set-description' },
-                    wp.element.createElement(
-                        'h4',
-                        null,
+                        'div',
+                        { className: 'lp-tc-related-inquiry-grades' },
                         wp.element.createElement(
-                            'a',
-                            { href: this.props.attributes.link },
+                            'span',
+                            null,
+                            this.props.attributes.grade
+                        )
+                    ),
+                    wp.element.createElement('div', { className: 'custom-bg-dark custom-bg-dark-inquiry-sets' }),
+                    wp.element.createElement(
+                        'div',
+                        { className: 'lp-tc-related-inquiry-set-description' },
+                        wp.element.createElement(
+                            'h4',
+                            null,
                             this.props.attributes.title
                         )
                     )
@@ -239,40 +239,40 @@ wp.blocks.registerBlockType('wp-curriculum/inquiry-set-thumbnail-block', {
 
 
         return wp.element.createElement(
-            'div',
-            { className: 'lp-tc-related-inquiry-blocks-padding' },
+            'a',
+            { href: attributes.link, target: '_blank', className: 'lp-tc-related-inquiry-block-link' },
             wp.element.createElement(
                 'div',
-                { className: 'media-image' },
+                { className: 'lp-tc-related-inquiry-blocks-padding' },
                 wp.element.createElement(
                     'div',
-                    { className: 'image-thumbnail' },
+                    { className: 'media-image' },
                     wp.element.createElement(
                         'div',
-                        { className: 'image-section' },
-                        wp.element.createElement('img', { src: attributes.featuredImage, alt: '', className: 'img-thumbnail-square img-responsive img-loaded' })
+                        { className: 'image-thumbnail' },
+                        wp.element.createElement(
+                            'div',
+                            { className: 'image-section' },
+                            wp.element.createElement('img', { src: attributes.featuredImage, alt: '', className: 'img-thumbnail-square img-responsive img-loaded' })
+                        )
                     )
-                )
-            ),
-            wp.element.createElement(
-                'div',
-                { className: 'lp-tc-related-inquiry-grades' },
+                ),
                 wp.element.createElement(
-                    'span',
-                    null,
-                    attributes.grade
-                )
-            ),
-            wp.element.createElement('div', { className: 'custom-bg-dark custom-bg-dark-inquiry-sets' }),
-            wp.element.createElement(
-                'div',
-                { className: 'lp-tc-related-inquiry-set-description' },
-                wp.element.createElement(
-                    'h4',
-                    null,
+                    'div',
+                    { className: 'lp-tc-related-inquiry-grades' },
                     wp.element.createElement(
-                        'a',
-                        { href: attributes.link },
+                        'span',
+                        null,
+                        attributes.grade
+                    )
+                ),
+                wp.element.createElement('div', { className: 'custom-bg-dark custom-bg-dark-inquiry-sets' }),
+                wp.element.createElement(
+                    'div',
+                    { className: 'lp-tc-related-inquiry-set-description' },
+                    wp.element.createElement(
+                        'h4',
+                        null,
                         attributes.title
                     )
                 )
