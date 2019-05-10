@@ -61,7 +61,7 @@ body.single-lesson-plans {
     font-size: 16px;
     line-height:18px;
 }
-.tc-lp-details-description p { color:#fff !important; font-size:16px; line-height:20px; }
+.tc-lp-details-description p { color:#fff !important; font-size:16px; line-height:22px; }
 .tc-lp-details-standards-list { padding:20px 0; }
 .tc-lp-details-standards-list .tc-lp-details-standard {
     display: inline-block;
@@ -180,9 +180,9 @@ span.selected-standard-pill:last-child {
     width: 77% !important;
 }
 .tc-pink-triangle {
-    border-left: 75px solid #851738;
-    border-top: 52px solid transparent;
-    border-bottom: 52px solid transparent;
+    border-left: 100px solid #851738;
+    border-top: 68px solid transparent;
+    border-bottom: 68px solid transparent;
 }
 .excerpt-section {
     color: #fff;
@@ -207,7 +207,7 @@ span.selected-standard-pill:last-child {
 .excerpt-button {
     font-size: 16px;
     font-family: "Biko", 'Helvetica Neue', 'Roboto', Arial, Helvetica, sans-serif;
-    padding: 7px 18px;
+    padding: 9px 18px 7px 18px;
     text-transform: uppercase;
     background-color: #AD2152;
     color: white;
@@ -215,11 +215,12 @@ span.selected-standard-pill:last-child {
     box-shadow: none!important;
     border-radius: 0;
     transition: all .2s ease-in;
-    margin-top:35px;
+    margin-top:33px;
 }
 .excerpt-button i {
     margin-left: 15px;
     font-size: 20px;
+    vertical-align: middle;
 }
 
 .excerpt-button:hover {
@@ -238,7 +239,8 @@ span.selected-standard-pill:last-child {
 }
 .investigative-section-answer {
     color: #fff;
-    font-size: 24px;
+    font-size: 18px;
+    line-height: 22px;
 }
 
 #framework-excerpt {

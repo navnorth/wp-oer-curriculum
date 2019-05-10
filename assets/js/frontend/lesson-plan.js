@@ -2,14 +2,25 @@ $ = jQuery;
 
 $(document).ready(function() {
     $('#show-excerpt').click(function() {
+        toggleArrow('#framework-excerpt', '#show-excerpt');
         $('#framework-excerpt').slideToggle('slow', function() {
             if ($(this).is(':visible')) { 
                 $(this).css({'display': 'flex', 'align-items': 'stretch'});
+            } else {
             }
         })
     })
+
+    function toggleArrow(parentID, iconID) {
+        if ($(parentID).is(':visible')) {
+            $(`${iconID} i`).removeClass('fa-angle-up').addClass('fa-angle-down');
+        } else {
+            $(`${iconID} i`).removeClass('fa-angle-down').addClass('fa-angle-up');
+        }
+    }
     
     $('#close-excerpt').click(function() {
+        toggleArrow('#framework-excerpt', '#show-excerpt');
         $('#framework-excerpt').slideUp('slow');
     })
     

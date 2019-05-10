@@ -140,7 +140,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                 <div class="excerpt-section">
                     <h2><?php echo $oer_lp_iq['question']; ?></h2>
                     <div class="show-excerpt-section text-right">
-                        <button id="show-excerpt" type="button" class="excerpt-button">Framework Excerpt<i class="fal fa-angle-right"></i></button>
+                        <button id="show-excerpt" type="button" class="excerpt-button"><span>Framework Excerpt</span><i class="fal fa-angle-down"></i></button>
                     </div>
                 </div>
             </div>
