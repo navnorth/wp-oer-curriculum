@@ -10,7 +10,7 @@ body.single-lesson-plans {
 .single-lesson-plans #page.container, .site-content .container { width:100%; max-width: 1440px; padding:0; }
 .lp-featured-section { 
     background: linear-gradient(180deg, #4A6F81 0%, #436576 71.27%);
-    max-height:440px; }
+}
 .padding-0 { padding:0 !important; }
 .tc-lp-controls {
     position: absolute;
@@ -141,13 +141,7 @@ body.single-lesson-plans {
 .investigate-section-custom-width {
     width: 23% !important;
 }
-.lp-featured-section { max-height:480px; overflow:hidden; }
-.lp-featured-section .featured-image img {
-    height: 100%;
-    width: 100%;
-    object-fit: fill;
-    object-position: 50% 50%;
-}
+.lp-featured-section { overflow:hidden; }
 span.selected-standard-pill {
     padding: 5px 10px;
     background: #f1f1f1;
@@ -907,3 +901,17 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     display: none;
 }
 .tc-primary-source-sensitive-material-section p { padding:5px 15px 6px; }
+
+.resource-thumbnail {
+    width: 360px;
+    height: 360px;
+    background-size: cover;
+}
+.resource-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(204,97,12,.5);
+}

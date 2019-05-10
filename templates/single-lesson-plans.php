@@ -47,7 +47,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 <div class="container">
     <div class="row lp-featured-section">
         <div class="col-md-6 col-sm-12 featured-image padding-0">
-            <?php the_post_thumbnail(); ?>
+            <?php the_post_thumbnail('inquiry-set-featured'); ?>
             <div class="tc-lp-grade"><?php echo $lp_grade ?></div>
             <div class="tc-lp-controls">
                 <div class="sharethis-inline-share-buttons"></div>
@@ -160,7 +160,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             if (!empty(array_filter($primary_resources['resource']))) {
                 foreach ($primary_resources['resource'] as $resourceKey => $resource) {
                     $resource = get_page_by_title($resource,OBJECT,"resource");
-                    $resource_img = get_the_post_thumbnail_url($resource);
+                    $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
                     $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
                     $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
                     if ($sensitiveMaterialValue!=="")
@@ -169,15 +169,15 @@ if (have_posts()) : while (have_posts()) : the_post();
                 <div class="col-md-3 col-sm-3 padding-0">
                     <div class="media-image">
                         <div class="image-thumbnail">
-                            <div class="image-section">
-                                <?php if ($resource_img!==""):
-                                $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID);
-                                ?>
-                                <a href="<?php echo $ps_url;  ?>">
-                                    <img src="<?php echo $resource_img; ?>" alt="" class="img-thumbnail-square img-responsive img-loaded">
-                                </a>
-                                <?php endif; ?>
-                            </div>
+                            <?php if ($resource_img!==""):
+                            $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID);
+                            ?>
+                            <a href="<?php echo $ps_url;  ?>">
+                                <span class="resource-overlay"></span>
+                                <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1)">
+                                </div>
+                            </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <?php if ($sensitiveMaterial!=="" && $sensitiveMaterial!=="no"): ?>
