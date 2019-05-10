@@ -1842,7 +1842,7 @@ $default = false;
                                 <div class="panel-body">
                                      <div class="form-group">
                                         <label>Title</label>
-                                        <input type="text" name="<?php echo $module; ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" />
+                                        <input type="text" name="<?php echo $module; ?>[title]" maxlength="512" class="form-control" placeholder="" />
                                     </div>
                                     <div class="form-group">
                                     <?php

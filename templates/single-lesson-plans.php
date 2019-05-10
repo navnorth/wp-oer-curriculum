@@ -218,19 +218,11 @@ if (have_posts()) : while (have_posts()) : the_post();
                 else
                     $_col = floor(12/$col);
                 foreach ($elements_orders as $elementKey => $value) {
-                    if (strpos($elementKey, 'oer_lp_custom_editor_teacher_background') !== false) {
+                    if (strpos($elementKey, 'oer_lp_custom_editor_historical_background') !== false) {
                         $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                     ?>
                     <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
-                        <a class="nav-link active" id="tc-teacher-background-tab" data-toggle="tab" href="#tc-teacher-background-tab-content" role="tab" aria-controls="tc-teacher-background-tab" aria-selected="true" aria-expanded="false">
-                            <?php echo $oer_lp_custom_editor['title']; ?>
-                        </a>
-                    </li>
-                    <?php  } elseif (strpos($elementKey, 'oer_lp_custom_editor_student_background') !== false) {
-                        $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
-                    ?>
-                    <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
-                        <a class="nav-link" id="tc-student-background-tab" data-toggle="tab" href="#tc-student-background-tab-content" role="tab" aria-controls="tc-student-background-tab" aria-selected="false" aria-expanded="false">
+                        <a class="nav-link active" id="tc-historical-background-tab" data-toggle="tab" href="#tc-historical-background-tab-content" role="tab" aria-controls="tc-historical-background-tab" aria-selected="true" aria-expanded="false">
                             <?php echo $oer_lp_custom_editor['title']; ?>
                         </a>
                     </li>
@@ -291,13 +283,16 @@ if (have_posts()) : while (have_posts()) : the_post();
         <?php
         if (!empty($elements_orders)) {
             foreach ($elements_orders as $elementKey => $value) {
-                if (strpos($elementKey, 'oer_lp_custom_editor_teacher_background') !== false || strpos($elementKey, 'oer_lp_custom_editor_student_background') !== false || strpos($elementKey, 'oer_lp_custom_editor_') !== false) {
+                if (strpos($elementKey, 'oer_lp_custom_editor_historical_background') !== false || strpos($elementKey, 'oer_lp_custom_editor_teacher_background') !== false || strpos($elementKey, 'oer_lp_custom_editor_student_background') !== false || strpos($elementKey, 'oer_lp_custom_editor_') !== false) {
                     $tab_id = "";
                     $active = false;
                     $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
-                    if ($elementKey=="oer_lp_custom_editor_teacher_background"){
+                    if ($elementKey=="oer_lp_custom_editor_historical_background"){
+                        $tab_id = "tc-historical-background-tab-content";
+                        $active=true;
+                    }
+                    elseif ($elementKey=="oer_lp_custom_editor_teacher_background"){
                         $tab_id = "tc-teacher-background-tab-content";
-                        $active = true;
                     }
                     elseif ($elementKey == "oer_lp_custom_editor_student_background" ){
                         $tab_id = "tc-student-background-tab-content";
@@ -331,47 +326,46 @@ if (have_posts()) : while (have_posts()) : the_post();
                             }
                     ?>
                     <div class="tab-pane clearfix fade" id="tc-materials-tab-content" role="tabpanel" aria-labelledby="tc-materials-list-tab">
-                        <div class="tc-tab-content">
+                        <div class="tc-tab-content materials-tab">
                             <?php foreach($arr_materials as $material){ ?>
+                                <?php if (isset($material['url']) && ($material['url']!="")): ?>
                                 <a href="<?php echo $material['url']; ?>" class="tc-material-block-link" target="_blank">
-                                <div class="tc-material-block col-md-<?php echo $block_size; ?> col-sm-6">
-                                    <?php if (isset($material['title']) && ($material['title']!="")): ?>
-                                    <h4><?php echo $material['title']; ?></h4>
-                                    <?php endif; ?>
-                                    <?php if (isset($material['url']) && ($material['url']!="")): ?>
+                                <div class="tc-material-block">
                                     <div class="tc-material-icon">
                                         <?php
                                             $icon = "";
                                             $file_type = get_file_type_from_url($material['url']);
                                             switch ($file_type['title']){
                                                 case "Image":
-                                                    $icon = '<i class="far fa-file-image fa-6x"></i>';
+                                                    $icon = '<i class="far fa-file-image fa-3x"></i>';
                                                     break;
                                                 case "PDF":
-                                                    $icon = '<i class="far fa-file-pdf fa-6x"></i>';
+                                                    $icon = '<i class="far fa-file-pdf fa-3x"></i>';
                                                     break;
                                                 case "Plain Text":
-                                                    $icon = '<i class="far fa-file-alt fa-6x"></i>';
+                                                    $icon = '<i class="far fa-file-alt fa-3x"></i>';
                                                     break;
                                                 case "Archive":
-                                                    $icon = '<i class="far fa-file-archive fa-6x"></i>';
+                                                    $icon = '<i class="far fa-file-archive fa-3x"></i>';
                                                     break;
                                                 case "Microsoft Document":
-                                                    $icon = '<i class="far fa-file-word fa-6x"></i>';
+                                                    $icon = '<i class="far fa-file-word fa-3x"></i>';
                                                     break;
                                                 case "Microsoft Excel":
-                                                    $icon = '<i class="far fa-file-excel fa-6x"></i>';
+                                                    $icon = '<i class="far fa-file-excel fa-3x"></i>';
                                                     break;
                                                 case "Microsoft Powerpoint":
-                                                    $icon = '<i class="far fa-file-powerpoint fa-6x"></i>';
+                                                    $icon = '<i class="far fa-file-powerpoint fa-3x"></i>';
                                                     break;
                                             }
                                         ?>
                                         <span><?php echo $icon; ?></span>
                                     </div>
                                     <?php endif; ?>
-                                    <div class="custom-bg-dark custom-bg-dark-inquiry-sets"></div>
                                     <div class="tc-material-description">
+                                        <?php if (isset($material['title']) && ($material['title']!="")): ?>
+                                        <h4><?php echo $material['title']; ?></h4>
+                                        <?php endif; ?>
                                         <?php if (isset($material['description']) && ($material['description']!="")): ?>
                                             <?php echo $material['description']; ?>
                                         <?php endif; ?>
