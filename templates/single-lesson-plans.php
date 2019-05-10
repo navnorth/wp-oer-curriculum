@@ -82,7 +82,9 @@ if (have_posts()) : while (have_posts()) : the_post();
                 <div class="tc-lp-details-description">
                     <?php echo the_content(); ?>
                 </div>
+                <?php if ($oer_lp_standards): ?>
                 <button class="open-standards">Standards</button>
+                    <?php endif; ?>
                 <div id="standards-dialog" class="tc-lp-details-standards-list">
                     <?php
                     $oer_lp_standards = explode(",",$oer_lp_standards);
