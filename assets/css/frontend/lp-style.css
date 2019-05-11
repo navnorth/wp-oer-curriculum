@@ -125,6 +125,7 @@ body.single-lesson-plans {
     border-radius: 0;
     height: 100%;
     width: 40px;
+    cursor: pointer;
 }
 .row.tc-investigative-section {
     min-height: 75px;
