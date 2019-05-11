@@ -66,7 +66,8 @@ jQuery(document).ready(function($){
         tab_content = $(this).attr('href');
         $('.ps-info-tabs a[href="' + tab_content + '"]').tab("show");
         $('.ps-info-tabs a[href="' + tab_content + '"]').removeClass*('show');
-        $([document.documentElement, document.body]).animate({
+        console.log($(tab_content).offset().top);
+        $('html,body').animate({
             scrollTop: $(tab_content).offset().top
         }, 2000);
     });
