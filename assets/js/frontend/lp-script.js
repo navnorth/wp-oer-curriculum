@@ -62,7 +62,6 @@ jQuery(document).ready(function($){
     });
     
     $('.question-popup-button').on("click", function(e){
-        e.preventDefault();
         tab_content = $(this).attr('href');
         $('.ps-info-tabs a[href="' + tab_content + '"]').tab("show");
         $('.ps-info-tabs a[href="' + tab_content + '"]').removeClass*('show');

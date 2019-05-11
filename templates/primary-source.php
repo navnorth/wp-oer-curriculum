@@ -97,7 +97,7 @@ $tabs = floor(12/$tab_count);
 if ($sensitive_material_display==true) : ?>
 <div class="tc-sensitive-material-section tc-primary-source-sensitive-material-section">
     <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
-    <button class="question-popup-button" role="button" data-toggle="tab" data-tabid="ps-sensitive-info-tab" data-target="#ps-sensitive-info-tab-content"><i class="fal fa-question-circle"></i></button>
+    <button class="question-popup-button" role="button" data-toggle="tab" data-tabid="ps-sensitive-info-tab" href="#ps-sensitive-info-tab-content"><i class="fal fa-question-circle"></i></button>
 </div>
 <?php endif; ?>
 <div class="ps-info">
