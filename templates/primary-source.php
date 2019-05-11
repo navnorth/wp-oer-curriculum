@@ -182,7 +182,7 @@ if ($sensitive_material_display==true) : ?>
                     $author_url = $resource_meta['oer_authorurl'][0];
                 
                 $option_set = false;
-                if (get_option('oer_authorname_label')){
+                if (get_option('oer_authorname_label'))
                     $option_set = true;
             ?>
             <div class="ps-meta-group">
@@ -204,7 +204,7 @@ if ($sensitive_material_display==true) : ?>
             <?php if (isset($resource_meta['oer_datecreated_estimate']) && $resource_meta['oer_datecreated_estimate'][0]!=="") {
                 
                 $option_set = false;
-                if (get_option('oer_datecreated_estimate_label')){
+                if (get_option('oer_datecreated_estimate_label'))
                     $option_set = true;
             ?>
             <div class="ps-meta-group">
@@ -222,7 +222,7 @@ if ($sensitive_material_display==true) : ?>
             <?php if (isset($resource_meta['oer_format'][0]) && $resource_meta['oer_format'][0]!=="") {
                 
                 $option_set = false;
-                if (get_option('oer_format_label')){
+                if (get_option('oer_format_label'))
                     $option_set = true;
             ?>
             <div class="ps-meta-group">
@@ -243,7 +243,7 @@ if ($sensitive_material_display==true) : ?>
                     $publisher_url = $resource_meta['oer_publisherurl'][0];
                     
                 $option_set = false;
-                if (get_option('oer_publishername_label')){
+                if (get_option('oer_publishername_label'))
                     $option_set = true;
             ?>
             <div class="ps-meta-group">
@@ -265,7 +265,7 @@ if ($sensitive_material_display==true) : ?>
             <?php if (isset($resource_meta['oer_citation'][0]) && $resource_meta['oer_citation'][0]!=="") {
                 
                 $option_set = false;
-                if (get_option('oer_citation_label')){
+                if (get_option('oer_citation_label'))
                     $option_set = true;
             ?>
             <div class="ps-meta-group">
