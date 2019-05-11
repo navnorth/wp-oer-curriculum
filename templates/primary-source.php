@@ -180,9 +180,20 @@ if ($sensitive_material_display==true) : ?>
                 $author_url = "";
                 if (isset($resource_meta['oer_authorurl']))
                     $author_url = $resource_meta['oer_authorurl'][0];
+                
+                $option_set = false;
+                if (get_option('oer_authorname_label')){
+                    $option_set = true;
             ?>
             <div class="ps-meta-group">
-                <label class="ps-label">Author:</label>
+                <label class="ps-label">
+                    <?php
+                    if (!$option_set)
+                        _e("Author:", OER_SLUG);
+                    else
+                        echo get_option('oer_authorname_label');
+                    ?> 
+                </label>
                 <?php if ($author_url=="") : ?>
                     <span class="ps-value"><?php echo $resource_meta['oer_authorname'][0]; ?></span>
                 <?php else: ?>
@@ -191,19 +202,59 @@ if ($sensitive_material_display==true) : ?>
             </div>
             <?php } ?>
             <?php if (isset($resource_meta['oer_datecreated_estimate']) && $resource_meta['oer_datecreated_estimate'][0]!=="") {
+                
+                $option_set = false;
+                if (get_option('oer_datecreated_estimate_label')){
+                    $option_set = true;
             ?>
             <div class="ps-meta-group">
-                <label class="ps-label">Date Created Estimate:</label>
+                <label class="ps-label">
+                    <?php
+                    if (!$option_set)
+                        _e("Date Created Estimate:", OER_SLUG);
+                    else
+                        echo get_option('oer_datecreated_estimate_label');
+                    ?>
+                </label>
                 <span class="ps-value"><?php echo $resource_meta['oer_datecreated_estimate'][0]; ?></span>
+            </div>
+            <?php } ?>
+            <?php if (isset($resource_meta['oer_format'][0]) && $resource_meta['oer_format'][0]!=="") {
+                
+                $option_set = false;
+                if (get_option('oer_format_label')){
+                    $option_set = true;
+            ?>
+            <div class="ps-meta-group">
+                <label class="ps-label">
+                    <?php
+                    if (!$option_set)
+                        _e("Format:", OER_SLUG);
+                    else
+                        echo get_option('oer_format_label');
+                    ?>
+                </label>
+                <span class="ps-value"><?php echo ucwords($resource_meta['oer_format'][0]); ?></span>
             </div>
             <?php } ?>
             <?php if (isset($resource_meta['oer_publishername']) && $resource_meta['oer_publishername'][0]!=="") {
                 $publisher_url = "";
                 if (isset($resource_meta['oer_publisherurl']))
                     $publisher_url = $resource_meta['oer_publisherurl'][0];
+                    
+                $option_set = false;
+                if (get_option('oer_publishername_label')){
+                    $option_set = true;
             ?>
             <div class="ps-meta-group">
-                <label class="ps-label">Publisher:</label>
+                <label class="ps-label">
+                    <?php
+                    if (!$option_set)
+                        _e("Publisher:", OER_SLUG);
+                    else
+                        echo get_option('oer_publishername_label');
+                    ?>
+                </label>
                 <?php if ($publisher_url=="") : ?>
                 <span class="ps-value"><?php echo $resource_meta['oer_publishername'][0]; ?></span>
                 <?php else: ?>
@@ -211,15 +262,21 @@ if ($sensitive_material_display==true) : ?>
                 <?php endif; ?>
             </div>
             <?php } ?>
-            <?php if (isset($resource_meta['oer_mediatype'][0]) && $resource_meta['oer_mediatype'][0]!=="") { ?>
+            <?php if (isset($resource_meta['oer_citation'][0]) && $resource_meta['oer_citation'][0]!=="") {
+                
+                $option_set = false;
+                if (get_option('oer_citation_label')){
+                    $option_set = true;
+            ?>
             <div class="ps-meta-group">
-                <label class="ps-label">Format:</label>
-                <span class="ps-value"><?php echo ucwords($resource_meta['oer_mediatype'][0]); ?></span>
-            </div>
-            <?php } ?>
-            <?php if (isset($resource_meta['oer_citation'][0]) && $resource_meta['oer_citation'][0]!=="") { ?>
-            <div class="ps-meta-group">
-                <label class="ps-label">Citation:</label>
+                <label class="ps-label">
+                    <?php
+                    if (!$option_set)
+                        _e("Citation:", OER_SLUG);
+                    else
+                        echo get_option('oer_citation_label');
+                    ?>
+                </label>
                 <span class="ps-value"><?php echo $resource_meta['oer_citation'][0]; ?></span>
             </div>
             <?php } ?>
