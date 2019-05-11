@@ -67,10 +67,9 @@ jQuery(document).ready(function($){
             left: 0, 
             behavior: 'smooth'
         });
-        /*window.scrollTo($('.ps-info-tabs-content').offset().top,0);
         tab_content = $(this).attr('href');
         $('.ps-info-tabs a[href="' + tab_content + '"]').tab("show");
-        $('.ps-info-tabs a[href="' + tab_content + '"]').removeClass*('show');*/
+        $('.ps-info-tabs a[href="' + tab_content + '"]').removeClass*('show');
     });
 });
 
