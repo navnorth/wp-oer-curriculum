@@ -67,7 +67,7 @@ jQuery(document).ready(function($){
         $('.ps-info-tabs a[href="' + tab_content + '"]').tab("show");
         $('.ps-info-tabs a[href="' + tab_content + '"]').removeClass*('show');
         setTimeout(function(){
-            $('body').scrollTop = $('.ps-info-tabs-content').offset().top
+            window.scrollTo($('.ps-info-tabs-content').offset().top,0);
         }, 2000);
     });
 });
