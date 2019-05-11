@@ -66,10 +66,8 @@ jQuery(document).ready(function($){
         tab_content = $(this).attr('href');
         $('.ps-info-tabs a[href="' + tab_content + '"]').tab("show");
         $('.ps-info-tabs a[href="' + tab_content + '"]').removeClass*('show');
-        console.log($('.ps-info-tabs-content').offset().top);
-        console.log($('.ps-info-tabs-content').position().top);
-        $('body').animate({
-            scrollTop: $('.ps-info-tabs-content').offset().top
+        setTimeOut(function(){
+            $('body').scrollTop = $('.ps-info-tabs-content').offset().top
         }, 2000);
     });
 });
