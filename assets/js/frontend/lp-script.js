@@ -62,10 +62,10 @@ jQuery(document).ready(function($){
     });
     
     $('.question-popup-button').on("click", function(e){
+        window.scrollTo($('.ps-info-tabs-content').offset().top,0);
         tab_content = $(this).attr('href');
         $('.ps-info-tabs a[href="' + tab_content + '"]').tab("show");
         $('.ps-info-tabs a[href="' + tab_content + '"]').removeClass*('show');
-        window.scrollTo($('.ps-info-tabs-content').offset().top,0);
     });
 });
 
