@@ -10,14 +10,6 @@ $(document).ready(function() {
             }
         })
     })
-
-    function toggleArrow(parentID, iconID) {
-        if ($(parentID).is(':visible')) {
-            $(`${iconID} i`).removeClass('fa-angle-up').addClass('fa-angle-down');
-        } else {
-            $(`${iconID} i`).removeClass('fa-angle-down').addClass('fa-angle-up');
-        }
-    }
     
     $('#close-excerpt').click(function() {
         toggleArrow('#framework-excerpt', '#show-excerpt');
@@ -50,4 +42,32 @@ $(document).ready(function() {
             $(this).text("Read More");
         }
     });
+
+    splitTextIntoColumns('#initial-excerpt');
+    splitTextIntoColumns('#tc-historical-background-tab-content .tc-tab-content span');
 })
+
+function toggleArrow(parentID, iconID) {
+    if (!$(parentID) || $(!iconID)) { return; }
+
+    if ($(parentID).is(':visible')) {
+        $(`${iconID} i`).removeClass('fa-angle-up').addClass('fa-angle-down');
+    } else {
+        $(`${iconID} i`).removeClass('fa-angle-down').addClass('fa-angle-up');
+    }
+}
+
+function splitTextIntoColumns(selector) {
+    if (!$(selector)) { return 'Element not found'; }
+    let text = $(selector).text(),
+        textLength = text.length;
+    if (textLength < 1000) { return; }
+
+    let words = text.split(' '),
+        wordCount = words.length,
+        part1 = words.slice(0, (wordCount/ 2) + 5).join(' '),
+        part2 = words.slice(((wordCount / 2) + 5), words.length).join(' ');
+
+    $(selector).text(part1);
+    $(`<span id="appended_text">${part2}</span>`).insertAfter(selector);
+}

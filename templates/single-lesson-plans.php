@@ -147,15 +147,18 @@ if (have_posts()) : while (have_posts()) : the_post();
             </div>
         </div>
         <div id="framework-excerpt" class="investigative-section-answer custom-dark-pink-bg">
-            <div class="col-md-3 col-sm-3 col-xs-12"></div>
-            <div class="excerpt-content col-md-9 col-sm-9 col-xs-12">
-                <?php echo $oer_lp_iq['excerpt']; ?>
+            <!-- <div class="col-md-3 col-sm-3 col-xs-12"></div> -->
+            <!-- <div class="excerpt-content col-md-9 col-sm-9 col-xs-12"> -->
+            <div class="excerpt-content">
+                <div class="content-wrapper">
+                    <span id="initial-excerpt"><?php echo $oer_lp_iq['excerpt']; ?></span>
+                </div>
                 <button type="button" id="close-excerpt" class="excerpt-button float-right">CLOSE<i class="fal fa-angle-up"></i></button>
             </div>
         </div>
     </div>
     <?php } ?>
-    <div class="row">
+    <div class="row resource-row">
         <?php
         $primary_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
         if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
@@ -306,7 +309,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     ?>
                     <div class="tab-pane clearfix fade <?php if ($active): echo "active"; endif; ?> in" id="<?php echo $tab_id; ?>" role="tabpanel" aria-labelledby="">
                         <div class="tc-tab-content">
-                            <p><?php echo $oer_lp_custom_editor['description'];?></p>
+                            <span><?php echo $oer_lp_custom_editor['description'];?></span>
                         </div>
                     <button class="tc-read-more">Read More</button>
                     </div>

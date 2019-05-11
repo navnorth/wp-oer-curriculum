@@ -43,7 +43,7 @@ body.single-lesson-plans {
 .tc-lp-details {
     padding: 60px 75px;
 }
-.single-lesson-plans .row { margin-right:0; margin-left:0; width:100%; display:block; float:none; }
+.single-lesson-plans .row { margin-right:0; margin-left:0; width:100%; display:block; float:none;}
 .tc-lp-details-header .tc-lp-title {
     color: #fff;
     margin-top: 0;
@@ -187,7 +187,6 @@ span.selected-standard-pill:last-child {
 .excerpt-section {
     color: #fff;
 }
-
 .excerpt-section h2 {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -222,7 +221,12 @@ span.selected-standard-pill:last-child {
     font-size: 20px;
     vertical-align: middle;
 }
-
+.excerpt-content .content-wrapper {
+    display: flex;
+}
+.excerpt-content .content-wrapper span {
+    padding: 0 30px;
+}
 .excerpt-button:hover {
     background-color: #851738;
 }
@@ -240,7 +244,7 @@ span.selected-standard-pill:last-child {
 .investigative-section-answer {
     color: #fff;
     font-size: 18px;
-    line-height: 22px;
+    line-height: 30px;
 }
 
 #framework-excerpt {
@@ -250,6 +254,8 @@ span.selected-standard-pill:last-child {
 .excerpt-content {
     overflow-y: hidden;
     padding: 50px 100px 50px 50px !important;
+    background: #fff;
+    color: #4f4f4f;
 }
 
 .excerpt-content p { 
@@ -329,7 +335,7 @@ span.selected-standard-pill:last-child {
     padding: 10%;
 }
 .tc-tab-content {
-    font-size: 20px !important;
+    font-size: 18px !important;
     max-height: 340px;
     height:100%;
     overflow-y: hidden;
@@ -342,7 +348,7 @@ span.selected-standard-pill:last-child {
     max-height:none;
 }
 .tc-tab-content p {
-    font-size: 20px;
+    font-size: 18px;
 }
 .materials-tab {
     display: flex;
@@ -903,7 +909,6 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     display: none;
 }
 .tc-primary-source-sensitive-material-section p { padding:5px 15px 6px; }
-
 .resource-thumbnail {
     width: 360px;
     height: 360px;
@@ -916,4 +921,13 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     left: 0;
     right: 0;
     background-color: rgba(204,97,12,.5);
+}
+.resource-row {
+    background-color: rgba(205, 98, 15, .5);
+}
+#tc-historical-background-tab-content .tc-tab-content {
+    display: flex;
+}
+#tc-historical-background-tab-content .tc-tab-content span {
+    padding: 0 30px;
 }
