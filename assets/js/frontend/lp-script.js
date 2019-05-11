@@ -65,10 +65,9 @@ jQuery(document).ready(function($){
         e.preventDefault();
         tab_content = $(this).attr('href');
         $('.ps-info-tabs a[href="' + tab_content + '"]').tab("show");
-        $('.ps-info-tabs a[href="' + tab_content + '"]').removeClass*('show');
-        console.log($(tab_content).offset());
+        $('.ps-info-tabs a[href="' + tab_content + '"]').removeClass*('show').css({ "position": "relative" });
         $('html,body').animate({
-            scrollTop: $(tab_content).top
+            scrollTop: $(tab_content).offset().top
         }, 2000);
     });
 });
