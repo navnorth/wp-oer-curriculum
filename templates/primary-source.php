@@ -95,7 +95,7 @@ if (isset($resource_meta['oer_sensitive_material']) && $resource_meta['oer_sensi
 $tabs = floor(12/$tab_count);   
 
 if (in_array($active_tab,array("ps-transcription-info-tab","ps-sensitive-info-tab"))){
-    if ($transcription_display==false && $sensitive_material_display==false)
+    if (($active_tab=="ps-transcription-info-tab" && !$transcription_display) || ($active_tab=="ps-sensitive-info-tab" && !$sensitive_material_display))
         $active_tab = null;
 }
 
