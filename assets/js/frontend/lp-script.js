@@ -58,6 +58,9 @@ jQuery(document).ready(function($){
         var nav = $(this);
         var url = nav.attr('href');
         var tab = nav.attr('data-activetab');
+        if (typeof tab == undefined) {
+            tab = $('.ps-info-tabs li a.nav-link.active').attr('id');
+        }
         lp_redirect_with_post(url, tab);
     });
     
