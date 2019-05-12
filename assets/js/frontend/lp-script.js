@@ -58,10 +58,6 @@ jQuery(document).ready(function($){
         var nav = $(this);
         var url = nav.attr('href');
         var tab = nav.attr('data-activetab');
-        console.log(tab);
-        if (typeof tab == undefined) {
-            tab = $('.ps-info-tabs li a.nav-link.active').attr('id');
-        }
         lp_redirect_with_post(url, tab);
     });
     
@@ -75,6 +71,10 @@ jQuery(document).ready(function($){
         $('.ps-info-tabs a[href="' + tab_content + '"]').tab("show");
         $('.ps-info-tabs a[href="' + tab_content + '"]').removeClass*('show');
     });
+    
+    if ($('.lp-nav-right,.lp-nav-left').is(":visible")) {
+         $('.lp-nav-right,.lp-nav-left').attr('data-activetab', $('.ps-info-tabs li a.nav-link.active').attr('id'));
+    }
 });
 
 function lp_redirect_with_post(url, tab) {
