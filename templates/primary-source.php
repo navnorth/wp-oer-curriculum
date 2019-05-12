@@ -94,6 +94,11 @@ if (isset($resource_meta['oer_sensitive_material']) && $resource_meta['oer_sensi
 }
 $tabs = floor(12/$tab_count);   
 
+if (in_array($active_tab,array("ps-transcription-info-tab","ps-sensitive-info-tab"))){
+    if ($transcription_display==false && $sensitive_material_display==false)
+        $active_tab = null;
+}
+
 if ($sensitive_material_display==true) : ?>
 <div class="tc-sensitive-material-section tc-primary-source-sensitive-material-section">
     <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
