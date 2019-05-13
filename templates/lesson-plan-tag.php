@@ -45,7 +45,7 @@ $inquiry_sets = get_posts( $args );
                     $grade_level = oer_inquiry_set_grade_level($inquiry_set->ID);
             ?>
             <div class="col-md-4 col-sm-6 padding-0">
-            <a href="<?php echo $link; ?>" target="_blank" class="wp-block-wp-curriculum-inquiry-set-thumbnail-block lp-tc-related-inquiry-block-link">
+            <a href="<?php echo $link; ?>" class="wp-block-wp-curriculum-inquiry-set-thumbnail-block lp-tc-related-inquiry-block-link">
                 <div class="lp-tc-related-inquiry-blocks-padding">
                     <div class="media-image">
                         <div class="image-thumbnail">
