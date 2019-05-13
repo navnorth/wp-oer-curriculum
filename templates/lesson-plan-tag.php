@@ -29,30 +29,8 @@ $inquiry_sets = get_posts( $args );
 ?>
 
 <div id="main">
-    <div id="tc-heading" class="heading">
-        <div class="tc-heading-wrapper">
-            <?php if (get_field('home_page_banner_image_1', $front_page_id)): ?>
-            <div class="col-md-4 padding-none banner-1">
-                <div class="banner-overlay overlay-green"></div>
-                <div style="background-image: url(<?php echo the_field('home_page_banner_image_1', $front_page_id); ?>)" class="head-banner"></div>
-            </div>
-            <?php endif; ?>
-            <?php if (get_field('home_page_banner_image_2', $front_page_id)): ?>
-            <div class="col-md-4 padding-none banner-2">
-                <div class="banner-overlay overlay-orange"></div>
-                <div style="background-image: url(<?php echo the_field('home_page_banner_image_2', $front_page_id); ?>)" class="head-banner"></div>
-            </div>
-            <?php endif; ?>
-            <?php if (get_field('home_page_banner_image_3', $front_page_id)): ?>
-            <div class="col-md-4 padding-none banner-3">
-                <div class="banner-overlay overlay-pink"></div>
-                <div style="background-image: url(<?php echo the_field('home_page_banner_image_3', $front_page_id); ?>)" class="head-banner"></div>
-            </div>
-            <?php endif; ?>
-            <div class="primary-title" id="banner-heading">
-                <h1 id="banner-title"><strong><?php _e("Inquiry Sets", OER_LESSON_PLAN_SLUG); ?> :</strong> <span id="secondary-banner-title"><?php echo $tag_name; ?></span></h1>
-            </div>
-        </div>
+    <div class="inquiry-set-header-wrapper">
+        <h4 class="inquiry-sets-by-tag-header"><?php _e("Inquiry Sets", OER_LESSON_PLAN_SLUG); ?>: <span id="tag-name"><?php echo $tag_name; ?></span></h4>
     </div>
     <div id="tc-topics">
         <div class="tc-topic-wrapper">
@@ -79,7 +57,6 @@ $inquiry_sets = get_posts( $args );
                     <div class="lp-tc-related-inquiry-grades">
                         <span><?php echo $grade_level; ?></span>
                     </div>
-                    <div class="custom-bg-dark custom-bg-dark-inquiry-sets"></div>
                     <div class="lp-tc-related-inquiry-set-description">
                         <h4><?php echo $inquiry_set->post_title; ?></h4>
                     </div>

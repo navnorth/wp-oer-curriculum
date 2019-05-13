@@ -780,7 +780,7 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
 /** End of Primary Source Template Styling **/
 /** Topic Template Styling **/
 .topic-template #page.site { padding-left:0; padding-right:0; }
-.topic-template #page.site .site-content { margin-top:0; }
+.topic-template #page.site .site-content { margin-top:0; position: relative;}
 .tc-topic-wrapper {
     margin: 75px auto 50px;
     max-width: 1200px;
