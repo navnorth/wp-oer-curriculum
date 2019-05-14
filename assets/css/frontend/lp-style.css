@@ -541,6 +541,8 @@ span.selected-standard-pill:last-child {
 .tc-related-inquiry-grids-section {
     background: linear-gradient(180deg, #4A6F81 0%, #436576 71.27%);    
     padding: 8%;
+    display: flex;
+    justify-content: space-between;
 }
 .tc-custom-bg-orange {
     background: #cc610c;
@@ -600,6 +602,15 @@ span.selected-standard-pill:last-child {
 .tc-related-inquiry-set-description p {
     margin-bottom: 0;
     font-size: 16px;
+}
+.tc-related-inquiry-set-description h4 {
+    color: #4F4F4F;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+	font-size: 20px;
+	margin-bottom: 0;
+	font-weight: 400;
 }
 .tc-material-block { width:75% !important; display: flex;}
 .tc-material-block h4 {

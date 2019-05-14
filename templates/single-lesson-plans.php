@@ -478,39 +478,41 @@ if (have_posts()) : while (have_posts()) : the_post();
                     $inquiry_img = get_the_post_thumbnail_url($inquiry);
                     $inquiry_meta_data = oer_lp_get_inquiry_set_metadata($inquiry_set);
             ?>
-            <div class="col-md-4 col-sm-6 tc-related-inquiry-blocks-padding">
-                <div class="media-image">
-                    <div class="image-thumbnail">
-                        <div class="image-section">
-                            <img src="<?php echo $inquiry_img; ?>" alt="" class="img-thumbnail-square img-responsive img-loaded">
+            <a class="lp-tc-related-inquiry-block-link lp-tc-related-inquiry-block col-md-4 col-sm-6 move-up-left" href="<?php echo $inquiry_link; ?>">
+                <div class="lp-tc-related-wrap"> 
+                    <div class="media-image">
+                        <div class="image-thumbnail">
+                            <div class="image-section">
+                                <img src="<?php echo $inquiry_img; ?>" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                            </div>
                         </div>
                     </div>
+                    <?php
+                    $grades = (isset($inquiry_meta_data['oer_lp_grades'][0]) ? unserialize($inquiry_meta_data['oer_lp_grades'][0]) : array());
+                    if (count($grades)>0){
+                        $grade = "";
+                        if ($grades) {
+                            if ($grades=="pre-k")
+                                $grade = "Pre-K";
+                            elseif ($grades=="k")
+                                $grade = "Kindergarten";
+                            else {
+                                if (function_exists('oer_grade_levels'))
+                                    $grades = oer_grade_levels($grades);
+                                $grade = "Grade ".$grades;
+                            }
+                    ?>
+                    <div class="tc-related-inquiry-grades">
+                        <span><?php echo $grade; ?></span>
+                    </div>
+                    <?php }
+                    } ?>
+                    <div class="custom-bg-dark custom-bg-dark-inquiry-sets"></div>
+                    <div class="tc-related-inquiry-set-description">
+                    <h4><?php echo $inquiry->post_title; ?></h4>
+                    </div>
                 </div>
-                <?php
-                $grades = (isset($inquiry_meta_data['oer_lp_grades'][0]) ? unserialize($inquiry_meta_data['oer_lp_grades'][0]) : array());
-                if (count($grades)>0){
-                    $grade = "";
-                    if ($grades) {
-                        if ($grades=="pre-k")
-                            $grade = "Pre-K";
-                        elseif ($grades=="k")
-                            $grade = "Kindergarten";
-                        else {
-                            if (function_exists('oer_grade_levels'))
-                                $grades = oer_grade_levels($grades);
-                            $grade = "Grade ".$grades;
-                        }
-                ?>
-                <div class="tc-related-inquiry-grades">
-                    <span><?php echo $grade; ?></span>
-                </div>
-                <?php }
-                } ?>
-                <div class="custom-bg-dark custom-bg-dark-inquiry-sets"></div>
-                <div class="tc-related-inquiry-set-description">
-                   <h4><a href="<?php echo $inquiry_link; ?>"><?php echo $inquiry->post_title; ?></a></h4>
-                </div>
-            </div>
+            </a>
             <?php }
             } ?>
         </div>
