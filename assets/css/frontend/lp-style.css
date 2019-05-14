@@ -224,9 +224,10 @@ span.selected-standard-pill:last-child {
 }
 .excerpt-content .content-wrapper {
     display: flex;
+    margin: 30px;
 }
 .excerpt-content .content-wrapper span {
-    padding: 0 30px;
+    padding: 0 40px;
 }
 .excerpt-button:hover {
     background-color: #851738;
@@ -244,8 +245,9 @@ span.selected-standard-pill:last-child {
 }
 .investigative-section-answer {
     color: #fff;
-    font-size: 18px;
-    line-height: 30px;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: justify;
 }
 
 #framework-excerpt {
@@ -336,7 +338,8 @@ span.selected-standard-pill:last-child {
     padding: 10%;
 }
 .tc-tab-content {
-    font-size: 18px !important;
+    font-size: 14px !important;
+    text-align: justify;
     max-height: 340px;
     height:100%;
     overflow-y: hidden;
