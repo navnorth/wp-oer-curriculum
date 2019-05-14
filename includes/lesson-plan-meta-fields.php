@@ -330,7 +330,7 @@ $default = false;
                                     $posts = get_posts([
                                         'post_type' => 'resource',
                                         'post_status' => 'publish',
-                                        'numberposts' => 250,
+                                        'numberposts' => -1,
                                         'orderby' => 'title',
                                         'order'    => 'ASC'
                                     ]);
@@ -446,7 +446,7 @@ $default = false;
                                                     $posts = get_posts([
                                                         'post_type' => 'resource',
                                                         'post_status' => 'publish',
-                                                        'numberposts' => 250,
+                                                        'numberposts' => -1,
                                                         'orderby' => 'title',
                                                         'order'    => 'ASC'
                                                     ]);
@@ -1378,7 +1378,7 @@ $default = false;
                                                             $posts = get_posts([
                                                                 'post_type' => 'resource',
                                                                 'post_status' => 'publish',
-                                                                'numberposts' => 250,
+                                                                'numberposts' => -1,
                                                                 'orderby' => 'title',
                                                                 'order'    => 'ASC'
                                                             ]);
@@ -2045,7 +2045,7 @@ $default = false;
                                                 $posts = get_posts([
                                                     'post_type' => 'resource',
                                                     'post_status' => 'publish',
-                                                    'numberposts' => 250,
+                                                    'numberposts' => -1,
                                                     'orderby' => 'title',
                                                     'order'    => 'ASC'
                                                 ]);

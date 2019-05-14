@@ -303,7 +303,7 @@ if (! function_exists('oer_lp_primary_resource_dropdown')){
         $posts = get_posts([
             'post_type' => 'resource',
             'post_status' => 'publish',
-            'numberposts' => 250,
+            'numberposts' => -1,
             'orderby' => 'title',
             'order'    => 'ASC'
         ]);

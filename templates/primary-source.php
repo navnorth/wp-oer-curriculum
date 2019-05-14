@@ -141,14 +141,16 @@ if ($sensitive_material_display==true) : ?>
 <div class="ps-info-tabs-content">
     <div class="tab-pane clearfix fade active in" id="ps-information-tab-content" role="tabpanel" aria-labelledby="ps-information-tab">
         <?php
-        
         $isFile = false;
-        if (!function_exists('is_file_resource'))
+        if (function_exists('is_file_resource'))
             $isFile = is_file_resource($resource_meta['oer_resourceurl'][0]);
-        if (!function_exists('is_pdf_resource') && $isFile==false)
+        
+        if (function_exists('is_pdf_resource') && $isFile==false)
             $isFile = is_pdf_resource($resource_meta['oer_resourceurl'][0]);
-        if (!function_exists('is_image_resource') && $isFile==false)
+        
+        if (function_exists('is_image_resource') && $isFile==false)
             $isFile = is_image_resource($resource_meta['oer_resourceurl'][0]);
+        
         ?>
         <div class="col-md-8">
             <h1 class="ps-info-title"><?php echo $resource->post_title; ?></h1>
