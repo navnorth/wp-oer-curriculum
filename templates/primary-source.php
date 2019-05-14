@@ -151,6 +151,8 @@ if ($sensitive_material_display==true) : ?>
         if (function_exists('is_image_resource') && $isFile==false)
             $isFile = is_image_resource($resource_meta['oer_resourceurl'][0]);
         
+        if (function_exists('is_audiovideo_resource') && $isFile==false)
+            $isFile = is_audiovideo_resource($resource_meta['oer_resourceurl'][0]);
         ?>
         <div class="col-md-8">
             <h1 class="ps-info-title"><?php echo $resource->post_title; ?></h1>
