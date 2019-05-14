@@ -784,7 +784,8 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
 .tc-topic-wrapper {
     margin: 75px auto 50px;
     max-width: 1200px;
-    overflow:hidden; 
+    display: flex;
+    flex-wrap: wrap;
 }
 /** End of Topic Template Styling **/
 @media (min-width: 1443px){
