@@ -923,6 +923,10 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     left: 0;
     right: 0;
     background-color: rgba(204,97,12,.5);
+    transition: all .4s ease-in;
+}
+.resource-overlay:hover {
+    opacity: 0;
 }
 .resource-row {
     background-color: rgba(205, 98, 15, .5);
