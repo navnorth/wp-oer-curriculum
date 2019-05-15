@@ -742,21 +742,30 @@ jQuery(document).ready(function ($) {
                 total_form_box += 1;
                 $.post(ajaxurl, {action:'lp_add_more_pr_callback', row_id: total_form_box}).done(function (response) {
                     if($('div.lp-primary-resource-element-wrapper').length) {
-                        $(response).insertAfter('div.lp-primary-resource-element-wrapper:last');
+                        $(response).insertAfter('div.lp-primary-resource-element-wrapper:last').tinymce_textareas();
                     } else {
-                        $('.lp-primary-resource-element-panel').html(response);
+                        $('.lp-primary-resource-element-panel').html(response).tinymce_textareas();
+                    }
+                    
+                    if (typeof( tinymce ) == "object" && typeof( tinymce.execCommand ) == "function" ) {
+                        tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-resource-teacher-' + total_form_box );
+                        tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-resource-teacher-' + total_form_box );
+                        //quicktags({ id: 'oer-lp-resource-teacher-' + total_form_box });
+                        
+                        tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-resource-student-' + total_form_box );
+                        tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-resource-student-' + total_form_box );
+                        //quicktags({ id: 'oer-lp-resource-student-' + total_form_box });
                     }
 
-                    tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-resource-teacher-' + total_form_box );
-                    tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-resource-teacher-' + total_form_box );
-
-                    tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-resource-student-' + total_form_box );
-                    tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-resource-student-' + total_form_box );
-
                     // Toggle reorder button
-                    LessonPlan.toggleUpDownButton();
+                   LessonPlan.toggleUpDownButton();
                 });
             });
+            $.fn.tinymce_textareas = function(){
+                tinyMCE.init({
+                    skin: 'wp_theme'
+                });
+            }
         },
 
         // Delete source

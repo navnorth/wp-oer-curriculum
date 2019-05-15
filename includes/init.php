@@ -398,7 +398,7 @@ add_action('wp_ajax_lp_add_more_pr_callback', 'lp_add_more_pr_callback');
 add_action('wp_ajax_nopriv_lp_add_more_pr_callback', 'lp_add_more_pr_callback');
 
 function lp_add_more_pr_callback() {
-    $totalElements = isset($_REQUEST['row_id']) ? $_REQUEST['row_id'] : '15';
+    $totalElements = isset($_REQUEST['row_id']) ? $_REQUEST['row_id'] : '25';
     $content = '<div class="panel panel-default lp-primary-resource-element-wrapper" id="lp-primary-resource-element-wrapper-' . $totalElements . '">
                     <div class="panel-heading">
                         <h3 class="panel-title lp-module-title">
@@ -445,6 +445,8 @@ function lp_add_more_pr_callback() {
                                     'textarea_rows' => 6,
                                     'drag_drop_upload' => true,
                                     'teeny' => true,
+                                    'quicktags' => true,
+                                    'tinymce' => true
                                 )
                             );
                         $content .= ob_get_clean();
@@ -460,6 +462,8 @@ function lp_add_more_pr_callback() {
                                     'textarea_rows' => 6,
                                     'drag_drop_upload' => true,
                                     'teeny' => true,
+                                    'quicktags' => true,
+                                    'tinymce' => true
                                 )
                             );
                             $content .= ob_get_clean();
