@@ -104,14 +104,35 @@ if (have_posts()) : while (have_posts()) : the_post();
                 </div>
                 <div class="tc-lp-details-tags-list">
                     <?php
-                    if ($tags):
-                    foreach($tags as $tag){
+                    if ($tags && sizeof($tags) <= 6):
+                        foreach($tags as $tag){
                     ?>
-                    <a href="<?php echo site_url("inquiry-sets/topic/".sanitize_title($tag->name)) ?>" class="tc-lp-details-tag"><?php echo $tag->name; ?></a>
+                        <a href="<?php echo site_url("inquiry-sets/topic/".sanitize_title($tag->name)) ?>" class="tc-lp-details-tag"><?php echo $tag->name; ?></a>
                     <?php
-                    }
-                    endif;
+                        }
+                        endif;
                     ?>
+
+                    <?php
+                        if ($tags && sizeof($tags) > 6):
+                            for($i=0; $i < 5; $i++){
+                    ?>
+                        <a href="<?php echo site_url("inquiry-sets/topic/".sanitize_title($tags[$i]->name)) ?>" class="tc-lp-details-tag"><?php echo $tags[$i]->name; ?></a>
+                    <?php } ?>
+                        <span class="open-tags tc-lp-details-tag">+ <?php echo (sizeof($tags) - 5) ?> more</span>
+                        <div id="tags-dialog">
+                            <div class="tc-lp-details-tags-list">
+                                <span class="ui-helper-hidden-accessible"><input type="text"/></span>
+                                <?php foreach($tags as $tag){
+                                ?>
+                                <a href="<?php echo site_url("inquiry-sets/topic/".sanitize_title($tag->name)) ?>" class="tc-lp-details-tag"><?php echo $tag->name; ?></a>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    <?php
+                        endif;
+                    ?>
+
                 </div>
                 <?php if ($oer_sensitive) : ?>
                 <div class="tc-sensitive-material-section">

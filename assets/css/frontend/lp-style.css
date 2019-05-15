@@ -87,6 +87,7 @@ body.single-lesson-plans {
     line-height: 18px;
     margin-bottom: 10px;
     transition: all .2s ease-in;
+    cursor: pointer;
 }
 .tc-lp-details-tags-list .tc-lp-details-tag:hover {
     text-decoration: none;
@@ -890,28 +891,33 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
 }
 
 /** JQUERY UI DIALOG OVERRIDES **/
-.ui-widget.standards-dialog {
+.ui-widget.standards-dialog, .ui-widget.tags-dialog {
     font-family: 'Helvetica Neue', 'Roboto', Helvetica, Arial, sans-serif;
 }
-.ui-dialog.standards-dialog {
+.ui-dialog.standards-dialog, .ui-dialog.tags-dialog {
     padding: 0 !important;
     border: 0 !important;
 }
 .ui-widget .ui-dialog-titlebar button {
-    background-image: none;
+    background: none;
+    color: #fff;
+    border: none;
 }
-.standards-dialog .ui-widget-content {
-    background: #2b424d !important;
+.standards-dialog .ui-widget-content, .tags-dialog .ui-widget-content {
+    background: #4a6e7f !important;
     border: 0 !important;
     border-radius: 0;
 }
-
-.ui-dialog.standards-dialog .ui-dialog-titlebar {
+.ui-dialog .ui-dialog-titlebar-close {
+    right: .4em !important;
+    top: 45% !important;
+}
+.ui-dialog.standards-dialog .ui-dialog-titlebar, .ui-dialog.tags-dialog .ui-dialog-titlebar {
     background: #2A3E48 !important;
     border-radius: 0;
     border: 0 !important;
 }
-.ui-dialog.standards-dialog {
+.ui-dialog.standards-dialog, .ui-dialog.tags-dialog {
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
     border-bottom-left-radius: 0px;
@@ -921,8 +927,11 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     background: #000 !important;
     opacity: .7 !important;
 }
-#standards-dialog {
+#standards-dialog, #tags-dialog {
     display: none;
+}
+#tags-dialog .tc-lp-details-tags-list {
+    padding-top: 20px;
 }
 .tc-primary-source-sensitive-material-section p { padding:5px 15px 6px; }
 .resource-thumbnail {

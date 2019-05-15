@@ -25,8 +25,25 @@ $(document).ready(function() {
             resizable: false,
             dialogClass: 'standards-dialog'
         });
-        return false;
     });
+
+    $(".open-tags").click(function() {
+        $("#tags-dialog").dialog({
+            modal: true,
+            width: 700,
+            minHeight: 200,
+            title: 'Tags',
+            draggable: false,
+            resizeable: false,
+            dialogClass: 'tags-dialog',
+            create: function(event, ui) { 
+                var widget = $(this).dialog("widget");
+                $(".ui-dialog-titlebar-close span.ui-button-icon-primary", widget)
+                    .removeClass("ui-icon-closethick ui-icon")
+                    .addClass("fal fa-times");
+             }
+        });
+    })
     
     if ($('.tc-home-tabs-content .active .tc-tab-content').height()<340) {
         $('.tc-home-tabs-content .active .tc-read-more').addClass('tc-btn-hide');
