@@ -750,11 +750,11 @@ jQuery(document).ready(function ($) {
                     if (typeof( tinymce ) == "object" && typeof( tinymce.execCommand ) == "function" ) {
                         tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-resource-teacher-' + total_form_box );
                         tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-resource-teacher-' + total_form_box );
-                        //quicktags({ id: 'oer-lp-resource-teacher-' + total_form_box });
+                        quicktags({ id: 'oer-lp-resource-teacher-' + total_form_box });
                         
                         tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-resource-student-' + total_form_box );
                         tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-resource-student-' + total_form_box );
-                        //quicktags({ id: 'oer-lp-resource-student-' + total_form_box });
+                        quicktags({ id: 'oer-lp-resource-student-' + total_form_box });
                     }
 
                     // Toggle reorder button
@@ -763,7 +763,10 @@ jQuery(document).ready(function ($) {
             });
             $.fn.tinymce_textareas = function(){
                 tinyMCE.init({
-                    skin: 'wp_theme'
+                    skin: 'wp_theme',
+                    mode: 'exact',
+                    menubar: false,
+                    toolbar: 'bold italic underscore blockquote strikethrough bullist numlist alignleft aligncenter alignright undo redo'
                 });
             }
         },
