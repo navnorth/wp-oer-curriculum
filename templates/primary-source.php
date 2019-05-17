@@ -200,7 +200,7 @@ if ($sensitive_material_display==true) : ?>
                     if (!$option_set)
                         _e("Author:", OER_SLUG);
                     else
-                        echo get_option('oer_authorname_label');
+                        echo get_option('oer_authorname_label').":";
                     ?> 
                 </label>
                 <?php if ($author_url=="") : ?>
@@ -222,7 +222,7 @@ if ($sensitive_material_display==true) : ?>
                     if (!$option_set)
                         _e("Date Created Estimate:", OER_SLUG);
                     else
-                        echo get_option('oer_datecreated_estimate_label');
+                        echo get_option('oer_datecreated_estimate_label').":";
                     ?>
                 </label>
                 <span class="ps-value"><?php echo $resource_meta['oer_datecreated_estimate'][0]; ?></span>
@@ -240,7 +240,7 @@ if ($sensitive_material_display==true) : ?>
                     if (!$option_set)
                         _e("Format:", OER_SLUG);
                     else
-                        echo get_option('oer_format_label');
+                        echo get_option('oer_format_label').":";
                     ?>
                 </label>
                 <span class="ps-value"><?php echo ucwords($resource_meta['oer_format'][0]); ?></span>
@@ -261,7 +261,7 @@ if ($sensitive_material_display==true) : ?>
                     if (!$option_set)
                         _e("Publisher:", OER_SLUG);
                     else
-                        echo get_option('oer_publishername_label');
+                        echo get_option('oer_publishername_label').":";
                     ?>
                 </label>
                 <?php if ($publisher_url=="") : ?>
@@ -283,7 +283,7 @@ if ($sensitive_material_display==true) : ?>
                     if (!$option_set)
                         _e("Citation:", OER_SLUG);
                     else
-                        echo get_option('oer_citation_label');
+                        echo get_option('oer_citation_label').":";
                     ?>
                 </label>
                 <span class="ps-value"><?php echo $resource_meta['oer_citation'][0]; ?></span>
