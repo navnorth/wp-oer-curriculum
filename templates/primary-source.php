@@ -35,6 +35,9 @@ $resource = get_post($source_id);
 
 // Get Featured Image Url
 $featured_image_url = get_the_post_thumbnail_url($resource->ID, "full");
+$resource_url = get_post_meta($resource->ID, "oer_resourceurl", true);
+$youtube = oer_is_youtube_url($resource_url);
+$isPDF = is_pdf_resource($resource_url);
 
 // Get Curriculum Meta for Primary Sources
 $post_meta_data = get_post_meta($curriculum_id);
@@ -42,6 +45,9 @@ $primary_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? un
 $index = 0;
 $teacher_info = "";
 $student_info = "";
+$embed = "";
+$prev_url = null;
+$next_url = null;
 if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
     if (!empty(array_filter($primary_resources['resource']))) {
         foreach ($primary_resources['resource'] as $resourceKey => $source) {
@@ -67,9 +73,31 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             $student_info = $primary_resources['student_info'][$index];
     }
 }
+if ($youtube || $isPDF)
+    $featured_image_url = "";
 ?>
 <a class="back-button" href="<?php echo $back_url; ?>"><i class="fal fa-arrow-left"></i><?php _e("Back to Inquiry Set", OER_LESSON_PLAN_SLUG)?></a>
 <div class="ps-header" style="background:url(<?php echo $featured_image_url; ?>) no-repeat center center #9C9C9C;" data-curid="<?php echo $index; ?>">
+    <?php if ($youtube): ?>
+    <div class="ps-youtube-video">
+        <?php
+            echo '<div class="youtubeVideoWrapper">';
+            if (function_exists('oer_generate_youtube_embed_code'))
+                $embed = oer_generate_youtube_embed_code($resource_url);
+            echo $embed;
+            echo '</div>';
+        ?>
+    </div>
+    <?php endif; ?>
+    <?php if ($isPDF): ?>
+    <div class="ps-pdf-block">
+        <?php
+            echo '<div class="psPDFWrapper">';
+            oer_display_pdf_embeds($resource_url);
+            echo '</div>';
+        ?>
+    </div>
+    <?php endif; ?>
     <span class="ps-nav-left <?php echo $lp_prev_class; ?>"><a class="lp-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>"><i class="fal fa-chevron-left fa-2x"></i></a></span>
     <span class="ps-nav-right <?php echo $lp_next_class; ?>"><a class="lp-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>"><i class="fal fa-chevron-right fa-2x"></i></a></span>
     <span class="ps-expand"><a href="<?php echo $featured_image_url; ?>" class="lp-expand-img" target="_blank"><i class="fal fa-expand-arrows-alt"></i></a></span>

@@ -971,3 +971,19 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     width: 24px !important;
     height: 24px !important;
 }
+.ps-youtube-video {
+    display:table;
+    width:100%;
+    height:100%;
+}
+.ps-youtube-video .youtubeVideoWrapper { display:table-cell; vertical-align:middle; }
+.ps-youtube-video .videoWrapper{ width: 800px; height: 450px; display: block; margin: 0 auto; padding-bottom:0; padding-top:0;  }
+.ps-pdf-block { height:100%; }
+.ps-pdf-block .psPDFWrapper { margin: 0 auto; width: 800px; height: 100%; max-width:100%; }
+
+@media only screen and (max-width: 600px){
+    .ps-youtube-video .videoWrapper {
+        width: 100%;
+        height: 225px;
+    }
+}
