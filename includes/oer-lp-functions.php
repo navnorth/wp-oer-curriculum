@@ -190,44 +190,91 @@ if (! function_exists('get_standard_notations_from_ids')) {
      * @param bool $admin
      */
     function get_standard_notations_from_ids($ids, $admin = false) {
+        global $wpdb;
+        
         $stds = null;
+        $substds = null;
+        $notations = null;
+        $empty = true;
        
         if(!is_array($ids)) {
-            $ids = str_replace('standard_notation-', '', $ids);
             $stds = explode(',', $ids);
+            foreach ($stds as $std) {
+                if (strpos($std, "standard_notation")!== false){
+                    $notations[] = str_replace('standard_notation-', '', $std);
+                } else {
+                    $substds[] = str_replace('sub_standards-', '', $std);
+                }
+            }
         } else {
             foreach($ids as $id){
-                $id = str_replace('standard_notation-', '', $id);
-                $stds[] = $id;
+                if (strpos($id, "standard_notation")){
+                    $notations[] = str_replace('standard_notation-', '', $id);
+                } else {
+                    $substds[] = str_replace('sub_standards-', '', $id);
+                }
             }
         }
         
-        // Count the number of ids
-        $idsCount = count($stds);
-
-        // Prepare the right amount of placeholders, in an array
-
-        // For strings, you would use, ‘%s’
-        $stringPlaceholders = array_fill(0, $idsCount, '%s');
-
-        // Put all the placeholders in one string ‘%s, %s, %s, %s, %s,…’
-        $placeholdersForIds = implode(',', $stringPlaceholders);
+        if ($notations) {
+            // Count the number of ids
+            $idsCount = count($notations);
+    
+            // Prepare the right amount of placeholders, in an array
+    
+            // For strings, you would use, ‘%s’
+            $stringPlaceholders = array_fill(0, $idsCount, '%s');
+    
+            // Put all the placeholders in one string ‘%s, %s, %s, %s, %s,…’
+            $placeholdersForIds = implode(',', $stringPlaceholders);
+            
+            $results = $wpdb->get_results( $wpdb->prepare( "SELECT * from " . $wpdb->prefix. "oer_standard_notation where id in (" . $placeholdersForIds .")" , $notations ) , ARRAY_A);
+            if (!empty($results)) {
+                foreach ($results as $result) {?>
+                    <span class="selected-standard-pill">
+                        <?php echo $result['description'];?>
+                        <?php if ($admin) {?>
+                            <a href="javascript:void(0)"
+                               class="remove-ss-pill"
+                               data-id="standard_notation-<?php echo $result['id']?>"
+                            ><i class="fa fa-times"></i></a>
+                        <?php }?>
+                    </span>
+                <?php }
+                $empty = false;
+            }
+        }
         
-        global $wpdb;
-        $results = $wpdb->get_results( $wpdb->prepare( "SELECT * from " . $wpdb->prefix. "oer_standard_notation where id in (" . $placeholdersForIds .")" , $stds ) , ARRAY_A);
-        if (!empty($results)) {
-            foreach ($results as $result) {?>
-                <span class="selected-standard-pill">
-                    <?php echo $result['description'];?>
-                    <?php if ($admin) {?>
-                        <a href="javascript:void(0)"
-                           class="remove-ss-pill"
-                           data-id="standard_notation-<?php echo $result['id']?>"
-                        ><i class="fa fa-times"></i></a>
-                    <?php }?>
-                </span>
-            <?php }
-        } else {
+        if ($substds){
+            // Count the number of ids
+            $idsCount = count($substds);
+    
+            // Prepare the right amount of placeholders, in an array
+    
+            // For strings, you would use, ‘%s’
+            $stringPlaceholders = array_fill(0, $idsCount, '%s');
+    
+            // Put all the placeholders in one string ‘%s, %s, %s, %s, %s,…’
+            $placeholdersForIds = implode(',', $stringPlaceholders);
+            
+            $results = $wpdb->get_results( $wpdb->prepare( "SELECT * from " . $wpdb->prefix. "oer_sub_standards where id in (" . $placeholdersForIds .")" , $substds ) , ARRAY_A);
+            if (!empty($results)) {
+                foreach ($results as $result) {?>
+                    <span class="selected-standard-pill">
+                        <?php echo $result['standard_title'];?>
+                        <?php if ($admin) {?>
+                            <a href="javascript:void(0)"
+                               class="remove-ss-pill"
+                               data-id="sub_standards-<?php echo $result['id']?>"
+                            ><i class="fa fa-times"></i></a>
+                        <?php }?>
+                    </span>
+                <?php }
+                $empty = false;
+            }
+        }
+        
+        if ($empty==true) {
             if ($admin) {
                 echo "<p>You have not selected any academic standards</p>";
             }
