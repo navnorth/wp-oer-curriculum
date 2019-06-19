@@ -52,7 +52,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             <div class="tc-lp-controls">
                 <div class="sharethis-inline-share-buttons"></div>
                 <?php if ($oer_lp_download_copy_document): ?>
-                <a href="<?php echo $oer_lp_download_copy_document; ?>"><i class="fal fa-download"></i></a>
+                <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank"><i class="fal fa-download"></i></a>
                 <?php endif; ?>
             </div>
         </div>
