@@ -59,6 +59,15 @@ $(document).ready(function() {
             $(this).text("Read More");
         }
     });
+    
+    if ($('.excerpt-section-custom-width').is(":visible")) {
+        excerpt_height = $('.excerpt-section-custom-width').innerHeight();
+        border_width = Math.floor(excerpt_height/2);
+        $('.tc-pink-triangle').css({
+            'border-top': border_width.toString() + 'px solid transparent',
+            'border-bottom': border_width.toString() + 'px solid transparent'
+        });
+    }
 
     splitTextIntoColumns('#initial-excerpt');
     splitTextIntoColumns('#tc-historical-background-tab-content .tc-tab-content span');
