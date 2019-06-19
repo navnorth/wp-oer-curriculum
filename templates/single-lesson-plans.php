@@ -95,7 +95,14 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 $standard_details = was_standard_details($standard);
                         ?>
                         <div class="tc-lp-details-standard">
-                            <a href="javascript:void(0)"><?php if ($standard_details): echo $standard_details->description; endif; ?></a>
+                            <a href="javascript:void(0)"><?php
+                            if ($standard_details){
+                                if (isset($standard_details->description))
+                                    echo $standard_details->description;
+                                else
+                                    echo $standard_details->standard_title;
+                            }
+                            ?></a>
                         </div>
                         <?php
                         }
