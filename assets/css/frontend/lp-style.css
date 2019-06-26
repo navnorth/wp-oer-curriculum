@@ -751,7 +751,7 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     font-weight: 300;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
 }
-.tc-view-button:hover { color:#fff !important; }
+.tc-view-button:hover, .tc-view-button:active, .tc-view-button:focus { color:#fff !important; }
 .fade.in { opacity:1; }
 .ps-tagcloud { margin:25px 0 15px; }
 .ps-button { padding:5px 10px; border:1px solid #2a3e48; cursor:pointer; margin:3px; display:inline-block; font-size:18px; }
