@@ -3,7 +3,7 @@
  Plugin Name:  Curriculum Plugin
  Plugin URI:   https://www.wp-oer.com
  Description:  Open Educational Resource management and curation, metadata publishing, and alignment to Common Core State Standards.
- Version:      0.0.1
+ Version:      0.2.2
  Author:       Navigation North
  Author URI:   https://www.navigationnorth.com
  Text Domain:  wp-oer
@@ -37,7 +37,7 @@ define( 'OER_LESSON_PLAN_FILE',__FILE__);
 // Plugin Name and Version
 define( 'OER_LESSON_PLAN_PLUGIN_NAME', 'WP OER Curriculum Plugin' );
 define( 'OER_LESSON_PLAN_ADMIN_PLUGIN_NAME', 'WP OER Curriculum Plugin');
-define( 'OER_LESSON_PLAN_VERSION', '0.0.1' );
+define( 'OER_LESSON_PLAN_VERSION', '0.2.2' );
 
 include_once(OER_LESSON_PLAN_PATH.'includes/oer-lp-functions.php');
 include_once(OER_LESSON_PLAN_PATH.'includes/init.php');
@@ -71,7 +71,7 @@ function check_parent_plugin()
     {
         wp_die('Sorry, but this plugin requires the Parent Plugin to be installed and active. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
     }
-    
+
     // Require WP Curriculum plugin
     if ( !is_plugin_active( 'wp-academic-standards/wp-academic-standards.php')
         && current_user_can( 'activate_plugins' )){
@@ -145,7 +145,7 @@ function lp_add_rewrites()
         if (empty($flush_rewrite)){
             add_option('lp_rewrite_rules', false);
         }
-        
+
         $wp_rewrite->init();
         $wp_rewrite->flush_rules();
         update_option('lp_rewrite_rules', true);
@@ -161,13 +161,13 @@ function lp_add_query_vars( $vars ){
 add_action( 'template_include' , 'lp_assign_standard_template' );
 function lp_assign_standard_template($template) {
 	global $wp_query;
-        
+
         $url_path = trim(parse_url(add_query_arg(array()), PHP_URL_PATH), '/');
-        
+
         status_header(200);
-        
+
         $root_slug = "inquiry-sets";
-        
+
         if ( strpos( $url_path, $root_slug ) !== false && get_query_var('curriculum') && get_query_var('source')) {
             $wp_query->is_404 = false;
             $template = locate_template('templates/primary-source.php', true);
@@ -197,7 +197,7 @@ function lp_add_inquiry_set_rest_args() {
 add_action('enqueue_block_editor_assets', 'lp_enqueue_inquiry_set_block');
 function lp_enqueue_inquiry_set_block(){
 	wp_enqueue_script(
-            'inquiry-set-thumbnail-block-js', 
+            'inquiry-set-thumbnail-block-js',
             OER_LESSON_PLAN_URL . "/assets/js/backend/inquiry-set-thumbnail-block.build.js",
             array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-components', 'wp-editor', 'wp-api')
 	);
@@ -209,7 +209,7 @@ function lp_enqueue_inquiry_set_block(){
             )
         );
 	wp_enqueue_style(
-            'inquiry-set-thumbnail-block-css', 
+            'inquiry-set-thumbnail-block-css',
             OER_LESSON_PLAN_URL . "/assets/css/backend/inquiry-set-thumbnail-block.css",
             array('wp-edit-blocks')
 	);
@@ -230,7 +230,7 @@ function lp_add_meta_to_api() {
 				'update_callback' => null,
 				'schema' => null
 				  ) );
-	
+
 	// Register Featured Image to REST API
 	register_rest_field( 'lesson-plans',
 			'featured_image_url',
@@ -239,7 +239,7 @@ function lp_add_meta_to_api() {
 			    'update_callback' => null,
 			    'schema'          => null,
 			) );
-	
+
 }
 
 function lp_rest_get_meta_field($inquiryset, $field, $request){
@@ -247,14 +247,14 @@ function lp_rest_get_meta_field($inquiryset, $field, $request){
 		$grades = get_post_meta($inquiryset['id'], $field, true);
                 $grades = $grades[0];
 		$grade_level = "";
-                
+
                 if ($grades == "pre-k")
                     $grade_level = "Pre-Kindergarten";
                 elseif ($grades == "k")
                     $grade_level = "Kindergarten";
                 else
                     $grade_level = "Grade ".$grades;
-                    
+
                 return $grade_level;
 	} else
 		return get_post_meta($inquiryset['id'], $field, true);
