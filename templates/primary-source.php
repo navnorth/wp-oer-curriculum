@@ -50,18 +50,31 @@ $prev_url = null;
 $next_url = null;
 if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
     if (!empty(array_filter($primary_resources['resource']))) {
+        $source_count = count($primary_resources['resource']);
         foreach ($primary_resources['resource'] as $resourceKey => $source) {
-            if ($source==$resource->post_title)
+            if (strcmp(esc_html($source),$resource->post_title)==0)
                 break;
             $index++;
         }
         if (isset($primary_resources['resource'][$index-1])){
-            $prev_resource = oer_lp_get_resource_details($primary_resources['resource'][$index-1]);
-            $prev_url = $back_url."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID;
+            // get previous url
+            $prevIndex = $index - 1;
+            do {
+                $prev_resource = oer_lp_get_resource_details($primary_resources['resource'][$prevIndex]);
+                $prevIndex--;
+            } while(!$prev_resource && $prevIndex >= 0);
+            if ($prev_resource)
+                $prev_url = $back_url."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID;
         }
         if (isset($primary_resources['resource'][$index+1])){
-            $next_resource = oer_lp_get_resource_details($primary_resources['resource'][$index+1]);
-            $next_url = $back_url."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID;
+            //get next url
+            $nextIndex = $index + 1;
+            do {
+                $next_resource = oer_lp_get_resource_details($primary_resources['resource'][$nextIndex]);
+                $nextIndex++;
+            } while(!$next_resource && $nextIndex < $source_count);
+            if ($next_resource)
+                $next_url = $back_url."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID;
         }
         if ($index==0)
             $lp_prev_class = "ps-nav-hidden";

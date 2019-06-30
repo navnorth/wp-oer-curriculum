@@ -369,6 +369,10 @@ if (! function_exists('oer_lp_primary_resource_dropdown')){
 if (! function_exists('oer_lp_get_resource_details')){
     function oer_lp_get_resource_details($source_title){
         $resource = get_page_by_title($source_title,OBJECT,"resource");
+        if (!$resource){
+            $source_title = str_replace("-","_",sanitize_title($source_title));
+            $resource = get_page_by_path($source_title,OBJECT,"resource");
+        }
         return $resource;
     }
 }
@@ -410,6 +414,9 @@ if (! function_exists('oer_lp_title_from_slug')){
 if (! function_exists('oer_inquiry_set_grade_level')){
     function oer_inquiry_set_grade_level($inquiry_set_id){
         $grades = get_post_meta($inquiry_set_id, "oer_lp_grades", true);
+        if (!is_array($grades))
+            return false;
+        
         $grades = $grades[0];
         $grade_level = "";
         

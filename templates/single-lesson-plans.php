@@ -191,8 +191,13 @@ if (have_posts()) : while (have_posts()) : the_post();
         $primary_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
         if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             if (!empty(array_filter($primary_resources['resource']))) {
-                foreach ($primary_resources['resource'] as $resourceKey => $resource) {
-                    $resource = get_page_by_title($resource,OBJECT,"resource");
+                foreach ($primary_resources['resource'] as $resourceKey => $res) {
+                    $ps_url = "";
+                    $resource = get_page_by_title($res,OBJECT,"resource");
+                    if (!$resource){
+                        $res = str_replace("-","_",sanitize_title($res));
+                        $resource = get_page_by_path($res,OBJECT,"resource");
+                    }
                     $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
                     $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
                     $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
@@ -203,7 +208,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <div class="media-image">
                         <div class="image-thumbnail">
                             <?php if ($resource_img!==""):
-                            $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID);
+                                if ($resource)
+                                    $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID);
                             ?>
                             <a href="<?php echo $ps_url;  ?>">
                                 <span class="resource-overlay"></span>
