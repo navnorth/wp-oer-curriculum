@@ -291,13 +291,18 @@ jQuery(document).ready(function ($) {
             $(document).on('click','#lp-create-module-btn', function () {
                 var total_form_box = parseInt($('.lp-element-wrapper').length, 10);
                 var module_type = $('#module-type').val();
-
+                var textId, firstInit;
                 $.post(ajaxurl, {action:'lp_create_module_callback', module_type: module_type, row_id: total_form_box}).done(function (response) {
-                    $(response).insertAfter('div.lp-element-wrapper:last');
+                    $(response).insertAfter('div.lp-element-wrapper:last').tinymce_textareas();
 
                     if (module_type == 'editor') {
-                        tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-custom-editor-' + total_form_box );
-                        tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-custom-editor-' + total_form_box );
+                        textId = 'oer-lp-custom-editor-' + total_form_box;
+                        if (typeof( tinymce ) == "object" && typeof( tinymce.execCommand ) == "function" ) {
+                            tinymce.execCommand( 'mceFocus', false, textId );
+                            tinymce.execCommand( 'mceRemoveEditor', false, textId );
+                            tinymce.execCommand( 'mceAddEditor', false, textId );
+                            quicktags({ id: textId });
+                        }
                     }
 
                     $('#lp-dynamic-module-modal').modal('hide');

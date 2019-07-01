@@ -537,6 +537,7 @@ function create_dynamic_editor($id) {
                                 'media_buttons' => true,
                                 'textarea_rows' => 10,
                                 'drag_drop_upload' => true,
+                                'default_editor' => 'html',
                                 'teeny' => true,
                             )
                         );
