@@ -701,7 +701,7 @@ a.lp-nav-left, a.lp-nav-right, a.lp-expand-img {
     transition: all .2s ease-in;
 }
 a.lp-nav-left:hover, a.lp-nav-right:hover, a.lp-expand-img:hover, a.lp-expand-img:active{
-    color: #ffffff;
+    color: #ffffff !important;
 }
 .ps-nav-right {
     position: absolute;
