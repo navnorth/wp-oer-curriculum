@@ -763,12 +763,6 @@ jQuery(document).ready(function ($) {
                         tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-resource-student-' + total_form_box );
                         quicktags({ id: 'oer-lp-resource-student-' + total_form_box });
                     }
-
-                    if($('div.lp-primary-resource-element-wrapper').length) {
-                        $('div.lp-primary-resource-element-wrapper:last').tinymce_textareas();
-                    } else {
-                        $('.lp-primary-resource-element-panel').tinymce_textareas();
-                    }
                     // Toggle reorder button
                    LessonPlan.toggleUpDownButton();
                 });
