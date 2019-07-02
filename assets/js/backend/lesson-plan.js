@@ -293,13 +293,13 @@ jQuery(document).ready(function ($) {
                 var module_type = $('#module-type').val();
                 var textId, firstInit;
                 $.post(ajaxurl, {action:'lp_create_module_callback', module_type: module_type, row_id: total_form_box}).done(function (response) {
-                    $(response).insertAfter('div.lp-element-wrapper:last').tinymce_textareas();
+                    $(response).insertAfter('div.lp-element-wrapper:last');
 
                     if (module_type == 'editor') {
                         textId = 'oer-lp-custom-editor-' + total_form_box;
                         if (typeof( tinymce ) == "object" && typeof( tinymce.execCommand ) == "function" ) {
-                            tinymce.execCommand( 'mceFocus', false, textId );
                             tinymce.execCommand( 'mceRemoveEditor', false, textId );
+                            LessonPlan.tinymceTextArea(textId);
                             tinymce.execCommand( 'mceAddEditor', false, textId );
                             quicktags({ id: textId });
                         }
@@ -747,35 +747,50 @@ jQuery(document).ready(function ($) {
                 total_form_box += 1;
                 $.post(ajaxurl, {action:'lp_add_more_pr_callback', row_id: total_form_box}).done(function (response) {
                     if($('div.lp-primary-resource-element-wrapper').length) {
-                        $(response).insertAfter('div.lp-primary-resource-element-wrapper:last').tinymce_textareas();
+                        $(response).insertAfter('div.lp-primary-resource-element-wrapper:last');
                     } else {
-                        $('.lp-primary-resource-element-panel').html(response).tinymce_textareas();
+                        $('.lp-primary-resource-element-panel').html(response);
                     }
                     
                     if (typeof( tinymce ) == "object" && typeof( tinymce.execCommand ) == "function" ) {
                         tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-resource-teacher-' + total_form_box );
+                        LessonPlan.tinymceTextArea('oer-lp-resource-teacher-' + total_form_box);
                         tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-resource-teacher-' + total_form_box );
                         quicktags({ id: 'oer-lp-resource-teacher-' + total_form_box });
                         
                         tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-resource-student-' + total_form_box );
+                        LessonPlan.tinymceTextArea('oer-lp-resource-student-' + total_form_box );
                         tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-resource-student-' + total_form_box );
                         quicktags({ id: 'oer-lp-resource-student-' + total_form_box });
                     }
 
+                    if($('div.lp-primary-resource-element-wrapper').length) {
+                        $('div.lp-primary-resource-element-wrapper:last').tinymce_textareas();
+                    } else {
+                        $('.lp-primary-resource-element-panel').tinymce_textareas();
+                    }
                     // Toggle reorder button
                    LessonPlan.toggleUpDownButton();
                 });
             });
-            $.fn.tinymce_textareas = function(){
-                tinyMCE.init({
-                    skin: 'wp_theme',
-                    mode: 'exact',
-                    menubar: false,
-                    toolbar: 'bold italic underscore blockquote strikethrough bullist numlist alignleft aligncenter alignright undo redo'
-                });
-            }
         },
 
+        // Turn textarea into tinymce editor
+        tinymceTextArea: function(elementId){
+            tinymce.init({
+                selector : 'textarea#' + elementId,
+                skin: 'wp_theme',
+                mode: 'textareas',
+                menubar: false,
+                toolbar: 'bold italic underscore blockquote strikethrough bullist numlist alignleft aligncenter alignright undo redo',
+                setup: function(editor){
+                    editor.on("change", function(){
+                        editor.save();
+                    });
+                }
+            });
+        },
+        
         // Delete source
         deletePrimarySource: function () {
             $(document).on('click', '.lp-remove-source',function(e) {

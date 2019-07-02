@@ -1037,7 +1037,7 @@ $default = false;
                         if ($elementKey!=="oer_lp_custom_editor_teacher_background" && $elementKey!=="oer_lp_custom_editor_student_background") {
                         $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                         ?>
-                            <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-<?php echo $key; ?>">
+                            <div class="panel panel-default lp-element-wrapper oer-lp-introduction-group" id="oer-lp-custom-editor-group-<?php echo $value; ?>">
                                 <input type="hidden" name="lp_order[<?php echo $elementKey;?>]" class="element-order" value="<?php echo $value;?>" value="1">
                                 <div class="panel-heading">
                                     <h3 class="panel-title lp-module-title">
