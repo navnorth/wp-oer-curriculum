@@ -754,13 +754,13 @@ jQuery(document).ready(function ($) {
                     
                     if (typeof( tinymce ) == "object" && typeof( tinymce.execCommand ) == "function" ) {
                         tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-resource-teacher-' + total_form_box );
-                        LessonPlan.tinymceTextArea('oer-lp-resource-teacher-' + total_form_box);
                         tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-resource-teacher-' + total_form_box );
+                        LessonPlan.tinymceTextArea('oer-lp-resource-teacher-' + total_form_box);
                         quicktags({ id: 'oer-lp-resource-teacher-' + total_form_box });
                         
                         tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-resource-student-' + total_form_box );
-                        LessonPlan.tinymceTextArea('oer-lp-resource-student-' + total_form_box );
                         tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-resource-student-' + total_form_box );
+                        LessonPlan.tinymceTextArea('oer-lp-resource-student-' + total_form_box );
                         quicktags({ id: 'oer-lp-resource-student-' + total_form_box });
                     }
                     // Toggle reorder button
