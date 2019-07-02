@@ -693,7 +693,7 @@ span.selected-standard-pill:last-child {
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
 }
 a.lp-nav-left, a.lp-nav-right, a.lp-expand-img { 
-    color:#ffffff; 
+    color:#ffffff !important; 
     -webkit-font-smoothing:antialiased; 
     display:block; 
     cursor:pointer; 
