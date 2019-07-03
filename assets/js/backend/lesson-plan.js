@@ -783,6 +783,39 @@ jQuery(document).ready(function ($) {
                     });
                 }
             });
+            $(document).on('change','#' + elementId, function(){
+                LessonPlan.setEditorContent($(this).attr('id'),$(this).val());
+            });
+        },
+        
+        // Save tinymce editor
+        tinymceSaveEditor: function(){
+            if (wp.data) {
+                wp.data.subscribe(function(){
+                    if (wp.data.select('core/editor').isSavingPost()) {
+                        if (window.tinymce && window.tinymce.editors) {
+                            for (var i=0; i<tinymce.editors.length; i++) {
+                                tinymce.editors[i].save();
+                            }
+                        }
+                    } 
+                });
+            }
+        },
+        
+        // Set Editor Content
+        setEditorContent: function(elemId, val) {
+            var $_editorTextArea = $('#' + elemId);
+            if ($_editorTextArea.is(':visible')) {
+                $_editorTextArea.val(val);
+                tinymce.get(elemId).setContent(val);
+                tinymce.get(elemId).save();
+            } else {
+                tinymce.get(elemId).setContent(val);
+                tinymce.get(elemId).save();
+                $_editorTextArea.val(val);
+            }
+            $('button.switch-tmce[data-wp-editor-id="' + elemId +'"]').trigger("click");
         },
         
         // Delete source
@@ -926,4 +959,5 @@ jQuery(document).ready(function ($) {
     LessonPlan.requireModuleTitle();
     LessonPlan.lpRemoveCopyLesson();
     LessonPlan.lpPrimarySourceSensitiveMaterial();
+    LessonPlan.tinymceSaveEditor();
 });
