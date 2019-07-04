@@ -191,12 +191,12 @@ if (! function_exists('get_standard_notations_from_ids')) {
      */
     function get_standard_notations_from_ids($ids, $admin = false) {
         global $wpdb;
-        
+
         $stds = null;
         $substds = null;
         $notations = null;
         $empty = true;
-       
+
         if(!is_array($ids)) {
             $stds = explode(',', $ids);
             foreach ($stds as $std) {
@@ -215,19 +215,19 @@ if (! function_exists('get_standard_notations_from_ids')) {
                 }
             }
         }
-        
+
         if ($notations) {
             // Count the number of ids
             $idsCount = count($notations);
-    
+
             // Prepare the right amount of placeholders, in an array
-    
+
             // For strings, you would use, ‘%s’
             $stringPlaceholders = array_fill(0, $idsCount, '%s');
-    
+
             // Put all the placeholders in one string ‘%s, %s, %s, %s, %s,…’
             $placeholdersForIds = implode(',', $stringPlaceholders);
-            
+
             $results = $wpdb->get_results( $wpdb->prepare( "SELECT * from " . $wpdb->prefix. "oer_standard_notation where id in (" . $placeholdersForIds .")" , $notations ) , ARRAY_A);
             if (!empty($results)) {
                 foreach ($results as $result) {?>
@@ -244,19 +244,19 @@ if (! function_exists('get_standard_notations_from_ids')) {
                 $empty = false;
             }
         }
-        
+
         if ($substds){
             // Count the number of ids
             $idsCount = count($substds);
-    
+
             // Prepare the right amount of placeholders, in an array
-    
+
             // For strings, you would use, ‘%s’
             $stringPlaceholders = array_fill(0, $idsCount, '%s');
-    
+
             // Put all the placeholders in one string ‘%s, %s, %s, %s, %s,…’
             $placeholdersForIds = implode(',', $stringPlaceholders);
-            
+
             $results = $wpdb->get_results( $wpdb->prepare( "SELECT * from " . $wpdb->prefix. "oer_sub_standards where id in (" . $placeholdersForIds .")" , $substds ) , ARRAY_A);
             if (!empty($results)) {
                 foreach ($results as $result) {?>
@@ -273,7 +273,7 @@ if (! function_exists('get_standard_notations_from_ids')) {
                 $empty = false;
             }
         }
-        
+
         if ($empty==true) {
             if ($admin) {
                 echo "<p>You have not selected any academic standards</p>";
@@ -354,9 +354,9 @@ if (! function_exists('oer_lp_primary_resource_dropdown')){
             'orderby' => 'title',
             'order'    => 'ASC'
         ]);
-        
+
         $resource_options .= "<option>Select Resource</option>";
-        
+
         if (count($posts)) {
             foreach ($posts as $post) {
                 $resource_options .= '<option value="' . $post->post_title . '" ' . (($resource == $post->post_title) ? 'selected="selected"' : "") . '>' . $post->post_title . '</option>';
@@ -416,29 +416,32 @@ if (! function_exists('oer_inquiry_set_grade_level')){
         $grades = get_post_meta($inquiry_set_id, "oer_lp_grades", true);
         if (!is_array($grades))
             return false;
-        
+
         $grades = $grades[0];
         $grade_level = "";
-        
+
         if ($grades == "pre-k")
             $grade_level = "Pre-Kindergarten";
         elseif ($grades == "k")
             $grade_level = "Kindergarten";
         else
             $grade_level = "Grade ".$grades;
-            
+
         return $grade_level;
     }
 }
 
-if (! function_exists('is_lp_parent_plugin_activated')){
-    function is_lp_parent_plugin_activated(){
+if (! function_exists('nn_check_dependencies')){
+    function nn_check_dependencies(){
+        $activeOER = $activeWAS = false;
         $active_plugins_basenames = get_option( 'active_plugins' );
         foreach ( $active_plugins_basenames as $plugin_basename ) {
             if ( false !== strpos( $plugin_basename, '/open-educational-resources.php' ) ) {
-                return true;
+                $activeOER = true;
+            } else if ( false !== strpos( $plugin_basename, '/wp-academic-standards.php' ) ) {
+                $activeWAS = true;
             }
         }
-        return false;
+        return ($activeOER && $activeWAS);
     }
 }
