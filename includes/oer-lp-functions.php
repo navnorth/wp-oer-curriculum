@@ -430,3 +430,15 @@ if (! function_exists('oer_inquiry_set_grade_level')){
         return $grade_level;
     }
 }
+
+if (! function_exists('is_lp_parent_plugin_activated')){
+    function is_lp_parent_plugin_activated(){
+        $active_plugins_basenames = get_option( 'active_plugins' );
+        foreach ( $active_plugins_basenames as $plugin_basename ) {
+            if ( false !== strpos( $plugin_basename, '/open-educational-resources.php' ) ) {
+                return true;
+            }
+        }
+        return false;
+    }
+}

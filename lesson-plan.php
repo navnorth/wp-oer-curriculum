@@ -65,7 +65,7 @@ function check_parent_plugin()
 {
     // Require parent plugin
     if(
-        ! is_plugin_active( 'wp-oer/open-educational-resources.php' ) and
+        ! is_lp_parent_plugin_activated() and
         current_user_can( 'activate_plugins' )
     )
     {
