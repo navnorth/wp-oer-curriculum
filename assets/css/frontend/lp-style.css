@@ -602,9 +602,9 @@ span.selected-standard-pill:last-child {
 }
 .tc-related-inquiry-set-description h4 {
     color: #4F4F4F;
-    overflow:hidden;
+    /*overflow:hidden;
     text-overflow:ellipsis;
-    white-space:nowrap;
+    white-space:nowrap;*/
 	font-size: 20px;
 	margin-bottom: 0;
 	font-weight: 400;
