@@ -89,24 +89,28 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <?php
                     $oer_lp_standards = explode(",",$oer_lp_standards);
                     if (is_array($oer_lp_standards)):
+                        echo '<ul class="tc-lp-standards">';
                         foreach($oer_lp_standards as $standard){
                             $standard_details = "";
                             if (function_exists('was_standard_details'))
                                 $standard_details = was_standard_details($standard);
                         ?>
-                        <div class="tc-lp-details-standard">
-                            <a href="javascript:void(0)"><?php
+                        <li class="tc-lp-details-standard">
+                            <?php
                             if ($standard_details){
+                                if(isset($standard_details->standard_notation))
+                                    echo '<strong>'.$standard_details->standard_notation.'</strong><br/>';
                                 if (isset($standard_details->description))
                                     echo $standard_details->description;
                                 else
                                     echo $standard_details->standard_title;
                             }
-                            ?></a>
-                        </div>
+                            ?>
+                        </li>
                         <?php
                         }
                     endif;
+                    echo '</ul>';
                     ?>
                 </div>
                 <div class="tc-lp-details-tags-list">

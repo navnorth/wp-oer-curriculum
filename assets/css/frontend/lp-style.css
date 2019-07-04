@@ -68,11 +68,21 @@ body.single-lesson-plans {
     margin-right: 35px;
     margin-bottom: 10px;
 }
-.tc-lp-details-standards-list .tc-lp-details-standard a {
+.tc-lp-details-standards-list .tc-lp-details-standard {
     color: #fff;
-    text-decoration: underline;
-    font-size: 18px;
+    font-size: 16px;
 }
+.tc-lp-details-standards-list .tc-lp-details-standard:before{
+    content: '\f101';
+    font-family: 'Font Awesome 5 Pro';
+    font-size: 22px;
+    position: absolute;
+    left: -30px;
+    top: -5px;
+    color: #ffffff;
+}
+ul.tc-lp-standards { margin-left:0; }
+ul.tc-lp-standards li.tc-lp-details-standard { list-style:none; position:relative; }
 .tc-lp-details-tags-list {
     padding: 8px 0 0 0;
 }
