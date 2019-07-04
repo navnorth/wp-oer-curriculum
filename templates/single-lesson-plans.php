@@ -94,20 +94,20 @@ if (have_posts()) : while (have_posts()) : the_post();
                             $standard_details = "";
                             if (function_exists('was_standard_details'))
                                 $standard_details = was_standard_details($standard);
-                        ?>
-                        <li class="tc-lp-details-standard">
-                            <?php
                             if ($standard_details){
-                                if(isset($standard_details->standard_notation))
-                                    echo '<strong>'.$standard_details->standard_notation.'</strong><br/>';
-                                if (isset($standard_details->description))
-                                    echo $standard_details->description;
-                                else
-                                    echo $standard_details->standard_title;
-                            }
                             ?>
-                        </li>
-                        <?php
+                            <li class="tc-lp-details-standard">
+                                <?php
+                                    if(isset($standard_details->standard_notation))
+                                        echo '<strong>'.$standard_details->standard_notation.'</strong><br/>';
+                                    if (isset($standard_details->description))
+                                        echo $standard_details->description;
+                                    else
+                                        echo $standard_details->standard_title;
+                                ?>
+                            </li>
+                            <?php
+                            }
                         }
                     endif;
                     echo '</ul>';
