@@ -315,6 +315,11 @@ function lp_save_custom_fields() {
             if (isset($_POST['oer_lp_download_copy_document'])) {
                 update_post_meta($post->ID, 'oer_lp_download_copy_document', sanitize_text_field($_POST['oer_lp_download_copy_document']));
             }
+            
+            // Save Sensitive Warning
+            if (isset($_POST['oer_lp_sensitive_warning'])) {
+                update_post_meta($post->ID, 'oer_lp_sensitive_warning', sanitize_text_field($_POST['oer_lp_sensitive_warning']));
+            }
 
             // Save related inquiry sets
             if (isset($_POST['oer_lp_related_inquiry_set'])) {

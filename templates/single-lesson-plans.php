@@ -35,6 +35,9 @@ $authors = (isset($post_meta_data['oer_lp_authors'][0]) ? unserialize($post_meta
 // check if there is a resource with sensitive material set
 $oer_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
 
+if (isset($post_meta_data['oer_lp_sensitive_warning']) && $post_meta_data['oer_lp_sensitive_warning'][0]=="1")
+    $oer_sensitive = true;
+
 if (isset($oer_resources['sensitive_material']))
     $sensitive_material = $oer_resources['sensitive_material'];
     

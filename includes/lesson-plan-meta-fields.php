@@ -7,9 +7,9 @@ global $oer_lp_default_structure;
 global $inquiryset_post;
 
 $inquiryset_post = $post;
+
 // Get all post meta for the post
 $post_meta_data = get_post_meta($post->ID );
-//echo "<pre>"; print_r(get_post_custom($post->ID, '', true ));
 
 // Lesson activity data
 $oer_lp_activity_title  = isset($post_meta_data['oer_lp_activity_title'][0]) ? unserialize($post_meta_data['oer_lp_activity_title'][0]) : array();
@@ -17,6 +17,7 @@ $oer_lp_activity_type   = isset($post_meta_data['oer_lp_activity_type'][0]) ? un
 $oer_lp_activity_detail = isset($post_meta_data['oer_lp_activity_detail'][0]) ? unserialize($post_meta_data['oer_lp_activity_detail'][0]) : array();
 
 $elements_orders        = isset($post_meta_data['lp_order'][0]) ? unserialize($post_meta_data['lp_order'][0]) : array();
+
 //was_selectable_admin_standards($post->ID, "oer_standard");
 foreach ($elements_orders as $orderKey => $orderValue) {
     if (isset($post_meta_data[$orderKey]) && strpos($orderKey, 'oer_lp_custom_text_list_') !== false) {
@@ -104,8 +105,18 @@ $default = false;
                             <li class="list-group-item">
                                 <a href="#oer-lp-custom-editor-group-student-background" title="Student Background">Student Background</a>
                             </li>
-                       <?php }
+                       <?php } 
                     }
+                    $sensitive_info_warning = 0;
+                    
+                    if(isset($post_meta_data['oer_lp_sensitive_warning'][0]))
+                        $sensitive_info_warning = $post_meta_data['oer_lp_sensitive_warning'][0];
+                    
+                    ?>
+                    <li class="list-group-item">
+                        <span>Sensitive Info. Warning</span> <input type="checkbox" name="oer_lp_sensitive_warning" <?php echo checked($sensitive_info_warning,1,false); ?> value="1">
+                    </li>
+                    <?php
                     if ($default==true)
                         $elements_orders = array();
                 } else { ?>
@@ -153,6 +164,9 @@ $default = false;
                     </li>
                     <li class="list-group-item">
                         <a href="#oer-lp-summative-group" title="Summative Assessment">Summative Assessment</a>
+                    </li>
+                    <li class="list-group-item">
+                        <span>Sensitive Info. Warning</span> <input type="checkbox" name="oer_lp_sensitive_warning" value="1">
                     </li>
                 <?php }?>
             </ul>
