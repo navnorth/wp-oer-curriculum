@@ -110,11 +110,11 @@ $default = false;
                     $sensitive_info_warning = 0;
                     
                     if(isset($post_meta_data['oer_lp_sensitive_warning'][0]))
-                        $sensitive_info_warning = $post_meta_data['oer_lp_sensitive_warning'][0];
+                        $sensitive_info_warning = (int)$post_meta_data['oer_lp_sensitive_warning'][0];
                     
                     ?>
                     <li class="list-group-item">
-                        <span>Sensitive Info. Warning</span> <input type="checkbox" name="oer_lp_sensitive_warning" <?php echo checked($sensitive_info_warning,1,false); ?> value="1">
+                        <span>Sensitive Info. Warning</span> <input type="checkbox" name="oer_lp_sensitive_warning" <?php echo checked(1,$sensitive_info_warning,true); ?> value="1">
                     </li>
                     <?php
                     if ($default==true)

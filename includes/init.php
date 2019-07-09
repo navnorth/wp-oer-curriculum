@@ -318,7 +318,10 @@ function lp_save_custom_fields() {
             
             // Save Sensitive Warning
             if (isset($_POST['oer_lp_sensitive_warning'])) {
-                update_post_meta($post->ID, 'oer_lp_sensitive_warning', sanitize_text_field($_POST['oer_lp_sensitive_warning']));
+                update_post_meta($post->ID, 'oer_lp_sensitive_warning', $_POST['oer_lp_sensitive_warning']);
+            } else {
+                if (get_post_meta($post->ID, 'oer_lp_sensitive_warning'))
+                    delete_post_meta($post->ID, 'oer_lp_sensitive_warning');
             }
 
             // Save related inquiry sets
