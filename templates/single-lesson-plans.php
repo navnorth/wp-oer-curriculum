@@ -253,6 +253,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     "lp_activities_order",
                     "lp_summative_order",
                     "lp_authors_order",
+                    "lp_oer_materials",
                     "lp_iq"
                 );
                 foreach($elements_orders as $element=>$order){

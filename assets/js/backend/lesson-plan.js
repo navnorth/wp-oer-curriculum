@@ -224,7 +224,7 @@ jQuery(document).ready(function ($) {
         // Change order value in hidden field and reinitialize the text editor
         changeElementOrder: function() {
             $("#oer-lp-sortable .lp-element-wrapper").each(function (index) {
-                var count = index + 1;
+                var count = index;
 
                 var position = $(this).find('.element-order').val();
                 var newvalue = $(this).find('.element-order').val(count);
@@ -296,11 +296,11 @@ jQuery(document).ready(function ($) {
                     $(response).insertAfter('div.lp-element-wrapper:last');
 
                     if (module_type == 'editor') {
-                        textId = 'oer-lp-custom-editor-' + total_form_box;
                         if (typeof( tinymce ) == "object" && typeof( tinymce.execCommand ) == "function" ) {
+                            textId = 'oer-lp-custom-editor-' + total_form_box;
                             tinymce.execCommand( 'mceRemoveEditor', false, textId );
-                            LessonPlan.tinymceTextArea(textId);
                             tinymce.execCommand( 'mceAddEditor', false, textId );
+                            LessonPlan.tinymceTextArea(textId);
                             quicktags({ id: textId });
                         }
                     }
