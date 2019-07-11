@@ -200,6 +200,7 @@ span.selected-standard-pill:last-child {
 .excerpt-section h2 {
     margin-bottom: 0;
     margin-top: 22px;
+    color: #fff;
     padding-left: 5%;
     font-size: 18px;
     font-family: 'Helvetica Neue', 'Roboto', Arial, Helvetica, sans-serif;
