@@ -240,7 +240,7 @@ span.selected-standard-pill:last-child {
     background-color: #851738;
 }
 .tc-lp-author { margin-right: 15px; }
-.tc-lp-author a {
+.tc-lp-author a, span.tc-lp-author {
     color: #FFB904 !important;
     font-weight: 500;
     font-size: 14px !important;

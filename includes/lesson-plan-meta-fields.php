@@ -250,7 +250,7 @@ $default = false;
                                                                     >
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-3">
+                                                            <!-- <div class="col-md-3">
                                                                 <div class="form-group">
                                                                     <input type="text"
                                                                            class="form-control"
@@ -305,7 +305,7 @@ $default = false;
                                                                      class="img-circle lp-oer-person-placeholder"
                                                                      width="50px"
                                                                      height="50px"/>
-                                                            </div>
+                                                            </div> -->
                                                         </div><!-- /.row -->
                                                     </div>
                                                 </div>
