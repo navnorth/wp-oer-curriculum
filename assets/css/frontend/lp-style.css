@@ -3,7 +3,6 @@ body.single-lesson-plans {
     box-sizing:border-box;
     -webkit-box-sizing:border-box;
 }
-
 /** Curriculum Frontend Styles **/
 .single-lesson-plans .container { width:100%; max-width:100%; }
 .single-lesson-plans .container .site-content { margin-top:0; }
@@ -898,6 +897,9 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
 }
 
 /** JQUERY UI DIALOG OVERRIDES **/
+.ui-widget.standards-dialog {
+    max-height: 75vh;
+}
 .ui-widget.standards-dialog, .ui-widget.tags-dialog {
     font-family: 'Helvetica Neue', 'Roboto', Helvetica, Arial, sans-serif;
 }
@@ -933,6 +935,10 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
 .ui-widget-overlay {
     background: #000 !important;
     opacity: .7 !important;
+}
+#standards-dialog.ui-dialog-content {
+    overflow: auto;
+    height: 75vh !important;
 }
 #standards-dialog, #tags-dialog {
     display: none;

@@ -23,9 +23,27 @@ $(document).ready(function() {
             title: 'Standards',
             draggable: false,
             resizable: false,
-            dialogClass: 'standards-dialog'
+            dialogClass: 'standards-dialog',
+            create: function(event, ui) { 
+                var widget = $(this).dialog("widget");
+                $(".ui-dialog-titlebar-close span.ui-button-icon-primary", widget)
+                    .removeClass("ui-icon-closethick ui-icon")
+                    .addClass("fal fa-times");
+            },
+            open: function(event, ui) {
+                $("body").addClass("modal-open");
+            },
+            close: function(event, ui) {
+                $("body").removeClass("modal-open");
+            }
         });
     });
+
+    $("#standards-dialog").on("show", function () {
+        $("body").addClass("modal-open");
+      }).on("hidden", function () {
+        $("body").removeClass("modal-open")
+      });
 
     $(".open-tags").click(function() {
         $("#tags-dialog").dialog({

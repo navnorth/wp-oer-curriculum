@@ -70,7 +70,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                             
                             foreach($authors['name'] as $author){
                                 $author_url = $authors['author_url'][$aIndex];
-                                
+
                                 echo "<span class='tc-lp-author'>".$authors['name'][$aIndex]."</span>";
                                     
                                 $aIndex++;
