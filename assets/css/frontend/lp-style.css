@@ -229,7 +229,6 @@ span.selected-standard-pill:last-child {
     vertical-align: middle;
 }
 .excerpt-content .content-wrapper {
-    display: flex;
     margin: 30px;
 }
 .excerpt-content .content-wrapper span {
@@ -253,7 +252,6 @@ span.selected-standard-pill:last-child {
     color: #fff;
     font-size: 14px;
     line-height: 24px;
-    text-align: justify;
 }
 
 #framework-excerpt {
@@ -262,15 +260,14 @@ span.selected-standard-pill:last-child {
 
 .excerpt-content {
     overflow-y: hidden;
-    padding: 50px 100px 50px 50px !important;
+    padding: 70px;
     background: #fff;
     color: #4f4f4f;
     width:100%;
 }
 
 .excerpt-content p { 
-    font-size: 16px;
-    color:#fff; 
+    font-size: 14px;
 }
 .close-excerpt {
     margin-top: 30px;
@@ -346,7 +343,8 @@ span.selected-standard-pill:last-child {
 }
 .tc-tab-content {
     font-size: 14px !important;
-    text-align: justify;
+    font-family: 'Helvetica Neue', 'Roboto', Arial, Helvetica, sans-serif !important;
+    line-height: 24px;
     max-height: 340px;
     height:100%;
     overflow-y: hidden;
@@ -550,6 +548,7 @@ span.selected-standard-pill:last-child {
     padding: 8%;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 .tc-custom-bg-orange {
     background: #cc610c;

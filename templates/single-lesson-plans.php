@@ -182,9 +182,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             <!-- <div class="col-md-3 col-sm-3 col-xs-12"></div> -->
             <!-- <div class="excerpt-content col-md-9 col-sm-9 col-xs-12"> -->
             <div class="excerpt-content">
-                <div class="content-wrapper">
-                    <span id="initial-excerpt"><?php echo $oer_lp_iq['excerpt']; ?></span>
-                </div>
+                <div class="content-wrapper"><?php echo $oer_lp_iq['excerpt']; ?></div>
                 <button type="button" id="close-excerpt" class="excerpt-button float-right">CLOSE<i class="fal fa-angle-up"></i></button>
             </div>
         </div>
