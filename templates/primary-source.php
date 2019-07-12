@@ -52,6 +52,8 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
     if (!empty(array_filter($primary_resources['resource']))) {
         $source_count = count($primary_resources['resource']);
         foreach ($primary_resources['resource'] as $resourceKey => $source) {
+            if ($source==$resource->post_title)
+                break;
             if (strcmp(esc_html($source),$resource->post_title)==0)
                 break;
             $index++;
@@ -70,7 +72,7 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             //get next url
             $nextIndex = $index + 1;
             do {
-                $next_resource = oer_lp_get_resource_details($primary_resources['resource'][$nextIndex]);
+                $next_resource = oer_lp_get_resource_details($primary_resources['resource'][$nextIndex]);   
                 $nextIndex++;
             } while(!$next_resource && $nextIndex < $source_count);
             if ($next_resource)
@@ -80,9 +82,9 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             $lp_prev_class = "ps-nav-hidden";
         if ($index==count($primary_resources['resource'])-1)
             $lp_next_class = "ps-nav-hidden";
-        if (isset($primary_resources['teacher_info']))
+        if (isset($primary_resources['teacher_info'][$index]))
             $teacher_info = $primary_resources['teacher_info'][$index];
-        if (isset($primary_resources['student_info']))
+        if (isset($primary_resources['student_info'][$index]))
             $student_info = $primary_resources['student_info'][$index];
     }
 }
