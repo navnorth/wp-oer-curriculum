@@ -520,7 +520,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <div class="media-image">
                         <div class="image-thumbnail">
                             <div class="image-section">
-                                <img src="<?php echo $inquiry_img; ?>" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                                <!-- <img src="<?php echo $inquiry_img; ?>" alt="" class="img-thumbnail-square img-responsive img-loaded"> -->
+                                <?php echo the_post_thumbnail('resource-thumbnail'); ?>
                             </div>
                         </div>
                     </div>

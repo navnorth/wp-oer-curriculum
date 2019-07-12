@@ -1309,7 +1309,7 @@ $default = false;
                                                             <input type="text" class="form-control" name="oer_lp_authors[name][]" placeholder="Name">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <!-- <div class="col-md-3">
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" name="oer_lp_authors[role][]" placeholder="Role">
                                                         </div>
@@ -1335,7 +1335,7 @@ $default = false;
                                                              class="img-circle lp-oer-person-placeholder"
                                                              width="50px"
                                                              height="50px"/>
-                                                    </div>
+                                                    </div> -->
             
                                                 </div><!-- /.row -->
                                             </div>
@@ -1979,7 +1979,7 @@ $default = false;
                                                 <input type="text" class="form-control" name="oer_lp_authors[name][]" placeholder="Name">
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <!-- <div class="col-md-3">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" name="oer_lp_authors[role][]" placeholder="Role">
                                             </div>
@@ -2005,7 +2005,7 @@ $default = false;
                                                  class="img-circle lp-oer-person-placeholder"
                                                  width="50px"
                                                  height="50px"/>
-                                        </div>
+                                        </div> -->
 
                                     </div><!-- /.row -->
                                 </div>
