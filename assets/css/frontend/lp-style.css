@@ -960,7 +960,7 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(204,97,12,.5);
+    background-color: rgba(204,97,12,.4);
     transition: all .4s ease-in;
 }
 .resource-overlay:hover {
