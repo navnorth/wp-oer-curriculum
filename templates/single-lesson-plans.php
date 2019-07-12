@@ -515,7 +515,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                 if ($inquiry_set!=="0") {
                     $inquiry = oer_lp_get_inquiry_set_details($inquiry_set);
                     $inquiry_link = get_permalink($inquiry_set);
-                    $inquiry_img = get_the_post_thumbnail_url($inquiry);
+                    $inquiry_img = get_the_post_thumbnail_url($inquiry, $size = 'resource-thumbnail');
                     $inquiry_meta_data = oer_lp_get_inquiry_set_metadata($inquiry_set);
             ?>
             <a class="lp-tc-related-inquiry-block-link lp-tc-related-inquiry-block col-md-4 col-sm-6 move-up-left" href="<?php echo $inquiry_link; ?>">
@@ -524,7 +524,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         <div class="image-thumbnail">
                             <div class="image-section">
                                 <!-- <img src="<?php echo $inquiry_img; ?>" alt="" class="img-thumbnail-square img-responsive img-loaded"> -->
-                                <?php echo the_post_thumbnail('resource-thumbnail'); ?>
+                                <div title="<?php echo $inquiry->post_title?>" class="related-inquiry-set-thumbnail" style="background-image: url(<?php echo $inquiry_img; ?>)"></div>
                             </div>
                         </div>
                     </div>

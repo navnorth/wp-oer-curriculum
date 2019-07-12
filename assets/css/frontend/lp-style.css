@@ -553,6 +553,11 @@ span.selected-standard-pill:last-child {
     justify-content: space-between;
     flex-wrap: wrap;
 }
+.related-inquiry-set-thumbnail {
+    background-size: cover;
+    width: 100%;
+    height: 270px;
+}
 .tc-custom-bg-orange {
     background: #cc610c;
     height: 15px;
