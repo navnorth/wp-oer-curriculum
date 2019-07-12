@@ -264,7 +264,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                     ?>
                     <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
-                        <a class="nav-link active" id="tc-historical-background-tab" data-toggle="tab" href="#tc-historical-background-tab-content" role="tab" aria-controls="tc-historical-background-tab" aria-selected="true" aria-expanded="false">
+                        <a class="nav-link active" id="tc-historical-background-tab" data-toggle="tab" href="#tc-historical-background-tab-content" role="tab" aria-controls="tc-historical-background-tab" aria-selected="true" aria-expanded="true">
                             <?php echo $oer_lp_custom_editor['title']; ?>
                         </a>
                     </li>
