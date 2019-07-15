@@ -75,6 +75,11 @@ jQuery(document).ready(function($){
     if ($('.lp-nav-right,.lp-nav-left').is(":visible")) {
          $('.lp-nav-right,.lp-nav-left').attr('data-activetab', $('.ps-info-tabs li a.nav-link.active').attr('id'));
     }
+    
+    $('.tcl-lp-share-button').on("click", function(e){
+        e.preventDefault();
+        $('.tcp-lp-share-buttons').toggle();
+    });
 });
 
 function lp_redirect_with_post(url, tab) {

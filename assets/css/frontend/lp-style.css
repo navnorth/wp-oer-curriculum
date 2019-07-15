@@ -1020,6 +1020,11 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
 #a2apage_show_more_less { display:none; }
 .addtoany_shortcode { text-align:center; }
 ul#tc-home-tabs-section.nav.nav-tabs.tc-home-tabs { display:block; }
+.lp-featured-section .featured-image { position:relative; }
+.tcl-lp-share-button { outline:none;  }
+.tcp-lp-share-buttons { display:none; position:absolute; right:45px; padding:3px; }
+.tcp-lp-share-buttons .ssba-share-text { display:none; }
+.tcp-lp-share-buttons br { display:none; }
 @media only screen and (max-width: 600px){
     .ps-youtube-video .videoWrapper {
         width: 100%;
