@@ -404,6 +404,7 @@ span.selected-standard-pill:last-child {
 .tc-home-tabs li.nav-item, .ps-info-tabs li.nav-item {
     text-align: center;
     text-transform: uppercase;
+    height: 70px;
 }
 
 .tc-home-tabs li.nav-item .nav-link, .ps-info-tabs li.nav-item .nav-link {
@@ -420,6 +421,9 @@ span.selected-standard-pill:last-child {
     border-radius: 0 !important;
     margin-right: 0;
     transition: all .2s ease-in;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
 }
 .tc-home-tabs li.nav-item a.active {
     color:#fff !important;
@@ -905,6 +909,17 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     }
     .back-button {
         font-size: 14px;
+    }
+}
+@media (max-width: 571px) {
+    .tc-home-tabs .col-md-3.nav-item .active:after {
+        display: none;
+    }
+    .tc-home-tabs .col-md-4.nav-item .active:after {
+        display: none;
+    }
+    .tc-home-tabs .col-md-6.nav-item .active:after {
+        display: none;
     }
 }
 
