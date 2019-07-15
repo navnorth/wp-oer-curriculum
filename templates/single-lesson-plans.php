@@ -25,6 +25,8 @@ $elements_orders = isset($post_meta_data['lp_order'][0]) ? unserialize($post_met
 $lp_grade = isset($post_meta_data['oer_lp_grades'][0])? unserialize($post_meta_data['oer_lp_grades'][0])[0]:"";
 if ($lp_grade!=="pre-k" && $lp_grade!=="k")
     $lp_grade = "Grade ".$lp_grade;
+elseif ($lp_grade=="k") 
+    $lp_grade = "Kindergarten";
     
 // Download Copy
 $oer_lp_download_copy_document = (isset($post_meta_data['oer_lp_download_copy_document'][0]) ? $post_meta_data['oer_lp_download_copy_document'][0] : '');
