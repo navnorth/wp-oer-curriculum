@@ -99,5 +99,5 @@
 }
 .lp-hidden { display:none; }
 .lp-remove-download-copy { cursor:pointer; }
-.lp-selected-section a { word-break:break-all; }
+.lp-selected-section a { word-break:break-word; }
 input[name='oer_lp_sensitive_warning'] { margin-left: 5px; margin-top: 0; }
