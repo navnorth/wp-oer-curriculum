@@ -156,6 +156,9 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
                     <button class="question-popup-button"><i class="fal fa-question-circle"></i></button>
                 </div>
+                <div id="sensitive-material-info" style="display:none">
+                        <p>This Inquiry Set contains sensitive content that may not be suitable for all audiences.</p>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>

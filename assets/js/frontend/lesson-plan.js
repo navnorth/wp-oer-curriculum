@@ -88,6 +88,10 @@ $(document).ready(function() {
     }
 
     $('#tc-historical-background-tab').click();
+
+    $('.tc-sensitive-material-section').on('click', function(e) {
+        $('#sensitive-material-info').toggle();
+    })
 })
 
 function toggleArrow(parentID, iconID) {
