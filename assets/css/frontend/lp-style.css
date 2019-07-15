@@ -80,7 +80,7 @@ body.single-lesson-plans {
     top: -5px;
     color: #ffffff;
 }
-ul.tc-lp-standards { margin-left:0; }
+ul.tc-lp-standards { margin-left:0; padding-bottom: 60px; }
 ul.tc-lp-standards li.tc-lp-details-standard { list-style:none; position:relative; }
 .tc-lp-details-tags-list {
     padding: 8px 0 0 0;
