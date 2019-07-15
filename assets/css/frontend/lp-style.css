@@ -140,10 +140,10 @@ ul.tc-lp-standards li.tc-lp-details-standard { list-style:none; position:relativ
 .row.tc-investigative-section {
     min-height: 75px;
     background: #851738;
-    overflow:hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap:nowrap;
     overflow: visible;
 }
 .custom-pink-bg {
@@ -1004,6 +1004,7 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
 .ps-pdf-block .psPDFWrapper { margin: 0 auto; width: 100%; height: 100%; max-width:100%; }
 #a2apage_show_more_less { display:none; }
 .addtoany_shortcode { text-align:center; }
+ul#tc-home-tabs-section.nav.nav-tabs.tc-home-tabs { display:block; }
 @media only screen and (max-width: 600px){
     .ps-youtube-video .videoWrapper {
         width: 100%;
