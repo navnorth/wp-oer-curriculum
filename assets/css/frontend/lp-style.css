@@ -83,7 +83,7 @@ body.single-lesson-plans {
     top: -5px;
     color: #ffffff;
 }
-ul.tc-lp-standards { margin-left:0; }
+ul.tc-lp-standards { margin-left:0; padding-bottom: 60px; }
 ul.tc-lp-standards li.tc-lp-details-standard { list-style:none; position:relative; }
 .tc-lp-details-tags-list {
     padding: 8px 0 0 0;
@@ -111,6 +111,22 @@ ul.tc-lp-standards li.tc-lp-details-standard { list-style:none; position:relativ
     top: 0;
     right: 0;
     height: 41px;
+}
+#sensitive-material-info {	
+    transition: all .2s ease-in-out;	
+    color: #fff;	
+    position: absolute;	
+    top: 41px;	
+    right: 0;	
+    background-color: #23353d;	
+    padding: 20px;	
+    width: 223px;	
+}	
+#sensitive-material-info p {	
+    color: #fff;	
+    font-size: 14px;	
+    margin-bottom: 0;	
+    line-height: 20px;	
 }
 .tc-sensitive-material-section p {
     display: inline-block;
