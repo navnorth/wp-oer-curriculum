@@ -55,7 +55,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             <?php the_post_thumbnail('inquiry-set-featured'); ?>
             <div class="tc-lp-grade"><?php echo $lp_grade ?></div>
             <div class="tc-lp-controls">
-                <div class="tcl-lp-share"><a href="javascript:void(0);" class="tcl-lp-share-button" title="Share"><i class="fas fa-share-alt"></i></a></div>
+                <div class="tcl-lp-share"><a href="javascript:void(0);" class="tcl-lp-share-button" title="Share"><i class="fal fa-share-alt"></i></a></div>
                 <?php if ($oer_lp_download_copy_document): ?>
                 <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank" title="Download"><i class="fal fa-download"></i></a>
                 <?php endif; ?>
