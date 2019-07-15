@@ -80,7 +80,7 @@ body.single-lesson-plans {
     top: -5px;
     color: #ffffff;
 }
-ul.tc-lp-standards { margin-left:0; padding-bottom: 60px; }
+ul.tc-lp-standards { margin-left:0; }
 ul.tc-lp-standards li.tc-lp-details-standard { list-style:none; position:relative; }
 .tc-lp-details-tags-list {
     padding: 8px 0 0 0;
@@ -113,23 +113,7 @@ ul.tc-lp-standards li.tc-lp-details-standard { list-style:none; position:relativ
     display: inline-block;
     background: #2b424d;
     margin-bottom: 0 !important;
-    padding: 7.5px 15px;
-}
-#sensitive-material-info {
-    transition: all .2s ease-in-out;
-    color: #fff;
-    position: absolute;
-    top: 41px;
-    right: 0;
-    background-color: #23353d;
-    padding: 20px;
-    width: 223px;
-}
-#sensitive-material-info p {
-    color: #fff;
-    font-size: 14px;
-    margin-bottom: 0;
-    line-height: 20px;
+    padding: 5px 15px;
 }
 .sensitive-material-text {
     color: #fff;
@@ -1038,7 +1022,7 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
 ul#tc-home-tabs-section.nav.nav-tabs.tc-home-tabs { display:block; }
 .lp-featured-section .featured-image { position:relative; }
 .tcl-lp-share-button { outline:none;  }
-.tcp-lp-share-buttons { display:none; position:absolute; right:45px; padding:3px; }
+.tcp-lp-share-buttons { display:none; position:absolute; right:45px; padding:3px; background:#283d47; }
 .tcp-lp-share-buttons .ssba-share-text { display:none; }
 .tcp-lp-share-buttons br { display:none; }
 @media only screen and (max-width: 600px){
