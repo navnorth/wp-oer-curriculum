@@ -141,7 +141,7 @@ var myInquirySets = function (_Component) {
 
             var inquirysets = new wp.api.collections.Inquiryset();
 
-            return inquirysets.fetch().then(function (posts) {
+            return inquirysets.fetch({data: { per_page: 100 } }).then(function (posts) {
                 if (posts && 0 !== _this2.state.selectedInquirySet) {
                     var post = posts.find(function (item) {
                         return item.id == _this2.state.selectedInquirySet;
