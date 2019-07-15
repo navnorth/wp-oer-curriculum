@@ -60,6 +60,9 @@ body.single-lesson-plans {
     font-size: 16px;
     line-height:18px;
 }
+.tc-lp-details-description .ssba {
+    display: none;
+}
 .tc-lp-details-description p { color:#fff !important; font-size:16px; line-height:22px; }
 .tc-lp-details-standards-list { padding:20px 0; }
 .tc-lp-details-standards-list .tc-lp-details-standard {
