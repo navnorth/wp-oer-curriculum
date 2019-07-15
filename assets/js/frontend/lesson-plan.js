@@ -86,6 +86,8 @@ $(document).ready(function() {
             'border-bottom': border_width.toString() + 'px solid transparent'
         });
     }
+
+    $('#tc-historical-background-tab').click();
 })
 
 function toggleArrow(parentID, iconID) {
