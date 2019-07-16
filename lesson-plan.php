@@ -288,10 +288,7 @@ function lp_get_resource_thumbnail_url($attachment_id, $size){
             $l[$index]['height'] = $meta['height'];
             $l[$index]['width'] = $meta['width'];
             
-            if (file_exists($file_path))
-                return $l[$index]['img_url'];
-            else
-                return $img_url;
+            return $l[$index]['img_url'];
         }
         $index++;
     }
