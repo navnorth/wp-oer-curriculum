@@ -125,7 +125,7 @@ var myInquirySets = function (_Component) {
             if (post.featured_image_url) {
                 image_url = post.featured_image_url;
             }
-
+            
             this.props.setAttributes({
                 selectedInquirySet: parseInt(value),
                 title: post.title.rendered,
@@ -168,7 +168,7 @@ var myInquirySets = function (_Component) {
             } else {
                 output = __('No inquiry set found. Please create some first.');
             }
-
+            
             return [!!this.props.isSelected && wp.element.createElement(
                 InspectorControls,
                 { key: 'inspectorset' },
