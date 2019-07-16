@@ -266,13 +266,13 @@ function lp_get_resource_thumbnail_url($attachment_id, $size){
     global $_wp_additional_image_sizes;
     
     $l = null;
-    
-    $upload_dir = wp_upload_dir()['baseurl'];
     $upload_folder = wp_upload_dir()['path'];
     $img_url = wp_get_attachment_image_url( $attachment_id, 'resource-thumbnail');
+    $upload_dir = pathinfo($img_url, PATHINFO_DIRNAME);
     $ext = pathinfo($img_url, PATHINFO_EXTENSION);
     $filename = pathinfo($img_url, PATHINFO_FILENAME);
     $index = 0;
+    
     foreach($_wp_additional_image_sizes as $image_size=>$meta){
         if ($image_size==$size){
             $img_name = $filename.'-'.$meta['width'].'x'.$meta['height'].".".$ext;
@@ -280,7 +280,7 @@ function lp_get_resource_thumbnail_url($attachment_id, $size){
             
             $l[$index]['orig_url'] = $img_url;
             $l[$index]['upload_dir'] = wp_upload_dir();
-            $l[$index]['img_url'] = $upload_dir.'/resource-images/'.$img_name;
+            $l[$index]['img_url'] = $upload_dir.'/'.$img_name;
             $l[$index]['img_path'] = $file_path;
             $l[$index]['ext'] = $ext;
             $l[$index]['filename'] = $filename;
