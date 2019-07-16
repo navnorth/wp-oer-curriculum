@@ -51,7 +51,7 @@ $oer_lp_default_structure = array(
     // 'oer_lp_custom_editor_teacher_background',
     // 'oer_lp_custom_editor_student_background',
     'oer_lp_custom_editor_historical_background',
-    'lp_oer_materials'
+    //'lp_oer_materials'
 );
 
 /**
@@ -180,7 +180,7 @@ function lp_assign_standard_template($template) {
 add_action( 'init', 'lp_add_inquiry_set_rest_args', 30 );
 function lp_add_inquiry_set_rest_args() {
     global $wp_post_types;
-
+    
     $wp_post_types['lesson-plans']->show_in_rest = true;
     $wp_post_types['lesson-plans']->rest_base = 'inquiryset';
     $wp_post_types['lesson-plans']->rest_controller_class = 'WP_REST_Posts_Controller';
@@ -256,8 +256,9 @@ function lp_rest_get_meta_field($inquiryset, $field, $request){
 
 function lp_get_rest_featured_image($inquiryset, $field, $request) {
     if( $inquiryset['featured_media'] ){
-        $img = wp_get_attachment_image_src( $inquiryset['featured_media'], 'app-thumb' );
-        return $img[0];
+        return wp_get_attachment_image_url($inquiryset['featured_media'],'thumbnail');
+        $img = wp_get_attachment_image_src( $inquiryset['featured_media'], 'inquiry-set-featured', true );
+        return $img;
     }
     return false;
 }
