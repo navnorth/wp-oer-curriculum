@@ -275,9 +275,11 @@ function lp_get_resource_thumbnail_url($attachment_id, $size){
     
     foreach($_wp_additional_image_sizes as $image_size=>$meta){
         if ($image_size==$size){
+            if (strpos($img_url,'-'.$meta['width'].'x'.$meta['height'].".".$ext))
+                return $img_url;
+            
             $img_name = $filename.'-'.$meta['width'].'x'.$meta['height'].".".$ext;
             $file_path = $upload_folder . '/resource-images/' . $img_name;
-            
             $l[$index]['orig_url'] = $img_url;
             $l[$index]['upload_dir'] = wp_upload_dir();
             $l[$index]['img_url'] = $upload_dir.'/'.$img_name;
