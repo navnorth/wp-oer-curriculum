@@ -57,7 +57,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             <div class="tc-lp-controls">
                 <div class="tcl-lp-share"><?php if (shortcode_exists('addtoany')) echo do_shortcode("[addtoany]"); ?></div>
                 <?php if ($oer_lp_download_copy_document): ?>
-                <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank" title="Download"><i class="fal fa-download"></i></a>
+                <a href="<?php echo $oer_lp_download_copy_document; ?>" onclick="curriculum_trackEvent('Inquiry Set','Download','<?php echo the_title(); ?>')" target="_blank" title="Download"><i class="fal fa-download"></i></a>
                 <?php endif; ?>
             </div>
         </div>
