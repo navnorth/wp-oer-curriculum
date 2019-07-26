@@ -273,26 +273,30 @@ function lp_get_resource_thumbnail_url($attachment_id, $size){
     $filename = pathinfo($img_url, PATHINFO_FILENAME);
     $index = 0;
     
-    foreach($_wp_additional_image_sizes as $image_size=>$meta){
-        if ($image_size==$size){
-            if (strpos($img_url,'-'.$meta['width'].'x'.$meta['height'].".".$ext))
-                return $img_url;
-            
-            $img_name = $filename.'-'.$meta['width'].'x'.$meta['height'].".".$ext;
-            $file_path = $upload_folder . '/resource-images/' . $img_name;
-            $l[$index]['orig_url'] = $img_url;
-            $l[$index]['upload_dir'] = wp_upload_dir();
-            $l[$index]['img_url'] = $upload_dir.'/'.$img_name;
-            $l[$index]['img_path'] = $file_path;
-            $l[$index]['ext'] = $ext;
-            $l[$index]['filename'] = $filename;
-            $l[$index]['size'] = $image_size;
-            $l[$index]['height'] = $meta['height'];
-            $l[$index]['width'] = $meta['width'];
-            
-            return $l[$index]['img_url'];
+    if ($img_url){
+        foreach($_wp_additional_image_sizes as $image_size=>$meta){
+            if ($image_size==$size){
+                if (strpos($img_url,'-'.$meta['width'].'x'.$meta['height'].".".$ext))
+                    return $img_url;
+                
+                $img_name = $filename.'-'.$meta['width'].'x'.$meta['height'].".".$ext;
+                $file_path = $upload_folder . '/resource-images/' . $img_name;
+                $l[$index]['orig_url'] = $img_url;
+                $l[$index]['upload_dir'] = wp_upload_dir();
+                $l[$index]['img_url'] = $upload_dir.'/'.$img_name;
+                $l[$index]['img_path'] = $file_path;
+                $l[$index]['ext'] = $ext;
+                $l[$index]['filename'] = $filename;
+                $l[$index]['size'] = $image_size;
+                $l[$index]['height'] = $meta['height'];
+                $l[$index]['width'] = $meta['width'];
+                
+                return $l[$index]['img_url'];
+            }
+            $index++;
         }
-        $index++;
+    } else {
+        $img_url = "";
     }
     
     return $img_url;

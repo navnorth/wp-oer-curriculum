@@ -208,7 +208,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $res = str_replace("-","_",sanitize_title($res));
                         $resource = get_page_by_path($res,OBJECT,"resource");
                     }
-                    $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
+                    $resource_img = lp_get_resource_thumbnail_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
                     $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
                     $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
                     if ($sensitiveMaterialValue!=="")
