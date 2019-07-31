@@ -103,3 +103,22 @@ function toggleArrow(parentID, iconID) {
         $(`${iconID} i`).removeClass('fa-angle-down').addClass('fa-angle-up');
     }
 }
+
+// Event Tracker Function
+function curriculum_trackEvent(eventCategory, eventAction, eventLabel, eventValue = null) {
+    eventLabel = eventLabel.toString();
+
+    // To make all google event param in lower case
+    eventLabel      = eventLabel.toLowerCase();
+    eventAction     = eventAction.toLowerCase();
+    eventCategory   = eventCategory.toLowerCase();
+    
+    if (typeof ga != 'undefined' && ga != null){
+        if(eventValue == null)
+          return ga('send', 'event',eventCategory,eventAction,eventLabel)
+        else
+          eventValue = eventValue.toLowerCase()
+          return ga('send', 'event',eventCategory,eventAction,eventLabel,eventValue)
+    }
+    return 0;
+}

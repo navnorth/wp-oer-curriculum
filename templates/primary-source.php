@@ -98,7 +98,7 @@ if ($youtube || $isPDF)
         <?php
             echo '<div class="youtubeVideoWrapper">';
             if (function_exists('oer_generate_youtube_embed_code'))
-                $embed = oer_generate_youtube_embed_code($resource_url);
+                $embed = oer_generate_youtube_embed_code($resource_url, $resource->post_title);
             echo $embed;
             echo '</div>';
         ?>

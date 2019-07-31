@@ -3,7 +3,7 @@
  Plugin Name:  Curriculum Plugin
  Plugin URI:   https://www.wp-oer.com
  Description:  Educational curriculum organizing and publishing, integrating with OER and Academic Standards
- Version:      0.3.0
+ Version:      0.3.1
  Author:       Navigation North
  Author URI:   https://www.navigationnorth.com
  Text Domain:  wp-curriculum
@@ -37,7 +37,7 @@ define( 'OER_LESSON_PLAN_FILE',__FILE__);
 // Plugin Name and Version
 define( 'OER_LESSON_PLAN_PLUGIN_NAME', 'Curriculum Plugin' );
 define( 'OER_LESSON_PLAN_ADMIN_PLUGIN_NAME', 'Curriculum Plugin');
-define( 'OER_LESSON_PLAN_VERSION', '0.3.0' );
+define( 'OER_LESSON_PLAN_VERSION', '0.3.1' );
 
 include_once(OER_LESSON_PLAN_PATH.'includes/oer-lp-functions.php');
 include_once(OER_LESSON_PLAN_PATH.'includes/init.php');
@@ -180,7 +180,7 @@ function lp_assign_standard_template($template) {
 add_action( 'init', 'lp_add_inquiry_set_rest_args', 30 );
 function lp_add_inquiry_set_rest_args() {
     global $wp_post_types;
-    
+
     $wp_post_types['lesson-plans']->show_in_rest = true;
     $wp_post_types['lesson-plans']->rest_base = 'inquiryset';
     $wp_post_types['lesson-plans']->rest_controller_class = 'WP_REST_Posts_Controller';
@@ -264,7 +264,7 @@ function lp_get_rest_featured_image($inquiryset, $field, $request) {
 // Custom function to get intermediate size thumbnail url
 function lp_get_resource_thumbnail_url($attachment_id, $size){
     global $_wp_additional_image_sizes;
-    
+
     $l = null;
     $upload_folder = wp_upload_dir()['path'];
     $img_url = wp_get_attachment_image_url( $attachment_id, 'resource-thumbnail');
@@ -272,28 +272,32 @@ function lp_get_resource_thumbnail_url($attachment_id, $size){
     $ext = pathinfo($img_url, PATHINFO_EXTENSION);
     $filename = pathinfo($img_url, PATHINFO_FILENAME);
     $index = 0;
-    
-    foreach($_wp_additional_image_sizes as $image_size=>$meta){
-        if ($image_size==$size){
-            if (strpos($img_url,'-'.$meta['width'].'x'.$meta['height'].".".$ext))
-                return $img_url;
-            
-            $img_name = $filename.'-'.$meta['width'].'x'.$meta['height'].".".$ext;
-            $file_path = $upload_folder . '/resource-images/' . $img_name;
-            $l[$index]['orig_url'] = $img_url;
-            $l[$index]['upload_dir'] = wp_upload_dir();
-            $l[$index]['img_url'] = $upload_dir.'/'.$img_name;
-            $l[$index]['img_path'] = $file_path;
-            $l[$index]['ext'] = $ext;
-            $l[$index]['filename'] = $filename;
-            $l[$index]['size'] = $image_size;
-            $l[$index]['height'] = $meta['height'];
-            $l[$index]['width'] = $meta['width'];
-            
-            return $l[$index]['img_url'];
+
+    if ($img_url){
+        foreach($_wp_additional_image_sizes as $image_size=>$meta){
+            if ($image_size==$size){
+                if (strpos($img_url,'-'.$meta['width'].'x'.$meta['height'].".".$ext))
+                    return $img_url;
+
+                $img_name = $filename.'-'.$meta['width'].'x'.$meta['height'].".".$ext;
+                $file_path = $upload_folder . '/resource-images/' . $img_name;
+                $l[$index]['orig_url'] = $img_url;
+                $l[$index]['upload_dir'] = wp_upload_dir();
+                $l[$index]['img_url'] = $upload_dir.'/'.$img_name;
+                $l[$index]['img_path'] = $file_path;
+                $l[$index]['ext'] = $ext;
+                $l[$index]['filename'] = $filename;
+                $l[$index]['size'] = $image_size;
+                $l[$index]['height'] = $meta['height'];
+                $l[$index]['width'] = $meta['width'];
+
+                return $l[$index]['img_url'];
+            }
+            $index++;
         }
-        $index++;
+    } else {
+        $img_url = "";
     }
-    
+
     return $img_url;
 }
