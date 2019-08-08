@@ -998,6 +998,12 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     height: 360px;
     background-size: cover;
 }
+.audio-resource-thumbnail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.media-image .image-thumbnail a:hover { text-decoration:none; }
 .resource-overlay {
     position: absolute;
     top: 0;
@@ -1044,6 +1050,15 @@ ul#tc-home-tabs-section.nav.nav-tabs.tc-home-tabs { display:block; }
 .tcp-lp-share-buttons { display:none; position:absolute; right:45px; padding:3px; background:#283d47; }
 .tcp-lp-share-buttons .ssba-share-text { display:none; }
 .tcp-lp-share-buttons br { display:none; }
+.ps-audio-block { width:100%; height:100%; }
+.psAudioWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.ps-audio-block .psAudioWrapper audio { width:50%; }
 @media only screen and (max-width: 600px){
     .ps-youtube-video .videoWrapper {
         width: 100%;
