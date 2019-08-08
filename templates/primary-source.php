@@ -38,6 +38,7 @@ $featured_image_url = get_the_post_thumbnail_url($resource->ID, "full");
 $resource_url = get_post_meta($resource->ID, "oer_resourceurl", true);
 $youtube = oer_is_youtube_url($resource_url);
 $isPDF = is_pdf_resource($resource_url);
+$isAudio = is_audio_resource($resource_url);
 
 // Get Curriculum Meta for Primary Sources
 $post_meta_data = get_post_meta($curriculum_id);
@@ -109,6 +110,16 @@ if ($youtube || $isPDF)
         <?php
             echo '<div class="psPDFWrapper">';
             oer_display_pdf_embeds($resource_url);
+            echo '</div>';
+        ?>
+    </div>
+    <?php endif; ?>
+    <?php if ($isAudio): ?>
+    <div class="ps-audio-block">
+        <?php
+            echo '<div class="psAudioWrapper">';
+            if (function_exists('oer_generate_audio_resource_embed'))
+                oer_generate_audio_resource_embed($resource_url);
             echo '</div>';
         ?>
     </div>
