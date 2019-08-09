@@ -193,7 +193,7 @@ if ($sensitive_material_display==true) : ?>
     </ul>
 </div>
 <div class="ps-info-tabs-content">
-    <div class="tab-pane clearfix fade active in" id="ps-information-tab-content" role="tabpanel" aria-labelledby="ps-information-tab">
+    <div class="tab-pane clearfix fade <?php if (!$active_tab || $active_tab=="ps-information-tab"): ?>active<?php endif; ?> in" id="ps-information-tab-content" role="tabpanel" aria-labelledby="ps-information-tab">
         <?php
         $isFile = false;
         if (function_exists('is_file_resource'))
@@ -375,19 +375,19 @@ if ($sensitive_material_display==true) : ?>
             <?php //} ?>
         </div>
     </div>
-    <div class="tab-pane clearfix fade in" id="ps-student-info-tab-content" role="tabpanel" aria-labelledby="ps-student-info-tab">
+    <div class="tab-pane clearfix fade <?php if ($active_tab=="ps-student-info-tab"): ?>active<?php endif; ?> in" id="ps-student-info-tab-content" role="tabpanel" aria-labelledby="ps-student-info-tab">
         <?php echo $student_info; ?>
     </div>
-    <div class="tab-pane clearfix fade in" id="ps-teacher-info-tab-content" role="tabpanel" aria-labelledby="ps-teacher-info-tab">
+    <div class="tab-pane clearfix fade <?php if ($active_tab=="ps-teacher-info-tab"): ?>active<?php endif; ?> in" id="ps-teacher-info-tab-content" role="tabpanel" aria-labelledby="ps-teacher-info-tab">
         <?php echo $teacher_info; ?>
     </div>
     <?php if ($transcription_display==true) : ?>
-    <div class="tab-pane clearfix fade in" id="ps-transcription-info-tab-content" role="tabpanel" aria-labelledby="ps-transcription-info-tab">
+    <div class="tab-pane clearfix fade <?php if ($active_tab=="ps-transcription-info-tab"): ?>active<?php endif; ?> in" id="ps-transcription-info-tab-content" role="tabpanel" aria-labelledby="ps-transcription-info-tab">
         <?php echo $resource_meta['oer_transcription'][0]; ?>
     </div>
     <?php endif; ?>
     <?php if ($sensitive_material_display==true) : ?>
-    <div class="tab-pane clearfix fade in" id="ps-sensitive-info-tab-content" role="tabpanel" aria-labelledby="ps-sensitive-info-tab">
+    <div class="tab-pane clearfix fade <?php if ($active_tab=="ps-sensitive-info-tab"): ?>active<?php endif; ?> in" id="ps-sensitive-info-tab-content" role="tabpanel" aria-labelledby="ps-sensitive-info-tab">
         <?php echo $resource_meta['oer_sensitive_material'][0]; ?>
     </div>
     <?php endif; ?>
