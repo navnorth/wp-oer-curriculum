@@ -38,6 +38,7 @@ $featured_image_url = get_the_post_thumbnail_url($resource->ID, "full");
 $resource_url = get_post_meta($resource->ID, "oer_resourceurl", true);
 $youtube = oer_is_youtube_url($resource_url);
 $isPDF = is_pdf_resource($resource_url);
+$isAudio = is_audio_resource($resource_url);
 
 // Get Curriculum Meta for Primary Sources
 $post_meta_data = get_post_meta($curriculum_id);
@@ -113,6 +114,16 @@ if ($youtube || $isPDF)
         ?>
     </div>
     <?php endif; ?>
+    <?php if ($isAudio): ?>
+    <div class="ps-audio-block">
+        <?php
+            echo '<div class="psAudioWrapper">';
+            if (function_exists('oer_generate_audio_resource_embed'))
+                oer_generate_audio_resource_embed($resource_url);
+            echo '</div>';
+        ?>
+    </div>
+    <?php endif; ?>
     <span class="ps-nav-left <?php echo $lp_prev_class; ?>"><a class="lp-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>"><i class="fal fa-chevron-left fa-2x"></i></a></span>
     <span class="ps-nav-right <?php echo $lp_next_class; ?>"><a class="lp-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>"><i class="fal fa-chevron-right fa-2x"></i></a></span>
     <span class="ps-expand"><a href="<?php echo $featured_image_url; ?>" class="lp-expand-img" target="_blank"><i class="fal fa-expand-arrows-alt"></i></a></span>
@@ -182,7 +193,7 @@ if ($sensitive_material_display==true) : ?>
     </ul>
 </div>
 <div class="ps-info-tabs-content">
-    <div class="tab-pane clearfix fade active in" id="ps-information-tab-content" role="tabpanel" aria-labelledby="ps-information-tab">
+    <div class="tab-pane clearfix fade <?php if (!$active_tab || $active_tab=="ps-information-tab"): ?>active<?php endif; ?> in" id="ps-information-tab-content" role="tabpanel" aria-labelledby="ps-information-tab">
         <?php
         $isFile = false;
         if (function_exists('is_file_resource'))
@@ -364,19 +375,19 @@ if ($sensitive_material_display==true) : ?>
             <?php //} ?>
         </div>
     </div>
-    <div class="tab-pane clearfix fade in" id="ps-student-info-tab-content" role="tabpanel" aria-labelledby="ps-student-info-tab">
+    <div class="tab-pane clearfix fade <?php if ($active_tab=="ps-student-info-tab"): ?>active<?php endif; ?> in" id="ps-student-info-tab-content" role="tabpanel" aria-labelledby="ps-student-info-tab">
         <?php echo $student_info; ?>
     </div>
-    <div class="tab-pane clearfix fade in" id="ps-teacher-info-tab-content" role="tabpanel" aria-labelledby="ps-teacher-info-tab">
+    <div class="tab-pane clearfix fade <?php if ($active_tab=="ps-teacher-info-tab"): ?>active<?php endif; ?> in" id="ps-teacher-info-tab-content" role="tabpanel" aria-labelledby="ps-teacher-info-tab">
         <?php echo $teacher_info; ?>
     </div>
     <?php if ($transcription_display==true) : ?>
-    <div class="tab-pane clearfix fade in" id="ps-transcription-info-tab-content" role="tabpanel" aria-labelledby="ps-transcription-info-tab">
+    <div class="tab-pane clearfix fade <?php if ($active_tab=="ps-transcription-info-tab"): ?>active<?php endif; ?> in" id="ps-transcription-info-tab-content" role="tabpanel" aria-labelledby="ps-transcription-info-tab">
         <?php echo $resource_meta['oer_transcription'][0]; ?>
     </div>
     <?php endif; ?>
     <?php if ($sensitive_material_display==true) : ?>
-    <div class="tab-pane clearfix fade in" id="ps-sensitive-info-tab-content" role="tabpanel" aria-labelledby="ps-sensitive-info-tab">
+    <div class="tab-pane clearfix fade <?php if ($active_tab=="ps-sensitive-info-tab"): ?>active<?php endif; ?> in" id="ps-sensitive-info-tab-content" role="tabpanel" aria-labelledby="ps-sensitive-info-tab">
         <?php echo $resource_meta['oer_sensitive_material'][0]; ?>
     </div>
     <?php endif; ?>

@@ -3,7 +3,7 @@
  Plugin Name:  Curriculum Plugin
  Plugin URI:   https://www.wp-oer.com
  Description:  Educational curriculum organizing and publishing, integrating with OER and Academic Standards
- Version:      0.3.1
+ Version:      0.3.2
  Author:       Navigation North
  Author URI:   https://www.navigationnorth.com
  Text Domain:  wp-curriculum
@@ -37,7 +37,7 @@ define( 'OER_LESSON_PLAN_FILE',__FILE__);
 // Plugin Name and Version
 define( 'OER_LESSON_PLAN_PLUGIN_NAME', 'Curriculum Plugin' );
 define( 'OER_LESSON_PLAN_ADMIN_PLUGIN_NAME', 'Curriculum Plugin');
-define( 'OER_LESSON_PLAN_VERSION', '0.3.1' );
+define( 'OER_LESSON_PLAN_VERSION', '0.3.2' );
 
 include_once(OER_LESSON_PLAN_PATH.'includes/oer-lp-functions.php');
 include_once(OER_LESSON_PLAN_PATH.'includes/init.php');

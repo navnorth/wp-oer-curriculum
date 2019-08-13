@@ -208,6 +208,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $res = str_replace("-","_",sanitize_title($res));
                         $resource = get_page_by_path($res,OBJECT,"resource");
                     }
+                    $resource_url = get_post_meta($resource->ID, "oer_resourceurl", true);
+                    $isAudio = is_audio_resource($resource_url);
                     $resource_img = lp_get_resource_thumbnail_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
                     $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
                     $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
@@ -217,9 +219,19 @@ if (have_posts()) : while (have_posts()) : the_post();
                 <div class="col-md-3 col-sm-3 padding-0">
                     <div class="media-image">
                         <div class="image-thumbnail">
-                            <?php if ($resource_img!==""):
-                                if ($resource)
-                                    $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID);
+                            <?php
+                            if ($resource)
+                                $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID);
+                                
+                            if ($isAudio):
+                            ?>
+                            <a href="<?php echo $ps_url;  ?>">
+                                <span class="resource-overlay"></span>
+                                <div class="resource-thumbnail audio-resource-thumbnail">
+                                    <i class="fas fa-volume-up fa-7x"></i>
+                                </div>
+                            </a>
+                            <?php elseif ($resource_img!==""):
                             ?>
                             <a href="<?php echo $ps_url;  ?>">
                                 <span class="resource-overlay"></span>
