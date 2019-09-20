@@ -64,19 +64,11 @@ register_activation_hook( __FILE__, 'check_parent_plugin' );
 function check_parent_plugin()
 {
     // Require parent plugin
-    if(
-        ! is_plugin_active( 'wp-oer/open-educational-resources.php' ) and
-        current_user_can( 'activate_plugins' )
-    )
+    if( current_user_can( 'activate_plugins' ))
     {
-        wp_die('Sorry, but this plugin requires the Parent Plugin to be installed and active. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
+        wp_die('Sorry, but you don\'t have enough permission to install this plugin. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
     }
 
-    // Require WP Curriculum plugin
-    if ( !is_plugin_active( 'wp-academic-standards/wp-academic-standards.php')
-        && current_user_can( 'activate_plugins' )){
-        wp_die('Sorry, but this plugin requires the WP Academic Standards Plugin to be installed and active. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
-    }
 }
 
 /**
