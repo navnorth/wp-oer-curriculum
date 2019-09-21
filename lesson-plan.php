@@ -64,7 +64,7 @@ register_activation_hook( __FILE__, 'check_parent_plugin' );
 function check_parent_plugin()
 {
     // Require parent plugin
-    if( current_user_can( 'activate_plugins' ))
+    if( !current_user_can( 'activate_plugins' ))
     {
         wp_die('Sorry, but you don\'t have enough permission to install this plugin. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
     }
@@ -237,7 +237,8 @@ function lp_add_meta_to_api() {
 function lp_rest_get_meta_field($inquiryset, $field, $request){
 	if ($field=="oer_lp_grades") {
 		$grades = get_post_meta($inquiryset['id'], $field, true);
-                $grades = $grades[0];
+                if (is_array($grades))
+                    $grades = $grades[0];
 		$grade_level = "";
 
                 if ($grades == "pre-k")

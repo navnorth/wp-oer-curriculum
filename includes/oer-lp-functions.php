@@ -423,3 +423,29 @@ if (! function_exists('oer_inquiry_set_grade_level')){
         return $grade_level;
     }
 }
+
+if (! function_exists('is_oer_plugin_installed')){
+    function is_oer_plugin_installed(){
+        $activeOER = false;
+        $active_plugins_basenames = get_option( 'active_plugins' );
+        foreach ( $active_plugins_basenames as $plugin_basename ) {
+		if ( false !== strpos( $plugin_basename, '/open-educational-resources.php' ) ) {
+                $activeOER = true;
+            }
+        }
+        return $activeOER;
+    }
+}
+
+if (! function_exists('is_standards_plugin_installed')){
+    function is_standards_plugin_installed(){
+        $activeWAS = false;
+        $active_plugins_basenames = get_option( 'active_plugins' );
+        foreach ( $active_plugins_basenames as $plugin_basename ) {
+		if ( false !== strpos( $plugin_basename, '/wp-academic-standards.php' ) ) {
+                $activeWAS = true;
+            }
+        }
+        return $activeWAS;
+    }
+}

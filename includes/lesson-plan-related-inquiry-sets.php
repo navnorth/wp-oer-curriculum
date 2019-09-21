@@ -6,7 +6,7 @@ global $wpdb;
 global $inquiryset_post;
 
 $inquiry = get_post_meta($inquiryset_post->ID,'oer_lp_related_inquiry_set');
-$inquiry = (is_array($inquiry)?$inquiry[0]:array());
+$inquiry = ((is_array($inquiry)&& count($inquiry)>0)?$inquiry[0]:array());
 ?>
 <div class="lesson_plan_meta_wrapper">
     <div class="row">

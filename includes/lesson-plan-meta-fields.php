@@ -50,11 +50,14 @@ $default = false;
                             <li class="list-group-item">
                                 <a href="#oer-lp-authors" title="Lesson Times">Authors</a>
                             </li>
-                        <?php } elseif ($elementKey == 'lp_primary_resources') {?>
+                        <?php } elseif ($elementKey == 'lp_primary_resources') {
+                            if (is_oer_plugin_installed()){
+                            ?>
                             <li class="list-group-item">
                                 <a href="#oer-lp-primary-resources" title="Primary Resources">Primary Resources</a>
                             </li>
-                        <?php } elseif ($elementKey == 'lp_oer_materials') {?>
+                        <?php }
+                        } elseif ($elementKey == 'lp_oer_materials') {?>
                             <li class="list-group-item">
                                 <a href="#oer-lp-materials" class="js-scroll-trigger" title="Materials"><?php _e("Materials", OER_LESSON_PLAN_SLUG); ?></a>
                             </li>
@@ -115,9 +118,11 @@ $default = false;
                     <li class="list-group-item">
                         <a href="#oer-lp-authors" title="Authors">Authors</a>
                     </li>
+                    <?php if (is_oer_plugin_installed()){ ?>
                     <li class="list-group-item">
                         <a href="#oer-lp-primary-resources" title="Primary Resources">Primary Resources</a>
                     </li>
+                    <?php } ?>
                     <li class="list-group-item">
                         <a href="#oer-lp-materials" title="Materials"><?php _e("Materials", OER_LESSON_PLAN_SLUG); ?></a>
                     </li>
@@ -310,7 +315,9 @@ $default = false;
                                 </div>
                             </div>
                         <?php }?>
-                    <?php } elseif ($elementKey == 'lp_primary_resources') {?>
+                    <?php } elseif ($elementKey == 'lp_primary_resources') {
+                        if (is_oer_plugin_installed()){
+                        ?>
                         <!-- Primary Sources -->
                         <div class="panel panel-default lp-element-wrapper oer-lp-primary-resources" id="oer-lp-primary-resources">
                             <input type="hidden" name="lp_order[lp_primary_resources]" class="element-order" value="<?php echo $value;?>">
@@ -511,7 +518,8 @@ $default = false;
                                 </div>
                             </div>
                         </div>
-                    <?php } elseif ($elementKey == 'lp_oer_materials') {?>
+                    <?php }
+                    } elseif ($elementKey == 'lp_oer_materials') {?>
                         <div class="panel panel-default lp-element-wrapper" id="oer-lp-materials">
                             <input type="hidden" name="lp_order[lp_oer_materials]" class="element-order" value="3">
                             <div class="panel-heading">
@@ -748,6 +756,7 @@ $default = false;
                                 </h3>
                             </div>
                             <div class="panel-body">
+                                <?php if (is_standards_plugin_installed()) { ?>
                                 <h4 class="page-title-inner"><?php _e("Standards", OER_LESSON_PLAN_SLUG); ?></h4>
 
                                 <div id="selected-standard-wrapper">
@@ -765,6 +774,7 @@ $default = false;
                                         >Select Standards</button>
                                     </div>
                                 </div>
+                                <?php } ?>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h4>Related Instructional Objectives (<span title="Students will be able to...">SWBAT...</span>)</h4>
@@ -1339,6 +1349,7 @@ $default = false;
                             </div>
                             <?php
                         } elseif ($module=="lp_primary_resources"){
+                            if (is_oer_plugin_installed()){ 
                             ?>
                             <!-- Primary Sources -->
                             <div class="panel panel-default lp-element-wrapper oer-lp-primary-resources" id="oer-lp-primary-resources">
@@ -1443,7 +1454,7 @@ $default = false;
                                     </div>
                                 </div>
                             </div>
-                            <?php
+                            <?php }
                         } elseif ($module=="lp_oer_materials"){
                             ?>
                             <!--Materials module-->
@@ -1582,6 +1593,7 @@ $default = false;
                                     </h3>
                                 </div>
                                 <div class="panel-body">
+                                    <?php if (is_standards_plugin_installed()) { ?>
                                     <h4 class="page-title-inner"><?php _e("Standards", OER_LESSON_PLAN_SLUG); ?></h4>
                                     <div id="selected-standard-wrapper">
                                         <p><?php _e("You have not selected any academic standards", OER_LESSON_PLAN_SLUG); ?></p>
@@ -1595,6 +1607,7 @@ $default = false;
                                             >Select Standards</button>
                                         </div>
                                     </div>
+                                    <?php } ?>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h4>Related Instructional Objectives (<span title="Students will be able to...">SWBAT...</span>)</h4>
@@ -2007,6 +2020,7 @@ $default = false;
                         </div>
                     </div>
                 </div>
+                <?php if (is_oer_plugin_installed()){ ?>
                 <!-- Primary Sources -->
                 <div class="panel panel-default lp-element-wrapper oer-lp-primary-resources" id="oer-lp-primary-resources">
                     <input type="hidden" name="lp_order[lp_primary_resources]" class="element-order" value="3">
@@ -2110,6 +2124,7 @@ $default = false;
                         </div>
                     </div>
                 </div>
+                <?php } ?>
                 <!--Materials module-->
                 <div class="panel panel-default lp-element-wrapper" id="oer-lp-materials">
                     <input type="hidden" name="lp_order[lp_oer_materials]" class="element-order" value="4">
@@ -2237,6 +2252,7 @@ $default = false;
                         </h3>
                     </div>
                     <div class="panel-body">
+                        <?php if (is_standards_plugin_installed()) { ?>
                         <h4 class="page-title-inner"><?php _e("Standards", OER_LESSON_PLAN_SLUG); ?></h4>
                         <div id="selected-standard-wrapper">
                             <p><?php _e("You have not selected any academic standards", OER_LESSON_PLAN_SLUG); ?></p>
@@ -2250,6 +2266,7 @@ $default = false;
                                 >Select Standards</button>
                             </div>
                         </div>
+                        <?php } ?>
                         <div class="row">
                             <div class="col-md-12">
                                 <h4>Related Instructional Objectives (<span title="Students will be able to...">SWBAT...</span>)</h4>
