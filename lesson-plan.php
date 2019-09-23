@@ -189,30 +189,28 @@ function lp_add_inquiry_set_rest_args() {
 add_action('enqueue_block_editor_assets', 'lp_enqueue_inquiry_set_block');
 function lp_enqueue_inquiry_set_block(){
     global $post;
-    if (isset($post->post_type) && $post->post_type!=='resource'){
-	wp_enqueue_script(
-            'inquiry-set-thumbnail-block-js',
-            OER_LESSON_PLAN_URL . "/assets/js/backend/inquiry-set-thumbnail-block.build.js",
-            array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-components', 'wp-editor', 'wp-api')
-	);
-        wp_localize_script(
-            'inquiry-set-thumbnail-block-js',
-            'wp_nn_theme',
-            array(
-                "theme_path" => get_template_directory_uri()
-            )
-        );
-	wp_enqueue_style(
-            'inquiry-set-thumbnail-block-css',
-            OER_LESSON_PLAN_URL . "/assets/css/backend/inquiry-set-thumbnail-block.css",
-            array('wp-edit-blocks')
-	);
-	/* Register Thumbnail Block */
-	register_block_type('wp-curriculum/inquiry-set-thumbnail-block', array(
-            'editor_script' => 'inquiry-set-thumbnail-block-js',
-            'editor_style' => 'inquiry-set-thumbnail-block-css'
-	));
-    }
+    wp_enqueue_script(
+        'inquiry-set-thumbnail-block-js',
+        OER_LESSON_PLAN_URL . "/assets/js/backend/inquiry-set-thumbnail-block.build.js",
+        array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-components', 'wp-editor', 'wp-api')
+    );
+    wp_localize_script(
+        'inquiry-set-thumbnail-block-js',
+        'wp_nn_theme',
+        array(
+            "theme_path" => get_template_directory_uri()
+        )
+    );
+    wp_enqueue_style(
+        'inquiry-set-thumbnail-block-css',
+        OER_LESSON_PLAN_URL . "/assets/css/backend/inquiry-set-thumbnail-block.css",
+        array('wp-edit-blocks')
+    );
+    /* Register Thumbnail Block */
+    register_block_type('wp-curriculum/inquiry-set-thumbnail-block', array(
+        'editor_script' => 'inquiry-set-thumbnail-block-js',
+        'editor_style' => 'inquiry-set-thumbnail-block-css'
+    ));
 }
 
 add_action( 'rest_api_init', 'lp_add_meta_to_api');
