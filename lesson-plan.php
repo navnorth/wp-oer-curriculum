@@ -188,6 +188,8 @@ function lp_add_inquiry_set_rest_args() {
 /* Enqueue script and css for Gutenberg Inquiry Set Thumbnail block */
 add_action('enqueue_block_editor_assets', 'lp_enqueue_inquiry_set_block');
 function lp_enqueue_inquiry_set_block(){
+    global $post;
+    if (isset($post->post_type) && $post->post_type!=='resource'){
 	wp_enqueue_script(
             'inquiry-set-thumbnail-block-js',
             OER_LESSON_PLAN_URL . "/assets/js/backend/inquiry-set-thumbnail-block.build.js",
@@ -210,6 +212,7 @@ function lp_enqueue_inquiry_set_block(){
             'editor_script' => 'inquiry-set-thumbnail-block-js',
             'editor_style' => 'inquiry-set-thumbnail-block-css'
 	));
+    }
 }
 
 add_action( 'rest_api_init', 'lp_add_meta_to_api');
