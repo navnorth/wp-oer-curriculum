@@ -65,6 +65,10 @@ $default = false;
                             <li class="list-group-item">
                                 <a href="#oer-lp-iq" title="Investigative Question"><?php _e("Investigative Question", OER_LESSON_PLAN_SLUG); ?></a>
                             </li>
+                        <?php } elseif ($elementKey == 'lp_required_materials') {?>
+                            <li class="list-group-item">
+                                <a href="#oer-lp-required-materials" title="Required Materials"><?php _e("Required Equipment Materials", OER_LESSON_PLAN_SLUG); ?></a>
+                            </li>
                         <?php } elseif ($elementKey == 'lp_lesson_times_order') {?>
                             <li class="list-group-item">
                                 <a href="#oer-lp-times-group" title="Lesson Times">Lesson Times</a>
@@ -128,6 +132,9 @@ $default = false;
                     </li>
                     <li class="list-group-item">
                         <a href="#oer-lp-iq" title="Investigative Question"><?php _e("Investigative Question", OER_LESSON_PLAN_SLUG); ?></a>
+                    </li>
+                     <li class="list-group-item">
+                        <a href="#oer-lp-required-materials" title="Required Materials"><?php _e("Required Equipment Materials", OER_LESSON_PLAN_SLUG); ?></a>
                     </li>
                     <li class="list-group-item">
                         <a href="#oer-lp-times-group" title="Lesson Times">Lesson Times</a>
@@ -625,6 +632,39 @@ $default = false;
                                         'oer_lp_iq_excerpt',
                                         $settings = array(
                                             'textarea_name' => 'oer_lp_iq[excerpt]',
+                                            'media_buttons' => true,
+                                            'textarea_rows' => 6,
+                                            'drag_drop_upload' => true,
+                                            'teeny' => true,
+                                        )
+                                    ); ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } elseif ($elementKey == 'lp_required_materials') {?>
+                        <!--Required Equipment Materials Module-->
+                        <?php
+                        $oer_lp_required_materials  = isset($post_meta_data['oer_lp_required_materials'][0]) ? $post_meta_data['oer_lp_required_materials'][0] : array();
+                        ?>
+                        <div class="panel panel-default lp-element-wrapper oer-lp-required-materials" id="oer-lp-required-materials">
+                            <input type="hidden" name="lp_order[lp_required_materials]" class="element-order" value="<?php echo $value;?>">
+                            <div class="panel-heading">
+                                <h3 class="panel-title lp-module-title">
+                                    <?php _e("Required Equipment Materials", OER_LESSON_PLAN_SLUG); ?>
+                                    <span class="lp-sortable-handle">
+                                        <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                        <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label>Required Equipment Materials</label>
+                                    <?php wp_editor( (isset($oer_lp_required_materials) ? $oer_lp_required_materials : ""),
+                                        'oer_lp_required_materials',
+                                        $settings = array(
+                                            'textarea_name' => 'oer_lp_required_materials',
                                             'media_buttons' => true,
                                             'textarea_rows' => 6,
                                             'drag_drop_upload' => true,
@@ -1511,6 +1551,38 @@ $default = false;
                                             'oer_lp_iq_excerpt',
                                             $settings = array(
                                                 'textarea_name' => 'oer_lp_iq[excerpt]',
+                                                'media_buttons' => true,
+                                                'textarea_rows' => 6,
+                                                'drag_drop_upload' => true,
+                                                'teeny' => true,
+                                            )
+                                        ); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        } elseif ($module=="lp_required_materials"){
+                            ?>
+                            <!--Required Equipment Materials Module-->
+                            <div class="panel panel-default lp-element-wrapper oer-lp-required-materials" id="oer-lp-required-materials">
+                                <input type="hidden" name="lp_order[lp_required_materials]" class="element-order" value="<?php echo $index; ?>">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title lp-module-title">
+                                        <?php _e("Required Equipment Materials", OER_LESSON_PLAN_SLUG); ?>
+                                        <span class="lp-sortable-handle">
+                                            <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                            <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label>Required Equipment Materials</label>
+                                        <?php wp_editor( '',
+                                            'oer_lp_required_materials',
+                                            $settings = array(
+                                                'textarea_name' => 'oer_lp_required_materials',
                                                 'media_buttons' => true,
                                                 'textarea_rows' => 6,
                                                 'drag_drop_upload' => true,

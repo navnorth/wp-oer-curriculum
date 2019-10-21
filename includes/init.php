@@ -195,6 +195,7 @@ function lp_save_custom_fields() {
     global $post, $wpdb, $_oer_prefix;
     
     //Check first if $post is not empty
+    var_dump($post);
     if ($post) {
         if ($post->post_type == 'lesson-plans') {
             //Save/update introduction
@@ -219,6 +220,11 @@ function lp_save_custom_fields() {
             // Save Investigative Question
             if (isset($_POST['oer_lp_iq'])) {
                 update_post_meta($post->ID, 'oer_lp_iq', $_POST['oer_lp_iq']);
+            }
+            
+            // Save Required Equipment Materials
+            if (isset($_POST['oer_lp_required_materials'])) {
+                update_post_meta($post->ID, 'oer_lp_required_materials', $_POST['oer_lp_required_materials']);
             }
 
             //Save/update lesson times

@@ -47,10 +47,11 @@ $oer_lp_default_structure = array(
     'lp_authors_order',
     'lp_standard_order',
     'lp_iq',
+    'lp_required_materials',
     'lp_primary_resources',
     // 'oer_lp_custom_editor_teacher_background',
     // 'oer_lp_custom_editor_student_background',
-    'oer_lp_custom_editor_historical_background',
+    //'oer_lp_custom_editor_historical_background',
     'lp_oer_materials'
 );
 
@@ -122,31 +123,31 @@ add_filter( 'single_template', 'get_single_lesson_plans_template' );
 add_action( 'init', 'lp_add_rewrites', 10, 0 );
 function lp_add_rewrites()
 {
-        $root_slug = "inquiry-sets";
+    $root_slug = "inquiry-sets";
 	global $wp_rewrite;
-        add_rewrite_tag( '%curriculum%', '([^/]*)' );
+    add_rewrite_tag( '%curriculum%', '([^/]*)' );
 	add_rewrite_tag( '%source%', '([^&]+)' );
-        add_rewrite_tag( '%topic%', '([^&]+)' );
+    add_rewrite_tag( '%topic%', '([^&]+)' );
 	add_rewrite_rule( '^'.$root_slug.'/([^/]*)/source/([^&]+)/?$', 'index.php?post_type=lesson-plans&curriculum=$matches[1]&source=$matches[2]', 'top' );
-        add_rewrite_rule( '^'.$root_slug.'/topic/([^&]+)/?$', 'index.php?post_type=lesson-plans&topic=$matches[1]', 'top' );
-        add_rewrite_endpoint( 'curriculum', EP_PERMALINK | EP_PAGES );
+    add_rewrite_rule( '^'.$root_slug.'/topic/([^&]+)/?$', 'index.php?post_type=lesson-plans&topic=$matches[1]', 'top' );
+    add_rewrite_endpoint( 'curriculum', EP_PERMALINK | EP_PAGES );
 	add_rewrite_endpoint( 'source', EP_PERMALINK | EP_PAGES );
-        add_rewrite_endpoint( 'topic', EP_PERMALINK | EP_PAGES );
+    add_rewrite_endpoint( 'topic', EP_PERMALINK | EP_PAGES );
 
 	$flush_rewrite = get_option('lp_rewrite_rules');
-        if (empty($flush_rewrite)){
-            add_option('lp_rewrite_rules', false);
-        }
+    if (empty($flush_rewrite)){
+        add_option('lp_rewrite_rules', false);
+    }
 
-        $wp_rewrite->init();
-        $wp_rewrite->flush_rules();
-        update_option('lp_rewrite_rules', true);
+    $wp_rewrite->init();
+    $wp_rewrite->flush_rules();
+    update_option('lp_rewrite_rules', true);
 }
 
 add_filter( 'query_vars', 'lp_add_query_vars' );
 function lp_add_query_vars( $vars ){
 	$vars[] = "source";
-        $vars[] = "topic";
+    $vars[] = "topic";
 	return $vars;
 }
 
@@ -154,26 +155,26 @@ add_action( 'template_include' , 'lp_assign_standard_template' );
 function lp_assign_standard_template($template) {
 	global $wp_query;
 
-        $url_path = trim(parse_url(add_query_arg(array()), PHP_URL_PATH), '/');
+    $url_path = trim(parse_url(add_query_arg(array()), PHP_URL_PATH), '/');
 
-        status_header(200);
+    status_header(200);
 
-        $root_slug = "inquiry-sets";
+    $root_slug = "inquiry-sets";
 
-        if ( strpos( $url_path, $root_slug ) !== false && get_query_var('curriculum') && get_query_var('source')) {
-            $wp_query->is_404 = false;
-            $template = locate_template('templates/primary-source.php', true);
-            if (!$template) {
-                    $template = dirname(__FILE__) . '/templates/primary-source.php';
-            }
-        } elseif ( strpos( $url_path, $root_slug ) !== false && get_query_var('topic')) {
-            $wp_query->is_404 = false;
-            $template = locate_template('templates/lesson-plan-tag.php', true);
-            if (!$template) {
-                    $template = dirname(__FILE__) . '/templates/lesson-plan-tag.php';
-            }
+    if ( strpos( $url_path, $root_slug ) !== false && get_query_var('curriculum') && get_query_var('source')) {
+        $wp_query->is_404 = false;
+        $template = locate_template('templates/primary-source.php', true);
+        if (!$template) {
+            $template = dirname(__FILE__) . '/templates/primary-source.php';
         }
-        return $template;
+    } elseif ( strpos( $url_path, $root_slug ) !== false && get_query_var('topic')) {
+        $wp_query->is_404 = false;
+        $template = locate_template('templates/lesson-plan-tag.php', true);
+        if (!$template) {
+            $template = dirname(__FILE__) . '/templates/lesson-plan-tag.php';
+        }
+    }
+    return $template;
 }
 
 add_action( 'init', 'lp_add_inquiry_set_rest_args', 30 );
