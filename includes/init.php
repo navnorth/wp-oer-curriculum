@@ -195,7 +195,6 @@ function lp_save_custom_fields() {
     global $post, $wpdb, $_oer_prefix;
     
     //Check first if $post is not empty
-    var_dump($post);
     if ($post) {
         if ($post->post_type == 'lesson-plans') {
             //Save/update introduction
