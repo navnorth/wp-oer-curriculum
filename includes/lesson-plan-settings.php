@@ -1,0 +1,119 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+global $message, $type;
+
+	if (isset($_REQUEST['settings-updated'])) {
+		if (!current_user_can('manage_options')) {
+			wp_die( "You don't have permission to access this page!" );
+		}
+	}
+	
+?>
+<div class="wrap">
+    
+    <div id="icon-themes" class="oer-logo"><img src="<?php echo OER_URL ?>images/wp-oer-admin-logo.png" /></div>
+    <h2><?php _e("Settings - WP Curriculum", OER_LESSON_PLAN_SLUG); ?></h2>
+    <?php settings_errors(); ?>
+     
+	<?php
+	$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'metadata';
+	?>
+     
+    <h2 class="nav-tab-wrapper">
+        <a href="?post_type=resource&page=oer_settings&tab=general" class="nav-tab <?php echo $active_tab == 'metadata' ? 'nav-tab-active' : ''; ?>"><?php _e("Metadata", OER_LESSON_PLAN_SLUG); ?></a>
+    </h2>
+    
+    <?php
+	switch ($active_tab) {
+		case "metadata":
+			oer_curriculum_show_metadata_settings();
+			break;
+		default:
+			break;
+	}
+    ?>
+</div><!-- /.wrap -->
+<div class="oer-plugin-footer">
+	<div class="oer-plugin-info"><?php echo OER_LESSON_PLAN_PLUGIN_NAME . " " . OER_LESSON_PLAN_VERSION .""; ?></div>
+	<div class="oer-plugin-link"><a href='https://www.wp-oer.com/' target='_blank'><?php _e("More Information", OER_LESSON_PLAN_SLUG); ?></a></div>
+	<div class="clear"></div>
+</div>
+<?php
+
+function oer_curriculum_show_metadata_settings() {
+	$metas = oer_get_all_meta("lesson-plans");
+	$metadata = null;
+	
+	foreach($metas as $met){
+		if (strpos($met['meta_key'],"oer_")!==false){
+			$metadata[] = $met['meta_key'];
+		}
+	}
+	
+	$meta = array_unique($metadata);
+	
+	// Save Option
+	if ($_POST){
+		if ($_REQUEST['tab'] && $_REQUEST['tab']=="metadata") {
+			// Remove meta key enabled option
+			foreach($metas as $met){
+				if (strpos($met['meta_key'],"oer_")!==false){
+					delete_option($met['meta_key']."_enabled");
+				}
+			}
+			oer_save_metadata_options($_POST);
+		}
+	}
+?>
+<div class="oer-plugin-body">
+	<div class="oer-plugin-row">
+		<div class="oer-row-left">
+			<?php _e("Use the options below to update metadata field options.", OER_SLUG); ?>
+		</div>
+		<div class="oer-row-right">
+		</div>
+	</div>
+	<div class="oer-plugin-row">
+		<form method="post" class="oer_settings_form" onsubmit="return processInitialSettings(this);">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Field Name</th>
+						<th>Label</th>
+						<th>Enabled</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($meta as $key) {
+						$label = "";
+						$enabled = "0";
+						$option_set = false;
+							if (get_option($key."_label")){
+								$label = get_option($key."_label");
+								$option_set = true;
+							}
+							else
+								$label = oer_get_meta_label($key);
+							
+							if (get_option($key."_enabled"))
+								$enabled = (get_option($key."_enabled")=="1")?true:false;
+							elseif ($option_set==false)
+								$enabled = "1";
+							
+					?>
+					<tr>
+						<td><?php echo $key; ?></td>
+						<td><input type="text" name="<?php echo $key."_label"; ?>" value="<?php echo $label; ?>" /></td>
+						<td><input type="checkbox" name="<?php echo $key."_enabled"; ?>" value="1" <?php checked($enabled,"1",true); ?>/></td>
+					</tr>
+					<?php 
+					} ?>
+				</tbody>
+			</table>
+			<?php submit_button("Save Metadata Options"); ?>
+		</form>
+	</div>
+</div>
+<?php
+}

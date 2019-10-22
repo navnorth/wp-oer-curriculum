@@ -777,3 +777,12 @@ function add_modals_to_footer(){
     include_once(OER_LESSON_PLAN_PATH.'includes/popups/standard-selection.php'); 
 }
 add_action( 'admin_footer', 'add_modals_to_footer', 10 );
+
+function add_oer_curriculum_settings(){
+    add_submenu_page('edit.php?post_type=lesson-plans','Settings','Settings','add_users','oer_settings','oer_curriculum_settings');
+}
+add_action( 'admin_menu', 'add_oer_curriculum_settings' );
+
+function oer_curriculum_settings(){
+    include_once( OER_LESSON_PLAN_PATH."includes/lesson-plan-settings.php" );
+}
