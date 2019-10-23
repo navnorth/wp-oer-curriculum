@@ -25,6 +25,20 @@ foreach ($elements_orders as $orderKey => $orderValue) {
     //echo "Key -> " . $orderKey . "  value -> " . $orderValue ."<br/>";
 }
 $default = false;
+
+// Check Metadata settings for label and if enabled
+$author_set = (get_option('oer_lp_authors_label'))?true:false;
+$author_enabled = (get_option('oer_lp_authors_enabled'))?true:false;
+$primary_resources_set = (get_option('oer_lp_primary_resources_label'))?true:false;
+$primary_resources_enabled = (get_option('oer_lp_primary_resources_enabled'))?true:false;
+$materials_set = (get_option('lp_oer_materials_label'))?true:false;
+$materials_enabled = (get_option('lp_oer_materials_enabled'))?true:false;
+$iq_set = (get_option('oer_lp_iq_label'))?true:false;
+$iq_enabled = (get_option('oer_lp_iq_enabled'))?true:false;
+$req_materials_set = (get_option('oer_lp_required_materials_label'))?true:false;
+$req_materials_enabled = (get_option('oer_lp_required_materials_enabled'))?true:false;
+$history_bg_set = (get_option('oer_lp_custom_editor_historical_background_label'))?true:false;
+$history_bg_enabled = (get_option('oer_lp_custom_editor_historical_background_enabled'))?true:false;
 ?>
 <div class="lesson_plan_meta_wrapper">
     <div class="row">
@@ -46,30 +60,56 @@ $default = false;
                             <li class="list-group-item">
                                 <a href="#oer-lp-introduction-group" title="Introduction">Introduction</a>
                             </li>
-                        <?php } elseif ($elementKey == 'lp_authors_order') {?>
-                            <li class="list-group-item">
-                                <a href="#oer-lp-authors" title="Lesson Times">Authors</a>
-                            </li>
-                        <?php } elseif ($elementKey == 'lp_primary_resources') {
-                            if (is_oer_plugin_installed()){
+                        <?php } elseif ($elementKey == 'lp_authors_order') {
+                            if (($author_set && $author_enabled) || !$author_set) {
                             ?>
                             <li class="list-group-item">
-                                <a href="#oer-lp-primary-resources" title="Primary Resources">Primary Resources</a>
+                                <a href="#oer-lp-authors" title="Lesson Times">
+                                    <?php
+                                    echo oer_lp_get_field_label('oer_lp_authors');
+                                    ?>
+                                </a>
                             </li>
                         <?php }
-                        } elseif ($elementKey == 'lp_oer_materials') {?>
+                            } elseif ($elementKey == 'lp_primary_resources') {
+                            if (is_oer_plugin_installed()){
+                                if (($primary_resources_set && $primary_resources_enabled) || !$primary_resources_set) {
+                            ?>
                             <li class="list-group-item">
-                                <a href="#oer-lp-materials" class="js-scroll-trigger" title="Materials"><?php _e("Materials", OER_LESSON_PLAN_SLUG); ?></a>
+                                <a href="#oer-lp-primary-resources" title="Primary Resources">
+                                    <?php
+                                    echo oer_lp_get_field_label('oer_lp_primary_resources');
+                                    ?>
+                                </a>
                             </li>
-                        <?php } elseif ($elementKey == 'lp_iq') {?>
+                        <?php }
+                            }
+                        } elseif ($elementKey == 'lp_oer_materials') {
+                            if (($materials_set && $materials_enabled) || !$materials_set) {
+                            ?>
                             <li class="list-group-item">
-                                <a href="#oer-lp-iq" title="Investigative Question"><?php _e("Investigative Question", OER_LESSON_PLAN_SLUG); ?></a>
+                                <a href="#oer-lp-materials" class="js-scroll-trigger" title="Materials">
+                                <?php
+                                echo oer_lp_get_field_label('lp_oer_materials');
+                                ?>
+                                </a>
                             </li>
-                        <?php } elseif ($elementKey == 'lp_required_materials') {?>
+                        <?php }
+                        } elseif ($elementKey == 'lp_iq') {
+                            if (($iq_set && $iq_enabled) || !$iq_set) {
+                            ?>
                             <li class="list-group-item">
-                                <a href="#oer-lp-required-materials" title="Required Materials"><?php _e("Required Equipment Materials", OER_LESSON_PLAN_SLUG); ?></a>
+                                <a href="#oer-lp-iq" title="Investigative Question"><?php echo oer_lp_get_field_label('oer_lp_iq'); ?></a>
                             </li>
-                        <?php } elseif ($elementKey == 'lp_lesson_times_order') {?>
+                        <?php }
+                        } elseif ($elementKey == 'lp_required_materials') {
+                            if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
+                            ?>
+                            <li class="list-group-item">
+                                <a href="#oer-lp-required-materials" title="Required Materials"><?php echo oer_lp_get_field_label('oer_lp_required_materials');  ?></a>
+                            </li>
+                        <?php }
+                        } elseif ($elementKey == 'lp_lesson_times_order') {?>
                             <li class="list-group-item">
                                 <a href="#oer-lp-times-group" title="Lesson Times">Lesson Times</a>
                             </li>
@@ -119,23 +159,33 @@ $default = false;
                     <li class="list-group-item">
                         <a href="#oer-lp-introduction-group" title="Introduction">Introduction</a>
                     </li>
+                    <?php if (($author_set && $author_enabled) || !$author_set) { ?>
                     <li class="list-group-item">
-                        <a href="#oer-lp-authors" title="Authors">Authors</a>
-                    </li>
-                    <?php if (is_oer_plugin_installed()){ ?>
-                    <li class="list-group-item">
-                        <a href="#oer-lp-primary-resources" title="Primary Resources">Primary Resources</a>
+                        <a href="#oer-lp-authors" title="Authors"><?php echo oer_lp_get_field_label('oer_lp_authors'); ?></a>
                     </li>
                     <?php } ?>
+                    <?php if (is_oer_plugin_installed()){ ?>
+                    <?php if (($primary_resources_set && $primary_resources_enabled) || !$primary_resources_set) { ?>
                     <li class="list-group-item">
-                        <a href="#oer-lp-materials" title="Materials"><?php _e("Materials", OER_LESSON_PLAN_SLUG); ?></a>
+                        <a href="#oer-lp-primary-resources" title="Primary Resources"><?php echo oer_lp_get_field_label('oer_lp_primary_resources'); ?></a>
                     </li>
+                    <?php } ?>
+                    <?php } ?>
+                    <?php if (($materials_set  && $materials_enabled ) || !$materials_set ) { ?>
                     <li class="list-group-item">
-                        <a href="#oer-lp-iq" title="Investigative Question"><?php _e("Investigative Question", OER_LESSON_PLAN_SLUG); ?></a>
+                        <a href="#oer-lp-materials" title="Materials"><?php echo oer_lp_get_field_label('lp_oer_materials'); ?></a>
                     </li>
+                    <?php } ?>
+                    <?php if (($iq_set && $iq_enabled) || !$iq_set) { ?>
+                    <li class="list-group-item">
+                        <a href="#oer-lp-iq" title="Investigative Question"><?php echo oer_lp_get_field_label('oer_lp_iq'); ?></a>
+                    </li>
+                    <?php } ?>
+                    <?php if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) { ?>
                      <li class="list-group-item">
-                        <a href="#oer-lp-required-materials" title="Required Materials"><?php _e("Required Equipment Materials", OER_LESSON_PLAN_SLUG); ?></a>
+                        <a href="#oer-lp-required-materials" title="Required Materials"><?php echo oer_lp_get_field_label('oer_lp_required_materials'); ?></a>
                     </li>
+                     <?php } ?>
                     <li class="list-group-item">
                         <a href="#oer-lp-times-group" title="Lesson Times">Lesson Times</a>
                     </li>
@@ -202,7 +252,9 @@ $default = false;
                                 ?>
                             </div>
                         </div>
-                    <?php } elseif ($elementKey == 'lp_authors_order') {?>
+                    <?php } elseif ($elementKey == 'lp_authors_order') {
+                        if (($author_set && $author_enabled) || !$author_set) { 
+                        ?>
                         <?php
                         $authors = (isset($post_meta_data['oer_lp_authors'][0]) ? unserialize($post_meta_data['oer_lp_authors'][0]) : array());
                         if(!empty($authors)) { ?>
@@ -210,7 +262,7 @@ $default = false;
                                 <input type="hidden" name="lp_order[lp_authors_order]" class="element-order" value="<?php echo $value;?>">
                                 <div class="panel-heading">
                                     <h3 class="panel-title lp-module-title">
-                                        <?php _e("Authors", OER_LESSON_PLAN_SLUG); ?>
+                                        <?php echo oer_lp_get_field_label('oer_lp_authors'); ?>
                                         <span class="lp-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -321,16 +373,18 @@ $default = false;
                                     </div>
                                 </div>
                             </div>
-                        <?php }?>
+                        <?php }
+                        } ?>
                     <?php } elseif ($elementKey == 'lp_primary_resources') {
                         if (is_oer_plugin_installed()){
+                            if (($primary_resources_set && $primary_resources_enabled) || !$primary_resources_set) { 
                         ?>
                         <!-- Primary Sources -->
                         <div class="panel panel-default lp-element-wrapper oer-lp-primary-resources" id="oer-lp-primary-resources">
                             <input type="hidden" name="lp_order[lp_primary_resources]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
-                                    <?php _e("Primary Resources", OER_LESSON_PLAN_SLUG); ?>
+                                    <?php echo oer_lp_get_field_label('oer_lp_primary_resources'); ?>
                                     <span class="lp-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -526,12 +580,15 @@ $default = false;
                             </div>
                         </div>
                     <?php }
-                    } elseif ($elementKey == 'lp_oer_materials') {?>
+                        }
+                    } elseif ($elementKey == 'lp_oer_materials') {
+                        if (($materials_set && $materials_enabled) || !$materials_set) { 
+                        ?>
                         <div class="panel panel-default lp-element-wrapper" id="oer-lp-materials">
                             <input type="hidden" name="lp_order[lp_oer_materials]" class="element-order" value="3">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
-                                    <?php _e("Materials", OER_LESSON_PLAN_SLUG); ?>
+                                    <?php echo oer_lp_get_field_label('lp_oer_materials'); ?>
                                     <span class="lp-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -598,7 +655,10 @@ $default = false;
                                 ><i class="fa fa-plus"></i> Add Materials</button>
                             </div>
                         </div>
-                    <?php } elseif ($elementKey == 'lp_iq') {?>
+                    <?php }
+                    } elseif ($elementKey == 'lp_iq') {
+                        if (($iq_set && $iq_enabled) || !$iq_set) { 
+                        ?>
                         <!--Investigative Question Module-->
                         <?php
                         $oer_lp_iq  = isset($post_meta_data['oer_lp_iq'][0]) ? unserialize($post_meta_data['oer_lp_iq'][0]) : array();
@@ -607,7 +667,7 @@ $default = false;
                             <input type="hidden" name="lp_order[lp_iq]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
-                                    <?php _e("Investigative Question", OER_LESSON_PLAN_SLUG); ?>
+                                    <?php echo oer_lp_get_field_label('oer_lp_iq'); ?>
                                     <span class="lp-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -641,7 +701,10 @@ $default = false;
                                 </div>
                             </div>
                         </div>
-                    <?php } elseif ($elementKey == 'lp_required_materials') {?>
+                    <?php }
+                    } elseif ($elementKey == 'lp_required_materials') {
+                        if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) { 
+                        ?>
                         <!--Required Equipment Materials Module-->
                         <?php
                         $oer_lp_required_materials  = isset($post_meta_data['oer_lp_required_materials'][0]) ? $post_meta_data['oer_lp_required_materials'][0] : array();
@@ -674,7 +737,8 @@ $default = false;
                                 </div>
                             </div>
                         </div>
-                    <?php } elseif ($elementKey == 'lp_lesson_times_order') {?>
+                    <?php }
+                    } elseif ($elementKey == 'lp_lesson_times_order') {?>
                         <!--For Lesson Times-->
                         <div class="panel panel-default lp-element-wrapper oer-lp-times-group" id="oer-lp-times-group">
                             <input type="hidden" name="lp_order[lp_lesson_times_order]" class="element-order" value="<?php echo $value;?>">
@@ -1308,13 +1372,14 @@ $default = false;
                             </div>
                             <?php
                         } elseif ($module=="lp_authors_order"){
+                            if (($author_set && $author_enabled) || !$author_set) { 
                             ?>
                             <!--Authors-->
                             <div class="panel panel-default lp-element-wrapper oer-lp-authors-group" id="oer-lp-authors">
                                 <input type="hidden" name="lp_order[lp_authors_order]" class="element-order" value="<?php echo $index; ?>">
                                 <div class="panel-heading">
                                     <h3 class="panel-title lp-module-title">
-                                        <?php _e("Authors", OER_LESSON_PLAN_SLUG); ?>
+                                        <?php echo oer_lp_get_field_label('oer_lp_authors'); ?>
                                         <span class="lp-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1387,16 +1452,17 @@ $default = false;
                                     </div>
                                 </div>
                             </div>
-                            <?php
+                            <?php }
                         } elseif ($module=="lp_primary_resources"){
-                            if (is_oer_plugin_installed()){ 
+                            if (is_oer_plugin_installed()){
+                                if (($primary_resources_set && $primary_resources_enabled) || !$primary_resources_set) { 
                             ?>
                             <!-- Primary Sources -->
                             <div class="panel panel-default lp-element-wrapper oer-lp-primary-resources" id="oer-lp-primary-resources">
                                 <input type="hidden" name="lp_order[lp_primary_resources]" class="element-order" value="<?php echo $index; ?>">
                                 <div class="panel-heading">
                                     <h3 class="panel-title lp-module-title">
-                                        <?php _e("Primary Resources", OER_LESSON_PLAN_SLUG); ?>
+                                        <?php echo oer_lp_get_field_label('oer_lp_primary_resources'); ?>
                                         <span class="lp-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1495,14 +1561,16 @@ $default = false;
                                 </div>
                             </div>
                             <?php }
+                            }
                         } elseif ($module=="lp_oer_materials"){
+                            if (($materials_set && $materials_enabled) || !$materials_set) { 
                             ?>
                             <!--Materials module-->
                             <div class="panel panel-default lp-element-wrapper" id="oer-lp-materials">
                                 <input type="hidden" name="lp_order[lp_oer_materials]" class="element-order" value="<?php echo $index; ?>">
                                 <div class="panel-heading">
                                     <h3 class="panel-title lp-module-title">
-                                        <?php _e("Materials", OER_LESSON_PLAN_SLUG); ?>
+                                        <?php echo oer_lp_get_field_label('lp_oer_materials'); ?>
                                         <span class="lp-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1519,15 +1587,16 @@ $default = false;
                                     ><i class="fa fa-plus"></i> Add Materials</button>
                                 </div>
                             </div>
-                            <?php
+                            <?php }
                         } elseif ($module=="lp_iq"){
+                            if (($iq_set && $iq_enabled) || !$iq_set) {    
                             ?>
                             <!--Investigative Question Module-->
                             <div class="panel panel-default lp-element-wrapper oer-lp-iq" id="oer-lp-iq">
                                 <input type="hidden" name="lp_order[lp_iq]" class="element-order" value="<?php echo $index; ?>">
                                 <div class="panel-heading">
                                     <h3 class="panel-title lp-module-title">
-                                        <?php _e("Investigative Question", OER_LESSON_PLAN_SLUG); ?>
+                                        <?php echo oer_lp_get_field_label('oer_lp_iq'); ?>
                                         <span class="lp-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1560,15 +1629,16 @@ $default = false;
                                     </div>
                                 </div>
                             </div>
-                            <?php
+                            <?php }
                         } elseif ($module=="lp_required_materials"){
+                            if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {    
                             ?>
                             <!--Required Equipment Materials Module-->
                             <div class="panel panel-default lp-element-wrapper oer-lp-required-materials" id="oer-lp-required-materials">
                                 <input type="hidden" name="lp_order[lp_required_materials]" class="element-order" value="<?php echo $index; ?>">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title lp-module-title">
-                                        <?php _e("Required Equipment Materials", OER_LESSON_PLAN_SLUG); ?>
+                                    <h3 class="panel-title lp-module-title">                                        
+                                        <?php echo oer_lp_get_field_label('oer_lp_required_materials'); ?>
                                         <span class="lp-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1592,7 +1662,7 @@ $default = false;
                                     </div>
                                 </div>
                             </div>
-                            <?php
+                            <?php }
                         } elseif ($module=="lp_lesson_times_order"){
                             ?>
                             <!--For Lesson Times-->

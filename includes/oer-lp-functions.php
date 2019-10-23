@@ -492,6 +492,9 @@ if (!function_exists('oer_lp_get_meta_label')){
 			case "oer_lp_grades":
 				$label = __("Grade Level", OER_LESSON_PLAN_SLUG);
 				break;
+            case "lp_oer_materials":
+                $label = __("Materials", OER_LESSON_PLAN_SLUG);
+                break;
 		}
 		return $label;
 	}
@@ -511,12 +514,28 @@ if (!function_exists('oer_lp_get_all_meta')){
 if (!function_exists('oer_lp_save_metadata_options')){
 	function oer_lp_save_metadata_options($post_data){
 		foreach($post_data as $key=>$value){
-			if (strpos($key,"oer_")!==false){
-				if (get_option($key))
+			if (strpos($key,"oer_")!==false || strpos($key,"lp_oer_")!==false){
+				if (get_option($key)){
 					update_option($key, $value);
-				else
+				}
+				else{
 					add_option($key, $value);
+				}
 			}
 		}
 	}
+}
+
+// Get Field Label
+if (! function_exists('oer_lp_get_field_label')){
+    function oer_lp_get_field_label($field){
+        $label = null;
+        
+        if (get_option($field.'_label'))
+            $label = get_option($field.'_label');
+        else
+            $label = oer_lp_get_meta_label($field);
+         
+        return $label;
+    }
 }

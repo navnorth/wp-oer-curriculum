@@ -57,7 +57,7 @@ function oer_curriculum_show_metadata_settings() {
 	if ($_POST){
 		// Remove meta key enabled option
 		foreach($metas as $met){
-			if (strpos($met['meta_key'],"oer_")!==false){
+			if (strpos($met['meta_key'],"oer_")!==false || strpos($met['meta_key'],"lp_oer_")!==false){
 				delete_option($met['meta_key']."_enabled");
 			}
 		}
