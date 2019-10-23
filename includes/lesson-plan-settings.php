@@ -42,7 +42,7 @@ global $message, $type;
 <?php
 
 function oer_curriculum_show_metadata_settings() {
-	$metas = oer_get_all_meta("lesson-plans");
+	$metas = oer_lp_get_all_meta("lesson-plans");
 	$metadata = null;
 	
 	foreach($metas as $met){
@@ -55,27 +55,25 @@ function oer_curriculum_show_metadata_settings() {
 	
 	// Save Option
 	if ($_POST){
-		if ($_REQUEST['tab'] && $_REQUEST['tab']=="metadata") {
-			// Remove meta key enabled option
-			foreach($metas as $met){
-				if (strpos($met['meta_key'],"oer_")!==false){
-					delete_option($met['meta_key']."_enabled");
-				}
+		// Remove meta key enabled option
+		foreach($metas as $met){
+			if (strpos($met['meta_key'],"oer_")!==false){
+				delete_option($met['meta_key']."_enabled");
 			}
-			oer_save_metadata_options($_POST);
 		}
+		oer_lp_save_metadata_options($_POST);
 	}
 ?>
-<div class="oer-plugin-body">
-	<div class="oer-plugin-row">
+<div class="lesson-plan-plugin-body">
+	<div class="lesson-plan-plugin-row">
 		<div class="oer-row-left">
 			<?php _e("Use the options below to update metadata field options.", OER_SLUG); ?>
 		</div>
 		<div class="oer-row-right">
 		</div>
 	</div>
-	<div class="oer-plugin-row">
-		<form method="post" class="oer_settings_form" onsubmit="return processInitialSettings(this);">
+	<div class="lesson-plan-plugin-row">
+		<form method="post" class="oer_settings_form" onsubmit="return lpInitialSettings(this);">
 			<table class="table">
 				<thead>
 					<tr>
@@ -94,7 +92,7 @@ function oer_curriculum_show_metadata_settings() {
 								$option_set = true;
 							}
 							else
-								$label = oer_get_meta_label($key);
+								$label = oer_lp_get_meta_label($key);
 							
 							if (get_option($key."_enabled"))
 								$enabled = (get_option($key."_enabled")=="1")?true:false;
@@ -117,3 +115,4 @@ function oer_curriculum_show_metadata_settings() {
 </div>
 <?php
 }
+oer_curriculum_display_loader();

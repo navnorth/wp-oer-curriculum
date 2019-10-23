@@ -100,3 +100,35 @@
 .lp-hidden { display:none; }
 .lp-remove-download-copy { cursor:pointer; }
 .lp-selected-section a { word-break:break-all; }
+.lesson-plan-plugin-body {
+    border-left: 1px solid #cdcdcd;
+    border-right: 1px solid #cdcdcd;
+    border-bottom: 1px solid #cdcdcd;
+}
+.lesson-plan-plugin-row {
+    padding: 0 15px;
+    overflow: hidden;
+}
+.lp-loader {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background: rgba(60,60,60,0.5);
+    display: none;
+    margin-left: -20px;
+    padding-right: 20px;
+}
+.lesson-plan-plugin-row:first-child {
+    padding: 15px 15px 0;
+}
+.lesson-plan-plugin-row .oer-row-left {
+    width: 63%;
+    float: left;
+}
+.lesson-plan-plugin-row .oer-row-right {
+    width: 35%;
+    float: right;
+}

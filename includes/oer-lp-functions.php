@@ -449,3 +449,74 @@ if (! function_exists('is_standards_plugin_installed')){
         return $activeWAS;
     }
 }
+/** Display loader image **/
+if (! function_exists('oer_curriculum_display_loader')){
+    function oer_curriculum_display_loader(){
+    ?>
+    <div class="lp-loader"><div class="loader-img"><div><img src="<?php echo OER_LESSON_PLAN_URL; ?>assets/images/load.gif" align="center" valign="middle" /></div></div></div>
+    <?php
+    }
+}
+// Get Meta Label
+if (!function_exists('oer_lp_get_meta_label')){
+	function oer_lp_get_meta_label($key){
+		$label = "";
+		switch ($key){
+			case "oer_lp_authors":
+				$label = __("Author", OER_LESSON_PLAN_SLUG);
+				break;
+			case "oer_lp_primary_resources":
+				$label = __("Primary Resources", OER_LESSON_PLAN_SLUG);
+				break;
+			case "oer_lp_iq":
+				$label = __("Investigative Question", OER_LESSON_PLAN_SLUG);
+				break;
+			case "oer_lp_related_objective":
+				$label = __("Related Instructional Objectives (SWBAT...)", OER_LESSON_PLAN_SLUG);
+				break;
+			case "oer_lp_custom_editor_historical_background":
+				$label = __("Historical Background", OER_LESSON_PLAN_SLUG);
+				break;
+			case "oer_lp_download_copy":
+				$label = __("Download Copy", OER_LESSON_PLAN_SLUG);
+				break;
+			case "oer_lp_download_copy_document":
+				$label = __("Download Copy Document", OER_LESSON_PLAN_SLUG);
+				break;
+			case "oer_lp_related_inquiry_set":
+				$label = __("Related Inquiry Sets", OER_LESSON_PLAN_SLUG);
+				break;
+			case "oer_lp_required_materials":
+				$label = __("Required Equipment Materials", OER_LESSON_PLAN_SLUG);
+				break;
+			case "oer_lp_grades":
+				$label = __("Grade Level", OER_LESSON_PLAN_SLUG);
+				break;
+		}
+		return $label;
+	}
+}
+// Get All Post Meta
+if (!function_exists('oer_lp_get_all_meta')){
+	function oer_lp_get_all_meta($type){
+		global $wpdb;
+		$result = $wpdb->get_results($wpdb->prepare(
+		"SELECT post_id, meta_key, meta_value FROM ".$wpdb->prefix."posts,".$wpdb->prefix."postmeta WHERE post_type=%s
+			AND ".$wpdb->prefix."posts.ID=".$wpdb->prefix."postmeta.post_id", $type
+		), ARRAY_A);
+		return $result;
+	}
+}
+// Save Metadata options
+if (!function_exists('oer_lp_save_metadata_options')){
+	function oer_lp_save_metadata_options($post_data){
+		foreach($post_data as $key=>$value){
+			if (strpos($key,"oer_")!==false){
+				if (get_option($key))
+					update_option($key, $value);
+				else
+					add_option($key, $value);
+			}
+		}
+	}
+}
