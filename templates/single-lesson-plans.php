@@ -153,11 +153,19 @@ if (have_posts()) : while (have_posts()) : the_post();
     <?php
     $oer_lp_iq = isset($post_meta_data['oer_lp_iq'][0])?unserialize($post_meta_data['oer_lp_iq'][0]):array();
     if (!empty($oer_lp_iq)){
+        $option_set = false;
+        if (get_option('oer_lp_iq_label'))
+            $option_set = true;
     ?>
     <div class="row tc-investigative-section">
         <div class="col-md-2 col-sm-2 col-xs-12 padding-0 custom-pink-bg investigate-section-custom-width">
             <div class="investigate-question-section">
-                <h2>Investigative Question</h2>
+                <h2><?php
+                if (!$option_set)
+                    _e("Investigative Question", OER_LESSON_PLAN_SLUG);
+                else
+                    echo get_option('oer_lp_iq_label');
+                ?></h2>
             </div>
         </div>
         <div class="col-md-10 col-sm-10 col-xs-12 padding-0 custom-dark-pink-bg excerpt-section-custom-width">
@@ -488,13 +496,21 @@ if (have_posts()) : while (have_posts()) : the_post();
     <?php
     $related_inquiry_sets = (isset($post_meta_data['oer_lp_related_inquiry_set'][0]) ? unserialize($post_meta_data['oer_lp_related_inquiry_set'][0]) : array());
     if (count($related_inquiry_sets)>0) {
+        $option_set = false;
+        if (get_option('oer_lp_related_inquiry_set_label'))
+            $option_set = true;
     ?>
     <div class="row">
         <div class="tc-related-inquiry-sets-topbar clearfix">
             <div class="col-md-6 col-sm-6 col-xs-6 padding-0 tc-custom-bg-orange"></div>
             <div class="col-md-6 col-sm-6 col-xs-6 padding-0 tc-custom-bg-pink"></div>
             <div class="tc-related-inquiry-section">
-                <p>Related Inquiry Sets</p>
+                <p><?php
+                if (!$option_set)
+                    _e("Related Inquiry Sets", OER_LESSON_PLAN_SLUG);
+                else
+                    echo get_option('oer_lp_related_inquiry_set_label');
+                ?></p>
             </div>
         </div>
         <div class="tc-related-inquiry-grids-section clearfix">
