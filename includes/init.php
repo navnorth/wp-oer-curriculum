@@ -197,6 +197,16 @@ function lp_save_custom_fields() {
     //Check first if $post is not empty
     if ($post) {
         if ($post->post_type == 'lesson-plans') {
+            //Save/update Type
+            if (isset($_POST['oer_lp_type'])) {
+                update_post_meta($post->ID, 'oer_lp_type', $_POST['oer_lp_type']);
+            }
+            
+            //Save/update Other Type
+            if (isset($_POST['oer_lp_type_other'])) {
+                update_post_meta($post->ID, 'oer_lp_type_other', $_POST['oer_lp_type_other']);
+            }
+            
             //Save/update introduction
             if (isset($_POST['oer_lp_introduction'])) {
                 update_post_meta($post->ID, 'oer_lp_introduction', $_POST['oer_lp_introduction']);

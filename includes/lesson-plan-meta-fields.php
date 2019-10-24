@@ -39,6 +39,8 @@ $req_materials_set = (get_option('oer_lp_required_materials_label'))?true:false;
 $req_materials_enabled = (get_option('oer_lp_required_materials_enabled'))?true:false;
 $history_bg_set = (get_option('oer_lp_custom_editor_historical_background_label'))?true:false;
 $history_bg_enabled = (get_option('oer_lp_custom_editor_historical_background_enabled'))?true:false;
+$type_set = (get_option('oer_lp_type_label'))?true:false;
+$type_enabled = (get_option('oer_lp_type_enabled'))?true:false;
 ?>
 <div class="lesson_plan_meta_wrapper">
     <div class="row">
@@ -220,6 +222,41 @@ $history_bg_enabled = (get_option('oer_lp_custom_editor_historical_background_en
             </ul>
         </div>
         <div class="col-md-8" id="oer-lp-sortable">
+            <!-- Details Module -->
+            <div class="panel panel-default lp-element-wrapper oer-lp-details-group" id="oer-lp-details-group">
+                <div class="panel-heading">
+                    <h3 class="panel-title lp-module-title">
+                        <?php _e("Details", OER_LESSON_PLAN_SLUG); ?>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <?php
+                    $oer_lp_type = isset($post_meta_data['oer_lp_type'][0]) ? $post_meta_data['oer_lp_type'][0] : "";
+                    $oer_lp_type_other = isset($post_meta_data['oer_lp_type_other'][0]) ? $post_meta_data['oer_lp_type_other'][0] : "";
+                    $xclass = " hidden";
+                    if (($type_set && $type_enabled) || !$type_set) {
+                        if ($oer_lp_type=="Other")
+                            $xclass = "";
+                        
+                    ?>
+                    <div class="form-group">
+                        <label for="oer_lp_type"><?php echo oer_lp_get_field_label('oer_lp_type'); ?></label>
+                        <select name="oer_lp_type" id="oer_lp_type" class="form-control">
+                            <?php echo oer_lp_get_curriculum_type($oer_lp_type); ?>
+                        </select>
+                    </div>
+                    <div class="form-group other-type-group<?php echo $xclass; ?>">
+                        <label for="oer_lp_type_other"><?php echo oer_lp_get_field_label('oer_lp_type_other'); ?></label>
+                        <input type="text"
+                               class="form-control"
+                               name="oer_lp_type_other"
+                               placeholder="Curriculum Type"
+                               value="<?php echo isset($oer_lp_type_other) ? $oer_lp_type_other : "";?>"
+                        >
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
             <!--For Introduction-->
             <?php if (!empty($elements_orders)) {
                 foreach ($elements_orders as $elementKey => $value) {

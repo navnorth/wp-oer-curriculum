@@ -495,6 +495,12 @@ if (!function_exists('oer_lp_get_meta_label')){
             case "lp_oer_materials":
                 $label = __("Materials", OER_LESSON_PLAN_SLUG);
                 break;
+            case "oer_lp_type":
+                $label = __("Type", OER_LESSON_PLAN_SLUG);
+                break;
+            case "oer_lp_type_other":
+                $label = __("Other Type", OER_LESSON_PLAN_SLUG);
+                break;
 		}
 		return $label;
 	}
@@ -537,5 +543,25 @@ if (! function_exists('oer_lp_get_field_label')){
             $label = oer_lp_get_meta_label($field);
          
         return $label;
+    }
+}
+
+// Get Curriculum Type
+if (! function_exists('oer_lp_get_curriculum_type')){
+    function oer_lp_get_curriculum_type($value = ""){
+        $html = '<option value="">Select Type</option>';
+        $types = array(
+            "Brief Activity",
+            "Full Lesson",
+            "Short Project",
+            "Extended Project",
+            "Comprehensive Unit",
+            "Other"
+        );
+        
+        foreach ($types as $type){
+            $html .= '<option value="'.$type.'" '.selected($type,$value,false).'>'.$type.'</option>';
+        }
+        return $html;
     }
 }
