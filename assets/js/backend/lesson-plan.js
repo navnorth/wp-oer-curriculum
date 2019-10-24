@@ -882,6 +882,17 @@ jQuery(document).ready(function ($) {
                 } 
                 dis.parent().find('input[name="oer_lp_primary_resources[sensitive_material_value][]"]').val(val);
             });
+        },
+        
+        // Select Type
+        lpOtherCurriculumType: function() {
+            $(document).on('change', 'select[name="oer_lp_type"]', function (e) {
+                var dis = $(this);
+                if (dis.val()=="Other")
+                    $('.other-type-group').removeClass('hidden').show();
+                else
+                    $('.other-type-group').hide();
+            });
         }
     };
 
@@ -912,6 +923,7 @@ jQuery(document).ready(function ($) {
     LessonPlan.requireModuleTitle();
     LessonPlan.lpRemoveCopyLesson();
     LessonPlan.lpPrimarySourceSensitiveMaterial();
+    LessonPlan.lpOtherCurriculumType();
 });
 
 //Process Initial Setup
