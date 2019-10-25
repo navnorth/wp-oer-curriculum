@@ -45,8 +45,12 @@ function oer_lesson_plan_creation() {
 }
 
 function oer_lesson_plan_custom_meta_boxes() {
+    // Grade Levels
     add_meta_box( 'oer_lesson_plan_grades', 'Grade Level', 'oer_lp_grade_level_cb', 'lesson-plans', 'side', 'high' );
+    // Appropriate Age Levels
     add_meta_box( 'oer_lesson_plan_age_levels', 'Appropriate Age Levels', 'oer_lp_age_levels_cb', 'lesson-plans', 'side', 'high' );
+    //Suggested Instructional Time
+    add_meta_box( 'oer_lesson_plan_suggested_time', 'Suggested Instructional Time', 'oer_lp_suggested_time_cb', 'lesson-plans', 'side', 'high' );
     add_meta_box('oer_lesson_plan_meta_boxid', 'Lesson Meta Fields', 'oer_lesson_plan_meta_callback', 'lesson-plans', 'advanced');
 
     // Add a download copy option
@@ -76,6 +80,20 @@ function oer_lp_age_levels_cb(){
     echo '<div class="form-group oer_lp_age_levels">';
     echo '<div class="input-group full-width">';
     echo '<input type="text" class="form-control" name="oer_lp_age_levels" placeholder="Age Levels" value="'. $oer_lp_age_levels .'">';
+    echo '</div>';
+    echo '</div>';
+}
+
+// Suggested Instructional Time Callback
+function oer_lp_suggested_time_cb(){
+    global $post;
+    
+    $post_meta_data = get_post_meta($post->ID );
+    $oer_lp_suggested_time = (isset($post_meta_data['oer_lp_suggested_instructional_time'][0]) ? $post_meta_data['oer_lp_suggested_instructional_time'][0] : "");
+    
+    echo '<div class="form-group oer_lp_age_levels">';
+    echo '<div class="input-group full-width">';
+    echo '<input type="text" class="form-control" name="oer_lp_suggested_instructional_time" placeholder="Suggested Time" value="'. $oer_lp_suggested_time .'">';
     echo '</div>';
     echo '</div>';
 }
@@ -271,6 +289,11 @@ function lp_save_custom_fields() {
             // Update Appropriate Age Levels
             if (isset($_POST['oer_lp_age_levels'])) {
                 update_post_meta($post->ID, 'oer_lp_age_levels', $_POST['oer_lp_age_levels']);
+            }
+            
+            // Update Suggested Instructional Time
+            if (isset($_POST['oer_lp_suggested_instructional_time'])) {
+                update_post_meta($post->ID, 'oer_lp_suggested_instructional_time', $_POST['oer_lp_suggested_instructional_time']);
             }
 
             // Save Standards
