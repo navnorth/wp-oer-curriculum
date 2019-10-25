@@ -46,6 +46,7 @@ function oer_lesson_plan_creation() {
 
 function oer_lesson_plan_custom_meta_boxes() {
     add_meta_box( 'oer_lesson_plan_grades', 'Grade Level', 'oer_lp_grade_level_cb', 'lesson-plans', 'side', 'high' );
+    add_meta_box( 'oer_lesson_plan_age_levels', 'Appropriate Age Levels', 'oer_lp_age_levels_cb', 'lesson-plans', 'side', 'high' );
     add_meta_box('oer_lesson_plan_meta_boxid', 'Lesson Meta Fields', 'oer_lesson_plan_meta_callback', 'lesson-plans', 'advanced');
 
     // Add a download copy option
@@ -63,6 +64,20 @@ function oer_lesson_plan_meta_callback() {
 // Related Inquiry Sets Callback
 function oer_lesson_plan_related_inquiry_callback(){
     include_once(OER_LESSON_PLAN_PATH . 'includes/lesson-plan-related-inquiry-sets.php');
+}
+
+// Age Levels Callback
+function oer_lp_age_levels_cb(){
+    global $post;
+    
+    $post_meta_data = get_post_meta($post->ID );
+    $oer_lp_age_levels = (isset($post_meta_data['oer_lp_age_levels'][0]) ? $post_meta_data['oer_lp_age_levels'][0] : "");
+    
+    echo '<div class="form-group oer_lp_age_levels">';
+    echo '<div class="input-group full-width">';
+    echo '<input type="text" class="form-control" name="oer_lp_age_levels" placeholder="Age Levels" value="'. $oer_lp_age_levels .'">';
+    echo '</div>';
+    echo '</div>';
 }
 
 /**
@@ -251,6 +266,11 @@ function lp_save_custom_fields() {
 
             if (isset($_POST['oer_lp_grades'])) {
                 update_post_meta($post->ID, 'oer_lp_grades', $_POST['oer_lp_grades']);
+            }
+            
+            // Update Appropriate Age Levels
+            if (isset($_POST['oer_lp_age_levels'])) {
+                update_post_meta($post->ID, 'oer_lp_age_levels', $_POST['oer_lp_age_levels']);
             }
 
             // Save Standards
