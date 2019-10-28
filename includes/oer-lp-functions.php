@@ -525,6 +525,7 @@ if (!function_exists('oer_lp_get_all_meta')){
 // Save Metadata options
 if (!function_exists('oer_lp_save_metadata_options')){
 	function oer_lp_save_metadata_options($post_data){
+        var_dump($post_data);
 		foreach($post_data as $key=>$value){
 			if (strpos($key,"oer_")!==false || strpos($key,"lp_oer_")!==false){
 				if (get_option($key)){
