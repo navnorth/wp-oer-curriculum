@@ -527,11 +527,12 @@ if (!function_exists('oer_lp_save_metadata_options')){
 	function oer_lp_save_metadata_options($post_data){
 		foreach($post_data as $key=>$value){
 			if (strpos($key,"oer_")!==false || strpos($key,"lp_oer_")!==false){
-                var_dump($key);
 				if (get_option($key)){
 					update_option($key, $value);
 				}
 				else{
+                    var_dump($key);
+                    var_dump($value);
 					add_option($key, $value);
 				}
 			}

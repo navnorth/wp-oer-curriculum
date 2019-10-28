@@ -50,7 +50,6 @@ function oer_curriculum_show_metadata_settings() {
 			$metadata[] = $met['meta_key'];
 		}
 	}
-	var_dump($metadata);
 	$meta = array_unique($metadata);
 	
 	// Save Option
