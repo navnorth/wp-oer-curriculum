@@ -62,6 +62,7 @@ function oer_curriculum_show_metadata_settings() {
 		}
 		oer_lp_save_metadata_options($_POST);
 	}
+	var_dump(get_option('oer_lp_suggested_instructional_time_label'));
 ?>
 <div class="lesson-plan-plugin-body">
 	<div class="lesson-plan-plugin-row">
