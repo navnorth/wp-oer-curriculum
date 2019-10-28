@@ -48,9 +48,20 @@ function oer_lesson_plan_custom_meta_boxes() {
     // Grade Levels
     add_meta_box( 'oer_lesson_plan_grades', 'Grade Level', 'oer_lp_grade_level_cb', 'lesson-plans', 'side', 'high' );
     // Appropriate Age Levels
-    add_meta_box( 'oer_lesson_plan_age_levels', 'Appropriate Age Levels', 'oer_lp_age_levels_cb', 'lesson-plans', 'side', 'high' );
+    $age_levels_set = (get_option('oer_lp_age_levels_label'))?true:false;
+    $age_levels_enabled = (get_option('oer_lp_age_levels_enabled'))?true:false;
+    if (($age_levels_set && $age_levels_enabled) || !$age_levels_set) {
+        $label = oer_lp_get_field_label('oer_lp_age_levels');
+        add_meta_box( 'oer_lesson_plan_age_levels', $label , 'oer_lp_age_levels_cb', 'lesson-plans', 'side', 'high' );
+    }
+    
     //Suggested Instructional Time
-    add_meta_box( 'oer_lesson_plan_suggested_time', 'Suggested Instructional Time', 'oer_lp_suggested_time_cb', 'lesson-plans', 'side', 'high' );
+    $suggested_time_set = (get_option('oer_lp_suggested_instructional_time_label'))?true:false;
+    $suggested_time_enabled = (get_option('oer_lp_suggested_instructional_time_enabled'))?true:false;
+    if (($suggested_time_set && $suggested_time_enabled) || !$suggested_time_set) {
+        $label = oer_lp_get_field_label('oer_lp_suggested_instructional_time');
+        add_meta_box( 'oer_lesson_plan_suggested_time', $label, 'oer_lp_suggested_time_cb', 'lesson-plans', 'side', 'high' );
+    }
     add_meta_box('oer_lesson_plan_meta_boxid', 'Lesson Meta Fields', 'oer_lesson_plan_meta_callback', 'lesson-plans', 'advanced');
 
     // Add a download copy option
