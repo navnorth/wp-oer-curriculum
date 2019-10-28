@@ -501,6 +501,12 @@ if (!function_exists('oer_lp_get_meta_label')){
             case "oer_lp_type_other":
                 $label = __("Other Type", OER_LESSON_PLAN_SLUG);
                 break;
+            case "oer_lp_age_levels":
+                $label = __("Appropriate Age Levels", OER_LESSON_PLAN_SLUG);
+                break;
+            case "oer_lp_suggested_instructional_time":
+                $label = __("Suggested Instructional Time", OER_LESSON_PLAN_SLUG);
+                break;
 		}
 		return $label;
 	}
