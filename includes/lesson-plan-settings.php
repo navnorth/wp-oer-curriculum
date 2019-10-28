@@ -62,7 +62,6 @@ function oer_curriculum_show_metadata_settings() {
 		}
 		oer_lp_save_metadata_options($_POST);
 	}
-	var_dump(get_option('oer_lp_suggested_instructional_time_label'));
 ?>
 <div class="lesson-plan-plugin-body">
 	<div class="lesson-plan-plugin-row">
@@ -84,7 +83,6 @@ function oer_curriculum_show_metadata_settings() {
 				</thead>
 				<tbody>
 					<?php foreach($meta as $key) {
-						var_dump($key);
 						$label = "";
 						$enabled = "0";
 						$option_set = false;
