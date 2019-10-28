@@ -533,7 +533,7 @@ if (!function_exists('oer_lp_save_metadata_options')){
 				else{
                     var_dump($key);
                     var_dump($value);
-					add_option($key, $value);
+					var_dump(add_option($key, $value));
 				}
 			}
 		}
