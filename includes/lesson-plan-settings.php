@@ -46,9 +46,7 @@ function oer_curriculum_show_metadata_settings() {
 	$metadata = null;
 	
 	foreach($metas as $met){
-		if (strpos($met['meta_key'],"oer_")!==false){
-			$metadata[] = $met['meta_key'];
-		}
+		$metadata[] = $met['meta_key'];
 	}
 	
 	$meta = array_unique($metadata);
