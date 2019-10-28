@@ -88,6 +88,7 @@ function oer_curriculum_show_metadata_settings() {
 						$enabled = "0";
 						$option_set = false;
 							if (get_option($key."_label")){
+								var_dump($key);
 								$label = get_option($key."_label");
 								$option_set = true;
 							}
