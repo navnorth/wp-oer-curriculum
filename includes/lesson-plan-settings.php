@@ -43,10 +43,13 @@ global $message, $type;
 
 function oer_curriculum_show_metadata_settings() {
 	$metas = oer_lp_get_all_meta("lesson-plans");
+	var_dump($metas);
 	$metadata = null;
 	
 	foreach($metas as $met){
-		$metadata[] = $met['meta_key'];
+		if (strpos($met['meta_key'],"oer_")!==false){
+			$metadata[] = $met['meta_key'];
+		}
 	}
 	
 	$meta = array_unique($metadata);
