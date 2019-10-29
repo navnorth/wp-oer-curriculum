@@ -42,43 +42,26 @@ if (!empty($sensitive_material) && count($sensitive_material)>0) {
     $oer_sensitive = true;
 }
 
+$lp_type_set = (get_option('oer_lp_type_label'))?true:false;
+$lp_type_enabled = (get_option('oer_lp_type_enabled'))?true:false;
+
 if (have_posts()) : while (have_posts()) : the_post();
 ?>
 <div class="container">
     <div class="row lp-featured-section">
-        <div class="col-md-6 col-sm-12 featured-image padding-0">
-            <?php the_post_thumbnail('inquiry-set-featured'); ?>
-            <div class="tc-lp-grade"><?php echo $lp_grade ?></div>
-            <div class="tc-lp-controls">
-                <div class="sharethis-inline-share-buttons"></div>
-                <?php if ($oer_lp_download_copy_document): ?>
-                <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank"><i class="fal fa-download"></i></a>
-                <?php endif; ?>
-            </div>
+        <div class="row tc-lp-details-header">
+            <h1 class="tc-lp-title"><?php echo the_title(); ?></h1>
         </div>
-        <div class="col-md-6 col-sm-12 curriculum-detail padding-0">
+        <div class="col-md-8 col-sm-12 curriculum-detail padding-0">
             <div class="tc-lp-details">
-                <div class="tc-lp-details-header">
-                    <h1 class="tc-lp-title"><?php echo the_title(); ?></h1>
-                    <div class="tc-lp-authors-list">
-                        <?php
-                        if (!empty($authors)){
-                            $aIndex = 0;
-                            
-                            foreach($authors['name'] as $author){
-                                $author_url = $authors['author_url'][$aIndex];
-                                
-                                if (isset($author_url))
-                                    echo "<span class='tc-lp-author'><a href='".$author_url."'>".$authors['name'][$aIndex]."</a></span>";
-                                else
-                                    echo "<span class='tc-lp-author'>".$authors['name'][$aIndex]."</span>";
-                                    
-                                $aIndex++;
-                            }
-                        } 
-                        ?>
-                    </div>
+                <?php if (($lp_type_set && $lp_type_enabled) || !$lp_type_set) { ?>
+                <div class="tc-lp-type">
+                    <?php
+                    $oer_lp_type = (isset($post_meta_data['oer_lp_type'][0]) ? $post_meta_data['oer_lp_type'][0] : '');
+                    echo $oer_lp_type;
+                    ?>
                 </div>
+                <?php } ?>
                 <div class="tc-lp-details-description">
                     <?php echo the_content(); ?>
                 </div>
@@ -146,6 +129,34 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
                     <button class="question-popup-button"><i class="fal fa-question-circle"></i></button>
                 </div>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 featured-image padding-0">
+            <?php the_post_thumbnail('inquiry-set-featured'); ?>
+            <div class="tc-lp-authors-list">
+                <?php
+                if (!empty($authors)){
+                    $aIndex = 0;
+                    
+                    foreach($authors['name'] as $author){
+                        $author_url = $authors['author_url'][$aIndex];
+                        
+                        if (isset($author_url))
+                            echo "<span class='tc-lp-author'><a href='".$author_url."'>".$authors['name'][$aIndex]."</a></span>";
+                        else
+                            echo "<span class='tc-lp-author'>".$authors['name'][$aIndex]."</span>";
+                            
+                        $aIndex++;
+                    }
+                } 
+                ?>
+            </div>
+            <div class="tc-lp-grade"><?php echo $lp_grade ?></div>
+            <div class="tc-lp-controls">
+                <div class="sharethis-inline-share-buttons"></div>
+                <?php if ($oer_lp_download_copy_document): ?>
+                <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank"><i class="fal fa-download"></i></a>
                 <?php endif; ?>
             </div>
         </div>
