@@ -38,7 +38,7 @@ body.single-lesson-plans {
     font-size: 18px !important;
 }
 .tc-lp-details {
-    padding: 60px 75px;
+    padding: 5px 0 25px;
 }
 .single-lesson-plans .row { margin-right:0; margin-left:0; width:100%; display:block; float:none;}
 .tc-lp-details-header .tc-lp-title {
