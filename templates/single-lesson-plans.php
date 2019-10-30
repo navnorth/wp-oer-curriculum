@@ -46,6 +46,8 @@ $lp_type_set = (get_option('oer_lp_type_label'))?true:false;
 $lp_type_enabled = (get_option('oer_lp_type_enabled'))?true:false;
 $related_inquiry_set = (get_option('oer_lp_related_inquiry_set_label'))?true:false;
 $related_inquiry_enabled = (get_option('oer_lp_related_inquiry_set_enabled'))?true:false;
+$author_set = (get_option('oer_lp_authors_label'))?true:false;
+$author_enabled = (get_option('oer_lp_authors_enabled'))?true:false;
 
 if (have_posts()) : while (have_posts()) : the_post();
 ?>
@@ -126,38 +128,6 @@ if (have_posts()) : while (have_posts()) : the_post();
                     endif;
                     ?>
                 </div>
-                <div class="tc-lp-details-tags-list">
-                    <?php
-                    if ($tags && sizeof($tags) <= 6):
-                        foreach($tags as $tag){
-                    ?>
-                        <a href="<?php echo site_url("inquiry-sets/topic/".sanitize_title($tag->name)) ?>" class="tc-lp-details-tag"><?php echo $tag->name; ?></a>
-                    <?php
-                        }
-                        endif;
-                    ?>
-
-                    <?php
-                        if ($tags && sizeof($tags) > 6):
-                            for($i=0; $i < 5; $i++){
-                    ?>
-                        <a href="<?php echo site_url("inquiry-sets/topic/".sanitize_title($tags[$i]->name)) ?>" class="tc-lp-details-tag"><?php echo $tags[$i]->name; ?></a>
-                    <?php } ?>
-                        <span class="open-tags tc-lp-details-tag">+ <?php echo (sizeof($tags) - 5) ?> more</span>
-                        <div id="tags-dialog">
-                            <div class="tc-lp-details-tags-list">
-                                <span class="ui-helper-hidden-accessible"><input type="text"/></span>
-                                <?php foreach($tags as $tag){
-                                ?>
-                                <a href="<?php echo site_url("inquiry-sets/topic/".sanitize_title($tag->name)) ?>" class="tc-lp-details-tag"><?php echo $tag->name; ?></a>
-                                <?php } ?>
-                            </div>
-                        </div>
-                    <?php
-                        endif;
-                    ?>
-
-                </div>
                 <?php if ($oer_sensitive) : ?>
                 <div class="tc-sensitive-material-section">
                     <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
@@ -168,7 +138,9 @@ if (have_posts()) : while (have_posts()) : the_post();
         </div>
         <div class="col-md-4 col-sm-12 featured-image padding-0">
             <?php the_post_thumbnail('inquiry-set-featured'); ?>
+            <?php if (($author_set && $author_enabled) || !$author_set) { ?>
             <div class="tc-lp-authors-list">
+                 <span class="lp-author-label"><?php echo oer_lp_get_field_label('oer_lp_authors'); ?></span>
                 <?php
                 if (!empty($authors)){
                     $aIndex = 0;
@@ -186,7 +158,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                 } 
                 ?>
             </div>
-            <div class="tc-lp-grade"><?php echo $lp_grade ?></div>
+            <?php } ?>
             <div class="tc-lp-controls">
                 <div class="sharethis-inline-share-buttons"></div>
                 <?php if ($oer_lp_download_copy_document): ?>
@@ -195,50 +167,6 @@ if (have_posts()) : while (have_posts()) : the_post();
             </div>
         </div>
     </div>
-    <?php
-    $oer_lp_iq = isset($post_meta_data['oer_lp_iq'][0])?unserialize($post_meta_data['oer_lp_iq'][0]):array();
-    if (!empty($oer_lp_iq)){
-        $option_set = false;
-        if (get_option('oer_lp_iq_label'))
-            $option_set = true;
-    ?>
-    <div class="row tc-investigative-section">
-        <div class="col-md-2 col-sm-2 col-xs-12 padding-0 custom-pink-bg investigate-section-custom-width">
-            <div class="investigate-question-section">
-                <h2><?php
-                if (!$option_set)
-                    _e("Investigative Question", OER_LESSON_PLAN_SLUG);
-                else
-                    echo get_option('oer_lp_iq_label');
-                ?></h2>
-            </div>
-        </div>
-        <div class="col-md-10 col-sm-10 col-xs-12 padding-0 custom-dark-pink-bg excerpt-section-custom-width">
-            <div class="col-md-1 col-sm-1 hidden-xs padding-0">
-                <div class="tc-pink-triangle"></div>
-            </div>
-            <div class="col-md-11 col-sm-11">
-                <div class="excerpt-section">
-                    <h2><?php echo $oer_lp_iq['question']; ?></h2>
-                    <div class="show-excerpt-section text-right">
-                        <button id="show-excerpt" type="button" class="excerpt-button"><span>Framework Excerpt</span><i class="fal fa-angle-down"></i></button>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
-        <div id="framework-excerpt" class="investigative-section-answer custom-dark-pink-bg">
-            <!-- <div class="col-md-3 col-sm-3 col-xs-12"></div> -->
-            <!-- <div class="excerpt-content col-md-9 col-sm-9 col-xs-12"> -->
-            <div class="excerpt-content">
-                <div class="content-wrapper">
-                    <span id="initial-excerpt"><?php echo $oer_lp_iq['excerpt']; ?></span>
-                </div>
-                <button type="button" id="close-excerpt" class="excerpt-button float-right">CLOSE<i class="fal fa-angle-up"></i></button>
-            </div>
-        </div>
-    </div>
-    <?php } ?>
     <div class="row resource-row">
         <?php
         $primary_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
@@ -278,7 +206,6 @@ if (have_posts()) : while (have_posts()) : the_post();
         }
         ?>
     </div>
-    <div class="row custom-bg-dark custom-bg-dark-row"></div>
     <div class="row">
         <ul class="nav nav-tabs tc-home-tabs" id="tc-home-tabs-section" role="tablist">
             <?php

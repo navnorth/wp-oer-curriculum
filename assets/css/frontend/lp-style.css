@@ -793,6 +793,7 @@ h4.tc-related-inquiry-sets-heading { font-size:16px; text-transform:uppercase; f
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a:hover,
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a:active,
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a:focus { text-decoration: underline; }
+.lp-author-label { margin-right:10px; }
 /** End of Primary Source Template Styling **/
 /** Topic Template Styling **/
 .topic-template #page.site { padding-left:0; padding-right:0; }
