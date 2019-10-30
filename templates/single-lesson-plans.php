@@ -44,6 +44,8 @@ if (!empty($sensitive_material) && count($sensitive_material)>0) {
 
 $lp_type_set = (get_option('oer_lp_type_label'))?true:false;
 $lp_type_enabled = (get_option('oer_lp_type_enabled'))?true:false;
+$related_inquiry_set = (get_option('oer_lp_related_inquiry_set_label'))?true:false;
+$related_inquiry_enabled = (get_option('oer_lp_related_inquiry_set_enabled'))?true:false;
 
 if (have_posts()) : while (have_posts()) : the_post();
 ?>
@@ -65,6 +67,31 @@ if (have_posts()) : while (have_posts()) : the_post();
                 <div class="tc-lp-details-description">
                     <?php echo the_content(); ?>
                 </div>
+                <?php
+                $related_inquiry_sets = (isset($post_meta_data['oer_lp_related_inquiry_set'][0]) ? unserialize($post_meta_data['oer_lp_related_inquiry_set'][0]) : array());
+                if (count($related_inquiry_sets)>0) {
+                    if (($related_inquiry_set && $related_inquiry_enabled) || !$related_inquiry_set) {
+                ?>
+                <div class="tc-related-inquiry-sets">
+                    <h4 class="tc-related-inquiry-sets-heading clearfix">
+                        <?php echo oer_lp_get_field_label('oer_lp_related_inquiry_set'); ?>
+                    </h4>
+                    <div class="tc-related-inquiry-sets-details clearfix">
+                        <ul class="tc-related-inquiry-sets-list">
+                        <?php
+                        foreach($related_inquiry_sets as $inquiry_set) {
+                            if ($inquiry_set!=="0") {
+                                $inquiry = oer_lp_get_inquiry_set_details($inquiry_set);
+                                $inquiry_link = get_permalink($inquiry_set);
+                                
+                                echo '<li><a href="'.$inquiry_link.'">'.$inquiry->post_title.'</a></li>';
+                            }
+                        } ?>
+                        </ul>
+                    </div>
+                </div>
+                <?php }
+                } ?>
                 <?php if ($oer_lp_standards): ?>
                 <button class="open-standards">Standards</button>
                     <?php endif; ?>
@@ -504,75 +531,6 @@ if (have_posts()) : while (have_posts()) : the_post();
         }
         ?>
     </div>
-    <?php
-    $related_inquiry_sets = (isset($post_meta_data['oer_lp_related_inquiry_set'][0]) ? unserialize($post_meta_data['oer_lp_related_inquiry_set'][0]) : array());
-    if (count($related_inquiry_sets)>0) {
-        $option_set = false;
-        if (get_option('oer_lp_related_inquiry_set_label'))
-            $option_set = true;
-    ?>
-    <div class="row">
-        <div class="tc-related-inquiry-sets-topbar clearfix">
-            <div class="col-md-6 col-sm-6 col-xs-6 padding-0 tc-custom-bg-orange"></div>
-            <div class="col-md-6 col-sm-6 col-xs-6 padding-0 tc-custom-bg-pink"></div>
-            <div class="tc-related-inquiry-section">
-                <p><?php
-                if (!$option_set)
-                    _e("Related Inquiry Sets", OER_LESSON_PLAN_SLUG);
-                else
-                    echo get_option('oer_lp_related_inquiry_set_label');
-                ?></p>
-            </div>
-        </div>
-        <div class="tc-related-inquiry-grids-section clearfix">
-            <?php
-            foreach($related_inquiry_sets as $inquiry_set) {
-                if ($inquiry_set!=="0") {
-                    $inquiry = oer_lp_get_inquiry_set_details($inquiry_set);
-                    $inquiry_link = get_permalink($inquiry_set);
-                    $inquiry_img = get_the_post_thumbnail_url($inquiry);
-                    $inquiry_meta_data = oer_lp_get_inquiry_set_metadata($inquiry_set);
-            ?>
-            <a class="lp-tc-related-inquiry-block-link lp-tc-related-inquiry-block col-md-4 col-sm-6 move-up-left" href="<?php echo $inquiry_link; ?>">
-                <div class="lp-tc-related-wrap"> 
-                    <div class="media-image">
-                        <div class="image-thumbnail">
-                            <div class="image-section">
-                                <img src="<?php echo $inquiry_img; ?>" alt="" class="img-thumbnail-square img-responsive img-loaded">
-                            </div>
-                        </div>
-                    </div>
-                    <?php
-                    $grades = (isset($inquiry_meta_data['oer_lp_grades'][0]) ? unserialize($inquiry_meta_data['oer_lp_grades'][0]) : array());
-                    if (count($grades)>0){
-                        $grade = "";
-                        if ($grades) {
-                            if ($grades=="pre-k")
-                                $grade = "Pre-K";
-                            elseif ($grades=="k")
-                                $grade = "Kindergarten";
-                            else {
-                                if (function_exists('oer_grade_levels'))
-                                    $grades = oer_grade_levels($grades);
-                                $grade = "Grade ".$grades;
-                            }
-                    ?>
-                    <div class="tc-related-inquiry-grades">
-                        <span><?php echo $grade; ?></span>
-                    </div>
-                    <?php }
-                    } ?>
-                    <div class="custom-bg-dark custom-bg-dark-inquiry-sets"></div>
-                    <div class="tc-related-inquiry-set-description">
-                    <h4><?php echo $inquiry->post_title; ?></h4>
-                    </div>
-                </div>
-            </a>
-            <?php }
-            } ?>
-        </div>
-    </div>
-    <?php } ?>
 </div>
 <?php
 	// Display Activity Objects
