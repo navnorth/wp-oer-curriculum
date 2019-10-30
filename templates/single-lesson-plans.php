@@ -69,7 +69,14 @@ if (have_posts()) : while (have_posts()) : the_post();
                 </div>
                 <?php
                 $related_inquiry_sets = (isset($post_meta_data['oer_lp_related_inquiry_set'][0]) ? unserialize($post_meta_data['oer_lp_related_inquiry_set'][0]) : array());
-                if (count($related_inquiry_sets)>0) {
+                $show_related_inquiry_sets = false;
+                foreach($related_inquiry_sets as $rset){
+                    if ($rset!=="0"){
+                        $show_related_inquiry_sets = true;
+                        break;
+                    }
+                }
+                if ($show_related_inquiry_sets) {
                     if (($related_inquiry_set && $related_inquiry_enabled) || !$related_inquiry_set) {
                 ?>
                 <div class="tc-related-inquiry-sets">
