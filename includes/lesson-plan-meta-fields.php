@@ -41,6 +41,9 @@ $history_bg_set = (get_option('oer_lp_custom_editor_historical_background_label'
 $history_bg_enabled = (get_option('oer_lp_custom_editor_historical_background_enabled'))?true:false;
 $type_set = (get_option('oer_lp_type_label'))?true:false;
 $type_enabled = (get_option('oer_lp_type_enabled'))?true:false;
+$standards_set = (get_option('oer_lp_standards_label'))?true:false;
+$standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
+
 ?>
 <div class="lesson_plan_meta_wrapper">
     <div class="row">
@@ -115,11 +118,13 @@ $type_enabled = (get_option('oer_lp_type_enabled'))?true:false;
                             <li class="list-group-item">
                                 <a href="#oer-lp-times-group" title="Lesson Times">Lesson Times</a>
                             </li>
-                        <?php } elseif ($elementKey == 'lp_standard_order') {?>
+                        <?php } elseif ($elementKey == 'lp_standard_order') {
+                             if (($standards_set && $standards_enabled) || !$standards_set) { ?>
                             <li class="list-group-item">
-                                <a href="#oer-lp-standards-group" title="Standards and Objectives">Standards and Objectives</a>
+                                <a href="#oer-lp-standards-group" title="Standards and Objectives"><?php echo oer_lp_get_field_label('oer_lp_standards');  ?></a>
                             </li>
-                        <?php } elseif ($elementKey == 'lp_activities_order') {?>
+                        <?php }
+                        } elseif ($elementKey == 'lp_activities_order') {?>
                             <li class="list-group-item">
                                 <a href="#oer-lp-activities-group" title="Activities in this Lesson">Activities in this Lesson</a>
                                 <ul class="list-group sidebar-lesson-activities-title">
@@ -191,9 +196,11 @@ $type_enabled = (get_option('oer_lp_type_enabled'))?true:false;
                     <li class="list-group-item">
                         <a href="#oer-lp-times-group" title="Lesson Times">Lesson Times</a>
                     </li>
+                    <?php if (($standards_set && $standards_enabled) || !$standards_set) { ?>
                     <li class="list-group-item">
-                        <a href="#oer-lp-standards-group" title="Standards and Objectives">Standards and Objectives</a>
+                        <a href="#oer-lp-standards-group" title="Standards and Objectives"><?php echo oer_lp_get_field_label('oer_lp_standards');  ?></a>
                     </li>
+                    <?php } ?>
                     <li class="list-group-item">
                         <a href="#oer-lp-activities-group" title="Activities in this Lesson">Activities in this Lesson</a>
                         <ul class="list-group sidebar-lesson-activities-title">
@@ -882,7 +889,7 @@ $type_enabled = (get_option('oer_lp_type_enabled'))?true:false;
                                 </div>
                             </div>
                         </div>
-                    <?php } elseif ($elementKey == 'lp_standard_order') {?>
+                    <?php } elseif ($elementKey == 'lp_standard_order') { ?>
                         <!--For Standards and Objectives -->
                         <div class="panel panel-default lp-element-wrapper oer-lp-standards-group" id="oer-lp-standards-group">
                             <input type="hidden" name="lp_order[lp_standard_order]" class="element-order" value="<?php echo $value;?>">
@@ -897,7 +904,8 @@ $type_enabled = (get_option('oer_lp_type_enabled'))?true:false;
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <?php if (is_standards_plugin_installed()) { ?>
+                                <?php if (is_standards_plugin_installed()) {
+                                    if (($standards_set && $standards_enabled) || !$standards_set) { ?>
                                 <h4 class="page-title-inner"><?php _e("Standards", OER_LESSON_PLAN_SLUG); ?></h4>
 
                                 <div id="selected-standard-wrapper">
@@ -915,7 +923,8 @@ $type_enabled = (get_option('oer_lp_type_enabled'))?true:false;
                                         >Select Standards</button>
                                     </div>
                                 </div>
-                                <?php } ?>
+                                <?php }
+                                } ?>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h4>Related Instructional Objectives (<span title="Students will be able to...">SWBAT...</span>)</h4>
@@ -1772,7 +1781,8 @@ $type_enabled = (get_option('oer_lp_type_enabled'))?true:false;
                                     </h3>
                                 </div>
                                 <div class="panel-body">
-                                    <?php if (is_standards_plugin_installed()) { ?>
+                                    <?php if (is_standards_plugin_installed()) {
+                                        if (($standards_set && $standards_enabled) || !$standards_set) { ?>
                                     <h4 class="page-title-inner"><?php _e("Standards", OER_LESSON_PLAN_SLUG); ?></h4>
                                     <div id="selected-standard-wrapper">
                                         <p><?php _e("You have not selected any academic standards", OER_LESSON_PLAN_SLUG); ?></p>
@@ -1786,7 +1796,8 @@ $type_enabled = (get_option('oer_lp_type_enabled'))?true:false;
                                             >Select Standards</button>
                                         </div>
                                     </div>
-                                    <?php } ?>
+                                    <?php }
+                                    } ?>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <h4>Related Instructional Objectives (<span title="Students will be able to...">SWBAT...</span>)</h4>

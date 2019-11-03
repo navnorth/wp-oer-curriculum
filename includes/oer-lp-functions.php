@@ -507,6 +507,9 @@ if (!function_exists('oer_lp_get_meta_label')){
             case "oer_lp_suggested_instructional_time":
                 $label = __("Suggested Instructional Time", OER_LESSON_PLAN_SLUG);
                 break;
+            case "oer_lp_standards":
+                $label = __("Standards", OER_LESSON_PLAN_SLUG);
+                break;
 		}
 		return $label;
 	}

@@ -48,6 +48,8 @@ $related_inquiry_set = (get_option('oer_lp_related_inquiry_set_label'))?true:fal
 $related_inquiry_enabled = (get_option('oer_lp_related_inquiry_set_enabled'))?true:false;
 $author_set = (get_option('oer_lp_authors_label'))?true:false;
 $author_enabled = (get_option('oer_lp_authors_enabled'))?true:false;
+$standards_set = (get_option('oer_lp_standards_label'))?true:false;
+$standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
 
 if (have_posts()) : while (have_posts()) : the_post();
 ?>
@@ -101,33 +103,43 @@ if (have_posts()) : while (have_posts()) : the_post();
                 </div>
                 <?php }
                 } ?>
-                <?php if ($oer_lp_standards): ?>
-                <button class="open-standards">Standards</button>
-                    <?php endif; ?>
-                <div id="standards-dialog" class="tc-lp-details-standards-list">
-                    <?php
-                    $oer_lp_standards = explode(",",$oer_lp_standards);
-                    if (is_array($oer_lp_standards)):
-                        foreach($oer_lp_standards as $standard){
-                            $standard_details = "";
-                            if (function_exists('was_standard_details'))
-                                $standard_details = was_standard_details($standard);
-                        ?>
-                        <div class="tc-lp-details-standard">
-                            <a href="javascript:void(0)"><?php
-                            if ($standard_details){
-                                if (isset($standard_details->description))
-                                    echo $standard_details->description;
-                                else
-                                    echo $standard_details->standard_title;
-                            }
-                            ?></a>
-                        </div>
-                        <?php
-                        }
-                    endif;
-                    ?>
+                <?php if ($oer_lp_standards) {
+                     if (($standards_set && $standards_enabled) || !$standards_set) {
+                ?>
+                <div class="tc-lp-standards">
+                    <h4 class="tc-lp-field-heading clearfix">
+                        <?php echo oer_lp_get_field_label('oer_lp_standards'); ?>
+                    </h4>
+                    <div class="tc-lp-standards-details clearfix">
+                        <ul class="tc-lp-standards-list">
+                            <?php
+                            $oer_lp_standards = explode(",",$oer_lp_standards);
+                            if (is_array($oer_lp_standards)):
+                                foreach($oer_lp_standards as $standard){
+                                    $standard_details = "";
+                                    if (function_exists('was_standard_details'))
+                                        $standard_details = was_standard_details($standard);
+                                ?>
+                                <div class="tc-lp-details-standard">
+                                    <a href="javascript:void(0)"><?php
+                                    if ($standard_details){
+                                        if (isset($standard_details->description))
+                                            echo $standard_details->description;
+                                        else
+                                            echo $standard_details->standard_title;
+                                    }
+                                    ?></a>
+                                </div>
+                                <?php
+                                }
+                            endif;
+                            ?>
+                        </ul>
+                    </div>
                 </div>
+                <?php
+                     }
+                } ?>
                 <?php if ($oer_sensitive) : ?>
                 <div class="tc-sensitive-material-section">
                     <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
