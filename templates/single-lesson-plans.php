@@ -116,21 +116,28 @@ if (have_posts()) : while (have_posts()) : the_post();
                             $oer_lp_standards = explode(",",$oer_lp_standards);
                             if (is_array($oer_lp_standards)):
                                 foreach($oer_lp_standards as $standard){
+                                    echo "<li>";
+                                    if (function_exists('oer_std_get_standard_by_notation'))
+                                        $core_standard = oer_std_get_standard_by_notation($standard);
+                                    if ($core_standard) {
+                                        echo '<a data-toggle="collapse" href="#core-standard-'.$core_standard->id.'">'.$core_standard->standard_name.'</a>';
+                                    }
                                     $standard_details = "";
                                     if (function_exists('was_standard_details'))
                                         $standard_details = was_standard_details($standard);
                                 ?>
-                                <div class="tc-lp-details-standard">
-                                    <a href="javascript:void(0)"><?php
+                                <div class="collapse tc-lp-details-standard" id="core-standard-<?php echo $core_standard->id; ?>">
+                                    <?php
                                     if ($standard_details){
                                         if (isset($standard_details->description))
                                             echo $standard_details->description;
                                         else
                                             echo $standard_details->standard_title;
                                     }
-                                    ?></a>
+                                    ?>
                                 </div>
                                 <?php
+                                echo "</li>";
                                 }
                             endif;
                             ?>
