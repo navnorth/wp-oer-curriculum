@@ -147,6 +147,59 @@ if (have_posts()) : while (have_posts()) : the_post();
                 <?php
                      }
                 } ?>
+                <?php
+                    $subject_areas = array();
+                    $post_terms = get_the_terms( $post->ID, 'resource-subject-area' );
+                    if (!empty($post_terms)){
+                        $subjects = array();
+                    foreach($post_terms as $term)
+                    {
+                        if($term->parent != 0)
+                        {
+                            $parent[] = oer_get_parent_term_list($term->term_id);
+                            $subjects[] = $term;
+                        }
+                        else
+                        {
+                            $subject_areas[] = $term;
+                        }
+                    }
+                    
+                    if(!empty($parent) && array_filter($parent))
+                    {
+                        $recur_multi_dimen_arr_obj =  new RecursiveArrayIterator($parent);
+                        $recur_flat_arr_obj =  new RecursiveIteratorIterator($recur_multi_dimen_arr_obj);
+                        $flat_arr = iterator_to_array($recur_flat_arr_obj, false);
+                
+                        $flat_arr = array_values(array_unique($flat_arr));
+                        
+                        for($k=0; $k < count($flat_arr); $k++)
+                        {
+                            //$idObj = get_category_by_slug($flat_arr[$k]);
+                            $idObj = get_term_by( 'slug' , $flat_arr[$k] , 'resource-subject-area' );
+                            
+                            if(!empty($idObj->name))
+                                $subject_areas[] = $idObj;
+                        }
+                    }
+                    if (count($subjects)>0)
+                        $subject_areas = array_merge($subject_areas,$subjects);
+                ?>
+                <div class="tc-lp-subject-areas">
+                   <h4 class="tc-lp-field-heading clearfix">
+                        <?php _e("Subjects",OER_LESSON_PLAN_SLUG); ?>
+                    </h4>
+                   <div class="tc-lp-subject-details clearfix">
+                        <ul class="tc-lp-subject-areas-list">
+                            <?php
+                            foreach($subject_areas as $subject){
+                                echo "<li>".$subject->name."</li>";
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                </div>
+                <?php } ?>
                 <?php if ($oer_sensitive) : ?>
                 <div class="tc-sensitive-material-section">
                     <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
