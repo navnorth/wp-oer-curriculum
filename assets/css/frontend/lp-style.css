@@ -795,9 +795,9 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a:focus { text-decoration: underline; }
 .lp-author-label { margin-right:10px; font-size:14px; color:#4F4F4F; font-weight:bold; text-transform: uppercase; }
 .tc-lp-author a { font-size:14px; color:#77B143; }
-.tc-lp-standards-list { padding-left:0; }
-.tc-lp-standards-list li { list-style:none; font-size:14px; }
-.tc-lp-standards-list li a { color: #77B143; text-decoration: none; }
+.tc-lp-standards-list, .tc-lp-subject-areas-list { padding-left:0; }
+.tc-lp-standards-list li, .tc-lp-subject-areas-list li { list-style:none; font-size:14px; }
+.tc-lp-standards-list li a, .tc-lp-subject-areas-list li a { color: #77B143; text-decoration: none; }
 .tc-lp-standards-list li .collapse { color:#4f4f4f; margin-left:15px; }
 /** End of Primary Source Template Styling **/
 /** Topic Template Styling **/

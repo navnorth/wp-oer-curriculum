@@ -193,7 +193,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                         <ul class="tc-lp-subject-areas-list">
                             <?php
                             foreach($subject_areas as $subject){
-                                echo "<li>".$subject->name."</li>";
+                                $subject_url = home_url("/resource-subject-area/".$subject->slug);
+                                echo "<li><a href='".$subject_url."'>".$subject->name."</a></li>";
                             }
                             ?>
                         </ul>
