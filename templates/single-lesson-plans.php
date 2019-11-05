@@ -192,9 +192,19 @@ if (have_posts()) : while (have_posts()) : the_post();
                    <div class="tc-lp-subject-details clearfix">
                         <ul class="tc-lp-subject-areas-list">
                             <?php
+                            $i = 1;
+                            $cnt = count($subject_areas);
+                            $moreCnt = $cnt-2;
                             foreach($subject_areas as $subject){
                                 $subject_url = home_url("/resource-subject-area/".$subject->slug);
-                                echo "<li><a href='".$subject_url."'>".$subject->name."</a></li>";
+                                if ($i>2)
+                                    echo "<li class='hidden'><a href='".$subject_url."'>".$subject->name."</a></li>";
+                                else
+                                    echo "<li><a href='".$subject_url."'>".$subject->name."</a></li>";
+                                if (($i==$cnt) && ($cnt>2)){
+                                    echo "<li><a class='see-more-subjects'>SEE ".$moreCnt." MORE +</a></li>";
+                                }
+                                $i++;
                             }
                             ?>
                         </ul>
@@ -230,6 +240,21 @@ if (have_posts()) : while (have_posts()) : the_post();
                     }
                 } 
                 ?>
+            </div>
+            <?php } 
+            $keywords = wp_get_post_tags($post->ID);
+            if(!empty($keywords))
+            {
+            ?>
+            <div class="tc-lp-keywords">
+                <div class="lp_keywords_container tagcloud">
+                <?php
+                    foreach($keywords as $keyword)
+                    {
+                            echo "<span><a href='".esc_url(get_tag_link($keyword->term_id))."' class='button'>".ucwords($keyword->name)."</a></span>";
+                    }
+                ?>
+                </div>
             </div>
             <?php } ?>
             <div class="tc-lp-controls">
