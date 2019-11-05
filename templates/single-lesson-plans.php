@@ -265,13 +265,18 @@ if (have_posts()) : while (have_posts()) : the_post();
             </div>
         </div>
     </div>
-    <div class="row resource-row">
+    <div class="see-more-row">
+        <p class="center"><span><a class="see-more-link"><?php _e("SEE MORE +",OER_LESSON_PLAN_SLUG); ?></a></span></p>
+    </div>
+    <div class="row lp-primary-sources-row">
         <?php
         $primary_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
         if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             if (!empty(array_filter($primary_resources['resource']))) {
                 foreach ($primary_resources['resource'] as $resourceKey => $resource) {
                     $resource = get_page_by_title($resource,OBJECT,"resource");
+                    $type = get_post_meta($resource->ID,"oer_mediatype");
+                    $type = $type[0];
                     $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
                     $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
                     $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
@@ -286,10 +291,14 @@ if (have_posts()) : while (have_posts()) : the_post();
                             ?>
                             <a href="<?php echo $ps_url;  ?>">
                                 <span class="resource-overlay"></span>
+                                <span class="lp-source-type"><?php echo $type; ?></span>
                                 <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1)">
                                 </div>
                             </a>
                             <?php endif; ?>
+                        </div>
+                        <div class="lp-resource-title">
+                            <?php echo $resource->post_title; ?>
                         </div>
                     </div>
                     <?php if ($sensitiveMaterial!=="" && $sensitiveMaterial!=="no"): ?>
@@ -304,7 +313,7 @@ if (have_posts()) : while (have_posts()) : the_post();
         }
         ?>
     </div>
-    <div class="row">
+    <div class="row hidden">
         <ul class="nav nav-tabs tc-home-tabs" id="tc-home-tabs-section" role="tablist">
             <?php
             if (!empty($elements_orders)) {
@@ -390,7 +399,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             ?>
         </ul>
     </div>
-    <div class="row tab-content tc-home-tabs-content col-md-12 padding-0">
+    <div class="row tab-content tc-home-tabs-content col-md-12 padding-0 hidden">
         <?php
         if (!empty($elements_orders)) {
             foreach ($elements_orders as $elementKey => $value) {

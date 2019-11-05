@@ -801,6 +801,28 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
 .tc-lp-standards-list li .collapse { color:#4f4f4f; margin-left:15px; }
 .lp_keywords_container span a { color:#77B143; border-color:#E0E0E0; }
 .lp_keywords_container span { margin: 5px; }
+.see-more-row .center { text-align:center; }
+.see-more-row .see-more-link { font-size:14px; font-weight:bold; color:#77B143; line-height:19px; cursor:pointer; }
+.lp-source-type {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px 15px;
+    background: #356483;
+    color: #ffffff;
+}
+.lp-primary-sources-row { padding:50px; background:#FBFBFB; border-top:1px solid #E0E0E0; }
+.lp-primary-sources-row .media-image { background:rgba(255,255,255,0.8); width:200px; height:auto; }
+.lp-primary-sources-row .image-thumbnail { width:200px; height:200px; }
+.lp-primary-sources-row .lp-resource-title {
+    background: #4f4f4f;
+    color: #ffffff;
+    padding: 5px 10px;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 /** End of Primary Source Template Styling **/
 /** Topic Template Styling **/
 .topic-template #page.site { padding-left:0; padding-right:0; }
