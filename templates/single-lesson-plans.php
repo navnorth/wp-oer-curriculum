@@ -50,6 +50,12 @@ $author_set = (get_option('oer_lp_authors_label'))?true:false;
 $author_enabled = (get_option('oer_lp_authors_enabled'))?true:false;
 $standards_set = (get_option('oer_lp_standards_label'))?true:false;
 $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
+$age_levels_set = (get_option('oer_lp_age_levels_label'))?true:false;
+$age_levels_enabled = (get_option('oer_lp_age_levels_enabled'))?true:false;
+$suggested_time_set = (get_option('oer_lp_suggested_instructional_time_label'))?true:false;
+$suggested_time_enabled = (get_option('oer_lp_suggested_instructional_time_enabled'))?true:false;
+$req_materials_set = (get_option('oer_lp_required_materials_label'))?true:false;
+$req_materials_enabled = (get_option('oer_lp_required_materials_enabled'))?true:false;
 
 if (have_posts()) : while (have_posts()) : the_post();
 ?>
@@ -242,6 +248,52 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <button class="question-popup-button"><i class="fal fa-question-circle"></i></button>
                 </div>
                 <?php endif; ?>
+                <div id="tcHiddenFields" class="tc-hidden-fields collapse">
+                    <?php
+                    // Grade Level Display
+                    $oer_lp_grade = oer_inquiry_set_grade_level($post->ID);
+                    if ($oer_lp_grade){
+                        ?>
+                        <div class="form-field">
+                            <span class="tc-lp-label">Grade Level:</span> <span class="tc-lp-value"><?php echo $oer_lp_grade; ?></span>
+                        </div>
+                        <?php
+                    }
+                    
+                    // Appropriate Age Levels Display
+                    if (($age_levels_set && $age_levels_enabled) || !$age_levels_set) {
+                        $age_label = oer_lp_get_field_label('oer_lp_age_levels');
+                        $age_levels = (isset($post_meta_data['oer_lp_age_levels'][0]) ? $post_meta_data['oer_lp_age_levels'][0] : "");
+                        ?>
+                        <div class="form-field">
+                            <span class="tc-lp-label"><?php echo $age_label; ?>:</span> <span class="tc-lp-value"><?php echo $age_levels; ?></span>
+                        </div>
+                        <?php
+                    }
+                    
+                    // Suggested Instructional Time Display
+                   if (($suggested_time_set && $suggested_time_enabled) || !$suggested_time_set) {
+                        $suggested_label = oer_lp_get_field_label('oer_lp_suggested_instructional_time');
+                        $suggested_time = (isset($post_meta_data['oer_lp_suggested_instructional_time'][0]) ? $post_meta_data['oer_lp_suggested_instructional_time'][0] : "");
+                        ?>
+                        <div class="form-field">
+                            <span class="tc-lp-label"><?php echo $suggested_label; ?>:</span> <span class="tc-lp-value"><?php echo $suggested_time; ?></span>
+                        </div>
+                        <?php
+                    }
+                    
+                     // Required Equipment Materials Display
+                   if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
+                        $req_materials_label = oer_lp_get_field_label('oer_lp_required_materials');
+                        $req_materials = (isset($post_meta_data['oer_lp_required_materials'][0]) ? $post_meta_data['oer_lp_required_materials'][0] : "");
+                        ?>
+                        <div class="form-field">
+                            <span class="tc-lp-label"><?php echo $req_materials_label; ?>:</span> <span class="tc-lp-value"><?php echo $req_materials; ?></span>
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
             </div>
         </div>
         <div class="col-md-4 col-sm-12 featured-image padding-0">
@@ -291,7 +343,7 @@ if (have_posts()) : while (have_posts()) : the_post();
         </div>
     </div>
     <div class="see-more-row">
-        <p class="center"><span><a class="see-more-link"><?php _e("SEE MORE +",OER_LESSON_PLAN_SLUG); ?></a></span></p>
+        <p class="center"><span><a class="see-more-link" role="button" data-toggle="collapse" href="#tcHiddenFields"><?php _e("SEE MORE +",OER_LESSON_PLAN_SLUG); ?></a></span></p>
     </div>
     <div class="row lp-primary-sources-row">
         <?php
