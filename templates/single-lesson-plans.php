@@ -113,31 +113,56 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <div class="tc-lp-standards-details clearfix">
                         <ul class="tc-lp-standards-list">
                             <?php
+                            $stds = array();
+                            $standards = array();
+                            $cstandard = null;
                             $oer_lp_standards = explode(",",$oer_lp_standards);
                             if (is_array($oer_lp_standards)):
+                                $current_std_id = "";
                                 foreach($oer_lp_standards as $standard){
-                                    echo "<li>";
-                                    if (function_exists('oer_std_get_standard_by_notation'))
+                                    if (function_exists('oer_std_get_standard_by_notation')){
                                         $core_standard = oer_std_get_standard_by_notation($standard);
-                                    if ($core_standard) {
-                                        echo '<a data-toggle="collapse" href="#core-standard-'.$core_standard->id.'">'.$core_standard->standard_name.'</a>';
+                                        if ($current_std_id!==$core_standard->id){
+                                            if (!empty($standards) && !empty($cstandard)) {
+                                                $stds[] = array_merge(array("notation"=>$standards), $cstandard);
+                                            }
+                                            $standards = array();
+                                            $current_std_id = $core_standard->id;
+                                            $cstandard = array("core_standard_id"=>$core_standard->id,"core_standard_name"=>$core_standard->standard_name);
+                                        }
+                                        $standards[] = $standard;
                                     }
-                                    $standard_details = "";
-                                    if (function_exists('was_standard_details'))
-                                        $standard_details = was_standard_details($standard);
-                                ?>
-                                <div class="collapse tc-lp-details-standard" id="core-standard-<?php echo $core_standard->id; ?>">
-                                    <?php
-                                    if ($standard_details){
-                                        if (isset($standard_details->description))
-                                            echo $standard_details->description;
-                                        else
-                                            echo $standard_details->standard_title;
+                                }
+                                if (!empty($standards) && !empty($cstandard)) {
+                                    $stds[] = array_merge(array("notation"=>$standards), $cstandard);
+                                }
+                                $cstd_id = array_column($stds,"core_standard_id");
+                                array_multisort($cstd_id,SORT_ASC,$stds);
+                                $standard_details = "";
+                                foreach($stds as $std){
+                                    if (isset($std['core_standard_id'])) {
+                                        echo "<li>";
+                                            echo '<a data-toggle="collapse" href="#core-standard-'.$std['core_standard_id'].'">'.$std['core_standard_name'].'</a>';
+                                        ?>
+                                        <div class="collapse tc-lp-details-standard" id="core-standard-<?php echo $std['core_standard_id']; ?>">
+                                        <?php
+                                        if (is_array($std['notation'])) {
+                                            echo "<ul class='tc-lp-notation-list'>";
+                                            foreach ($std['notation'] as $notation) {
+                                                if (function_exists('was_standard_details'))
+                                                    $standard_details = was_standard_details($notation);
+                                                if (!empty($standard_details)){
+                                                    if (isset($standard_details->description))
+                                                        echo "<li>".$standard_details->description."</li>";
+                                                    else
+                                                        echo "<li>".$standard_details->standard_title."</li>";
+                                                }
+                                            }
+                                            echo "</ul>";
+                                        }
+                                            echo "</div>";
+                                        echo "</li>";
                                     }
-                                    ?>
-                                </div>
-                                <?php
-                                echo "</li>";
                                 }
                             endif;
                             ?>
@@ -291,7 +316,9 @@ if (have_posts()) : while (have_posts()) : the_post();
                             ?>
                             <a href="<?php echo $ps_url;  ?>">
                                 <span class="resource-overlay"></span>
+                                <?php if (!empty($type)): ?>
                                 <span class="lp-source-type"><?php echo $type; ?></span>
+                                <?php endif; ?>
                                 <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1)">
                                 </div>
                             </a>
