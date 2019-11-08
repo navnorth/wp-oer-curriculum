@@ -826,6 +826,7 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
 }
 .tc-lp-notation-list { padding-left:10px; }
 .tc-lp-value { color:#77B143; font-size:14px; line-height:19px; }
+.tc-lp-subject-areas-list li { color:#77B143; }
 /** End of Primary Source Template Styling **/
 /** Topic Template Styling **/
 .topic-template #page.site { padding-left:0; padding-right:0; }

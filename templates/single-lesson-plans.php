@@ -179,42 +179,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                      }
                 } ?>
                 <?php
-                    $subject_areas = array();
                     $post_terms = get_the_terms( $post->ID, 'resource-subject-area' );
-                    if (!empty($post_terms)){
-                        $subjects = array();
-                    foreach($post_terms as $term)
-                    {
-                        if($term->parent != 0)
-                        {
-                            $parent[] = oer_get_parent_term_list($term->term_id);
-                            $subjects[] = $term;
-                        }
-                        else
-                        {
-                            $subject_areas[] = $term;
-                        }
-                    }
-                    
-                    if(!empty($parent) && array_filter($parent))
-                    {
-                        $recur_multi_dimen_arr_obj =  new RecursiveArrayIterator($parent);
-                        $recur_flat_arr_obj =  new RecursiveIteratorIterator($recur_multi_dimen_arr_obj);
-                        $flat_arr = iterator_to_array($recur_flat_arr_obj, false);
-                
-                        $flat_arr = array_values(array_unique($flat_arr));
-                        
-                        for($k=0; $k < count($flat_arr); $k++)
-                        {
-                            //$idObj = get_category_by_slug($flat_arr[$k]);
-                            $idObj = get_term_by( 'slug' , $flat_arr[$k] , 'resource-subject-area' );
-                            
-                            if(!empty($idObj->name))
-                                $subject_areas[] = $idObj;
-                        }
-                    }
-                    if (count($subjects)>0)
-                        $subject_areas = array_merge($subject_areas,$subjects);
+                    if (!empty($post_terms)) {
                 ?>
                 <div class="tc-lp-subject-areas">
                    <h4 class="tc-lp-field-heading clearfix">
@@ -224,17 +190,17 @@ if (have_posts()) : while (have_posts()) : the_post();
                         <ul class="tc-lp-subject-areas-list">
                             <?php
                             $i = 1;
-                            $cnt = count($subject_areas);
-                            $moreCnt = $cnt-2;
-                            foreach($subject_areas as $subject){
-                                $subject_url = home_url("/resource-subject-area/".$subject->slug);
+                            $cnt = count($post_terms);
+                            $moreCnt = $cnt - 2;
+                            foreach($post_terms as $term){
+                                $subject_parent = get_term_parents_list($term->term_id,'resource-subject-area', array('separator' => ' <i class="fas fa-angle-double-right"></i> ', 'inclusive' => false));
+                                $subject = $subject_parent . '<a href="'.get_term_link($term->term_id).'">'.$term->name.'</a>';
                                 if ($i>2)
-                                    echo "<li class='hidden'><a href='".$subject_url."'>".$subject->name."</a></li>";
+                                    echo '<li class="collapse lp-subject-hidden">'.$subject.'</li>';
                                 else
-                                    echo "<li><a href='".$subject_url."'>".$subject->name."</a></li>";
-                                if (($i==$cnt) && ($cnt>2)){
-                                    echo "<li><a class='see-more-subjects'>SEE ".$moreCnt." MORE +</a></li>";
-                                }
+                                    echo '<li>'.$subject.'</li>';
+                                if (($i==2) && ($cnt>2))
+                                    echo '<li><a class="see-more-subjects" data-toggle="collapse" data-count="'.$moreCnt.'" href=".lp-subject-hidden">SEE '.$moreCnt.' MORE +</a></li>';
                                 $i++;
                             }
                             ?>

@@ -61,6 +61,16 @@ jQuery(document).ready(function($){
         $('#see-more-link').text("SEE MORE +");
     });
     
+    $(document).on("show.bs.collapse", '.lp-subject-hidden.collapse', function (){
+        var more_count = $('.see-more-subjects').attr('data-count');
+        $('.see-more-subjects').text("SEE " + more_count + " LESS -");
+    });
+    
+    $(document).on("hide.bs.collapse", '.lp-subject-hidden.collapse', function (){
+        var more_count = $('.see-more-subjects').attr('data-count');
+        $('.see-more-subjects').text("SEE " + more_count + " MORE +");
+    });
+    
     $('.lp-nav-right,.lp-nav-left').on("click", function(e){
         e.preventDefault();
         var nav = $(this);
