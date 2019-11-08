@@ -788,7 +788,7 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
 h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; text-transform:uppercase; font-weight:bold; text-decoration:underline; color:#356483; line-height:19px; margin:0; }
 .tc-related-inquiry-sets-details { padding:10px 0; }
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list { padding-left:0;}
-.tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li { font-size:14px; font-weight:bold; line-height:19px;}
+.tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li { font-size:14px; line-height:19px; list-style:none; }
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a { color:#77B143; text-decoration:none;  }
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a:hover,
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a:active,
@@ -827,6 +827,9 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
 .tc-lp-notation-list { padding-left:10px; }
 .tc-lp-value { color:#77B143; font-size:14px; line-height:19px; }
 .tc-lp-subject-areas-list li { color:#77B143; }
+.single-lesson-plans #main { padding-left:0; padding-right:0; }
+.single-lesson-plans #main .container { padding-left:0; padding-right:0; }
+.single-lesson-plans #main .container .lp-featured-section { padding-left:50px; padding-right:50px; }
 /** End of Primary Source Template Styling **/
 /** Topic Template Styling **/
 .topic-template #page.site { padding-left:0; padding-right:0; }
