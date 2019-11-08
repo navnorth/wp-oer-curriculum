@@ -53,6 +53,14 @@ jQuery(document).ready(function($){
         }
     });
     
+    $(document).on("show.bs.collapse", '#tcHiddenFields.collapse', function (){
+        $('#see-more-link').text("SEE LESS -");
+    });
+    
+    $(document).on("hide.bs.collapse", '#tcHiddenFields.collapse', function (){
+        $('#see-more-link').text("SEE MORE +");
+    });
+    
     $('.lp-nav-right,.lp-nav-left').on("click", function(e){
         e.preventDefault();
         var nav = $(this);

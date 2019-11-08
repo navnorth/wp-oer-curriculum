@@ -264,33 +264,39 @@ if (have_posts()) : while (have_posts()) : the_post();
                     if (($age_levels_set && $age_levels_enabled) || !$age_levels_set) {
                         $age_label = oer_lp_get_field_label('oer_lp_age_levels');
                         $age_levels = (isset($post_meta_data['oer_lp_age_levels'][0]) ? $post_meta_data['oer_lp_age_levels'][0] : "");
+                        if (!empty($age_levels)){
                         ?>
                         <div class="form-field">
                             <span class="tc-lp-label"><?php echo $age_label; ?>:</span> <span class="tc-lp-value"><?php echo $age_levels; ?></span>
                         </div>
                         <?php
+                        }
                     }
                     
                     // Suggested Instructional Time Display
                    if (($suggested_time_set && $suggested_time_enabled) || !$suggested_time_set) {
                         $suggested_label = oer_lp_get_field_label('oer_lp_suggested_instructional_time');
                         $suggested_time = (isset($post_meta_data['oer_lp_suggested_instructional_time'][0]) ? $post_meta_data['oer_lp_suggested_instructional_time'][0] : "");
+                        if (!empty($suggested_time)){
                         ?>
                         <div class="form-field">
                             <span class="tc-lp-label"><?php echo $suggested_label; ?>:</span> <span class="tc-lp-value"><?php echo $suggested_time; ?></span>
                         </div>
                         <?php
+                        }
                     }
                     
                      // Required Equipment Materials Display
                    if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
                         $req_materials_label = oer_lp_get_field_label('oer_lp_required_materials');
                         $req_materials = (isset($post_meta_data['oer_lp_required_materials'][0]) ? $post_meta_data['oer_lp_required_materials'][0] : "");
+                        if (!empty($req_materials)){
                         ?>
                         <div class="form-field">
                             <span class="tc-lp-label"><?php echo $req_materials_label; ?>:</span> <span class="tc-lp-value"><?php echo $req_materials; ?></span>
                         </div>
                         <?php
+                        }
                     }
                     ?>
                 </div>
@@ -343,7 +349,7 @@ if (have_posts()) : while (have_posts()) : the_post();
         </div>
     </div>
     <div class="see-more-row">
-        <p class="center"><span><a class="see-more-link" role="button" data-toggle="collapse" href="#tcHiddenFields"><?php _e("SEE MORE +",OER_LESSON_PLAN_SLUG); ?></a></span></p>
+        <p class="center"><span><a id="see-more-link" class="see-more-link" role="button" data-toggle="collapse" href="#tcHiddenFields" aria-expanded="false" aria-controls="tcHiddenFields"><?php _e("SEE MORE +",OER_LESSON_PLAN_SLUG); ?></a></span></p>
     </div>
     <div class="row lp-primary-sources-row">
         <?php

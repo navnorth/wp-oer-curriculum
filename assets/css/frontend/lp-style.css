@@ -802,7 +802,8 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
 .lp_keywords_container span a { color:#77B143; border-color:#E0E0E0; }
 .lp_keywords_container span { margin: 5px; }
 .see-more-row .center { text-align:center; }
-.see-more-row .see-more-link { font-size:14px; font-weight:bold; color:#77B143; line-height:19px; cursor:pointer; }
+.see-more-row .see-more-link, .see-more-row .see-more-link:active { font-size:14px; font-weight:bold; color:#77B143; line-height:19px; cursor:pointer; text-decoration:none; }
+.see-more-row .see-more-link:hover { text-decoration:underline; }
 .lp-source-type {
     position: absolute;
     right: 0;
