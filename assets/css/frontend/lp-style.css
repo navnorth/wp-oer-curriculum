@@ -793,7 +793,7 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a:hover,
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a:active,
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a:focus { text-decoration: underline; }
-.lp-author-label { margin-right:10px; font-size:14px; color:#4F4F4F; font-weight:bold; text-transform: uppercase; }
+.lp-author-label, .tc-lp-label { margin-right:10px; font-size:14px; color:#4F4F4F; font-weight:bold; text-transform: uppercase; }
 .tc-lp-author a { font-size:14px; color:#77B143; }
 .tc-lp-standards-list, .tc-lp-subject-areas-list { padding-left:0; margin-top: 5px; margin-bottom: 15px; }
 .tc-lp-standards-list li, .tc-lp-subject-areas-list li { list-style:none; font-size:14px; }
@@ -824,6 +824,7 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
     text-overflow: ellipsis;
 }
 .tc-lp-notation-list { padding-left:10px; }
+.tc-lp-value { color:#77B143; font-size:14px; line-height:19px; }
 /** End of Primary Source Template Styling **/
 /** Topic Template Styling **/
 .topic-template #page.site { padding-left:0; padding-right:0; }
