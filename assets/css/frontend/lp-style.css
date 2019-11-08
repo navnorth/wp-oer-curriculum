@@ -830,6 +830,8 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
 .single-lesson-plans #main { padding-left:0; padding-right:0; }
 .single-lesson-plans #main .container { padding-left:0; padding-right:0; }
 .single-lesson-plans #main .container .lp-featured-section { padding-left:50px; padding-right:50px; }
+.lp-full-content { display:none; }
+.tc-lp-details-description a { color:#77B143; }
 /** End of Primary Source Template Styling **/
 /** Topic Template Styling **/
 .topic-template #page.site { padding-left:0; padding-right:0; }

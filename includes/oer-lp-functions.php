@@ -569,3 +569,20 @@ if (! function_exists('oer_lp_get_curriculum_type')){
         return $html;
     }
 }
+
+// Limit Content Display
+if (!function_exists('oer_lp_content')){
+    function oer_lp_content($limit) {
+        global $post; 
+        $content = get_the_content($post->ID);
+        if (strlen($content)>=$limit) {
+          $content = substr($content, 0, $limit);
+        }
+        
+        $content = preg_replace('/[.+]/','', $content);
+        //$content = apply_filters('the_content', $content); 
+        $content = str_replace(']]>', ']]>', $content);
+        $content .= '... <a href="javascript:void(0);" class="lp-read-more">(read more)</a>';
+        return $content;
+    }
+}

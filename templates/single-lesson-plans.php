@@ -75,7 +75,12 @@ if (have_posts()) : while (have_posts()) : the_post();
                 </div>
                 <?php } ?>
                 <div class="tc-lp-details-description">
-                    <?php echo the_content(); ?>
+                    <?php if (strlen($post->post_content)>230) : ?>
+                    <div class="lp-excerpt"><?php echo oer_lp_content(230); ?></div>
+                    <div class="lp-full-content"><?php echo the_content(); ?> <a href="javascript:void(0);" class="lp-read-less">(read less)</a></div>
+                    <?php else : ?>
+                    <div class="lp-content"><?php echo the_content(); ?></div>
+                    <?php endif; ?>
                 </div>
                 <?php
                 $related_inquiry_sets = (isset($post_meta_data['oer_lp_related_inquiry_set'][0]) ? unserialize($post_meta_data['oer_lp_related_inquiry_set'][0]) : array());
@@ -148,7 +153,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 foreach($stds as $std){
                                     if (isset($std['core_standard_id'])) {
                                         echo "<li>";
-                                            echo '<a data-toggle="collapse" href="#core-standard-'.$std['core_standard_id'].'">'.$std['core_standard_name'].'</a>';
+                                            echo '<a class="lp-standard-toggle" data-toggle="collapse" href="#core-standard-'.$std['core_standard_id'].'">'.$std['core_standard_name'].' <i class="fas fa-caret-right"></i></a>';
                                         ?>
                                         <div class="collapse tc-lp-details-standard" id="core-standard-<?php echo $std['core_standard_id']; ?>">
                                         <?php
