@@ -348,7 +348,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 <?php if (!empty($type)): ?>
                                 <span class="lp-source-type"><?php echo $type; ?></span>
                                 <?php endif; ?>
-                                <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1)">
+                                <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;">
                                 </div>
                             </a>
                             <?php endif; ?>
@@ -367,263 +367,141 @@ if (have_posts()) : while (have_posts()) : the_post();
                 }
             }
         }
-        ?>
-    </div>
-    <div class="row hidden">
-        <ul class="nav nav-tabs tc-home-tabs" id="tc-home-tabs-section" role="tablist">
-            <?php
-            if (!empty($elements_orders)) {
-                $col = 0;
-                $keys = array(
-                    "lp_introduction_order",
-                    "lp_primary_resources",
-                    "lp_lesson_times_order",
-                    "lp_industries_order",
-                    "lp_standard_order",
-                    "lp_activities_order",
-                    "lp_summative_order",
-                    "lp_authors_order",
-                    "lp_iq"
-                );
-                foreach($elements_orders as $element=>$order){
-                    if (!in_array($element,$keys))
-                        $col++;
-                }
-                if($col==0)
-                    $_col = 12;
-                else
-                    $_col = floor(12/$col);
-                foreach ($elements_orders as $elementKey => $value) {
+        if (!empty($elements_orders)) {
+            $keys = array(
+                "lp_introduction_order",
+                "lp_primary_resources",
+                "lp_lesson_times_order",
+                "lp_industries_order",
+                "lp_standard_order",
+                "lp_activities_order",
+                "lp_summative_order",
+                "lp_authors_order",
+                "lp_iq",
+                "lp_oer_materials"
+            );
+            foreach($elements_orders as $elementKey=>$order){
+                if (!in_array($elementKey,$keys)){
                     if (strpos($elementKey, 'oer_lp_custom_editor_historical_background') !== false) {
                         $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
-                    ?>
-                    <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
-                        <a class="nav-link active" id="tc-historical-background-tab" data-toggle="tab" href="#tc-historical-background-tab-content" role="tab" aria-controls="tc-historical-background-tab" aria-selected="true" aria-expanded="false">
-                            <?php echo $oer_lp_custom_editor['title']; ?>
-                        </a>
-                    </li>
-                    <?php  } elseif (strpos($elementKey, 'lp_oer_materials') !== false) {
-                        $materials = (isset($post_meta_data['lp_oer_materials'][0]) ? unserialize($post_meta_data['lp_oer_materials'][0]) : array());
-                        if (count($materials)>0) {
-                    ?>
-                    <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
-                        <a class="nav-link" id="tc-materials-tab" data-toggle="tab" href="#tc-materials-tab-content" role="tab" aria-controls="tc-materials-tab" aria-selected="false" aria-expanded="false">
-                            <?php _e("Materials",OER_LESSON_PLAN_SLUG); ?>
-                        </a>
-                    </li>
-                    <?php }
+                        if(!empty($oer_lp_custom_editor)) {
+                            
+                        ?>
+                        <div class="col-md-3 col-sm-3 padding-0">
+                            <div class="media-image">
+                                <div class="image-thumbnail">
+                                    <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_custom_editor['title'])); ?>
+                                    <a href="<?php echo $ps_url;  ?>">
+                                        <span class="resource-overlay"></span>
+                                        <?php if (!empty($type)): ?>
+                                        <span class="lp-source-type"><?php _e("Text", OER_LESSON_PLAN_SLUG); ?></span>
+                                        <?php endif; ?>
+                                        <div class="resource-thumbnail text-thumbnail">
+                                            <i class="fa fa-file-text-o fa-4x"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="lp-resource-title">
+                                    <?php echo $oer_lp_custom_editor['title']; ?>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                        }
                     } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_editor_') !== false) {
                         $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                         if(!empty($oer_lp_custom_editor)) {
                         ?>
-                        <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
-                            <a class="nav-link" id="tc-<?php echo sanitize_title($oer_lp_custom_editor['title']); ?>-tab" data-toggle="tab" href="#tc-<?php echo sanitize_title($oer_lp_custom_editor['title']); ?>-tab-content" role="tab" aria-controls="tc-<?php echo sanitize_title($oer_lp_custom_editor['title']); ?>-tab" aria-selected="false" aria-expanded="false">
-                                <?php echo $oer_lp_custom_editor['title']; ?>
-                            </a>
-                        </li>
+                        <div class="col-md-3 col-sm-3 padding-0">
+                            <div class="media-image">
+                                <div class="image-thumbnail">
+                                    <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_custom_editor['title'])); ?>
+                                    <a href="<?php echo $ps_url;  ?>">
+                                        <span class="resource-overlay"></span>
+                                        <?php if (!empty($type)): ?>
+                                        <span class="lp-source-type"><?php _e("Text", OER_LESSON_PLAN_SLUG); ?></span>
+                                        <?php endif; ?>
+                                        <div class="resource-thumbnail text-thumbnail">
+                                            <i class="fa fa-file-text-o fa-4x"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="lp-resource-title">
+                                    <?php echo $oer_lp_custom_editor['title']; ?>
+                                </div>
+                            </div>
+                        </div>
                         <?php } ?>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_text_list_') !== false) {
-                        ?>
-                        <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
-                            <a class="nav-link" id="tc-text-list-tab" data-toggle="tab" href="#tc-text-list-tab-content" role="tab" aria-controls="tc-text-list-tab" aria-selected="false" aria-expanded="false">
-                                Text List
-                            </a>
-                        </li>
+                    ?>
+                    <div class="col-md-3 col-sm-3 padding-0">
+                        <div class="media-image">
+                            <div class="image-thumbnail">
+                                <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title("Text List")); ?>
+                                <a href="<?php echo $ps_url;  ?>">
+                                    <span class="resource-overlay"></span>
+                                    <?php if (!empty($type)): ?>
+                                    <span class="lp-source-type"><?php _e("Text", OER_LESSON_PLAN_SLUG); ?></span>
+                                    <?php endif; ?>
+                                    <div class="resource-thumbnail text-thumbnail">
+                                        <i class="fa fa-file-text-o fa-4x"></i>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="lp-resource-title">
+                                <?php _e("Text List", OER_LESSON_PLAN_SLUG); ?>
+                            </div>
+                        </div>
+                    </div>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_vocabulary_list_title_') !== false) {
                         $oer_lp_vocabulary_list_title = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
                         $oer_keys = explode('_', $elementKey); 
                         $listOrder = end($oer_keys);
                         $oer_lp_vocabulary_details = (isset($post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0] : "");
                         if (!empty($oer_lp_vocabulary_list_title)) { ?>
-                        <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
-                            <a class="nav-link" id="tc-<?php echo sanitize_title($oer_lp_vocabulary_list_title); ?>-tab" data-toggle="tab" href="#tc-<?php echo sanitize_title($oer_lp_vocabulary_list_title); ?>-tab-content" role="tab" aria-controls="tc-<?php echo sanitize_title($oer_lp_vocabulary_list_title); ?>-tab" aria-selected="false" aria-expanded="false">
-                                <?php echo $oer_lp_vocabulary_list_title; ?>
-                            </a>
-                        </li>
+                        <div class="col-md-3 col-sm-3 padding-0">
+                            <div class="media-image">
+                                <div class="image-thumbnail">
+                                    <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_vocabulary_list_title)); ?>
+                                    <a href="<?php echo $ps_url;  ?>">
+                                        <span class="resource-overlay"></span>
+                                        <?php if (!empty($type)): ?>
+                                        <span class="lp-source-type"><?php _e("Text", OER_LESSON_PLAN_SLUG); ?></span>
+                                        <?php endif; ?>
+                                        <div class="resource-thumbnail text-thumbnail">
+                                            <i class="fa fa-file-text-o fa-4x"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="lp-resource-title">
+                                    <?php echo $oer_lp_vocabulary_list_title; ?>
+                                </div>
+                            </div>
+                        </div>
                         <?php } ?>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'lp_oer_materials_list_') !== false) {?>
-                        <li class="nav-item col-md-<?php echo $_col; ?> col-sm-<?php echo $_col; ?> padding-0">
-                            <a class="nav-link" id="tc-materials-list-tab" data-toggle="tab" href="#tc-materials-list-tab-content" role="tab" aria-controls="tc-materials-list-tab" aria-selected="false" aria-expanded="false">
-                                Materials
-                            </a>
-                        </li>
-                        <?php
-                        }
-                    //}
-                }
-            }
-            ?>
-        </ul>
-    </div>
-    <div class="row tab-content tc-home-tabs-content col-md-12 padding-0 hidden">
-        <?php
-        if (!empty($elements_orders)) {
-            foreach ($elements_orders as $elementKey => $value) {
-                if (strpos($elementKey, 'oer_lp_custom_editor_historical_background') !== false || strpos($elementKey, 'oer_lp_custom_editor_teacher_background') !== false || strpos($elementKey, 'oer_lp_custom_editor_student_background') !== false || strpos($elementKey, 'oer_lp_custom_editor_') !== false) {
-                    $tab_id = "";
-                    $active = false;
-                    $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
-                    if ($elementKey=="oer_lp_custom_editor_historical_background"){
-                        $tab_id = "tc-historical-background-tab-content";
-                        $active=true;
-                    }
-                    elseif ($elementKey=="oer_lp_custom_editor_teacher_background"){
-                        $tab_id = "tc-teacher-background-tab-content";
-                    }
-                    elseif ($elementKey == "oer_lp_custom_editor_student_background" ){
-                        $tab_id = "tc-student-background-tab-content";
-                    }
-                    else{
-                        $tab_id = "tc-".sanitize_title($oer_lp_custom_editor['title'])."-tab-content";
-                    }
-                    if(!empty($oer_lp_custom_editor)) {
-                    ?>
-                    <div class="tab-pane clearfix fade <?php if ($active): echo "active"; endif; ?> in" id="<?php echo $tab_id; ?>" role="tabpanel" aria-labelledby="">
-                        <div class="tc-tab-content">
-                            <span><?php echo $oer_lp_custom_editor['description'];?></span>
-                        </div>
-                    <button class="tc-read-more">Read More</button>
-                    </div>
-                    <?php
-                    } ?>
-                <?php  } elseif (strpos($elementKey, 'lp_oer_materials') !== false) {
-                        $materials = (isset($post_meta_data['lp_oer_materials'][0]) ? unserialize($post_meta_data['lp_oer_materials'][0]) : array());
-                        $block_size = 12;
-                        if (count($materials)>0) {
-                            $arr_materials = array();
-                            $urls = $materials['url'];
-                            $titles = $materials['title'];
-                            $descriptions = $materials['description'];
-                            $block_size = floor(12/count($urls));
-                            for($i=0;$i<count($urls);$i++){
-                                $arr_materials[$i] = array("url" => $urls[$i],
-                                                           "title" => $titles[$i],
-                                                           "description" => $descriptions[$i]);
-                            }
-                    ?>
-                    <div class="tab-pane clearfix fade" id="tc-materials-tab-content" role="tabpanel" aria-labelledby="tc-materials-list-tab">
-                        <div class="tc-tab-content materials-tab">
-                            <?php foreach($arr_materials as $material){ ?>
-                                <?php if (isset($material['url']) && ($material['url']!="")): ?>
-                                <a href="<?php echo $material['url']; ?>" class="tc-material-block-link" target="_blank">
-                                <div class="tc-material-block">
-                                    <div class="tc-material-icon">
-                                        <?php
-                                            $icon = "";
-                                            $file_type = get_file_type_from_url($material['url']);
-                                            switch ($file_type['title']){
-                                                case "Image":
-                                                    $icon = '<i class="far fa-file-image fa-3x"></i>';
-                                                    break;
-                                                case "PDF":
-                                                    $icon = '<i class="far fa-file-pdf fa-3x"></i>';
-                                                    break;
-                                                case "Plain Text":
-                                                    $icon = '<i class="far fa-file-alt fa-3x"></i>';
-                                                    break;
-                                                case "Archive":
-                                                    $icon = '<i class="far fa-file-archive fa-3x"></i>';
-                                                    break;
-                                                case "Microsoft Document":
-                                                    $icon = '<i class="far fa-file-word fa-3x"></i>';
-                                                    break;
-                                                case "Microsoft Excel":
-                                                    $icon = '<i class="far fa-file-excel fa-3x"></i>';
-                                                    break;
-                                                case "Microsoft Powerpoint":
-                                                    $icon = '<i class="far fa-file-powerpoint fa-3x"></i>';
-                                                    break;
-                                            }
-                                        ?>
-                                        <span><?php echo $icon; ?></span>
-                                    </div>
+                    <div class="col-md-3 col-sm-3 padding-0">
+                        <div class="media-image">
+                            <div class="image-thumbnail">
+                                <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_vocabulary_list_title)); ?>
+                                <a href="<?php echo $ps_url;  ?>">
+                                    <span class="resource-overlay"></span>
+                                    <?php if (!empty($type)): ?>
+                                    <span class="lp-source-type"><?php _e("Text", OER_LESSON_PLAN_SLUG); ?></span>
                                     <?php endif; ?>
-                                    <div class="tc-material-description">
-                                        <?php if (isset($material['title']) && ($material['title']!="")): ?>
-                                        <h4><?php echo $material['title']; ?></h4>
-                                        <?php endif; ?>
-                                        <?php if (isset($material['description']) && ($material['description']!="")): ?>
-                                            <?php echo $material['description']; ?>
-                                        <?php endif; ?>
+                                    <div class="resource-thumbnail text-thumbnail">
+                                        <i class="fa fa-file-text-o fa-4x"></i>
                                     </div>
-                                </div></a>
-                            <?php } ?>
+                                </a>
+                            </div>
+                            <div class="lp-resource-title">
+                                <?php _e("Materials", OER_LESSON_PLAN_SLUG); ?>
+                            </div>
                         </div>
-                    </div>
-                <?php } ?>
-                <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_text_list_') !== false) {
-                    $oer_lp_custom_text_list = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : array());
-                    if (!empty(array_filter($oer_lp_custom_text_list))) {
-                    ?>
-                    <div class="tab-pane clearfix fade" id="tc-text-list-tab-content" role="tabpanel" aria-labelledby="">
-                        <div class="tc-tab-content">
-                            <ul>
-                            <?php foreach ($oer_lp_custom_text_list as $key => $list) { ?>
-                                <li><?php echo $list; ?></li>
-                            <?php } ?>
-                            </ul>
-                        </div>
-                        <button class="tc-read-more">Read More</button>
                     </div>
                     <?php
                     }
-                    ?>
-                <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_vocabulary_list_title_') !== false) {
-                    $oer_lp_vocabulary_list_title = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
-                    $oer_keys = explode('_', $elementKey);
-                    $listOrder = end($oer_keys);
-                    $oer_lp_vocabulary_details = (isset($post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_lp_vocabulary_details_'.$listOrder][0] : "");
-                    if (!empty($oer_lp_vocabulary_list_title)) {
-                        $tab_id = "tc-".sanitize_title($oer_lp_vocabulary_list_title)."-tab-content"
-                    ?>
-                    <div class="tab-pane clearfix fade" id="<?php echo $tab_id; ?>" role="tabpanel" aria-labelledby="">
-                        <div class="tc-tab-content">
-                            <p><?php echo $oer_lp_vocabulary_details;?></p>
-                        </div>
-                        <button class="tc-read-more">Read More</button>
-                    </div>
-                    <?php } ?>
-                <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'lp_oer_materials_list_') !== false) {
-                    $materials = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : array());
-                    if (!empty($materials) && lp_scan_array($materials)) {
-                    ?>
-                    <div class="tab-pane clearfix fade" id="tc-materials-list-tab-content" role="tabpanel" aria-labelledby="">
-                        <div class="tc-tab-content">
-                        <?php
-                         if (!empty(array_filter($materials['url']))) {
-                            foreach ($materials['url'] as $materialKey => $material) {
-                                $file_response = get_file_type_from_url($material);
-                                ?>
-                                <div class="form-group">
-                                    <label>Material:</label>
-                                    <a href="<?php echo $material; ?>" target="_blank"><?php echo $file_response['icon'];?></a>
-                                </div>
-                                <?php
-                                if (isset($materials['title'][$materialKey]) &&
-                                    !empty($materials['title'][$materialKey])
-                                ) {?>
-                                <div class="form-group">
-                                    <label>Title:</label>
-                                    <span><?php echo $materials['title'][$materialKey];?></span>
-                                </div>
-                                <?php }?>
-                                <?php
-                                if (isset($materials['description'][$materialKey]) &&
-                                    !empty($materials['description'][$materialKey])
-                                ) {?>
-                                    <div class="form-group">
-                                        <label>Description:</label>
-                                        <span><?php echo $materials['description'][$materialKey];?></span>
-                                    </div>
-                                <?php }
-                            }
-                        }
-                        ?>
-                        </div>
-                        <button class="tc-read-more">Read More</button>
-                    </div>
-                    <?php } ?>
-                <?php }
+                }
             }
         }
         ?>

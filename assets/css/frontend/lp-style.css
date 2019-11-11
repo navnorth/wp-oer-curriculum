@@ -961,9 +961,14 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
 }
 .tc-primary-source-sensitive-material-section p { padding:5px 15px 6px; }
 .resource-thumbnail {
-    width: 360px;
-    height: 360px;
+    width: 100%;
+    height: 100%;
     background-size: cover;
+}
+.text-thumbnail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .resource-overlay {
     position: absolute;
