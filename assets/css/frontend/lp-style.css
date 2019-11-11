@@ -810,6 +810,7 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.lp-primary-sources-row.ps-related-sources { overflow:hidden; }
 .tc-lp-notation-list { padding-left:10px; }
 .tc-lp-value { color:#77B143; font-size:14px; line-height:19px; }
 .tc-lp-subject-areas-list li { color:#77B143; }
