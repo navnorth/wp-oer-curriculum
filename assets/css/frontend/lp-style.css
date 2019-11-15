@@ -851,6 +851,7 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
     align-items: center;
     color: #77B143;
 }
+.ps-info-description { margin-bottom: 30px; overflow: hidden; }
 /** End of Primary Source Template Styling **/
 /** Topic Template Styling **/
 .topic-template #page.site { padding-left:0; padding-right:0; }

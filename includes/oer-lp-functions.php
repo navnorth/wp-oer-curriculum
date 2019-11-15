@@ -586,3 +586,45 @@ if (!function_exists('oer_lp_content')){
         return $content;
     }
 }
+
+// Get Modules
+if (!function_exists('oer_lp_modules')){
+    function oer_lp_modules($curriculum_id) {
+        $modules = null;
+        $post_meta_data = get_post_meta($curriculum_id);
+        $elements_orders = isset($post_meta_data['lp_order'][0]) ? unserialize($post_meta_data['lp_order'][0]) : array();
+        
+        if (!empty($elements_orders)) {
+            $keys = array(
+                "lp_introduction_order",
+                "lp_primary_resources",
+                "lp_lesson_times_order",
+                "lp_industries_order",
+                "lp_standard_order",
+                "lp_activities_order",
+                "lp_summative_order",
+                "lp_authors_order",
+                "lp_iq",
+                "lp_oer_materials"
+            );
+            
+            foreach($elements_orders as $elementKey=>$order){
+                if (!in_array($elementKey,$keys)){
+                    if (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_vocabulary_list_title_') === false) 
+                        $module = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
+                    
+                    if (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_text_list_') !== false){
+                        $module['title'] = "Text List";
+                    } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_vocabulary_list_title_') !== false) {
+                        $oer_lp_vocabulary_list_title = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
+                        $module['title'] = $oer_lp_vocabulary_list_title;
+                    } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'lp_oer_materials_list_') !== false) {
+                        $module['title'] = "Materials";
+                    }
+                    $modules[] = $module;
+                }
+            }
+        }
+        return $modules;
+    }
+}

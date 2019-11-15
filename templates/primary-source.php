@@ -74,6 +74,15 @@ if ($youtube || $isPDF)
 if (function_exists('oer_get_resource_metadata')){
     $resource_meta = oer_get_resource_metadata($resource->ID);
 }
+if (empty($next_resource)){
+    $modules = oer_lp_modules($post->ID);
+    var_dump($modules);
+    if (isset($modules[0])){
+        $lp_next_class = "";
+        $next_resource = $modules[0];
+        $next_url = $back_url."/module/".sanitize_title($next_resource['title']);
+    }
+}
 ?>
 <div class="lp-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
 <div class="row ps-details-row">
@@ -134,7 +143,7 @@ if (function_exists('oer_get_resource_metadata')){
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if ($resource_img!==""):
-                    $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($prev_resource->post_title)."-".$resource->ID);
+                    $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID);
                     ?>
                     <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
                     <?php endif; ?>
@@ -148,19 +157,29 @@ if (function_exists('oer_get_resource_metadata')){
     </div>
     <div class="lp-ps-nav-right-block <?php echo $lp_next_class; ?> col-md-6 col-sm-12">
         <?php if (!empty($next_resource)):
-        $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($prev_resource), 'resource-thumbnail' );
+        $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($next_resource), 'resource-thumbnail' );
         ?>
         <a class="lp-ps-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>">
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
-                    <?php if ($resource_img!==""):
-                    $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID);
+                    <?php if (!empty($resource_img)):
+                    if (is_object($next_resource))
+                        $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
+                    else
+                        $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($next_resource['title']));
                     ?>
                     <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
+                    <?php else: ?>
+                    <div class="resource-thumbnail" style="background: rgba(204,97,12,.1); background-size:cover; display:flex; align-items:center; justify-content: center;"><i class="fa fa-file-text-o fa-4x"></i></div>
                     <?php endif; ?>
                 </span>
                 <span class="nav-lp-resource-title col-md-8">
-                    <?php echo $next_resource->post_title; ?>
+                    <?php
+                     if (is_object($next_resource))
+                        echo $next_resource->post_title;
+                    else
+                        echo $next_resource['title'];
+                    ?>
                 </span>
             </span>
             <span class="nav-media-icon"><i class="fas fa-arrow-right fa-2x"></i></span>
