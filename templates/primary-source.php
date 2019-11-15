@@ -76,7 +76,6 @@ if (function_exists('oer_get_resource_metadata')){
 }
 if (empty($next_resource)){
     $modules = oer_lp_modules($post->ID);
-    var_dump($modules);
     if (isset($modules[0])){
         $lp_next_class = "";
         $next_resource = $modules[0];
