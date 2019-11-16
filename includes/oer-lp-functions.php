@@ -486,6 +486,15 @@ if (!function_exists('oer_lp_get_meta_label')){
 			case "oer_lp_related_inquiry_set":
 				$label = __("Related Inquiry Sets", OER_LESSON_PLAN_SLUG);
 				break;
+            case "oer_lp_related_inquiry_set_1":
+				$label = __("Inquiry Set 1", OER_LESSON_PLAN_SLUG);
+				break;
+            case "oer_lp_related_inquiry_set_2":
+				$label = __("Inquiry Set 2", OER_LESSON_PLAN_SLUG);
+				break;
+            case "oer_lp_related_inquiry_set_3":
+				$label = __("Inquiry Set 3", OER_LESSON_PLAN_SLUG);
+				break;
 			case "oer_lp_required_materials":
 				$label = __("Required Equipment Materials", OER_LESSON_PLAN_SLUG);
 				break;
@@ -530,7 +539,7 @@ if (!function_exists('oer_lp_save_metadata_options')){
 	function oer_lp_save_metadata_options($post_data){
 		foreach($post_data as $key=>$value){
 			if (strpos($key,"oer_")!==false || strpos($key,"lp_oer_")!==false){
-				update_option($key, $value, yes);
+				update_option($key, $value, true);
 			}
 		}
 	}

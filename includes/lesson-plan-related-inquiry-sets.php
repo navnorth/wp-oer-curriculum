@@ -16,9 +16,13 @@ $inquiry = ((is_array($inquiry)&& count($inquiry)>0)?$inquiry[0]:array());
                     <?php
                     for ($i=1;$i<=3;$i++){
                         $inquirysets = oer_lp_related_inquiry_sets($inquiryset_post->ID);
+                        $related_inquiry_set = (get_option('oer_lp_related_inquiry_set_'.$i.'_label'))?true:false;
+                        $related_inquiry_set_enabled = (get_option('oer_lp_related_inquiry_set_'.$i.'_enabled'))?true:false;
+                        if (($related_inquiry_set && $related_inquiry_set_enabled) || !$related_inquiry_set) {
+                            $label = oer_lp_get_field_label('oer_lp_related_inquiry_set_'.$i);
                     ?>
                     <div class="form-group">
-                        <label for="relatedInquirySet<?php echo $i; ?>">Inquiry Set <?php echo $i; ?></label>
+                        <label for="relatedInquirySet<?php echo $i; ?>"><?php echo $label; ?></label>
                         <select name="oer_lp_related_inquiry_set[]" id="relatedInquirySet<?php echo $i; ?>" class="form-control">
                             <option value="0">-- Select Inquiry Set --</option>
                             <?php if (count($inquirysets)>0) {
@@ -30,7 +34,8 @@ $inquiry = ((is_array($inquiry)&& count($inquiry)>0)?$inquiry[0]:array());
                             } ?>
                         </select>
                     </div>
-                    <?php } ?>
+                    <?php }
+                    } ?>
                 </div>
             </div>
         </div>

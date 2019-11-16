@@ -43,6 +43,7 @@ global $message, $type;
 
 function oer_curriculum_show_metadata_settings() {
 	$metas = oer_lp_get_all_meta("lesson-plans");
+	$inquirysets = null;
 	$metadata = null;
 	
 	foreach($metas as $met){
@@ -50,6 +51,12 @@ function oer_curriculum_show_metadata_settings() {
 			$metadata[] = $met['meta_key'];
 		}
 	}
+	
+	// Add Options for related inquiry sets 1-3
+	for($i=1;$i<=3;$i++){
+		$metadata[] = $inquirysets[] = 'oer_lp_related_inquiry_set_'.$i;
+	}
+	
 	$meta = array_unique($metadata);
 	
 	// Save Option
@@ -59,6 +66,9 @@ function oer_curriculum_show_metadata_settings() {
 			if (strpos($met['meta_key'],"oer_")!==false || strpos($met['meta_key'],"lp_oer_")!==false){
 				delete_option($met['meta_key']."_enabled");
 			}
+		}
+		foreach($inquirysets as $inquiryset){
+			delete_option($inquiryset."_enabled");
 		}
 		oer_lp_save_metadata_options($_POST);
 	}

@@ -68,7 +68,12 @@ function oer_lesson_plan_custom_meta_boxes() {
     add_meta_box( 'oer_lesson_plan_download_copy', 'Downloadable Copy', 'oer_lp_download_copy_cb', 'lesson-plans', 'side', 'high' );
     
     // Add Related Inquiry Sets metabox
-    add_meta_box('oer_lesson_plan_related_inquiry', 'Related Inquiry Sets', 'oer_lesson_plan_related_inquiry_callback', 'lesson-plans', 'advanced');
+    $related_inquiry_set = (get_option('oer_lp_related_inquiry_set_label'))?true:false;
+    $related_inquiry_set_enabled = (get_option('oer_lp_related_inquiry_set_enabled'))?true:false;
+    if (($related_inquiry_set && $related_inquiry_set_enabled) || !$related_inquiry_set) {
+        $label = oer_lp_get_field_label('oer_lp_related_inquiry_set');
+        add_meta_box('oer_lesson_plan_related_inquiry', $label, 'oer_lesson_plan_related_inquiry_callback', 'lesson-plans', 'advanced');
+    }
 }
 
 //Meta fields callback
