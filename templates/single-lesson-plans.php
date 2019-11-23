@@ -64,7 +64,7 @@ if (have_posts()) : while (have_posts()) : the_post();
         <div class="row tc-lp-details-header">
             <h1 class="tc-lp-title"><?php echo the_title(); ?></h1>
         </div>
-        <div class="col-md-8 col-sm-12 curriculum-detail padding-0">
+        <div class="col-md-8 col-sm-12 curriculum-detail padding-left-0">
             <div class="tc-lp-details">
                 <?php if (($lp_type_set && $lp_type_enabled) || !$lp_type_set) { ?>
                 <div class="tc-lp-type">
@@ -273,7 +273,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-sm-12 featured-image padding-0">
+        <div class="col-md-4 col-sm-12 featured-image padding-right-0">
             <?php the_post_thumbnail('inquiry-set-featured'); ?>
             <?php if (($author_set && $author_enabled) || !$author_set) { ?>
             <div class="tc-lp-authors-list">
