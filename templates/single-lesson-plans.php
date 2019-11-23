@@ -114,7 +114,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                 </div>
                 <?php }
                 } ?>
-                <?php if ($oer_lp_standards) {
+                <?php if (!empty($oer_lp_standards)) {
                      if (($standards_set && $standards_enabled) || !$standards_set) {
                 ?>
                 <div class="tc-lp-standards">
@@ -223,7 +223,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <?php
                     // Grade Level Display
                     $oer_lp_grade = oer_inquiry_set_grade_level($post->ID);
-                    if ($oer_lp_grade){
+                    if (!empty($oer_lp_grade)){
                         ?>
                         <div class="form-field">
                             <span class="tc-lp-label">Grade Level:</span> <span class="tc-lp-value"><?php echo $oer_lp_grade; ?></span>
@@ -277,9 +277,11 @@ if (have_posts()) : while (have_posts()) : the_post();
             <?php the_post_thumbnail('inquiry-set-featured'); ?>
             <?php if (($author_set && $author_enabled) || !$author_set) { ?>
             <div class="tc-lp-authors-list">
-                 <span class="lp-author-label"><?php echo oer_lp_get_field_label('oer_lp_authors'); ?></span>
                 <?php
                 if (!empty($authors)){
+                    ?>
+                     <span class="lp-author-label"><?php echo oer_lp_get_field_label('oer_lp_authors'); ?></span>
+                    <?php 
                     $aIndex = 0;
                     
                     foreach($authors['name'] as $author){
