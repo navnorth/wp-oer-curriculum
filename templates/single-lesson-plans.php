@@ -278,7 +278,14 @@ if (have_posts()) : while (have_posts()) : the_post();
             <?php if (($author_set && $author_enabled) || !$author_set) { ?>
             <div class="tc-lp-authors-list">
                 <?php
-                if (!empty($authors)){
+                $author_display = false;
+                foreach($authors as $author){
+                    if (!empty($author[0])){
+                        $author_display = true;
+                        break;
+                    }
+                }
+                if ($author_display){
                     ?>
                      <span class="lp-author-label"><?php echo oer_lp_get_field_label('oer_lp_authors'); ?></span>
                     <?php 
