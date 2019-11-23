@@ -49,7 +49,7 @@ body.single-lesson-plans {
 }
 .tc-lp-details .tc-lp-type { color: #356483; font-size:14px; }
 .tc-lp-authors-list {
-    color: #FFB904;
+    color: #77b143;
     font-weight: 600;
     font-size: 18px !important;
     margin:10px 0;
@@ -227,15 +227,14 @@ span.selected-standard-pill:last-child {
 .excerpt-button:hover {
     background-color: #851738;
 }
-.tc-lp-author { margin-right: 15px; }
+.tc-lp-author { margin-left: 10px; }
 .tc-lp-author a {
     color: #77B143 !important;
     font-size: 14px !important;
     transition: all .2s ease-in;
 }
 .tc-lp-author a:hover {
-    color: #FFF !important;
-    text-decoration: none;
+    text-decoration: underline;
 }
 .investigative-section-answer {
     color: #fff;

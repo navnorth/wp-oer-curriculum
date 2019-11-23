@@ -293,7 +293,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                     
                     foreach($authors['name'] as $author){
                         $author_url = $authors['author_url'][$aIndex];
-                        
+                        if ($aIndex>0)
+                            echo ", ";
                         if (isset($author_url))
                             echo "<span class='tc-lp-author'><a href='".$author_url."'>".$authors['name'][$aIndex]."</a></span>";
                         else
