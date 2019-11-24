@@ -477,7 +477,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <select name="oer_lp_primary_resources[resource][]" class="form-control">
-                                                                    <option>Select Resource</option>
+                                                                    <option value="">Select Resource</option>
                                                                     <?php
                                                                     if (count($posts)) {
                                                                         foreach ($posts as $post) {
@@ -2255,7 +2255,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                 ]);
                                                 ?>
                                                 <select name="oer_lp_primary_resources[resource][]" class="form-control">
-                                                    <option>Select Resource</option>
+                                                    <option value="">Select Resource</option>
                                                     <?php
                                                     if (count($posts)) {
                                                         foreach ($posts as $post) {
