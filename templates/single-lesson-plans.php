@@ -356,7 +356,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                             <a href="<?php echo $ps_url;  ?>">
                                 <span class="resource-overlay"></span>
                                 <?php if (!empty($type)): ?>
-                                <span class="lp-source-type"><?php echo $type; ?></span>
+                                <span class="lp-source-type"><?php echo ucwords($type); ?></span>
                                 <?php endif; ?>
                                 <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;">
                                 </div>

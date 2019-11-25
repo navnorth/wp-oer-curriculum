@@ -798,7 +798,7 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
     color: #ffffff;
 }
 .lp-primary-sources-row { padding:50px; background:#FBFBFB; border-top:1px solid #E0E0E0; }
-.lp-primary-sources-row .media-image { background:rgba(255,255,255,0.8); width:200px; height:auto; }
+.lp-primary-sources-row .media-image { background:rgba(255,255,255,0.8); width:200px; height:auto; margin-bottom:40px; }
 .lp-primary-sources-row .image-thumbnail { width:200px; height:200px; }
 .lp-primary-sources-row .lp-resource-title {
     background: #4f4f4f;

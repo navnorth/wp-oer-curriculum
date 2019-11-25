@@ -82,6 +82,8 @@ if (empty($next_resource)){
         $next_url = $back_url."/module/".sanitize_title($next_resource['title']);
     }
 }
+$type = get_post_meta($resource->ID,"oer_mediatype");
+$type = $type[0];
 ?>
 <div class="lp-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
 <div class="row ps-details-row">
@@ -108,8 +110,10 @@ if (empty($next_resource)){
         <div class="ps-image-block">
            <img src="<?php echo $featured_image_url; ?>" alt="<?php echo $resource->post_title; ?>" />
         </div>
-        <?php endif; ?>
+        <?php if ($type=="website"): ?>
         <span class="ps-expand"><a href="<?php echo $featured_image_url; ?>" class="lp-expand-img" target="_blank"><i class="fas fa-external-link-alt"></i></a></span>
+        <?php endif; ?>
+        <?php endif; ?>
         <div class="lp-center">
             <?php if (isset($resource_meta['oer_resourceurl'])) { ?>
             <div class="ps-meta-group ps-resource-url">
