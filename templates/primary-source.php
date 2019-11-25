@@ -87,6 +87,7 @@ $type = $type[0];
 ?>
 <div class="lp-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
 <div class="row ps-details-row">
+    <?php if (!empty($featured_image_url) || $youtube || $isPDF) { ?>
     <div class="ps-media-image col-md-4 col-sm-12" data-curid="<?php echo $index; ?>">
         <?php if ($youtube): ?>
         <div class="ps-youtube-video">
@@ -123,6 +124,7 @@ $type = $type[0];
         </div>
     </div>
     <?php
+    }
     $resource_meta = null;
     $subject_areas = null;
     ?>
