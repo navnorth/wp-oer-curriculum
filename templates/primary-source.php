@@ -44,6 +44,7 @@ $student_info = "";
 $embed = "";
 $prev_url = null;
 $next_url = null;
+$right_class = "col-md-12";
 if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
     if (!empty(array_filter($primary_resources['resource']))) {
         foreach ($primary_resources['resource'] as $resourceKey => $source) {
@@ -87,7 +88,9 @@ $type = $type[0];
 ?>
 <div class="lp-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
 <div class="row ps-details-row">
-    <?php if (!empty($featured_image_url) || $youtube || $isPDF) { ?>
+    <?php if (!empty($featured_image_url) || $youtube || $isPDF) {
+        $right_class = "col-md-8";
+    ?>
     <div class="ps-media-image col-md-4 col-sm-12" data-curid="<?php echo $index; ?>">
         <?php if ($youtube): ?>
         <div class="ps-youtube-video">
@@ -128,7 +131,7 @@ $type = $type[0];
     $resource_meta = null;
     $subject_areas = null;
     ?>
-    <div class="ps-details col-md-8 col-sm-12">
+    <div class="ps-details <?php echo $right_class; ?> col-sm-12">
         <div class="ps-info">
             <h1 class="ps-info-title"><?php echo $resource->post_title; ?></h1>
             <div class="ps-info-description">
