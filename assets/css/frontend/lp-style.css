@@ -698,7 +698,7 @@ a.lp-nav-left:hover, a.lp-nav-right:hover, a.lp-expand-img:hover {
 }
 .ps-expand {
     position: absolute;
-    right: 3.5%;
+    right: 4.3%;
     top: 0;
     background-color: #356483;   
     transition: all .2s ease-in;
@@ -799,6 +799,7 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
 }
 .lp-primary-sources-row { padding:50px; background:#FBFBFB; border-top:1px solid #E0E0E0; }
 .lp-primary-sources-row .media-image { background:rgba(255,255,255,0.8); width:200px; height:auto; margin-bottom:40px; }
+.ps-image-block img { width:100%; }
 .lp-primary-sources-row .image-thumbnail { width:200px; height:200px; }
 .lp-primary-sources-row .lp-resource-title {
     background: #4f4f4f;
