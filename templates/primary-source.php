@@ -32,6 +32,7 @@ $resource = get_post($source_id);
 // Get Featured Image Url
 $featured_image_url = get_the_post_thumbnail_url($resource->ID, "full");
 $resource_url = get_post_meta($resource->ID, "oer_resourceurl", true);
+$oer_resource_url = get_the_permalink($resource->ID);
 $youtube = oer_is_youtube_url($resource_url);
 $isPDF = is_pdf_resource($resource_url);
 
@@ -119,9 +120,9 @@ $type = $type[0];
         <?php endif; ?>
         <?php endif; ?>
         <div class="lp-center">
-            <?php if (isset($resource_meta['oer_resourceurl'])) { ?>
+            <?php if (isset($oer_resource_url)) { ?>
             <div class="ps-meta-group ps-resource-url">
-                <a href="<?php echo $resource_meta['oer_resourceurl'][0]; ?>" class="tc-view-button" target="_blank"><?php _e("View Original", OER_LESSON_PLAN_SLUG); ?></a>
+                <a href="<?php echo $oer_resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Original", OER_LESSON_PLAN_SLUG); ?></a>
             </div>
             <?php } ?>
         </div>
