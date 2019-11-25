@@ -107,7 +107,8 @@ $type = $type[0];
         <div class="ps-pdf-block">
             <?php
                 echo '<div class="psPDFWrapper">';
-                oer_display_pdf_embeds($resource_url);
+                if (function_exists('oer_display_pdf_embeds'))
+                    oer_display_pdf_embeds($resource_url);
                 echo '</div>';
             ?>
         </div>
