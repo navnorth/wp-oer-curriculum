@@ -117,7 +117,7 @@ $type = $type[0];
            <img src="<?php echo $featured_image_url; ?>" alt="<?php echo $resource->post_title; ?>" />
         </div>
         <?php if ($type=="website"): ?>
-        <span class="ps-expand"><a href="<?php echo $featured_image_url; ?>" class="lp-expand-img" target="_blank"><i class="fas fa-external-link-alt"></i></a></span>
+        <span class="ps-expand"><a href="<?php echo $resource_url; ?>" class="lp-expand-img" target="_blank"><i class="fas fa-external-link-alt"></i></a></span>
         <?php endif; ?>
         <?php endif; ?>
         <div class="lp-center">
