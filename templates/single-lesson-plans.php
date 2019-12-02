@@ -342,10 +342,6 @@ if (have_posts()) : while (have_posts()) : the_post();
                     $type = get_post_meta($resource->ID,"oer_mediatype");
                     $type = $type[0];
                     $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
-                    $oer_authorname = get_post_meta($_res_id, "oer_authorname", true);
-                    $oer_authorurl = get_post_meta($_res_id, "oer_authorurl", true);
-                    $oer_authorname2 = get_post_meta($_res_id, "oer_authorname2", true);
-                    $oer_authorurl2 = get_post_meta($_res_id, "oer_authorurl2", true);
                     $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
                     $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
                     if ($sensitiveMaterialValue!=="")
@@ -358,9 +354,6 @@ if (have_posts()) : while (have_posts()) : the_post();
                             $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID);
                             ?>
                             <a href="<?php echo $ps_url;  ?>">
-                                <?php if(!$resource_img): $_avtr = getResourceIcon($type); ?>
-                                  <div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div>
-                                <?php endif; ?>
                                 <span class="resource-overlay"></span>
                                 <?php if (!empty($type)): ?>
                                 <span class="lp-source-type"><?php echo ucwords($type); ?></span>
@@ -371,17 +364,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                             <?php endif; ?>
                         </div>
                         <div class="lp-resource-title">
-                            <b><?php echo $resource->post_title; ?></b>
+                            <?php echo $resource->post_title; ?>
                         </div>
-                        <div class="lp-resource-author">
-                          <?php if( $oer_authorname != ''):?>
-                            <div class="lp-resource-author_block"><a href="<?php echo $oer_authorurl; ?>" target="_new"><?php echo $oer_authorname; ?></a></div>
-                          <?php endif; ?>
-                          <?php /* if( $oer_authorname2 != ''):?>
-                            <div class="lp-resource-author_block"><a href=""><?php echo $oer_authorname2; ?></a></div>
-                          <?php endif;*/ ?>
-                        </div>
-                        <div class="lp-resource-excerpt"><?php echo oer_get_related_resource_content($resource->post_content, 75); ?></div>
                     </div>
                     <?php if ($sensitiveMaterial!=="" && $sensitiveMaterial!=="no"): ?>
                     <div class="sensitive-source">
