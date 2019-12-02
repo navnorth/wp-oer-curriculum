@@ -2647,6 +2647,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
             <?php }
             }?>
 
+            <?php if (in_array('lp_add_module', $oer_lp_default_structure)) { ?>
             <!--Add Extra Module-->
             <div class="row">
                 <div class="col-md-12">
@@ -2656,6 +2657,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                     ><i class="fa fa-plus"></i> Add Module</button>
                 </div>
             </div>
+            <?php } ?>
         </div>
     </div>
 </div>
