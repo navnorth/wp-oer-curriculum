@@ -42,6 +42,7 @@ global $message, $type;
 <?php
 
 function oer_curriculum_show_metadata_settings() {
+    global $oer_lp_deleted_fields;
 	$metas = oer_lp_get_all_meta("lesson-plans");
 	$inquirysets = null;
 	$metadata = null;
@@ -107,14 +108,16 @@ function oer_curriculum_show_metadata_settings() {
 								$enabled = (get_option($key."_enabled")=="1")?true:false;
 							elseif ($option_set==false)
 								$enabled = "1";
-							
-					?>
-					<tr>
-						<td><?php echo $key; ?></td>
-						<td><input type="text" name="<?php echo $key."_label"; ?>" value="<?php echo $label; ?>" /></td>
-						<td><input type="checkbox" name="<?php echo $key."_enabled"; ?>" value="1" <?php checked($enabled,"1",true); ?>/></td>
-					</tr>
-					<?php 
+						
+                        if (!in_array($key,$oer_lp_deleted_fields)){	
+                        ?>
+                        <tr>
+                            <td><?php echo $key; ?></td>
+                            <td><input type="text" name="<?php echo $key."_label"; ?>" value="<?php echo $label; ?>" /></td>
+                            <td><input type="checkbox" name="<?php echo $key."_enabled"; ?>" value="1" <?php checked($enabled,"1",true); ?>/></td>
+                        </tr>
+                        <?php
+                        }
 					} ?>
 				</tbody>
 			</table>
