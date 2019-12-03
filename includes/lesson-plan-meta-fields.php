@@ -397,9 +397,9 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                                 }
                                                                 ?>
                                                                 <img src="<?php echo $image;?>"
-                                                                     class="img-circle lp-oer-person-placeholder"
-                                                                     width="50px"
-                                                                     height="50px"/>
+                                                                    class="img-circle lp-oer-person-placeholder"
+                                                                    width="50px"
+                                                                    height="50px"/>
                                                             </div>
                                                         </div><!-- /.row -->
                                                     </div>
@@ -1505,9 +1505,9 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                     <div class="col-md-3">
                                                         <input type="hidden" name="oer_lp_authors[author_pic][]">
                                                         <img src="<?php echo OER_LESSON_PLAN_URL;?>assets/images/lp-oer-person-placeholder.png"
-                                                             class="img-circle lp-oer-person-placeholder"
-                                                             width="50px"
-                                                             height="50px"/>
+                                                            class="img-circle lp-oer-person-placeholder"
+                                                            width="50px"
+                                                            height="50px"/>
                                                     </div>
             
                                                 </div><!-- /.row -->

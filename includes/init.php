@@ -211,9 +211,10 @@ function oer_lesson_plan_assets() {
         if (!wp_script_is('admin-lp-bootstrap', 'enqueued')) {
             wp_enqueue_script('admin-lp-bootstrap', OER_LESSON_PLAN_URL . 'assets/lib/bootstrap-3.3.7/js/bootstrap.min.js');
         }
-
-        wp_enqueue_script('lesson-plan', OER_LESSON_PLAN_URL . 'assets/js/backend/lesson-plan.js');
-
+        
+        wp_register_script('lesson-plan', OER_LESSON_PLAN_URL . 'assets/js/backend/lesson-plan.js');
+        wp_localize_script('lesson-plan','lpScript', array("image_placeholder_url" => OER_LESSON_PLAN_URL.'assets/images/lp-oer-person-placeholder.png'));
+        wp_enqueue_script('lesson-plan');
     }
 }
 

@@ -321,6 +321,7 @@ jQuery(document).ready(function ($) {
                 var ClonedDiv = $('.lp-author-element-wrapper:last').clone();
                 ClonedDiv.insertAfter('div.lp-author-element-wrapper:last');
                 ClonedDiv.find('input[type=text]').val('');
+                ClonedDiv.find('img.lp-oer-person-placeholder').attr('src',lpScript.image_placeholder_url);
                 $('.lp-remove-author').removeAttr('disabled');
                 LessonPlan.toggleUpDownButton();
             });
