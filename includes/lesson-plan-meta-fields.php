@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $post;
 global $wpdb;
 global $oer_lp_default_structure;
+global $oer_convert_info;
 global $inquiryset_post;
 
 $inquiryset_post = $post;
@@ -508,19 +509,43 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                     </div>
 
                                                     <div class="form-group">
+                                                        <?php if ($oer_convert_info): ?>
+                                                        <label>Title</label>
+                                                        <input type="text"
+                                                            class="form-control"
+                                                            name="oer_lp_primary_resources[title][]"
+                                                            placeholder="Resource Title"
+                                                            value="<?php echo isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey] : "";?>">
+                                                        <?php else: ?>
                                                         <label>Teacher Information</label>
                                                         <?php wp_editor( $teacherInfo,
-                                                            'oer-lp-resource-teacher-' . $resourceKey,
+                                                           'oer-lp-resource-teacher-' . $resourceKey,
+                                                           $settings = array(
+                                                               'textarea_name' => 'oer_lp_primary_resources[teacher_info][]',
+                                                               'media_buttons' => true,
+                                                               'textarea_rows' => 6,
+                                                               'drag_drop_upload' => true,
+                                                               'teeny' => true,
+                                                           )
+                                                       ); ?>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <?php if ($oer_convert_info):
+                                                        $resource_description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
+                                                        ?>
+                                                        <label>Description</label>
+                                                        <?php wp_editor( $resource_description,
+                                                            'oer-lp-resource-student-' . $resourceKey,
                                                             $settings = array(
-                                                                'textarea_name' => 'oer_lp_primary_resources[teacher_info][]',
+                                                                'textarea_name' => 'oer_lp_primary_resources[description][]',
                                                                 'media_buttons' => true,
                                                                 'textarea_rows' => 6,
                                                                 'drag_drop_upload' => true,
                                                                 'teeny' => true,
                                                             )
                                                         ); ?>
-                                                    </div>
-                                                    <div class="form-group">
+                                                        <?php else: ?>
                                                         <label>Student Information</label>
                                                         <?php wp_editor( $studentInfo,
                                                             'oer-lp-resource-student-' . $resourceKey,
@@ -532,6 +557,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                                 'teeny' => true,
                                                             )
                                                         ); ?>
+                                                        <?php endif; ?>
                                                     </div>
                                                 </div>
                                             </div>

@@ -344,6 +344,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
                     $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
                     $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
+                    $title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
                     if ($sensitiveMaterialValue!=="")
                         $sensitiveMaterial = $sensitiveMaterialValue;
                 ?>
@@ -364,7 +365,12 @@ if (have_posts()) : while (have_posts()) : the_post();
                             <?php endif; ?>
                         </div>
                         <div class="lp-resource-title">
-                            <?php echo $resource->post_title; ?>
+                            <?php
+                            if (!empty($title))
+                                echo $title;
+                            else
+                                echo $resource->post_title;
+                            ?>
                         </div>
                     </div>
                     <?php if ($sensitiveMaterial!=="" && $sensitiveMaterial!=="no"): ?>

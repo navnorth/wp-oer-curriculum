@@ -46,19 +46,28 @@ $embed = "";
 $prev_url = null;
 $next_url = null;
 $right_class = "col-md-12";
+$new_title = "";
+$new_description = "";
+$prev_title = "";
+$next_title = "";
 if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
     if (!empty(array_filter($primary_resources['resource']))) {
         foreach ($primary_resources['resource'] as $resourceKey => $source) {
-            if ($source==$resource->post_title)
+            if ($source==$resource->post_title){
+                $new_title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
+                $new_description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
                 break;
+            }
             $index++;
         }
         if (isset($primary_resources['resource'][$index-1])){
             $prev_resource = oer_lp_get_resource_details($primary_resources['resource'][$index-1]);
+            $prev_title = (isset($primary_resources['title'][$index-1]) ? $primary_resources['title'][$index-1]: "");
             $prev_url = $back_url."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID;
         }
         if (isset($primary_resources['resource'][$index+1])){
             $next_resource = oer_lp_get_resource_details($primary_resources['resource'][$index+1]);
+            $next_title = (isset($primary_resources['title'][$index+1]) ? $primary_resources['title'][$index+1]: "");
             $next_url = $back_url."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID;
         }
         if ($index==0)
@@ -135,9 +144,19 @@ $type = $type[0];
     ?>
     <div class="ps-details <?php echo $right_class; ?> col-sm-12">
         <div class="ps-info">
-            <h1 class="ps-info-title"><?php echo $resource->post_title; ?></h1>
+            <h1 class="ps-info-title"><?php
+            if (!empty($new_title))
+                echo $new_title;
+            else
+                echo $resource->post_title;
+            ?></h1>
             <div class="ps-info-description">
-                <?php echo $resource->post_content; ?>
+                <?php
+                if (!empty($new_description))
+                    echo $new_description;
+                else
+                    echo $resource->post_content;
+                ?>
             </div>
         </div>
     </div>
@@ -159,7 +178,12 @@ $type = $type[0];
                     <?php endif; ?>
                 </span>
                 <span class="nav-lp-resource-title col-md-8">
-                    <?php echo $prev_resource->post_title; ?>
+                    <?php
+                    if (!empty($prev_title))
+                        echo $prev_title;
+                    else
+                        echo $prev_resource->post_title;
+                    ?>
                 </span>
             </span>
         </a>
@@ -185,8 +209,12 @@ $type = $type[0];
                 </span>
                 <span class="nav-lp-resource-title col-md-8">
                     <?php
-                     if (is_object($next_resource))
-                        echo $next_resource->post_title;
+                     if (is_object($next_resource)){
+                        if (!empty($next_title))
+                            echo $next_title;
+                        else
+                            echo $next_resource->post_title;
+                     }
                     else
                         echo $next_resource['title'];
                     ?>

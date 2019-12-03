@@ -43,6 +43,7 @@ include_once(OER_LESSON_PLAN_PATH.'includes/oer-lp-functions.php');
 include_once(OER_LESSON_PLAN_PATH.'includes/init.php');
 
 global $oer_lp_default_structure;
+global $oer_convert_info;
 $oer_lp_default_structure = array(
     'lp_authors_order',
     'lp_standard_order',
@@ -55,6 +56,8 @@ $oer_lp_default_structure = array(
     //'lp_oer_materials',
     //'lp_add_module'
 );
+
+$oer_convert_info = true;
 
 /**
  * Parent plugin (WP OER) required to activate WP OER Lesson Plan Plugin

@@ -509,29 +509,34 @@ function lp_add_more_pr_callback() {
                         
                         
                         <div class="form-group">
-                            <label>Teacher Information</label>';
+                            <label>Title</label>
+                            <input type="text"
+                            class="form-control"
+                            name="oer_lp_primary_resources[title][]"
+                            placeholder="Resource Title"
+                            value="">';
                             ob_start(); // Start output buffer
-                            wp_editor('',
-                                'oer-lp-resource-teacher-' . $totalElements,
-                                $settings = array(
-                                    'textarea_name' => 'oer_lp_primary_resources[teacher_info][]',
-                                    'media_buttons' => true,
-                                    'textarea_rows' => 6,
-                                    'drag_drop_upload' => true,
-                                    'teeny' => true,
-                                    'quicktags' => true,
-                                    'tinymce' => true
-                                )
-                            );
+                            //wp_editor('',
+                            //    'oer-lp-resource-teacher-' . $totalElements,
+                            //    $settings = array(
+                            //        'textarea_name' => 'oer_lp_primary_resources[teacher_info][]',
+                            //        'media_buttons' => true,
+                            //        'textarea_rows' => 6,
+                            //        'drag_drop_upload' => true,
+                            //        'teeny' => true,
+                            //        'quicktags' => true,
+                            //        'tinymce' => true
+                            //    )
+                            //);
                         $content .= ob_get_clean();
                         $content .= '</div>';
                         $content .= '<div class="form-group">
-                            <label>Student Information</label>';
+                            <label>Description</label>';
                             ob_start(); // Start output buffer
                             wp_editor('',
                                 'oer-lp-resource-student-' . $totalElements,
                                 $settings = array(
-                                    'textarea_name' => 'oer_lp_primary_resources[student_info][]',
+                                    'textarea_name' => 'oer_lp_primary_resources[description][]',
                                     'media_buttons' => true,
                                     'textarea_rows' => 6,
                                     'drag_drop_upload' => true,
