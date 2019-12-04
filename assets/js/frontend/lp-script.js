@@ -1,13 +1,15 @@
 jQuery(document).ready(function($){
     // When the user scrolls down 50px from the top of the document, fixed the header to the top
     window.onscroll = function() {
-        if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+        rightWidth = jQuery('.single-lesson-plans #main .container .lp-featured-section').outerWidth()
+        if (document.body.scrollTop > 52 || document.documentElement.scrollTop > 52) {
             jQuery('.tc-lp-details-header').css({
                 "background":"#ffffff",
                 "padding":"10px 50px",
                 "border":"1px solid #4f4f4f",
                 "box-shadow": "1px 1px 2px 0px rgba(0,0,0,0.8)",
-                "z-index":"1"
+                "z-index":"1",
+                "width": rightWidth + "px"
             });
         } else {
             jQuery('.tc-lp-details-header').css({
@@ -15,7 +17,8 @@ jQuery(document).ready(function($){
                 "padding":"25px 50px 0",
                 "border":"none",
                 "box-shadow":"none",
-                "z-index":"0"
+                "z-index":"0",
+                "width":"100%"
             });
         }
     };
