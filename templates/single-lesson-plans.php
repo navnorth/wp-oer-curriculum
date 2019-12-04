@@ -348,6 +348,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     $oer_authorurl2 = get_post_meta($_res_id, "oer_authorurl2", true);
                     $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
                     $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
+                    $title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
                     if ($sensitiveMaterialValue!=="")
                         $sensitiveMaterial = $sensitiveMaterialValue;
                 ?>

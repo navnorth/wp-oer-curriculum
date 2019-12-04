@@ -43,6 +43,8 @@ include_once(OER_LESSON_PLAN_PATH.'includes/oer-lp-functions.php');
 include_once(OER_LESSON_PLAN_PATH.'includes/init.php');
 
 global $oer_lp_default_structure;
+global $oer_convert_info;
+global $oer_lp_deleted_fields;
 $oer_lp_default_structure = array(
     'lp_authors_order',
     'lp_standard_order',
@@ -52,8 +54,30 @@ $oer_lp_default_structure = array(
     // 'oer_lp_custom_editor_teacher_background',
     // 'oer_lp_custom_editor_student_background',
     //'oer_lp_custom_editor_historical_background',
-    'lp_oer_materials'
+    //'lp_oer_materials',
+    //'lp_add_module'
 );
+
+$oer_lp_deleted_fields = array(
+    'lp_oer_materials',
+    'oer_lp_custom_editor_6',
+    'oer_lp_vocabulary_list_title_6',
+    'oer_lp_vocabulary_details_6',
+    'oer_lp_custom_editor_7',
+    'oer_lp_custom_text_list_7',
+    'oer_lp_custom_text_list_8',
+    'lp_oer_materials_list_8',
+    'lp_oer_materials_list_9',
+    'oer_lp_custom_text_list_6',
+    'oer_lp_vocabulary_list_title_7',
+    'oer_lp_vocabulary_details_7',
+    'oer_lp_vocabulary_list_title_8',
+    'oer_lp_vocabulary_details_8',
+    'oer_lp_vocabulary_list_title_9',
+    'oer_lp_vocabulary_details_9'
+);
+
+$oer_convert_info = true;
 
 /**
  * Parent plugin (WP OER) required to activate WP OER Lesson Plan Plugin

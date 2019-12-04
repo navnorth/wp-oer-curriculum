@@ -410,7 +410,8 @@ if (! function_exists('oer_lp_title_from_slug')){
 if (! function_exists('oer_inquiry_set_grade_level')){
     function oer_inquiry_set_grade_level($inquiry_set_id){
         $grades = get_post_meta($inquiry_set_id, "oer_lp_grades", true);
-        $grades = $grades[0];
+        if (is_array($grades))
+            $grades = $grades[0];
         $grade_level = "";
         
         if ($grades == "pre-k")
@@ -630,7 +631,8 @@ if (!function_exists('oer_lp_modules')){
                     } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'lp_oer_materials_list_') !== false) {
                         $module['title'] = "Materials";
                     }
-                    $modules[] = $module;
+                    if (!empty($module))
+                        $modules[] = $module;
                 }
             }
         }

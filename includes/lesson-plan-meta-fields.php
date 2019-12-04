@@ -4,6 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $post;
 global $wpdb;
 global $oer_lp_default_structure;
+global $oer_convert_info;
 global $inquiryset_post;
 
 $inquiryset_post = $post;
@@ -396,9 +397,9 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                                 }
                                                                 ?>
                                                                 <img src="<?php echo $image;?>"
-                                                                     class="img-circle lp-oer-person-placeholder"
-                                                                     width="50px"
-                                                                     height="50px"/>
+                                                                    class="img-circle lp-oer-person-placeholder"
+                                                                    width="50px"
+                                                                    height="50px"/>
                                                             </div>
                                                         </div><!-- /.row -->
                                                     </div>
@@ -508,19 +509,43 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                     </div>
 
                                                     <div class="form-group">
+                                                        <?php if ($oer_convert_info): ?>
+                                                        <label>Title</label>
+                                                        <input type="text"
+                                                            class="form-control"
+                                                            name="oer_lp_primary_resources[title][]"
+                                                            placeholder="Resource Title"
+                                                            value="<?php echo isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey] : "";?>">
+                                                        <?php else: ?>
                                                         <label>Teacher Information</label>
                                                         <?php wp_editor( $teacherInfo,
-                                                            'oer-lp-resource-teacher-' . $resourceKey,
+                                                           'oer-lp-resource-teacher-' . $resourceKey,
+                                                           $settings = array(
+                                                               'textarea_name' => 'oer_lp_primary_resources[teacher_info][]',
+                                                               'media_buttons' => true,
+                                                               'textarea_rows' => 6,
+                                                               'drag_drop_upload' => true,
+                                                               'teeny' => true,
+                                                           )
+                                                       ); ?>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <?php if ($oer_convert_info):
+                                                        $resource_description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
+                                                        ?>
+                                                        <label>Description</label>
+                                                        <?php wp_editor( $resource_description,
+                                                            'oer-lp-resource-student-' . $resourceKey,
                                                             $settings = array(
-                                                                'textarea_name' => 'oer_lp_primary_resources[teacher_info][]',
+                                                                'textarea_name' => 'oer_lp_primary_resources[description][]',
                                                                 'media_buttons' => true,
                                                                 'textarea_rows' => 6,
                                                                 'drag_drop_upload' => true,
                                                                 'teeny' => true,
                                                             )
                                                         ); ?>
-                                                    </div>
-                                                    <div class="form-group">
+                                                        <?php else: ?>
                                                         <label>Student Information</label>
                                                         <?php wp_editor( $studentInfo,
                                                             'oer-lp-resource-student-' . $resourceKey,
@@ -532,6 +557,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                                 'teeny' => true,
                                                             )
                                                         ); ?>
+                                                        <?php endif; ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1479,9 +1505,9 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                     <div class="col-md-3">
                                                         <input type="hidden" name="oer_lp_authors[author_pic][]">
                                                         <img src="<?php echo OER_LESSON_PLAN_URL;?>assets/images/lp-oer-person-placeholder.png"
-                                                             class="img-circle lp-oer-person-placeholder"
-                                                             width="50px"
-                                                             height="50px"/>
+                                                            class="img-circle lp-oer-person-placeholder"
+                                                            width="50px"
+                                                            height="50px"/>
                                                     </div>
             
                                                 </div><!-- /.row -->
@@ -2647,6 +2673,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
             <?php }
             }?>
 
+            <?php if (in_array('lp_add_module', $oer_lp_default_structure)) { ?>
             <!--Add Extra Module-->
             <div class="row">
                 <div class="col-md-12">
@@ -2656,6 +2683,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                     ><i class="fa fa-plus"></i> Add Module</button>
                 </div>
             </div>
+            <?php } ?>
         </div>
     </div>
 </div>
