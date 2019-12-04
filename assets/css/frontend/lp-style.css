@@ -875,6 +875,7 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
 .single-lesson-plans #main .container .tc-lp-details-content {
     padding-left:50px;
     padding-right:50px;
+    margin-top:50px;
 }
 /** End of Topic Template Styling **/
 @media (min-width: 1443px){

@@ -6,14 +6,16 @@ jQuery(document).ready(function($){
                 "background":"#ffffff",
                 "padding":"10px 50px",
                 "border":"1px solid #4f4f4f",
-                "box-shadow": "1px 1px 2px 0px rgba(0,0,0,0.8)"
+                "box-shadow": "1px 1px 2px 0px rgba(0,0,0,0.8)",
+                "z-index":"1"
             });
         } else {
             jQuery('.tc-lp-details-header').css({
                 "background":"none",
                 "padding":"25px 50px 0",
                 "border":"none",
-                "box-shadow":"none"
+                "box-shadow":"none",
+                "z-index":"0"
             });
         }
     };
