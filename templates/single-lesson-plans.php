@@ -64,268 +64,270 @@ if (have_posts()) : while (have_posts()) : the_post();
         <div class="row tc-lp-details-header">
             <h1 class="tc-lp-title"><?php echo the_title(); ?></h1>
         </div>
-        <div class="col-md-8 col-sm-12 curriculum-detail padding-left-0">
-            <div class="tc-lp-details">
-                <?php if (($lp_type_set && $lp_type_enabled) || !$lp_type_set) { ?>
-                <div class="tc-lp-type">
+        <div class="row tc-lp-details-content">
+            <div class="col-md-8 col-sm-12 curriculum-detail padding-left-0">
+                <div class="tc-lp-details">
+                    <?php if (($lp_type_set && $lp_type_enabled) || !$lp_type_set) { ?>
+                    <div class="tc-lp-type">
+                        <?php
+                        $oer_lp_type = (isset($post_meta_data['oer_lp_type'][0]) ? $post_meta_data['oer_lp_type'][0] : '');
+                        echo $oer_lp_type;
+                        ?>
+                    </div>
+                    <?php } ?>
+                    <div class="tc-lp-details-description">
+                        <?php if (strlen($post->post_content)>230) : ?>
+                        <div class="lp-excerpt"><?php echo oer_lp_content(230); ?></div>
+                        <div class="lp-full-content"><?php echo the_content(); ?> <a href="javascript:void(0);" class="lp-read-less">(read less)</a></div>
+                        <?php else : ?>
+                        <div class="lp-content"><?php echo the_content(); ?></div>
+                        <?php endif; ?>
+                    </div>
                     <?php
-                    $oer_lp_type = (isset($post_meta_data['oer_lp_type'][0]) ? $post_meta_data['oer_lp_type'][0] : '');
-                    echo $oer_lp_type;
+                    $related_inquiry_sets = (isset($post_meta_data['oer_lp_related_inquiry_set'][0]) ? unserialize($post_meta_data['oer_lp_related_inquiry_set'][0]) : array());
+                    $show_related_inquiry_sets = false;
+                    foreach($related_inquiry_sets as $rset){
+                        if ($rset!=="0"){
+                            $show_related_inquiry_sets = true;
+                            break;
+                        }
+                    }
+                    if ($show_related_inquiry_sets) {
+                        if (($related_inquiry_set && $related_inquiry_enabled) || !$related_inquiry_set) {
+                    ?>
+                    <div class="tc-related-inquiry-sets">
+                        <h4 class="tc-related-inquiry-sets-heading clearfix">
+                            <?php echo oer_lp_get_field_label('oer_lp_related_inquiry_set'); ?>
+                        </h4>
+                        <div class="tc-related-inquiry-sets-details clearfix">
+                            <ul class="tc-related-inquiry-sets-list">
+                            <?php
+                            foreach($related_inquiry_sets as $inquiry_set) {
+                                if ($inquiry_set!=="0") {
+                                    $inquiry = oer_lp_get_inquiry_set_details($inquiry_set);
+                                    $inquiry_link = get_permalink($inquiry_set);
+                                    
+                                    echo '<li><a href="'.$inquiry_link.'">'.$inquiry->post_title.'</a></li>';
+                                }
+                            } ?>
+                            </ul>
+                        </div>
+                    </div>
+                    <?php }
+                    } ?>
+                    <?php if (!empty($oer_lp_standards)) {
+                         if (($standards_set && $standards_enabled) || !$standards_set) {
+                    ?>
+                    <div class="tc-lp-standards">
+                        <h4 class="tc-lp-field-heading clearfix">
+                            <?php echo oer_lp_get_field_label('oer_lp_standards'); ?>
+                        </h4>
+                        <div class="tc-lp-standards-details clearfix">
+                            <ul class="tc-lp-standards-list">
+                                <?php
+                                $stds = array();
+                                $standards = array();
+                                $cstandard = null;
+                                $oer_lp_standards = explode(",",$oer_lp_standards);
+                                if (is_array($oer_lp_standards)):
+                                    $current_std_id = "";
+                                    foreach($oer_lp_standards as $standard){
+                                        if (function_exists('oer_std_get_standard_by_notation')){
+                                            $core_standard = oer_std_get_standard_by_notation($standard);
+                                            if ($current_std_id!==$core_standard->id){
+                                                if (!empty($standards) && !empty($cstandard)) {
+                                                    $stds[] = array_merge(array("notation"=>$standards), $cstandard);
+                                                }
+                                                $standards = array();
+                                                $current_std_id = $core_standard->id;
+                                                $cstandard = array("core_standard_id"=>$core_standard->id,"core_standard_name"=>$core_standard->standard_name);
+                                            }
+                                            $standards[] = $standard;
+                                        }
+                                    }
+                                    if (!empty($standards) && !empty($cstandard)) {
+                                        $stds[] = array_merge(array("notation"=>$standards), $cstandard);
+                                    }
+                                    $cstd_id = array_column($stds,"core_standard_id");
+                                    array_multisort($cstd_id,SORT_ASC,$stds);
+                                    $standard_details = "";
+                                    foreach($stds as $std){
+                                        if (isset($std['core_standard_id'])) {
+                                            echo "<li>";
+                                                echo '<a class="lp-standard-toggle" data-toggle="collapse" href="#core-standard-'.$std['core_standard_id'].'">'.$std['core_standard_name'].' <i class="fas fa-caret-right"></i></a>';
+                                            ?>
+                                            <div class="collapse tc-lp-details-standard" id="core-standard-<?php echo $std['core_standard_id']; ?>">
+                                            <?php
+                                            if (is_array($std['notation'])) {
+                                                echo "<ul class='tc-lp-notation-list'>";
+                                                foreach ($std['notation'] as $notation) {
+                                                    if (function_exists('was_standard_details'))
+                                                        $standard_details = was_standard_details($notation);
+                                                    if (!empty($standard_details)){
+                                                        if (isset($standard_details->description))
+                                                            echo "<li>".$standard_details->description."</li>";
+                                                        else
+                                                            echo "<li>".$standard_details->standard_title."</li>";
+                                                    }
+                                                }
+                                                echo "</ul>";
+                                            }
+                                                echo "</div>";
+                                            echo "</li>";
+                                        }
+                                    }
+                                endif;
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+                    <?php
+                         }
+                    } ?>
+                    <?php
+                        $post_terms = get_the_terms( $post->ID, 'resource-subject-area' );
+                        if (!empty($post_terms)) {
+                    ?>
+                    <div class="tc-lp-subject-areas">
+                       <h4 class="tc-lp-field-heading clearfix">
+                            <?php _e("Subjects",OER_LESSON_PLAN_SLUG); ?>
+                        </h4>
+                       <div class="tc-lp-subject-details clearfix">
+                            <ul class="tc-lp-subject-areas-list">
+                                <?php
+                                $i = 1;
+                                $cnt = count($post_terms);
+                                $moreCnt = $cnt - 2;
+                                foreach($post_terms as $term){
+                                    $subject_parent = get_term_parents_list($term->term_id,'resource-subject-area', array('separator' => ' <i class="fas fa-angle-double-right"></i> ', 'inclusive' => false));
+                                    $subject = $subject_parent . '<a href="'.get_term_link($term->term_id).'">'.$term->name.'</a>';
+                                    if ($i>2)
+                                        echo '<li class="collapse lp-subject-hidden">'.$subject.'</li>';
+                                    else
+                                        echo '<li>'.$subject.'</li>';
+                                    if (($i==2) && ($cnt>2))
+                                        echo '<li><a class="see-more-subjects" data-toggle="collapse" data-count="'.$moreCnt.'" href=".lp-subject-hidden">SEE '.$moreCnt.' MORE +</a></li>';
+                                    $i++;
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    </div>
+                    <?php } ?>
+                    <?php if ($oer_sensitive) : ?>
+                    <div class="tc-sensitive-material-section">
+                        <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
+                        <button class="question-popup-button"><i class="fal fa-question-circle"></i></button>
+                    </div>
+                    <?php endif; ?>
+                    <div id="tcHiddenFields" class="tc-hidden-fields collapse">
+                        <?php
+                        // Grade Level Display
+                        $oer_lp_grade = oer_inquiry_set_grade_level($post->ID);
+                        if (!empty($oer_lp_grade)){
+                            ?>
+                            <div class="form-field">
+                                <span class="tc-lp-label">Grade Level:</span> <span class="tc-lp-value"><?php echo $oer_lp_grade; ?></span>
+                            </div>
+                            <?php
+                        }
+                        
+                        // Appropriate Age Levels Display
+                        if (($age_levels_set && $age_levels_enabled) || !$age_levels_set) {
+                            $age_label = oer_lp_get_field_label('oer_lp_age_levels');
+                            $age_levels = (isset($post_meta_data['oer_lp_age_levels'][0]) ? $post_meta_data['oer_lp_age_levels'][0] : "");
+                            if (!empty($age_levels)){
+                            ?>
+                            <div class="form-field">
+                                <span class="tc-lp-label"><?php echo $age_label; ?>:</span> <span class="tc-lp-value"><?php echo $age_levels; ?></span>
+                            </div>
+                            <?php
+                            }
+                        }
+                        
+                        // Suggested Instructional Time Display
+                       if (($suggested_time_set && $suggested_time_enabled) || !$suggested_time_set) {
+                            $suggested_label = oer_lp_get_field_label('oer_lp_suggested_instructional_time');
+                            $suggested_time = (isset($post_meta_data['oer_lp_suggested_instructional_time'][0]) ? $post_meta_data['oer_lp_suggested_instructional_time'][0] : "");
+                            if (!empty($suggested_time)){
+                            ?>
+                            <div class="form-field">
+                                <span class="tc-lp-label"><?php echo $suggested_label; ?>:</span> <span class="tc-lp-value"><?php echo $suggested_time; ?></span>
+                            </div>
+                            <?php
+                            }
+                        }
+                        
+                         // Required Equipment Materials Display
+                       if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
+                            $req_materials_label = oer_lp_get_field_label('oer_lp_required_materials');
+                            $req_materials = (isset($post_meta_data['oer_lp_required_materials'][0]) ? $post_meta_data['oer_lp_required_materials'][0] : "");
+                            if (!empty($req_materials)){
+                            ?>
+                            <div class="form-field">
+                                <span class="tc-lp-label"><?php echo $req_materials_label; ?>:</span> <span class="tc-lp-value"><?php echo $req_materials; ?></span>
+                            </div>
+                            <?php
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12 featured-image padding-right-0">
+                <?php the_post_thumbnail('inquiry-set-featured'); ?>
+                <?php if (($author_set && $author_enabled) || !$author_set) { ?>
+                <div class="tc-lp-authors-list">
+                    <?php
+                    $author_display = false;
+                    foreach($authors as $author){
+                        if (!empty($author[0])){
+                            $author_display = true;
+                            break;
+                        }
+                    }
+                    if ($author_display){
+                        ?>
+                         <span class="lp-author-label"><?php echo oer_lp_get_field_label('oer_lp_authors'); ?></span>
+                        <?php 
+                        $aIndex = 0;
+                        
+                        foreach($authors['name'] as $author){
+                            $author_url = $authors['author_url'][$aIndex];
+                            if ($aIndex>0)
+                                echo ", ";
+                            if (isset($author_url))
+                                echo "<span class='tc-lp-author'><a href='".$author_url."'>".$authors['name'][$aIndex]."</a></span>";
+                            else
+                                echo "<span class='tc-lp-author'>".$authors['name'][$aIndex]."</span>";
+                                
+                            $aIndex++;
+                        }
+                    } 
                     ?>
                 </div>
+                <?php } 
+                $keywords = wp_get_post_tags($post->ID);
+                if(!empty($keywords))
+                {
+                ?>
+                <div class="tc-lp-keywords">
+                    <div class="lp_keywords_container tagcloud">
+                    <?php
+                        foreach($keywords as $keyword)
+                        {
+                                echo "<span><a href='".esc_url(get_tag_link($keyword->term_id))."' class='button'>".ucwords($keyword->name)."</a></span>";
+                        }
+                    ?>
+                    </div>
+                </div>
                 <?php } ?>
-                <div class="tc-lp-details-description">
-                    <?php if (strlen($post->post_content)>230) : ?>
-                    <div class="lp-excerpt"><?php echo oer_lp_content(230); ?></div>
-                    <div class="lp-full-content"><?php echo the_content(); ?> <a href="javascript:void(0);" class="lp-read-less">(read less)</a></div>
-                    <?php else : ?>
-                    <div class="lp-content"><?php echo the_content(); ?></div>
+                <div class="tc-lp-controls">
+                    <div class="sharethis-inline-share-buttons"></div>
+                    <?php if ($oer_lp_download_copy_document): ?>
+                    <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank"><i class="fal fa-download"></i></a>
                     <?php endif; ?>
                 </div>
-                <?php
-                $related_inquiry_sets = (isset($post_meta_data['oer_lp_related_inquiry_set'][0]) ? unserialize($post_meta_data['oer_lp_related_inquiry_set'][0]) : array());
-                $show_related_inquiry_sets = false;
-                foreach($related_inquiry_sets as $rset){
-                    if ($rset!=="0"){
-                        $show_related_inquiry_sets = true;
-                        break;
-                    }
-                }
-                if ($show_related_inquiry_sets) {
-                    if (($related_inquiry_set && $related_inquiry_enabled) || !$related_inquiry_set) {
-                ?>
-                <div class="tc-related-inquiry-sets">
-                    <h4 class="tc-related-inquiry-sets-heading clearfix">
-                        <?php echo oer_lp_get_field_label('oer_lp_related_inquiry_set'); ?>
-                    </h4>
-                    <div class="tc-related-inquiry-sets-details clearfix">
-                        <ul class="tc-related-inquiry-sets-list">
-                        <?php
-                        foreach($related_inquiry_sets as $inquiry_set) {
-                            if ($inquiry_set!=="0") {
-                                $inquiry = oer_lp_get_inquiry_set_details($inquiry_set);
-                                $inquiry_link = get_permalink($inquiry_set);
-                                
-                                echo '<li><a href="'.$inquiry_link.'">'.$inquiry->post_title.'</a></li>';
-                            }
-                        } ?>
-                        </ul>
-                    </div>
-                </div>
-                <?php }
-                } ?>
-                <?php if (!empty($oer_lp_standards)) {
-                     if (($standards_set && $standards_enabled) || !$standards_set) {
-                ?>
-                <div class="tc-lp-standards">
-                    <h4 class="tc-lp-field-heading clearfix">
-                        <?php echo oer_lp_get_field_label('oer_lp_standards'); ?>
-                    </h4>
-                    <div class="tc-lp-standards-details clearfix">
-                        <ul class="tc-lp-standards-list">
-                            <?php
-                            $stds = array();
-                            $standards = array();
-                            $cstandard = null;
-                            $oer_lp_standards = explode(",",$oer_lp_standards);
-                            if (is_array($oer_lp_standards)):
-                                $current_std_id = "";
-                                foreach($oer_lp_standards as $standard){
-                                    if (function_exists('oer_std_get_standard_by_notation')){
-                                        $core_standard = oer_std_get_standard_by_notation($standard);
-                                        if ($current_std_id!==$core_standard->id){
-                                            if (!empty($standards) && !empty($cstandard)) {
-                                                $stds[] = array_merge(array("notation"=>$standards), $cstandard);
-                                            }
-                                            $standards = array();
-                                            $current_std_id = $core_standard->id;
-                                            $cstandard = array("core_standard_id"=>$core_standard->id,"core_standard_name"=>$core_standard->standard_name);
-                                        }
-                                        $standards[] = $standard;
-                                    }
-                                }
-                                if (!empty($standards) && !empty($cstandard)) {
-                                    $stds[] = array_merge(array("notation"=>$standards), $cstandard);
-                                }
-                                $cstd_id = array_column($stds,"core_standard_id");
-                                array_multisort($cstd_id,SORT_ASC,$stds);
-                                $standard_details = "";
-                                foreach($stds as $std){
-                                    if (isset($std['core_standard_id'])) {
-                                        echo "<li>";
-                                            echo '<a class="lp-standard-toggle" data-toggle="collapse" href="#core-standard-'.$std['core_standard_id'].'">'.$std['core_standard_name'].' <i class="fas fa-caret-right"></i></a>';
-                                        ?>
-                                        <div class="collapse tc-lp-details-standard" id="core-standard-<?php echo $std['core_standard_id']; ?>">
-                                        <?php
-                                        if (is_array($std['notation'])) {
-                                            echo "<ul class='tc-lp-notation-list'>";
-                                            foreach ($std['notation'] as $notation) {
-                                                if (function_exists('was_standard_details'))
-                                                    $standard_details = was_standard_details($notation);
-                                                if (!empty($standard_details)){
-                                                    if (isset($standard_details->description))
-                                                        echo "<li>".$standard_details->description."</li>";
-                                                    else
-                                                        echo "<li>".$standard_details->standard_title."</li>";
-                                                }
-                                            }
-                                            echo "</ul>";
-                                        }
-                                            echo "</div>";
-                                        echo "</li>";
-                                    }
-                                }
-                            endif;
-                            ?>
-                        </ul>
-                    </div>
-                </div>
-                <?php
-                     }
-                } ?>
-                <?php
-                    $post_terms = get_the_terms( $post->ID, 'resource-subject-area' );
-                    if (!empty($post_terms)) {
-                ?>
-                <div class="tc-lp-subject-areas">
-                   <h4 class="tc-lp-field-heading clearfix">
-                        <?php _e("Subjects",OER_LESSON_PLAN_SLUG); ?>
-                    </h4>
-                   <div class="tc-lp-subject-details clearfix">
-                        <ul class="tc-lp-subject-areas-list">
-                            <?php
-                            $i = 1;
-                            $cnt = count($post_terms);
-                            $moreCnt = $cnt - 2;
-                            foreach($post_terms as $term){
-                                $subject_parent = get_term_parents_list($term->term_id,'resource-subject-area', array('separator' => ' <i class="fas fa-angle-double-right"></i> ', 'inclusive' => false));
-                                $subject = $subject_parent . '<a href="'.get_term_link($term->term_id).'">'.$term->name.'</a>';
-                                if ($i>2)
-                                    echo '<li class="collapse lp-subject-hidden">'.$subject.'</li>';
-                                else
-                                    echo '<li>'.$subject.'</li>';
-                                if (($i==2) && ($cnt>2))
-                                    echo '<li><a class="see-more-subjects" data-toggle="collapse" data-count="'.$moreCnt.'" href=".lp-subject-hidden">SEE '.$moreCnt.' MORE +</a></li>';
-                                $i++;
-                            }
-                            ?>
-                        </ul>
-                    </div>
-                </div>
-                <?php } ?>
-                <?php if ($oer_sensitive) : ?>
-                <div class="tc-sensitive-material-section">
-                    <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
-                    <button class="question-popup-button"><i class="fal fa-question-circle"></i></button>
-                </div>
-                <?php endif; ?>
-                <div id="tcHiddenFields" class="tc-hidden-fields collapse">
-                    <?php
-                    // Grade Level Display
-                    $oer_lp_grade = oer_inquiry_set_grade_level($post->ID);
-                    if (!empty($oer_lp_grade)){
-                        ?>
-                        <div class="form-field">
-                            <span class="tc-lp-label">Grade Level:</span> <span class="tc-lp-value"><?php echo $oer_lp_grade; ?></span>
-                        </div>
-                        <?php
-                    }
-                    
-                    // Appropriate Age Levels Display
-                    if (($age_levels_set && $age_levels_enabled) || !$age_levels_set) {
-                        $age_label = oer_lp_get_field_label('oer_lp_age_levels');
-                        $age_levels = (isset($post_meta_data['oer_lp_age_levels'][0]) ? $post_meta_data['oer_lp_age_levels'][0] : "");
-                        if (!empty($age_levels)){
-                        ?>
-                        <div class="form-field">
-                            <span class="tc-lp-label"><?php echo $age_label; ?>:</span> <span class="tc-lp-value"><?php echo $age_levels; ?></span>
-                        </div>
-                        <?php
-                        }
-                    }
-                    
-                    // Suggested Instructional Time Display
-                   if (($suggested_time_set && $suggested_time_enabled) || !$suggested_time_set) {
-                        $suggested_label = oer_lp_get_field_label('oer_lp_suggested_instructional_time');
-                        $suggested_time = (isset($post_meta_data['oer_lp_suggested_instructional_time'][0]) ? $post_meta_data['oer_lp_suggested_instructional_time'][0] : "");
-                        if (!empty($suggested_time)){
-                        ?>
-                        <div class="form-field">
-                            <span class="tc-lp-label"><?php echo $suggested_label; ?>:</span> <span class="tc-lp-value"><?php echo $suggested_time; ?></span>
-                        </div>
-                        <?php
-                        }
-                    }
-                    
-                     // Required Equipment Materials Display
-                   if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
-                        $req_materials_label = oer_lp_get_field_label('oer_lp_required_materials');
-                        $req_materials = (isset($post_meta_data['oer_lp_required_materials'][0]) ? $post_meta_data['oer_lp_required_materials'][0] : "");
-                        if (!empty($req_materials)){
-                        ?>
-                        <div class="form-field">
-                            <span class="tc-lp-label"><?php echo $req_materials_label; ?>:</span> <span class="tc-lp-value"><?php echo $req_materials; ?></span>
-                        </div>
-                        <?php
-                        }
-                    }
-                    ?>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 featured-image padding-right-0">
-            <?php the_post_thumbnail('inquiry-set-featured'); ?>
-            <?php if (($author_set && $author_enabled) || !$author_set) { ?>
-            <div class="tc-lp-authors-list">
-                <?php
-                $author_display = false;
-                foreach($authors as $author){
-                    if (!empty($author[0])){
-                        $author_display = true;
-                        break;
-                    }
-                }
-                if ($author_display){
-                    ?>
-                     <span class="lp-author-label"><?php echo oer_lp_get_field_label('oer_lp_authors'); ?></span>
-                    <?php 
-                    $aIndex = 0;
-                    
-                    foreach($authors['name'] as $author){
-                        $author_url = $authors['author_url'][$aIndex];
-                        if ($aIndex>0)
-                            echo ", ";
-                        if (isset($author_url))
-                            echo "<span class='tc-lp-author'><a href='".$author_url."'>".$authors['name'][$aIndex]."</a></span>";
-                        else
-                            echo "<span class='tc-lp-author'>".$authors['name'][$aIndex]."</span>";
-                            
-                        $aIndex++;
-                    }
-                } 
-                ?>
-            </div>
-            <?php } 
-            $keywords = wp_get_post_tags($post->ID);
-            if(!empty($keywords))
-            {
-            ?>
-            <div class="tc-lp-keywords">
-                <div class="lp_keywords_container tagcloud">
-                <?php
-                    foreach($keywords as $keyword)
-                    {
-                            echo "<span><a href='".esc_url(get_tag_link($keyword->term_id))."' class='button'>".ucwords($keyword->name)."</a></span>";
-                    }
-                ?>
-                </div>
-            </div>
-            <?php } ?>
-            <div class="tc-lp-controls">
-                <div class="sharethis-inline-share-buttons"></div>
-                <?php if ($oer_lp_download_copy_document): ?>
-                <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank"><i class="fal fa-download"></i></a>
-                <?php endif; ?>
             </div>
         </div>
     </div>
