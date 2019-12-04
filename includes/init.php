@@ -857,7 +857,7 @@ function add_modals_to_footer(){
 add_action( 'admin_footer', 'add_modals_to_footer', 10 );
 
 function add_oer_curriculum_settings(){
-    add_submenu_page('edit.php?post_type=lesson-plans','Settings','Settings','add_users','oer_settings','oer_curriculum_settings');
+    add_submenu_page('edit.php?post_type=lesson-plans','Settings','Settings','add_users','oer_curriculum_settings','oer_curriculum_settings');
 }
 add_action( 'admin_menu', 'add_oer_curriculum_settings' );
 
