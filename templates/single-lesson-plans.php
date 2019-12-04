@@ -339,27 +339,28 @@ if (have_posts()) : while (have_posts()) : the_post();
             if (!empty(array_filter($primary_resources['resource']))) {
                 foreach ($primary_resources['resource'] as $resourceKey => $resource) {
                     $resource = get_page_by_title($resource,OBJECT,"resource");
-                    $type = get_post_meta($resource->ID,"oer_mediatype");
-                    $type = $type[0];
-                    $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
-                    $oer_authorname = get_post_meta($_res_id, "oer_authorname", true);	
-                    $oer_authorurl = get_post_meta($_res_id, "oer_authorurl", true);	
-                    $oer_authorname2 = get_post_meta($_res_id, "oer_authorname2", true);	
-                    $oer_authorurl2 = get_post_meta($_res_id, "oer_authorurl2", true);
+                    $url = get_post_meta($resource->ID, "oer_resourceurl", true);
+                    $type = get_post_meta($resource->ID,"oer_mediatype")[0];
+                    $resource_img = ''; 
+                    $_hasimage = has_post_thumbnail($resource);
+                    if($_hasimage) $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
+                    $oer_authorname = get_post_meta($resource->ID, "oer_authorname", true);	
+                    $oer_authorurl = get_post_meta($resource->ID, "oer_authorurl", true);	
+                    $oer_authorname2 = get_post_meta($resource->ID, "oer_authorname2", true);	
+                    $oer_authorurl2 = get_post_meta($resource->ID, "oer_authorurl2", true);
                     $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
                     $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
                     $title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
+                    
                     if ($sensitiveMaterialValue!=="")
                         $sensitiveMaterial = $sensitiveMaterialValue;
                 ?>
                 <div class="col-md-3 col-sm-3 padding-0">
                     <div class="media-image">
                         <div class="image-thumbnail">
-                            <?php if ($resource_img!==""):
-                            $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID);
-                            ?>
+                            <?php $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID); ?>
                             <a href="<?php echo $ps_url;  ?>">
-                                <?php if(!$resource_img): $_avtr = getResourceIcon($type); ?>	
+                                <?php if($resource_img==''): $_avtr = getResourceIcon($type,$url); ?>	
                                   <div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div>	
                                 <?php endif; ?>
                                 <span class="resource-overlay"></span>
@@ -369,7 +370,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;">
                                 </div>
                             </a>
-                            <?php endif; ?>
+                            
                         </div>
                         <div class="lp-resource-title">
                           <b><?php echo $resource->post_title; ?></b>
