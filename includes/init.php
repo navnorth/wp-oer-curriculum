@@ -70,9 +70,19 @@ function oer_lesson_plan_custom_meta_boxes() {
     // Add Related Inquiry Sets metabox
     $related_inquiry_set = (get_option('oer_lp_related_inquiry_set_label'))?true:false;
     $related_inquiry_set_enabled = (get_option('oer_lp_related_inquiry_set_enabled'))?true:false;
+    $related_curriculum_enabled = false;
     if (($related_inquiry_set && $related_inquiry_set_enabled) || !$related_inquiry_set) {
-        $label = oer_lp_get_field_label('oer_lp_related_inquiry_set');
-        add_meta_box('oer_lesson_plan_related_inquiry', $label, 'oer_lesson_plan_related_inquiry_callback', 'lesson-plans', 'advanced');
+        for ($i=1;$i<=3;$i++){
+            $enabled = (get_option('oer_lp_related_inquiry_set_'.$i.'_enabled'))?true:false;
+            if ($enabled) {
+                $related_curriculum_enabled = true;
+                break;
+            }
+        }
+        if ($related_curriculum_enabled) {
+            $label = oer_lp_get_field_label('oer_lp_related_inquiry_set');
+            add_meta_box('oer_lesson_plan_related_inquiry', $label, 'oer_lesson_plan_related_inquiry_callback', 'lesson-plans', 'advanced');
+        }
     }
 }
 
