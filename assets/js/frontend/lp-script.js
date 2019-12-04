@@ -1,4 +1,23 @@
 jQuery(document).ready(function($){
+    // When the user scrolls down 50px from the top of the document, fixed the header to the top
+    window.onscroll = function() {
+        if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+            jQuery('.tc-lp-details-header').css({
+                "background":"#ffffff",
+                "padding":"10px 50px",
+                "border":"1px solid #4f4f4f",
+                "box-shadow": "1px 1px 2px 0px rgba(0,0,0,0.8)"
+            });
+        } else {
+            jQuery('.tc-lp-details-header').css({
+                "background":"none",
+                "padding":"25px 50px 0",
+                "border":"none",
+                "box-shadow":"none"
+            });
+        }
+    };
+    
     $('.lp-nav-right-ajax').on("click", function(){
         var id = $(this).attr('data-id');
         var cnt = $(this).attr('data-count');
@@ -112,6 +131,17 @@ jQuery(document).ready(function($){
     if ($('.lp-nav-right,.lp-nav-left').is(":visible")) {
          $('.lp-nav-right,.lp-nav-left').attr('data-activetab', $('.ps-info-tabs li a.nav-link.active').attr('id'));
     }
+    
+    if (typeof wp.data !== "undefined") {
+		wp.data.subscribe(function(){
+			var isSav = wp.data.select('core/editor').isSavingPost();
+			var isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
+			
+			if (isSavingPost && !isAutosavingPost) {
+				window.tinyMCE.triggerSave();
+			}
+		});
+	}
 });
 
 function lp_redirect_with_post(url, tab) {
