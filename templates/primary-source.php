@@ -96,6 +96,7 @@ if (empty($next_resource)){
 $type = get_post_meta($resource->ID,"oer_mediatype");
 $type = $type[0];
 ?>
+<?php echo oer_breadcrumb_display($resource); ?>
 <div class="lp-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
 <div class="row ps-details-row">
     <?php if (!empty($featured_image_url) || $youtube || $isPDF) {
@@ -171,10 +172,16 @@ $type = $type[0];
             <span class="nav-media-icon"><i class="fas fa-arrow-left fa-2x"></i></span>
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
-                    <?php if ($resource_img!==""):
+                    <?php if ($resource_img!=""):
                     $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID);
                     ?>
                     <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
+                    <?php else: ?>
+                    <?php
+                     $prev_resource_url = get_post_meta($prev_resource->ID, "oer_resourceurl", true);
+                     $prev_resource_type = get_post_meta($prev_resource->ID,"oer_mediatype")[0];
+                    ?>
+                    <div class="navigation-avatar"><span class="dashicons <?php echo getResourceIcon($prev_resource_type,$prev_resource_url); ?>"></span></div>
                     <?php endif; ?>
                 </span>
                 <span class="nav-lp-resource-title col-md-8">
@@ -197,14 +204,18 @@ $type = $type[0];
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if (!empty($resource_img)):
-                    if (is_object($next_resource))
-                        $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
-                    else
-                        $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($next_resource['title']));
-                    ?>
-                    <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
+                      if (is_object($next_resource))
+                          $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
+                      else
+                          $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($next_resource['title']));
+                      ?>
+                      <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
                     <?php else: ?>
-                    <div class="resource-thumbnail" style="background: rgba(204,97,12,.1); background-size:cover; display:flex; align-items:center; justify-content: center;"><i class="fa fa-file-text-o fa-4x"></i></div>
+                      <?php
+                       $next_resource_url = get_post_meta($next_resource->ID, "oer_resourceurl", true);
+                       $next_resource_type = get_post_meta($next_resource->ID,"oer_mediatype")[0];
+                      ?>
+                      <div class="navigation-avatar"><span class="dashicons <?php echo getResourceIcon($next_resource_type,$next_resource_url); ?>"></span></div>
                     <?php endif; ?>
                 </span>
                 <span class="nav-lp-resource-title col-md-8">
