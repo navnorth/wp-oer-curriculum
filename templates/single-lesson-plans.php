@@ -58,6 +58,7 @@ $req_materials_set = (get_option('oer_lp_required_materials_label'))?true:false;
 $req_materials_enabled = (get_option('oer_lp_required_materials_enabled'))?true:false;
 
 if (have_posts()) : while (have_posts()) : the_post();
+echo oer_breadcrumb_display();
 ?>
 <div class="container">
     <div class="row lp-featured-section">
@@ -355,7 +356,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     if ($sensitiveMaterialValue!=="")
                         $sensitiveMaterial = $sensitiveMaterialValue;
                 ?>
-                <div class="col-md-3 col-sm-3 padding-0">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                     <div class="media-image">
                         <div class="image-thumbnail">
                             <?php $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID); ?>
@@ -415,18 +416,17 @@ if (have_posts()) : while (have_posts()) : the_post();
                         if(!empty($oer_lp_custom_editor)) {
                             
                         ?>
-                        <div class="col-md-3 col-sm-3 padding-0">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                             <div class="media-image">
                                 <div class="image-thumbnail">
                                     <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_custom_editor['title'])); ?>
                                     <a href="<?php echo $ps_url;  ?>">
+                                        <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                         <span class="resource-overlay"></span>
                                         <?php if (!empty($type)): ?>
                                         <span class="lp-source-type"><?php _e("Text", OER_LESSON_PLAN_SLUG); ?></span>
                                         <?php endif; ?>
-                                        <div class="resource-thumbnail text-thumbnail">
-                                            <i class="fa fa-file-text-o fa-4x"></i>
-                                        </div>
+                                        <div class="resource-thumbnail text-thumbnail"></div>
                                     </a>
                                 </div>
                                 <div class="lp-resource-title">
@@ -440,18 +440,17 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $oer_lp_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                         if(!empty($oer_lp_custom_editor)) {
                         ?>
-                        <div class="col-md-3 col-sm-3 padding-0">
+                        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                             <div class="media-image">
                                 <div class="image-thumbnail">
                                     <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_custom_editor['title'])); ?>
                                     <a href="<?php echo $ps_url;  ?>">
+                                        <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                         <span class="resource-overlay"></span>
                                         <?php if (!empty($type)): ?>
                                         <span class="lp-source-type"><?php _e("Text", OER_LESSON_PLAN_SLUG); ?></span>
                                         <?php endif; ?>
-                                        <div class="resource-thumbnail text-thumbnail">
-                                            <i class="fa fa-file-text-o fa-4x"></i>
-                                        </div>
+                                        <div class="resource-thumbnail text-thumbnail"></div>
                                     </a>
                                 </div>
                                 <div class="lp-resource-title">
@@ -462,18 +461,17 @@ if (have_posts()) : while (have_posts()) : the_post();
                         <?php } ?>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_lp_custom_text_list_') !== false) {
                     ?>
-                    <div class="col-md-3 col-sm-3 padding-0">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                         <div class="media-image">
                             <div class="image-thumbnail">
                                 <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title("Text List")); ?>
                                 <a href="<?php echo $ps_url;  ?>">
+                                    <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                     <span class="resource-overlay"></span>
                                     <?php if (!empty($type)): ?>
                                     <span class="lp-source-type"><?php _e("Text", OER_LESSON_PLAN_SLUG); ?></span>
                                     <?php endif; ?>
-                                    <div class="resource-thumbnail text-thumbnail">
-                                        <i class="fa fa-file-text-o fa-4x"></i>
-                                    </div>
+                                    <div class="resource-thumbnail text-thumbnail"></div>
                                 </a>
                             </div>
                             <div class="lp-resource-title">
@@ -492,13 +490,12 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 <div class="image-thumbnail">
                                     <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_vocabulary_list_title)); ?>
                                     <a href="<?php echo $ps_url;  ?>">
+                                        <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                         <span class="resource-overlay"></span>
                                         <?php if (!empty($type)): ?>
                                         <span class="lp-source-type"><?php _e("Text", OER_LESSON_PLAN_SLUG); ?></span>
                                         <?php endif; ?>
-                                        <div class="resource-thumbnail text-thumbnail">
-                                            <i class="fa fa-file-text-o fa-4x"></i>
-                                        </div>
+                                        <div class="resource-thumbnail text-thumbnail"></div>
                                     </a>
                                 </div>
                                 <div class="lp-resource-title">
@@ -508,18 +505,17 @@ if (have_posts()) : while (have_posts()) : the_post();
                         </div>
                         <?php } ?>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'lp_oer_materials_list_') !== false) {?>
-                    <div class="col-md-3 col-sm-3 padding-0">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                         <div class="media-image">
                             <div class="image-thumbnail">
                                 <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_vocabulary_list_title)); ?>
                                 <a href="<?php echo $ps_url;  ?>">
+                                    <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                     <span class="resource-overlay"></span>
                                     <?php if (!empty($type)): ?>
                                     <span class="lp-source-type"><?php _e("Text", OER_LESSON_PLAN_SLUG); ?></span>
                                     <?php endif; ?>
-                                    <div class="resource-thumbnail text-thumbnail">
-                                        <i class="fa fa-file-text-o fa-4x"></i>
-                                    </div>
+                                    <div class="resource-thumbnail text-thumbnail"></div>
                                 </a>
                             </div>
                             <div class="lp-resource-title">
