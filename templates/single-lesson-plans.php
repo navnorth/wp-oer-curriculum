@@ -58,7 +58,7 @@ $req_materials_set = (get_option('oer_lp_required_materials_label'))?true:false;
 $req_materials_enabled = (get_option('oer_lp_required_materials_enabled'))?true:false;
 
 if (have_posts()) : while (have_posts()) : the_post();
-echo oer_breadcrumb_display();
+    if (function_exists('oer_breadcrumb_display')) : echo oer_breadcrumb_display();
 ?>
 <div class="container">
     <div class="row lp-featured-section">
