@@ -5,9 +5,8 @@ jQuery(document).ready(function($){
         if (document.body.scrollTop > 52 || document.documentElement.scrollTop > 52) {
             jQuery('.tc-lp-details-header').css({
                 "background":"#ffffff",
-                "padding":"10px 50px",
-                "border":"1px solid #4f4f4f",
-                "box-shadow": "1px 1px 2px 0px rgba(0,0,0,0.8)",
+                "padding":"15px 50px",
+                "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
                 "z-index":"1",
                 "width": rightWidth + "px"
             });
@@ -15,7 +14,6 @@ jQuery(document).ready(function($){
             jQuery('.tc-lp-details-header').css({
                 "background":"none",
                 "padding":"25px 50px 0",
-                "border":"none",
                 "box-shadow":"none",
                 "z-index":"0",
                 "width":"100%"
