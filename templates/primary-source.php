@@ -96,7 +96,7 @@ if (empty($next_resource)){
 $type = get_post_meta($resource->ID,"oer_mediatype");
 $type = $type[0];
 ?>
-<?php if (function_exists('oer_breadcrumb_display')) : echo oer_breadcrumb_display($resource); ?>
+<?php if (function_exists('oer_breadcrumb_display')) echo oer_breadcrumb_display($resource); ?>
 <div class="lp-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
 <div class="row ps-details-row">
     <?php if (!empty($featured_image_url) || $youtube || $isPDF) {
