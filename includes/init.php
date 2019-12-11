@@ -842,6 +842,41 @@ function lp_get_source_callback(){
     die();
 }
 
+/**
+ * Add Text Feature
+ */
+add_action('wp_ajax_lp_add_text_feature_callback', 'lp_add_text_feature_callback');
+add_action('wp_ajax_nopriv_lp_add_text_feature_callback', 'lp_add_text_feature_callback');
+
+function lp_add_text_feature_callback() {
+    
+    $element_id = (isset($_REQUEST['row_id']))?$_REQUEST['row_id']:1;
+    $element_id++;
+    $label_id = "oer_lp_text_editor_label-".$element_id;
+    $editor_id = "oer_lp_text_feature_editor-".$element_id;
+    $content = '<div class="text-editor-group">';
+    $content .=     '<div class="form-group">';
+    $content .=         '<input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" placeholder="Text Title">';
+    $content .=     '</div>';
+    $content .=     '<div class="form-group';
+                    ob_start(); // Start output buffer
+                    wp_editor('',
+                        'oer-lp-text-feature-editor-' . $element_id,
+                        $settings = array(
+                            'textarea_name' => $editor_id,
+                            'media_buttons' => true,
+                            'textarea_rows' => 10,
+                            'drag_drop_upload' => true,
+                            'teeny' => true,
+                        )
+                    );
+    $content .= ob_get_clean();
+    $content .=     '</div>';
+    $content .= '</div>';
+    echo $content;
+    exit();
+}
+
 function change_post_types_slug( $args, $post_type ) {
 
    /*item post type slug*/   

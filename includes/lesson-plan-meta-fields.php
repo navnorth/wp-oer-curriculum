@@ -773,7 +773,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                         </div>
                     <?php }
                     } elseif ($elementKey == 'lp_required_materials') {
-                        if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) { 
+                        if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
                         ?>
                         <!--Required Equipment Materials Module-->
                         <?php
@@ -783,7 +783,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                             <input type="hidden" name="lp_order[lp_required_materials]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
-                                    <?php _e("Required Equipment Materials", OER_LESSON_PLAN_SLUG); ?>
+                                <?php _e("Required Equipment Materials", OER_LESSON_PLAN_SLUG); ?>
                                     <span class="lp-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -804,6 +804,9 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                             'teeny' => true,
                                         )
                                     ); ?>
+                                </div>
+                                <div class="button-row form-group">
+                                    <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Text", OER_LESSON_PLAN_SLUG); ?></button>
                                 </div>
                             </div>
                         </div>
