@@ -917,6 +917,20 @@ jQuery(document).ready(function ($) {
                     quicktags({ id: 'oer-lp-text-feature-editor-' + id });
                 });
             });
+        },
+        
+        // Add Saving of TinyMCE data
+        lpTinyMCESave: function(){
+            if (typeof wp.data !== "undefined") {
+                wp.data.subscribe(function(){
+                    var isSavingPost = wp.data.select('core/editor').isSavingPost();
+                    var isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
+                    
+                    if (isSavingPost && !isAutosavingPost) {
+                        window.tinyMCE.triggerSave();
+                    }
+                });
+            }
         }
     };
     
@@ -949,6 +963,7 @@ jQuery(document).ready(function ($) {
     LessonPlan.lpPrimarySourceSensitiveMaterial();
     LessonPlan.lpOtherCurriculumType();
     LessonPlan.lpAddTextFeature();
+    LessonPlan.lpTinyMCESave();
 });
 
 //Process Initial Setup
