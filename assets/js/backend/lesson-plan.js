@@ -802,9 +802,10 @@ jQuery(document).ready(function ($) {
                     validated = false;
                     return;
                 }
-                e.preventDefault();
                 var custom_editor = $(".oer-lp-introduction-group[id^=oer-lp-custom-editor-group");
-                if (custom_editor.length>0) {
+                var custom_visible = $(".oer-lp-introduction-group[id^=oer-lp-custom-editor-group").is(":visible");
+                if (custom_editor.length>0 && custom_visible) {
+                    e.preventDefault();
                     $.each(custom_editor, function(index, value){
                         var id = $(this).attr('id');
                         if ($(this).is(":visible")){

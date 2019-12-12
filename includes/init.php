@@ -382,6 +382,11 @@ function lp_save_custom_fields() {
                     }
                 }
             }
+            
+            // Save Additional Text Features
+            if (isset($_POST['oer_lp_text_feature'])){
+                update_post_meta($post->ID, 'oer_lp_text_feature', $_POST['oer_lp_text_feature']);
+            }
 
             // Save elements Order
             if (isset($_POST['lp_order'])) {
@@ -406,7 +411,6 @@ function lp_save_custom_fields() {
                 update_post_meta($post->ID, 'oer_lp_related_inquiry_set', $_POST['oer_lp_related_inquiry_set']);
             }
         }
-        
     }
 }
 
@@ -852,8 +856,8 @@ function lp_add_text_feature_callback() {
     
     $element_id = (isset($_REQUEST['row_id']))?$_REQUEST['row_id']:1;
     $element_id++;
-    $label_id = "oer_lp_text_editor_label-".$element_id;
-    $editor_id = "oer_lp_text_feature_editor-".$element_id;
+    $label_id = "oer_lp_text_feature[label][]";
+    $editor_id = "oer_lp_text_feature[editor][]";
     $content = '<div class="text-editor-group">';
     $content .=     '<div class="form-group">';
     $content .=         '<input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" placeholder="Text Title">';
