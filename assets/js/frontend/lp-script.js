@@ -4,11 +4,10 @@ jQuery(document).ready(function($){
         if (jQuery(window).width()<=600){
             if (document.body.scrollTop > 245 || document.documentElement.scrollTop > 245) {
                 jQuery('.tc-lp-details-header').css({
-                    "background":"none",
-                    "padding":"25px 25px 0",
-                    "box-shadow":"none",
-                    "z-index":"0",
-                    "width":"100%",
+                    "background":"#ffffff",
+                    "padding":"15px 25px",
+                    "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
+                    "z-index":"1",
                     "margin-top":"0"
                 });
             } else {
