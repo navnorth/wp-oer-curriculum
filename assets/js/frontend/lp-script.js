@@ -1,17 +1,17 @@
 jQuery(document).ready(function($){
     // When the user scrolls down 50px from the top of the document, fixed the header to the top
     window.onscroll = function() {
-        rightWidth = jQuery('.single-lesson-plans #main .container .lp-featured-section').outerWidth()
-        if (document.body.scrollTop > 52 || document.documentElement.scrollTop > 52) {
-            jQuery('.tc-lp-details-header').css({
-                "background":"#ffffff",
-                "padding":"15px 50px",
-                "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
-                "z-index":"1",
-                "width": rightWidth + "px"
-            });
-        } else {
-            if (jQuery(window).width()<=600){
+        if (jQuery(window).width()<=600){
+            if (document.body.scrollTop > 245 || document.documentElement.scrollTop > 245) {
+                jQuery('.tc-lp-details-header').css({
+                    "background":"none",
+                    "padding":"25px 25px 0",
+                    "box-shadow":"none",
+                    "z-index":"0",
+                    "width":"100%",
+                    "margin-top":"245px"
+                });
+            } else {
                 jQuery('.tc-lp-details-header').css({
                     "background":"none",
                     "padding":"25px 25px 0",
@@ -19,6 +19,17 @@ jQuery(document).ready(function($){
                     "z-index":"0",
                     "width":"100%",
                     "margin-top":"0"
+                });
+            }
+        } else {
+            rightWidth = jQuery('.single-lesson-plans #main .container .lp-featured-section').outerWidth()
+            if (document.body.scrollTop > 52 || document.documentElement.scrollTop > 52) {
+                jQuery('.tc-lp-details-header').css({
+                    "background":"#ffffff",
+                    "padding":"15px 50px",
+                    "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
+                    "z-index":"1",
+                    "width": rightWidth + "px"
                 });
             } else {
                 jQuery('.tc-lp-details-header').css({
