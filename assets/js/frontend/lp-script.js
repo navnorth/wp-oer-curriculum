@@ -11,13 +11,24 @@ jQuery(document).ready(function($){
                 "width": rightWidth + "px"
             });
         } else {
-            jQuery('.tc-lp-details-header').css({
-                "background":"none",
-                "padding":"25px 50px 0",
-                "box-shadow":"none",
-                "z-index":"0",
-                "width":"100%"
-            });
+            if (jQuery(window).width()<=600){
+                jQuery('.tc-lp-details-header').css({
+                    "background":"none",
+                    "padding":"25px 25px 0",
+                    "box-shadow":"none",
+                    "z-index":"0",
+                    "width":"100%",
+                    "margin-top":"0"
+                });
+            } else {
+                jQuery('.tc-lp-details-header').css({
+                    "background":"none",
+                    "padding":"25px 50px 0",
+                    "box-shadow":"none",
+                    "z-index":"0",
+                    "width":"100%"
+                });
+            }
         }
     };
     
