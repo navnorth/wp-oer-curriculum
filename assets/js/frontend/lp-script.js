@@ -8,7 +8,7 @@ jQuery(document).ready(function($){
                     "padding":"15px 25px",
                     "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
                     "z-index":"1",
-                    "top":"0"
+                    "top":"0 !important"
                 });
             } else {
                 jQuery('.tc-lp-details-header').css({
@@ -17,7 +17,7 @@ jQuery(document).ready(function($){
                     "box-shadow":"none",
                     "z-index":"0",
                     "width":"100%",
-                    "top":"290px"
+                    "top":"290px !important"
                 });
             }
         } else {
