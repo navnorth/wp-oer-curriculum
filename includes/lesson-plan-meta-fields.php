@@ -842,7 +842,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                 }
                                 ?>
                                 <div class="button-row form-group">
-                                    <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Text", OER_LESSON_PLAN_SLUG); ?></button>
+                                    <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Section", OER_LESSON_PLAN_SLUG); ?></button>
                                 </div>
                             </div>
                         </div>

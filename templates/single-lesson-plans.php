@@ -272,6 +272,26 @@ if (have_posts()) : while (have_posts()) : the_post();
                             <?php
                             }
                         }
+                        
+                        // Additional Section
+                        $additional_sections = isset($post_meta_data['oer_lp_text_feature'][0]) ? unserialize($post_meta_data['oer_lp_text_feature'][0]) : array();
+                         if (is_array($additional_sections)){
+                            $cnt = 0;
+                            if (isset($additional_sections['label']))
+                                $cnt = count($additional_sections['label']);
+                            if (isset($additional_sections['editor'])){
+                                $cnt = (count($additional_sections['editor'])>$cnt) ? count($additional_sections['editor']) : $cnt;
+                            }
+                            for ($i=0;$i<$cnt;$i++){
+                                if (!empty($additional_sections['label'][$i]) || !empty($additional_sections['editor'][$i])) {
+                                ?>
+                                <div class="form-field">
+                                    <span class="tc-lp-label"><?php echo $additional_sections['label'][$i]; ?>:</span> <span class="tc-lp-value"><?php echo $additional_sections['editor'][$i]; ?></span>
+                                </div>
+                                <?php
+                                }
+                            }
+                         }
                         ?>
                     </div>
                 </div>
