@@ -203,9 +203,12 @@ jQuery(document).ready(function ($) {
             $(document).on('click', '.resource-reorder-up', function(){
                 var $current = $(this).closest('.lp-primary-resource-element-wrapper');
                 var $previous = $current.prev('.lp-primary-resource-element-wrapper');
+                var ret = $current.find('iframe').attr('id').replace('_ifr','');
+                tinyMCE.execCommand('mceRemoveEditor', false, $('#'+ret).attr('id'));
                 if($previous.length !== 0){
                     $current.insertBefore($previous);
                     LessonPlan.toggleUpDownButton();
+                    tinyMCE.execCommand('mceAddEditor', false, $('#'+ret).attr('id'));
                 }
                 return false;
             });
@@ -213,9 +216,12 @@ jQuery(document).ready(function ($) {
             $(document).on('click', '.resource-reorder-down', function(){
                 var $current = $(this).closest('.lp-primary-resource-element-wrapper');
                 var $next = $current.next('.lp-primary-resource-element-wrapper');
+                var ret = $current.find('iframe').attr('id').replace('_ifr','');
+                tinyMCE.execCommand('mceRemoveEditor', false, $('#'+ret).attr('id'));
                 if($next.length !== 0){
                     $current.insertAfter($next);
                     LessonPlan.toggleUpDownButton();
+                    tinyMCE.execCommand('mceAddEditor', false, $('#'+ret).attr('id'));
                 }
                 return false;
             });
@@ -739,9 +745,10 @@ jQuery(document).ready(function ($) {
         // Add More Primary resources
         addMorePrimaryResource: function () {
             $(document).on('click', '.lp-add-more-resource', function () {
+                var resource_field_type = $(this).attr('typ');
                 var total_form_box = parseInt($('.lp-primary-resource-element-panel').find('.lp-primary-resource-element-wrapper').length, 10);
                 total_form_box += 1;
-                $.post(ajaxurl, {action:'lp_add_more_pr_callback', row_id: total_form_box}).done(function (response) {
+                $.post(ajaxurl, {action:'lp_add_more_pr_callback', row_id: total_form_box, type: resource_field_type}).done(function (response) {
                     if($('div.lp-primary-resource-element-wrapper').length) {
                         $(response).insertAfter('div.lp-primary-resource-element-wrapper:last').tinymce_textareas();
                     } else {
@@ -764,10 +771,14 @@ jQuery(document).ready(function ($) {
             });
             $.fn.tinymce_textareas = function(){
                 tinyMCE.init({
+                    //plugins: 'print preview fullpage powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable',
+                    plugins: 'lists link fullscreen',
                     skin: 'wp_theme',
                     mode: 'exact',
                     menubar: false,
-                    toolbar: 'bold italic underscore blockquote strikethrough bullist numlist alignleft aligncenter alignright undo redo'
+                    //toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
+                    toolbar: 'bold italic underline blockquote strikethrough numlist bullist alignleft aligncenter alignright undo redo link fullscreen'
+                    
                 });
             }
         },

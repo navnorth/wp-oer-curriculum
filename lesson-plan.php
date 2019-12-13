@@ -153,7 +153,8 @@ function lp_add_rewrites()
 	add_rewrite_tag( '%source%', '([^&]+)' );
     add_rewrite_tag( '%topic%', '([^&]+)' );
     add_rewrite_tag( '%module%', '([^&]+)' );
-	add_rewrite_rule( '^'.$root_slug.'/([^/]*)/source/([^&]+)/?$', 'index.php?post_type=lesson-plans&curriculum=$matches[1]&source=$matches[2]', 'top' );
+    add_rewrite_tag( '%idx%', '([^&]+)' );
+	add_rewrite_rule( '^'.$root_slug.'/([^/]*)/source/([^&]+)/idx/([^&]+)/?$', 'index.php?post_type=lesson-plans&curriculum=$matches[1]&source=$matches[2]&idx=$matches[3]', 'top' );
     add_rewrite_rule( '^'.$root_slug.'/topic/([^&]+)/?$', 'index.php?post_type=lesson-plans&topic=$matches[1]', 'top' );
     add_rewrite_rule( '^'.$root_slug.'/([^/]*)/module/([^&]+)/?$', 'index.php?post_type=lesson-plans&curriculum=$matches[1]&module=$matches[2]', 'top' );
     add_rewrite_endpoint( 'curriculum', EP_PERMALINK | EP_PAGES );

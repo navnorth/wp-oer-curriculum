@@ -484,83 +484,114 @@ add_action('wp_ajax_nopriv_lp_add_more_pr_callback', 'lp_add_more_pr_callback');
 
 function lp_add_more_pr_callback() {
     $totalElements = isset($_REQUEST['row_id']) ? $_REQUEST['row_id'] : '25';
-    $content = '<div class="panel panel-default lp-primary-resource-element-wrapper" id="lp-primary-resource-element-wrapper-' . $totalElements . '">
-                    <div class="panel-heading">
-                        <h3 class="panel-title lp-module-title">
-                            Resource
-                            <span class="lp-sortable-handle">
-                                <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
-                                <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
-                            </span>
-                            <span class="btn btn-danger btn-sm lp-remove-source"
-                                  title="Delete"
-                                  disabled="disabled"
-                            ><i class="fa fa-trash"></i> </span>
-                        </h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Resource</label>
-                                    <select name="oer_lp_primary_resources[resource][]" class="form-control">';
-                                        $content .= oer_lp_primary_resource_dropdown();
-                        $content .= '</select>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="checkbox pull-right">
-                                    <label>
-                                        <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
-                                        Sensitive Material
-                                    </label>
-                                </div>
-                            </div>
+    $prType = isset($_REQUEST['type']) ? $_REQUEST['type'] : 'resource';
+    //RESOURCE FIELD TYPE
+    if($prType == 'resource'){
+      $content = '<div class="panel panel-default lp-primary-resource-element-wrapper" id="lp-primary-resource-element-wrapper-' . $totalElements . '">
+                      <div class="panel-heading">
+                          <h3 class="panel-title lp-module-title">
+                              Resource
+                              <span class="lp-sortable-handle">
+                                  <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
+                                  <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
+                              </span>
+                              <span class="btn btn-danger btn-sm lp-remove-source"
+                                    title="Delete"
+                                    disabled="disabled"
+                              ><i class="fa fa-trash"></i> </span>
+                          </h3>
+                      </div>
+                      <div class="panel-body">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label>Resource</label>
+                                      <select name="oer_lp_primary_resources[resource][]" class="form-control">';
+                                          $content .= oer_lp_primary_resource_dropdown();
+                          $content .= '</select>
+                                  </div>
+                              </div>
+                              <div class="col-md-5">
+                                  <div class="checkbox pull-right">
+                                      <label>
+                                          <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="' . $prType .'">
+                                          <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
+                                          Sensitive Material
+                                      </label>
+                                  </div>
+                              </div>
+                          </div>';
+      //TEXTBOX FIELD TYPE 
+      }else{                   
+        $content = '<div class="panel panel-default lp-primary-resource-element-wrapper" id="lp-primary-resource-element-wrapper-' . $totalElements . '">
+                        <div class="panel-heading">
+                            <h3 class="panel-title lp-module-title">
+                                Texbox
+                                <span class="lp-sortable-handle">
+                                    <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
+                                    <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
+                                </span>
+                                <span class="btn btn-danger btn-sm lp-remove-source"
+                                      title="Delete"
+                                      disabled="disabled"
+                                ><i class="fa fa-trash"></i> </span>
+                            </h3>
                         </div>
-                        
-                        
-                        <div class="form-group">
-                            <label>Title</label>
-                            <input type="text"
-                            class="form-control"
-                            name="oer_lp_primary_resources[title][]"
-                            placeholder="Resource Title"
-                            value="">';
-                            ob_start(); // Start output buffer
-                            //wp_editor('',
-                            //    'oer-lp-resource-teacher-' . $totalElements,
-                            //    $settings = array(
-                            //        'textarea_name' => 'oer_lp_primary_resources[teacher_info][]',
-                            //        'media_buttons' => true,
-                            //        'textarea_rows' => 6,
-                            //        'drag_drop_upload' => true,
-                            //        'teeny' => true,
-                            //        'quicktags' => true,
-                            //        'tinymce' => true
-                            //    )
-                            //);
-                        $content .= ob_get_clean();
-                        $content .= '</div>';
-                        $content .= '<div class="form-group">
-                            <label>Description</label>';
-                            ob_start(); // Start output buffer
-                            wp_editor('',
-                                'oer-lp-resource-student-' . $totalElements,
-                                $settings = array(
-                                    'textarea_name' => 'oer_lp_primary_resources[description][]',
-                                    'media_buttons' => true,
-                                    'textarea_rows' => 6,
-                                    'drag_drop_upload' => true,
-                                    'teeny' => true,
-                                    'quicktags' => true,
-                                    'tinymce' => true
-                                )
-                            );
-                            $content .= ob_get_clean();
-                        $content .= '</div>
-                    </div>
-                </div>';
-
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="checkbox pull-right">
+                                        <label>
+                                            <input type="hidden" name="oer_lp_primary_resources[resource][]" value="">
+                                            <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="'.$prType.'">
+                                            <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
+                                            Sensitive Material
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>';
+      }                
+            $content .= '<div class="form-group">
+                              <label>Title</label>
+                              <input type="text"
+                              class="form-control"
+                              name="oer_lp_primary_resources[title][]"
+                              placeholder="Resource Title"
+                              value="">';
+                              ob_start(); // Start output buffer
+                              //wp_editor('',
+                              //    'oer-lp-resource-teacher-' . $totalElements,
+                              //    $settings = array(
+                              //        'textarea_name' => 'oer_lp_primary_resources[teacher_info][]',
+                              //        'media_buttons' => true,
+                              //        'textarea_rows' => 6,
+                              //        'drag_drop_upload' => true,
+                              //        'teeny' => true,
+                              //        'quicktags' => true,
+                              //        'tinymce' => true
+                              //    )
+                              //);
+                          $content .= ob_get_clean();
+                          $content .= '</div>';
+                          $content .= '<div class="form-group">
+                              <label>Description</label>';
+                              ob_start(); // Start output buffer
+                              wp_editor('',
+                                  'oer-lp-resource-student-' . $totalElements,
+                                  $settings = array(
+                                      'textarea_name' => 'oer_lp_primary_resources[description][]',
+                                      'media_buttons' => true,
+                                      'textarea_rows' => 6,
+                                      'drag_drop_upload' => true,
+                                      'teeny' => true,
+                                  )
+                              );
+                              $content .= ob_get_clean();
+                          $content .= '</div>
+                      </div>
+                  </div>';
+    
+    
     echo $content;
     exit();
 }

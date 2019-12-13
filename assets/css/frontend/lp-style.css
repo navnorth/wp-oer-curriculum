@@ -37,9 +37,7 @@ body.single-lesson-plans {
     color: #fff;
     font-size: 18px !important;
 }
-.tc-lp-details {
-    padding: 5px 0 25px;
-}
+.tc-lp-details {padding: 5px 0 25px; float: left; width: 100%;}
 .single-lesson-plans .row { margin-right:0; margin-left:0; width:100%; display:block; float:none;}
 .tc-lp-details-header .tc-lp-title {
     color: #333;
@@ -55,7 +53,7 @@ body.single-lesson-plans {
     margin:10px 0;
 }
 .tc-lp-details-description {
-    padding: 20px 0;
+    padding: 0px 0 20px 0px;
     color: #333 !important;
     font-size: 14px;
     line-height:18px;
@@ -770,22 +768,62 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     fill: #ffb802;
 }
 .tc-lp-controls .sharethis-inline-share-buttons#st-1 .st-btn[data-network='sharethis']:hover svg{ fill:#fff; }
-h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; text-transform:uppercase; font-weight:bold; text-decoration:underline; color:#356483; line-height:19px; margin:0; }
-.tc-related-inquiry-sets-details { padding:10px 0; }
+h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; text-transform:uppercase; font-weight:bold; color:#356483; line-height:19px; margin:0; float: left;}
+h4.tc-lp-field-heading span.oer_lp_related_fields {text-decoration: underline;}
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list { padding-left:0;}
-.tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li { font-size:14px; line-height:19px; list-style:none; }
+.tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li { font-size:14px; list-style:none; }
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a { color:#77B143; text-decoration:none;  }
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a:hover,
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a:active,
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a:focus { text-decoration: underline; }
 .lp-author-label, .tc-lp-label { margin-right:10px; font-size:14px; color:#4F4F4F; font-weight:bold; text-transform: uppercase; }
 .tc-lp-author a { font-size:14px; color:#77B143; }
-.tc-lp-standards-list, .tc-lp-subject-areas-list { padding-left:0; margin-top: 5px; margin-bottom: 15px; }
-.tc-lp-standards-list li, .tc-lp-subject-areas-list li { list-style:none; font-size:14px; }
+.tc-lp-standards-list, .tc-related-inquiry-sets-list, .tc-lp-subject-areas-list, .tc-lp-objectives-list { padding-left:0; margin-top: 0px; margin-bottom: 0px; padding-bottom:15px;}
+.tc-lp-standards-list li, .tc-lp-subject-areas-list li, .tc-lp-objectives-list li { list-style:none; font-size:14px; }
 .tc-lp-standards-list li a, .tc-lp-subject-areas-list li a { color: #77B143; text-decoration: none; }
+.tc-lp-objectives-list li a, .tc-lp-objectives-list li a { color: #77B143; text-decoration: none; }
 .tc-lp-standards-list li .collapse { color:#4f4f4f; margin-left:15px; }
+.tc-lp-objectives-details ul.tc-lp-objectives-list { padding-left:0;}
 .lp_keywords_container span a { color:#77B143; border-color:#E0E0E0; }
 .lp_keywords_container span { margin: 5px; }
+.tc-lp-objectives, .tc-lp-standards, .tc-related-inquiry-sets {margin-bottom: 0px;}
+a.tc_lp_collapse_button h4 {line-height: 1.8em;}
+.tc-related-inquiry-sets, .tc-lp-standards, .tc-lp-subject-areas, .tc-lp-objectives {float: left;width: 100%;}
+.tc-lp-details-content .curriculum-detail, .tc-lp-details-content .featured-image {float: left;}
+a.tc_lp_collapse_button>h4 span.oer_lp_acicon {position: relative;}
+a.tc_lp_collapse_button {
+  display: block;
+  position: relative;
+  clear: left;
+  padding-right: 30px;
+  float: left;
+  margin-bottom: 10px;
+}
+a.tc_lp_collapse_button>h4 span.oer_lp_acicon:after {
+    content: "\f460";
+    font: 400 16px dashicons;
+    color: #356483;
+    position: absolute;
+    line-height: 16px;
+    padding-left: 5px;
+    bottom: 1px;
+}
+a.tc_lp_collapse_button.collapsed>h4 span.oer_lp_acicon:after {
+    content: "\f132";
+}
+div#tcHiddenFields {float: left;}
+@media (max-width: 1023px){
+  .wp_oer_breadcrumb {
+      padding: 12px 50px !important;
+      font-size: .9em !important;
+
+  }
+}
+@media (max-width: 792px){
+  .tc-lp-details-content .featured-image {
+      padding-left: 0px !important;
+  }
+}
 .see-more-row .center { text-align:center; }
 .see-more-row .see-more-link, .see-more-row .see-more-link:active { font-size:14px; font-weight:bold; color:#77B143; line-height:19px; cursor:pointer; text-decoration:none; }
 .see-more-row .see-more-link:hover { text-decoration:underline; }
@@ -875,7 +913,7 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
 .single-lesson-plans #main .container .tc-lp-details-content {
     padding-left:50px;
     padding-right:50px;
-    margin-top:50px;
+    margin-top:20px;
 }
 /** End of Topic Template Styling **/
 @media (min-width: 1443px){
@@ -1021,6 +1059,9 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
 }
 .ps-details-row {
     overflow:hidden; 
+}
+.ps-details-row .ps-info-description li {
+    list-style-position: inside;
 }
 .resource-overlay {
     position: absolute;

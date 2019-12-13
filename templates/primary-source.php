@@ -23,6 +23,7 @@ if ($curriculum)
 
 // Get Resource ID
 $psource = get_query_var('source');
+$psindex = get_query_var('idx');
 $sources = explode("-",$psource);
 if ($sources)
     $source_id = $sources[count($sources)-1];
@@ -53,7 +54,7 @@ $next_title = "";
 if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
     if (!empty(array_filter($primary_resources['resource']))) {
         foreach ($primary_resources['resource'] as $resourceKey => $source) {
-            if ($source==$resource->post_title){
+            if ($psindex == $resourceKey){
                 $new_title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
                 $new_description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
                 break;
@@ -63,12 +64,12 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
         if (isset($primary_resources['resource'][$index-1])){
             $prev_resource = oer_lp_get_resource_details($primary_resources['resource'][$index-1]);
             $prev_title = (isset($primary_resources['title'][$index-1]) ? $primary_resources['title'][$index-1]: "");
-            $prev_url = $back_url."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID;
+            $prev_url = $back_url."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID.'/idx/'.($index-1);
         }
         if (isset($primary_resources['resource'][$index+1])){
             $next_resource = oer_lp_get_resource_details($primary_resources['resource'][$index+1]);
             $next_title = (isset($primary_resources['title'][$index+1]) ? $primary_resources['title'][$index+1]: "");
-            $next_url = $back_url."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID;
+            $next_url = $back_url."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID.'/idx/'.($index+1);
         }
         if ($index==0)
             $lp_prev_class = "ps-nav-hidden";
@@ -96,7 +97,16 @@ if (empty($next_resource)){
 $type = get_post_meta($resource->ID,"oer_mediatype");
 $type = $type[0];
 ?>
-<?php if (function_exists('oer_breadcrumb_display')) echo oer_breadcrumb_display($resource); ?>
+<?php
+  //Breadcrumb trail
+  $sup = (!empty($new_title))? $new_title : $resource->post_title;
+  $ret = '<div class="wp_oer_breadcrumb">';
+  $ret .= '<a href="'.get_site_url().'">Home</a>';
+  $ret .= ' / <a href="'.get_permalink( $curriculum_details->ID ).'">'.$curriculum_details->post_title.'</a>';
+  $ret .= ' / '.$sup;
+  $ret .= '</div>';
+  echo $ret;
+?>
 <div class="lp-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
 <div class="row ps-details-row">
     <?php if (!empty($featured_image_url) || $youtube || $isPDF) {

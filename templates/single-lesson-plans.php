@@ -29,6 +29,7 @@ if ($lp_grade!=="pre-k" && $lp_grade!=="k")
 // Download Copy
 $oer_lp_download_copy_document = (isset($post_meta_data['oer_lp_download_copy_document'][0]) ? $post_meta_data['oer_lp_download_copy_document'][0] : '');
 $oer_lp_standards = isset($post_meta_data['oer_lp_standards'][0])?$post_meta_data['oer_lp_standards'][0]:"";
+$oer_lp_related_objectives = isset($post_meta_data['oer_lp_related_objective'][0])? unserialize($post_meta_data['oer_lp_related_objective'][0]): array('');
 $tags = get_the_terms($post->ID,"post_tag");
 $authors = (isset($post_meta_data['oer_lp_authors'][0]) ? unserialize($post_meta_data['oer_lp_authors'][0]) : array());
 
@@ -50,6 +51,8 @@ $author_set = (get_option('oer_lp_authors_label'))?true:false;
 $author_enabled = (get_option('oer_lp_authors_enabled'))?true:false;
 $standards_set = (get_option('oer_lp_standards_label'))?true:false;
 $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
+$objectives_set = (get_option('oer_lp_related_objective_label'))?true:false;
+$objectives_enabled = (get_option('oer_lp_related_objective_enabled'))?true:false;
 $age_levels_set = (get_option('oer_lp_age_levels_label'))?true:false;
 $age_levels_enabled = (get_option('oer_lp_age_levels_enabled'))?true:false;
 $suggested_time_set = (get_option('oer_lp_suggested_instructional_time_label'))?true:false;
@@ -98,10 +101,12 @@ if (have_posts()) : while (have_posts()) : the_post();
                         if (($related_inquiry_set && $related_inquiry_enabled) || !$related_inquiry_set) {
                     ?>
                     <div class="tc-related-inquiry-sets">
-                        <h4 class="tc-related-inquiry-sets-heading clearfix">
-                            <?php echo oer_lp_get_field_label('oer_lp_related_inquiry_set'); ?>
-                        </h4>
-                        <div class="tc-related-inquiry-sets-details clearfix">
+                        <a href="#collapse_lp_related_inquiry_sets" data-toggle="collapse" class="tc_lp_collapse_button collapsed" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          <h4 class="tc-related-inquiry-sets-heading clearfix">
+                              <span class="oer_lp_related_fields"><?php echo oer_lp_get_field_label('oer_lp_related_inquiry_set'); ?></span><span class="oer_lp_acicon"></span>
+                          </h4>
+                        </a>
+                        <div class="tc-related-inquiry-sets-details clearfix collapse" id="collapse_lp_related_inquiry_sets">
                             <ul class="tc-related-inquiry-sets-list">
                             <?php
                             foreach($related_inquiry_sets as $inquiry_set) {
@@ -121,10 +126,12 @@ if (have_posts()) : while (have_posts()) : the_post();
                          if (($standards_set && $standards_enabled) || !$standards_set) {
                     ?>
                     <div class="tc-lp-standards">
-                        <h4 class="tc-lp-field-heading clearfix">
-                            <?php echo oer_lp_get_field_label('oer_lp_standards'); ?>
-                        </h4>
-                        <div class="tc-lp-standards-details clearfix">
+                        <a href="#collapse_lp_standards" data-toggle="collapse" class="tc_lp_collapse_button collapsed" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          <h4 class="tc-lp-field-heading clearfix">
+                              <span class="oer_lp_related_fields"><?php echo oer_lp_get_field_label('oer_lp_standards'); ?></span><span class="oer_lp_acicon"></span>
+                          </h4>
+                        </a>
+                        <div class="tc-lp-standards-details clearfix collapse" id="collapse_lp_standards">
                             <ul class="tc-lp-standards-list">
                                 <?php
                                 $stds = array();
@@ -191,10 +198,12 @@ if (have_posts()) : while (have_posts()) : the_post();
                         if (!empty($post_terms)) {
                     ?>
                     <div class="tc-lp-subject-areas">
-                       <h4 class="tc-lp-field-heading clearfix">
-                            <?php _e("Subjects",OER_LESSON_PLAN_SLUG); ?>
-                        </h4>
-                       <div class="tc-lp-subject-details clearfix">
+                       <a href="#collapse_lp_subjects" class="tc_lp_collapse_button collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                         <h4 class="tc-lp-field-heading clearfix">
+                              <span class="oer_lp_related_fields"><?php _e("Subjects",OER_LESSON_PLAN_SLUG); ?></span><span class="oer_lp_acicon"></span>
+                          </h4>
+                       </a>
+                       <div class="tc-lp-subject-details clearfix collapse" id="collapse_lp_subjects">
                             <ul class="tc-lp-subject-areas-list">
                                 <?php
                                 $i = 1;
@@ -216,6 +225,31 @@ if (have_posts()) : while (have_posts()) : the_post();
                         </div>
                     </div>
                     <?php } ?>
+                    
+                    
+                    <?php 
+                    if (($objectives_set && $objectives_enabled) || !$standards_set):
+                    
+                      $_tmp_html = ''; $_cnt = 1;
+                      foreach($oer_lp_related_objectives as $_obj):
+                        if(trim($_obj,' ') > ''):
+                          $_tmp_html .= '<li>'.$_cnt++.') '.$_obj.'</li>';
+                        endif;
+                      endforeach;            
+                      if ($_tmp_html > ''): ?>
+                      <div class="tc-lp-objectives">
+                        <a href="#collapse_lp_objectives" class="tc_lp_collapse_button collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          <h4 class="tc-lp-field-heading clearfix"><span class="oer_lp_related_fields"><?php echo oer_lp_get_field_label('oer_lp_related_objective'); ?></span><span class="oer_lp_acicon"></span></h4>
+                        </a>                
+                        <div class="tc-lp-objectives-details clearfix collapse" id="collapse_lp_objectives">
+                            <ul class="tc-lp-objectives-list"><?php echo $_tmp_html; ?></ul>
+                        </div>
+                      </div>
+                      <?php endif; ?>
+                    <?php endif; ?>
+                    
+                    
+                    
                     <?php if ($oer_sensitive) : ?>
                     <div class="tc-sensitive-material-section">
                         <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
@@ -341,7 +375,8 @@ if (have_posts()) : while (have_posts()) : the_post();
         $primary_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
         if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             if (!empty(array_filter($primary_resources['resource']))) {
-                foreach ($primary_resources['resource'] as $resourceKey => $resource) {
+                $_idx = 0;
+                foreach ($primary_resources['resource'] as $resourceKey => $resource) {;
                     $resource = get_page_by_title($resource,OBJECT,"resource");
                     $url = get_post_meta($resource->ID, "oer_resourceurl", true);
                     $type = get_post_meta($resource->ID,"oer_mediatype")[0];
@@ -354,15 +389,17 @@ if (have_posts()) : while (have_posts()) : the_post();
                     $oer_authorurl2 = get_post_meta($resource->ID, "oer_authorurl2", true);
                     $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
                     $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
+                    $_resource_field_type = (isset($primary_resources['field_type'][$resourceKey]) ? $primary_resources['field_type'][$resourceKey]: "");
                     $title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
-                    
-                    if ($sensitiveMaterialValue!=="")
-                        $sensitiveMaterial = $sensitiveMaterialValue;
+                    $description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
+                    if(trim($resource->post_title,' ')=='') $type = 'text';
+                    if($_resource_field_type != 'textbox' && trim($resource->post_title,' ')!='') $title = $resource->post_title AND $description = $resource->post_content;
+                    if ($sensitiveMaterialValue!=="") $sensitiveMaterial = $sensitiveMaterialValue;  
                 ?>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                     <div class="media-image">
                         <div class="image-thumbnail">
-                            <?php $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID); ?>
+                            <?php $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID)."/idx/".$_idx++; ?>
                             <a href="<?php echo $ps_url;  ?>">
                                 <?php if($resource_img==''): $_avtr = getResourceIcon($type,$url); ?>	
                                   <div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div>	
@@ -377,7 +414,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                             
                         </div>
                         <div class="lp-resource-title">
-                          <b><?php echo $resource->post_title; ?></b>
+                          <b><?php echo $title; ?></b>
                         </div>	
                         <div class="lp-resource-author">	
                           <?php if( $oer_authorname != ''):?>	
@@ -387,7 +424,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                             <div class="lp-resource-author_block"><a href=""><?php echo $oer_authorname2; ?></a></div>	
                           <?php endif;*/ ?>
                         </div>
-                        <div class="lp-resource-excerpt"><?php echo oer_get_related_resource_content($resource->post_content, 75); ?></div>
+                        <div class="lp-resource-excerpt"><?php echo oer_get_related_resource_content(strip_tags($description), 50); ?></div>
                     </div>
                     <?php if ($sensitiveMaterial!=="" && $sensitiveMaterial!=="no"): ?>
                     <div class="sensitive-source">
