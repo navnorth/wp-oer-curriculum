@@ -9,7 +9,7 @@ jQuery(document).ready(function($){
                     "padding":"15px 25px",
                     "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
                     "z-index":"1",
-                    "margin-top":"0"
+                    "top":"0"
                 });
             } else {
                 jQuery('.tc-lp-details-header').css({
@@ -18,7 +18,7 @@ jQuery(document).ready(function($){
                     "box-shadow":"none",
                     "z-index":"0",
                     "width":"100%",
-                    "margin-top": headerHeight + "px"
+                    "top": headerHeight + "px"
                 });
             }
         } else {
