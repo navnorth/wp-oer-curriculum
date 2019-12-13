@@ -1071,7 +1071,7 @@ h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; tex
         height: 225px;
     }
     .single-lesson-plans #main .container .tc-lp-details-header {
-        top:290px !important;
+        margin-top:245px;
         padding:25px 25px 0;
     }
     .wp_oer_breadcrumb { margin-top:60px; }
