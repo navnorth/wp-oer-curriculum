@@ -905,7 +905,7 @@ div#tcHiddenFields {float: left;}
     top: 0;
     transition: 0.2s;
     width: 100%;
-    padding: 25px 50px 0;
+    padding: 15px 50px 0;
 }
 .single-lesson-plans.admin-bar #main .container .tc-lp-details-header{
     top:32px;
@@ -914,6 +914,10 @@ div#tcHiddenFields {float: left;}
     padding-left:50px;
     padding-right:50px;
     margin-top:20px;
+}
+.single-lesson-plans .wp_oer_breadcrumb {
+    padding: 25px 10px;
+    font-size: 12px !important;
 }
 /** End of Topic Template Styling **/
 @media (min-width: 1443px){
