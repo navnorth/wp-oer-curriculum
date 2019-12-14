@@ -1111,4 +1111,9 @@ div#tcHiddenFields {float: left;}
         width: 100%;
         height: 225px;
     }
+    .single-lesson-plans #main .container .tc-lp-details-header {
+        top:245px;
+        padding:25px 25px 0;
+    }
+    .wp_oer_breadcrumb { margin-top:60px; }
 }

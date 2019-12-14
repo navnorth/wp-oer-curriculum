@@ -152,6 +152,6 @@
     background-color:rgba(241,241,241,0.5);
     cursor:pointer;
 }
-.panel-group .panel .panel-body div {
-    box-sizing: border-box !important;
-}
+.button-row { margin:10px 0; }
+.text-editor-group { margin:10px 0; }
+.panel-group .panel .panel-body div {box-sizing: border-box !important;}

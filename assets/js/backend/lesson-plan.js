@@ -813,9 +813,10 @@ jQuery(document).ready(function ($) {
                     validated = false;
                     return;
                 }
-                e.preventDefault();
                 var custom_editor = $(".oer-lp-introduction-group[id^=oer-lp-custom-editor-group");
-                if (custom_editor.length>0) {
+                var custom_visible = $(".oer-lp-introduction-group[id^=oer-lp-custom-editor-group").is(":visible");
+                if (custom_editor.length>0 && custom_visible) {
+                    e.preventDefault();
                     $.each(custom_editor, function(index, value){
                         var id = $(this).attr('id');
                         if ($(this).is(":visible")){
@@ -905,9 +906,45 @@ jQuery(document).ready(function ($) {
                 else
                     $('.other-type-group').hide();
             });
+        },
+        
+        // Add Text Feature
+        lpAddTextFeature: function(){
+            $(document).on("click", "#addTxtBtn", function(e){
+                e.preventDefault();
+                var dis = $(this).closest('.button-row.form-group');
+                
+                var total_text_features = parseInt($('.text-editor-group').length, 10);
+                var id = total_text_features + 1;
+                $.post(ajaxurl,
+                       {
+                        action:'lp_add_text_feature_callback',
+                        row_id: total_text_features
+                       }).done(function (response) {
+                    dis.before(response);
+
+                    tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-text-feature-editor-' + id );
+                    tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-text-feature-editor-' + id );
+                    quicktags({ id: 'oer-lp-text-feature-editor-' + id });
+                });
+            });
+        },
+        
+        // Add Saving of TinyMCE data
+        lpTinyMCESave: function(){
+            if (typeof wp.data !== "undefined") {
+                wp.data.subscribe(function(){
+                    var isSavingPost = wp.data.select('core/editor').isSavingPost();
+                    var isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
+                    
+                    if (isSavingPost && !isAutosavingPost) {
+                        window.tinyMCE.triggerSave();
+                    }
+                });
+            }
         }
     };
-
+    
     // Initialize all function on ready state
     LessonPlan.updateActivityTitle();
     LessonPlan.addMoreTimeElements();
@@ -936,6 +973,8 @@ jQuery(document).ready(function ($) {
     LessonPlan.lpRemoveCopyLesson();
     LessonPlan.lpPrimarySourceSensitiveMaterial();
     LessonPlan.lpOtherCurriculumType();
+    LessonPlan.lpAddTextFeature();
+    LessonPlan.lpTinyMCESave();
 });
 
 //Process Initial Setup

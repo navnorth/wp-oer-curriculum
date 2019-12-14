@@ -870,7 +870,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                         </div>
                     <?php }
                     } elseif ($elementKey == 'lp_required_materials') {
-                        if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) { 
+                        if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
                         ?>
                         <!--Required Equipment Materials Module-->
                         <?php
@@ -880,7 +880,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                             <input type="hidden" name="lp_order[lp_required_materials]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
-                                    <?php _e("Required Equipment Materials", OER_LESSON_PLAN_SLUG); ?>
+                                <?php _e("Required Equipment Materials", OER_LESSON_PLAN_SLUG); ?>
                                     <span class="lp-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -901,6 +901,45 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                             'teeny' => true,
                                         )
                                     ); ?>
+                                </div>
+                                <?php
+                                $text_features = isset($post_meta_data['oer_lp_text_feature'][0]) ? unserialize($post_meta_data['oer_lp_text_feature'][0]) : array();
+                                if (is_array($text_features)){
+                                    $label_id = "oer_lp_text_feature[label][]";
+                                    $editor_id = "oer_lp_text_feature[editor][]";
+                                ?>
+                                    <div class="text-editor-group">
+                                    <?php
+                                    $cnt = 0;
+                                    if (isset($text_features['label']))
+                                        $cnt = count($text_features['label']);
+                                    if (isset($text_features['editor'])){
+                                        $cnt = (count($text_features['editor'])>$cnt) ? count($text_features['editor']) : $cnt;
+                                    }
+                                    for ($i=0;$i<$cnt;$i++){
+                                        echo '<div class="form-group">';
+                                        echo '<input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" value="'.$text_features['label'][$i].'">';
+                                        echo '</div>';
+                                        echo '<div class="form-group">';
+                                        wp_editor( (isset($text_features['editor'][$i]) ? $text_features['editor'][$i] : ""),
+                                            'oer-lp-text-feature-editor-' . $i,
+                                            $settings = array(
+                                                'textarea_name' => $editor_id,
+                                                'media_buttons' => true,
+                                                'textarea_rows' => 10,
+                                                'drag_drop_upload' => true,
+                                                'teeny' => true,
+                                            )
+                                        );
+                                        echo '</div>';
+                                    }
+                                    ?>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                                <div class="button-row form-group">
+                                    <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Section", OER_LESSON_PLAN_SLUG); ?></button>
                                 </div>
                             </div>
                         </div>
