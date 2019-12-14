@@ -4,12 +4,13 @@ jQuery(document).ready(function($){
         if (jQuery(window).width()<=600){
             headerHeight = jQuery('#side-header.fusion-mobile-menu-design-classic').outerHeight();
             if (document.body.scrollTop > 245 || document.documentElement.scrollTop > 245) {
+                topPos = headerHeight - document.body.scrollTop;
                 jQuery('.tc-lp-details-header').css({
                     "background":"#ffffff",
                     "padding":"15px 25px",
                     "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
                     "z-index":"1",
-                    "top":"0"
+                    "top":topPos + "px"
                 });
             } else {
                 jQuery('.tc-lp-details-header').css({

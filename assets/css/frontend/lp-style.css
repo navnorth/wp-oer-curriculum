@@ -1115,5 +1115,8 @@ div#tcHiddenFields {float: left;}
         top:245px;
         padding:25px 25px 0;
     }
+    .single-lesson-plans.admin-bar #main .container .tc-lp-details-header {
+        top:257px;
+    }
     .wp_oer_breadcrumb { margin-top:60px; }
 }
