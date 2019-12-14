@@ -1,8 +1,8 @@
 jQuery(document).ready(function($){
     // When the user scrolls down 50px from the top of the document, fixed the header to the top
+    var headerHeight = jQuery('#side-header.fusion-mobile-menu-design-classic').outerHeight();
     window.onscroll = function() {
         if (jQuery(window).width()<=600){
-            headerHeight = jQuery('#side-header.fusion-mobile-menu-design-classic').outerHeight();
             if (document.body.scrollTop > 245 || document.documentElement.scrollTop > 245) {
                 jQuery('.tc-lp-details-header').css({
                     "background":"#ffffff",
@@ -12,7 +12,7 @@ jQuery(document).ready(function($){
                     "top":"0"
                 });
             } else {
-                topPos = headerHeight - document.body.scrollTop;
+                topPos = headerHeight - document.documentElement.scrollTop;
                 console.log(topPos);
                 if (jQuery('#wpadminbar.mobile').length>0)
                     topPos = topPos + 32;
