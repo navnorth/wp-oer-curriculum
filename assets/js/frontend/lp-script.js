@@ -12,6 +12,8 @@ jQuery(document).ready(function($){
                     "top":"0"
                 });
             } else {
+                console.log(headerHeight);
+                console.log(document.documentElement.scrollTop);
                 topPos = headerHeight - document.documentElement.scrollTop;
                 console.log(topPos);
                 if (jQuery('#wpadminbar.mobile').length>0)
