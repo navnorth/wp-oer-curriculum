@@ -13,6 +13,7 @@ jQuery(document).ready(function($){
                 });
             } else {
                 topPos = headerHeight - document.body.scrollTop;
+                console.log(topPos);
                 if (jQuery('#wpadminbar.mobile').length>0)
                     topPos = topPos + 32;
                 jQuery('.tc-lp-details-header').css({
