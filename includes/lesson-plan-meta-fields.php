@@ -1739,7 +1739,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                           value="<?php echo isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey] : "";?>">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Description444</label>
+                                                    <label>Description</label>
                                                     <?php wp_editor( '',
                                                         'oer-lp-resource-student-1',
                                                         $settings = array(
@@ -1898,6 +1898,9 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                 'teeny' => true,
                                             )
                                         ); ?>
+                                    </div>
+                                    <div class="button-row form-group">
+                                        <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Section", OER_LESSON_PLAN_SLUG); ?></button>
                                     </div>
                                 </div>
                             </div>
