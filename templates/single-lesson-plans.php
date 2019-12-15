@@ -157,6 +157,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                                     if (!empty($standards) && !empty($cstandard)) {
                                         $stds[] = array_merge(array("notation"=>$standards), $cstandard);
                                     }
+                                    print_r($stds.'<br>');
                                     $cstd_id = array_column($stds,"core_standard_id");
                                     array_multisort($cstd_id,SORT_ASC,$stds);
                                     $standard_details = "";
