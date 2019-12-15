@@ -142,7 +142,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                                     $current_std_id = "";
                                     foreach($oer_lp_standards as $standard){
                                         if (function_exists('oer_std_get_standard_by_notation')){
-                                            $core_standard = oer_std_get_standard_by_notation($standard); echo $core_standard->id.'<br>';
+                                            $core_standard = oer_std_get_standard_by_notation($standard); echo 'ID:'.$core_standard->id.'<br>';
                                             if ($current_std_id!==$core_standard->id){
                                                 if (!empty($standards) && !empty($cstandard)) {
                                                     $stds[] = array_merge(array("notation"=>$standards), $cstandard);
