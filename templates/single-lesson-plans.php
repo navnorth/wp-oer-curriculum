@@ -81,8 +81,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                     </div>
                     <?php } ?>
                     <div class="tc-lp-details-description">
-                        <?php if (strlen($post->post_content)>230) : ?>
-                        <div class="lp-excerpt"><?php echo oer_lp_content(230); ?></div>
+                        <?php if (strlen($post->post_content)>360) : ?>
+                        <div class="lp-excerpt"><?php echo oer_lp_content(360); ?></div>
                         <div class="lp-full-content"><?php echo the_content(); ?> <a href="javascript:void(0);" class="lp-read-less">(read less)</a></div>
                         <?php else : ?>
                         <div class="lp-content"><?php echo the_content(); ?></div>
