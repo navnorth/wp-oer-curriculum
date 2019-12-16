@@ -141,9 +141,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 if (is_array($oer_lp_standards)):
                                     $current_std_id = "";
                                     foreach($oer_lp_standards as $standard){
-                                        echo 'Standard: '.$standard.' - Function Exists: '.function_exists('oer_std_get_standard_by_notation').'<br>';
                                         if (function_exists('oer_std_get_standard_by_notation')){
-                                            $core_standard = oer_std_get_standard_by_notation($standard); echo 'Standard: '.$standard.' - ID:'.$core_standard->id.'<br>';
+                                            $core_standard = oer_std_get_standard_by_notation($standard);
                                             if ($current_std_id!==$core_standard->id){
                                                 if (!empty($standards) && !empty($cstandard)) {
                                                     $stds[] = array_merge(array("notation"=>$standards), $cstandard);
@@ -158,8 +157,6 @@ if (have_posts()) : while (have_posts()) : the_post();
                                     if (!empty($standards) && !empty($cstandard)) {
                                         $stds[] = array_merge(array("notation"=>$standards), $cstandard);
                                     }
-                                    print_r($stds);
-                                    echo('<br>');
                                     $cstd_id = array_column($stds,"core_standard_id");
                                     array_multisort($cstd_id,SORT_ASC,$stds);
                                     $standard_details = "";
