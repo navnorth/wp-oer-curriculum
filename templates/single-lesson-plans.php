@@ -29,7 +29,6 @@ if ($lp_grade!=="pre-k" && $lp_grade!=="k")
 // Download Copy
 $oer_lp_download_copy_document = (isset($post_meta_data['oer_lp_download_copy_document'][0]) ? $post_meta_data['oer_lp_download_copy_document'][0] : '');
 $oer_lp_standards = isset($post_meta_data['oer_lp_standards'][0])?$post_meta_data['oer_lp_standards'][0]:"";
-print_r('data:'.$oer_lp_standards);
 $oer_lp_related_objectives = isset($post_meta_data['oer_lp_related_objective'][0])? unserialize($post_meta_data['oer_lp_related_objective'][0]): array('');
 $tags = get_the_terms($post->ID,"post_tag");
 $authors = (isset($post_meta_data['oer_lp_authors'][0]) ? unserialize($post_meta_data['oer_lp_authors'][0]) : array());
@@ -142,6 +141,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 if (is_array($oer_lp_standards)):
                                     $current_std_id = "";
                                     foreach($oer_lp_standards as $standard){
+                                        echo 'Standard: '$standard.' - Function Exists: '.function_exists('oer_std_get_standard_by_notation').'<br>';
                                         if (function_exists('oer_std_get_standard_by_notation')){
                                             $core_standard = oer_std_get_standard_by_notation($standard); echo 'Standard: '.$standard.' - ID:'.$core_standard->id.'<br>';
                                             if ($current_std_id!==$core_standard->id){
