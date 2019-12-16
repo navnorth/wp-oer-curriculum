@@ -141,7 +141,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 if (is_array($oer_lp_standards)):
                                     $current_std_id = "";
                                     foreach($oer_lp_standards as $standard){
-                                        echo 'Standard: '$standard.' - Function Exists: '.function_exists('oer_std_get_standard_by_notation').'<br>';
+                                        echo 'Standard: '.$standard.' - Function Exists: '.function_exists('oer_std_get_standard_by_notation').'<br>';
                                         if (function_exists('oer_std_get_standard_by_notation')){
                                             $core_standard = oer_std_get_standard_by_notation($standard); echo 'Standard: '.$standard.' - ID:'.$core_standard->id.'<br>';
                                             if ($current_std_id!==$core_standard->id){
