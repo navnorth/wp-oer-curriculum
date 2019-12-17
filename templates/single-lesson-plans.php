@@ -296,7 +296,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         
                          // Required Equipment Materials Display
                        if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
-                            $req_materials_label = oer_lp_get_field_label('oer_lp_required_materials');
+                            $req_materials_label = (isset($post_meta_data['oer_lp_required_materials_label'][0]) ? $post_meta_data['oer_lp_required_materials_label'][0] : "");
                             $req_materials = (isset($post_meta_data['oer_lp_required_materials'][0]) ? $post_meta_data['oer_lp_required_materials'][0] : "");
                             if (!empty($req_materials)){
                             ?>
@@ -398,61 +398,62 @@ if (have_posts()) : while (have_posts()) : the_post();
                 $_idx = 0;
                 foreach ($primary_resources['resource'] as $resourceKey => $resource) {;
                     $resource = get_page_by_title($resource,OBJECT,"resource");
-                    $url = get_post_meta($resource->ID, "oer_resourceurl", true);
-                    $type = get_post_meta($resource->ID,"oer_mediatype")[0];
-                    $resource_img = ''; 
-                    $_hasimage = has_post_thumbnail($resource);
-                    if($_hasimage) $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
-                    $oer_authorname = get_post_meta($resource->ID, "oer_authorname", true);	
-                    $oer_authorurl = get_post_meta($resource->ID, "oer_authorurl", true);	
-                    $oer_authorname2 = get_post_meta($resource->ID, "oer_authorname2", true);	
-                    $oer_authorurl2 = get_post_meta($resource->ID, "oer_authorurl2", true);
-                    $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
-                    $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
-                    $_resource_field_type = (isset($primary_resources['field_type'][$resourceKey]) ? $primary_resources['field_type'][$resourceKey]: "");
-                    $title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
-                    $description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
-                    if(trim($resource->post_title,' ')=='') $type = 'text';
-                    if($_resource_field_type != 'textbox' && trim($resource->post_title,' ')!='') $title = $resource->post_title AND $description = $resource->post_content;
-                    if ($sensitiveMaterialValue!=="") $sensitiveMaterial = $sensitiveMaterialValue;  
+                    if (!empty($resource)){
+                        $url = get_post_meta($resource->ID, "oer_resourceurl", true);
+                        $type = get_post_meta($resource->ID,"oer_mediatype")[0];
+                        $resource_img = ''; 
+                        $_hasimage = has_post_thumbnail($resource);
+                        if($_hasimage) $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
+                        $oer_authorname = get_post_meta($resource->ID, "oer_authorname", true);	
+                        $oer_authorurl = get_post_meta($resource->ID, "oer_authorurl", true);	
+                        $oer_authorname2 = get_post_meta($resource->ID, "oer_authorname2", true);	
+                        $oer_authorurl2 = get_post_meta($resource->ID, "oer_authorurl2", true);
+                        $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
+                        $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
+                        $_resource_field_type = (isset($primary_resources['field_type'][$resourceKey]) ? $primary_resources['field_type'][$resourceKey]: "");
+                        $title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
+                        $description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
+                        if(trim($resource->post_title,' ')=='') $type = 'text';
+                        if($_resource_field_type != 'textbox' && trim($resource->post_title,' ')!='') $title = $resource->post_title AND $description = $resource->post_content;
+                        if ($sensitiveMaterialValue!=="") $sensitiveMaterial = $sensitiveMaterialValue;  
                 ?>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
-                    <div class="media-image">
-                        <div class="image-thumbnail">
-                            <?php $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID)."/idx/".$_idx++; ?>
-                            <a href="<?php echo $ps_url;  ?>">
-                                <?php if($resource_img==''): $_avtr = getResourceIcon($type,$url); ?>	
-                                  <div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div>	
-                                <?php endif; ?>
-                                <span class="resource-overlay"></span>
-                                <?php if (!empty($type)): ?>
-                                <span class="lp-source-type"><?php echo ucwords($type); ?></span>
-                                <?php endif; ?>
-                                <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;">
-                                </div>
-                            </a>
-                            
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
+                        <div class="media-image">
+                            <div class="image-thumbnail">
+                                <?php $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID)."/idx/".$_idx++; ?>
+                                <a href="<?php echo $ps_url;  ?>">
+                                    <?php if($resource_img==''): $_avtr = getResourceIcon($type,$url); ?>	
+                                      <div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div>	
+                                    <?php endif; ?>
+                                    <span class="resource-overlay"></span>
+                                    <?php if (!empty($type)): ?>
+                                    <span class="lp-source-type"><?php echo ucwords($type); ?></span>
+                                    <?php endif; ?>
+                                    <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;">
+                                    </div>
+                                </a>
+                                
+                            </div>
+                            <div class="lp-resource-title">
+                              <b><?php echo $title; ?></b>
+                            </div>	
+                            <div class="lp-resource-author">	
+                              <?php if( $oer_authorname != ''):?>	
+                                <div class="lp-resource-author_block"><a href="<?php echo $oer_authorurl; ?>" target="_new"><?php echo $oer_authorname; ?></a></div>	
+                              <?php endif; ?>	
+                              <?php /* if( $oer_authorname2 != ''):?>	
+                                <div class="lp-resource-author_block"><a href=""><?php echo $oer_authorname2; ?></a></div>	
+                              <?php endif;*/ ?>
+                            </div>
+                            <div class="lp-resource-excerpt"><?php echo oer_get_related_resource_content(strip_tags($description), 50); ?></div>
                         </div>
-                        <div class="lp-resource-title">
-                          <b><?php echo $title; ?></b>
-                        </div>	
-                        <div class="lp-resource-author">	
-                          <?php if( $oer_authorname != ''):?>	
-                            <div class="lp-resource-author_block"><a href="<?php echo $oer_authorurl; ?>" target="_new"><?php echo $oer_authorname; ?></a></div>	
-                          <?php endif; ?>	
-                          <?php /* if( $oer_authorname2 != ''):?>	
-                            <div class="lp-resource-author_block"><a href=""><?php echo $oer_authorname2; ?></a></div>	
-                          <?php endif;*/ ?>
+                        <?php if ($sensitiveMaterial!=="" && $sensitiveMaterial!=="no"): ?>
+                        <div class="sensitive-source">
+                            <p><i class="fal fa-exclamation-triangle"></i></p>
                         </div>
-                        <div class="lp-resource-excerpt"><?php echo oer_get_related_resource_content(strip_tags($description), 50); ?></div>
+                        <?php endif; ?>
                     </div>
-                    <?php if ($sensitiveMaterial!=="" && $sensitiveMaterial!=="no"): ?>
-                    <div class="sensitive-source">
-                        <p><i class="fal fa-exclamation-triangle"></i></p>
-                    </div>
-                    <?php endif; ?>
-                </div>
-                <?php
+                <?php }
                 }
             }
         }

@@ -875,12 +875,13 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                         <!--Required Equipment Materials Module-->
                         <?php
                         $oer_lp_required_materials  = isset($post_meta_data['oer_lp_required_materials'][0]) ? $post_meta_data['oer_lp_required_materials'][0] : array();
+                        $oer_lp_required_materials_label = isset($post_meta_data['oer_lp_required_materials_label'][0]) ? $post_meta_data['oer_lp_required_materials_label'][0] : "";
                         ?>
                         <div class="panel panel-default lp-element-wrapper oer-lp-required-materials" id="oer-lp-required-materials">
                             <input type="hidden" name="lp_order[lp_required_materials]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
-                                <?php _e("Required Equipment Materials", OER_LESSON_PLAN_SLUG); ?>
+                                <?php _e("Additional Sections", OER_LESSON_PLAN_SLUG); ?>
                                     <span class="lp-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -890,7 +891,9 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                             </div>
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <label>Required Equipment Materials</label>
+                                    <input type="text" class="form-control" name="oer_lp_required_materials_label" placeholder="Additional Section" id="oer_lp_required_materials_label" value="<?php echo $oer_lp_required_materials_label; ?>">
+                                </div>
+                                <div class="form-group">
                                     <?php wp_editor( (isset($oer_lp_required_materials) ? $oer_lp_required_materials : ""),
                                         'oer_lp_required_materials',
                                         $settings = array(
@@ -1736,7 +1739,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                           class="form-control"
                                                           name="oer_lp_primary_resources[title][]"
                                                           placeholder="Resource Title"
-                                                          value="<?php echo isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey] : "";?>">
+                                                          value="">
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Description</label>
@@ -1886,8 +1889,10 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                     </h3>
                                 </div>
                                 <div class="panel-body">
+                                     <div class="form-group">
+                                        <input type="text" class="form-control" name="oer_lp_required_materials_label" placeholder="Additional Section" id="oer_lp_required_materials_label" value="">
+                                    </div>
                                     <div class="form-group">
-                                        <label>Required Equipment Materials</label>
                                         <?php wp_editor( '',
                                             'oer_lp_required_materials',
                                             $settings = array(

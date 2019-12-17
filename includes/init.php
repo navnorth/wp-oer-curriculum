@@ -295,6 +295,11 @@ function lp_save_custom_fields() {
             if (isset($_POST['oer_lp_required_materials'])) {
                 update_post_meta($post->ID, 'oer_lp_required_materials', $_POST['oer_lp_required_materials']);
             }
+            
+             // Save Required Equipment Materials Label
+            if (isset($_POST['oer_lp_required_materials_label'])) {
+                update_post_meta($post->ID, 'oer_lp_required_materials_label', $_POST['oer_lp_required_materials_label']);
+            }
 
             //Save/update lesson times
             if (isset($_POST['oer_lp_times_label'])) {
