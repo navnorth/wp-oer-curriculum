@@ -48,7 +48,7 @@ global $oer_lp_deleted_fields;
 $oer_lp_default_structure = array(
     'lp_authors_order',
     'lp_standard_order',
-    'lp_iq',
+    //'lp_iq',
     'lp_required_materials',
     'lp_primary_resources',
     // 'oer_lp_custom_editor_teacher_background',
