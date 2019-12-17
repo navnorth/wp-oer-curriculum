@@ -81,8 +81,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                     </div>
                     <?php } ?>
                     <div class="tc-lp-details-description">
-                        <?php if (strlen($post->post_content)>230) : ?>
-                        <div class="lp-excerpt"><?php echo oer_lp_content(230); ?></div>
+                        <?php if (strlen($post->post_content)>360) : ?>
+                        <div class="lp-excerpt"><?php echo oer_lp_content(360); ?></div>
                         <div class="lp-full-content"><?php echo the_content(); ?> <a href="javascript:void(0);" class="lp-read-less">(read less)</a></div>
                         <?php else : ?>
                         <div class="lp-content"><?php echo the_content(); ?></div>
@@ -141,9 +141,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 if (is_array($oer_lp_standards)):
                                     $current_std_id = "";
                                     foreach($oer_lp_standards as $standard){
-                                        echo 'Standard: '.$standard.' - Function Exists: '.function_exists('oer_std_get_standard_by_notation').'<br>';
                                         if (function_exists('oer_std_get_standard_by_notation')){
-                                            $core_standard = oer_std_get_standard_by_notation($standard); echo 'Standard: '.$standard.' - ID:'.$core_standard->id.'<br>';
+                                            $core_standard = oer_std_get_standard_by_notation($standard);
                                             if ($current_std_id!==$core_standard->id){
                                                 if (!empty($standards) && !empty($cstandard)) {
                                                     $stds[] = array_merge(array("notation"=>$standards), $cstandard);
@@ -158,8 +157,6 @@ if (have_posts()) : while (have_posts()) : the_post();
                                     if (!empty($standards) && !empty($cstandard)) {
                                         $stds[] = array_merge(array("notation"=>$standards), $cstandard);
                                     }
-                                    print_r($stds);
-                                    echo('<br>');
                                     $cstd_id = array_column($stds,"core_standard_id");
                                     array_multisort($cstd_id,SORT_ASC,$stds);
                                     $standard_details = "";
