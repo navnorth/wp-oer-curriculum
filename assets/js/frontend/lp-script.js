@@ -8,7 +8,7 @@ jQuery(document).ready(function($){
                     "background":"#ffffff",
                     "padding":"15px 25px",
                     "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
-                    "z-index":"99999",
+                    "z-index":"999999 !important",
                     "top":"0"
                 });
             } else {
@@ -32,7 +32,7 @@ jQuery(document).ready(function($){
                     "background":"#ffffff",
                     "padding":"15px 50px",
                     "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
-                    "z-index":"99999",
+                    "z-index":"999999 !important",
                     "width": rightWidth + "px"
                 });
             } else {
