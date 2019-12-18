@@ -14,8 +14,8 @@ jQuery(document).ready(function($){
             } else {
                 topPos = headerHeight - document.documentElement.scrollTop;
                 topPos += 60;
-                if (jQuery('#wpadminbar.mobile').length>0)
-                    topPos = topPos + 71;
+                if (jQuery('#wpadminbar').length>0)
+                    topPos = topPos + 32;
                 jQuery('.tc-lp-details-header').css({
                     "background":"none",
                     "padding":"25px 25px 0",
