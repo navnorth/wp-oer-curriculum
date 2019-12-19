@@ -530,7 +530,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-md-5">
-                                                            <div class="checkbox pull-right">
+                                                            <div class="checkbox pull-left">
                                                                 <label>
                                                                     <input type="hidden" name="oer_lp_primary_resources[resource][]" value="">
                                                                     <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="<?php echo $resource_field_type; ?>">

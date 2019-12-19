@@ -248,14 +248,6 @@ if (have_posts()) : while (have_posts()) : the_post();
                       <?php endif; ?>
                     <?php endif; ?>
                     
-                    
-                    
-                    <?php if ($oer_sensitive) : ?>
-                    <div class="tc-sensitive-material-section">
-                        <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Sensitive Material</span></p>
-                        <button class="question-popup-button"><i class="fal fa-question-circle"></i></button>
-                    </div>
-                    <?php endif; ?>
                     <div id="tcHiddenFields" class="tc-hidden-fields collapse">
                         <?php
                         // Grade Level Display
@@ -363,6 +355,14 @@ if (have_posts()) : while (have_posts()) : the_post();
                     ?>
                 </div>
                 <?php } 
+                
+                if ($oer_sensitive) : ?>
+                <div class="tc-sensitive-material-section">
+                    <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Potentially Sensitive Material</span></p>
+                    <!--<button class="question-popup-button"><i class="fal fa-question-circle"></i></button>-->
+                </div>
+                <?php endif;
+                
                 $keywords = wp_get_post_tags($post->ID);
                 if(!empty($keywords))
                 {
@@ -385,6 +385,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <?php endif; ?>
                 </div>
             </div>
+            
         </div>
     </div>
     <div class="see-more-row">
@@ -414,7 +415,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
                         $description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
                         if(trim($resource->post_title,' ')=='') $type = 'text';
-                        if($_resource_field_type != 'textbox' && trim($resource->post_title,' ')!='') $title = $resource->post_title AND $description = $resource->post_content;
+                        $title = ($_resource_field_type != 'textbox' && trim($primary_resources['title'][$resourceKey],' ')!='' ) ? $primary_resources['title'][$resourceKey]: $resource->post_title;
+                        $description = ($_resource_field_type != 'textbox' && trim($primary_resources['description'][$resourceKey],' ')!='' ) ? $primary_resources['description'][$resourceKey]: $resource->post_content;
                         if ($sensitiveMaterialValue!=="") $sensitiveMaterial = $sensitiveMaterialValue;  
                 ?>
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
@@ -431,6 +433,11 @@ if (have_posts()) : while (have_posts()) : the_post();
                                     <?php endif; ?>
                                     <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;">
                                     </div>
+                                    <?php if ($sensitiveMaterial!=="" && $sensitiveMaterial!=="no"): ?>
+                                    <div class="sensitive-source">
+                                        <p><i class="fal fa-exclamation-triangle"></i></p>
+                                    </div>
+                                    <?php endif; ?>
                                 </a>
                                 
                             </div>
@@ -447,11 +454,6 @@ if (have_posts()) : while (have_posts()) : the_post();
                             </div>
                             <div class="lp-resource-excerpt"><?php echo oer_get_related_resource_content(strip_tags($description), 50); ?></div>
                         </div>
-                        <?php if ($sensitiveMaterial!=="" && $sensitiveMaterial!=="no"): ?>
-                        <div class="sensitive-source">
-                            <p><i class="fal fa-exclamation-triangle"></i></p>
-                        </div>
-                        <?php endif; ?>
                     </div>
                 <?php }
                 }
