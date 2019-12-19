@@ -159,7 +159,7 @@ function oer_lp_grade_level_cb() {
                 $checkbox .= '<div class="col-md-5 span2">';
         }
         $checkbox .= '<div class="form-checkbox">';
-        $checkbox .= '<input type="radio" name="oer_lp_grades[]" value="'.$key.'" id="oer_lp_grade_'.$key.'" '.oer_lp_show_selected($key, $oer_lp_grades, 'checkbox').'>';
+        $checkbox .= '<input type="checkbox" name="oer_lp_grades[]" value="'.$key.'" id="oer_lp_grade_'.$key.'" '.oer_lp_show_selected($key, $oer_lp_grades, 'checkbox').'>';
         $checkbox .= '<label class="oer_lp_radio_label" for="oer_lp_grade_'.$key.'">'.$oer_lp_grade_option.'</label>';
         $checkbox .= '</div>';
         if ($index % 7 == 0 )
@@ -316,6 +316,8 @@ function lp_save_custom_fields() {
 
             if (isset($_POST['oer_lp_grades'])) {
                 update_post_meta($post->ID, 'oer_lp_grades', $_POST['oer_lp_grades']);
+            }else{
+                update_post_meta($post->ID, 'oer_lp_grades', false);
             }
             
             // Update Appropriate Age Levels

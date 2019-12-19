@@ -410,18 +410,25 @@ if (! function_exists('oer_lp_title_from_slug')){
 if (! function_exists('oer_inquiry_set_grade_level')){
     function oer_inquiry_set_grade_level($inquiry_set_id){
         $grades = get_post_meta($inquiry_set_id, "oer_lp_grades", true);
-        if (is_array($grades))
-            $grades = $grades[0];
-        $grade_level = "";
-        
-        if ($grades == "pre-k")
-            $grade_level = "Pre-Kindergarten";
-        elseif ($grades == "k")
-            $grade_level = "Kindergarten";
-        else
-            $grade_level = "Grade ".$grades;
-            
-        return $grade_level;
+        $_tmp = '';
+        if(empty($grades)){
+          $_tmp = '';
+        }else{
+          if (is_array($grades)){
+            foreach ($grades as $key => $value) {
+              
+              if ($value == "pre-k"){
+                  $grade_level = "Pre-Kindergarten";
+              }elseif ($value == "k"){
+                  $grade_level = "Kindergarten";
+              }else{
+                  $grade_level = $value;
+              }
+              $_tmp = ($_tmp=='')? $_tmp = $grade_level : $_tmp .= ', '.$grade_level;
+            }  
+          }
+        }  
+        return $_tmp;
     }
 }
 
