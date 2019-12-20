@@ -526,6 +526,7 @@ function lp_add_more_pr_callback() {
                                   <div class="checkbox pull-right">
                                       <label>
                                           <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="' . $prType .'">
+                                          <input type="hidden" name="oer_lp_primary_resources[sensitive_material_value][]" value="no">
                                           <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
                                           Sensitive Material
                                       </label>
@@ -555,6 +556,7 @@ function lp_add_more_pr_callback() {
                                         <label>
                                             <input type="hidden" name="oer_lp_primary_resources[resource][]" value="">
                                             <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="'.$prType.'">
+                                            <input type="hidden" name="oer_lp_primary_resources[sensitive_material_value][]" value="no">
                                             <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
                                             Sensitive Material
                                         </label>

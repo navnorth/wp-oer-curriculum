@@ -671,6 +671,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                     <div class="checkbox pull-right">
                                                         <label>
                                                             <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="resource">
+                                                            <input type="hidden" name="oer_lp_primary_resources[sensitive_material_value][]" value="no">
                                                             <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
                                                             Sensitive Material
                                                         </label>
@@ -1727,6 +1728,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                         <div class="checkbox pull-right">
                                                             <label>
                                                                 <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="resource">
+                                                                <input type="hidden" name="oer_lp_primary_resources[sensitive_material_value][]" value="no">
                                                                 <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
                                                                 Sensitive Material
                                                             </label>
@@ -2471,6 +2473,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                             <div class="checkbox pull-right">
                                                 <label>
                                                     <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="resource">
+                                                    <input type="hidden" name="oer_lp_primary_resources[sensitive_material_value][]" value="no">
                                                     <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
                                                     Sensitive Material
                                                 </label>

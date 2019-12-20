@@ -415,9 +415,25 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
                         $description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
                         if(trim($resource->post_title,' ')=='') $type = 'text';
-                        $title = ($_resource_field_type != 'textbox' && trim($primary_resources['title'][$resourceKey],' ')!='' ) ? $primary_resources['title'][$resourceKey]: $resource->post_title;
-                        $description = ($_resource_field_type != 'textbox' && trim($primary_resources['description'][$resourceKey],' ')!='' ) ? $primary_resources['description'][$resourceKey]: $resource->post_content;
+                        if($_resource_field_type == 'resource'){
+                          if(trim($primary_resources['title'][$resourceKey],' ')!='' ){
+                            $title = $primary_resources['title'][$resourceKey];
+                          }else{
+                            $title = $resource->post_title;
+                          }
+                        }
+                        if($_resource_field_type == 'resource'){
+                          if(trim($primary_resources['description'][$resourceKey],' ')!='' ){
+                            $description = $primary_resources['description'][$resourceKey];
+                          }else{
+                            $description = $resource->post_content;
+                          }
+                        }
+                        //$description = ($_resource_field_type != 'textbox' && trim($primary_resources['description'][$resourceKey],' ')!='' ) ? $primary_resources['description'][$resourceKey]: $resource->post_content;
                         if ($sensitiveMaterialValue!=="") $sensitiveMaterial = $sensitiveMaterialValue;  
+                        
+                        
+                      //  echo print_r($primary_resources);
                 ?>
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                         <div class="media-image">
