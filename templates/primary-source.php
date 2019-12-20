@@ -102,8 +102,10 @@ $type = $type[0];
   $sup = (!empty($new_title))? $new_title : $resource->post_title;
   $ret = '<div class="wp_oer_breadcrumb">';
   $ret .= '<a href="'.get_site_url().'">Home</a>';
-  $ret .= ' / <a href="'.get_permalink( $curriculum_details->ID ).'">'.$curriculum_details->post_title.'</a>';
-  $ret .= ' / '.$sup;
+  $cur = (strlen($curriculum_details->post_title) > 30)? substr($curriculum_details->post_title, 0, 30).'...' : $curriculum_details->post_title;
+  $ret .= ' / <a href="'.get_permalink( $curriculum_details->ID ).'">'.$cur.'</a>';
+  $res = (strlen($sup) > 30)? substr($sup, 0, 30).'...' : $sup;
+  $ret .= ' / '.$res;
   $ret .= '</div>';
   echo $ret;
 ?>

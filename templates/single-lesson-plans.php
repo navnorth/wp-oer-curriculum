@@ -457,18 +457,18 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 </a>
                                 
                             </div>
-                            <div class="lp-resource-title">
-                              <b><?php echo $title; ?></b>
-                            </div>	
-                            <div class="lp-resource-author">	
-                              <?php if( $oer_authorname != ''):?>	
-                                <div class="lp-resource-author_block"><a href="<?php echo $oer_authorurl; ?>" target="_new"><?php echo $oer_authorname; ?></a></div>	
-                              <?php endif; ?>	
-                              <?php /* if( $oer_authorname2 != ''):?>	
-                                <div class="lp-resource-author_block"><a href=""><?php echo $oer_authorname2; ?></a></div>	
-                              <?php endif;*/ ?>
+                            <div class="lp-resource-info">
+                              <div class="lp-resource-title"><?php echo $title; ?></div>	
+                              <div class="lp-resource-author">	
+                                <?php if( $oer_authorname != ''):?>	
+                                  <div class="lp-resource-author_block"><a href="<?php echo $oer_authorurl; ?>" target="_new"><?php echo $oer_authorname; ?></a></div>	
+                                <?php endif; ?>	
+                                <?php /* if( $oer_authorname2 != ''):?>	
+                                  <div class="lp-resource-author_block"><a href=""><?php echo $oer_authorname2; ?></a></div>	
+                                <?php endif;*/ ?>
+                              </div>
+                              <div class="lp-resource-excerpt"><?php echo oer_get_related_resource_content(strip_tags($description), 50); ?></div>
                             </div>
-                            <div class="lp-resource-excerpt"><?php echo oer_get_related_resource_content(strip_tags($description), 50); ?></div>
                         </div>
                     </div>
                 <?php }
