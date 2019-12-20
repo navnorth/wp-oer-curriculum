@@ -415,9 +415,25 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
                         $description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
                         if(trim($resource->post_title,' ')=='') $type = 'text';
-                        $title = ($_resource_field_type != 'textbox' && trim($primary_resources['title'][$resourceKey],' ')!='' ) ? $primary_resources['title'][$resourceKey]: $resource->post_title;
-                        $description = ($_resource_field_type != 'textbox' && trim($primary_resources['description'][$resourceKey],' ')!='' ) ? $primary_resources['description'][$resourceKey]: $resource->post_content;
+                        if($_resource_field_type == 'resource'){
+                          if(trim($primary_resources['title'][$resourceKey],' ')!='' ){
+                            $title = $primary_resources['title'][$resourceKey];
+                          }else{
+                            $title = $resource->post_title;
+                          }
+                        }
+                        if($_resource_field_type == 'resource'){
+                          if(trim($primary_resources['description'][$resourceKey],' ')!='' ){
+                            $description = $primary_resources['description'][$resourceKey];
+                          }else{
+                            $description = $resource->post_content;
+                          }
+                        }
+                        //$description = ($_resource_field_type != 'textbox' && trim($primary_resources['description'][$resourceKey],' ')!='' ) ? $primary_resources['description'][$resourceKey]: $resource->post_content;
                         if ($sensitiveMaterialValue!=="") $sensitiveMaterial = $sensitiveMaterialValue;  
+                        
+                        
+                      //  echo print_r($primary_resources);
                 ?>
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                         <div class="media-image">
@@ -441,18 +457,18 @@ if (have_posts()) : while (have_posts()) : the_post();
                                 </a>
                                 
                             </div>
-                            <div class="lp-resource-title">
-                              <b><?php echo $title; ?></b>
-                            </div>	
-                            <div class="lp-resource-author">	
-                              <?php if( $oer_authorname != ''):?>	
-                                <div class="lp-resource-author_block"><a href="<?php echo $oer_authorurl; ?>" target="_new"><?php echo $oer_authorname; ?></a></div>	
-                              <?php endif; ?>	
-                              <?php /* if( $oer_authorname2 != ''):?>	
-                                <div class="lp-resource-author_block"><a href=""><?php echo $oer_authorname2; ?></a></div>	
-                              <?php endif;*/ ?>
+                            <div class="lp-resource-info">
+                              <div class="lp-resource-title"><?php echo $title; ?></div>	
+                              <div class="lp-resource-author">	
+                                <?php if( $oer_authorname != ''):?>	
+                                  <div class="lp-resource-author_block"><a href="<?php echo $oer_authorurl; ?>" target="_new"><?php echo $oer_authorname; ?></a></div>	
+                                <?php endif; ?>	
+                                <?php /* if( $oer_authorname2 != ''):?>	
+                                  <div class="lp-resource-author_block"><a href=""><?php echo $oer_authorname2; ?></a></div>	
+                                <?php endif;*/ ?>
+                              </div>
+                              <div class="lp-resource-excerpt"><?php echo oer_get_related_resource_content(strip_tags($description), 50); ?></div>
                             </div>
-                            <div class="lp-resource-excerpt"><?php echo oer_get_related_resource_content(strip_tags($description), 50); ?></div>
                         </div>
                     </div>
                 <?php }
