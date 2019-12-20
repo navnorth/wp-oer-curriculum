@@ -896,10 +896,10 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                         <h3 class="panel-title lp-module-title">
                                             <?php _e("Section", OER_LESSON_PLAN_SLUG); ?>
                                             <span class="lp-sortable-handle">
-                                            <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
-                                            <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
+                                            <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>
+                                            <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>
                                         </span>
-                                            <span class="btn btn-danger btn-sm lp-remove-source"
+                                            <span class="btn btn-danger btn-sm lp-remove-section"
                                                   title="Delete"
                                                   disabled="disabled"
                                             ><i class="fa fa-trash"></i> </span>
@@ -934,10 +934,10 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                         <h3 class="panel-title lp-module-title">
                                             <?php _e("Section", OER_LESSON_PLAN_SLUG); ?>
                                             <span class="lp-sortable-handle">
-                                            <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
-                                            <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
+                                            <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>
+                                            <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>
                                         </span>
-                                            <span class="btn btn-danger btn-sm lp-remove-source"
+                                            <span class="btn btn-danger btn-sm lp-remove-section"
                                                   title="Delete"
                                                   disabled="disabled"
                                             ><i class="fa fa-trash"></i> </span>
@@ -975,6 +975,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                     <?php
                                 }
                                 ?>
+                                </div>
                                 <div class="button-row form-group">
                                     <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Section", OER_LESSON_PLAN_SLUG); ?></button>
                                 </div>
@@ -1924,20 +1925,36 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                     </h3>
                                 </div>
                                 <div class="panel-body">
-                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="oer_lp_required_materials_label" placeholder="Additional Section" id="oer_lp_required_materials_label" value="">
+                                    <div class="panel panel-default lp-section-element-wrapper">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title lp-module-title">
+                                            <?php _e("Section", OER_LESSON_PLAN_SLUG); ?>
+                                            <span class="lp-sortable-handle">
+                                            <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>
+                                            <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>
+                                        </span>
+                                            <span class="btn btn-danger btn-sm lp-remove-section"
+                                                  title="Delete"
+                                                  disabled="disabled"
+                                            ><i class="fa fa-trash"></i> </span>
+                                        </h3>
                                     </div>
-                                    <div class="form-group">
-                                        <?php wp_editor( '',
-                                            'oer_lp_required_materials',
-                                            $settings = array(
-                                                'textarea_name' => 'oer_lp_required_materials',
-                                                'media_buttons' => true,
-                                                'textarea_rows' => 6,
-                                                'drag_drop_upload' => true,
-                                                'teeny' => true,
-                                            )
-                                        ); ?>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                           <input type="text" class="form-control" name="oer_lp_required_materials_label" placeholder="Additional Section" id="oer_lp_required_materials_label" value="">
+                                       </div>
+                                       <div class="form-group">
+                                           <?php wp_editor( '',
+                                               'oer_lp_required_materials',
+                                               $settings = array(
+                                                   'textarea_name' => 'oer_lp_required_materials',
+                                                   'media_buttons' => true,
+                                                   'textarea_rows' => 6,
+                                                   'drag_drop_upload' => true,
+                                                   'teeny' => true,
+                                               )
+                                           ); ?>
+                                       </div>
                                     </div>
                                     <div class="button-row form-group">
                                         <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Section", OER_LESSON_PLAN_SLUG); ?></button>

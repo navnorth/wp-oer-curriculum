@@ -225,6 +225,33 @@ jQuery(document).ready(function ($) {
                 }
                 return false;
             });
+            
+            // Section element reorder
+            $(document).on('click', '.section-reorder-up', function(){
+                var $current = $(this).closest('.lp-section-element-wrapper');
+                var $previous = $current.prev('.lp-section-element-wrapper');
+                var ret = $current.find('iframe').attr('id').replace('_ifr','');
+                tinyMCE.execCommand('mceRemoveEditor', false, $('#'+ret).attr('id'));
+                if($previous.length !== 0){
+                    $current.insertBefore($previous);
+                    LessonPlan.toggleUpDownButton();
+                    tinyMCE.execCommand('mceAddEditor', false, $('#'+ret).attr('id'));
+                }
+                return false;
+            });
+
+            $(document).on('click', '.section-reorder-down', function(){
+                var $current = $(this).closest('.lp-section-element-wrapper');
+                var $next = $current.next('.lp-section-element-wrapper');
+                var ret = $current.find('iframe').attr('id').replace('_ifr','');
+                tinyMCE.execCommand('mceRemoveEditor', false, $('#'+ret).attr('id'));
+                if($next.length !== 0){
+                    $current.insertAfter($next);
+                    LessonPlan.toggleUpDownButton();
+                    tinyMCE.execCommand('mceAddEditor', false, $('#'+ret).attr('id'));
+                }
+                return false;
+            });
         },
 
         // Change order value in hidden field and reinitialize the text editor
@@ -280,6 +307,12 @@ jQuery(document).ready(function ($) {
             $('.resource-reorder-down').removeClass('hide');
             $('.resource-reorder-up').first().addClass('hide');
             $('.resource-reorder-down').last().addClass('hide');
+            
+            // Show / Hide button on Additional Section module
+            $('.section-reorder-up').removeClass('hide');
+            $('.section-reorder-down').removeClass('hide');
+            $('.section-reorder-up').first().addClass('hide');
+            $('.section-reorder-down').last().addClass('hide');
         },
 
         // Create dynamic module
