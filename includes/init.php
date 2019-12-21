@@ -209,6 +209,7 @@ add_action('admin_enqueue_scripts', 'oer_lesson_plan_assets');
 
 function oer_lesson_plan_assets() {
     global $post;
+    wp_enqueue_editor();
     if (
         (isset($_GET['post_type']) && $_GET['post_type'] == 'lesson-plans') ||
         (isset($post->post_type) && $post->post_type == 'lesson-plans')
