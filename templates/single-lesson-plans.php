@@ -287,17 +287,17 @@ if (have_posts()) : while (have_posts()) : the_post();
                         }
                         
                          // Required Equipment Materials Display
-                       if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
+                       /*if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
                             $req_materials_label = (isset($post_meta_data['oer_lp_required_materials_label'][0]) ? $post_meta_data['oer_lp_required_materials_label'][0] : "");
                             $req_materials = (isset($post_meta_data['oer_lp_required_materials'][0]) ? $post_meta_data['oer_lp_required_materials'][0] : "");
-                            if (!empty($req_materials)){
+                            if (!empty($req_materials)){*/
                             ?>
-                            <div class="form-field">
-                                <span class="tc-lp-label"><?php echo $req_materials_label; ?>:</span> <span class="tc-lp-value"><?php echo $req_materials; ?></span>
-                            </div>
+                            <!--<div class="form-field">
+                                <span class="tc-lp-label"><?php //echo $req_materials_label; ?>:</span> <span class="tc-lp-value"><?php echo $req_materials; ?></span>
+                            </div>-->
                             <?php
-                            }
-                        }
+                            /*}
+                        }*/
                         
                         // Additional Section
                         $additional_sections = isset($post_meta_data['oer_lp_text_feature'][0]) ? unserialize($post_meta_data['oer_lp_text_feature'][0]) : array();

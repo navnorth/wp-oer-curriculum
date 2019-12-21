@@ -891,43 +891,19 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                 </h3>
                             </div>
                             <div class="panel-body">
-                                <div class="panel panel-default lp-section-element-wrapper">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title lp-module-title">
-                                            <?php _e("Section", OER_LESSON_PLAN_SLUG); ?>
-                                            <span class="lp-sortable-handle">
-                                            <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>
-                                            <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>
-                                        </span>
-                                            <span class="btn btn-danger btn-sm lp-remove-section"
-                                                  title="Delete"
-                                                  disabled="disabled"
-                                            ><i class="fa fa-trash"></i> </span>
-                                        </h3>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="oer_lp_required_materials_label" placeholder="Additional Section" id="oer_lp_required_materials_label" value="<?php echo $oer_lp_required_materials_label; ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <?php wp_editor( (isset($oer_lp_required_materials) ? $oer_lp_required_materials : ""),
-                                                'oer_lp_required_materials',
-                                                $settings = array(
-                                                    'textarea_name' => 'oer_lp_required_materials',
-                                                    'media_buttons' => true,
-                                                    'textarea_rows' => 6,
-                                                    'drag_drop_upload' => true,
-                                                    'teeny' => true,
-                                                )
-                                            ); ?>
-                                        </div>
-                                    </div>
-                                </div>
                                 <?php
                                 $text_features = isset($post_meta_data['oer_lp_text_feature'][0]) ? unserialize($post_meta_data['oer_lp_text_feature'][0]) : array();
                                 if (is_array($text_features)){
                                     $label_id = "oer_lp_text_feature[label][]";
                                     $editor_id = "oer_lp_text_feature[editor][]";
+                                    
+                                    $cnt = 0;
+                                    if (isset($text_features['label']))
+                                        $cnt = count($text_features['label']);
+                                    if (isset($text_features['editor'])){
+                                        $cnt = (count($text_features['editor'])>$cnt) ? count($text_features['editor']) : $cnt;
+                                    }
+                                    for ($i=0;$i<$cnt;$i++){
                                 ?>
                                 <div class="panel panel-default lp-section-element-wrapper">
                                     <div class="panel-heading">
@@ -939,20 +915,12 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                         </span>
                                             <span class="btn btn-danger btn-sm lp-remove-section"
                                                   title="Delete"
-                                                  disabled="disabled"
                                             ><i class="fa fa-trash"></i> </span>
                                         </h3>
                                     </div>
                                     <div class="panel-body">
                                         <div class="text-editor-group">
-                                        <?php
-                                        $cnt = 0;
-                                        if (isset($text_features['label']))
-                                            $cnt = count($text_features['label']);
-                                        if (isset($text_features['editor'])){
-                                            $cnt = (count($text_features['editor'])>$cnt) ? count($text_features['editor']) : $cnt;
-                                        }
-                                        for ($i=0;$i<$cnt;$i++){
+                                       <?php
                                             echo '<div class="form-group">';
                                             echo '<input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" value="'.$text_features['label'][$i].'">';
                                             echo '</div>';
@@ -968,14 +936,14 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                 )
                                             );
                                             echo '</div>';
-                                        }
                                         ?>
                                         </div>
                                     </div>
-                                    <?php
+                                </div>
+                                <?php
+                                    }
                                 }
                                 ?>
-                                </div>
                                 <div class="button-row form-group">
                                     <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Section", OER_LESSON_PLAN_SLUG); ?></button>
                                 </div>
@@ -1941,13 +1909,13 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                     </div>
                                     <div class="panel-body">
                                         <div class="form-group">
-                                           <input type="text" class="form-control" name="oer_lp_required_materials_label" placeholder="Additional Section" id="oer_lp_required_materials_label" value="">
+                                           <input type="text" class="form-control" name="oer_lp_text_feature[label][]" placeholder="Additional Section" id="oer_lp_required_materials_label" value="">
                                        </div>
                                        <div class="form-group">
                                            <?php wp_editor( '',
-                                               'oer_lp_required_materials',
+                                               'oer-lp-text-feature-1',
                                                $settings = array(
-                                                   'textarea_name' => 'oer_lp_required_materials',
+                                                   'textarea_name' => 'oer_lp_text_feature[editor][]',
                                                    'media_buttons' => true,
                                                    'textarea_rows' => 6,
                                                    'drag_drop_upload' => true,

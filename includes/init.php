@@ -898,24 +898,37 @@ function lp_add_text_feature_callback() {
     $element_id++;
     $label_id = "oer_lp_text_feature[label][]";
     $editor_id = "oer_lp_text_feature[editor][]";
-    $content = '<div class="text-editor-group">';
-    $content .=     '<div class="form-group">';
-    $content .=         '<input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" placeholder="Text Title">';
-    $content .=     '</div>';
-    $content .=     '<div class="form-group';
-                    ob_start(); // Start output buffer
-                    wp_editor('',
-                        'oer-lp-text-feature-editor-' . $element_id,
-                        $settings = array(
-                            'textarea_name' => $editor_id,
-                            'media_buttons' => true,
-                            'textarea_rows' => 10,
-                            'drag_drop_upload' => true,
-                            'teeny' => true,
-                        )
-                    );
-    $content .= ob_get_clean();
-    $content .=     '</div>';
+    $content = '<div class="panel panel-default lp-section-element-wrapper" id="lp_section_element_wrapper-'.$element_id.'">';
+    $content .= '   <div class="panel-heading">';
+    $content .= '       <h3 class="panel-title lp-module-title">';
+    $content .=             __("Section", OER_LESSON_PLAN_SLUG);
+    $content .= '           <span class="lp-sortable-handle">';
+    $content .= '               <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>';
+    $content .= '               <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>';
+    $content .= '           </span>';
+    $content .= '           <span class="btn btn-danger btn-sm lp-remove-section" title="Delete"><i class="fa fa-trash"></i> </span>';
+    $content .= '       </h3>';
+    $content .= '   </div>';
+    $content .= '   <div class="panel-body">';
+    $content .= '        <div class="text-editor-group">';
+    $content .= '           <div class="form-group">';
+    $content .= '               <input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" placeholder="Text Title">';
+    $content .= '           </div>';
+    $content .= '       <div class="form-group';
+                            ob_start(); // Start output buffer
+                            wp_editor('',
+                                'oer-lp-text-feature-editor-' . $element_id,
+                                $settings = array(
+                                    'textarea_name' => $editor_id,
+                                    'media_buttons' => true,
+                                    'textarea_rows' => 10,
+                                    'drag_drop_upload' => true,
+                                    'teeny' => true,
+                                )
+                            );
+    $content .=             ob_get_clean();
+    $content .= '       </div>';
+    $content .= '   </div>';
     $content .= '</div>';
     echo $content;
     exit();
@@ -939,6 +952,7 @@ function add_modals_to_footer(){
         include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-module.php');
         include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-author.php');
         include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-source.php');
+        include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-section.php');
         include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-confirm-popup.php');
         include_once(OER_LESSON_PLAN_PATH.'includes/popups/standard-selection.php');
     }

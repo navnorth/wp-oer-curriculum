@@ -959,6 +959,8 @@ jQuery(document).ready(function ($) {
                     tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-text-feature-editor-' + id );
                     tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-text-feature-editor-' + id );
                     quicktags({ id: 'oer-lp-text-feature-editor-' + id });
+                    
+                    LessonPlan.toggleUpDownButton();
                 });
             });
         },
@@ -975,6 +977,29 @@ jQuery(document).ready(function ($) {
                     }
                 });
             }
+        },
+        
+        // Delete Section
+        deleteSection: function () {
+            $(document).on('click', '.lp-remove-section',function(e) {
+                var section = $(this).closest('.panel-default');
+                var elementId = section.attr('id');
+                e.preventDefault();
+                $('#lp-delete-section').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+                    .on('click', '#lp-section-delete-confirm', function(e) {
+                        section.remove();
+                        $('a[href=#' + elementId +']').parent('li').remove();
+                        $('#lp-delete-section').modal('hide');
+
+                        // Disable delete button for section
+                        if($('.lp-section-element-wrapper').length === 1) {
+                            $('.lp-remove-section').attr('disabled', 'disabled');
+                        }
+                    });
+            });
         }
     };
     
@@ -1007,6 +1032,7 @@ jQuery(document).ready(function ($) {
     LessonPlan.lpPrimarySourceSensitiveMaterial();
     LessonPlan.lpOtherCurriculumType();
     LessonPlan.lpAddTextFeature();
+    LessonPlan.deleteSection();
     LessonPlan.lpTinyMCESave();
 });
 
