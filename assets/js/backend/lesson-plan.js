@@ -2,9 +2,6 @@
  * All backend custom JavaScript code are here
  *
  */
-window.onerror = function(){
-   return true;
-}
 jQuery(document).ready(function ($) {
 
     var LessonPlan = {
