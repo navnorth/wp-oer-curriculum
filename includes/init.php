@@ -916,7 +916,7 @@ function lp_add_text_feature_callback() {
     $content .= '               <input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" placeholder="Text Title">';
     $content .= '           </div>';
     $content .= '       <div class="form-group';
-                            ob_start(); // Start output buffer
+                            /*ob_start(); // Start output buffer
                             wp_editor('',
                                 'oer-lp-text-feature-editor-' . $element_id,
                                 $settings = array(
@@ -927,7 +927,8 @@ function lp_add_text_feature_callback() {
                                     'teeny' => true,
                                 )
                             );
-    $content .=             ob_get_clean();
+    $content .=             ob_get_clean();*/
+    $content .= '           <textarea name="'.$editor_id.'" id="oer-lp-text-feature-editor-'.$element_id.'" rows="10"></textarea>';
     $content .= '       </div>';
     $content .= '   </div>';
     $content .= '</div>';
