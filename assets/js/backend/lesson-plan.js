@@ -956,9 +956,9 @@ jQuery(document).ready(function ($) {
                        }).done(function (response) {
                     dis.before(response);
 
-                    tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-text-feature-editor-' + id );
+                    /*tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-text-feature-editor-' + id );
                     tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-text-feature-editor-' + id );
-                    quicktags({ id: 'oer-lp-text-feature-editor-' + id });
+                    quicktags({ id: 'oer-lp-text-feature-editor-' + id });*/
                     LessonPlan.initializeEditor('oer-lp-text-feature-editor-' + id);
                     
                     LessonPlan.toggleUpDownButton();
