@@ -959,6 +959,7 @@ jQuery(document).ready(function ($) {
                     tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-text-feature-editor-' + id );
                     tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-text-feature-editor-' + id );
                     quicktags({ id: 'oer-lp-text-feature-editor-' + id });
+                    LessonPlan.initializeEditor('oer-lp-text-feature-editor-' + id);
                     
                     LessonPlan.toggleUpDownButton();
                 });
@@ -1000,6 +1001,21 @@ jQuery(document).ready(function ($) {
                         }
                     });
             });
+        },
+        
+        // Initialize WP Editor
+        initializeEditor: function(id) {
+            wp.editor.initialize(
+                id,
+                {
+                    tinymce: {
+                        wpautop: true,
+                        plugins: 'charmap colorpicker compatrx directionality fullscreen hr image lists media paste tabfocus textcolor wordpress wpautoresize wpdialogs wpeditimate wpemoji wpgallery wplink wptextpattern wpview',
+                        toolbar1: 'formatselect bold italic | bullist numlist | blockquote | alignleft aligncenter alignright | link unlink | wp_more | spellchecker'
+                    },
+                    quicktags: true
+                }
+            );
         }
     };
     
