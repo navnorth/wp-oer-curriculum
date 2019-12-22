@@ -959,7 +959,6 @@ jQuery(document).ready(function ($) {
                     /*tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-text-feature-editor-' + id );
                     tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-text-feature-editor-' + id );
                     quicktags({ id: 'oer-lp-text-feature-editor-' + id });*/
-                    wp.editor.remove('oer-lp-text-feature-editor-' + id);
                     LessonPlan.initializeEditor('oer-lp-text-feature-editor-' + id);
                     
                     LessonPlan.toggleUpDownButton();
@@ -1006,6 +1005,7 @@ jQuery(document).ready(function ($) {
         
         // Initialize WP Editor
         initializeEditor: function(id) {
+            wp.editor.remove(id);
             wp.editor.initialize(
                 id,
                 {
@@ -1014,7 +1014,8 @@ jQuery(document).ready(function ($) {
                         plugins: 'charmap colorpicker compat3x directionality fullscreen hr image lists media paste tabfocus textcolor wordpress wpautoresize wpdialogs wpeditimage wpemoji wpgallery wplink wptextpattern wpview',
                         toolbar1: 'formatselect bold italic | bullist numlist | blockquote | alignleft aligncenter alignright | link unlink | wp_more | spellchecker'
                     },
-                    quicktags: true
+                    quicktags: true,
+                    mediaButtons: true
                 }
             );
         }
