@@ -508,8 +508,10 @@ if (have_posts()) : while (have_posts()) : the_post();
                                         <div class="resource-thumbnail text-thumbnail"></div>
                                     </a>
                                 </div>
-                                <div class="lp-resource-title">
-                                    <?php echo $oer_lp_custom_editor['title']; ?>
+                                <div class="lp-resource-info">
+                                  <div class="lp-resource-title">
+                                      <?php echo $oer_lp_custom_editor['title']; ?>
+                                  </div>
                                 </div>
                             </div>
                         </div>
@@ -532,8 +534,10 @@ if (have_posts()) : while (have_posts()) : the_post();
                                         <div class="resource-thumbnail text-thumbnail"></div>
                                     </a>
                                 </div>
-                                <div class="lp-resource-title">
-                                    <?php echo $oer_lp_custom_editor['title']; ?>
+                                <div class="lp-resource-info">
+                                  <div class="lp-resource-title">
+                                      <?php echo $oer_lp_custom_editor['title']; ?>
+                                  </div>
                                 </div>
                             </div>
                         </div>
@@ -553,8 +557,10 @@ if (have_posts()) : while (have_posts()) : the_post();
                                     <div class="resource-thumbnail text-thumbnail"></div>
                                 </a>
                             </div>
-                            <div class="lp-resource-title">
-                                <?php _e("Text List", OER_LESSON_PLAN_SLUG); ?>
+                            <div class="lp-resource-info">
+                              <div class="lp-resource-title">
+                                  <?php _e("Text List", OER_LESSON_PLAN_SLUG); ?>
+                              </div>
                             </div>
                         </div>
                     </div>
@@ -577,8 +583,10 @@ if (have_posts()) : while (have_posts()) : the_post();
                                         <div class="resource-thumbnail text-thumbnail"></div>
                                     </a>
                                 </div>
-                                <div class="lp-resource-title">
-                                    <?php echo $oer_lp_vocabulary_list_title; ?>
+                                <div class="lp-resource-info">
+                                  <div class="lp-resource-title">
+                                      <?php echo $oer_lp_vocabulary_list_title; ?>
+                                  </div>
                                 </div>
                             </div>
                         </div>
@@ -597,8 +605,10 @@ if (have_posts()) : while (have_posts()) : the_post();
                                     <div class="resource-thumbnail text-thumbnail"></div>
                                 </a>
                             </div>
-                            <div class="lp-resource-title">
-                                <?php _e("Materials", OER_LESSON_PLAN_SLUG); ?>
+                            <div class="lp-resource-info">
+                              <div class="lp-resource-title">
+                                  <?php _e("Materials", OER_LESSON_PLAN_SLUG); ?>
+                              </div>
                             </div>
                         </div>
                     </div>
