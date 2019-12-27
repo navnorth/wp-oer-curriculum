@@ -151,6 +151,15 @@ $type = $type[0];
         </div>
     </div>
     <?php
+    } else {
+        $media_type = $post_meta_data("oer_mediatype")[0];
+        ?>
+        <div class="ps-image-block">
+            <?php if (empty($feature_image_url)): ?>
+            <span class="dashicons <?php if (function_exists('getResourceIcon')) echo getResourceIcon($media_type,$resource_url); ?>"></span>
+            <?php endif; ?>
+        </div>
+        <?php
     }
     $resource_meta = null;
     $subject_areas = null;
