@@ -162,8 +162,15 @@ $type = $type[0];
                  <a class="oer-featureimg" href="<?php echo $resource_url; ?>" target="_blank"><span class="dashicons <?php if (function_exists('getResourceIcon')) echo getResourceIcon($media_type,$resource_url); ?>"></span></a>
                 <?php endif; ?>
             </div>
+            <div class="lp-center">
+                <?php if (isset($oer_resource_url)) { ?>
+                <div class="ps-meta-group ps-resource-url">
+                    <a href="<?php echo $oer_resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Original", OER_LESSON_PLAN_SLUG); ?></a>
+                </div>
+                <?php } ?>
+            </div>
         </div>
-        <?php
+        <?php  
         }
     }
     $resource_meta = null;
