@@ -15,6 +15,7 @@ body.single-lesson-plans {
     right: 0;
     background: #283d47 !important;
     padding: 5px 0;
+    margin-right:-40px;
 }
 .tc-lp-controls a {
     display: block;
@@ -1111,6 +1112,7 @@ div#tcHiddenFields {float: left;}
 .ps-pdf-block .psPDFWrapper { margin: 0 auto; width: 100%; height: 100%; max-width:100%; }
 .padding-right-0 { padding-right:0 !important; }
 .padding-left-0 { padding-left:0 !important; }
+.oer-sngl-rsrc-img.oer-sngl-audio-type { border:none; }
 @media only screen and (max-width: 600px){
     .ps-youtube-video .videoWrapper {
         width: 100%;

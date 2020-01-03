@@ -225,6 +225,33 @@ jQuery(document).ready(function ($) {
                 }
                 return false;
             });
+            
+            // Section element reorder
+            $(document).on('click', '.section-reorder-up', function(){
+                var $current = $(this).closest('.lp-section-element-wrapper');
+                var $previous = $current.prev('.lp-section-element-wrapper');
+                //var ret = $current.find('iframe').attr('id').replace('_ifr','');
+                //tinyMCE.execCommand('mceRemoveEditor', false, $('#'+ret).attr('id'));
+                if($previous.length !== 0){
+                    $current.insertBefore($previous);
+                    LessonPlan.toggleUpDownButton();
+                    //tinyMCE.execCommand('mceAddEditor', false, $('#'+ret).attr('id'));
+                }
+                return false;
+            });
+
+            $(document).on('click', '.section-reorder-down', function(){
+                var $current = $(this).closest('.lp-section-element-wrapper');
+                var $next = $current.next('.lp-section-element-wrapper');
+                //var ret = $current.find('iframe').attr('id').replace('_ifr','');
+                //tinyMCE.execCommand('mceRemoveEditor', false, $('#'+ret).attr('id'));
+                if($next.length !== 0){
+                    $current.insertAfter($next);
+                    LessonPlan.toggleUpDownButton();
+                    //tinyMCE.execCommand('mceAddEditor', false, $('#'+ret).attr('id'));
+                }
+                return false;
+            });
         },
 
         // Change order value in hidden field and reinitialize the text editor
@@ -280,6 +307,12 @@ jQuery(document).ready(function ($) {
             $('.resource-reorder-down').removeClass('hide');
             $('.resource-reorder-up').first().addClass('hide');
             $('.resource-reorder-down').last().addClass('hide');
+            
+            // Show / Hide button on Additional Section module
+            $('.section-reorder-up').removeClass('hide');
+            $('.section-reorder-down').removeClass('hide');
+            $('.section-reorder-up').first().addClass('hide');
+            $('.section-reorder-down').last().addClass('hide');
         },
 
         // Create dynamic module
@@ -926,6 +959,9 @@ jQuery(document).ready(function ($) {
                     tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-text-feature-editor-' + id );
                     tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-text-feature-editor-' + id );
                     quicktags({ id: 'oer-lp-text-feature-editor-' + id });
+                    /*LessonPlan.initializeEditor('oer-lp-text-feature-editor-' + id);*/
+                    
+                    LessonPlan.toggleUpDownButton();
                 });
             });
         },
@@ -942,6 +978,46 @@ jQuery(document).ready(function ($) {
                     }
                 });
             }
+        },
+        
+        // Delete Section
+        deleteSection: function () {
+            $(document).on('click', '.lp-remove-section',function(e) {
+                var section = $(this).closest('.panel-default');
+                var elementId = section.attr('id');
+                e.preventDefault();
+                $('#lp-delete-section').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+                    .on('click', '#lp-section-delete-confirm', function(e) {
+                        section.remove();
+                        $('a[href=#' + elementId +']').parent('li').remove();
+                        $('#lp-delete-section').modal('hide');
+
+                        // Disable delete button for section
+                        if($('.lp-section-element-wrapper').length === 1) {
+                            $('.lp-remove-section').attr('disabled', 'disabled');
+                        }
+                    });
+            });
+        },
+        
+        // Initialize WP Editor
+        initializeEditor: function(id) {
+            wp.editor.remove(id);
+            wp.editor.initialize(
+                id,
+                {
+                    tinymce: {
+                        wpautop: true,
+                        plugins: 'charmap colorpicker compat3x directionality fullscreen hr image lists media paste tabfocus textcolor wordpress wpautoresize wpdialogs wpeditimage wpemoji wpgallery wplink wptextpattern wpview',
+                        toolbar1: 'formatselect bold italic | bullist numlist | blockquote | alignleft aligncenter alignright | link unlink | wp_more | spellchecker'
+                    },
+                    quicktags: true,
+                    mediaButtons: true
+                }
+            );
         }
     };
     
@@ -974,6 +1050,7 @@ jQuery(document).ready(function ($) {
     LessonPlan.lpPrimarySourceSensitiveMaterial();
     LessonPlan.lpOtherCurriculumType();
     LessonPlan.lpAddTextFeature();
+    LessonPlan.deleteSection();
     LessonPlan.lpTinyMCESave();
 });
 

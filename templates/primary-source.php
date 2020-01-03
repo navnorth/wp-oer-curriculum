@@ -151,6 +151,20 @@ $type = $type[0];
         </div>
     </div>
     <?php
+    } else {
+        $media_type = get_post_meta($resource->ID, "oer_mediatype")[0];
+        if (!empty($resource_url)){
+            $right_class = "col-md-8";
+        ?>
+        <div class="ps-media-image col-md-4 col-sm-12" data-curid="<?php echo $index; ?>">
+            <div class="oer-sngl-rsrc-img">
+                 <?php if (empty($feature_image_url)): ?>
+                 <a class="oer-featureimg" href="<?php echo $resource_url; ?>" target="_blank"><span class="dashicons <?php if (function_exists('getResourceIcon')) echo getResourceIcon($media_type,$resource_url); ?>"></span></a>
+                <?php endif; ?>
+            </div>
+        </div>
+        <?php
+        }
     }
     $resource_meta = null;
     $subject_areas = null;
