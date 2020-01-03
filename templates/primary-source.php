@@ -168,7 +168,10 @@ $type = $type[0];
           if (isset($oer_resource_url) && $type > '') {
             $_desc_bot_class = "nofeat";
             $_oer_resource_url_nofeat = $oer_resource_url;
-          }       
+          }
+          if (!empty($featured_image_url)){
+            
+          }        
     ?>     
     <?php
     }

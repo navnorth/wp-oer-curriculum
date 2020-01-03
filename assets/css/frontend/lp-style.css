@@ -892,7 +892,7 @@ div#tcHiddenFields {float: left;}
     color: #77B143;
 }
 .ps-info-description { margin-bottom: 30px; overflow: hidden; }
-.ps-info-description.nofeat {margin-bottom: 10px !important;}
+ps-info-description.nofeat {margin-bottom: 10px !important;}
 /** End of Primary Source Template Styling **/
 /** Topic Template Styling **/
 .topic-template #page.site { padding-left:0; padding-right:0; }
