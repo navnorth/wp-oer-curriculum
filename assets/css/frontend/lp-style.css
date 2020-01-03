@@ -734,7 +734,6 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     font-size: 14px;
     line-height:20px;
 }
-a.tc-view-button.nofeat {padding: 0px;}
 .tc-view-button:hover, .tc-view-button:active, .tc-view-button:focus { text-decoration: underline }
 .fade.in { opacity:1; }
 .ps-tagcloud { margin:25px 0 15px; }
@@ -892,7 +891,6 @@ div#tcHiddenFields {float: left;}
     color: #77B143;
 }
 .ps-info-description { margin-bottom: 30px; overflow: hidden; }
-ps-info-description.nofeat {margin-bottom: 10px !important;}
 /** End of Primary Source Template Styling **/
 /** Topic Template Styling **/
 .topic-template #page.site { padding-left:0; padding-right:0; }

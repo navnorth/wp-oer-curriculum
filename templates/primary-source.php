@@ -40,7 +40,6 @@ $isPDF = is_pdf_resource($resource_url);
 // Get Curriculum Meta for Primary Sources
 $post_meta_data = get_post_meta($curriculum_id);
 $primary_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
-$modules = oer_lp_modules($post->ID);
 $index = 0;
 $teacher_info = "";
 $student_info = "";
@@ -54,37 +53,27 @@ $prev_title = "";
 $next_title = "";
 if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
     if (!empty(array_filter($primary_resources['resource']))) {
-        $allResMod = array();
-        //Add All resources to array
         foreach ($primary_resources['resource'] as $resourceKey => $source) {
-          array_push($allResMod, array('title'=>$source,'description'=>$primary_resources['description'][$resourceKey],'type'=>'source'));
-        }
-        //Add all modules to array
-        foreach ($modules as $modKey => $mod) {
-          array_push($allResMod, array('title'=>$mod[title],'description'=>$mod[0],'type'=>'module'));
-        }      
-        foreach ($allResMod as $resourceKey => $source) {
             if ($psindex == $resourceKey){
-                $new_type = (isset($source['type']) ? $source['type']: "");
-                $new_title = (isset($source['title']) ? $source['title']: "");
-                $new_description = (isset($source['description']) ? $source['description']: "");        
+                $new_title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
+                $new_description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
                 break;
             }
             $index++;
         }
-        if (isset($allResMod[$index-1])){
+        if (isset($primary_resources['resource'][$index-1])){
             $prev_resource = oer_lp_get_resource_details($primary_resources['resource'][$index-1]);
-            $prev_title = (isset($allResMod[$index-1]['title']) ? $allResMod[$index-1]['title']: ""); 
+            $prev_title = (isset($primary_resources['title'][$index-1]) ? $primary_resources['title'][$index-1]: "");
             $prev_url = $back_url."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID.'/idx/'.($index-1);
         }
-        if (isset($allResMod[$index+1])){
+        if (isset($primary_resources['resource'][$index+1])){
             $next_resource = oer_lp_get_resource_details($primary_resources['resource'][$index+1]);
-            $next_title = (isset($allResMod[$index+1]['title']) ? $allResMod[$index+1]['title']: "");
+            $next_title = (isset($primary_resources['title'][$index+1]) ? $primary_resources['title'][$index+1]: "");
             $next_url = $back_url."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID.'/idx/'.($index+1);
         }
         if ($index==0)
             $lp_prev_class = "ps-nav-hidden";
-        if ($index==count($allResMod['resource'])-1)
+        if ($index==count($primary_resources['resource'])-1)
             $lp_next_class = "ps-nav-hidden";
         if (isset($primary_resources['teacher_info']))
             $teacher_info = $primary_resources['teacher_info'][$index];
@@ -97,7 +86,6 @@ if ($youtube || $isPDF)
 if (function_exists('oer_get_resource_metadata')){
     $resource_meta = oer_get_resource_metadata($resource->ID);
 }
-/*
 if (empty($next_resource)){
     $modules = oer_lp_modules($post->ID);
     if (isset($modules[0])){
@@ -106,7 +94,6 @@ if (empty($next_resource)){
         $next_url = $back_url."/module/".sanitize_title($next_resource['title']);
     }
 }
-*/
 $type = get_post_meta($resource->ID,"oer_mediatype");
 $type = $type[0];
 ?>
@@ -164,16 +151,6 @@ $type = $type[0];
         </div>
     </div>
     <?php
-    }else{
-          if (isset($oer_resource_url) && $type > '') {
-            $_desc_bot_class = "nofeat";
-            $_oer_resource_url_nofeat = $oer_resource_url;
-          }
-          if (!empty($featured_image_url)){
-            
-          }        
-    ?>     
-    <?php
     }
     $resource_meta = null;
     $subject_areas = null;
@@ -186,7 +163,7 @@ $type = $type[0];
             else
                 echo $resource->post_title;
             ?></h1>
-            <div class="ps-info-description <?php echo $_desc_bot_class; ?>">
+            <div class="ps-info-description">
                 <?php
                 if (!empty($new_description))
                     echo $new_description;
@@ -194,12 +171,7 @@ $type = $type[0];
                     echo $resource->post_content;
                 ?>
             </div>
-        </div>      
-        <?php if( isset($_oer_resource_url_nofeat)){ ?>
-        <div class="ps-meta-group" >
-            <a href="<?php echo $_oer_resource_url_nofeat; ?>" class="tc-view-button nofeat" target="_blank"><?php _e("View Original", OER_LESSON_PLAN_SLUG); ?></a>
         </div>
-        <?php } ?>      
     </div>
 </div>
 <div class="ps-related-sources lp-primary-sources-row">
