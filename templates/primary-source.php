@@ -159,7 +159,7 @@ $type = $type[0];
         <div class="ps-media-image col-md-4 col-sm-12" data-curid="<?php echo $index; ?>">
             <div class="oer-sngl-rsrc-img">
                  <?php if (empty($feature_image_url)): ?>
-                 <a class="oer-featureimg" href="<?php echo $resource_url; ?>" target="_blank"><span class="dashicons <?php if (function_exists('getResourceIcon')) echo getResourceIcon($media_type,$resource_url); ?>"></span></a>
+                 <a class="oer-featureimg" href="<?php echo $resource_url; ?>" target="_blank"><span class="dashicons <?php if (function_exists('getResourceIcon')) echo getResourceIcon($media_type,$resource_url); ?> nofeat"></span></a>
                 <?php endif; ?>
             </div>
             <div class="lp-center">
