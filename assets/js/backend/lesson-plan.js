@@ -204,7 +204,6 @@ jQuery(document).ready(function ($) {
                 var $current = $(this).closest('.lp-primary-resource-element-wrapper');
                 var $previous = $current.prev('.lp-primary-resource-element-wrapper');
                 var $x = $current.find('iframe').length;
-                console.log($x);
                 if($x > 0){
                   var ret = $current.find('iframe').attr('id').replace('_ifr','');
                   tinyMCE.execCommand('mceRemoveEditor', false, $('#'+ret).attr('id'));

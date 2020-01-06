@@ -7,6 +7,14 @@ add_filter('body_class', function($classes){
 
 get_header();
 
+global $_css_oer;
+if ($_css_oer) {
+$output = "<style>"."\n";
+$output .= $_css_oer."\n";
+$output .="</style>"."\n";
+echo $output;
+}
+
 $back_url = "";
 $source_id = 0;
 $lp_prev_class = "";
