@@ -971,7 +971,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                             <input type="hidden" name="lp_order[lp_additional_sections]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title lp-module-title">
-                                <?php _e("Additional Sections", OER_LESSON_PLAN_SLUG); ?>
+                                <?php echo oer_lp_get_field_label('oer_lp_additional_sections'); ?>
                                     <span class="lp-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
