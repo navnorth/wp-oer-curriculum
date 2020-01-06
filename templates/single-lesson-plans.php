@@ -308,7 +308,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         }*/
                         
                         // Additional Section
-                        $additional_sections = isset($post_meta_data['oer_lp_text_feature'][0]) ? unserialize($post_meta_data['oer_lp_text_feature'][0]) : array();
+                        $additional_sections = isset($post_meta_data['oer_lp_additional_sections'][0]) ? unserialize($post_meta_data['oer_lp_additional_sections'][0]) : array();
                          if (is_array($additional_sections)){
                             $cnt = 0;
                             if (isset($additional_sections['label']))

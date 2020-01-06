@@ -38,6 +38,8 @@ $iq_set = (get_option('oer_lp_iq_label'))?true:false;
 $iq_enabled = (get_option('oer_lp_iq_enabled'))?true:false;
 $req_materials_set = (get_option('oer_lp_required_materials_label'))?true:false;
 $req_materials_enabled = (get_option('oer_lp_required_materials_enabled'))?true:false;
+$additional_sections_set = (get_option('oer_lp_additional_sections_label'))?true:false;
+$additional_sections_enabled = (get_option('oer_lp_additional_sections_enabled'))?true:false;
 $history_bg_set = (get_option('oer_lp_custom_editor_historical_background_label'))?true:false;
 $history_bg_enabled = (get_option('oer_lp_custom_editor_historical_background_enabled'))?true:false;
 $type_set = (get_option('oer_lp_type_label'))?true:false;
@@ -113,6 +115,13 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                             ?>
                             <li class="list-group-item">
                                 <a href="#oer-lp-required-materials" title="Required Materials"><?php echo oer_lp_get_field_label('oer_lp_required_materials');  ?></a>
+                            </li>
+                        <?php }
+                        } elseif ($elementKey == 'lp_additional_sections') {
+                            if (($additional_sections_set && $additional_sections_enabled) || !$additional_sections_set) {
+                            ?>
+                            <li class="list-group-item">
+                                <a href="#oer-lp-additional-sections" title="Additional Sections"><?php echo oer_lp_get_field_label('oer_lp_additional_sections');  ?></a>
                             </li>
                         <?php }
                         } elseif ($elementKey == 'lp_lesson_times_order') {?>
@@ -927,6 +936,86 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                             echo '<div class="form-group">';
                                             wp_editor( (isset($text_features['editor'][$i]) ? $text_features['editor'][$i] : ""),
                                                 'oer-lp-text-feature-editor-' . $i,
+                                                $settings = array(
+                                                    'textarea_name' => $editor_id,
+                                                    'media_buttons' => true,
+                                                    'textarea_rows' => 10,
+                                                    'drag_drop_upload' => true,
+                                                    'teeny' => true,
+                                                )
+                                            );
+                                            echo '</div>';
+                                        ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                                    }
+                                }
+                                ?>
+                                <div class="button-row form-group">
+                                    <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Section", OER_LESSON_PLAN_SLUG); ?></button>
+                                </div>
+                            </div>
+                        </div>
+                    <?php }
+                    } elseif ($elementKey == 'lp_additional_sections') {
+                        if (($additional_sections_set && $additional_sections_enabled) || !$additional_sections_set) {
+                        ?>
+                        <!--Required Equipment Materials Module-->
+                        <?php
+                        $oer_lp_additional_sections  = isset($post_meta_data['oer_lp_additional_sections'][0]) ? $post_meta_data['oer_lp_additional_sections'][0] : array();
+                        $oer_lp_additional_sections_label = isset($post_meta_data['oer_lp_additional_sections_label'][0]) ? $post_meta_data['oer_lp_additional_sections_label'][0] : "";
+                        ?>
+                        <div class="panel panel-default lp-element-wrapper oer-lp-required-materials" id="oer-lp-additional-sections">
+                            <input type="hidden" name="lp_order[lp_additional_sections]" class="element-order" value="<?php echo $value;?>">
+                            <div class="panel-heading">
+                                <h3 class="panel-title lp-module-title">
+                                <?php _e("Additional Sections", OER_LESSON_PLAN_SLUG); ?>
+                                    <span class="lp-sortable-handle">
+                                        <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                        <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                    </span>
+                                    <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <?php
+                                $text_features = isset($post_meta_data['oer_lp_additional_sections'][0]) ? unserialize($post_meta_data['oer_lp_additional_sections'][0]) : array();
+                                if (is_array($text_features)){
+                                    $label_id = "oer_lp_additional_sections[label][]";
+                                    $editor_id = "oer_lp_additional_sections[editor][]";
+                                    
+                                    $cnt = 0;
+                                    if (isset($text_features['label']))
+                                        $cnt = count($text_features['label']);
+                                    if (isset($text_features['editor'])){
+                                        $cnt = (count($text_features['editor'])>$cnt) ? count($text_features['editor']) : $cnt;
+                                    }
+                                    for ($i=0;$i<$cnt;$i++){
+                                ?>
+                                <div class="panel panel-default lp-section-element-wrapper">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title lp-module-title">
+                                            <?php _e("Section", OER_LESSON_PLAN_SLUG); ?>
+                                            <span class="lp-sortable-handle">
+                                            <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>
+                                            <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>
+                                        </span>
+                                            <span class="btn btn-danger btn-sm lp-remove-section"
+                                                  title="Delete"
+                                            ><i class="fa fa-trash"></i> </span>
+                                        </h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="text-editor-group">
+                                       <?php
+                                            echo '<div class="form-group">';
+                                            echo '<input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" value="'.$text_features['label'][$i].'">';
+                                            echo '</div>';
+                                            echo '<div class="form-group">';
+                                            wp_editor( (isset($text_features['editor'][$i]) ? $text_features['editor'][$i] : ""),
+                                                'oer-lp-additional-sections-editor-' . $i,
                                                 $settings = array(
                                                     'textarea_name' => $editor_id,
                                                     'media_buttons' => true,
@@ -1909,7 +1998,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                     </div>
                                     <div class="panel-body">
                                         <div class="form-group">
-                                           <input type="text" class="form-control" name="oer_lp_text_feature[label][]" placeholder="Additional Section" id="oer_lp_required_materials_label" value="">
+                                           <input type="text" class="form-control" name="oer_lp_text_feature[label][]" placeholder="Additional Section" id="oer_lp_additional_sections_label" value="">
                                        </div>
                                        <div class="form-group">
                                            <?php wp_editor( '',
@@ -1923,6 +2012,61 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                )
                                            ); ?>
                                        </div>
+                                    </div>
+                                    <div class="button-row form-group">
+                                        <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Section", OER_LESSON_PLAN_SLUG); ?></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php }
+                        } elseif ($module=="lp_additional_sections"){
+                            if (($additional_sections_set && $additional_sections_enabled) || !$additional_sections_set) {    
+                            ?>
+                            <!--Additional Sections Module-->
+                            <div class="panel panel-default lp-element-wrapper oer-lp-required-materials" id="oer-lp-additional-sections">
+                                <input type="hidden" name="lp_order[lp_additional_sections]" class="element-order" value="<?php echo $index; ?>">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title lp-module-title">                                        
+                                        <?php echo oer_lp_get_field_label('oer_lp_additional_sections'); ?>
+                                        <span class="lp-sortable-handle">
+                                            <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                                            <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                                        </span>
+                                        <span class="btn btn-danger btn-sm lp-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                                    </h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="panel panel-default lp-section-element-wrapper">
+                                        <div class="panel-heading">
+                                            <h3 class="panel-title lp-module-title">
+                                                <?php _e("Section", OER_LESSON_PLAN_SLUG); ?>
+                                                <span class="lp-sortable-handle">
+                                                <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>
+                                                <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>
+                                            </span>
+                                                <span class="btn btn-danger btn-sm lp-remove-section"
+                                                      title="Delete"
+                                                      disabled="disabled"
+                                                ><i class="fa fa-trash"></i> </span>
+                                            </h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                               <input type="text" class="form-control" name="oer_lp_additional_sections[label][]" placeholder="Additional Section" id="oer_lp_additional_sections_label" value="">
+                                           </div>
+                                           <div class="form-group">
+                                               <?php wp_editor( '',
+                                                   'oer-lp-additional-section-1',
+                                                   $settings = array(
+                                                       'textarea_name' => 'oer_lp_additional_sections[editor][]',
+                                                       'media_buttons' => true,
+                                                       'textarea_rows' => 6,
+                                                       'drag_drop_upload' => true,
+                                                       'teeny' => true,
+                                                   )
+                                               ); ?>
+                                           </div>
+                                        </div>
                                     </div>
                                     <div class="button-row form-group">
                                         <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Section", OER_LESSON_PLAN_SLUG); ?></button>

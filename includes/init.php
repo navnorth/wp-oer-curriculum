@@ -301,6 +301,16 @@ function lp_save_custom_fields() {
             if (isset($_POST['oer_lp_required_materials_label'])) {
                 update_post_meta($post->ID, 'oer_lp_required_materials_label', $_POST['oer_lp_required_materials_label']);
             }
+            
+            // Save Additional Sections
+            if (isset($_POST['oer_lp_additional_sections'])) {
+                update_post_meta($post->ID, 'oer_lp_additional_sections', $_POST['oer_lp_additional_sections']);
+            }
+            
+             // Save Additional Sections Label
+            if (isset($_POST['oer_lp_additional_sections_label'])) {
+                update_post_meta($post->ID, 'oer_lp_additional_sections_label', $_POST['oer_lp_additional_sections_label']);
+            }
 
             //Save/update lesson times
             if (isset($_POST['oer_lp_times_label'])) {
@@ -897,8 +907,8 @@ function lp_add_text_feature_callback() {
     
     $element_id = (isset($_REQUEST['row_id']))?$_REQUEST['row_id']:1;
     $element_id++;
-    $label_id = "oer_lp_text_feature[label][]";
-    $editor_id = "oer_lp_text_feature[editor][]";
+    $label_id = "oer_lp_additional_sections[label][]";
+    $editor_id = "oer_lp_additional_sections[editor][]";
     $content = '<div class="panel panel-default lp-section-element-wrapper" id="lp_section_element_wrapper-'.$element_id.'">';
     $content .= '   <div class="panel-heading">';
     $content .= '       <h3 class="panel-title lp-module-title">';
@@ -918,7 +928,7 @@ function lp_add_text_feature_callback() {
     $content .= '       <div class="form-group';
                             ob_start(); // Start output buffer
                             wp_editor('',
-                                'oer-lp-text-feature-editor-' . $element_id,
+                                'oer-lp-additional-sections-editor-' . $element_id,
                                 $settings = array(
                                     'textarea_name' => $editor_id,
                                     'media_buttons' => true,
