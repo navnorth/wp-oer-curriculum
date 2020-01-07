@@ -332,8 +332,8 @@ if (have_posts()) : while (have_posts()) : the_post();
             </div>
             <div class="col-md-4 col-sm-12 featured-image padding-right-0">
                 <?php the_post_thumbnail('inquiry-set-featured'); ?>
-                <?php if (($author_set && $author_enabled) || !$author_set) { ?>
                 <div class="tc-lp-authors-list">
+                <?php if (($author_set && $author_enabled) || !$author_set) { ?>
                     <?php
                     $author_display = false;
                     foreach($authors as $author){
@@ -361,10 +361,15 @@ if (have_posts()) : while (have_posts()) : the_post();
                         }
                     } 
                     ?>
+                    <div class="tc-lp-controls">
+                        <div class="sharethis-inline-share-buttons"></div>
+                        <?php if ($oer_lp_download_copy_document): ?>
+                        <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank"><i class="fal fa-download"></i></a>
+                        <?php endif; ?>
+                    </div>
+                <?php } ?>
                 </div>
-                <?php } 
-                
-                if ($oer_sensitive) : ?>
+                <?php if ($oer_sensitive) : ?>
                 <div class="tc-sensitive-material-section">
                     <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Potentially Sensitive Material</span></p>
                     <!--<button class="question-popup-button"><i class="fal fa-question-circle"></i></button>-->
@@ -386,12 +391,6 @@ if (have_posts()) : while (have_posts()) : the_post();
                     </div>
                 </div>
                 <?php } ?>
-                <div class="tc-lp-controls">
-                    <div class="sharethis-inline-share-buttons"></div>
-                    <?php if ($oer_lp_download_copy_document): ?>
-                    <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank"><i class="fal fa-download"></i></a>
-                    <?php endif; ?>
-                </div>
             </div>
             
         </div>
