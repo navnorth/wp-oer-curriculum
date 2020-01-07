@@ -15,7 +15,6 @@ body.single-lesson-plans {
     right: 0;
     background: #283d47 !important;
     padding: 5px 0;
-    margin-right:-40px;
 }
 .tc-lp-controls a {
     display: block;
@@ -54,6 +53,7 @@ body.single-lesson-plans {
     margin:10px 0;
     line-height: 24px;
     position:relative;
+    padding-right:50px;
 }
 .tc-lp-details-description {
     padding: 10px 0 20px 0px;
