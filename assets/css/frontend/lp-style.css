@@ -53,6 +53,7 @@ body.single-lesson-plans {
     font-size: 18px !important;
     margin:10px 0;
     line-height: 24px;
+    position:relative;
 }
 .tc-lp-details-description {
     padding: 10px 0 20px 0px;
