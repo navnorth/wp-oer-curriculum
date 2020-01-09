@@ -217,7 +217,8 @@ function oer_lesson_plan_assets() {
         wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL . 'assets/lib/font-awesome/css/all.min.css');
         wp_enqueue_style('lesson-plan-bootstrap', OER_LESSON_PLAN_URL . 'assets/lib/bootstrap-3.3.7/css/bootstrap.min.css');
         wp_enqueue_style('admin-lesson-plan', OER_LESSON_PLAN_URL . 'assets/css/backend/lp-style.css');
-
+        wp_enqueue_style('lesson-plan-resource-selector-style', OER_LESSON_PLAN_URL . 'assets/css/backend/lp-resource-selector-style.css', array() , null, 'all');
+        
         //Enqueue script
         if (!wp_script_is('admin-lp-bootstrap', 'enqueued')) {
             wp_enqueue_script('admin-lp-bootstrap', OER_LESSON_PLAN_URL . 'assets/lib/bootstrap-3.3.7/js/bootstrap.min.js');
@@ -226,6 +227,7 @@ function oer_lesson_plan_assets() {
         wp_register_script('lesson-plan', OER_LESSON_PLAN_URL . 'assets/js/backend/lesson-plan.js');
         wp_localize_script('lesson-plan','lpScript', array("image_placeholder_url" => OER_LESSON_PLAN_URL.'assets/images/lp-oer-person-placeholder.png'));
         wp_enqueue_script('lesson-plan');
+      	wp_enqueue_script('lesson-plan-resource-selector-script', OER_LESSON_PLAN_URL . 'assets/js/backend/lp-resource-selector.js' , array('jquery') , null, true);
     }
 }
 
@@ -527,11 +529,29 @@ function lp_add_more_pr_callback() {
                           <div class="row">
                               <div class="col-md-6">
                                   <div class="form-group">
-                                      <label>Resource</label>
+                                      <div class="oer_lp_primary_resources_image_wrappper">
+                                        <label>Resource</label>
+                                        <div class="oer_lp_primary_resources_image">
+                                          <div class="oer_lp_primary_resources_image_display">
+                                            <p>You have not selected a resource</p>
+                                          </div>
+                                          <div class="oer_lp_primary_resources_image_preloader" style="display:none;">
+                                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                                          </div>
+                                        </div>
+                                        
+                                        <div class="oer_lp_primary_resources_display"><?php echo htmlspecialchars($resource);?></div>
+                                        <input type="hidden" name="oer_lp_primary_resources[resource][]" value="">
+                                        <input type="button" class="button lp-resource-selector-button" value="Select Resource">
+                                      </div>';
+                                      
+                                      /*
                                       <select name="oer_lp_primary_resources[resource][]" class="form-control">';
                                           $content .= oer_lp_primary_resource_dropdown();
-                          $content .= '</select>
-                                  </div>
+                                      </select>
+                                      */
+                                      
+                     $content .= '</div>
                               </div>
                               <div class="col-md-5">
                                   <div class="checkbox pull-right">
@@ -563,7 +583,7 @@ function lp_add_more_pr_callback() {
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <div class="checkbox pull-right">
+                                    <div class="checkbox pull-left">
                                         <label>
                                             <input type="hidden" name="oer_lp_primary_resources[resource][]" value="">
                                             <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="'.$prType.'">
@@ -599,6 +619,10 @@ function lp_add_more_pr_callback() {
                           $content .= '</div>';
                           $content .= '<div class="form-group">
                               <label>Description</label>';
+                              
+                              //$content .= '<textarea name="oer_lp_primary_resources[description][]" id="oer-lp-resource-student-'.$totalElements.'" cols="40"></textarea>';
+                              
+                              
                               ob_start(); // Start output buffer
                               wp_editor('',
                                   'oer-lp-resource-student-' . $totalElements,
@@ -608,9 +632,12 @@ function lp_add_more_pr_callback() {
                                       'textarea_rows' => 6,
                                       'drag_drop_upload' => true,
                                       'teeny' => true,
+                                      'quicktags' => true
                                   )
                               );
                               $content .= ob_get_clean();
+                              
+                              
                           $content .= '</div>
                       </div>
                   </div>';
@@ -647,6 +674,40 @@ function lp_create_module_callback() {
         echo create_dynamic_materials_module($element_id);
     }
     exit();
+}
+
+
+// Ajax Requests
+/**
+ * Get Resource Information
+ */
+add_action('wp_ajax_lp_get_resource_info_callback', 'lp_get_resource_info_callback');
+add_action('wp_ajax_nopriv_lp_get_resource_info_callback', 'lp_get_resource_info_callback');
+
+function lp_get_resource_info_callback() {
+  
+  $_arr = array();
+  if(!empty($_POST['restitle'])){
+      $_restitle = $_POST['restitle'];
+      $_resource= get_page_by_title($_restitle,OBJECT,"resource");
+      $_arr['p_title'] = $_resource->post_title;
+      $_arr['p_url'] = get_permalink($_resource->ID);
+      $_arr['p_resourceurl'] = trim(get_post_meta($_resource->ID, "oer_resourceurl", true)," ");
+      $_arr['p_type'] = get_post_meta($_resource->ID,"oer_mediatype")[0];
+      $rsrcThumbID = get_post_thumbnail_id($_resource);
+      $resource_img='';
+      if (!empty($rsrcThumbID)){
+          $resource_img = wp_get_attachment_image_url(get_post_thumbnail_id($_resource), 'Thumbnail' );
+          $_arr['p_imgtyp'] = 'image';
+          $_arr['p_img'] = $resource_img;
+      }else{
+        $_avtr = getResourceIcon($_arr['p_type'],$_arr['p_resourceurl']);
+        $_arr['p_imgtyp'] = 'avatar';
+        $_arr['p_img'] = $_avtr;
+      }
+  }
+  echo json_encode($_arr);
+  exit();
 }
 
 /**
@@ -966,9 +1027,11 @@ function add_modals_to_footer(){
         include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-section.php');
         include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-confirm-popup.php');
         include_once(OER_LESSON_PLAN_PATH.'includes/popups/standard-selection.php');
+        include_once(OER_LESSON_PLAN_PATH . 'includes/lesson-plan-resource-selector.php');
     }
 }
 add_action( 'admin_footer', 'add_modals_to_footer', 10 );
+
 
 function add_oer_curriculum_settings(){
     add_submenu_page('edit.php?post_type=lesson-plans','Settings','Settings','add_users','oer_curriculum_settings','oer_curriculum_settings');
