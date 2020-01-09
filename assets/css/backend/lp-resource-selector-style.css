@@ -302,6 +302,7 @@ label.lp-resource-selector-tag-p.checked {
 .oer_lp_primary_resources_image_display {float: left;width: 100%;}
 .oer_lp_primary_resources_image_display>a img { max-width: 100% !important; border: 1px solid #868686;}
 .wp-editor-container>textarea {width: 100%;}
+.wp-switch-editor { height: 28px !important; }
 
 /***************/
 /*  PRELOADER  */
