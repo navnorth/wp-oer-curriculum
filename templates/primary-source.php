@@ -144,16 +144,20 @@ $type = $type[0];
         </div>
         <?php else: ?>
         <div class="ps-image-block">
+           <?php if (isset($resource_url)) { ?>
+           <a href="<?php echo $resource_url; ?>" target="_blank"><img src="<?php echo $featured_image_url; ?>" alt="<?php echo $resource->post_title; ?>" /></a>
+           <?php }  else { ?>
            <img src="<?php echo $featured_image_url; ?>" alt="<?php echo $resource->post_title; ?>" />
+           <?php } ?>
         </div>
         <?php if ($type=="website"): ?>
         <span class="ps-expand"><a href="<?php echo $resource_url; ?>" class="lp-expand-img" target="_blank"><i class="fas fa-external-link-alt"></i></a></span>
         <?php endif; ?>
         <?php endif; ?>
         <div class="lp-center">
-            <?php if (isset($oer_resource_url)) { ?>
+            <?php if (isset($resource_url)) { ?>
             <div class="ps-meta-group ps-resource-url">
-                <a href="<?php echo $oer_resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Original", OER_LESSON_PLAN_SLUG); ?></a>
+                <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OER_LESSON_PLAN_SLUG); ?></a>
             </div>
             <?php } ?>
         </div>
@@ -171,9 +175,9 @@ $type = $type[0];
                 <?php endif; ?>
             </div>
             <div class="lp-center">
-                <?php if (isset($oer_resource_url)) { ?>
+                <?php if (isset($resource_url)) { ?>
                 <div class="ps-meta-group ps-resource-url">
-                    <a href="<?php echo $oer_resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Original", OER_LESSON_PLAN_SLUG); ?></a>
+                    <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OER_LESSON_PLAN_SLUG); ?></a>
                 </div>
                 <?php } ?>
             </div>
