@@ -632,7 +632,6 @@ function lp_add_more_pr_callback() {
                                       'textarea_rows' => 6,
                                       'drag_drop_upload' => true,
                                       'teeny' => true,
-                                      'quicktags' => true
                                   )
                               );
                               $content .= ob_get_clean();
