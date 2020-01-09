@@ -815,7 +815,9 @@ jQuery(document).ready(function ($) {
                    LessonPlan.toggleUpDownButton();
                 });
             });
+            console.log('IN');
             $.fn.tinymce_textareas = function(){
+                console.log('INNER');
                 tinyMCE.init({
                     //plugins: 'print preview fullpage powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable',
                     plugins: 'lists link fullscreen',
@@ -823,8 +825,8 @@ jQuery(document).ready(function ($) {
                     mode: 'textareas',
                     menubar: false,
                     //toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
-                    toolbar: 'bold italic underline blockquote strikethrough numlist bullist alignleft aligncenter alignright undo redo link fullscreen'
-                    
+                    toolbar: 'bold italic underline blockquote strikethrough numlist bullist alignleft aligncenter alignright undo redo link fullscreen',
+                    quicktags: true
                 });
             }
         },
