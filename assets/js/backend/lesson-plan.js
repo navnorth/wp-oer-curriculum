@@ -240,6 +240,7 @@ jQuery(document).ready(function ($) {
             $(document).on('click', '.section-reorder-up', function(){
                 var $current = $(this).closest('.lp-section-element-wrapper');
                 var $previous = $current.prev('.lp-section-element-wrapper');
+                var $x = $current.find('iframe').length;
                 if($x > 0){
                   var ret = $current.find('iframe').attr('id').replace('_ifr','');
                   tinyMCE.execCommand('mceRemoveEditor', false, $('#'+ret).attr('id'));
