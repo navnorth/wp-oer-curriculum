@@ -619,10 +619,6 @@ function lp_add_more_pr_callback() {
                           $content .= '</div>';
                           $content .= '<div class="form-group">
                               <label>Description</label>';
-                              
-                              $content .= '<textarea name="oer_lp_primary_resources[description][]" id="oer-lp-resource-student-'.$totalElements.'" cols="40"></textarea>';
-                              
-                              /*
                               ob_start(); // Start output buffer
                               wp_editor('',
                                   'oer-lp-resource-student-' . $totalElements,
@@ -636,8 +632,6 @@ function lp_add_more_pr_callback() {
                                   )
                               );
                               $content .= ob_get_clean();
-                              */
-                              
                           $content .= '</div>
                       </div>
                   </div>';
