@@ -806,9 +806,6 @@ jQuery(document).ready(function ($) {
                         tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-resource-student-' + total_form_box );
                         tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-resource-student-' + total_form_box );
                         quicktags({ id: 'oer-lp-resource-student-' + total_form_box });
-                                                
-                        $('#oer-lp-resource-student-'+total_form_box+'-html').trigger('click');
-                        $('#oer-lp-resource-student-'+total_form_box+'-tmce').trigger('click').focus();
                     }
 
                     // Toggle reorder button

@@ -490,45 +490,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <div class="oer_lp_primary_resources_image_wrappper">
-                                                                  <label>Resource</label>
-                                                              
-                                                                  <?php $btn_text = (htmlspecialchars($resource) > '')? 'Change Resource' : 'Select Resource' ?>
-                                                                  
-                                                                  <div class="oer_lp_primary_resources_image">
-                                                                    <div class="oer_lp_primary_resources_image_display">
-                                                                      <?php 
-                                                                      if(!empty($resource)){
-                                                                          $rsrc = get_page_by_title($resource,OBJECT,"resource");
-                                                                          $url = get_permalink($rsrc->ID);
-                                                                          $type = get_post_meta($rsrc->ID,"oer_mediatype")[0];
-                                                                          $rsrcThumbID = get_post_thumbnail_id($rsrc);
-                                                                          $resource_img='';
-                                                                          if (!empty($rsrcThumbID)){
-                                                                              $resource_img = wp_get_attachment_image_url(get_post_thumbnail_id($rsrc), 'resource-thumbnail' );
-                                                                              ?><a href="<?php echo $url; ?>" target="_blank"><img src="<?php echo $resource_img ?>"/></a><?php
-                                                                          }else{
-                                                                            $_avtr = getResourceIcon($type,$url);
-                                                                            ?><a href="<?php echo $url; ?>" target="_blank"><div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div></a><?php
-                                                                          }
-                                                                      }else{
-                                                                        ?><p>You have not selected a resource</p><?php
-                                                                      }
-                                                                      ?>
-                                                                    </div>
-                                                                    <div class="oer_lp_primary_resources_image_preloader" style="display:none;">
-                                                                      <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-                                                                    </div>
-                                                                  </div>
-                                                                  
-                                                                  <div class="oer_lp_primary_resources_display"><?php echo htmlspecialchars($resource);?></div>
-                                                                  <input type="hidden" name="oer_lp_primary_resources[resource][]" value="<?php echo htmlspecialchars($resource);?>">
-                                                                  <input type="button" class="button lp-resource-selector-button" value="<?php echo $btn_text; ?>">
-                                                                </div>
-                                                              
-                                                                
-                                                                <!--
-                                                                <select name="oer_lp_primary_resources[resource][]" itm="1" class="form-control">
+                                                                <select name="oer_lp_primary_resources[resource][]" class="form-control">
                                                                     <option value="">Select Resource</option>
                                                                     <?php
                                                                     if (count($posts)) {
@@ -539,8 +501,6 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                                     }
                                                                     ?>
                                                                 </select>
-                                                              -->
-                                                                
                                                             </div>
                                                         </div>
                                                         <div class="col-md-5">
@@ -581,7 +541,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                         <div class="col-md-5">
                                                             <div class="checkbox pull-left">
                                                                 <label>
-                                                                    <input type="hidden" name="oer_lp_primary_resources[resource][]" itm="2" value="">
+                                                                    <input type="hidden" name="oer_lp_primary_resources[resource][]" value="">
                                                                     <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="<?php echo $resource_field_type; ?>">
                                                                     <input type="hidden"
                                                                            name="oer_lp_primary_resources[sensitive_material_value][]"
@@ -704,7 +664,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                         'order'    => 'ASC'
                                                     ]);
                                                     ?>
-                                                    <select name="oer_lp_primary_resources[resource][]" itm="3" class="form-control">
+                                                    <select name="oer_lp_primary_resources[resource][]" class="form-control">
                                                         <option>Select Resource</option>
                                                         <?php
                                                         if (count($posts)) {
@@ -1833,31 +1793,17 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <div class="oer_lp_primary_resources_image_wrappper">
-                                                              <label>Resource</label>
-                                                              <?php
-                                                              $posts = get_posts([
-                                                                  'post_type' => 'resource',
-                                                                  'post_status' => 'publish',
-                                                                  'numberposts' => -1,
-                                                                  'orderby' => 'title',
-                                                                  'order'    => 'ASC'
-                                                              ]);
-                                                              ?>
-                                                              <div class="oer_lp_primary_resources_image">
-                                                                <div class="oer_lp_primary_resources_image_display">
-                                                                  <div class="oer_lp_primary_resources_display"><?php echo htmlspecialchars($resource);?></div>
-                                                                  <input type="hidden" name="oer_lp_primary_resources[resource][]" value="">
-                                                                  <input type="button" class="button lp-resource-selector-button" value="Select Resource">
-                                                                </div>
-                                                                <div class="oer_lp_primary_resources_image_preloader" style="display:none;">
-                                                                  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-                                                                </div>
-                                                              </div>
-                                                            </div>
-
-                                                            <!--
-                                                            <select name="oer_lp_primary_resources[resource][]" itm="4" class="form-control">
+                                                            <label>Resource</label>
+                                                            <?php
+                                                            $posts = get_posts([
+                                                                'post_type' => 'resource',
+                                                                'post_status' => 'publish',
+                                                                'numberposts' => -1,
+                                                                'orderby' => 'title',
+                                                                'order'    => 'ASC'
+                                                            ]);
+                                                            ?>
+                                                            <select name="oer_lp_primary_resources[resource][]" class="form-control">
                                                                 <option>Select Resource</option>
                                                                 <?php
                                                                 if (count($posts)) {
@@ -1867,8 +1813,6 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                                 }
                                                                 ?>
                                                             </select>
-                                                            -->
-                                                            
                                                         </div>
                                                     </div>
                                                     <div class="col-md-5">
@@ -2675,7 +2619,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                     'order'    => 'ASC'
                                                 ]);
                                                 ?>
-                                                <select name="oer_lp_primary_resources[resource][]" itm="5" class="form-control">
+                                                <select name="oer_lp_primary_resources[resource][]" class="form-control">
                                                     <option value="">Select Resource</option>
                                                     <?php
                                                     if (count($posts)) {
