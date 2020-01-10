@@ -407,12 +407,12 @@ if (have_posts()) : while (have_posts()) : the_post();
                 foreach ($primary_resources['resource'] as $resourceKey => $resource) {
                     $resource = get_page_by_title($resource,OBJECT,"resource");
                     $resource_id = 0;
+                    $resource_img = ''; 
                     if (!empty($resource)){
                         $resource_id = $resource->ID;
                         $url = get_post_meta($resource->ID, "oer_resourceurl", true);
                         $type = get_post_meta($resource->ID,"oer_mediatype")[0];
                         $title = $resource->post_title;
-                        $resource_img = ''; 
                         $_hasimage = has_post_thumbnail($resource);
                         if($_hasimage) $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
                         $oer_authorname = get_post_meta($resource->ID, "oer_authorname", true);	
@@ -420,7 +420,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $oer_authorname2 = get_post_meta($resource->ID, "oer_authorname2", true);	
                         $oer_authorurl2 = get_post_meta($resource->ID, "oer_authorurl2", true);
                     }
-                        $resource_img = (isset($primary_resources['image'][$resourceKey]) ? $primary_resources['image'][$resourceKey]: "");
+                        $resource_img = (isset($primary_resources['image'][$resourceKey]) ? $primary_resources['image'][$resourceKey]: $resource_img);
                         $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
                         $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
                         $_resource_field_type = (isset($primary_resources['field_type'][$resourceKey]) ? $primary_resources['field_type'][$resourceKey]: "");
