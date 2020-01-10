@@ -686,9 +686,9 @@ add_action('wp_ajax_nopriv_lp_get_resource_info_callback', 'lp_get_resource_info
 function lp_get_resource_info_callback() {
   
   $_arr = array();
-  if(!empty($_POST['restitle'])){
-      $_restitle = $_POST['restitle'];
-      $_resource= get_page_by_title($_restitle,OBJECT,"resource");
+  if(!empty($_POST['resid'])){
+      $_resid = $_POST['resid'];
+      $_resource= get_post($_resid);
       $_arr['p_title'] = $_resource->post_title;
       $_arr['p_url'] = get_permalink($_resource->ID);
       $_arr['p_resourceurl'] = trim(get_post_meta($_resource->ID, "oer_resourceurl", true)," ");

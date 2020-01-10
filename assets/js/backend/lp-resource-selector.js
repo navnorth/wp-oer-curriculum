@@ -6,19 +6,18 @@ jQuery( document ).ready(function() {
     jQuery(document).on('click','.lp-resource-selector-select',function(e){
   		e.preventDefault ? e.preventDefault() : e.returnValue = false;
       tmp_this.siblings('.oer_lp_primary_resources_image').children('.oer_lp_primary_resources_image_display').html('');
+      tmp_this.siblings('.oer_lp_primary_resources_display').html('');
       tmp_this.siblings('.oer_lp_primary_resources_image').children('.oer_lp_primary_resources_image_preloader').show();
   		var selone = jQuery('input[name="lp-resource-selector-rad"]:checked');
-  		var resid = selone.val();
+  		var resid = selone.parent().attr('data-postid');
   		var resname = selone.attr('title');
-  		tmp_this.siblings('.oer_lp_primary_resources_display').html(resname);
-      tmp_this.siblings('input[name="oer_lp_primary_resources[resource][]"]').val(resname);
   		jQuery('.lp-resource-selector-overlay').css('visibility', 'hidden').removeClass('fadeIn').addClass('fadeOut');
       
       if(resname > ''){  
         jQuery.ajax({
   				type:'POST',
   				url: ajaxurl,
-  				data: {'action':'lp_get_resource_info_callback','restitle': resname},
+  				data: {'action':'lp_get_resource_info_callback','resid': resid},
   				success:function(response){
 
             response = JSON.parse(response);
@@ -37,40 +36,58 @@ jQuery( document ).ready(function() {
             console.log(p_imgurl);
             
             //set images
-            if(p_url > ''){
+            if(p_title){
               if(p_imgtyp == 'image'){
                   var _shtml  = '<a href="'+p_url+'" target="_blank"><img src="'+p_imgurl+'"></a>';
                   jQuery('.oer_lp_primary_resources_image_display a').imagesLoaded( function() {
-                    setTimeout(function(){ 
+                    setTimeout(function(){
+                      tmp_this.siblings('.oer_lp_primary_resources_display').html(resname);
+                      tmp_this.siblings('input[name="oer_lp_primary_resources[resource][]"]').val(resname);
                       tmp_this.siblings('.oer_lp_primary_resources_image').children('.oer_lp_primary_resources_image_preloader').hide(); 
                       tmp_this.siblings('.oer_lp_primary_resources_image').children('.oer_lp_primary_resources_image_display').html(_shtml);
-                    }, 1000);
+                      tmp_this.val('Change Resource');
+                    }, 500);
                   });
               }else{
-
                   var _shtml = '<a href="'+p_url+'" target="_blank">';
                         _shtml += '<div class="resource-avatar">';
                           _shtml += '<span class="dashicons '+p_imgurl+'"></span>';
                         _shtml += '</div>';
                       _shtml += '</a>';
+                  tmp_this.siblings('.oer_lp_primary_resources_display').html(resname);
+                  tmp_this.siblings('input[name="oer_lp_primary_resources[resource][]"]').val(resname);
                   tmp_this.siblings('.oer_lp_primary_resources_image').children('.oer_lp_primary_resources_image_preloader').hide(); 
                   tmp_this.siblings('.oer_lp_primary_resources_image').children('.oer_lp_primary_resources_image_display').html(_shtml);
+                  tmp_this.val('Change Resource');
               }             
+            }else{
+              var _shtml = '<p class="error">Failed to retrieve a resource: please try again</p>';
+              tmp_this.siblings('.oer_lp_primary_resources_display').html('');
+              tmp_this.siblings('input[name="oer_lp_primary_resources[resource][]"]').val('');
+              tmp_this.siblings('.oer_lp_primary_resources_image').children('.oer_lp_primary_resources_image_preloader').hide(); 
+              tmp_this.siblings('.oer_lp_primary_resources_image').children('.oer_lp_primary_resources_image_display').html(_shtml);
+              tmp_this.val('Select Resource');
             }
             
             
   				},
   				error: function(XMLHttpRequest, textStatus, errorThrown) {
-  				   alert("Error picking up the city list: please try again.");
-  				   jQuery('.vplg_linePreloader').hide(500);
-  				   jQuery('select[name="vplg_reg_city"]').attr("disabled","disabled").html('<option value="">Select state first</option>');
+             var _shtml = '<p class="error">Failed to retrieve a resource: please try again</p>';
+             tmp_this.siblings('.oer_lp_primary_resources_display').html('');
+             tmp_this.siblings('input[name="oer_lp_primary_resources[resource][]"]').val('');
+             tmp_this.siblings('.oer_lp_primary_resources_image').children('.oer_lp_primary_resources_image_preloader').hide(); 
+             tmp_this.siblings('.oer_lp_primary_resources_image').children('.oer_lp_primary_resources_image_display').html(_shtml);
+             tmp_this.val('Select Resource');
   				}
   			});
         
       }else{
         var _shtml = '<p>You have not selected a resource</p>';
+        tmp_this.siblings('.oer_lp_primary_resources_display').html('');
+        tmp_this.siblings('input[name="oer_lp_primary_resources[resource][]"]').val('');
         tmp_this.siblings('.oer_lp_primary_resources_image').children('.oer_lp_primary_resources_image_preloader').hide(); 
         tmp_this.siblings('.oer_lp_primary_resources_image').children('.oer_lp_primary_resources_image_display').html(_shtml);
+        tmp_this.val('Select Resource');
       }
         
   	});  
