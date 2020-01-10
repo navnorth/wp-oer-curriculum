@@ -526,6 +526,14 @@ function lp_add_more_pr_callback() {
                           </h3>
                       </div>
                       <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <label>Thumbnail Image</label>
+                                <div class="oer_primary_resource_thumbnail_holder"></div>
+                                <button name="oer_lp_primary_resources_thumbnail_button" class="oer_lp_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                <input type="hidden" name="oer_lp_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
+                            </div>
+                        </div>
                           <div class="row">
                               <div class="col-md-6">
                                   <div class="form-group">
@@ -581,16 +589,24 @@ function lp_add_more_pr_callback() {
                             </h3>
                         </div>
                         <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <div class="checkbox pull-left">
-                                        <label>
-                                            <input type="hidden" name="oer_lp_primary_resources[resource][]" value="">
-                                            <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="'.$prType.'">
-                                            <input type="hidden" name="oer_lp_primary_resources[sensitive_material_value][]" value="no">
-                                            <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
-                                            Sensitive Material
-                                        </label>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <label>Thumbnail Image</label>
+                                        <div class="oer_primary_resource_thumbnail_holder"></div>
+                                        <button name="oer_lp_primary_resources_thumbnail_button" class="oer_lp_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                        <input type="hidden" name="oer_lp_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="checkbox pull-right">
+                                            <label>
+                                                <input type="hidden" name="oer_lp_primary_resources[resource][]" value="">
+                                                <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="'.$prType.'">
+                                                <input type="hidden" name="oer_lp_primary_resources[sensitive_material_value][]" value="no">
+                                                <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
+                                                Sensitive Material
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>';

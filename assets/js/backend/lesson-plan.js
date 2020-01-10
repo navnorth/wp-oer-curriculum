@@ -1064,6 +1064,43 @@ jQuery(document).ready(function ($) {
                     mediaButtons: true
                 }
             );
+        },
+        
+        /** Add Featured Image Selection on Add Textbox/Resource **/
+        addFeaturedImageOnResourceTextBox: function(){
+            var frame, metabox, btn, input, imageholder;
+            $(document).on('click', 'button.oer_lp_primary_resources_thumbnail_button',function(e) {
+                metabox = $(this).closest(".lp-primary-resource-element-wrapper");
+                btn = $(this);
+                input = metabox.find('.oer_primary_resourceurl');
+                imageholder = metabox.find('.oer_primary_resource_thumbnail_holder');
+                
+                e.preventDefault();
+        
+                if (frame) {
+                    frame.open();
+                    return;
+                }
+        
+                frame = wp.media({
+                    title: 'Select or upload thumbnail image',
+                    button: {
+                        text: "Use this image"
+                    },
+                    multiple:false
+                });
+        
+                frame.on("select", function(){
+                    imageholder.find(".resource-thumbnail").remove();
+                    var attachment = frame.state().get("selection").first().toJSON();
+                    
+                    input.val(attachment.url);
+                    btn.before('<img src="' + attachment.url + '" class="resource-thumbnail" width="200">');
+                    btn.text("Change Thumbnail");
+                });
+                
+                frame.open();
+            });
         }
     };
     
@@ -1098,6 +1135,7 @@ jQuery(document).ready(function ($) {
     LessonPlan.lpAddTextFeature();
     LessonPlan.deleteSection();
     LessonPlan.lpTinyMCESave();
+    LessonPlan.addFeaturedImageOnResourceTextBox();
 });
 
 //Process Initial Setup

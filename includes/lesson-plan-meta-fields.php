@@ -468,6 +468,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                 
                                             $teacherInfo = (isset($primary_resources['teacher_info'][$resourceKey]) ? $primary_resources['teacher_info'][$resourceKey]: "");
                                             $studentInfo = (isset($primary_resources['student_info'][$resourceKey]) ? $primary_resources['student_info'][$resourceKey]: "");
+                                            $custom_thumbnail = (isset($primary_resources['image'][$resourceKey]) ? $primary_resources['image'][$resourceKey]: "");
                                             ?>
                                           
                                           <!-- RESOURCE FIELD TYPE --> 
@@ -487,6 +488,18 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                     </h3>
                                                 </div>
                                                 <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-7">
+                                                            <label>Thumbnail Image</label>
+                                                            <div class="oer_primary_resource_thumbnail_holder">
+                                                                <?php if (!empty($custom_thumbnail)): ?>
+                                                                <img src="<?php echo $custom_thumbnail; ?>" class="resource-thumbnail" width="200">
+                                                                <?php endif; ?>
+                                                            </div>
+                                                            <button name="oer_lp_primary_resources_thumbnail_button" class="oer_lp_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                                            <input type="hidden" name="oer_lp_primary_resources[image][]" class="oer_primary_resourceurl" value="<?php echo $custom_thumbnail; ?>" />
+                                                        </div>
+                                                    </div>
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
@@ -577,23 +590,35 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                     </h3>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <div class="checkbox pull-left">
-                                                                <label>
-                                                                    <input type="hidden" name="oer_lp_primary_resources[resource][]" itm="2" value="">
-                                                                    <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="<?php echo $resource_field_type; ?>">
-                                                                    <input type="hidden"
-                                                                           name="oer_lp_primary_resources[sensitive_material_value][]"
-                                                                           value="<?php echo (($sensitiveMaterial == 'yes')? 'yes' : 'no'); ?>"
-                                                                    >
-                                                                    <input type="checkbox"
-                                                                           name="oer_lp_primary_resources[sensitive_material][]"
-                                                                           value="yes"
-                                                                           <?php echo (($sensitiveMaterial == 'yes')? 'checked="checked"' : '');?>
-                                                                    >
-                                                                    Sensitive Material
-                                                                </label>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-7">
+                                                                <label>Thumbnail Image</label>
+                                                                <div class="oer_primary_resource_thumbnail_holder">
+                                                                    <?php if (!empty($custom_thumbnail)): ?>
+                                                                    <img src="<?php echo $custom_thumbnail; ?>" class="resource-thumbnail" width="200">
+                                                                    <?php endif; ?>
+                                                                </div>
+                                                                <button name="oer_lp_primary_resources_thumbnail_button" class="oer_lp_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                                                <input type="hidden" name="oer_lp_primary_resources[image][]" class="oer_primary_resourceurl" value="<?php echo $custom_thumbnail; ?>" />
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <div class="checkbox pull-left">
+                                                                    <label>
+                                                                        <input type="hidden" name="oer_lp_primary_resources[resource][]" itm="2" value="">
+                                                                        <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="<?php echo $resource_field_type; ?>">
+                                                                        <input type="hidden"
+                                                                               name="oer_lp_primary_resources[sensitive_material_value][]"
+                                                                               value="<?php echo (($sensitiveMaterial == 'yes')? 'yes' : 'no'); ?>"
+                                                                        >
+                                                                        <input type="checkbox"
+                                                                               name="oer_lp_primary_resources[sensitive_material][]"
+                                                                               value="yes"
+                                                                               <?php echo (($sensitiveMaterial == 'yes')? 'checked="checked"' : '');?>
+                                                                        >
+                                                                        Sensitive Material
+                                                                    </label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1831,6 +1856,13 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                             </div>
                                             <div class="panel-body">
                                                 <div class="row">
+                                                <div class="col-md-12">
+                                                    <label>Thumbnail Image</label>
+                                                    <div class="oer_primary_resource_thumbnail_holder"></div>
+                                                    <button name="oer_lp_primary_resources_thumbnail_button" class="oer_lp_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                                    <input type="hidden" name="oer_lp_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
+                                                </div></div>
+                                                <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <div class="oer_lp_primary_resources_image_wrappper">
@@ -1846,7 +1878,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                               ?>
                                                               <div class="oer_lp_primary_resources_image">
                                                                 <div class="oer_lp_primary_resources_image_display">
-                                                                  <div class="oer_lp_primary_resources_display"><?php echo htmlspecialchars($resource);?></div>
+                                                                  <div class="oer_lp_primary_resources_display"></div>
                                                                   <input type="hidden" name="oer_lp_primary_resources[resource][]" value="">
                                                                   <input type="button" class="button lp-resource-selector-button" value="Select Resource">
                                                                 </div>
