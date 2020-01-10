@@ -404,11 +404,14 @@ if (have_posts()) : while (have_posts()) : the_post();
         if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             if (!empty(array_filter($primary_resources['resource']))) {
                 $_idx = 0;
-                foreach ($primary_resources['resource'] as $resourceKey => $resource) {;
+                foreach ($primary_resources['resource'] as $resourceKey => $resource) {
                     $resource = get_page_by_title($resource,OBJECT,"resource");
+                    $resource_id = 0;
                     if (!empty($resource)){
+                        $resource_id = $resource->ID;
                         $url = get_post_meta($resource->ID, "oer_resourceurl", true);
                         $type = get_post_meta($resource->ID,"oer_mediatype")[0];
+                        $title = $resource->post_title;
                         $resource_img = ''; 
                         $_hasimage = has_post_thumbnail($resource);
                         if($_hasimage) $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
@@ -416,17 +419,17 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $oer_authorurl = get_post_meta($resource->ID, "oer_authorurl", true);	
                         $oer_authorname2 = get_post_meta($resource->ID, "oer_authorname2", true);	
                         $oer_authorurl2 = get_post_meta($resource->ID, "oer_authorurl2", true);
+                    }
+                        $resource_img = (isset($primary_resources['image'][$resourceKey]) ? $primary_resources['image'][$resourceKey]: "");
                         $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
                         $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
                         $_resource_field_type = (isset($primary_resources['field_type'][$resourceKey]) ? $primary_resources['field_type'][$resourceKey]: "");
                         $title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
                         $description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
-                        if(trim($resource->post_title,' ')=='') $type = 'text';
+                        if(trim($title,' ')=='') $type = 'text';
                         if($_resource_field_type == 'resource'){
                           if(trim($primary_resources['title'][$resourceKey],' ')!='' ){
                             $title = $primary_resources['title'][$resourceKey];
-                          }else{
-                            $title = $resource->post_title;
                           }
                         }
                         if($_resource_field_type == 'resource'){
@@ -445,7 +448,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                         <div class="media-image">
                             <div class="image-thumbnail">
-                                <?php $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($resource->post_title)."-".$resource->ID)."/idx/".$_idx++; ?>
+                                <?php $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($title)."-".$resource_id)."/idx/".$_idx++; ?>
                                 <a href="<?php echo $ps_url;  ?>">
                                     <?php if($resource_img==''): $_avtr = getResourceIcon($type,$url); ?>	
                                       <div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div>	
@@ -478,7 +481,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                             </div>
                         </div>
                     </div>
-                <?php }
+                <?php //}
                 }
             }
         }
