@@ -420,7 +420,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $oer_authorname2 = get_post_meta($resource->ID, "oer_authorname2", true);	
                         $oer_authorurl2 = get_post_meta($resource->ID, "oer_authorurl2", true);
                     }
-                        $resource_img = (isset($primary_resources['image'][$resourceKey]) ? $primary_resources['image'][$resourceKey]: $resource_img);
+                        $resource_img = (isset($primary_resources['image'][$resourceKey]) && !empty($primary_resources['image'][$resourceKey])  ? $primary_resources['image'][$resourceKey]: $resource_img);
                         $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
                         $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
                         $_resource_field_type = (isset($primary_resources['field_type'][$resourceKey]) ? $primary_resources['field_type'][$resourceKey]: "");
