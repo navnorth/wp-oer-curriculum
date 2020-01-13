@@ -494,6 +494,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                             <div class="oer_primary_resource_thumbnail_holder">
                                                                 <?php if (!empty($custom_thumbnail)): ?>
                                                                 <img src="<?php echo $custom_thumbnail; ?>" class="resource-thumbnail" width="200">
+                                                                <span class="btn btn-danger btn-sm lp-remove-source-featured-image" title="Remove Thumbnail"><i class="fas fa-minus-circle"></i></span>
                                                                 <?php endif; ?>
                                                             </div>
                                                             <button name="oer_lp_primary_resources_thumbnail_button" class="oer_lp_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
@@ -597,6 +598,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                                                                 <div class="oer_primary_resource_thumbnail_holder">
                                                                     <?php if (!empty($custom_thumbnail)): ?>
                                                                     <img src="<?php echo $custom_thumbnail; ?>" class="resource-thumbnail" width="200">
+                                                                    <span class="btn btn-danger btn-sm lp-remove-source-featured-image" title="Remove Thumbnail"><i class="fas fa-minus-circle"></i></span>
                                                                     <?php endif; ?>
                                                                 </div>
                                                                 <button name="oer_lp_primary_resources_thumbnail_button" class="oer_lp_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>

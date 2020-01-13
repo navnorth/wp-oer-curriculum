@@ -1091,15 +1091,33 @@ jQuery(document).ready(function ($) {
                 });
         
                 frame.on("select", function(){
-                    imageholder.find(".resource-thumbnail").remove();
+                    imageholder.find(".resource-thumbnail,.lp-remove-source-featured-image").remove();
                     var attachment = frame.state().get("selection").first().toJSON();
                     
                     input.val(attachment.url);
-                    btn.before('<img src="' + attachment.url + '" class="resource-thumbnail" width="200">');
+                    imageholder.append('<img src="' + attachment.url + '" class="resource-thumbnail" width="200"><span class="btn btn-danger btn-sm lp-remove-source-featured-image" title="Remove Thumbnail"><i class="fas fa-minus-circle"></i></span>');
                     btn.text("Change Thumbnail");
                 });
                 
                 frame.open();
+            });
+        },
+        
+        /** Remove Featured Image on Add Textbox/Resource Selection **/
+        removeFeaturedImageInResourceSelection: function(){
+            var frame, metabox, btn, input, imageholder;
+            $(document).on('click', '.lp-remove-source-featured-image',function(e) {
+                metabox = $(this).closest(".lp-primary-resource-element-wrapper");
+                btn = $(this);
+                input = metabox.find('.oer_primary_resourceurl');
+                imageholder = metabox.find('.oer_primary_resource_thumbnail_holder');
+                
+                e.preventDefault();
+        
+                input.val("");
+                imageholder.find("img").remove();
+                btn.remove();
+                metabox.find('button.oer_lp_primary_resources_thumbnail_button').text("Set Thumbnail");
             });
         }
     };
@@ -1136,6 +1154,7 @@ jQuery(document).ready(function ($) {
     LessonPlan.deleteSection();
     LessonPlan.lpTinyMCESave();
     LessonPlan.addFeaturedImageOnResourceTextBox();
+    LessonPlan.removeFeaturedImageInResourceSelection();
 });
 
 //Process Initial Setup

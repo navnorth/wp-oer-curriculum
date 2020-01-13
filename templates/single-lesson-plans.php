@@ -407,7 +407,8 @@ if (have_posts()) : while (have_posts()) : the_post();
                 foreach ($primary_resources['resource'] as $resourceKey => $resource) {
                     $resource = get_page_by_title($resource,OBJECT,"resource");
                     $resource_id = 0;
-                    $resource_img = ''; 
+                    $resource_img = '';
+                    $title = '';
                     if (!empty($resource)){
                         $resource_id = $resource->ID;
                         $url = get_post_meta($resource->ID, "oer_resourceurl", true);
