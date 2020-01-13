@@ -424,12 +424,15 @@ if (have_posts()) : while (have_posts()) : the_post();
                         $sensitiveMaterial = (isset($primary_resources['sensitive_material'][$resourceKey]) ? $primary_resources['sensitive_material'][$resourceKey]: "");
                         $sensitiveMaterialValue = (isset($primary_resources['sensitive_material_value'][$resourceKey]) ? $primary_resources['sensitive_material_value'][$resourceKey]: "");
                         $_resource_field_type = (isset($primary_resources['field_type'][$resourceKey]) ? $primary_resources['field_type'][$resourceKey]: "");
+                        if(trim($title,' ')=='') $type = 'text';
                         $title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
                         $description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
-                        if(trim($title,' ')=='') $type = 'text';
                         if($_resource_field_type == 'resource'){
                           if(trim($primary_resources['title'][$resourceKey],' ')!='' ){
                             $title = $primary_resources['title'][$resourceKey];
+                          } else {
+                            if (!empty($resource))
+                                $title = $resource->post_title;
                           }
                         }
                         if($_resource_field_type == 'resource'){
