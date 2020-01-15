@@ -174,11 +174,17 @@ jQuery(document).ready(function($){
     
     // set external links to open in new window and have distinct style
     $('a').each(function() {
-	var a = new RegExp('' + window.location.host + '|mailto' , 'i');
-        if(!a.test(this.href)) {
+        if( location.hostname === this.hostname || !this.hostname.length) {
+            $(this).addClass('local');
+        } else {
             $(this).attr( 'target','_blank' );
             $(this).addClass( 'external_link' );
         }
+        /*var a = new RegExp('' + window.location.host + '|mailto' , 'i');
+        if(!a.test(this.href)) {
+            $(this).attr( 'target','_blank' );
+            $(this).addClass( 'external_link' );
+        }*/
     });
 });
 
