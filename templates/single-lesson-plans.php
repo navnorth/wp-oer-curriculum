@@ -83,7 +83,15 @@ if (have_posts()) : while (have_posts()) : the_post();
                     <?php if (($lp_type_set && $lp_type_enabled) || !$lp_type_set) { ?>
                     <div class="tc-lp-type">
                         <?php
-                        $oer_lp_type = (isset($post_meta_data['oer_lp_type'][0]) ? $post_meta_data['oer_lp_type'][0] : '');
+                        $_tclptype='';
+                        if(isset($post_meta_data['oer_lp_type'][0])){
+                          $_tclptype = $post_meta_data['oer_lp_type'][0];
+                          if($_tclptype=='Other' && !empty(trim($post_meta_data['oer_lp_type_other'][0], ' '))){
+                            $_tclptype = $post_meta_data['oer_lp_type_other'][0];
+                          }
+                        }
+                        $oer_lp_type = $_tclptype;
+                        //$oer_lp_type = (isset($post_meta_data['oer_lp_type'][0]) ? $post_meta_data['oer_lp_type'][0] : '');
                         echo $oer_lp_type;
                         ?>
                     </div>
