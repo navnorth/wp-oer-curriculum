@@ -186,6 +186,12 @@ jQuery(document).ready(function($){
             $(this).addClass( 'external_link' );
         }*/
     });
+    
+    setTimeout(function(){
+      jQuery('a[data-toggle="collapse"]').addClass('et_smooth_scroll_disabled');
+    }, 500);
+    
+    
 });
 
 function lp_redirect_with_post(url, tab) {

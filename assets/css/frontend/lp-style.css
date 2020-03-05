@@ -1133,3 +1133,9 @@ div#tcHiddenFields {float: left;}
 .fa-warning::before, .fa-download:before {
     font-family: 'fontawesome' !important;
 }
+.tc-lp-standards-details,
+.tc-lp-subject-details,
+.tc-lp-objectives-details {
+  float:left;
+  clear: left;
+}
