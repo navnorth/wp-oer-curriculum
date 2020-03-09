@@ -3,7 +3,7 @@ Contributors: navigationnorth, joehobson, johnpaulbalagolan, josepheneldas
 Tags: Curriculum, Lesson Plan, Education, OER, Open Educational Resources, Learning
 Requires at least: 4.4
 Tested up to: 5.3.2
-Stable tag: 0.3.1
+Stable tag: 0.3.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
