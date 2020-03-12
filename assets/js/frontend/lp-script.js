@@ -161,16 +161,18 @@ jQuery(document).ready(function($){
          $('.lp-nav-right,.lp-nav-left').attr('data-activetab', $('.ps-info-tabs li a.nav-link.active').attr('id'));
     }
     
+    /*
     if (typeof wp.data !== "undefined") {
-		wp.data.subscribe(function(){
-			var isSav = wp.data.select('core/editor').isSavingPost();
-			var isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
-			
-			if (isSavingPost && !isAutosavingPost) {
-				window.tinyMCE.triggerSave();
-			}
-		});
-	}
+  		wp.data.subscribe(function(){
+  			var isSav = wp.data.select('core/editor').isSavingPost();
+  			var isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
+  			
+  			if (isSavingPost && !isAutosavingPost) {
+  				window.tinyMCE.triggerSave();
+  			}
+  		});
+  	}
+    */
     
     // set external links to open in new window and have distinct style
     $('a').each(function() {
