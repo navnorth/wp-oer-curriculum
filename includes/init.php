@@ -283,7 +283,11 @@ function lp_save_custom_fields() {
             // Save primary resource
             if (isset($_POST['oer_lp_primary_resources'])) {
                 update_post_meta($post->ID, 'oer_lp_primary_resources', $_POST['oer_lp_primary_resources']);
+            } else {
+                if (get_post_meta($post->ID, 'oer_lp_primary_resources'))
+                    delete_post_meta($post->ID, 'oer_lp_primary_resources');
             }
+            
             // Save materials
             if (isset($_POST['lp_oer_materials'])) {
                 update_post_meta($post->ID, 'lp_oer_materials', $_POST['lp_oer_materials']);
