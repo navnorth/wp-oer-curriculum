@@ -1139,3 +1139,5 @@ div#tcHiddenFields {float: left;}
   float:left;
   clear: left;
 }
+/** Divi Footer with primary source navigation issue fix **/
+.primary-source-template #main-footer { clear:both; }
