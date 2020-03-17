@@ -16,6 +16,7 @@ echo $output;
 }
 
 $back_url = "";
+$back_source_url = "";
 $source_id = 0;
 $lp_prev_class = "";
 $lp_next_class = "";
@@ -27,6 +28,7 @@ $curriculum = get_query_var('curriculum');
 $curriculum_details = get_page_by_path($curriculum, OBJECT, "lesson-plans");
 $curriculum_id = $curriculum_details->ID;
 if ($curriculum)
+    $back_source_url = site_url("inquiry-sets/".$curriculum);
     //Permalink Structure Consideration
     $_segments = explode("/",get_option( 'permalink_structure' )); $_pref = '';
     foreach ($_segments as $_segment){
@@ -80,13 +82,13 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             $prev_resource = oer_lp_get_resource_details($primary_resources['resource'][$index-1]);
             $prev_title = (isset($primary_resources['title'][$index-1]) ? $primary_resources['title'][$index-1]: "");
             $prev_image = (isset($primary_resources['image'][$index-1]) ? $primary_resources['image'][$index-1]: "");
-            $prev_url = $back_url."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID.'/idx/'.($index-1);
+            $prev_url = $back_source_url."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID.'/idx/'.($index-1);
         }
         if (isset($primary_resources['resource'][$index+1])){
             $next_resource = oer_lp_get_resource_details($primary_resources['resource'][$index+1]);
             $next_title = (isset($primary_resources['title'][$index+1]) ? $primary_resources['title'][$index+1]: "");
             $next_image = (isset($primary_resources['image'][$index+1]) ? $primary_resources['image'][$index+1]: "");
-            $next_url = $back_url."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID.'/idx/'.($index+1);
+            $next_url = $back_source_url."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID.'/idx/'.($index+1);
         }
         if ($index==0)
             $lp_prev_class = "ps-nav-hidden";
