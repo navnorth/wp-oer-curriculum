@@ -2,15 +2,15 @@
 /*
  Plugin Name:  Curriculum Plugin
  Plugin URI:   https://www.wp-oer.com
- Description:  Open Educational Resource management and curation, metadata publishing, and alignment to Common Core State Standards.
- Version:      0.2.2
+ Description:  Manage and display lesson plans and other curriculum with connections to Open Educational Resources and alignment to academic content standards.
+ Version:      0.3.2
  Author:       Navigation North
  Author URI:   https://www.navigationnorth.com
  Text Domain:  wp-oer
  License:      GPL3
  License URI:  https://www.gnu.org/licenses/gpl-3.0.html
 
- Copyright (C) 2017 Navigation North
+ Copyright (C) 2020 Navigation North
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -37,25 +37,50 @@ define( 'OER_LESSON_PLAN_FILE',__FILE__);
 // Plugin Name and Version
 define( 'OER_LESSON_PLAN_PLUGIN_NAME', 'WP OER Curriculum Plugin' );
 define( 'OER_LESSON_PLAN_ADMIN_PLUGIN_NAME', 'WP OER Curriculum Plugin');
-define( 'OER_LESSON_PLAN_VERSION', '0.2.2' );
+define( 'OER_LESSON_PLAN_VERSION', '0.3.2' );
 
 include_once(OER_LESSON_PLAN_PATH.'includes/oer-lp-functions.php');
 include_once(OER_LESSON_PLAN_PATH.'includes/init.php');
 
 global $oer_lp_default_structure;
+global $oer_convert_info;
+global $oer_lp_deleted_fields;
+global $root_slug;
 $oer_lp_default_structure = array(
     'lp_authors_order',
     'lp_standard_order',
-    'lp_iq',
-    'lp_required_materials',
-    //'lp_additional_sections',
+    //'lp_iq',
+    //'lp_required_materials',
+    'lp_additional_sections',
     'lp_primary_resources',
     // 'oer_lp_custom_editor_teacher_background',
     // 'oer_lp_custom_editor_student_background',
     //'oer_lp_custom_editor_historical_background',
-    'lp_oer_materials'
+    //'lp_oer_materials',
+    //'lp_add_module'
 );
 
+$oer_lp_deleted_fields = array(
+    'lp_oer_materials',
+    'oer_lp_custom_editor_6',
+    'oer_lp_vocabulary_list_title_6',
+    'oer_lp_vocabulary_details_6',
+    'oer_lp_custom_editor_7',
+    'oer_lp_custom_text_list_7',
+    'oer_lp_custom_text_list_8',
+    'lp_oer_materials_list_8',
+    'lp_oer_materials_list_9',
+    'oer_lp_custom_text_list_6',
+    'oer_lp_vocabulary_list_title_7',
+    'oer_lp_vocabulary_details_7',
+    'oer_lp_vocabulary_list_title_8',
+    'oer_lp_vocabulary_details_8',
+    'oer_lp_vocabulary_list_title_9',
+    'oer_lp_vocabulary_details_9'
+);
+
+$oer_convert_info = true;
+$root_slug = lp_oer_retrieve_rootslug();
 /**
  * Parent plugin (WP OER) required to activate WP OER Lesson Plan Plugin
  * Check if WP OER plugin already installed or not
@@ -124,13 +149,14 @@ add_filter( 'single_template', 'get_single_lesson_plans_template' );
 add_action( 'init', 'lp_add_rewrites', 10, 0 );
 function lp_add_rewrites()
 {
-    $root_slug = "inquiry-sets";
+  global $root_slug; 
 	global $wp_rewrite;
     add_rewrite_tag( '%curriculum%', '([^/]*)' );
 	add_rewrite_tag( '%source%', '([^&]+)' );
     add_rewrite_tag( '%topic%', '([^&]+)' );
     add_rewrite_tag( '%module%', '([^&]+)' );
-	add_rewrite_rule( '^'.$root_slug.'/([^/]*)/source/([^&]+)/?$', 'index.php?post_type=lesson-plans&curriculum=$matches[1]&source=$matches[2]', 'top' );
+    add_rewrite_tag( '%idx%', '([^&]+)' );
+	add_rewrite_rule( '^'.$root_slug.'/([^/]*)/source/([^&]+)/idx/([^&]+)/?$', 'index.php?post_type=lesson-plans&curriculum=$matches[1]&source=$matches[2]&idx=$matches[3]', 'top' );
     add_rewrite_rule( '^'.$root_slug.'/topic/([^&]+)/?$', 'index.php?post_type=lesson-plans&topic=$matches[1]', 'top' );
     add_rewrite_rule( '^'.$root_slug.'/([^/]*)/module/([^&]+)/?$', 'index.php?post_type=lesson-plans&curriculum=$matches[1]&module=$matches[2]', 'top' );
     add_rewrite_endpoint( 'curriculum', EP_PERMALINK | EP_PAGES );
@@ -159,12 +185,10 @@ function lp_add_query_vars( $vars ){
 add_action( 'template_include' , 'lp_assign_standard_template' );
 function lp_assign_standard_template($template) {
 	global $wp_query;
-
+  global $root_slug;
     $url_path = trim(parse_url(add_query_arg(array()), PHP_URL_PATH), '/');
 
     status_header(200);
-
-    $root_slug = "inquiry-sets";
 
     if ( strpos( $url_path, $root_slug ) !== false && get_query_var('curriculum') && get_query_var('source')) {
         $wp_query->is_404 = false;
@@ -247,6 +271,18 @@ function lp_add_meta_to_api() {
 
 }
 
+function lp_oer_retrieve_rootslug(){
+  $_segments = explode("/",get_option( 'permalink_structure' )); $_pref = '';
+  foreach ($_segments as $_segment){
+    if(trim($_segment," ") !== '' && substr_count($_segment,'%') == 0){$_pref .= $_segment.'/';}
+  }
+  if(get_option('oer_lp_general_setting')){
+    $_genset = json_decode(get_option('oer_lp_general_setting'));
+    $_root_slug = ($_genset->rootslug_enabled > 0)? $_genset->rootslug: 'curriculum'; 
+  }
+  return $_pref.$_root_slug;
+}
+
 function lp_rest_get_meta_field($inquiryset, $field, $request){
 	if ($field=="oer_lp_grades") {
 		$grades = get_post_meta($inquiryset['id'], $field, true);
@@ -274,8 +310,7 @@ function lp_get_rest_featured_image($inquiryset, $field, $request) {
 	return false;
 }
 
-
 add_action( 'wp_enqueue_scripts', 'load_dashicons_front_end' );
 function load_dashicons_front_end() {
-    wp_enqueue_style( 'dashicons' );
+  wp_enqueue_style( 'dashicons' );
 }
