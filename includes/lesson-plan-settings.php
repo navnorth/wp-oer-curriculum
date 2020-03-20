@@ -68,10 +68,10 @@ function oer_curriculum_show_general_settings(){
 							<?php	$_genset = json_decode(get_option('oer_lp_general_setting')); ?>
 							<tr>	
 									<td>Curriculum Root Slug</td>
-									<td><input type="text" name="oer_lp_general_setting[rootslug]" value="<? echo (isset($_genset->rootslug))? $_genset->rootslug: 'curriculum'; ?>"></td>
+									<td><input type="text" name="oer_lp_general_setting[rootslug]" value="<?php echo (isset($_genset->rootslug))? $_genset->rootslug: 'curriculum'; ?>"></td>
 									<td>
 										<input type="hidden" name="oer_lp_general_setting[rootslug_enabled]" value="0">
-										<input type="checkbox" name="oer_lp_general_setting[rootslug_enabled]" value="1" <? echo (isset($_genset->rootslug_enabled) && $_genset->rootslug_enabled > 0)? 'checked': ''; ?> />
+										<input type="checkbox" name="oer_lp_general_setting[rootslug_enabled]" value="1" <?php echo (isset($_genset->rootslug_enabled) && $_genset->rootslug_enabled > 0)? 'checked': ''; ?> />
 									</td>
 							</tr>
 					</tbody>
