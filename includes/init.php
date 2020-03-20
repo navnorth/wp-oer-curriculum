@@ -1026,10 +1026,10 @@ function lp_add_text_feature_callback() {
 }
 
 function change_post_types_slug( $args, $post_type ) {
-
+   global $root_slug;
    /*item post type slug*/   
    if ( 'lesson-plans' === $post_type ) {
-      $args['rewrite']['slug'] = 'inquiry-sets';
+      $args['rewrite']['slug'] = $root_slug;
    }
 
    return $args;

@@ -460,7 +460,7 @@
                       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                           <div class="media-image">
                               <div class="image-thumbnail">
-                                  <?php $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($title)."-".$resource_id)."/idx/".$_idx++; ?>
+                                  <?php $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($title)."-".$resource_id)."/idx/".$_idx++; ?>
                                   <a href="<?php echo $ps_url;  ?>">
                                       <?php if($resource_img==''): $_avtr = getResourceIcon($type,$url); ?>	
                                         <div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div>	
