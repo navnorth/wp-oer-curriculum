@@ -279,6 +279,8 @@ function lp_oer_retrieve_rootslug(){
   if(get_option('oer_lp_general_setting')){
     $_genset = json_decode(get_option('oer_lp_general_setting'));
     $_root_slug = ($_genset->rootslug_enabled > 0)? $_genset->rootslug: 'curriculum'; 
+  }else{
+    $_root_slug = 'curriculum';
   }
   return $_pref.$_root_slug;
 }
