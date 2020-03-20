@@ -28,7 +28,7 @@ $curriculum = get_query_var('curriculum');
 $curriculum_details = get_page_by_path($curriculum, OBJECT, "lesson-plans");
 $curriculum_id = $curriculum_details->ID;
 if ($curriculum)
-    $back_source_url = site_url("inquiry-sets/".$curriculum);
+    $back_source_url = site_url($root_slug."/".$curriculum);
     //Permalink Structure Consideration
     $back_url = site_url($root_slug."/".$curriculum);
 
@@ -227,7 +227,7 @@ $type = $type[0];
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if ($resource_img!=""):
-                    $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID);
+                    $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID);
                     ?>
                     <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
                     <?php else: ?>
@@ -261,9 +261,9 @@ $type = $type[0];
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if (!empty($resource_img)):
                       if (is_object($next_resource))
-                          $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
+                          $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
                       else
-                          $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($next_resource['title']));
+                          $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($next_resource['title']));
                       ?>
                       <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
                     <?php else: ?>
