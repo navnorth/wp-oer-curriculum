@@ -28,11 +28,7 @@ $curriculum_details = get_page_by_path($curriculum, OBJECT, "lesson-plans");
 $curriculum_id = $curriculum_details->ID;
 if ($curriculum)
     //Permalink Structure Consideration
-    $_segments = explode("/",get_option( 'permalink_structure' )); $_pref = '';
-    foreach ($_segments as $_segment){
-      if(trim($_segment," ") !== '' && substr_count($_segment,'%') == 0){$_pref .= $_segment.'/';}
-    }
-    $back_url = site_url($_pref."inquiry-sets/".$curriculum);
+    $back_url = site_url($root_slug."/".$curriculum);
 
 // Get Resource ID
 $psource = get_query_var('source');
@@ -120,7 +116,7 @@ $type = $type[0];
   $ret = '<div class="wp_oer_breadcrumb">'; 
   $ret .= '<a href="'.get_site_url().'">Home</a>'; 
   $cur = (strlen($curriculum_details->post_title) > 30)? substr($curriculum_details->post_title, 0, 30).'...' : $curriculum_details->post_title; 
-  $ret .= ' / <a href="'.get_permalink( $curriculum_details->ID ).'">'.$cur.'</a>'; 
+  $ret .= ' / <a href="'.site_url($root_slug."/".$curriculum).'">'.$cur.'</a>'; 
   $res = (strlen($sup) > 30)? substr($sup, 0, 30).'...' : $sup; 
   $ret .= ' / '.$res; 
   $ret .= '</div>'; 

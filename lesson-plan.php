@@ -45,6 +45,7 @@ include_once(OER_LESSON_PLAN_PATH.'includes/init.php');
 global $oer_lp_default_structure;
 global $oer_convert_info;
 global $oer_lp_deleted_fields;
+global $root_slug;
 $oer_lp_default_structure = array(
     'lp_authors_order',
     'lp_standard_order',
@@ -79,7 +80,7 @@ $oer_lp_deleted_fields = array(
 );
 
 $oer_convert_info = true;
-
+$root_slug = lp_oer_retrieve_rootslug();
 /**
  * Parent plugin (WP OER) required to activate WP OER Lesson Plan Plugin
  * Check if WP OER plugin already installed or not
@@ -148,7 +149,7 @@ add_filter( 'single_template', 'get_single_lesson_plans_template' );
 add_action( 'init', 'lp_add_rewrites', 10, 0 );
 function lp_add_rewrites()
 {
-    $root_slug = "inquiry-sets";
+  global $root_slug; 
 	global $wp_rewrite;
     add_rewrite_tag( '%curriculum%', '([^/]*)' );
 	add_rewrite_tag( '%source%', '([^&]+)' );
@@ -184,12 +185,10 @@ function lp_add_query_vars( $vars ){
 add_action( 'template_include' , 'lp_assign_standard_template' );
 function lp_assign_standard_template($template) {
 	global $wp_query;
-
+  global $root_slug;
     $url_path = trim(parse_url(add_query_arg(array()), PHP_URL_PATH), '/');
 
     status_header(200);
-
-    $root_slug = "inquiry-sets";
 
     if ( strpos( $url_path, $root_slug ) !== false && get_query_var('curriculum') && get_query_var('source')) {
         $wp_query->is_404 = false;
@@ -270,6 +269,18 @@ function lp_add_meta_to_api() {
 			    'schema'          => null,
 			) );
 
+}
+
+function lp_oer_retrieve_rootslug(){
+  $_segments = explode("/",get_option( 'permalink_structure' )); $_pref = '';
+  foreach ($_segments as $_segment){
+    if(trim($_segment," ") !== '' && substr_count($_segment,'%') == 0){$_pref .= $_segment.'/';}
+  }
+  if(get_option('oer_lp_general_setting')){
+    $_genset = json_decode(get_option('oer_lp_general_setting'));
+    $_root_slug = ($_genset->rootslug_enabled > 0)? $_genset->rootslug: 'curriculum'; 
+  }
+  return $_pref.$_root_slug;
 }
 
 function lp_rest_get_meta_field($inquiryset, $field, $request){
