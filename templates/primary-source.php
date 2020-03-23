@@ -246,7 +246,10 @@ $type = $type[0];
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if ($resource_img!=""):
-                    $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID);
+                        if (!empty($prev_title))
+                            $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($prev_title)."-".$prev_resource->ID);
+                        else
+                            $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID);
                     ?>
                     <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
                     <?php else: ?>
@@ -279,8 +282,12 @@ $type = $type[0];
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if (!empty($resource_img)):
-                        if (is_object($next_resource))
-                            $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
+                        if (is_object($next_resource)){
+                            if (!empty($next_title))
+                                $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($next_title)."-".$next_resource->ID);
+                            else
+                                $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
+                        }
                         else
                             $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($next_resource['title']));
                         ?>
