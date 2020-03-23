@@ -60,7 +60,7 @@ $prev_image = "";
 $next_url = null;
 $right_class = "col-md-12";
 $new_title = "";
-$new_description = null;
+$new_description = "";
 $prev_title = "";
 $next_title = "";
 $next_image = "";
@@ -78,13 +78,19 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             $prev_resource = oer_lp_get_resource_details($primary_resources['resource'][$index-1]);
             $prev_title = (isset($primary_resources['title'][$index-1]) ? $primary_resources['title'][$index-1]: "");
             $prev_image = (isset($primary_resources['image'][$index-1]) ? $primary_resources['image'][$index-1]: "");
-            $prev_url = $back_source_url."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID.'/idx/'.($index-1);
+            if (isset($prev_resource->post_title))
+                $prev_url = $back_source_url."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID.'/idx/'.($index-1);
+            else
+                $prev_url = $back_source_url."/source/".sanitize_title($prev_title)."-".$prev_resource->ID.'/idx/'.($index-1);
         }
         if (isset($primary_resources['resource'][$index+1])){
             $next_resource = oer_lp_get_resource_details($primary_resources['resource'][$index+1]);
             $next_title = (isset($primary_resources['title'][$index+1]) ? $primary_resources['title'][$index+1]: "");
             $next_image = (isset($primary_resources['image'][$index+1]) ? $primary_resources['image'][$index+1]: "");
-            $next_url = $back_source_url."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID.'/idx/'.($index+1);
+            if (isset($next_resource->post_title))
+                $next_url = $back_source_url."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID.'/idx/'.($index+1);
+            else
+                $next_url = $back_source_url."/source/".sanitize_title($next_title)."-".$next_resource->ID.'/idx/'.($index+1);
         }
         if ($index==0)
             $lp_prev_class = "ps-nav-hidden";
@@ -224,7 +230,7 @@ $type = $type[0];
             ?></h1>
             <div class="ps-info-description">
                 <?php
-                if (is_null($new_description))
+                if (empty($new_description))
                     echo $resource->post_content;
                 else
                     echo $new_description;
@@ -246,10 +252,7 @@ $type = $type[0];
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if ($resource_img!=""):
-                        if (!empty($prev_title))
-                            $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($prev_title)."-".$prev_resource->ID);
-                        else
-                            $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID);
+                        $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID);
                     ?>
                     <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
                     <?php else: ?>
@@ -283,10 +286,7 @@ $type = $type[0];
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if (!empty($resource_img)):
                         if (is_object($next_resource)){
-                            if (!empty($next_title))
-                                $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($next_title)."-".$next_resource->ID);
-                            else
-                                $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
+                            $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
                         }
                         else
                             $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($next_resource['title']));
