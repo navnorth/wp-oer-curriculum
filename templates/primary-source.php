@@ -60,7 +60,7 @@ $prev_image = "";
 $next_url = null;
 $right_class = "col-md-12";
 $new_title = "";
-$new_description = "";
+$new_description = null;
 $prev_title = "";
 $next_title = "";
 $next_image = "";
@@ -107,8 +107,27 @@ if (empty($next_resource)){
         $lp_next_class = "";
         $next_resource = $modules[0];
         $next_url = $back_url."/module/".sanitize_title($next_resource['title']);
+    } else {
+        if (!empty($next_title)){
+            $next_resource['title'] = $next_title;
+            $next_url = $back_source_url."/source/".sanitize_title($next_resource['title'])."-0/idx/".($index+1);
+        }
     }
 }
+if (empty($prev_resource)){
+    $modules = oer_lp_modules($post->ID);
+    if (isset($modules[0])){
+        $lp_prev_class = "";
+        $prev_resource = $modules[0];
+        $prev_url = $back_url."/module/".sanitize_title($prev_resource['title']);
+    } else {
+        if (!empty($prev_title)){
+            $prev_resource['title'] = $prev_title;
+            $prev_url = $back_source_url."/source/".sanitize_title($prev_resource['title'])."-0/idx/".($index-1);
+        }
+    }
+}
+
 $type = get_post_meta($resource->ID,"oer_mediatype");
 $type = $type[0];
 ?>
@@ -205,10 +224,10 @@ $type = $type[0];
             ?></h1>
             <div class="ps-info-description">
                 <?php
-                if (!empty($new_description))
-                    echo $new_description;
-                else
+                if (is_null($new_description))
                     echo $resource->post_content;
+                else
+                    echo $new_description;
                 ?>
             </div>
         </div>
@@ -260,12 +279,12 @@ $type = $type[0];
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if (!empty($resource_img)):
-                      if (is_object($next_resource))
-                          $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
-                      else
-                          $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($next_resource['title']));
-                      ?>
-                      <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
+                        if (is_object($next_resource))
+                            $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
+                        else
+                            $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($next_resource['title']));
+                        ?>
+                        <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
                     <?php else: ?>
                       <?php
                        $next_resource_url = get_post_meta($next_resource->ID, "oer_resourceurl", true);
