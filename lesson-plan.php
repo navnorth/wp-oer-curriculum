@@ -3,7 +3,7 @@
  Plugin Name:  Curriculum Plugin
  Plugin URI:   https://www.wp-oer.com
  Description:  Manage and display lesson plans and other curriculum with connections to Open Educational Resources and alignment to academic content standards.
- Version:      0.3.5
+ Version:      0.3.6
  Author:       Navigation North
  Author URI:   https://www.navigationnorth.com
  Text Domain:  wp-oer
@@ -37,7 +37,7 @@ define( 'OER_LESSON_PLAN_FILE',__FILE__);
 // Plugin Name and Version
 define( 'OER_LESSON_PLAN_PLUGIN_NAME', 'WP OER Curriculum Plugin' );
 define( 'OER_LESSON_PLAN_ADMIN_PLUGIN_NAME', 'WP OER Curriculum Plugin');
-define( 'OER_LESSON_PLAN_VERSION', '0.3.5' );
+define( 'OER_LESSON_PLAN_VERSION', '0.3.6' );
 
 include_once(OER_LESSON_PLAN_PATH.'includes/oer-lp-functions.php');
 include_once(OER_LESSON_PLAN_PATH.'includes/init.php');
@@ -149,7 +149,7 @@ add_filter( 'single_template', 'get_single_lesson_plans_template' );
 add_action( 'init', 'lp_add_rewrites', 10, 0 );
 function lp_add_rewrites()
 {
-  global $root_slug; 
+  global $root_slug;
 	global $wp_rewrite;
     add_rewrite_tag( '%curriculum%', '([^/]*)' );
 	add_rewrite_tag( '%source%', '([^&]+)' );
@@ -278,7 +278,7 @@ function lp_oer_retrieve_rootslug(){
   }
   if(get_option('oer_lp_general_setting')){
     $_genset = json_decode(get_option('oer_lp_general_setting'));
-    $_root_slug = ($_genset->rootslug_enabled > 0)? $_genset->rootslug: 'curriculum'; 
+    $_root_slug = ($_genset->rootslug_enabled > 0)? $_genset->rootslug: 'curriculum';
   }else{
     $_root_slug = 'curriculum';
   }
