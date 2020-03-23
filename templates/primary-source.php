@@ -78,19 +78,19 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             $prev_resource = oer_lp_get_resource_details($primary_resources['resource'][$index-1]);
             $prev_title = (isset($primary_resources['title'][$index-1]) ? $primary_resources['title'][$index-1]: "");
             $prev_image = (isset($primary_resources['image'][$index-1]) ? $primary_resources['image'][$index-1]: "");
-            if (isset($prev_resource->post_title))
+            if (is_object($prev_resource))
                 $prev_url = $back_source_url."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID.'/idx/'.($index-1);
             else
-                $prev_url = $back_source_url."/source/".sanitize_title($prev_title)."-".$prev_resource->ID.'/idx/'.($index-1);
+                $prev_url = $back_source_url."/source/".sanitize_title($prev_title)."-0/idx/".($index-1);
         }
         if (isset($primary_resources['resource'][$index+1])){
             $next_resource = oer_lp_get_resource_details($primary_resources['resource'][$index+1]);
             $next_title = (isset($primary_resources['title'][$index+1]) ? $primary_resources['title'][$index+1]: "");
             $next_image = (isset($primary_resources['image'][$index+1]) ? $primary_resources['image'][$index+1]: "");
-            if (isset($next_resource->post_title))
+            if (is_object($next_resource))
                 $next_url = $back_source_url."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID.'/idx/'.($index+1);
             else
-                $next_url = $back_source_url."/source/".sanitize_title($next_title)."-".$next_resource->ID.'/idx/'.($index+1);
+                $next_url = $back_source_url."/source/".sanitize_title($next_title)."-0/idx/".($index+1);
         }
         if ($index==0)
             $lp_prev_class = "ps-nav-hidden";
@@ -116,7 +116,6 @@ if (empty($next_resource)){
     } else {
         if (!empty($next_title)){
             $next_resource['title'] = $next_title;
-            $next_url = $back_source_url."/source/".sanitize_title($next_resource['title'])."-0/idx/".($index+1);
         }
     }
 }
@@ -129,7 +128,6 @@ if (empty($prev_resource)){
     } else {
         if (!empty($prev_title)){
             $prev_resource['title'] = $prev_title;
-            $prev_url = $back_source_url."/source/".sanitize_title($prev_resource['title'])."-0/idx/".($index-1);
         }
     }
 }
