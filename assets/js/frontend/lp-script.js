@@ -1,4 +1,52 @@
 jQuery(document).ready(function($){
+    // When the user scrolls down 50px from the top of the document, fixed the header to the top
+    var headerHeight = jQuery('#side-header.fusion-mobile-menu-design-classic').outerHeight();
+    window.onscroll = function() {
+        if (jQuery(window).width()<=600){
+            if (document.body.scrollTop > 245 || document.documentElement.scrollTop > 245) {
+                jQuery('.tc-lp-details-header').css({
+                    "background":"#ffffff",
+                    "padding":"15px 25px",
+                    "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
+                    "z-index":"999999",
+                    "top":"0"
+                });
+            } else {
+                topPos = headerHeight - document.documentElement.scrollTop;
+                topPos += 60;
+                if (jQuery('#wpadminbar').length>0)
+                    topPos = topPos + 32;
+                jQuery('.tc-lp-details-header').css({
+                    "background":"none",
+                    "padding":"25px 25px 0",
+                    "box-shadow":"none",
+                    "z-index":"0",
+                    "width":"100%",
+                    "top": topPos + "px"
+                });
+            }
+        } else {
+            rightWidth = jQuery('.single-lesson-plans #main .container .lp-featured-section').outerWidth()
+            if (document.body.scrollTop > 52 || document.documentElement.scrollTop > 52) {
+                jQuery('.tc-lp-details-header').css({
+                    "background":"#ffffff",
+                    "padding":"15px 50px",
+                    "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
+                    "z-index":"999999",
+                    "width": rightWidth + "px"
+                });
+            } else {
+                jQuery('.tc-lp-details-header').css({
+                    "background":"none",
+                    "padding":"25px 50px 0",
+                    "box-shadow":"none",
+                    "z-index":"0",
+                    "width":"100%"
+                });
+            }
+        }
+    };
+    
     $('.lp-nav-right-ajax').on("click", function(){
         var id = $(this).attr('data-id');
         var cnt = $(this).attr('data-count');
@@ -112,6 +160,40 @@ jQuery(document).ready(function($){
     if ($('.lp-nav-right,.lp-nav-left').is(":visible")) {
          $('.lp-nav-right,.lp-nav-left').attr('data-activetab', $('.ps-info-tabs li a.nav-link.active').attr('id'));
     }
+    
+    /*
+    if (typeof wp.data !== "undefined") {
+  		wp.data.subscribe(function(){
+  			var isSav = wp.data.select('core/editor').isSavingPost();
+  			var isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
+  			
+  			if (isSavingPost && !isAutosavingPost) {
+  				window.tinyMCE.triggerSave();
+  			}
+  		});
+  	}
+    */
+    
+    // set external links to open in new window and have distinct style
+    $('a').each(function() {
+        if( location.hostname === this.hostname || !this.hostname.length) {
+            $(this).addClass('local');
+        } else {
+            $(this).attr( 'target','_blank' );
+            $(this).addClass( 'external_link' );
+        }
+        /*var a = new RegExp('' + window.location.host + '|mailto' , 'i');
+        if(!a.test(this.href)) {
+            $(this).attr( 'target','_blank' );
+            $(this).addClass( 'external_link' );
+        }*/
+    });
+    
+    setTimeout(function(){
+      jQuery('a[data-toggle="collapse"]').addClass('et_smooth_scroll_disabled');
+    }, 500);
+    
+    
 });
 
 function lp_redirect_with_post(url, tab) {

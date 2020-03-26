@@ -410,17 +410,25 @@ if (! function_exists('oer_lp_title_from_slug')){
 if (! function_exists('oer_inquiry_set_grade_level')){
     function oer_inquiry_set_grade_level($inquiry_set_id){
         $grades = get_post_meta($inquiry_set_id, "oer_lp_grades", true);
-        $grades = $grades[0];
-        $grade_level = "";
-        
-        if ($grades == "pre-k")
-            $grade_level = "Pre-Kindergarten";
-        elseif ($grades == "k")
-            $grade_level = "Kindergarten";
-        else
-            $grade_level = "Grade ".$grades;
-            
-        return $grade_level;
+        $_tmp = '';
+        if(empty($grades)){
+          $_tmp = '';
+        }else{
+          if (is_array($grades)){
+            foreach ($grades as $key => $value) {
+              
+              if ($value == "pre-k"){
+                  $grade_level = "Pre-Kindergarten";
+              }elseif ($value == "k"){
+                  $grade_level = "Kindergarten";
+              }else{
+                  $grade_level = $value;
+              }
+              $_tmp = ($_tmp=='')? $_tmp = $grade_level : $_tmp .= ', '.$grade_level;
+            }  
+          }
+        }  
+        return $_tmp;
     }
 }
 
@@ -460,47 +468,47 @@ if (! function_exists('oer_curriculum_display_loader')){
 // Get Meta Label
 if (!function_exists('oer_lp_get_meta_label')){
 	function oer_lp_get_meta_label($key){
-		$label = "";
-		switch ($key){
-			case "oer_lp_authors":
-				$label = __("Author", OER_LESSON_PLAN_SLUG);
-				break;
-			case "oer_lp_primary_resources":
-				$label = __("Primary Resources", OER_LESSON_PLAN_SLUG);
-				break;
-			case "oer_lp_iq":
-				$label = __("Investigative Question", OER_LESSON_PLAN_SLUG);
-				break;
-			case "oer_lp_related_objective":
-				$label = __("Related Instructional Objectives (SWBAT...)", OER_LESSON_PLAN_SLUG);
-				break;
-			case "oer_lp_custom_editor_historical_background":
-				$label = __("Historical Background", OER_LESSON_PLAN_SLUG);
-				break;
-			case "oer_lp_download_copy":
-				$label = __("Download Copy", OER_LESSON_PLAN_SLUG);
-				break;
-			case "oer_lp_download_copy_document":
-				$label = __("Download Copy Document", OER_LESSON_PLAN_SLUG);
-				break;
-			case "oer_lp_related_inquiry_set":
-				$label = __("Related Inquiry Sets", OER_LESSON_PLAN_SLUG);
-				break;
+            $label = "";
+            switch ($key){
+            case "oer_lp_authors":
+                $label = __("Author", OER_LESSON_PLAN_SLUG);
+                break;
+            case "oer_lp_primary_resources":
+                $label = __("Primary Resources", OER_LESSON_PLAN_SLUG);
+                break;
+            case "oer_lp_iq":
+                $label = __("Investigative Question", OER_LESSON_PLAN_SLUG);
+                break;
+            case "oer_lp_related_objective":
+                $label = __("Related Instructional Objectives (SWBAT...)", OER_LESSON_PLAN_SLUG);
+                break;
+            case "oer_lp_custom_editor_historical_background":
+                $label = __("Historical Background", OER_LESSON_PLAN_SLUG);
+                break;
+            case "oer_lp_download_copy":
+                $label = __("Download Copy", OER_LESSON_PLAN_SLUG);
+                break;
+            case "oer_lp_download_copy_document":
+                $label = __("Download Copy Document", OER_LESSON_PLAN_SLUG);
+                break;
+            case "oer_lp_related_inquiry_set":
+                $label = __("Related Inquiry Sets", OER_LESSON_PLAN_SLUG);
+                break;
             case "oer_lp_related_inquiry_set_1":
-				$label = __("Inquiry Set 1", OER_LESSON_PLAN_SLUG);
-				break;
+                $label = __("Inquiry Set 1", OER_LESSON_PLAN_SLUG);
+                break;
             case "oer_lp_related_inquiry_set_2":
-				$label = __("Inquiry Set 2", OER_LESSON_PLAN_SLUG);
-				break;
+                $label = __("Inquiry Set 2", OER_LESSON_PLAN_SLUG);
+                break;
             case "oer_lp_related_inquiry_set_3":
-				$label = __("Inquiry Set 3", OER_LESSON_PLAN_SLUG);
-				break;
-			case "oer_lp_required_materials":
-				$label = __("Required Equipment Materials", OER_LESSON_PLAN_SLUG);
-				break;
-			case "oer_lp_grades":
-				$label = __("Grade Level", OER_LESSON_PLAN_SLUG);
-				break;
+                $label = __("Inquiry Set 3", OER_LESSON_PLAN_SLUG);
+                break;
+            case "oer_lp_required_materials":
+                $label = __("Required Equipment Materials", OER_LESSON_PLAN_SLUG);
+                break;
+            case "oer_lp_grades":
+                $label = __("Grade Level", OER_LESSON_PLAN_SLUG);
+                break;
             case "lp_oer_materials":
                 $label = __("Materials", OER_LESSON_PLAN_SLUG);
                 break;
@@ -519,8 +527,11 @@ if (!function_exists('oer_lp_get_meta_label')){
             case "oer_lp_standards":
                 $label = __("Standards", OER_LESSON_PLAN_SLUG);
                 break;
-		}
-		return $label;
+            case "oer_lp_additional_sections":
+                $label = __("Additional Sections", OER_LESSON_PLAN_SLUG);
+                break;
+	    }
+	    return $label;
 	}
 }
 // Get All Post Meta

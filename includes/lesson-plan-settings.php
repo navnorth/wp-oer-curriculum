@@ -12,7 +12,7 @@ global $message, $type;
 ?>
 <div class="wrap">
     
-    <div id="icon-themes" class="oer-logo"><img src="<?php echo OER_URL ?>images/wp-oer-admin-logo.png" /></div>
+    <!--<div id="icon-themes" class="oer-logo"><img src="<?php echo OER_URL ?>images/wp-oer-admin-logo.png" /></div>-->
     <h2><?php _e("Settings - WP Curriculum", OER_LESSON_PLAN_SLUG); ?></h2>
     <?php settings_errors(); ?>
      
@@ -21,13 +21,17 @@ global $message, $type;
 	?>
      
     <h2 class="nav-tab-wrapper">
-        <a href="?post_type=resource&page=oer_settings&tab=general" class="nav-tab <?php echo $active_tab == 'metadata' ? 'nav-tab-active' : ''; ?>"><?php _e("Metadata", OER_LESSON_PLAN_SLUG); ?></a>
-    </h2>
+        <a href="?post_type=lesson-plans&page=oer_curriculum_settings&tab=metadata" class="nav-tab <?php echo $active_tab == 'metadata' ? 'nav-tab-active' : ''; ?>"><?php _e("Metadata", OER_LESSON_PLAN_SLUG); ?></a>
+    		<a href="?post_type=lesson-plans&page=oer_curriculum_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php _e("General", OER_LESSON_PLAN_SLUG); ?></a>
+		</h2>
     
     <?php
 	switch ($active_tab) {
 		case "metadata":
 			oer_curriculum_show_metadata_settings();
+			break;
+		case "general":
+			oer_curriculum_show_general_settings();
 			break;
 		default:
 			break;
@@ -41,7 +45,64 @@ global $message, $type;
 </div>
 <?php
 
+
+function oer_curriculum_show_general_settings(){	
+	if (!is_admin()) exit;
+	oer_lp_save_general_setting(); ?>
+	<div class="lesson-plan-plugin-body">
+		<div class="lesson-plan-plugin-row">
+			<div class="oer-row-left">Use the options below to update general plugin options.</div>
+			<div class="oer-row-right"></div>
+		</div>
+		<div class="lesson-plan-plugin-row">
+			<form method="post" enctype="multipart/form-data">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Option</th>
+							<th>Value</th>
+							<th>Enabled</th>
+						</tr>
+					</thead>
+					<tbody>
+							<?php	$_genset = json_decode(get_option('oer_lp_general_setting')); ?>
+							<tr>	
+									<td>Curriculum Root Slug</td>
+									<td><input type="text" name="oer_lp_general_setting[rootslug]" value="<?php echo (isset($_genset->rootslug))? $_genset->rootslug: 'curriculum'; ?>"></td>
+									<td>
+										<input type="hidden" name="oer_lp_general_setting[rootslug_enabled]" value="0">
+										<input type="checkbox" name="oer_lp_general_setting[rootslug_enabled]" value="1" <?php echo (isset($_genset->rootslug_enabled) && $_genset->rootslug_enabled > 0)? 'checked': ''; ?> />
+									</td>
+							</tr>
+					</tbody>
+				</table>
+				<p class="submit"><input type="submit" name="oer_lp_general_setting_submit" id="submit" class="button button-primary" value="Save General Options"></p></form>
+			</form>
+		</div>
+	</div>
+	<?php
+}
+
+function oer_lp_save_general_setting(){
+	$_forbidkey = array("oer_lp_general_setting_submit");
+	global $pagenow;
+	if ( 'edit.php' !== $pagenow || !current_user_can('edit_others_posts')) return $query;
+	if (!isset( $_POST['oer_lp_general_setting'] )) return;											
+	$_arr = array();			
+	foreach ($_POST['oer_lp_general_setting'] as $key => $genset){
+		if(!in_array($genset)) $_arr[$key] = $genset;
+	}
+	if(!get_option('oer_lp_general_setting')){
+	    add_option('oer_lp_general_setting', json_encode($_arr));
+	}else{
+			update_option('oer_lp_general_setting', json_encode($_arr));
+	}
+}
+
+
+
 function oer_curriculum_show_metadata_settings() {
+    global $oer_lp_deleted_fields;
 	$metas = oer_lp_get_all_meta("lesson-plans");
 	$inquirysets = null;
 	$metadata = null;
@@ -107,14 +168,16 @@ function oer_curriculum_show_metadata_settings() {
 								$enabled = (get_option($key."_enabled")=="1")?true:false;
 							elseif ($option_set==false)
 								$enabled = "1";
-							
-					?>
-					<tr>
-						<td><?php echo $key; ?></td>
-						<td><input type="text" name="<?php echo $key."_label"; ?>" value="<?php echo $label; ?>" /></td>
-						<td><input type="checkbox" name="<?php echo $key."_enabled"; ?>" value="1" <?php checked($enabled,"1",true); ?>/></td>
-					</tr>
-					<?php 
+						
+                        if (!in_array($key,$oer_lp_deleted_fields)){	
+                        ?>
+                        <tr>
+                            <td><?php echo $key; ?></td>
+                            <td><input type="text" name="<?php echo $key."_label"; ?>" value="<?php echo $label; ?>" /></td>
+                            <td><input type="checkbox" name="<?php echo $key."_enabled"; ?>" value="1" <?php checked($enabled,"1",true); ?>/></td>
+                        </tr>
+                        <?php
+                        }
 					} ?>
 				</tbody>
 			</table>

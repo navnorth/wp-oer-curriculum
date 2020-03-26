@@ -70,9 +70,19 @@ function oer_lesson_plan_custom_meta_boxes() {
     // Add Related Inquiry Sets metabox
     $related_inquiry_set = (get_option('oer_lp_related_inquiry_set_label'))?true:false;
     $related_inquiry_set_enabled = (get_option('oer_lp_related_inquiry_set_enabled'))?true:false;
+    $related_curriculum_enabled = false;
     if (($related_inquiry_set && $related_inquiry_set_enabled) || !$related_inquiry_set) {
-        $label = oer_lp_get_field_label('oer_lp_related_inquiry_set');
-        add_meta_box('oer_lesson_plan_related_inquiry', $label, 'oer_lesson_plan_related_inquiry_callback', 'lesson-plans', 'advanced');
+        for ($i=1;$i<=3;$i++){
+            $enabled = (get_option('oer_lp_related_inquiry_set_'.$i.'_enabled'))?true:false;
+            if ($enabled) {
+                $related_curriculum_enabled = true;
+                break;
+            }
+        }
+        if ($related_curriculum_enabled) {
+            $label = oer_lp_get_field_label('oer_lp_related_inquiry_set');
+            add_meta_box('oer_lesson_plan_related_inquiry', $label, 'oer_lesson_plan_related_inquiry_callback', 'lesson-plans', 'advanced');
+        }
     }
 }
 
@@ -149,7 +159,7 @@ function oer_lp_grade_level_cb() {
                 $checkbox .= '<div class="col-md-5 span2">';
         }
         $checkbox .= '<div class="form-checkbox">';
-        $checkbox .= '<input type="radio" name="oer_lp_grades[]" value="'.$key.'" id="oer_lp_grade_'.$key.'" '.oer_lp_show_selected($key, $oer_lp_grades, 'checkbox').'>';
+        $checkbox .= '<input type="checkbox" name="oer_lp_grades[]" value="'.$key.'" id="oer_lp_grade_'.$key.'" '.oer_lp_show_selected($key, $oer_lp_grades, 'checkbox').'>';
         $checkbox .= '<label class="oer_lp_radio_label" for="oer_lp_grade_'.$key.'">'.$oer_lp_grade_option.'</label>';
         $checkbox .= '</div>';
         if ($index % 7 == 0 )
@@ -199,6 +209,7 @@ add_action('admin_enqueue_scripts', 'oer_lesson_plan_assets');
 
 function oer_lesson_plan_assets() {
     global $post;
+    wp_enqueue_editor();
     if (
         (isset($_GET['post_type']) && $_GET['post_type'] == 'lesson-plans') ||
         (isset($post->post_type) && $post->post_type == 'lesson-plans')
@@ -206,14 +217,17 @@ function oer_lesson_plan_assets() {
         wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL . 'assets/lib/font-awesome/css/all.min.css');
         wp_enqueue_style('lesson-plan-bootstrap', OER_LESSON_PLAN_URL . 'assets/lib/bootstrap-3.3.7/css/bootstrap.min.css');
         wp_enqueue_style('admin-lesson-plan', OER_LESSON_PLAN_URL . 'assets/css/backend/lp-style.css');
-
+        wp_enqueue_style('lesson-plan-resource-selector-style', OER_LESSON_PLAN_URL . 'assets/css/backend/lp-resource-selector-style.css', array() , null, 'all');
+        
         //Enqueue script
         if (!wp_script_is('admin-lp-bootstrap', 'enqueued')) {
             wp_enqueue_script('admin-lp-bootstrap', OER_LESSON_PLAN_URL . 'assets/lib/bootstrap-3.3.7/js/bootstrap.min.js');
         }
-
-        wp_enqueue_script('lesson-plan', OER_LESSON_PLAN_URL . 'assets/js/backend/lesson-plan.js');
-
+        
+        wp_register_script('lesson-plan', OER_LESSON_PLAN_URL . 'assets/js/backend/lesson-plan.js');
+        wp_localize_script('lesson-plan','lpScript', array("image_placeholder_url" => OER_LESSON_PLAN_URL.'assets/images/lp-oer-person-placeholder.png'));
+        wp_enqueue_script('lesson-plan');
+      	wp_enqueue_script('lesson-plan-resource-selector-script', OER_LESSON_PLAN_URL . 'assets/js/backend/lp-resource-selector.js' , array('jquery') , null, true);
     }
 }
 
@@ -269,7 +283,11 @@ function lp_save_custom_fields() {
             // Save primary resource
             if (isset($_POST['oer_lp_primary_resources'])) {
                 update_post_meta($post->ID, 'oer_lp_primary_resources', $_POST['oer_lp_primary_resources']);
+            } else {
+                if (get_post_meta($post->ID, 'oer_lp_primary_resources'))
+                    delete_post_meta($post->ID, 'oer_lp_primary_resources');
             }
+            
             // Save materials
             if (isset($_POST['lp_oer_materials'])) {
                 update_post_meta($post->ID, 'lp_oer_materials', $_POST['lp_oer_materials']);
@@ -283,6 +301,21 @@ function lp_save_custom_fields() {
             // Save Required Equipment Materials
             if (isset($_POST['oer_lp_required_materials'])) {
                 update_post_meta($post->ID, 'oer_lp_required_materials', $_POST['oer_lp_required_materials']);
+            }
+            
+             // Save Required Equipment Materials Label
+            if (isset($_POST['oer_lp_required_materials_label'])) {
+                update_post_meta($post->ID, 'oer_lp_required_materials_label', $_POST['oer_lp_required_materials_label']);
+            }
+            
+            // Save Additional Sections
+            if (isset($_POST['oer_lp_additional_sections'])) {
+                update_post_meta($post->ID, 'oer_lp_additional_sections', $_POST['oer_lp_additional_sections']);
+            }
+            
+             // Save Additional Sections Label
+            if (isset($_POST['oer_lp_additional_sections_label'])) {
+                update_post_meta($post->ID, 'oer_lp_additional_sections_label', $_POST['oer_lp_additional_sections_label']);
             }
 
             //Save/update lesson times
@@ -300,6 +333,8 @@ function lp_save_custom_fields() {
 
             if (isset($_POST['oer_lp_grades'])) {
                 update_post_meta($post->ID, 'oer_lp_grades', $_POST['oer_lp_grades']);
+            }else{
+                update_post_meta($post->ID, 'oer_lp_grades', false);
             }
             
             // Update Appropriate Age Levels
@@ -371,6 +406,11 @@ function lp_save_custom_fields() {
                     }
                 }
             }
+            
+            // Save Additional Text Features
+            if (isset($_POST['oer_lp_text_feature'])){
+                update_post_meta($post->ID, 'oer_lp_text_feature', $_POST['oer_lp_text_feature']);
+            }
 
             // Save elements Order
             if (isset($_POST['lp_order'])) {
@@ -395,7 +435,6 @@ function lp_save_custom_fields() {
                 update_post_meta($post->ID, 'oer_lp_related_inquiry_set', $_POST['oer_lp_related_inquiry_set']);
             }
         }
-        
     }
 }
 
@@ -473,78 +512,156 @@ add_action('wp_ajax_nopriv_lp_add_more_pr_callback', 'lp_add_more_pr_callback');
 
 function lp_add_more_pr_callback() {
     $totalElements = isset($_REQUEST['row_id']) ? $_REQUEST['row_id'] : '25';
-    $content = '<div class="panel panel-default lp-primary-resource-element-wrapper" id="lp-primary-resource-element-wrapper-' . $totalElements . '">
-                    <div class="panel-heading">
-                        <h3 class="panel-title lp-module-title">
-                            Resource
-                            <span class="lp-sortable-handle">
-                                <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
-                                <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
-                            </span>
-                            <span class="btn btn-danger btn-sm lp-remove-source"
-                                  title="Delete"
-                                  disabled="disabled"
-                            ><i class="fa fa-trash"></i> </span>
-                        </h3>
-                    </div>
-                    <div class="panel-body">
+    $prType = isset($_REQUEST['type']) ? $_REQUEST['type'] : 'resource';
+    //RESOURCE FIELD TYPE
+    if($prType == 'resource'){
+      $content = '<div class="panel panel-default lp-primary-resource-element-wrapper" id="lp-primary-resource-element-wrapper-' . $totalElements . '">
+                      <div class="panel-heading">
+                          <h3 class="panel-title lp-module-title">
+                              Resource
+                              <span class="lp-sortable-handle">
+                                  <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
+                                  <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
+                              </span>
+                              <span class="btn btn-danger btn-sm lp-remove-source"
+                                    title="Delete"
+                                    disabled="disabled"
+                              ><i class="fa fa-trash"></i> </span>
+                          </h3>
+                      </div>
+                      <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Resource</label>
-                                    <select name="oer_lp_primary_resources[resource][]" class="form-control">';
-                                        $content .= oer_lp_primary_resource_dropdown();
-                        $content .= '</select>
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="checkbox pull-right">
-                                    <label>
-                                        <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
-                                        Sensitive Material
-                                    </label>
-                                </div>
+                            <div class="col-md-7">
+                                <label>Thumbnail Image</label>
+                                <div class="oer_primary_resource_thumbnail_holder"></div>
+                                <button name="oer_lp_primary_resources_thumbnail_button" class="oer_lp_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                <input type="hidden" name="oer_lp_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
                             </div>
                         </div>
-                        
-                        
-                        <div class="form-group">
-                            <label>Teacher Information</label>';
-                            ob_start(); // Start output buffer
-                            wp_editor('',
-                                'oer-lp-resource-teacher-' . $totalElements,
-                                $settings = array(
-                                    'textarea_name' => 'oer_lp_primary_resources[teacher_info][]',
-                                    'media_buttons' => true,
-                                    'textarea_rows' => 6,
-                                    'drag_drop_upload' => true,
-                                    'teeny' => true,
-                                    'quicktags' => true,
-                                    'tinymce' => true
-                                )
-                            );
-                        $content .= ob_get_clean();
-                        $content .= '</div>';
-                        $content .= '<div class="form-group">
-                            <label>Student Information</label>';
-                            ob_start(); // Start output buffer
-                            wp_editor('',
-                                'oer-lp-resource-student-' . $totalElements,
-                                $settings = array(
-                                    'textarea_name' => 'oer_lp_primary_resources[student_info][]',
-                                    'media_buttons' => true,
-                                    'textarea_rows' => 6,
-                                    'drag_drop_upload' => true,
-                                    'teeny' => true,
-                                    'quicktags' => true,
-                                    'tinymce' => true
-                                )
-                            );
-                            $content .= ob_get_clean();
-                        $content .= '</div>
-                    </div>
-                </div>';
-
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <div class="oer_lp_primary_resources_image_wrappper">
+                                        <label>Resource</label>
+                                        <div class="oer_lp_primary_resources_image">
+                                          <div class="oer_lp_primary_resources_image_display">
+                                            <p>You have not selected a resource</p>
+                                          </div>
+                                          <div class="oer_lp_primary_resources_image_preloader" style="display:none;">
+                                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                                          </div>
+                                        </div>
+                                        
+                                        <div class="oer_lp_primary_resources_display"><?php echo htmlspecialchars($resource);?></div>
+                                        <input type="hidden" name="oer_lp_primary_resources[resource][]" value="">
+                                        <input type="button" class="button lp-resource-selector-button" value="Select Resource">
+                                      </div>';
+                                      
+                                      /*
+                                      <select name="oer_lp_primary_resources[resource][]" class="form-control">';
+                                          $content .= oer_lp_primary_resource_dropdown();
+                                      </select>
+                                      */
+                                      
+                     $content .= '</div>
+                              </div>
+                              <div class="col-md-5">
+                                  <div class="checkbox pull-right">
+                                      <label>
+                                          <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="' . $prType .'">
+                                          <input type="hidden" name="oer_lp_primary_resources[sensitive_material_value][]" value="no">
+                                          <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
+                                          Sensitive Material
+                                      </label>
+                                  </div>
+                              </div>
+                          </div>';
+      //TEXTBOX FIELD TYPE 
+      }else{                   
+        $content = '<div class="panel panel-default lp-primary-resource-element-wrapper" id="lp-primary-resource-element-wrapper-' . $totalElements . '">
+                        <div class="panel-heading">
+                            <h3 class="panel-title lp-module-title">
+                                Texbox
+                                <span class="lp-sortable-handle">
+                                    <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
+                                    <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
+                                </span>
+                                <span class="btn btn-danger btn-sm lp-remove-source"
+                                      title="Delete"
+                                      disabled="disabled"
+                                ><i class="fa fa-trash"></i> </span>
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <label>Thumbnail Image</label>
+                                        <div class="oer_primary_resource_thumbnail_holder"></div>
+                                        <button name="oer_lp_primary_resources_thumbnail_button" class="oer_lp_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                        <input type="hidden" name="oer_lp_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="checkbox pull-right">
+                                            <label>
+                                                <input type="hidden" name="oer_lp_primary_resources[resource][]" value="">
+                                                <input type="hidden" name="oer_lp_primary_resources[field_type][]" value="'.$prType.'">
+                                                <input type="hidden" name="oer_lp_primary_resources[sensitive_material_value][]" value="no">
+                                                <input type="checkbox" name="oer_lp_primary_resources[sensitive_material][]" value="yes">
+                                                Sensitive Material
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>';
+      }                
+            $content .= '<div class="form-group">
+                              <label>Title</label>
+                              <input type="text"
+                              class="form-control"
+                              name="oer_lp_primary_resources[title][]"
+                              placeholder="Resource Title"
+                              value="">';
+                              ob_start(); // Start output buffer
+                              //wp_editor('',
+                              //    'oer-lp-resource-teacher-' . $totalElements,
+                              //    $settings = array(
+                              //        'textarea_name' => 'oer_lp_primary_resources[teacher_info][]',
+                              //        'media_buttons' => true,
+                              //        'textarea_rows' => 6,
+                              //        'drag_drop_upload' => true,
+                              //        'teeny' => true,
+                              //        'quicktags' => true,
+                              //        'tinymce' => true
+                              //    )
+                              //);
+                          $content .= ob_get_clean();
+                          $content .= '</div>';
+                          $content .= '<div class="form-group">
+                              <label>Description</label>';
+                              
+                              //$content .= '<textarea name="oer_lp_primary_resources[description][]" id="oer-lp-resource-student-'.$totalElements.'" cols="40"></textarea>';
+                              
+                              
+                              ob_start(); // Start output buffer
+                              wp_editor('',
+                                  'oer-lp-resource-student-' . $totalElements,
+                                  $settings = array(
+                                      'textarea_name' => 'oer_lp_primary_resources[description][]',
+                                      'media_buttons' => true,
+                                      'textarea_rows' => 6,
+                                      'drag_drop_upload' => true,
+                                      'teeny' => true,
+                                  )
+                              );
+                              $content .= ob_get_clean();
+                              
+                              
+                          $content .= '</div>
+                      </div>
+                  </div>';
+    
+    
     echo $content;
     exit();
 }
@@ -576,6 +693,40 @@ function lp_create_module_callback() {
         echo create_dynamic_materials_module($element_id);
     }
     exit();
+}
+
+
+// Ajax Requests
+/**
+ * Get Resource Information
+ */
+add_action('wp_ajax_lp_get_resource_info_callback', 'lp_get_resource_info_callback');
+add_action('wp_ajax_nopriv_lp_get_resource_info_callback', 'lp_get_resource_info_callback');
+
+function lp_get_resource_info_callback() {
+  
+  $_arr = array();
+  if(!empty($_POST['resid'])){
+      $_resid = $_POST['resid'];
+      $_resource= get_post($_resid);
+      $_arr['p_title'] = $_resource->post_title;
+      $_arr['p_url'] = get_permalink($_resource->ID);
+      $_arr['p_resourceurl'] = trim(get_post_meta($_resource->ID, "oer_resourceurl", true)," ");
+      $_arr['p_type'] = get_post_meta($_resource->ID,"oer_mediatype")[0];
+      $rsrcThumbID = get_post_thumbnail_id($_resource);
+      $resource_img='';
+      if (!empty($rsrcThumbID)){
+          $resource_img = wp_get_attachment_image_url(get_post_thumbnail_id($_resource), 'Thumbnail' );
+          $_arr['p_imgtyp'] = 'image';
+          $_arr['p_img'] = $resource_img;
+      }else{
+        $_avtr = getResourceIcon($_arr['p_type'],$_arr['p_resourceurl']);
+        $_arr['p_imgtyp'] = 'avatar';
+        $_arr['p_img'] = $_avtr;
+      }
+  }
+  echo json_encode($_arr);
+  exit();
 }
 
 /**
@@ -826,11 +977,59 @@ function lp_get_source_callback(){
     die();
 }
 
-function change_post_types_slug( $args, $post_type ) {
+/**
+ * Add Text Feature
+ */
+add_action('wp_ajax_lp_add_text_feature_callback', 'lp_add_text_feature_callback');
+add_action('wp_ajax_nopriv_lp_add_text_feature_callback', 'lp_add_text_feature_callback');
 
+function lp_add_text_feature_callback() {
+    
+    $element_id = (isset($_REQUEST['row_id']))?$_REQUEST['row_id']:1;
+    $element_id++;
+    $label_id = "oer_lp_additional_sections[label][]";
+    $editor_id = "oer_lp_additional_sections[editor][]";
+    $content = '<div class="panel panel-default lp-section-element-wrapper" id="lp_section_element_wrapper-'.$element_id.'">';
+    $content .= '   <div class="panel-heading">';
+    $content .= '       <h3 class="panel-title lp-module-title">';
+    $content .=             __("Section", OER_LESSON_PLAN_SLUG);
+    $content .= '           <span class="lp-sortable-handle">';
+    $content .= '               <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>';
+    $content .= '               <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>';
+    $content .= '           </span>';
+    $content .= '           <span class="btn btn-danger btn-sm lp-remove-section" title="Delete"><i class="fa fa-trash"></i> </span>';
+    $content .= '       </h3>';
+    $content .= '   </div>';
+    $content .= '   <div class="panel-body">';
+    $content .= '        <div class="text-editor-group">';
+    $content .= '           <div class="form-group">';
+    $content .= '               <input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" placeholder="Text Title">';
+    $content .= '           </div>';
+    $content .= '       <div class="form-group';
+                            ob_start(); // Start output buffer
+                            wp_editor('',
+                                'oer-lp-additional-sections-editor-' . $element_id,
+                                $settings = array(
+                                    'textarea_name' => $editor_id,
+                                    'media_buttons' => true,
+                                    'textarea_rows' => 10,
+                                    'drag_drop_upload' => true,
+                                    'teeny' => true,
+                                )
+                            );
+    $content .=             ob_get_clean();
+    $content .= '       </div>';
+    $content .= '   </div>';
+    $content .= '</div>';
+    echo $content;
+    exit();
+}
+
+function change_post_types_slug( $args, $post_type ) {
+   global $root_slug;
    /*item post type slug*/   
    if ( 'lesson-plans' === $post_type ) {
-      $args['rewrite']['slug'] = 'inquiry-sets';
+      $args['rewrite']['slug'] = $root_slug;
    }
 
    return $args;
@@ -844,14 +1043,17 @@ function add_modals_to_footer(){
         include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-module.php');
         include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-author.php');
         include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-source.php');
+        include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-section.php');
         include_once(OER_LESSON_PLAN_PATH.'includes/popups/delete-confirm-popup.php');
         include_once(OER_LESSON_PLAN_PATH.'includes/popups/standard-selection.php');
+        include_once(OER_LESSON_PLAN_PATH . 'includes/lesson-plan-resource-selector.php');
     }
 }
 add_action( 'admin_footer', 'add_modals_to_footer', 10 );
 
+
 function add_oer_curriculum_settings(){
-    add_submenu_page('edit.php?post_type=lesson-plans','Settings','Settings','add_users','oer_settings','oer_curriculum_settings');
+    add_submenu_page('edit.php?post_type=lesson-plans','Settings','Settings','add_users','oer_curriculum_settings','oer_curriculum_settings');
 }
 add_action( 'admin_menu', 'add_oer_curriculum_settings' );
 

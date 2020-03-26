@@ -4,7 +4,8 @@
 .lesson_plan_meta_wrapper .lp-remove-module,
 .lesson_plan_meta_wrapper .lp-remove-author,
 .lesson_plan_meta_wrapper .lp-remove-material,
-.lesson_plan_meta_wrapper .lp-remove-source{
+.lesson_plan_meta_wrapper .lp-remove-source,
+.lesson_plan_meta_wrapper .lp-remove-section{
     position: absolute;
     right: 0;
     top: -5px;
@@ -132,3 +133,27 @@
     width: 35%;
     float: right;
 }
+.js #side-sortables.meta-box-sortables .postbox .toggle-indicator:before {
+    content: "\f343";
+    font-size: 17px;
+    color: #191e23;
+    font-weight: 600;
+}
+.js #side-sortables.meta-box-sortables .postbox.closed .toggle-indicator:before {
+    content: "\f347";
+    font-size: 17px;
+    color: #191e23;
+    font-weight: 600;
+}
+.js #side-sortables.meta-box-sortables .postbox h2.hndle {
+    font-size: 13px;
+    color: #191e23;
+}
+.js #side-sortables.meta-box-sortables .postbox h2.hndle:hover {
+    background-color:rgba(241,241,241,0.5);
+    cursor:pointer;
+}
+.button-row { margin:10px 0; }
+.text-editor-group { margin:10px 0; }
+.panel-group .panel .panel-body div {box-sizing: border-box !important;}
+.oer_lp_primary_resources_thumbnail_button { margin:10px 0; }

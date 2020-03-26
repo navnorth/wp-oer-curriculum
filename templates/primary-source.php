@@ -7,7 +7,16 @@ add_filter('body_class', function($classes){
 
 get_header();
 
+global $_css_oer;
+if ($_css_oer) {
+$output = "<style>"."\n";
+$output .= $_css_oer."\n";
+$output .="</style>"."\n";
+echo $output;
+}
+
 $back_url = "";
+$back_source_url = "";
 $source_id = 0;
 $lp_prev_class = "";
 $lp_next_class = "";
@@ -19,10 +28,13 @@ $curriculum = get_query_var('curriculum');
 $curriculum_details = get_page_by_path($curriculum, OBJECT, "lesson-plans");
 $curriculum_id = $curriculum_details->ID;
 if ($curriculum)
-    $back_url = site_url("inquiry-sets/".$curriculum);
+    $back_source_url = site_url($root_slug."/".$curriculum);
+    //Permalink Structure Consideration
+    $back_url = site_url($root_slug."/".$curriculum);
 
 // Get Resource ID
 $psource = get_query_var('source');
+$psindex = get_query_var('idx');
 $sources = explode("-",$psource);
 if ($sources)
     $source_id = $sources[count($sources)-1];
@@ -44,22 +56,41 @@ $teacher_info = "";
 $student_info = "";
 $embed = "";
 $prev_url = null;
+$prev_image = "";
 $next_url = null;
 $right_class = "col-md-12";
+$new_title = "";
+$new_description = "";
+$prev_title = "";
+$next_title = "";
+$next_image = "";
 if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
     if (!empty(array_filter($primary_resources['resource']))) {
         foreach ($primary_resources['resource'] as $resourceKey => $source) {
-            if ($source==$resource->post_title)
+            if ($psindex == $resourceKey){
+                $new_title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
+                $new_description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
                 break;
+            }
             $index++;
         }
         if (isset($primary_resources['resource'][$index-1])){
             $prev_resource = oer_lp_get_resource_details($primary_resources['resource'][$index-1]);
-            $prev_url = $back_url."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID;
+            $prev_title = (isset($primary_resources['title'][$index-1]) ? $primary_resources['title'][$index-1]: "");
+            $prev_image = (isset($primary_resources['image'][$index-1]) ? $primary_resources['image'][$index-1]: "");
+            if (is_object($prev_resource))
+                $prev_url = $back_source_url."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID.'/idx/'.($index-1);
+            else
+                $prev_url = $back_source_url."/source/".sanitize_title($prev_title)."-0/idx/".($index-1);
         }
         if (isset($primary_resources['resource'][$index+1])){
             $next_resource = oer_lp_get_resource_details($primary_resources['resource'][$index+1]);
-            $next_url = $back_url."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID;
+            $next_title = (isset($primary_resources['title'][$index+1]) ? $primary_resources['title'][$index+1]: "");
+            $next_image = (isset($primary_resources['image'][$index+1]) ? $primary_resources['image'][$index+1]: "");
+            if (is_object($next_resource))
+                $next_url = $back_source_url."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID.'/idx/'.($index+1);
+            else
+                $next_url = $back_source_url."/source/".sanitize_title($next_title)."-0/idx/".($index+1);
         }
         if ($index==0)
             $lp_prev_class = "ps-nav-hidden";
@@ -82,11 +113,40 @@ if (empty($next_resource)){
         $lp_next_class = "";
         $next_resource = $modules[0];
         $next_url = $back_url."/module/".sanitize_title($next_resource['title']);
+    } else {
+        if (!empty($next_title)){
+            $next_resource['title'] = $next_title;
+        }
     }
 }
+if (empty($prev_resource)){
+    $modules = oer_lp_modules($post->ID);
+    if (isset($modules[0])){
+        $lp_prev_class = "";
+        $prev_resource = $modules[0];
+        $prev_url = $back_url."/module/".sanitize_title($prev_resource['title']);
+    } else {
+        if (!empty($prev_title)){
+            $prev_resource['title'] = $prev_title;
+        }
+    }
+}
+
 $type = get_post_meta($resource->ID,"oer_mediatype");
 $type = $type[0];
 ?>
+<?php 
+  //Breadcrumb trail 
+  $sup = (!empty($new_title))? $new_title : $resource->post_title; 
+  $ret = '<div class="wp_oer_breadcrumb">'; 
+  $ret .= '<a href="'.get_site_url().'">Home</a>'; 
+  $cur = (strlen($curriculum_details->post_title) > 30)? substr($curriculum_details->post_title, 0, 30).'...' : $curriculum_details->post_title; 
+  $ret .= ' / <a href="'.site_url($root_slug."/".$curriculum).'">'.$cur.'</a>'; 
+  $res = (strlen($sup) > 30)? substr($sup, 0, 30).'...' : $sup; 
+  $ret .= ' / '.$res; 
+  $ret .= '</div>'; 
+  echo $ret; 
+?> 
 <div class="lp-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
 <div class="row ps-details-row">
     <?php if (!empty($featured_image_url) || $youtube || $isPDF) {
@@ -114,30 +174,65 @@ $type = $type[0];
         </div>
         <?php else: ?>
         <div class="ps-image-block">
+           <?php if (isset($resource_url)) { ?>
+           <a href="<?php echo $resource_url; ?>" target="_blank"><img src="<?php echo $featured_image_url; ?>" alt="<?php echo $resource->post_title; ?>" /></a>
+           <?php }  else { ?>
            <img src="<?php echo $featured_image_url; ?>" alt="<?php echo $resource->post_title; ?>" />
+           <?php } ?>
         </div>
         <?php if ($type=="website"): ?>
-        <span class="ps-expand"><a href="<?php echo $featured_image_url; ?>" class="lp-expand-img" target="_blank"><i class="fas fa-external-link-alt"></i></a></span>
+        <span class="ps-expand"><a href="<?php echo $resource_url; ?>" class="lp-expand-img" target="_blank"><i class="fas fa-external-link-alt"></i></a></span>
         <?php endif; ?>
         <?php endif; ?>
         <div class="lp-center">
-            <?php if (isset($oer_resource_url)) { ?>
+            <?php if (isset($resource_url)) { ?>
             <div class="ps-meta-group ps-resource-url">
-                <a href="<?php echo $oer_resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Original", OER_LESSON_PLAN_SLUG); ?></a>
+                <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OER_LESSON_PLAN_SLUG); ?></a>
             </div>
             <?php } ?>
         </div>
     </div>
     <?php
+    } else {
+        $media_type = get_post_meta($resource->ID, "oer_mediatype")[0];
+        if (!empty($resource_url)){
+            $right_class = "col-md-8";
+        ?>
+        <div class="ps-media-image col-md-4 col-sm-12" data-curid="<?php echo $index; ?>">
+            <div class="oer-sngl-rsrc-img">
+                 <?php if (empty($feature_image_url)): ?>
+                 <a class="oer-featureimg" href="<?php echo $resource_url; ?>" target="_blank"><span class="dashicons <?php if (function_exists('getResourceIcon')) echo getResourceIcon($media_type,$resource_url); ?> nofeat"></span></a>
+                <?php endif; ?>
+            </div>
+            <div class="lp-center">
+                <?php if (isset($resource_url)) { ?>
+                <div class="ps-meta-group ps-resource-url">
+                    <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OER_LESSON_PLAN_SLUG); ?></a>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+        <?php  
+        }
     }
     $resource_meta = null;
     $subject_areas = null;
     ?>
     <div class="ps-details <?php echo $right_class; ?> col-sm-12">
         <div class="ps-info">
-            <h1 class="ps-info-title"><?php echo $resource->post_title; ?></h1>
+            <h1 class="ps-info-title"><?php
+            if (!empty($new_title))
+                echo $new_title;
+            else
+                echo $resource->post_title;
+            ?></h1>
             <div class="ps-info-description">
-                <?php echo $resource->post_content; ?>
+                <?php
+                if (empty($new_description))
+                    echo $resource->post_content;
+                else
+                    echo $new_description;
+                ?>
             </div>
         </div>
     </div>
@@ -146,20 +241,33 @@ $type = $type[0];
     <div class="lp-ps-nav-left-block <?php echo $lp_prev_class; ?> col-md-6 col-sm-12">
         <?php if (!empty($prev_resource)):
         $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($prev_resource), 'resource-thumbnail' );
+        if (empty($resource_img))
+            $resource_img = $prev_image;
         ?>
         <a class="lp-ps-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>">
             <span class="col-md-3">&nbsp;</span>
             <span class="nav-media-icon"><i class="fas fa-arrow-left fa-2x"></i></span>
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
-                    <?php if ($resource_img!==""):
-                    $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID);
+                    <?php if ($resource_img!=""):
+                        $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID);
                     ?>
                     <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
+                    <?php else: ?>
+                    <?php
+                     $prev_resource_url = get_post_meta($prev_resource->ID, "oer_resourceurl", true);
+                     $prev_resource_type = get_post_meta($prev_resource->ID,"oer_mediatype")[0];
+                    ?>
+                    <div class="navigation-avatar"><span class="dashicons <?php echo getResourceIcon($prev_resource_type,$prev_resource_url); ?>"></span></div>
                     <?php endif; ?>
                 </span>
                 <span class="nav-lp-resource-title col-md-8">
-                    <?php echo $prev_resource->post_title; ?>
+                    <?php
+                    if (!empty($prev_title))
+                        echo $prev_title;
+                    else
+                        echo $prev_resource->post_title;
+                    ?>
                 </span>
             </span>
         </a>
@@ -168,25 +276,36 @@ $type = $type[0];
     <div class="lp-ps-nav-right-block <?php echo $lp_next_class; ?> col-md-6 col-sm-12">
         <?php if (!empty($next_resource)):
         $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($next_resource), 'resource-thumbnail' );
+        if (empty($resource_img))
+            $resource_img = $next_image;
         ?>
         <a class="lp-ps-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>">
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if (!empty($resource_img)):
-                    if (is_object($next_resource))
-                        $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
-                    else
-                        $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($next_resource['title']));
-                    ?>
-                    <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
+                        if (is_object($next_resource)){
+                            $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
+                        }
+                        else
+                            $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($next_resource['title']));
+                        ?>
+                        <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
                     <?php else: ?>
-                    <div class="resource-thumbnail" style="background: rgba(204,97,12,.1); background-size:cover; display:flex; align-items:center; justify-content: center;"><i class="fa fa-file-text-o fa-4x"></i></div>
+                      <?php
+                       $next_resource_url = get_post_meta($next_resource->ID, "oer_resourceurl", true);
+                       $next_resource_type = get_post_meta($next_resource->ID,"oer_mediatype")[0];
+                      ?>
+                      <div class="navigation-avatar"><span class="dashicons <?php echo getResourceIcon($next_resource_type,$next_resource_url); ?>"></span></div>
                     <?php endif; ?>
                 </span>
                 <span class="nav-lp-resource-title col-md-8">
                     <?php
-                     if (is_object($next_resource))
-                        echo $next_resource->post_title;
+                     if (is_object($next_resource)){
+                        if (!empty($next_title))
+                            echo $next_title;
+                        else
+                            echo $next_resource->post_title;
+                     }
                     else
                         echo $next_resource['title'];
                     ?>
