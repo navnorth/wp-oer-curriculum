@@ -1141,3 +1141,6 @@ div#tcHiddenFields {float: left;}
 }
 /** Divi Footer with primary source navigation issue fix **/
 .primary-source-template #main-footer { clear:both; }
+.primary-source-template #et-main-area .wp_oer_breadcrumb,
+.primary-source-template #et-main-area .lp-nav-block,
+.primary-source-template #et-main-area .row.ps-details-row{ padding-left:25px; padding-right:25px; }
