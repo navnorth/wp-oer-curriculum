@@ -117,12 +117,12 @@
                           if (($related_inquiry_set && $related_inquiry_enabled) || !$related_inquiry_set) {
                       ?>
                       <div class="tc-related-inquiry-sets">
-                          <a href="#collapse_lp_related_inquiry_sets" data-toggle="collapse" class="tc_lp_collapse_button collapsed" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          <a href="#collapse_lp_related_inquiry_sets" data-toggle="collapse" class="tc_lp_collapse_button" role="button" aria-expanded="true" aria-controls="collapseExample">
                             <h4 class="tc-related-inquiry-sets-heading clearfix">
                                 <span class="oer_lp_related_fields"><?php echo oer_lp_get_field_label('oer_lp_related_inquiry_set'); ?></span><span class="oer_lp_acicon"></span>
                             </h4>
                           </a>
-                          <div class="tc-related-inquiry-sets-details clearfix collapse" id="collapse_lp_related_inquiry_sets">
+                          <div class="tc-related-inquiry-sets-details clearfix collapse in" id="collapse_lp_related_inquiry_sets">
                               <ul class="tc-related-inquiry-sets-list">
                               <?php
                               foreach($related_inquiry_sets as $inquiry_set) {
@@ -142,12 +142,12 @@
                            if (($standards_set && $standards_enabled) || !$standards_set) {
                       ?>
                       <div class="tc-lp-standards">
-                          <a href="#collapse_lp_standards" data-toggle="collapse" class="tc_lp_collapse_button collapsed" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          <a href="#collapse_lp_standards" data-toggle="collapse" class="tc_lp_collapse_button" role="button" aria-expanded="true" aria-controls="collapseExample">
                             <h4 class="tc-lp-field-heading clearfix">
                                 <span class="oer_lp_related_fields"><?php echo oer_lp_get_field_label('oer_lp_standards'); ?></span><span class="oer_lp_acicon"></span>
                             </h4>
                           </a>
-                          <div class="tc-lp-standards-details clearfix collapse" id="collapse_lp_standards">
+                          <div class="tc-lp-standards-details clearfix collapse in" id="collapse_lp_standards">
                               <ul class="tc-lp-standards-list">
                                   <?php
                                   $stds = array();
@@ -214,12 +214,12 @@
                           if (!empty($post_terms)) {
                       ?>
                       <div class="tc-lp-subject-areas">
-                         <a href="#collapse_lp_subjects" class="tc_lp_collapse_button collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                         <a href="#collapse_lp_subjects" class="tc_lp_collapse_button" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseExample">
                            <h4 class="tc-lp-field-heading clearfix">
                                 <span class="oer_lp_related_fields"><?php _e("Subjects",OER_LESSON_PLAN_SLUG); ?></span><span class="oer_lp_acicon"></span>
                             </h4>
                          </a>
-                         <div class="tc-lp-subject-details clearfix collapse" id="collapse_lp_subjects">
+                         <div class="tc-lp-subject-details clearfix collapse in" id="collapse_lp_subjects">
                               <ul class="tc-lp-subject-areas-list">
                                   <?php
                                   $i = 1;
@@ -254,10 +254,10 @@
                         endforeach;            
                         if ($_tmp_html > ''): ?>
                         <div class="tc-lp-objectives">
-                          <a href="#collapse_lp_objectives" class="tc_lp_collapse_button collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          <a href="#collapse_lp_objectives" class="tc_lp_collapse_button" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseExample">
                             <h4 class="tc-lp-field-heading clearfix"><span class="oer_lp_related_fields"><?php echo oer_lp_get_field_label('oer_lp_related_objective'); ?></span><span class="oer_lp_acicon"></span></h4>
                           </a>                
-                          <div class="tc-lp-objectives-details clearfix collapse" id="collapse_lp_objectives">
+                          <div class="tc-lp-objectives-details clearfix collapse in" id="collapse_lp_objectives">
                               <ul class="tc-lp-objectives-list"><?php echo $_tmp_html; ?></ul>
                           </div>
                         </div>
