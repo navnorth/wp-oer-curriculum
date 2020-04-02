@@ -127,7 +127,8 @@ jQuery(document).ready(function($){
         $(this).parent().find('.lp-standard-toggle i').removeClass('fa-caret-down').addClass('fa-caret-right');
     });
     
-    $(document).on("click", '.lp-read-more', function (){
+    $(document).on("click", '.lp-read-more', function (e){
+        e.preventDefault ? e.preventDefault() : e.returnValue = false;
         $('.lp-excerpt').hide();
         $('.lp-full-content').show();
     });

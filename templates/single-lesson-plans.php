@@ -101,7 +101,8 @@
                           <div class="lp-excerpt"><?php echo oer_lp_content(360); ?></div>
                           <div class="lp-full-content"><?php echo the_content(); ?> <a href="javascript:void(0);" class="lp-read-less">(read less)</a></div>
                           <?php else : ?>
-                          <div class="lp-content"><?php echo the_content(); ?></div>
+                            <?php $content = preg_replace('/\[\/?et_pb.*?\]/', '', the_content()); ?>
+                            <div class="lp-content"><?php echo $content; ?></div>
                           <?php endif; ?>
                       </div>
                       <?php
@@ -267,6 +268,7 @@
                       <div id="tcHiddenFields" class="tc-hidden-fields collapse">
                           <?php
                           // Grade Level Display
+                          /*
                           $oer_lp_grade = oer_inquiry_set_grade_level($post->ID);
                           if (!empty($oer_lp_grade)){
                               ?>
@@ -301,7 +303,7 @@
                               <?php
                               }
                           }
-                          
+                          */
                            // Required Equipment Materials Display
                          /*if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
                               $req_materials_label = (isset($post_meta_data['oer_lp_required_materials_label'][0]) ? $post_meta_data['oer_lp_required_materials_label'][0] : "");
@@ -336,6 +338,7 @@
                            }
                           ?>
                       </div>
+                      
                   </div>
               </div>
               <div class="col-md-4 col-sm-12 featured-image padding-right-0">
@@ -371,8 +374,11 @@
                       ?>
                       <div class="tc-lp-controls">
                           <div class="sharethis-inline-share-buttons"></div>
+                          <div class="printversion-label">Download<br>Print Version</div>
                           <?php if ($oer_lp_download_copy_document): ?>
-                          <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank"><i class="fal fa-download"></i></a>
+                          <div class="printversion-download">
+                            <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank"><i class="fal fa-download"></i></a>
+                          </div>
                           <?php endif; ?>
                       </div>
                   <?php } ?>
@@ -399,6 +405,45 @@
                       </div>
                   </div>
                   <?php } ?>
+                      
+                  <?php
+                  // Grade Level Display
+                  $oer_lp_grade = oer_inquiry_set_grade_level($post->ID);
+                  if (!empty($oer_lp_grade)){
+                      ?>
+                      <div class="form-field">
+                          <span class="tc-lp-label">Grade Level:</span> <span class="tc-lp-value"><?php echo $oer_lp_grade; ?></span>
+                      </div>
+                      <?php
+                  }
+                  
+                  // Appropriate Age Levels Display
+                  if (($age_levels_set && $age_levels_enabled) || !$age_levels_set) {
+                      $age_label = oer_lp_get_field_label('oer_lp_age_levels');
+                      $age_levels = (isset($post_meta_data['oer_lp_age_levels'][0]) ? $post_meta_data['oer_lp_age_levels'][0] : "");
+                      if (!empty($age_levels)){
+                      ?>
+                      <div class="form-field">
+                          <span class="tc-lp-label"><?php echo $age_label; ?>:</span> <span class="tc-lp-value"><?php echo $age_levels; ?></span>
+                      </div>
+                      <?php
+                      }
+                  }
+                  
+                  // Suggested Instructional Time Display
+                 if (($suggested_time_set && $suggested_time_enabled) || !$suggested_time_set) {
+                      $suggested_label = oer_lp_get_field_label('oer_lp_suggested_instructional_time');
+                      $suggested_time = (isset($post_meta_data['oer_lp_suggested_instructional_time'][0]) ? $post_meta_data['oer_lp_suggested_instructional_time'][0] : "");
+                      if (!empty($suggested_time)){
+                      ?>
+                      <div class="form-field">
+                          <span class="tc-lp-label"><?php echo $suggested_label; ?>:</span> <span class="tc-lp-value"><?php echo $suggested_time; ?></span>
+                      </div>
+                      <?php
+                      }
+                  }
+                  ?>
+                  
               </div>
               
           </div>
