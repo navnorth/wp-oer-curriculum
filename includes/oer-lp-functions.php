@@ -603,6 +603,8 @@ if (!function_exists('oer_lp_content')){
         $content = preg_replace('/<!--.*?-->/ms', '', $content);
         //$content = apply_filters('the_content', $content); 
         $content = str_replace(']]>', ']]>', $content);
+        $content = preg_replace('/\[\/?et_pb.*?\]/', '', $content);
+        $content = strip_shortcodes($content);
         $content .= '... <a href="javascript:void(0);" class="lp-read-more">(read more)</a>';
         return $content;
     }

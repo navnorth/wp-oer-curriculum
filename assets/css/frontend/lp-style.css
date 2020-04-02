@@ -13,12 +13,12 @@ body.single-lesson-plans {
     position: absolute;
     top: 0;
     right: 0;
-    background: #283d47 !important;
     padding: 5px 0;
 }
 .tc-lp-controls a {
-    display: block;
-    padding: 10px 14px;
+    display: inline-block;
+    padding: 8px 14px;
+    background: #283d47 !important;
 }
 .tc-lp-controls a i {
     color: #ffb802;
@@ -60,6 +60,10 @@ body.single-lesson-plans {
     color: #333 !important;
     font-size: 14px;
     line-height:18px;
+}
+.tc-lp-details-description .et_pb_row{
+    width: 100% !important;
+    max-width: none !important;
 }
 .tc-lp-details-description p { color:#333 !important; font-size:14px; line-height:18px; }
 .tc-lp-details-standards-list { padding:20px 0; }
@@ -111,7 +115,7 @@ body.single-lesson-plans {
     margin-left: 15px !important;
 }
 .tc-lp-keywords {
-    margin: 10px 0;
+    margin: 28px 0 10px 0;
     line-height: 24px;    
 }
 .tc-sensitive-material-section i {
@@ -533,6 +537,9 @@ span.selected-standard-pill:last-child {
 .tc-related-inquiry-sets-topbar {
     position: relative;
 }
+div#collapse_lp_related_inquiry_sets {
+    clear: left;
+}
 .tc-related-inquiry-grids-section {
     background: linear-gradient(180deg, #4A6F81 0%, #436576 71.27%);    
     padding: 8%;
@@ -764,6 +771,16 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     position:absolute;
     top:43%;
 }
+.printversion-label {
+    float: left;
+    color: #4F4F4F;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 3px 15px 0px 0px;
+}
+.printversion-download {
+    float: left;
+}
 .tc-lp-controls .sharethis-inline-share-buttons#st-1 .st-btn[data-network='sharethis'] { background-color:transparent; }
 .tc-lp-controls .sharethis-inline-share-buttons#st-1 .st-btn[data-network='sharethis'] svg {
     height:24px;
@@ -828,6 +845,7 @@ div#tcHiddenFields {float: left;}
       padding-left: 0px !important;
   }
 }
+.see-more-row {clear: left;}
 .see-more-row .center { text-align:center; }
 .see-more-row .see-more-link, .see-more-row .see-more-link:active { font-size:14px; font-weight:bold; color:#77B143; line-height:19px; cursor:pointer; text-decoration:none; }
 .see-more-row .see-more-link:hover { text-decoration:underline; }
