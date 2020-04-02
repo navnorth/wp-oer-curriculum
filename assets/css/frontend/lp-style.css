@@ -10,10 +10,10 @@ body.single-lesson-plans {
 .single-lesson-plans #page.container, .site-content .container { width:100%; max-width: 1440px; padding:0; }
 .padding-0 { padding:0 !important; }
 .tc-lp-controls {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 5px 0;
+  position: relative;
+  padding: 5px 0;
+  float: left;
+  width: 100%;
 }
 .tc-lp-controls a {
     display: inline-block;
@@ -54,6 +54,8 @@ body.single-lesson-plans {
     line-height: 24px;
     position:relative;
     padding-right:50px;
+    float: left;
+    width: 100%;
 }
 .tc-lp-details-description {
     padding: 10px 0 20px 0px;
@@ -772,14 +774,19 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
     top:43%;
 }
 .printversion-label {
-    float: left;
-    color: #4F4F4F;
-    font-size: 14px;
+    display: block;
     line-height: 18px;
-    padding: 3px 15px 0px 0px;
+    padding: 14px 15px 0px 0px;
+    float: left;
+    font-size: 14px;
+    color: #4F4F4F;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 .printversion-download {
+    display: block;
     float: left;
+    padding: 0px 15px 0px 0px;
 }
 .tc-lp-controls .sharethis-inline-share-buttons#st-1 .st-btn[data-network='sharethis'] { background-color:transparent; }
 .tc-lp-controls .sharethis-inline-share-buttons#st-1 .st-btn[data-network='sharethis'] svg {
@@ -807,6 +814,7 @@ h4.tc-lp-field-heading span.oer_lp_related_fields, h4.tc-related-inquiry-sets-he
 .tc-lp-objectives-details ul.tc-lp-objectives-list { padding-left:0;}
 .lp_keywords_container span a { color:#77B143; border-color:#E0E0E0; }
 .lp_keywords_container span { margin: 5px; }
+.lp_keywords_container span:nth-of-type(1) {margin-left: 0px !important;}
 .tc-lp-objectives, .tc-lp-standards, .tc-related-inquiry-sets {margin-bottom: 0px;}
 a.tc_lp_collapse_button h4 {line-height: 1.8em;}
 .tc-related-inquiry-sets, .tc-lp-standards, .tc-lp-subject-areas, .tc-lp-objectives {float: left;width: 100%;}

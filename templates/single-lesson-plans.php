@@ -373,13 +373,13 @@
                       } 
                       ?>
                       <div class="tc-lp-controls">
-                          <div class="sharethis-inline-share-buttons"></div>
-                          <div class="printversion-label">Download<br>Print Version</div>
+                          <div class="printversion-label">Download Print Version</div>
                           <?php if ($oer_lp_download_copy_document): ?>
                           <div class="printversion-download">
                             <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank"><i class="fal fa-download"></i></a>
                           </div>
                           <?php endif; ?>
+                          <div class="sharethis-inline-share-buttons"></div>
                       </div>
                   <?php } ?>
                   </div>
