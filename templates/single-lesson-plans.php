@@ -344,9 +344,9 @@
               <div class="col-md-4 col-sm-12 featured-image padding-right-0">
                   <?php the_post_thumbnail('inquiry-set-featured'); ?>
                   <div class="tc-lp-controls">
-                      <div class="printversion-label">Download Print Version</div>
                       <?php if ($oer_lp_download_copy_document): ?>
-                      <div class="printversion-download">
+                        <div class="printversion-label">Download Print Version</div>
+                        <div class="printversion-download">
                         <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank"><i class="fal fa-download"></i></a>
                       </div>
                       <?php endif; ?>
