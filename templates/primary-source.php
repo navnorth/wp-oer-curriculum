@@ -229,9 +229,9 @@ $type = $type[0];
             <div class="ps-info-description">
                 <?php
                 if (empty($new_description))
-                    echo $resource->post_content;
+                    echo do_shortcode($resource->post_content);
                 else
-                    echo $new_description;
+                    echo do_shortcode($new_description);
                 ?>
             </div>
         </div>

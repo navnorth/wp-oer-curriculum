@@ -535,7 +535,7 @@
                                     <div class="lp-resource-author_block"><a href=""><?php echo $oer_authorname2; ?></a></div>	
                                   <?php endif;*/ ?>
                                 </div>
-                                <div class="lp-resource-excerpt"><?php echo oer_get_related_resource_content(strip_tags($description), 50); ?></div>
+                                <div class="lp-resource-excerpt"><?php echo oer_get_related_resource_content(strip_tags(strip_shortcodes($description)), 50); ?></div>
                               </div>
                           </div>
                       </div>
