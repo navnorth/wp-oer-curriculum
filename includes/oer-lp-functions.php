@@ -410,25 +410,113 @@ if (! function_exists('oer_lp_title_from_slug')){
 if (! function_exists('oer_inquiry_set_grade_level')){
     function oer_inquiry_set_grade_level($inquiry_set_id){
         $grades = get_post_meta($inquiry_set_id, "oer_lp_grades", true);
-        $_tmp = '';
         if(empty($grades)){
           $_tmp = '';
         }else{
-          if (is_array($grades)){
-            foreach ($grades as $key => $value) {
-              
-              if ($value == "pre-k"){
-                  $grade_level = "Pre-Kindergarten";
-              }elseif ($value == "k"){
-                  $grade_level = "Kindergarten";
-              }else{
-                  $grade_level = $value;
-              }
-              $_tmp = ($_tmp=='')? $_tmp = $grade_level : $_tmp .= ', '.$grade_level;
-            }  
-          }
+          $_tmp = oer_lp_grade_levels($grades);
         }  
         return $_tmp;
+    }
+}
+
+function oer_lp_sort_grade_level($a, $b) {
+    if ( $a == $b )
+        return 0;
+
+    if (is_numeric($a) && is_numeric($b))
+        return ($a<$b) ? -1 : 1;
+    elseif (is_numeric($a) && !is_numeric($b))
+        return 1;
+    elseif (!is_numeric($a) && is_numeric($b))
+        return -1;
+    else {
+        if ($a=="pre-k" && $b=="k")
+            return -1;
+        else
+            return 1;
+    }
+
+
+}
+
+function oer_lp_grade_levels($grade_levels){
+    $default_arr = [
+                    "pre-k",
+                    "k",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12"
+                    ];
+
+    $elmnt = 0;
+    $def_index = 0;
+    
+    usort($grade_levels, "oer_lp_sort_grade_level");
+
+    for($x=0; $x < count($grade_levels); $x++)
+    {
+        $grade_levels[$x];
+    }
+
+    $fltrarr = array_filter($grade_levels, 'strlen');
+    
+    $flag = array();
+    if (is_array($fltrarr) && count($fltrarr)>0)
+        $elmnt = $fltrarr[min(array_keys($fltrarr))];
+    
+    for($y=0; $y < count($default_arr); $y++){
+        if ($default_arr[$y]==$elmnt){
+            $def_index = $y;
+            break;
+        }
+    }
+
+    for($i =0; $i < count($fltrarr); $i++)
+    {
+        if($elmnt == $fltrarr[$i] || $default_arr[$def_index+$i] == strtolower($fltrarr[$i]))
+        {
+            $flag[] = 1;
+        }
+        else
+        {
+            $flag[] = 0;
+        }
+        if (strtolower($fltrarr[$i])=="k")
+            $fltrarr[$i] = "K";
+        if (strtolower($fltrarr[$i])=="pre-k")
+            $fltrarr[$i] = "Pre-K";
+        $elmnt++;
+    }
+
+    if(in_array('0',$flag))
+    {
+        return implode(", ",array_unique($fltrarr));
+    }
+    else
+    {
+        $arr_flt = array_keys($fltrarr);
+        
+        $end_filter = end($arr_flt);
+        
+        if (count($fltrarr)>1) {
+            if (strtolower($fltrarr[0])=="pre-k" || strtolower($fltrarr[$end_filter])=="k")
+                return $fltrarr[0]." &ndash; ".$fltrarr[$end_filter];
+            else
+                return $fltrarr[0]."-".$fltrarr[$end_filter];
+        }
+        else{
+            if (isset($fltrarr[0]))
+                return $fltrarr[0];
+        }
     }
 }
 
