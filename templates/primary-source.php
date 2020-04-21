@@ -59,6 +59,7 @@ $prev_url = null;
 $prev_image = "";
 $next_url = null;
 $right_class = "col-md-12";
+$left_class = "col-md-12";
 $new_title = "";
 $new_description = "";
 $prev_title = "";
@@ -151,8 +152,14 @@ $type = $type[0];
 <div class="row ps-details-row">
     <?php if (!empty($featured_image_url) || $youtube || $isPDF) {
         $right_class = "col-md-8";
+        $left_class = "col-md-4";
+
+        if ($isPDF){
+            $right_class = "col-md-5";
+            $left_class = "col-md-7";
+        }
     ?>
-    <div class="ps-media-image col-md-4 col-sm-12" data-curid="<?php echo $index; ?>">
+    <div class="ps-media-image <?php echo $left_class; ?> col-sm-12" data-curid="<?php echo $index; ?>">
         <?php if ($youtube): ?>
         <div class="ps-youtube-video">
             <?php
