@@ -378,3 +378,19 @@ function curriculum_cat_query(){
 	 
 	return $_arr;
 }
+
+
+function curriculum_tags_query(){
+	$_arr = array();
+	$tags_query = new WP_Term_Query( array('taxonomy' => 'post_tag','number' => 0, 'hide_empty' => false) );	
+	if ( ! empty( $tags_query->terms ) ) {
+		$cnt = 0;
+		foreach ( $tags_query ->terms as $term ) {
+			$_arr[$cnt]['id'] = $term->term_id;
+			$_arr[$cnt]['name'] = $term->name;
+			$_arr[$cnt]['link'] = get_home_url().'/tag/'.$term->slug;
+			$cnt++;
+		}
+	}
+	return $_arr;
+}
