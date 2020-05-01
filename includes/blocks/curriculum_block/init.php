@@ -330,7 +330,7 @@ function curriculum_tax_query(){
 			$_ret[$i]['tags']               = wp_get_post_tags($post->ID, array('fields' => 'ids'));
 			
 			/*
-			$results = wp_get_$_ordertbys($post->ID array('fields' => 'ids'));
+			$results = wp_get_post_tags($post->ID array('fields' => 'ids'));
 			if($results){
 					$x = 0;
           foreach($results as $row){		
