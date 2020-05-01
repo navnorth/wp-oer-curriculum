@@ -327,24 +327,25 @@ function curriculum_tax_query(){
 			$_ret[$i]['link']               = get_post_permalink($post->ID);
 			$_ret[$i]['featured_image_url'] = get_the_post_thumbnail_url($post->ID,'medium');
 			$_ret[$i]['oer_lp_grades']      = $post->oer_lp_grades;	
-			$_ret[$i]['tags']               = wp_get_post_tags($post->ID, array('fields' => 'ids'));
+			//$_ret[$i]['tags']               = wp_get_post_tags($post->ID, array('fields' => 'ids'));
 			
-			/*
-			$results = wp_get_post_tags($post->ID array('fields' => 'ids'));
+			
+			$results = wp_get_post_tags($post->ID);
 			if($results){
 					$x = 0;
-          foreach($results as $row){		
+          foreach($results as $row){
+							$_ret[$i]['tags'][$x]['id'] = $row->term_id;
 							$_ret[$i]['tags'][$x]['name'] = $row->name;
 							$_ret[$i]['tags'][$x]['slug'] = $row->slug;
 							$x++;
           }
       }
-			*/
+			
 			$i++;
 		}
 	
 	
-	return $_ret;
+	return json_encode($_ret);
 }
 
 
