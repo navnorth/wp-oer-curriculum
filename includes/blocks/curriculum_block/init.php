@@ -149,7 +149,7 @@ function render_posts_block($attributes, $ajx=false){
 	foreach($posts as $post){
 		$_content .= '<div class="lp-cur-blk-row">';
 			$featured_img_url = get_the_post_thumbnail_url($post->ID,'medium'); 
-			$_content .= '<a href="#" class="lp-cur-blk-left"><img src="'.$featured_img_url.'" alt="" /></a>';
+			$_content .= '<a href="'.get_post_permalink($post->ID).'" class="lp-cur-blk-left"><img src="'.$featured_img_url.'" alt="" /></a>';
 			$_content .= '<div class="lp-cur-blk-right">';
 				$_content .= '<div class="ttl"><a href="'.get_post_permalink($post->ID).'">'.$post->post_title.'</a></div>';
 				$_content .= '<div class="lp-cur-postmeta">';
@@ -315,5 +315,6 @@ function curriculum_tax_query(){
 	$posts = get_post( $args );
 	return $posts;
 }
+
 
 
