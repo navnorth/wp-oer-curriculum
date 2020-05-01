@@ -345,7 +345,7 @@ function curriculum_tax_query(){
 		}
 	
 	
-	return json_encode($_ret);
+	return $_ret;
 }
 
 
