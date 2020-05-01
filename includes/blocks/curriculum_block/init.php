@@ -281,6 +281,11 @@ add_action( 'rest_api_init', function () {
             'methods' => 'GET', 
             'callback' => 'curriculum_tax_query' 
     ) );
+		
+		register_rest_route( 'curriculum/v2', 'catquery', array(
+            'methods' => 'GET', 
+            'callback' => 'curriculum_cat_query' 
+    ) );
 });
 
 function curriculum_tax_query(){
@@ -333,4 +338,36 @@ function curriculum_tax_query(){
 	
 	
 	return $_ret;
+}
+
+
+function curriculum_cat_query(){
+	$_arr = array();
+	$term_query = new WP_Term_Query( array('taxonomy' => 'resource-subject-area','number' => 0,'parent' => 0,'hide_empty' => false) );	
+	if ( ! empty( $term_query->terms ) ) {
+		$cnt = 0;
+    foreach ( $term_query ->terms as $term ) {
+			$_arr[$cnt]['term_id'] = $term->term_id;
+			$_arr[$cnt]['name'] = $term->name;
+			$_arr[$cnt]['level'] = 'parent';
+			$_arr[$cnt]['parent'] = $term->parent;
+			//**************************************
+			$cnt++;
+			
+			$childterm_query = new WP_Term_Query( array('taxonomy'=>'resource-subject-area','number'=>0,'parent'=>$term->term_id,'hide_empty'=>false) );	
+			if ( ! empty( $childterm_query->terms ) ) {
+				foreach ( $childterm_query->terms as $childterm ) {
+					$_arr[$cnt]['term_id'] = $childterm->term_id;
+					$_arr[$cnt]['name'] = $childterm->name;
+					$_arr[$cnt]['level'] = 'child';
+					$_arr[$cnt]['parent'] = $childterm->parent;
+					$cnt++;
+				}
+			}
+			//**************************************
+			
+    }
+	} 
+	 
+	return $_arr;
 }
