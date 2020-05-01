@@ -288,7 +288,7 @@ function curriculum_tax_query(){
 	$_postperpage = $_GET['perpage'];
 	$_taxterms = $_GET['terms'];
 	$_ordertby = $_GET['orderby'];
-	$_ord = $_GET['ord'];
+	$_ord = $_GET['order'];
 
 	$args = array(
 		'posts_per_page' => $_postperpage,
