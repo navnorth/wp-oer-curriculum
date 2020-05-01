@@ -113,12 +113,11 @@ function updatepostdisplay(instanceparent){
         var instance = jQuery('[blockid="'+bid+'"]');
           if(typeof cgbGlobal == 'undefined'){ 
             instanceparent.find('#lp-cur-blk-content_drop').html(response['data']);
+            instanceparent.find('.lp-cur-blk-topbar-display-text span').text('show : '+localStorage.getItem('postsPerPage-'+bid));
+            instanceparent.find('.lp-cur-blk-topbar-sort-text span').text('Sort by: '+localStorage.getItem('sortBy-'+bid));
+            instanceparent.find('.lp-cur-blk-topbar-left span').text('Browse All '+response['cnt']+' Curriculums');
           }
-          instanceparent.find('.lp-cur-blk-topbar-display-text span').text('show : '+localStorage.getItem('postsPerPage-'+bid));
-          instanceparent.find('.lp-cur-blk-topbar-sort-text span').text('Sort by: '+localStorage.getItem('sortBy-'+bid));
-          instanceparent.find('.lp-cur-blk-topbar-left span').text('Browse All '+response['cnt']+' Curriculums');
-          
-          
+      
           setTimeout(function(){
             instanceparent.find('.lp_cur_blk_content_preloader_table').hide(300);
           }, 300);

@@ -283,38 +283,44 @@ add_action( 'rest_api_init', function () {
     ) );
 });
 
-
 function curriculum_tax_query(){
-	$_taxonomy = $_GET['taxonomy'];
-	$_postperpage = $_GET['postperpage'];
-	$_taxterms = $_GET['taxterms'];
-	$_sortby = $_GET['sortby'];
-	if($_taxterms != ''){
-		$args = array(
-			'posts_per_page' => $_postperpage,
-			'post_type' => 'lesson-plans',
-			'tax_query' => array(
-				//'relation' => 'AND',
-				array(
-					'taxonomy' => $_taxonomy,
-					'terms' => explode(',', $_taxterms),
-					'field' => 'term_id',
-				)
-			),
-			'orderby' => $_sortby,
-	  	'order'   => 'ASC',
-		);
-	}else{
-		$args = array(
-			'posts_per_page' => $_postperpage,
-			'post_type' => 'lesson-plans',
-			'orderby' => $_sortby,
-	  	'order'   => 'ASC',
-		);
-	}
-	$posts = get_post( $args );
-	return $posts;
+	
+	$_postperpage = $_GET['perpage'];
+	$_taxterms = $_GET['terms'];
+	$_ordertby = $_GET['orderby'];
+	$_ord = $_GET['ord'];
+
+	$args = array(
+		'posts_per_page' => $_postperpage,
+		'post_type' => 'lesson-plans',
+		'tax_query' => array(
+			'relation' => 'AND',
+			array(
+				'taxonomy' => 'resource-subject-area',
+				'terms' => explode(',', $_taxterms),
+				'field' => 'term_id',
+				'include_children' => false,
+			)
+		),
+		'orderby' => $_ordertby,
+  	'order'   => $_ord,
+	);
+	
+	$posts = get_posts( $args );
+
+	
+	$_ret = array(); $i=0;
+	
+		foreach($posts as $post){
+			$_ret[$i]['title']              = $post->post_title;
+			$_ret[$i]['content']            = substr(wp_strip_all_tags($post->post_content),0,180);
+			$_ret[$i]['link']               = get_post_permalink($post->ID);
+			$_ret[$i]['featured_image_url'] = get_the_post_thumbnail_url($post->ID,'medium');
+			$_ret[$i]['oer_lp_grades']      = $post->oer_lp_grades;
+			$_ret[$i]['tags']			          = wp_get_post_tags($post->ID, array( 'fields' => 'ids' ) );
+			$i++;
+		}
+	
+	
+	return $_ret;
 }
-
-
-
