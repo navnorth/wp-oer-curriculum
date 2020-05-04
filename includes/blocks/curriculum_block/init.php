@@ -329,6 +329,17 @@ function curriculum_tax_query(){
 			$_ret[$i]['oer_lp_grades']      = $post->oer_lp_grades;	
 			$_ret[$i]['tags']               = wp_get_post_tags($post->ID, array('fields' => 'ids'));
 			
+			
+			$_tmparr = array();
+			$results = wp_get_post_tags($post->ID);
+			if($results){
+          foreach($results as $row){
+							array_push($_tmparr, $row->name.'|'.$row->slug);
+          }
+      }
+			$_ret[$i]['tagsv2'] = $_tmparr;
+			
+			
 			/*
 			$results = wp_get_post_tags($post->ID);
 			if($results){
