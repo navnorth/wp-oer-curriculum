@@ -323,7 +323,7 @@ function curriculum_tax_query(){
 	
 		foreach($posts as $post){
 			$_ret[$i]['title']              = $post->post_title;
-			$_ret[$i]['content']            = substr(wp_strip_all_tags($post->post_content),0,180);
+			$_ret[$i]['content']            = substr(html_entity_decode($post->post_content),0,180);
 			$_ret[$i]['link']               = get_post_permalink($post->ID);
 			$_ret[$i]['featured_image_url'] = get_the_post_thumbnail_url($post->ID,'medium');
 			$_ret[$i]['oer_lp_grades']      = $post->oer_lp_grades;	
