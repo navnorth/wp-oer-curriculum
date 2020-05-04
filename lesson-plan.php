@@ -42,7 +42,7 @@ define( 'OER_LESSON_PLAN_VERSION', '0.3.5' );
 include_once(OER_LESSON_PLAN_PATH.'includes/oer-lp-functions.php');
 include_once(OER_LESSON_PLAN_PATH.'includes/init.php');
 
-require_once(OER_LESSON_PLAN_PATH.'includes/blocks/curriculum_block/init.php');
+//require_once(OER_LESSON_PLAN_PATH.'includes/blocks/curriculum_block/init.php');
 
 global $oer_lp_default_structure;
 global $oer_convert_info;
