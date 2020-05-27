@@ -527,7 +527,7 @@ function initiate_admin_bx_slider() {
 													jQuery('.featuredwpr_bxslider').css({'visibility':'visible','height':'auto'});
 													let dtc = jQuery('.curriculum-feat-title_'+blkid).detach();
 													jQuery(dtc).insertBefore(jQuery(slider).parent('.bx-viewport'));										
-													
+													console.log('BX LOAD ALL DONE')
 											},
 											onSlideAfter: function($slideElm, oldIndex, newIndex) {
 												var blkid = jQuery(slider).attr('blk');
@@ -576,7 +576,8 @@ function initiate_admin_bx_slider() {
 							pager: false,
 							onSliderLoad: function(currentIndex) {
 									jQuery('.featuredwpr_bxslider_'+blkid).css({'visibility':'visible','height':'auto'});								
-									jQuery(dtc).insertBefore(jQuery('.featuredwpr_bxslider_'+blkid).parent('.bx-viewport'));	
+									jQuery(dtc).insertBefore(jQuery('.featuredwpr_bxslider_'+blkid).parent('.bx-viewport'));
+									console.log('BX RESET DONE')
 							},
 							onSlideAfter: function($slideElm, oldIndex, newIndex) {
 								lpInspectorFeatSliderIndexSave($slideElm, oldIndex, newIndex, elmblkid)
