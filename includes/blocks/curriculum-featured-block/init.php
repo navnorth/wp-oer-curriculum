@@ -74,6 +74,7 @@ function curriculum_featured_block_cgb_block_assets() { // phpcs:ignore
 			'pluginDirPath' => plugin_dir_path( __DIR__ ),
 			'pluginDirUrl'  => plugin_dir_url( __DIR__ ),
 			'base_url' => get_home_url(),
+			'curriculum_plugin_url' => OER_LESSON_PLAN_URL,
 			// Add more data here that you want to access from `cgbGlobal` object.
 		]
 	);
