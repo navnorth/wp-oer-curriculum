@@ -561,8 +561,7 @@ function initiate_admin_bx_slider() {
 		
 		
 		
-		var sort = function(){
-			jQuery( function() {
+		function sort(){
 				jQuery(".lp_inspector_feat_hlite_list div").sortable({
 					placeholder: "lp_inspector_feat_hlite_node-state-highlight",
 					connectWith: ".lp_inspector_feat_hlite_featured",
@@ -572,7 +571,6 @@ function initiate_admin_bx_slider() {
 						curriculumfeatslider_reset(blkid, 750);
 					}
 				});
-			});
 		}
 		
 		
@@ -582,6 +580,7 @@ function initiate_admin_bx_slider() {
 				 if (jQuery('.lp_inspector_feat_hlite_list').length) {
 						clearInterval(featexist);
 						setTimeout(function(){
+							console.log('SORT ACTIVATED');
 							sort();
 						}, 500);
 				 }
