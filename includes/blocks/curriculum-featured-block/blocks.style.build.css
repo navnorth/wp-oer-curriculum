@@ -18,7 +18,7 @@
   padding: 2rem; }
 
 .lp_inspector_wrapper {
-  margin-bottom: 20px; }
+  margin-bottom: 10px; }
 
 .lp_inspector_feat_modal_wrapper_close {
   position: absolute;
@@ -173,6 +173,11 @@ option.lp_inspector_feat_subject_select_bold {
   .lp_inspector_feat_modal_content_subcontainer {
     border-top: 94px solid #fff !important; } }
 
+.curriculum-feat-title {
+  position: absolute;
+  top: 0px;
+  width: auto; }
+
 .oer_right_featuredwpr {
   float: none !important; }
 
@@ -223,6 +228,9 @@ option.lp_inspector_feat_subject_select_bold {
 
 .components-panel__header.edit-post-sidebar__panel-tabs {
   z-index: -2 !important; }
+
+.lp_inspector_feat_addbutton_wrapper {
+  margin-bottom: 9px; }
 
 .lp_inspector_feat_hlite_node.cur:before {
   content: "\f118";
