@@ -211,6 +211,7 @@ option.lp_inspector_feat_subject_select_bold {
 
 .featuredwpr_bxslider li div.frtdsnglwpr a div.img img {
   width: 100%;
+  max-width: 100% !important;
   margin: 0px !important; }
 
 .oer_right_featuredwpr .bx-wrapper .oer-ftrdttl {
@@ -288,3 +289,13 @@ option.lp_inspector_feat_subject_select_bold {
   height: 0px !important;
   width: 0px !important;
   float: left !important; }
+
+table.lp_inspector_feat_slider_setting {
+  width: 100%; }
+
+table.lp_inspector_feat_slider_setting input,
+table.lp_inspector_feat_slider_setting select {
+  width: 64px !important; }
+
+table.lp_inspector_feat_slider_setting tr td {
+  padding: 2px 5px; }
