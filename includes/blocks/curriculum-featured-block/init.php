@@ -244,7 +244,7 @@ function curriculum_feat_tax_query(){
 			$args = array(
 				'posts_per_page' => -1,
 				'post_type' => $_posttype,
-				'post_status' => 'published',
+				'post_status' => 'publish',
 				'tax_query' => array(
 					array(
 						'taxonomy' => 'resource-subject-area',
