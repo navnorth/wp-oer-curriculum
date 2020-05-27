@@ -82,7 +82,7 @@ input.ls_inspector_feat_modal_checkbox {
   border-left: 20px solid #fff;
   border-right: 10px solid #fff;
   border-top: 90px solid #fff;
-  border-bottom: 20px solid #fff; }
+  border-bottom: 70px solid #fff; }
 
 .lp_inspector_feat_modal_center {
   width: 100%;
@@ -101,8 +101,8 @@ input.ls_inspector_feat_modal_checkbox {
 
 .lp_inspector_feat_modal {
   position: relative;
-  max-height: 380px;
-  min-height: 300px;
+  max-height: 430px;
+  min-height: 430px;
   background-color: #ffffff;
   padding: 40px 20px 0px 20px;
   /*border-top: 20px solid #fff;*/
@@ -142,7 +142,7 @@ option.lp_inspector_feat_subject_select_bold {
   right: 15px;
   bottom: 0px;
   background-color: #fff;
-  padding: 20px 0px 0px 0px;
+  padding: 10px 0px 0px 0px;
   z-index: 1; }
 
 .lp_inspector_feat_search_wrapper input[type="button"] {
@@ -211,8 +211,9 @@ option.lp_inspector_feat_subject_select_bold {
 
 .featuredwpr_bxslider li div.frtdsnglwpr a div.img img {
   width: 100%;
-  max-width: 100% !important;
-  margin: 0px !important; }
+  /*max-width: 100% !important;*/
+  margin: 0px !important;
+  max-height: 254px; }
 
 .oer_right_featuredwpr .bx-wrapper .oer-ftrdttl {
   position: absolute;
@@ -299,3 +300,8 @@ table.lp_inspector_feat_slider_setting select {
 
 table.lp_inspector_feat_slider_setting tr td {
   padding: 2px 5px; }
+
+input.lp_inspector_feat_quickswitchbutton {
+  float: right;
+  margin-bottom: 10px !important;
+  margin-right: 10px !important; }
