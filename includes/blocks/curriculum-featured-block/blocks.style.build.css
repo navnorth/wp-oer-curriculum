@@ -218,6 +218,12 @@ option.lp_inspector_feat_subject_select_bold {
 .oer_right_featuredwpr {
   padding: 25px 0 25px 0 !important; }
 
+#adminmenuwrap {
+  z-index: 10 !important; }
+
+.components-panel__header.edit-post-sidebar__panel-tabs {
+  z-index: -2 !important; }
+
 .lp_inspector_feat_hlite_node.cur:before {
   content: "\f118";
   font-family: dashicons;
