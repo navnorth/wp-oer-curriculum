@@ -455,6 +455,7 @@ function initiate_admin_bx_slider() {
 		
 		jQuery(document).ready(function(){
 	
+			/*
 			jQuery(document).on('click', function(e){
 				var classlist = e.target.getAttribute('class');
 				var classArray = classlist.split(' ');
@@ -463,6 +464,7 @@ function initiate_admin_bx_slider() {
 					jQuery('.lp_inspector_feat_modal_curriculum_wrapper').hide(300);
 				}
 			})
+			*/
 			
 			jQuery(document).on('click','.lp_inspector_feat_addResources',function(e){
 		    jQuery('.lp_inspector_feat_modal_resource_wrapper').show(300);
