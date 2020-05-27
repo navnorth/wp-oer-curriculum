@@ -483,15 +483,26 @@ function initiate_admin_bx_slider() {
 		
 			var checkExist = setInterval(function() {
 				var numitems = jQuery('ul.featuredwpr_bxslider').length;
+				
 			 	if (numitems == featblockcount) {
 						clearInterval(checkExist);	
 						setTimeout(function(){		
+							//console.log('*******************');
+							
 							jQuery('.featuredwpr_bxslider').each(function(i, slider) {
 								
-								if (curriculumfeatsliders[i]===undefined){
-									blkid = jQuery(slider).attr('blk');
-
-									curriculumfeatsliders[i] = jQuery(slider).bxSlider({
+								blkid = jQuery(slider).attr('blk');
+								
+								//console.log('LENGTH: '+jQuery(slider).parent('.bx-viewport').length);
+								//console.log('--'+blkid);
+								//if (cgbGlobal['featuredwpr_bxslider_'+blkid] ===undefined){
+								//if (curriculumfeatsliders[i]===undefined){
+								if(jQuery(slider).parent('.bx-viewport').length == 0){
+									//blkid = jQuery(slider).attr('blk');
+									
+									//curriculumfeatsliders.splice(i, 0, '');
+									//curriculumfeatsliders[i] = jQuery(slider).bxSlider({
+									cgbGlobal['featuredwpr_bxslider_'+blkid] = jQuery(slider).bxSlider({
 											minSlides: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-minslides")),
 											maxSlides: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-maxslides")),
 											moveSlides: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-moveslides")),
@@ -501,7 +512,9 @@ function initiate_admin_bx_slider() {
 											onSliderLoad: function(currentIndex) {
 													localStorage.setItem("curriculumFeatCurrentSlideIndex-"+blkid, 0);
 													jQuery('.featuredwpr_bxslider').css({'visibility':'visible','height':'auto'});
-													jQuery('<div class="oer-ftrdttl">Highlighted Resources</div>').insertBefore(jQuery(slider).parent('.bx-viewport'));
+													let dtc = jQuery('.curriculum-feat-title_'+blkid).detach();
+													jQuery(dtc).insertBefore(jQuery(slider).parent('.bx-viewport'));										
+													
 											},
 											onSlideAfter: function($slideElm, oldIndex, newIndex) {
 												var blkid = jQuery(slider).attr('blk');
@@ -509,9 +522,13 @@ function initiate_admin_bx_slider() {
 											}
 									});					
 									jQuery(slider).attr('idx',i);
+									
 								}
-								
+								//console.log(cgbGlobal['featuredwpr_bxslider_'+blkid]);
 							});
+							
+							//console.log('*******************');
+							
 						}, 750); //set timeout
 				 }	
 			}, 100); //set interval
@@ -533,9 +550,10 @@ function initiate_admin_bx_slider() {
 			setTimeout(function(){
 						let elmblkid = jQuery('.featuredwpr_bxslider_'+blkid).attr('blk');
 						let bxidx = jQuery('.featuredwpr_bxslider_'+blkid).attr('idx');
-
+						let dtc = jQuery('.curriculum-feat-title_'+blkid).detach();
+						
 						jQuery('.featuredwpr_bxslider_'+blkid).parents('.bx-viewport').siblings('.oer-ftrdttl').remove();
-						curriculumfeatsliders[parseInt(bxidx)].reloadSlider({
+						cgbGlobal['featuredwpr_bxslider_'+blkid].reloadSlider({
 							startSlide: startIndex,
 							minSlides: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-minslides")),
 							maxSlides: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-maxslides")),
@@ -544,8 +562,8 @@ function initiate_admin_bx_slider() {
 							slideMargin: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidemargin")),
 							pager: false,
 							onSliderLoad: function(currentIndex) {
-									jQuery('.featuredwpr_bxslider_'+blkid).css({'visibility':'visible','height':'auto'});
-									jQuery('<div class="oer-ftrdttl">Highlighted Resources</div>').insertBefore(jQuery('.featuredwpr_bxslider_'+blkid).parent('.bx-viewport'));
+									jQuery('.featuredwpr_bxslider_'+blkid).css({'visibility':'visible','height':'auto'});								
+									jQuery(dtc).insertBefore(jQuery('.featuredwpr_bxslider_'+blkid).parent('.bx-viewport'));	
 							},
 							onSlideAfter: function($slideElm, oldIndex, newIndex) {
 								lpInspectorFeatSliderIndexSave($slideElm, oldIndex, newIndex, elmblkid)
@@ -565,6 +583,7 @@ function initiate_admin_bx_slider() {
 				jQuery(".lp_inspector_feat_hlite_list div").sortable({
 					placeholder: "lp_inspector_feat_hlite_node-state-highlight",
 					connectWith: ".lp_inspector_feat_hlite_featured",
+					cancel: ".lp_inspector_feat_hlite_node .dashicons-dismiss",
 					update: function(event, ui) {  
 						jQuery('.lp_inspector_feat_hlite_reposition_trigger').trigger('click');
 						var blkid = jQuery('.lp_inspector_feat_hlite_reposition_trigger').attr('blkid');
