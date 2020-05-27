@@ -133,7 +133,7 @@ function render_featured_block($attributes, $ajx=false){
 	$feats = explode(",",$attributes['selectedfeatured']);
 	$blkid = $attributes['blockid'];
 	$_ret .= '<div class="oer_right_featuredwpr">';
-		$_ret .= '<div class="oer-ftrdttl">Highlighted Resources</div>';
+		$_ret .= '<div class="oer-ftrdttl curriculum-feat-title_'.$attributes['blockid'].'">'.$attributes['blocktitle'].'</div>';
 		$_ret .= '<ul class="featuredwpr_bxslider_front featuredwpr_bxslider_front_'.$attributes['blockid'].'" blk="'.$attributes['blockid'].'" style="visibility:hidden;">';
 		
 				foreach($feats as $val){
@@ -148,7 +148,7 @@ function render_featured_block($attributes, $ajx=false){
 					$_cfb_image = (!$_tmp_image)? OER_LESSON_PLAN_URL.'assets/images/default-img.jpg': $_tmp_image;
 					
 						
-							$_ret .= '<li atrr="2343234">';
+							$_ret .= '<li>';
 								$_ret .= '<div class="frtdsnglwpr">';
 									$_ret .= '<a href="'.$_cfb_link.'">';
 										$_ret .= '<div class="img">';
@@ -190,7 +190,10 @@ function render_featured_block($attributes, $ajx=false){
 					$_ret .= 'slideMargin: '.$attributes['slidemargin'].',';
 					$_ret .= 'pager: false,';
 					$_ret .= 'onSliderLoad: function(currentIndex) {';
-							$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").css({"visibility":"visible","height":"auto"});';
+							$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").css({"visibility":"visible","height":"auto"});';				
+							$_ret .= 'let dtc = jQuery(".curriculum-feat-title_'.$attributes['blockid'].'").detach();';
+							$_ret .= 'jQuery(dtc).insertBefore(jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport"));';
+							
 					$_ret .= '}';
 			$_ret .= '});';
 			
