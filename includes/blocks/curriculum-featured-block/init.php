@@ -72,15 +72,13 @@ function curriculum_featured_block_cgb_block_assets() { // phpcs:ignore
 		'cgbGlobal', // Array containing dynamic data for a JS Global.
 		[
 			'pluginDirPath' => plugin_dir_path( __DIR__ ),
-			'pluginDirUrl'  => plugin_dir_url( __DIR__ ),
+			'pluginDirUrl' => plugin_dir_url( __DIR__ ),
 			'base_url' => get_home_url(),
 			'curriculum_plugin_url' => OER_LESSON_PLAN_URL,
 			'bxresetblocked' => false,
 			// Add more data here that you want to access from `cgbGlobal` object.
 		]
 	);
-	
-	
 	
 	
 
@@ -129,8 +127,9 @@ add_action( 'admin_enqueue_scripts', 'curriculum_featured_block_additional_scrip
 
 
 function render_featured_block($attributes, $ajx=false){
-
+	//print_r($attributes); echo '<br><br>';
 	//print_r($attributes['selectedfeatured']); echo '<br><br>';
+	//print_r($attributes['blockid']); echo '<br><br>';
 	if(!is_null($attributes['selectedfeatured'])){
 		$feats = explode(",",$attributes['selectedfeatured']);
 		$blkid = $attributes['blockid'];
@@ -183,13 +182,17 @@ function render_featured_block($attributes, $ajx=false){
 						echo $attributes['slidewidth'].'<br>';
 						echo $attributes['slidemargin'].'<br>';
 						*/
-
 						
-						$_ret .= 'minSlides: '.$attributes['minslides'].',';
-						$_ret .= 'maxSlides: '.$attributes['maxslides'].',';
-						$_ret .= 'moveSlides: '.$attributes['moveslides'].',';
-						$_ret .= 'slideWidth: '.$attributes['slidewidth'].',';
-						$_ret .= 'slideMargin: '.$attributes['slidemargin'].',';
+						$_ret .= (!isset($attributes['minslides']))? 'minSlides: 1,' : 'minSlides: '.$attributes['minslides'].',';
+						$_ret .= (!isset($attributes['maxslides']))? 'maxSlides: 3,': 'maxSlides: '.$attributes['maxslides'].',';
+						$_ret .= (!isset($attributes['moveslides']))? 'moveSlides: 1,': 'moveSlides: '.$attributes['moveslides'].',';
+						$_ret .= (!isset($attributes['slidewidth']))? 'slideWidth: 375,': 'slideWidth: '.$attributes['slidewidth'].',';
+						$_ret .= (!isset($attributes['slidemargin']))? 'slideMargin: 20,': 'slideMargin: '.$attributes['slidemargin'].',';
+						//$_ret .= 'minSlides: '.$attributes['minslides'].',';
+						//$_ret .= 'maxSlides: '.$attributes['maxslides'].',';
+						//$_ret .= 'moveSlides: '.$attributes['moveslides'].',';
+						//$_ret .= 'slideWidth: '.$attributes['slidewidth'].',';
+						//$_ret .= 'slideMargin: '.$attributes['slidemargin'].',';
 						$_ret .= 'pager: false,';
 						$_ret .= 'onSliderLoad: function(currentIndex) {';
 								$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").css({"visibility":"visible","height":"auto"});';
@@ -620,16 +623,7 @@ function initiate_admin_bx_slider() {
 		
 		
 		
-		function activatefeatsort(){
-			var featexist = setInterval(function() {
-				 if (jQuery('.lp_inspector_feat_hlite_list').length) {
-						clearInterval(featexist);
-						setTimeout(function(){
-							sort();
-						}, 500);
-				 }
-			}, 100); // check every 100ms
-		}
+		
 		
 		
 		</script>
