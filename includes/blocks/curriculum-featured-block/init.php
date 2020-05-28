@@ -57,7 +57,7 @@ function curriculum_featured_block_cgb_block_assets() { // phpcs:ignore
 	
 	/*
 	wp_register_script(
-		'curriculum-featured-block-jquery.bxslider.js', // Handle.
+		'dist-jquery.bxslider.js', // Handle.
 		OER_URL.'js/jquery.bxslider.js', // front.build.js: We register the block here. Built with Webpack.
 		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'jquery' ), // Dependencies, defined above.
 		null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/front.build.js' ), // Version: filemtime — Gets file modification time.
@@ -129,78 +129,78 @@ add_action( 'admin_enqueue_scripts', 'curriculum_featured_block_additional_scrip
 
 
 function render_featured_block($attributes, $ajx=false){
-	
-	//print_r($attributes['selectedfeatured']); echo '<br>';
-	$feats = explode(",",$attributes['selectedfeatured']);
-	$blkid = $attributes['blockid'];
-	$_ret .= '<div class="oer_right_featuredwpr">';
-		$_ret .= '<div class="oer-ftrdttl curriculum-feat-title_'.$attributes['blockid'].'">'.$attributes['blocktitle'].'</div>';
-		$_ret .= '<ul class="featuredwpr_bxslider_front featuredwpr_bxslider_front_'.$attributes['blockid'].'" blk="'.$attributes['blockid'].'" style="visibility:hidden;">';
-		
-				foreach($feats as $val){
-					$feat = explode("|",$val);
-					$feat_id = $feat[0]; $feat_type = $feat[1];
-					
-					$_post = get_post($feat_id);
-					$_cfb_link = get_post_permalink($_post->ID);
-					$_cfb_title = $_post->post_title;
-					$_cfb_desc = substr(html_entity_decode(strip_tags($_post->post_content)),0,150);
-					$_tmp_image = get_the_post_thumbnail_url($_post->ID,'medium');
-					$_cfb_image = (!$_tmp_image)? OER_LESSON_PLAN_URL.'assets/images/default-img.jpg': $_tmp_image;
-					
+
+	//print_r($attributes['selectedfeatured']); echo '<br><br>';
+	if(!is_null($attributes['selectedfeatured'])){
+		$feats = explode(",",$attributes['selectedfeatured']);
+		$blkid = $attributes['blockid'];
+		$_ret .= '<div class="oer_right_featuredwpr">';
+			$_ret .= '<div class="oer-ftrdttl curriculum-feat-title_'.$attributes['blockid'].'">'.$attributes['blocktitle'].'</div>';
+			$_ret .= '<ul class="featuredwpr_bxslider_front featuredwpr_bxslider_front_'.$attributes['blockid'].'" blk="'.$attributes['blockid'].'" style="visibility:hidden;">';
+			
+					foreach($feats as $val){
+						$feat = explode("|",$val);
+						$feat_id = $feat[0]; $feat_type = $feat[1];
 						
-							$_ret .= '<li>';
-								$_ret .= '<div class="frtdsnglwpr">';
-									$_ret .= '<a href="'.$_cfb_link.'">';
-										$_ret .= '<div class="img">';
-										
-												$_ret .= '<img src="'.$_cfb_image.'" alt="'.$_cfb_title.'" />';
-										
-										$_ret .= '</div>';
-									$_ret .= '</a>';
-									$_ret .= '<div class="ttl"><a href="'.$_cfb_link.'">'.$_cfb_title.'</a></div>';
-									$_ret .= '<div class="desc">'.$_cfb_desc.'</div>';
-								$_ret .= '</div>';
-							$_ret .= '</li>';
-				}
-				
-		$_ret .= '</ul>';
-	$_ret .= '</div>';
-
-	
-	$_ret .= '<script>';
-		$_ret .= 'jQuery(document).ready(function(){';
-			
-			$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").bxSlider({';
-					
-					//print_r($attributes);
-					/*
-					echo $blkid.'<br>';
-					echo $attributes['minslides'].'<br>';
-					echo $attributes['maxslides'].'<br>';
-					echo $attributes['moveslides'].'<br>';
-					echo $attributes['slidewidth'].'<br>';
-					echo $attributes['slidemargin'].'<br>';
-					*/
-
-					
-					$_ret .= 'minSlides: '.$attributes['minslides'].',';
-					$_ret .= 'maxSlides: '.$attributes['maxslides'].',';
-					$_ret .= 'moveSlides: '.$attributes['moveslides'].',';
-					$_ret .= 'slideWidth: '.$attributes['slidewidth'].',';
-					$_ret .= 'slideMargin: '.$attributes['slidemargin'].',';
-					$_ret .= 'pager: false,';
-					$_ret .= 'onSliderLoad: function(currentIndex) {';
-							$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").css({"visibility":"visible","height":"auto"});';				
-							$_ret .= 'let dtc = jQuery(".curriculum-feat-title_'.$attributes['blockid'].'").detach();';
-							$_ret .= 'jQuery(dtc).insertBefore(jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport"));';
+						$_post = get_post($feat_id);
+						$_cfb_link = get_post_permalink($_post->ID);
+						$_cfb_title = $_post->post_title;
+						$_cfb_desc = substr(html_entity_decode(strip_tags($_post->post_content)),0,150);
+						$_tmp_image = get_the_post_thumbnail_url($_post->ID,'medium');
+						$_cfb_image = (!$_tmp_image)? OER_LESSON_PLAN_URL.'assets/images/default-img.jpg': $_tmp_image;
+						
 							
-					$_ret .= '}';
+								$_ret .= '<li>';
+									$_ret .= '<div class="frtdsnglwpr">';
+										$_ret .= '<a href="'.$_cfb_link.'">';
+											$_ret .= '<div class="img">';
+											
+													$_ret .= '<img src="'.$_cfb_image.'" alt="'.$_cfb_title.'" />';
+											
+											$_ret .= '</div>';
+										$_ret .= '</a>';
+										$_ret .= '<div class="ttl"><a href="'.$_cfb_link.'">'.$_cfb_title.'</a></div>';
+										$_ret .= '<div class="desc">'.$_cfb_desc.'</div>';
+									$_ret .= '</div>';
+								$_ret .= '</li>';
+					}
+					
+			$_ret .= '</ul>';
+		$_ret .= '</div>';
+
+		
+		$_ret .= '<script>';
+			$_ret .= 'jQuery(document).ready(function(){';
+				
+				$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").bxSlider({';
+						
+						//print_r($attributes);
+						/*
+						echo $blkid.'<br>';
+						echo $attributes['minslides'].'<br>';
+						echo $attributes['maxslides'].'<br>';
+						echo $attributes['moveslides'].'<br>';
+						echo $attributes['slidewidth'].'<br>';
+						echo $attributes['slidemargin'].'<br>';
+						*/
+
+						
+						$_ret .= 'minSlides: '.$attributes['minslides'].',';
+						$_ret .= 'maxSlides: '.$attributes['maxslides'].',';
+						$_ret .= 'moveSlides: '.$attributes['moveslides'].',';
+						$_ret .= 'slideWidth: '.$attributes['slidewidth'].',';
+						$_ret .= 'slideMargin: '.$attributes['slidemargin'].',';
+						$_ret .= 'pager: false,';
+						$_ret .= 'onSliderLoad: function(currentIndex) {';
+								$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").css({"visibility":"visible","height":"auto"});';
+								$_ret .= 'let dtc = jQuery(".curriculum-feat-title_'.$attributes['blockid'].'").detach();';
+								$_ret .= 'jQuery(dtc).insertBefore(jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport"));';
+						$_ret .= '}';
+				$_ret .= '});';
+				
 			$_ret .= '});';
-			
-		$_ret .= '});';
-	$_ret .= '</script>';
-	
+		$_ret .= '</script>';
+	}
 	
 	return $_ret;
 }
@@ -208,28 +208,20 @@ function render_featured_block($attributes, $ajx=false){
 // Register a REST route
 add_action( 'rest_api_init', function () {
     //Path to meta query route
-    register_rest_route( 'curriculum/feat', 'resourcequery', array(
+		register_rest_route( 'curriculum/feat', 'dataquery', array(
             'methods' => 'GET', 
-            'callback' => 'curriculum_feat_resource_query' 
+            'callback' => 'curriculum_feat_dataquery' 
     ) );
-		
-		register_rest_route( 'curriculum/feat', 'curriculumquery', array(
-            'methods' => 'GET', 
-            'callback' => 'curriculum_feat_curriculum_query' 
-    ) );
-		
-		
-		register_rest_route( 'curriculum/feat', 'taxquery', array(
-            'methods' => 'GET', 
-            'callback' => 'curriculum_feat_tax_query' 
-    ) );
-		
 });
 
 
-function curriculum_feat_tax_query(){
-	$_posttype = $_GET['posttype'];
+function curriculum_feat_dataquery(){
+	
+	
 	$_arr = array();
+	
+	// TAXONOMY QUERY RESOURCE
+	$_taxres = array();
 	$term_query = new WP_Term_Query( 
 		array(
 						'taxonomy' => 'resource-subject-area',
@@ -240,11 +232,11 @@ function curriculum_feat_tax_query(){
 		);	
 	if ( ! empty( $term_query->terms ) ) {
 		$cnt = 0;
-    foreach ( $term_query ->terms as $term ) {
+		foreach ( $term_query ->terms as $term ) {
 			
 			$args = array(
 				'posts_per_page' => -1,
-				'post_type' => $_posttype,
+				'post_type' => 'resource',
 				'post_status' => 'publish',
 				'tax_query' => array(
 					array(
@@ -257,11 +249,11 @@ function curriculum_feat_tax_query(){
 				)
 			);
 			
-			$_arr[$cnt]['term_id'] = $term->term_id;
-			$_arr[$cnt]['name'] = $term->name;
-			$_arr[$cnt]['level'] = 'parent';
-			$_arr[$cnt]['parent'] = $term->parent;
-			$_arr[$cnt]['cnt'] = count(get_posts($args));
+			$_taxres[$cnt]['term_id'] = $term->term_id;
+			$_taxres[$cnt]['name'] = $term->name;
+			$_taxres[$cnt]['level'] = 'parent';
+			$_taxres[$cnt]['parent'] = $term->parent;
+			$_taxres[$cnt]['cnt'] = count(get_posts($args));
 			//**************************************
 			$cnt++;
 			
@@ -271,8 +263,8 @@ function curriculum_feat_tax_query(){
 
 					$args = array(
 						'posts_per_page' => -1,
-						'post_type' => $_posttype,
-						'post_status' => 'published',
+						'post_type' => 'resource',
+						'post_status' => 'publish',
 						'tax_query' => array(
 							array(
 								'taxonomy' => 'resource-subject-area',
@@ -284,72 +276,113 @@ function curriculum_feat_tax_query(){
 						'fields'=> 'ids'  //get the ids only to cut down resources
 					);
 					
-					$_arr[$cnt]['term_id'] = $childterm->term_id;
-					$_arr[$cnt]['name'] = $childterm->name;
-					$_arr[$cnt]['level'] = 'child';
-					$_arr[$cnt]['parent'] = $childterm->parent;
-					$_arr[$cnt]['cnt'] = count(get_posts($args));
+					$_taxres[$cnt]['term_id'] = $childterm->term_id;
+					$_taxres[$cnt]['name'] = $childterm->name;
+					$_taxres[$cnt]['level'] = 'child';
+					$_taxres[$cnt]['parent'] = $childterm->parent;
+					$_taxres[$cnt]['cnt'] = count(get_posts($args));
 					$cnt++;
 				}
 			}
 			//**************************************
 			
-    }
+		}
 	} 
-	 
-	return $_arr;
-}
-
-
-function curriculum_feat_resource_query(){
 	
+	
+	
+	
+	// TAXONOMY QUERY CURRICULUM
+	$_taxcur = array();
+	$term_query = new WP_Term_Query( 
+		array(
+						'taxonomy' => 'resource-subject-area',
+						'number' => 0,
+						'parent' => 0,
+						'hide_empty' => 1
+				) 
+		);	
+	if ( ! empty( $term_query->terms ) ) {
+		$cnt = 0;
+		foreach ( $term_query ->terms as $term ) {
+			
+			$args = array(
+				'posts_per_page' => -1,
+				'post_type' => 'lesson-plans',
+				'post_status' => 'publish',
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'resource-subject-area',
+						'terms' => array($term->term_id),
+						'field' => 'term_id', //get the termids only to cut down resources
+						'include_children' => false,
+					),
+					'fields'=> 'ids' //get the ids only to cut down resources
+				)
+			);
+			
+			$_taxcur[$cnt]['term_id'] = $term->term_id;
+			$_taxcur[$cnt]['name'] = $term->name;
+			$_taxcur[$cnt]['level'] = 'parent';
+			$_taxcur[$cnt]['parent'] = $term->parent;
+			$_taxcur[$cnt]['cnt'] = count(get_posts($args));
+			//**************************************
+			$cnt++;
+			
+			$childterm_query = new WP_Term_Query( array('taxonomy'=>'resource-subject-area','number'=>0,'parent'=>$term->term_id,'hide_empty'=>true) );	
+			if ( ! empty( $childterm_query->terms ) ) {
+				foreach ( $childterm_query->terms as $childterm ) {
+
+					$args = array(
+						'posts_per_page' => -1,
+						'post_type' => 'lesson-plans',
+						'post_status' => 'publish',
+						'tax_query' => array(
+							array(
+								'taxonomy' => 'resource-subject-area',
+								'terms' => array($childterm->term_id),
+								'field' => 'term_id', //get the termids only to cut down resources
+								'include_children' => false,
+							)
+						),
+						'fields'=> 'ids'  //get the ids only to cut down resources
+					);
+					
+					$_taxcur[$cnt]['term_id'] = $childterm->term_id;
+					$_taxcur[$cnt]['name'] = $childterm->name;
+					$_taxcur[$cnt]['level'] = 'child';
+					$_taxcur[$cnt]['parent'] = $childterm->parent;
+					$_taxcur[$cnt]['cnt'] = count(get_posts($args));
+					$cnt++;
+				}
+			}
+			//**************************************
+			
+		}
+	} 
+	
+	
+	
+	
+	// RESOURCES POSTS
 	$args = array(
 		'posts_per_page' => -1,
 		'post_type' => 'resource',
 		'orderby' => 'title',
   	'order'   => 'ASC',
 	);
-	/*
-	WP_Post Object
-	(
-	    [ID] => 23836
-	    [post_author] => 1
-	    [post_date] => 2019-09-02 03:03:22
-	    [post_date_gmt] => 2019-09-02 08:03:22
-	    [post_content] => 
-	    [post_title] => [TESTING] Polar Bears
-	    [post_excerpt] => 
-	    [post_status] => publish
-	    [comment_status] => closed
-	    [ping_status] => closed
-	    [post_password] => 
-	    [post_name] => testing-polar-bears
-	    [to_ping] => 
-	    [pinged] => 
-	    [post_modified] => 2019-09-02 03:03:22
-	    [post_modified_gmt] => 2019-09-02 08:03:22
-	    [post_content_filtered] => 
-	    [post_parent] => 0
-	    [guid] => http://k12.localhost.localdomain/?post_type=resource&amp;p=23836
-	    [menu_order] => 0
-	    [post_type] => resource
-	    [post_mime_type] => 
-	    [comment_count] => 0
-	    [filter] => raw
-	)
-	*/
+	
 	$posts = get_posts( $args );
 	if($posts){
-		$_ret = array(); $i=0;
+		$_reslist = array(); $i=0;
 		foreach($posts as $post){
-			$_ret[$i]['id'] = $post->ID;
-			$_ret[$i]['title'] = $post->post_title;
-			$_ret[$i]['content'] = $post->post_content;
-			$_ret[$i]['link'] = get_post_permalink($post->ID);
+			$_reslist[$i]['id'] = $post->ID;
+			$_reslist[$i]['title'] = $post->post_title;
+			$_reslist[$i]['content'] = $post->post_content;
+			$_reslist[$i]['link'] = get_post_permalink($post->ID);
 				$_tmp_image = get_the_post_thumbnail_url($post->ID,'medium');
 				$_cfb_image = (!$_tmp_image)? OER_LESSON_PLAN_URL.'assets/images/default-img.jpg': $_tmp_image;
-			$_ret[$i]['img'] =  $_cfb_image;
-			
+			$_reslist[$i]['img'] =  $_cfb_image;			
 			$term_ids = '';
 			$term_objs = get_the_terms($post->ID, 'resource-subject-area');
 			if($term_objs){
@@ -358,67 +391,35 @@ function curriculum_feat_resource_query(){
 				}   
 			}else{
 				$term_ids = false;
-			}
-			
-			$_ret[$i]['tax'] = $term_ids;
-			$_ret[$i]['typ'] =  'res';
+			}		
+			$_reslist[$i]['tax'] = $term_ids;
+			$_reslist[$i]['typ'] =  'res';
 			$i++;
 		}
 	}
 	
-	return $_ret;
 	
-}
-
-function curriculum_feat_curriculum_query(){
 	
+	
+	// CURRICULUM POSTS
 	$args = array(
 		'posts_per_page' => -1,
 		'post_type' => 'lesson-plans',
 		'orderby' => 'title',
   	'order'   => 'ASC',
 	);
-	/*
-	WP_Post Object
-	(
-	    [ID] => 23836
-	    [post_author] => 1
-	    [post_date] => 2019-09-02 03:03:22
-	    [post_date_gmt] => 2019-09-02 08:03:22
-	    [post_content] => 
-	    [post_title] => [TESTING] Polar Bears
-	    [post_excerpt] => 
-	    [post_status] => publish
-	    [comment_status] => closed
-	    [ping_status] => closed
-	    [post_password] => 
-	    [post_name] => testing-polar-bears
-	    [to_ping] => 
-	    [pinged] => 
-	    [post_modified] => 2019-09-02 03:03:22
-	    [post_modified_gmt] => 2019-09-02 08:03:22
-	    [post_content_filtered] => 
-	    [post_parent] => 0
-	    [guid] => http://k12.localhost.localdomain/?post_type=resource&amp;p=23836
-	    [menu_order] => 0
-	    [post_type] => resource
-	    [post_mime_type] => 
-	    [comment_count] => 0
-	    [filter] => raw
-	)
-	*/
 	$posts = get_posts( $args );
 	if($posts){
-		$_ret = array(); $i=0;
+		$_curlist = array(); $i=0;
 		foreach($posts as $post){
 			
-			$_ret[$i]['id'] = $post->ID;
-			$_ret[$i]['title'] = $post->post_title;
-			$_ret[$i]['content'] = $post->post_content;
-			$_ret[$i]['link'] = get_post_permalink($post->ID);
+			$_curlist[$i]['id'] = $post->ID;
+			$_curlist[$i]['title'] = $post->post_title;
+			$_curlist[$i]['content'] = $post->post_content;
+			$_curlist[$i]['link'] = get_post_permalink($post->ID);
 			$_tmp_image = get_the_post_thumbnail_url($post->ID,'medium');
 			$_cfb_image = (!$_tmp_image)? OER_LESSON_PLAN_URL.'assets/images/default-img.jpg': $_tmp_image;
-			$_ret[$i]['img'] =  $_cfb_image;
+			$_curlist[$i]['img'] =  $_cfb_image;
 			
 			$term_ids = '';
 			$term_objs = get_the_terms($post->ID, 'resource-subject-area');
@@ -430,15 +431,21 @@ function curriculum_feat_curriculum_query(){
 				$term_ids = false;
 			}
 			
-			$_ret[$i]['tax'] = $term_ids;
-			$_ret[$i]['typ'] =  'cur';
+			$_curlist[$i]['tax'] = $term_ids;
+			$_curlist[$i]['typ'] =  'cur';
 			$i++;
 		}
 	}
 	
-	return $_ret;
 	
+	$_arr[0] = $_taxres;
+	$_arr[1] = $_taxcur;
+	$_arr[2] = $_reslist;
+	$_arr[3] = $_curlist;
+	
+	return $_arr;
 }
+
 
 
 
@@ -528,7 +535,7 @@ function initiate_admin_bx_slider() {
 													jQuery('.featuredwpr_bxslider').css({'visibility':'visible','height':'auto'});
 													let dtc = jQuery('.curriculum-feat-title_'+blkid).detach();
 													jQuery(dtc).insertBefore(jQuery(slider).parent('.bx-viewport'));										
-													console.log('BX LOAD ALL DONE')
+													
 											},
 											onSlideAfter: function($slideElm, oldIndex, newIndex) {
 												var blkid = jQuery(slider).attr('blk');
