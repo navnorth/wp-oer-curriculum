@@ -134,7 +134,8 @@ function render_featured_block($attributes, $ajx=false){
 		$feats = explode(",",$attributes['selectedfeatured']);
 		$blkid = $attributes['blockid'];
 		$_ret .= '<div class="oer_right_featuredwpr">';
-			$_ret .= '<div class="oer-ftrdttl curriculum-feat-title_'.$attributes['blockid'].'">'.$attributes['blocktitle'].'</div>';
+		$_title = (isset($attributes['blocktitle']))? $attributes['blocktitle']: 'Featured';
+		$_ret .= '<div class="oer-ftrdttl curriculum-feat-title_'.$attributes['blockid'].'">'.$_title.'</div>';
 			$_ret .= '<ul class="featuredwpr_bxslider_front featuredwpr_bxslider_front_'.$attributes['blockid'].'" blk="'.$attributes['blockid'].'" style="visibility:hidden;">';
 			
 					foreach($feats as $val){
