@@ -75,6 +75,7 @@ function curriculum_featured_block_cgb_block_assets() { // phpcs:ignore
 			'pluginDirUrl'  => plugin_dir_url( __DIR__ ),
 			'base_url' => get_home_url(),
 			'curriculum_plugin_url' => OER_LESSON_PLAN_URL,
+			'bxresetblocked' => false,
 			// Add more data here that you want to access from `cgbGlobal` object.
 		]
 	);
@@ -555,7 +556,9 @@ function initiate_admin_bx_slider() {
 			     return curriculumfeatslider_load(blkid);
 			}		
 			*/
-			
+			jQuery('#lp_inspector_feat_modal_pick_blocker').addClass('show');
+			jQuery('.ls_inspector_feat_modal_checkbox').addClass('locked');
+			cgbGlobal['bxresetblocked'] = true;
 			var startIndex = localStorage.getItem("curriculumFeatCurrentSlideIndex-"+blkid);
 	    if(startIndex == null)
 	        startIndex = 0;
@@ -578,6 +581,9 @@ function initiate_admin_bx_slider() {
 									jQuery('.featuredwpr_bxslider_'+blkid).css({'visibility':'visible','height':'auto'});								
 									jQuery(dtc).insertBefore(jQuery('.featuredwpr_bxslider_'+blkid).parent('.bx-viewport'));
 									console.log('BX RESET DONE')
+									jQuery('#lp_inspector_feat_modal_pick_blocker').removeClass('show');
+									jQuery('.ls_inspector_feat_modal_checkbox').removeClass('locked');
+									cgbGlobal['bxresetblocked'] = false;
 							},
 							onSlideAfter: function($slideElm, oldIndex, newIndex) {
 								lpInspectorFeatSliderIndexSave($slideElm, oldIndex, newIndex, elmblkid)
