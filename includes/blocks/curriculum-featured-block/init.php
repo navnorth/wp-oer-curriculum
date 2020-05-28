@@ -580,7 +580,6 @@ function initiate_admin_bx_slider() {
 							onSliderLoad: function(currentIndex) {
 									jQuery('.featuredwpr_bxslider_'+blkid).css({'visibility':'visible','height':'auto'});								
 									jQuery(dtc).insertBefore(jQuery('.featuredwpr_bxslider_'+blkid).parent('.bx-viewport'));
-									console.log('BX RESET DONE')
 									jQuery('#lp_inspector_feat_modal_pick_blocker').removeClass('show');
 									jQuery('.ls_inspector_feat_modal_checkbox').removeClass('locked');
 									cgbGlobal['bxresetblocked'] = false;
@@ -619,7 +618,6 @@ function initiate_admin_bx_slider() {
 				 if (jQuery('.lp_inspector_feat_hlite_list').length) {
 						clearInterval(featexist);
 						setTimeout(function(){
-							console.log('SORT ACTIVATED');
 							sort();
 						}, 500);
 				 }
