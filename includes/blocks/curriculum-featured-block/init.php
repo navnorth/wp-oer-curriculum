@@ -525,13 +525,16 @@ function initiate_admin_bx_slider() {
 								if(jQuery(slider).parent('.bx-viewport').length == 0){
 									//blkid = jQuery(slider).attr('blk');
 									
+									let bxslidewidth = (isNaN(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidewidth")))? 375: localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidewidth");
+							
+									
 									//curriculumfeatsliders.splice(i, 0, '');
 									//curriculumfeatsliders[i] = jQuery(slider).bxSlider({
 									cgbGlobal['featuredwpr_bxslider_'+blkid] = jQuery(slider).bxSlider({
 											minSlides: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-minslides")),
 											maxSlides: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-maxslides")),
 											moveSlides: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-moveslides")),
-											slideWidth: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidewidth")),
+											slideWidth: bxslidewidth,
 											slideMargin: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidemargin")),
 											pager: false,
 											onSliderLoad: function(currentIndex) {
@@ -580,12 +583,16 @@ function initiate_admin_bx_slider() {
 						let dtc = jQuery('.curriculum-feat-title_'+blkid).detach();
 						
 						jQuery('.featuredwpr_bxslider_'+blkid).parents('.bx-viewport').siblings('.oer-ftrdttl').remove();
+						
+						let bxslidewidth = (isNaN(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidewidth")))? 375: localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidewidth");
+				
+						console.log('BW: '+bxslidewidth);
 						cgbGlobal['featuredwpr_bxslider_'+blkid].reloadSlider({
 							startSlide: startIndex,
 							minSlides: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-minslides")),
 							maxSlides: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-maxslides")),
 							moveSlides: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-moveslides")),
-							slideWidth: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidewidth")),
+							slideWidth: bxslidewidth,
 							slideMargin: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidemargin")),
 							pager: false,
 							onSliderLoad: function(currentIndex) {
