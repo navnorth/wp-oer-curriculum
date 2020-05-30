@@ -134,8 +134,8 @@ function render_featured_block($attributes, $ajx=false){
 		$feats = explode(",",$attributes['selectedfeatured']);
 		$blkid = $attributes['blockid'];
 		$_ret .= '<div class="oer_right_featuredwpr">';
-		$_title = (isset($attributes['blocktitle']))? $attributes['blocktitle']: 'Featured';
-		$_ret .= '<div class="oer-ftrdttl curriculum-feat-title_'.$attributes['blockid'].'">'.$_title.'</div>';
+			$_title = (isset($attributes['blocktitle']))? $attributes['blocktitle']: 'Featured';
+			$_ret .= '<div class="oer-ftrdttl curriculum-feat-title_'.$attributes['blockid'].'">'.$_title.'</div>';
 			$_ret .= '<ul class="featuredwpr_bxslider_front featuredwpr_bxslider_front_'.$attributes['blockid'].'" blk="'.$attributes['blockid'].'" style="visibility:hidden;">';
 			
 					foreach($feats as $val){
@@ -197,6 +197,17 @@ function render_featured_block($attributes, $ajx=false){
 						$_ret .= 'pager: false,';
 						$_ret .= 'onSliderLoad: function(currentIndex) {';
 								$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").css({"visibility":"visible","height":"auto"});';
+								
+								if(isset($attributes['slidealign'])){
+									if($attributes['slidealign'] == 'left'){
+										$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport").parent(".bx-wrapper").css({"margin-left":"0px"});';
+									}elseif($attributes['slidealign'] == 'right'){
+										$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport").parent(".bx-wrapper").css({"margin-right":"0px"});';
+									}
+								}else{
+									$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport").parent(".bx-wrapper").css({"margin-left":"0px"});';
+								}
+								
 								$_ret .= 'let dtc = jQuery(".curriculum-feat-title_'.$attributes['blockid'].'").detach();';
 								$_ret .= 'jQuery(dtc).insertBefore(jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport"));';
 						$_ret .= '}';
@@ -540,6 +551,12 @@ function initiate_admin_bx_slider() {
 											onSliderLoad: function(currentIndex) {
 													localStorage.setItem("curriculumFeatCurrentSlideIndex-"+blkid, 0);
 													jQuery('.featuredwpr_bxslider').css({'visibility':'visible','height':'auto'});
+													var slidealign = localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidealign",)
+													if(slidealign == "left"){
+														jQuery(slider).parent('.bx-viewport').parent('.bx-wrapper').css({'margin-left':'0px'});
+													}else if(slidealign == "right"){
+														jQuery(slider).parent('.bx-viewport').parent('.bx-wrapper').css({'margin-right':'0px'});
+													}
 													let dtc = jQuery('.curriculum-feat-title_'+blkid).detach();
 													jQuery(dtc).insertBefore(jQuery(slider).parent('.bx-viewport'));										
 													
@@ -596,7 +613,13 @@ function initiate_admin_bx_slider() {
 							slideMargin: parseInt(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidemargin")),
 							pager: false,
 							onSliderLoad: function(currentIndex) {
-									jQuery('.featuredwpr_bxslider_'+blkid).css({'visibility':'visible','height':'auto'});								
+									jQuery('.featuredwpr_bxslider_'+blkid).css({'visibility':'visible','height':'auto'});	
+									var slidealign = localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidealign",)
+									if(slidealign == "left"){
+										jQuery('.featuredwpr_bxslider_'+blkid).parent('.bx-viewport').parent('.bx-wrapper').css({'margin-left':'0px'});
+									}else if(slidealign == "right"){
+										jQuery('.featuredwpr_bxslider_'+blkid).parent('.bx-viewport').parent('.bx-wrapper').css({'margin-right':'0px'});
+									}							
 									jQuery(dtc).insertBefore(jQuery('.featuredwpr_bxslider_'+blkid).parent('.bx-viewport'));
 									jQuery('#lp_inspector_feat_modal_pick_blocker').removeClass('show');
 									jQuery('.ls_inspector_feat_modal_checkbox').removeClass('locked');

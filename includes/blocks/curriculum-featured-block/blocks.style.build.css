@@ -315,7 +315,7 @@ table.lp_inspector_feat_slider_setting {
 
 table.lp_inspector_feat_slider_setting input,
 table.lp_inspector_feat_slider_setting select {
-  width: 64px !important; }
+  width: 80px !important; }
 
 table.lp_inspector_feat_slider_setting tr td {
   padding: 2px 5px; }
