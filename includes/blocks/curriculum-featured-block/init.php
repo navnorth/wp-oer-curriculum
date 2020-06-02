@@ -145,7 +145,8 @@ function render_featured_block($attributes, $ajx=false){
 						$_post = get_post($feat_id);
 						$_cfb_link = get_post_permalink($_post->ID);
 						$_cfb_title = $_post->post_title;
-						$_cfb_desc = substr(html_entity_decode(strip_tags($_post->post_content)),0,150);
+						$_cfb_desc = html_entity_decode(strip_tags($_post->post_content));
+						$_cfb_desc = (strlen($_cfb_desc) > 150)? substr($_cfb_desc,0,150).'...': $_cfb_desc;
 						$_tmp_image = get_the_post_thumbnail_url($_post->ID,'medium');
 						$_cfb_image = (!$_tmp_image)? OER_LESSON_PLAN_URL.'assets/images/default-img.jpg': $_tmp_image;
 						
