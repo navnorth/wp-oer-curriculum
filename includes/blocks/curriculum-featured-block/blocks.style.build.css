@@ -324,3 +324,12 @@ input.lp_inspector_feat_quickswitchbutton {
   float: right;
   margin-bottom: 10px !important;
   margin-right: 10px !important; }
+
+/* editor overrride */
+.edit-post-visual-editor .block-editor-block-list__block .block-editor-block-list__block-edit {
+  margin-left: auto !important;
+  margin-right: auto !important; }
+
+.block-editor-block-list__layout .block-editor-block-list__block {
+  padding-left: 0px !important;
+  padding-right: 0px !important; }
