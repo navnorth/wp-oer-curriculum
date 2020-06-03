@@ -76,6 +76,9 @@ function curriculum_featured_block_cgb_block_assets() { // phpcs:ignore
 			'base_url' => get_home_url(),
 			'curriculum_plugin_url' => OER_LESSON_PLAN_URL,
 			'bxresetblocked' => false,
+			'slidedesclength' => 150,
+			'blockwidth' => 150,
+			'slideimageheight' => 225,
 			// Add more data here that you want to access from `cgbGlobal` object.
 		]
 	);
@@ -133,6 +136,9 @@ function render_featured_block($attributes, $ajx=false){
 	if(!is_null($attributes['selectedfeatured'])){
 		$feats = explode(",",$attributes['selectedfeatured']);
 		$blkid = $attributes['blockid'];
+		$_sliddesclength = (!isset($attributes['slidedesclength']))? 150: $attributes['slidedesclength'];
+		$_slideimageheight = (!isset($attributes['slideimageheight']))? 255: $attributes['slideimageheight'];
+		echo $attributes['slidedesclength'];
 		$_ret .= '<div class="oer_right_featuredwpr">';
 			$_title = (isset($attributes['blocktitle']))? $attributes['blocktitle']: 'Featured';
 			$_ret .= '<div class="oer-ftrdttl curriculum-feat-title_'.$attributes['blockid'].'">'.$_title.'</div>';
@@ -146,7 +152,7 @@ function render_featured_block($attributes, $ajx=false){
 						$_cfb_link = get_post_permalink($_post->ID);
 						$_cfb_title = $_post->post_title;
 						$_cfb_desc = html_entity_decode(strip_tags($_post->post_content));
-						$_cfb_desc = (strlen($_cfb_desc) > 150)? substr($_cfb_desc,0,150).'...': $_cfb_desc;
+						$_cfb_desc = (strlen($_cfb_desc) > $_sliddesclength)? substr($_cfb_desc,0,$_sliddesclength).'...': $_cfb_desc;
 						$_tmp_image = get_the_post_thumbnail_url($_post->ID,'medium');
 						$_cfb_image = (!$_tmp_image)? OER_LESSON_PLAN_URL.'assets/images/default-img.jpg': $_tmp_image;
 						
@@ -155,7 +161,7 @@ function render_featured_block($attributes, $ajx=false){
 									$_ret .= '<div class="frtdsnglwpr">';
 										$_ret .= '<a href="'.$_cfb_link.'">';
 											$_ret .= '<div class="img">';
-											
+													
 													$_ret .= '<img src="'.$_cfb_image.'" alt="'.$_cfb_title.'" />';
 											
 											$_ret .= '</div>';
@@ -211,6 +217,10 @@ function render_featured_block($attributes, $ajx=false){
 								
 								$_ret .= 'let dtc = jQuery(".curriculum-feat-title_'.$attributes['blockid'].'").detach();';
 								$_ret .= 'jQuery(dtc).insertBefore(jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport"));';
+								
+								$_ret .= 'let imgwidth = localStorage.getItem("lpInspectorFeatSliderSetting-'.$attributes['blockid'].'-slideimageheight");';
+								$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].' li div.frtdsnglwpr a div.img img").css({"height":"100%", "max-height": "'.$_slideimageheight.'px", "max-width":"100%" });';
+								
 						$_ret .= '}';
 				$_ret .= '});';
 				
@@ -394,7 +404,8 @@ function curriculum_feat_dataquery(){
 		foreach($posts as $post){
 			$_reslist[$i]['id'] = $post->ID;
 			$_reslist[$i]['title'] = $post->post_title;
-			$_reslist[$i]['content'] = $post->post_content;
+			$_sliddesclength = (!isset($attributes['slidedesclength']))? cgbGlobal['slidedesclength']: $attributes['slidedesclength'];
+			$_reslist[$i]['content'] = html_entity_decode(strip_tags($post->post_content));
 			$_reslist[$i]['link'] = get_post_permalink($post->ID);
 				$_tmp_image = get_the_post_thumbnail_url($post->ID,'medium');
 				$_cfb_image = (!$_tmp_image)? OER_LESSON_PLAN_URL.'assets/images/default-img.jpg': $_tmp_image;
@@ -431,7 +442,7 @@ function curriculum_feat_dataquery(){
 			
 			$_curlist[$i]['id'] = $post->ID;
 			$_curlist[$i]['title'] = $post->post_title;
-			$_curlist[$i]['content'] = $post->post_content;
+			$_curlist[$i]['content'] = html_entity_decode(strip_tags($post->post_content));
 			$_curlist[$i]['link'] = get_post_permalink($post->ID);
 			$_tmp_image = get_the_post_thumbnail_url($post->ID,'medium');
 			$_cfb_image = (!$_tmp_image)? OER_LESSON_PLAN_URL.'assets/images/default-img.jpg': $_tmp_image;
@@ -559,7 +570,13 @@ function initiate_admin_bx_slider() {
 														jQuery(slider).parent('.bx-viewport').parent('.bx-wrapper').css({'margin-right':'0px'});
 													}
 													let dtc = jQuery('.curriculum-feat-title_'+blkid).detach();
-													jQuery(dtc).insertBefore(jQuery(slider).parent('.bx-viewport'));										
+													jQuery(dtc).insertBefore(jQuery(slider).parent('.bx-viewport'));	
+																			
+													let blkwidth = localStorage.getItem("lpInspectorFeatBlockwidth-"+blkid);			
+													jQuery('#block-'+blkid).css({"width": blkwidth});
+													
+													let imgwidth = localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slideimageheight");
+													jQuery('.featuredwpr_bxslider_'+blkid+' li div.frtdsnglwpr a div.img img').css({'height':'100%', 'max-height': imgwidth+'px', 'max-width':'100%' });
 													
 											},
 											onSlideAfter: function($slideElm, oldIndex, newIndex) {
@@ -625,6 +642,9 @@ function initiate_admin_bx_slider() {
 									jQuery('#lp_inspector_feat_modal_pick_blocker').removeClass('show');
 									jQuery('.ls_inspector_feat_modal_checkbox').removeClass('locked');
 									cgbGlobal['bxresetblocked'] = false;
+									
+									let imgwidth = localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slideimageheight");
+									jQuery('.featuredwpr_bxslider_'+blkid+' li div.frtdsnglwpr a div.img img').css({'height':'100%', 'max-height': imgwidth+'px', 'max-width':'100%' });
 							},
 							onSlideAfter: function($slideElm, oldIndex, newIndex) {
 								lpInspectorFeatSliderIndexSave($slideElm, oldIndex, newIndex, elmblkid)
