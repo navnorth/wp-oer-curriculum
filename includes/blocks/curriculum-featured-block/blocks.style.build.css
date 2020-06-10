@@ -51,6 +51,18 @@ input.ls_inspector_feat_modal_checkbox {
   padding: 0px 8px !important;
   margin-right: 5px !important; }
 
+label.ls_inspector_feat_modal_label img {
+  display: none;
+  position: absolute;
+  left: -2px;
+  top: 3px; }
+
+label.ls_inspector_feat_modal_label.hide {
+  display: none !important; }
+
+label.ls_inspector_feat_modal_label img.show {
+  display: block !important; }
+
 .lp_inspector_feat_modal_curriculum_wrapper,
 .lp_inspector_feat_modal_resource_wrapper {
   display: none;
