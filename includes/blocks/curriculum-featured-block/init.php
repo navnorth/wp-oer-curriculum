@@ -138,7 +138,6 @@ function render_featured_block($attributes, $ajx=false){
 		$blkid = $attributes['blockid'];
 		$_sliddesclength = (!isset($attributes['slidedesclength']))? 150: $attributes['slidedesclength'];
 		$_slideimageheight = (!isset($attributes['slideimageheight']))? 255: $attributes['slideimageheight'];
-		echo $attributes['slidedesclength'];
 		$_ret .= '<div class="oer_right_featuredwpr">';
 			$_title = (isset($attributes['blocktitle']))? $attributes['blocktitle']: 'Featured';
 			$_ret .= '<div class="oer-ftrdttl curriculum-feat-title_'.$attributes['blockid'].'">'.$_title.'</div>';
