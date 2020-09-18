@@ -242,6 +242,10 @@ if (!function_exists('lp_enqueue_scripts_and_styles')) {
             (isset($_GET['post_type']) && $_GET['post_type'] == 'lesson-plans') ||
             (isset($post->post_type) && $post->post_type == 'lesson-plans')
         ) {
+            //Enqueue script
+            if (!wp_script_is('bootstrap-js', 'enqueued')) {
+                wp_enqueue_script('bootstrap-js', OER_LESSON_PLAN_URL . 'assets/lib/bootstrap-3.3.7/js/bootstrap.min.js');
+            }
             wp_enqueue_style('lp-style', OER_LESSON_PLAN_URL . 'assets/css/frontend/lp-style.css');
             wp_enqueue_script('lp-script', OER_LESSON_PLAN_URL . 'assets/js/frontend/lp-script.js', array('jquery'));
             wp_localize_script( 'lp-script', 'lp_ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
