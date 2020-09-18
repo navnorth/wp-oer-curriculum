@@ -192,14 +192,14 @@ function lp_assign_standard_template($template) {
     $url_path = trim(parse_url(add_query_arg(array()), PHP_URL_PATH), '/');
 
     status_header(200);
-
-    if ( strpos( $url_path, $root_slug ) !== false && get_query_var('curriculum') && get_query_var('source')) {
+    
+    if ( strpos( $url_path, $root_slug ) !== false && get_query_var($root_slug) && get_query_var('source')) {
         $wp_query->is_404 = false;
         $template = locate_template('templates/primary-source.php', true);
         if (!$template) {
             $template = dirname(__FILE__) . '/templates/primary-source.php';
         }
-    } elseif ( strpos( $url_path, $root_slug ) !== false && get_query_var('curriculum') && get_query_var('module')) {
+    } elseif ( strpos( $url_path, $root_slug ) !== false && get_query_var($root_slug) && get_query_var('module')) {
         $wp_query->is_404 = false;
         $template = locate_template('templates/module.php', true);
         if (!$template) {
