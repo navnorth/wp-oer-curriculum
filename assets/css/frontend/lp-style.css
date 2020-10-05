@@ -1128,11 +1128,6 @@ div#tcHiddenFields {float: left;}
     }
     .wp_oer_breadcrumb { margin-top:60px; }
 }
-.fa-exclamation-triangle::before,
-.fa-question-circle::before,
-.fa-warning::before, .fa-download:before {
-    font-family: 'fontawesome' !important;
-}
 .tc-lp-standards-details,
 .tc-lp-subject-details,
 .tc-lp-objectives-details {
