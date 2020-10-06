@@ -69,6 +69,8 @@
   $suggested_time_enabled = (get_option('oer_lp_suggested_instructional_time_enabled'))?true:false;
   $req_materials_set = (get_option('oer_lp_required_materials_label'))?true:false;
   $req_materials_enabled = (get_option('oer_lp_required_materials_enabled'))?true:false;
+  $addtl_materials_set = (get_option('oer_lp_required_materials_label'))?true:false;
+  $addtl_materials_enabled = (get_option('oer_lp_required_materials_enabled'))?true:false;
 
   if (have_posts()) : while (have_posts()) : the_post();
       if (function_exists('oer_breadcrumb_display'))
@@ -304,18 +306,59 @@
                               }
                           }
                           
-                           // Required Equipment Materials Display
-                         /*if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
+                          
+                          // Required Equipment Materials Display
+                          if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
                               $req_materials_label = (isset($post_meta_data['oer_lp_required_materials_label'][0]) ? $post_meta_data['oer_lp_required_materials_label'][0] : "");
                               $req_materials = (isset($post_meta_data['oer_lp_required_materials'][0]) ? $post_meta_data['oer_lp_required_materials'][0] : "");
-                              if (!empty($req_materials)){*/
+                              if (!empty($req_materials)){
                               ?>
-                              <!--<div class="form-field">
-                                  <span class="tc-lp-label"><?php //echo $req_materials_label; ?>:</span> <span class="tc-lp-value"><?php echo $req_materials; ?></span>
-                              </div>-->
+                              <div class="form-field">
+                                  <span class="tc-lp-label"><?php echo $req_materials_label; ?>:</span> <span class="tc-lp-value"><?php echo $req_materials; ?></span>
+                              </div>
                               <?php
-                              /*}
-                          }*/
+                              }
+                          }
+
+                          // Additional Materials Display
+                          if (($addtl_materials_set && $addtl_materials_enabled) || !$addtl_materials_set) {
+                              $addtl_materials_label = (isset($post_meta_data['oer_lp_oer_materials_label'][0]) ? $post_meta_data['oer_lp_oer_materials_label'][0] : "Additional Materials");
+                              $addtl_materials = (isset($post_meta_data['lp_oer_materials'][0]) ? unserialize($post_meta_data['lp_oer_materials'][0]) : array());
+                              if (!empty($addtl_materials)){
+                              ?>
+                              <div class="form-field">
+                                  <span class="tc-lp-label"><?php echo $addtl_materials_label; ?>:</span>
+                                  <?php 
+                                  $cnt = 0;
+                                  if (isset($addtl_materials['title']))
+                                    $cnt = count($addtl_materials['title']);
+                                  if (isset($addtl_materials['url'])){
+                                    $cnt = (count($addtl_materials['url'])>$cnt) ? count($addtl_materials['url']) : $cnt;
+                                  }
+                                  if (isset($addtl_materials['description'])){
+                                    $cnt = (count($addtl_materials['description'])>$cnt) ? count($addtl_materials['description']) : $cnt;
+                                  }
+                                  echo "<ul>";
+                                  for ($i=0;$i<$cnt;$i++){
+                                    if (!empty($addtl_materials['title'][$i]) || !empty($addtl_materials['url'][$i]) || !empty($addtl_materials['description'][$i])) {
+                                    ?>
+                                    <li>
+                                    <div class="form-field">
+                                        <span class="tc-lp-label"><a href="<?php echo $addtl_materials['url']; ?>"><?php echo $addtl_materials['title'][$i]; ?></a></span>
+                                    </div>
+                                    <div>
+                                      <span class="tc-lp-value"><?php echo $addtl_materials['description'][$i]; ?></span>
+                                    </div>
+                                    </li>
+                                    <?php
+                                    }
+                                  } 
+                                  echo "</ul>";
+                                  ?>
+                              </div>
+                              <?php
+                              }
+                          }
                           
                           // Additional Section
                           $additional_sections = isset($post_meta_data['oer_lp_additional_sections'][0]) ? unserialize($post_meta_data['oer_lp_additional_sections'][0]) : array();

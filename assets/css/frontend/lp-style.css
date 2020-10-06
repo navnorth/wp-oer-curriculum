@@ -657,7 +657,7 @@ span.selected-standard-pill:last-child {
     transition: all .2s ease-in;
     font-size:14px;
 }
-.lp-nav-block { margin-bottom:15px; }
+.lp-nav-block { margin-bottom:15px; margin-top:15px; }
 .back-button i {
     margin-right: 15px;
 }
