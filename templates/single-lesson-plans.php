@@ -71,6 +71,8 @@
   $req_materials_enabled = (get_option('oer_lp_required_materials_enabled'))?true:false;
   $addtl_materials_set = (get_option('oer_lp_required_materials_label'))?true:false;
   $addtl_materials_enabled = (get_option('oer_lp_required_materials_enabled'))?true:false;
+  $iq_set = (get_option('oer_lp_required_materials_label'))?true:false;
+  $iq_enabled = (get_option('oer_lp_required_materials_enabled'))?true:false;
 
   if (have_posts()) : while (have_posts()) : the_post();
       if (function_exists('oer_breadcrumb_display'))
@@ -279,7 +281,21 @@
                               </div>
                               <?php
                           }
-                          
+
+                          // Investigative Question
+                          if (($iq_set && $iq_enabled) || !$iq_set) {
+                              $iq_label = oer_lp_get_field_label('oer_lp_iq_label');
+                              $iq_data = (isset($post_meta_data['oer_lp_iq'][0]) ? unserialize($post_meta_data['oer_lp_iq'][0]) : "");
+                              if (!empty($iq_data)){
+                              ?>
+                              <div class="form-field">
+                                  <div><span class="tc-lp-label"><?php echo $iq_data['question']; ?></span></div>
+                                  <div><span class="tc-lp-value"><?php echo $iq_data['excerpt']; ?></span></div>
+                              </div>
+                              <?php
+                              }
+                          }
+
                           // Appropriate Age Levels Display
                           if (($age_levels_set && $age_levels_enabled) || !$age_levels_set) {
                               $age_label = oer_lp_get_field_label('oer_lp_age_levels');
@@ -344,7 +360,7 @@
                                     ?>
                                     <li>
                                     <div class="form-field">
-                                        <span class="tc-lp-label"><a href="<?php echo $addtl_materials['url']; ?>"><?php echo $addtl_materials['title'][$i]; ?></a></span>
+                                      <span class="tc-lp-label"><a href="<?php echo $addtl_materials['url']; ?>"><?php echo $addtl_materials['title'][$i]; ?></a></span>
                                     </div>
                                     <div>
                                       <span class="tc-lp-value"><?php echo $addtl_materials['description'][$i]; ?></span>
