@@ -72,11 +72,15 @@ function oer_lesson_plan_custom_meta_boxes() {
     $related_inquiry_set_enabled = (get_option('oer_lp_related_inquiry_set_enabled'))?true:false;
     $related_curriculum_enabled = false;
     if (($related_inquiry_set && $related_inquiry_set_enabled) || !$related_inquiry_set) {
-        for ($i=1;$i<=3;$i++){
-            $enabled = (get_option('oer_lp_related_inquiry_set_'.$i.'_enabled'))?true:false;
-            if ($enabled) {
-                $related_curriculum_enabled = true;
-                break;
+        if (!$related_inquiry_set){
+            $related_curriculum_enabled = true;
+        } else {
+            for ($i=1;$i<=3;$i++){
+                $enabled = (get_option('oer_lp_related_inquiry_set_'.$i.'_enabled'))?true:false;
+                if ($enabled) {
+                    $related_curriculum_enabled = true;
+                    break;
+                }
             }
         }
         if ($related_curriculum_enabled) {
