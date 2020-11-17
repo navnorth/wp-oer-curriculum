@@ -246,6 +246,12 @@ if (!function_exists('lp_enqueue_scripts_and_styles')) {
             if (!wp_script_is('bootstrap-js', 'enqueued')) {
                 wp_enqueue_script('bootstrap-js', OER_LESSON_PLAN_URL . 'assets/lib/bootstrap-3.3.7/js/bootstrap.min.js');
             }
+
+            if (!wp_style_is('lesson-plan-load-fa', 'enqueued') && 
+                !wp_style_is('fontawesome-style', 'enqueued') && 
+                !wp_style_is('fontawesome', 'enqueued')) {
+                wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL . 'assets/lib/font-awesome/css/all.min.css');
+            }
             wp_enqueue_style('lp-style', OER_LESSON_PLAN_URL . 'assets/css/frontend/lp-style.css');
             wp_enqueue_script('lp-script', OER_LESSON_PLAN_URL . 'assets/js/frontend/lp-script.js', array('jquery'));
             wp_localize_script( 'lp-script', 'lp_ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
