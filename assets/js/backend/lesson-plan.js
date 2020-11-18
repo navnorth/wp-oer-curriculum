@@ -1000,12 +1000,18 @@ jQuery(document).ready(function ($) {
                         action:'lp_add_text_feature_callback',
                         row_id: total_text_features
                        }).done(function (response) {
-                    dis.before(response);
-
+                    /*dis.before(response);*/
+                    if($('div.lp-section-element-wrapper').length) {
+                        $(response).insertAfter('div.lp-section-element-wrapper:last').tinymce_textareas();
+                    } else {
+                        $('.lp-section-element-panel').html(response).tinymce_textareas();
+                    }
+                    
+                    
                     tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-text-feature-editor-' + id );
                     tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-text-feature-editor-' + id );
                     quicktags({ id: 'oer-lp-text-feature-editor-' + id });
-                    /*LessonPlan.initializeEditor('oer-lp-text-feature-editor-' + id);*/
+                    LessonPlan.initializeEditor('oer-lp-text-feature-editor-' + id);
                     
                     LessonPlan.toggleUpDownButton();
                 });
@@ -1032,14 +1038,14 @@ jQuery(document).ready(function ($) {
                 var section = $(this).closest('.panel-default');
                 var elementId = section.attr('id');
                 e.preventDefault();
-                $('#lp-delete-section').modal({
+                $('#lp-delete-confirm-popup').modal({
                     backdrop: 'static',
                     keyboard: false
                 })
-                    .on('click', '#lp-section-delete-confirm', function(e) {
+                    .on('click', '#lp-delete-confirm-popup-btn', function(e) {
                         section.remove();
-                        $('a[href=#' + elementId +']').parent('li').remove();
-                        $('#lp-delete-section').modal('hide');
+                        $('a[href="#' + elementId +'"]').parent('li').remove();
+                        $('#lp-delete-confirm-popup').modal('hide');
 
                         // Disable delete button for section
                         if($('.lp-section-element-wrapper').length === 1) {
