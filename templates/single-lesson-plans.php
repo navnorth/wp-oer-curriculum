@@ -338,7 +338,7 @@
                                   if (!empty($req_materials['label'][$i]) || !empty($req_materials['editor'][$i])) {
                                   ?>
                                   <div class="form-field">
-                                      <span class="tc-lp-label"><?php echo $req_materials['label'][$i]; ?>:</span> <span class="tc-lp-value"><?php echo $req_materials['editor'][$i]; ?></span>
+                                      <span class="tc-lp-label-heading"><?php echo $req_materials['label'][$i]; ?>:</span> <span class="tc-lp-value"><?php echo $req_materials['editor'][$i]; ?></span>
                                   </div>
                                   <?php
                                   }
@@ -399,7 +399,7 @@
                                   if (!empty($additional_sections['label'][$i]) || !empty($additional_sections['editor'][$i])) {
                                     ?>
                                   <div class="form-field">
-                                      <span class="tc-lp-label"><?php echo $additional_sections['label'][$i]; ?>:</span> <span class="tc-lp-value"><?php echo $additional_sections['editor'][$i]; ?></span>
+                                      <span class="tc-lp-label-heading"><?php echo $additional_sections['label'][$i]; ?>:</span> <span class="tc-lp-value"><?php echo $additional_sections['editor'][$i]; ?></span>
                                   </div>
                                     <?php
                                   }
