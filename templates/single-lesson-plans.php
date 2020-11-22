@@ -325,14 +325,24 @@
                           
                           // Required Equipment Materials Display
                           if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
-                              $req_materials_label = (isset($post_meta_data['oer_lp_required_materials_label'][0]) ? $post_meta_data['oer_lp_required_materials_label'][0] : "");
-                              $req_materials = (isset($post_meta_data['oer_lp_required_materials'][0]) ? $post_meta_data['oer_lp_required_materials'][0] : "");
+                              $req_materials_label = (isset($post_meta_data['oer_lp_required_materials_label'][0]) ? $post_meta_data['oer_lp_required_materials_label'][0] : "Required Materials");
+                              $req_materials = (isset($post_meta_data['oer_lp_required_materials'][0]) ? unserialize($post_meta_data['oer_lp_required_materials'][0]) : "");
                               if (!empty($req_materials)){
-                              ?>
-                              <div class="form-field">
-                                  <span class="tc-lp-label"><?php echo $req_materials_label; ?>:</span> <span class="tc-lp-value"><?php echo $req_materials; ?></span>
-                              </div>
-                              <?php
+                                $cnt = 0;
+                                if (isset($req_materials['label']))
+                                    $cnt = count($req_materials['label']);
+                                if (isset($req_materials['editor'])){
+                                    $cnt = (count($req_materials['editor'])>$cnt) ? count($req_materials['editor']) : $cnt;
+                                }
+                                for ($i=0;$i<$cnt;$i++){
+                                  if (!empty($req_materials['label'][$i]) || !empty($req_materials['editor'][$i])) {
+                                  ?>
+                                  <div class="form-field">
+                                      <span class="tc-lp-label"><?php echo $req_materials['label'][$i]; ?>:</span> <span class="tc-lp-value"><?php echo $req_materials['editor'][$i]; ?></span>
+                                  </div>
+                                  <?php
+                                  }
+                                }
                               }
                           }
 
@@ -387,11 +397,11 @@
                               }
                               for ($i=0;$i<$cnt;$i++){
                                   if (!empty($additional_sections['label'][$i]) || !empty($additional_sections['editor'][$i])) {
-                                  ?>
+                                    ?>
                                   <div class="form-field">
                                       <span class="tc-lp-label"><?php echo $additional_sections['label'][$i]; ?>:</span> <span class="tc-lp-value"><?php echo $additional_sections['editor'][$i]; ?></span>
                                   </div>
-                                  <?php
+                                    <?php
                                   }
                               }
                            }

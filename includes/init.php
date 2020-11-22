@@ -1000,9 +1000,17 @@ add_action('wp_ajax_nopriv_lp_add_text_feature_callback', 'lp_add_text_feature_c
 function lp_add_text_feature_callback() {
     
     $element_id = (isset($_REQUEST['row_id']))?$_REQUEST['row_id']:1;
+    $ed_id = (isset($_REQUEST['editor_id'])?$_REQUEST['editor_id']:'oer-lp-additional-section-');
+    $req_mat = (isset($_REQUEST['required_material'])?true:false);
     $element_id++;
-    $label_id = "oer_lp_additional_sections[label][]";
-    $editor_id = "oer_lp_additional_sections[editor][]";
+
+    if ($req_mat){
+        $label_id = "oer_lp_required_materials[label][]";
+        $editor_id = "oer_lp_required_materials[editor][]";
+    } else {
+        $label_id = "oer_lp_additional_sections[label][]";
+        $editor_id = "oer_lp_additional_sections[editor][]";
+    }
     $content = '<div class="panel panel-default lp-section-element-wrapper" id="lp_section_element_wrapper-'.$element_id.'">';
     $content .= '   <div class="panel-heading">';
     $content .= '       <h3 class="panel-title lp-module-title">';
@@ -1015,14 +1023,14 @@ function lp_add_text_feature_callback() {
     $content .= '       </h3>';
     $content .= '   </div>';
     $content .= '   <div class="panel-body">';
-    $content .= '        <div class="text-editor-group">';
-    $content .= '           <div class="form-group">';
-    $content .= '               <input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" placeholder="Text Title">';
-    $content .= '           </div>';
-    $content .= '       <div class="form-group';
+    $content .= '       <div class="form-group">';
+    $content .= '           <input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" placeholder="Text Title">';
+    $content .= '       </div>';
+    $content .= '       <div class="form-group">';
+    $content .= '           <div class="text-editor-group">';
                             ob_start(); // Start output buffer
                             wp_editor('',
-                                'oer-lp-additional-sections-editor-' . $element_id,
+                                $ed_id . $element_id,
                                 $settings = array(
                                     'textarea_name' => $editor_id,
                                     'media_buttons' => true,
@@ -1032,6 +1040,7 @@ function lp_add_text_feature_callback() {
                                 )
                             );
     $content .=             ob_get_clean();
+    $content .= '           </div>';
     $content .= '       </div>';
     $content .= '   </div>';
     $content .= '</div>';
