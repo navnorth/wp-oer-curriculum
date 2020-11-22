@@ -168,7 +168,7 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                             <li class="list-group-item">
                                 <a href="#oer-lp-custom-editor-group-student-background" title="Student Background">Student Background</a>
                             </li>
-                       <?php }
+                       <?php } 
                     }
                     if ($default==true)
                         $elements_orders = array();
@@ -236,6 +236,9 @@ $standards_enabled = (get_option('oer_lp_standards_enabled'))?true:false;
                         <a href="#oer-lp-summative-group" title="Summative Assessment">Summative Assessment</a>
                     </li>
                 <?php }?>
+                <li class="list-group-item">
+                    <a href="#oer_lesson_plan_related_inquiry" title="Related Inquiry Sets">Related Inquiry Sets</a>
+                </li>
             </ul>
         </div>
         <div class="col-md-8" id="oer-lp-sortable">
