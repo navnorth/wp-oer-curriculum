@@ -220,6 +220,13 @@ function render_featured_block($attributes, $ajx=false){
 								$_ret .= 'let imgwidth = localStorage.getItem("lpInspectorFeatSliderSetting-'.$attributes['blockid'].'-slideimageheight");';
 								$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].' li div.frtdsnglwpr a div.img img").css({"height":"100%", "max-height": "'.$_slideimageheight.'px", "max-width":"100%" });';
 								
+								$_ret .= 'let sldcnt = jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").find("li").length;';
+								$_sngsldmgn = (!isset($attributes['slidemargin']))? 20 : $attributes['slidemargin'];
+								$_sngsldwdt = (!isset($attributes['slidewidth']))? (375 + $_sngsldmgn) : ($attributes['slidewidth'] + $_sngsldmgn);
+								$_ret .= 'let whlsldwdt = sldcnt * '.$_sngsldwdt.';';
+								$_ret .= 'console.log(whlsldwdt);';
+								$_ret .= 'jQuery(".featuredwpr_bxslider_front").css({"width":whlsldwdt+"px"})';
+								
 						$_ret .= '}';
 				$_ret .= '});';
 				

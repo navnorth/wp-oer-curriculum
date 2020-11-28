@@ -383,3 +383,6 @@ input.lp_inspector_feat_quickswitchbutton {
 
 .tooltipped:hover .tooltiptext {
   visibility: visible; }
+  ul.featuredwpr_bxslider_front {
+      padding: 0px !important;
+  }
