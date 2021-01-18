@@ -218,7 +218,7 @@ function oer_lesson_plan_assets() {
         (isset($_GET['post_type']) && $_GET['post_type'] == 'lesson-plans') ||
         (isset($post->post_type) && $post->post_type == 'lesson-plans')
     ) {
-        wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL . 'assets/lib/font-awesome/css/all.min.css');
+        wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL . 'assets/lib/fontawesome/css/all.min.css');
         wp_enqueue_style('lesson-plan-bootstrap', OER_LESSON_PLAN_URL . 'assets/lib/bootstrap-3.3.7/css/bootstrap.min.css');
         wp_enqueue_style('admin-lesson-plan', OER_LESSON_PLAN_URL . 'assets/css/backend/lp-style.css');
         wp_enqueue_style('lesson-plan-resource-selector-style', OER_LESSON_PLAN_URL . 'assets/css/backend/lp-resource-selector-style.css', array() , null, 'all');
@@ -254,7 +254,7 @@ if (!function_exists('lp_enqueue_scripts_and_styles')) {
             if (!wp_style_is('lesson-plan-load-fa', 'enqueued') && 
                 !wp_style_is('fontawesome-style', 'enqueued') && 
                 !wp_style_is('fontawesome', 'enqueued')) {
-                wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL . 'assets/lib/font-awesome/css/all.min.css');
+                wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL . 'assets/lib/fontawesome/css/all.min.css');
             }
             wp_enqueue_style('lp-style', OER_LESSON_PLAN_URL . 'assets/css/frontend/lp-style.css');
             wp_enqueue_script('lp-script', OER_LESSON_PLAN_URL . 'assets/js/frontend/lp-script.js', array('jquery'));

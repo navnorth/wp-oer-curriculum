@@ -299,25 +299,25 @@ if (! function_exists('get_file_type_from_url')) {
         $file_type = strtolower(end($oer_urls));
         if(in_array($file_type, ['jpg', 'jpeg', 'gif', 'png'])) {
             $response['title'] = 'Image';
-            $response['icon'] = '<i class="fa fa-file-image-o '.$class.'"></i>';
+            $response['icon'] = '<i class="fa fa-file-image '.$class.'"></i>';
         } elseif($file_type == 'pdf') {
             $response['title'] = 'PDF';
-            $response['icon'] = '<i class="fa fa-file-pdf-o '.$class.'"></i>';
+            $response['icon'] = '<i class="fa fa-file-pdf '.$class.'"></i>';
         } elseif(in_array($file_type, ['txt'])) {
             $response['title'] = 'Plain Text';
-            $response['icon'] = '<i class="fa fa-file-text-o '.$class.'"></i>';
+            $response['icon'] = '<i class="fa fa-file-alt '.$class.'"></i>';
         } elseif(in_array($file_type, ['7z', 'zip', 'rar'])) {
             $response['title'] = 'Archive';
-            $response['icon'] = '<i class="fa fa-file-archive-o '.$class.'"></i>';
+            $response['icon'] = '<i class="fa fa-file-archive '.$class.'"></i>';
         } elseif(in_array($file_type, ['docx', 'doc'])) {
             $response['title'] = 'Microsoft Document';
-            $response['icon'] = '<i class="fa fa-file-word-o '.$class.'"></i>';
+            $response['icon'] = '<i class="fa fa-file-word '.$class.'"></i>';
         } elseif(in_array($file_type, ['xls'])) {
             $response['title'] = 'Microsoft Excel';
-            $response['icon'] = '<i class="fa fa-file-excel-o '.$class.'"></i>';
+            $response['icon'] = '<i class="fa fa-file-excel '.$class.'"></i>';
         } elseif(in_array($file_type, ['ppt'])) {
             $response['title'] = 'Microsoft Powerpoint';
-            $response['icon'] = '<i class="fa fa-file-powerpoint-o '.$class.'"></i>';
+            $response['icon'] = '<i class="fa fa-file-powerpoint '.$class.'"></i>';
         }
         return $response;
     }
