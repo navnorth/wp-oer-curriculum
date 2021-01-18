@@ -17,7 +17,7 @@ body.single-lesson-plans {
     padding: 5px 0;
 }
 .tc-lp-controls a {
-    display: block;
+    display: inline;
     padding: 10px 14px;
 }
 .tc-lp-controls a i {

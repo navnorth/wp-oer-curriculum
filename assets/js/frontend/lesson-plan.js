@@ -40,7 +40,7 @@ $(document).ready(function() {
                 var widget = $(this).dialog("widget");
                 $(".ui-dialog-titlebar-close span.ui-button-icon-primary", widget)
                     .removeClass("ui-icon-closethick ui-icon")
-                    .addClass("fal fa-times");
+                    .addClass("fa fa-times");
              }
         });
     })
