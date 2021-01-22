@@ -18,14 +18,14 @@ echo $output;
 $back_url = "";
 $back_source_url = "";
 $source_id = 0;
-$lp_prev_class = "";
-$lp_next_class = "";
+$oer_curriculum_prev_class = "";
+$oer_curriculum_next_class = "";
 $prev_url = "";
 $next_url = "";
 
 // Back Button URL
 $curriculum = get_query_var('curriculum');
-$curriculum_details = get_page_by_path($curriculum, OBJECT, "lesson-plans");
+$curriculum_details = get_page_by_path($curriculum, OBJECT, "oer-curriculum");
 $curriculum_id = $curriculum_details->ID;
 if ($curriculum)
     $back_source_url = site_url($root_slug."/".$curriculum);
@@ -50,7 +50,7 @@ $isPDF = is_pdf_resource($resource_url);
 
 // Get Curriculum Meta for Primary Sources
 $post_meta_data = get_post_meta($curriculum_id);
-$primary_resources = (isset($post_meta_data['oer_lp_primary_resources'][0]) ? unserialize($post_meta_data['oer_lp_primary_resources'][0]) : array());
+$primary_resources = (isset($post_meta_data['oer_oer_curriculum_primary_resources'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_primary_resources'][0]) : array());
 $index = 0;
 $teacher_info = "";
 $student_info = "";
@@ -65,7 +65,7 @@ $new_description = "";
 $prev_title = "";
 $next_title = "";
 $next_image = "";
-if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
+if (!empty($primary_resources) && oer_curriculum_scan_array($primary_resources)) {
     if (!empty(array_filter($primary_resources['resource']))) {
         foreach ($primary_resources['resource'] as $resourceKey => $source) {
             if ($psindex == $resourceKey){
@@ -76,7 +76,7 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
             $index++;
         }
         if (isset($primary_resources['resource'][$index-1])){
-            $prev_resource = oer_lp_get_resource_details($primary_resources['resource'][$index-1]);
+            $prev_resource = oer_curriculum_get_resource_details($primary_resources['resource'][$index-1]);
             $prev_title = (isset($primary_resources['title'][$index-1]) ? $primary_resources['title'][$index-1]: "");
             $prev_image = (isset($primary_resources['image'][$index-1]) ? $primary_resources['image'][$index-1]: "");
             if (is_object($prev_resource))
@@ -85,7 +85,7 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
                 $prev_url = $back_source_url."/source/".sanitize_title($prev_title)."-0/idx/".($index-1);
         }
         if (isset($primary_resources['resource'][$index+1])){
-            $next_resource = oer_lp_get_resource_details($primary_resources['resource'][$index+1]);
+            $next_resource = oer_curriculum_get_resource_details($primary_resources['resource'][$index+1]);
             $next_title = (isset($primary_resources['title'][$index+1]) ? $primary_resources['title'][$index+1]: "");
             $next_image = (isset($primary_resources['image'][$index+1]) ? $primary_resources['image'][$index+1]: "");
             if (is_object($next_resource))
@@ -94,9 +94,9 @@ if (!empty($primary_resources) && lp_scan_array($primary_resources)) {
                 $next_url = $back_source_url."/source/".sanitize_title($next_title)."-0/idx/".($index+1);
         }
         if ($index==0)
-            $lp_prev_class = "ps-nav-hidden";
+            $oer_curriculum_prev_class = "ps-nav-hidden";
         if ($index==count($primary_resources['resource'])-1)
-            $lp_next_class = "ps-nav-hidden";
+            $oer_curriculum_next_class = "ps-nav-hidden";
         if (isset($primary_resources['teacher_info']))
             $teacher_info = $primary_resources['teacher_info'][$index];
         if (isset($primary_resources['student_info']))
@@ -109,9 +109,9 @@ if (function_exists('oer_get_resource_metadata')){
     $resource_meta = oer_get_resource_metadata($resource->ID);
 }
 if (empty($next_resource)){
-    $modules = oer_lp_modules($post->ID);
+    $modules = oer_curriculum_modules($post->ID);
     if (isset($modules[0])){
-        $lp_next_class = "";
+        $oer_curriculum_next_class = "";
         $next_resource = $modules[0];
         $next_url = $back_url."/module/".sanitize_title($next_resource['title']);
     } else {
@@ -121,9 +121,9 @@ if (empty($next_resource)){
     }
 }
 if (empty($prev_resource)){
-    $modules = oer_lp_modules($post->ID);
+    $modules = oer_curriculum_modules($post->ID);
     if (isset($modules[0])){
-        $lp_prev_class = "";
+        $oer_curriculum_prev_class = "";
         $prev_resource = $modules[0];
         $prev_url = $back_url."/module/".sanitize_title($prev_resource['title']);
     } else {
@@ -148,7 +148,7 @@ $type = $type[0];
   $ret .= '</div>'; 
   echo $ret; 
 ?> 
-<div class="lp-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
+<div class="oer-curriculum-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
 <div class="row ps-details-row">
     <?php if (!empty($featured_image_url) || $youtube || $isPDF) {
         $right_class = "col-md-8";
@@ -188,10 +188,10 @@ $type = $type[0];
            <?php } ?>
         </div>
         <?php if ($type=="website"): ?>
-        <span class="ps-expand"><a href="<?php echo $resource_url; ?>" class="lp-expand-img" target="_blank"><i class="fas fa-external-link-alt"></i></a></span>
+        <span class="ps-expand"><a href="<?php echo $resource_url; ?>" class="oer-curriculum-expand-img" target="_blank"><i class="fas fa-external-link-alt"></i></a></span>
         <?php endif; ?>
         <?php endif; ?>
-        <div class="lp-center">
+        <div class="oer-curriculum-center">
             <?php if (isset($resource_url)) { ?>
             <div class="ps-meta-group ps-resource-url">
                 <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OER_LESSON_PLAN_SLUG); ?></a>
@@ -211,7 +211,7 @@ $type = $type[0];
                  <a class="oer-featureimg" href="<?php echo $resource_url; ?>" target="_blank"><span class="dashicons <?php if (function_exists('getResourceIcon')) echo getResourceIcon($media_type,$resource_url); ?> nofeat"></span></a>
                 <?php endif; ?>
             </div>
-            <div class="lp-center">
+            <div class="oer-curriculum-center">
                 <?php if (isset($resource_url)) { ?>
                 <div class="ps-meta-group ps-resource-url">
                     <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OER_LESSON_PLAN_SLUG); ?></a>
@@ -244,14 +244,14 @@ $type = $type[0];
         </div>
     </div>
 </div>
-<div class="ps-related-sources lp-primary-sources-row">
-    <div class="lp-ps-nav-left-block <?php echo $lp_prev_class; ?> col-md-6 col-sm-12">
+<div class="ps-related-sources oer-curriculum-primary-sources-row">
+    <div class="oer-curriculum-ps-nav-left-block <?php echo $oer_curriculum_prev_class; ?> col-md-6 col-sm-12">
         <?php if (!empty($prev_resource)):
         $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($prev_resource), 'resource-thumbnail' );
         if (empty($resource_img))
             $resource_img = $prev_image;
         ?>
-        <a class="lp-ps-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>">
+        <a class="oer-curriculum-ps-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>">
             <span class="col-md-3">&nbsp;</span>
             <span class="nav-media-icon"><i class="fas fa-arrow-left fa-2x"></i></span>
             <span class="nav-media-image col-md-8">
@@ -268,7 +268,7 @@ $type = $type[0];
                     <div class="navigation-avatar"><span class="dashicons <?php echo getResourceIcon($prev_resource_type,$prev_resource_url); ?>"></span></div>
                     <?php endif; ?>
                 </span>
-                <span class="nav-lp-resource-title col-md-8">
+                <span class="nav-oer-curriculum-resource-title col-md-8">
                     <?php
                     if (!empty($prev_title))
                         echo $prev_title;
@@ -280,13 +280,13 @@ $type = $type[0];
         </a>
         <?php endif; ?>
     </div>
-    <div class="lp-ps-nav-right-block <?php echo $lp_next_class; ?> col-md-6 col-sm-12">
+    <div class="oer-curriculum-ps-nav-right-block <?php echo $oer_curriculum_next_class; ?> col-md-6 col-sm-12">
         <?php if (!empty($next_resource)):
         $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($next_resource), 'resource-thumbnail' );
         if (empty($resource_img))
             $resource_img = $next_image;
         ?>
-        <a class="lp-ps-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>">
+        <a class="oer-curriculum-ps-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>">
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if (!empty($resource_img)):
@@ -305,7 +305,7 @@ $type = $type[0];
                       <div class="navigation-avatar"><span class="dashicons <?php echo getResourceIcon($next_resource_type,$next_resource_url); ?>"></span></div>
                     <?php endif; ?>
                 </span>
-                <span class="nav-lp-resource-title col-md-8">
+                <span class="nav-oer-curriculum-resource-title col-md-8">
                     <?php
                      if (is_object($next_resource)){
                         if (!empty($next_title))
@@ -324,9 +324,9 @@ $type = $type[0];
         <?php endif; ?>
     </div>
 </div>
-<div class="lp-ajax-loader" role="status">
-    <div class="lp-ajax-loader-img">
-        <img src="<?php echo OER_LESSON_PLAN_URL."/assets/images/load.gif"; ?>" />
+<div class="oer-curriculum-ajax-loader" role="status">
+    <div class="oer-curriculum-ajax-loader-img">
+        <img src="<?php echo OER_LESSON_PLAN_URL."/images/load.gif"; ?>" />
     </div>
 </div>
 <?php
