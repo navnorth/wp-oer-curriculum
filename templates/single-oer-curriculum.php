@@ -453,14 +453,14 @@
                       <?php if ($oer_curriculum_download_copy_document): ?>
                       <div class="tc-oer-curriculum-controls">
                           <div class="sharethis-inline-share-buttons"></div>
-                          <a href="<?php echo $oer_curriculum_download_copy_document; ?>" target="_blank"><i class="fal fa-download"></i></a>
+                          <a href="<?php echo $oer_curriculum_download_copy_document; ?>" target="_blank"><i class="fa fa-download"></i></a>
                       </div>
                       <?php endif; ?>
                   <?php } ?>
                   </div>
                   <?php if ($oer_sensitive) : ?>
                   <div class="tc-sensitive-material-section">
-                      <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Potentially Sensitive Material</span></p>
+                      <p><i class="fa fa-exclamation-triangle"></i><span class="sensitive-material-text">Potentially Sensitive Material</span></p>
                       <!--<button class="question-popup-button"><i class="fal fa-question-circle"></i></button>-->
                   </div>
                   <?php endif;
@@ -554,7 +554,7 @@
                                       </div>
                                       <?php if ($sensitiveMaterial!=="" && $sensitiveMaterial!=="no"): ?>
                                       <div class="sensitive-source">
-                                          <p><i class="fal fa-exclamation-triangle"></i></p>
+                                          <p><i class="fa fa-exclamation-triangle"></i></p>
                                       </div>
                                       <?php endif; ?>
                                   </a>
