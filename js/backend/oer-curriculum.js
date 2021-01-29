@@ -465,7 +465,7 @@ jQuery(document).ready(function ($) {
                     });
                     jQuery('#selected-standard-wrapper').html(selectedHtml);
                     var selectedStandardsIds = selectedStandards.join();
-                    jQuery("input[name='oer_oer_curriculum_standards']").val(selectedStandardsIds);
+                    jQuery("input[name='oer_curriculum_standards']").val(selectedStandardsIds);
                     jQuery('#lpOerStandardModal').modal('hide');
                 });
             });
@@ -480,14 +480,14 @@ jQuery(document).ready(function ($) {
                 dis.parent().remove();
 
                 // Update the selected ids in input fields
-                var standardsIds =  jQuery("input[name='oer_oer_curriculum_standards']").val();
+                var standardsIds =  jQuery("input[name='oer_curriculum_standards']").val();
                 var standardsArr = standardsIds.split(",");
                 standardsArr = jQuery.grep(standardsArr, function(value) {
                     return value != pillId;
                 });
 
                 standardsIds = standardsArr.join();
-                jQuery("input[name='oer_oer_curriculum_standards']").val(standardsIds);
+                jQuery("input[name='oer_curriculum_standards']").val(standardsIds);
                 // Unchecked the checkbox from popup
                 jQuery('#lpOerStandardModal input[value='+pillId+']').attr('checked', false);
             });
@@ -756,7 +756,7 @@ jQuery(document).ready(function ($) {
 
         // Select lesson document for download copy
         lpDownloadCopyLesson: function() {
-            $(document).on('click', 'input[name="oer_oer_curriculum_download_copy_document"], .oer-curriculum-download-copy-icon', function (e) {
+            $(document).on('click', 'input[name="oer_curriculum_download_copy_document"], .oer-curriculum-download-copy-icon', function (e) {
                 e.preventDefault();
                 var dis = $(this);
 
@@ -781,7 +781,7 @@ jQuery(document).ready(function ($) {
 
                     $('.oer-curriculum-download-copy-icon').html(icon);
                     
-                    $('input[name="oer_oer_curriculum_download_copy_document"]').val(attachment.url);
+                    $('input[name="oer_curriculum_download_copy_document"]').val(attachment.url);
                     if (dis.parent().find('.oer-curriculum-selected-section')) {
                         dis.parent().find('.oer-curriculum-selected-section a').attr('href',attachment.url);
                         dis.parent().find('.oer-curriculum-selected-section a').text(attachment.url);
@@ -921,10 +921,10 @@ jQuery(document).ready(function ($) {
         lpRemoveCopyLesson: function() {
             $(document).on('click', '.oer-curriculum-remove-download-copy', function (e) {
                 e.preventDefault();
-                var dis = $('input[name="oer_oer_curriculum_download_copy_document"]');
+                var dis = $('input[name="oer_curriculum_download_copy_document"]');
 
                 $('.oer-curriculum-selected-section').addClass('oer-curriculum-hidden');
-                $('input[name="oer_oer_curriculum_download_copy_document"]').val("");
+                $('input[name="oer_curriculum_download_copy_document"]').val("");
                 $('.oer-curriculum-select-label').removeClass('oer-curriculum-hidden');
                 $('.oer-curriculum-download-copy-icon').removeClass('oer-curriculum-hidden').html('<i class="fa fa-upload"></i>');
                 
@@ -949,7 +949,7 @@ jQuery(document).ready(function ($) {
 
                     $('.oer-curriculum-download-copy-icon').html(icon);
                     
-                    $('input[name="oer_oer_curriculum_download_copy_document"]').val(attachment.url);
+                    $('input[name="oer_curriculum_download_copy_document"]').val(attachment.url);
                     if (dis.parent().find('.oer-curriculum-selected-section')) {
                         dis.parent().find('.oer-curriculum-selected-section a').attr('href',attachment.url);
                         dis.parent().find('.oer-curriculum-selected-section a').text(attachment.url);
@@ -965,20 +965,20 @@ jQuery(document).ready(function ($) {
         
         // Select lesson document for download copy
         lpPrimarySourceSensitiveMaterial: function() {
-            $(document).on('change', 'input[name="oer_oer_curriculum_primary_resources[sensitive_material][]"]', function (e) {
+            $(document).on('change', 'input[name="oer_curriculum_primary_resources[sensitive_material][]"]', function (e) {
                 e.preventDefault();
                 var dis = $(this);
                 var val = "no";
                 if (dis.is(":checked")) {
                     val = "yes"
                 } 
-                dis.parent().find('input[name="oer_oer_curriculum_primary_resources[sensitive_material_value][]"]').val(val);
+                dis.parent().find('input[name="oer_curriculum_primary_resources[sensitive_material_value][]"]').val(val);
             });
         },
         
         // Select Type
         lpOtherCurriculumType: function() {
-            $(document).on('change', 'select[name="oer_oer_curriculum_type"]', function (e) {
+            $(document).on('change', 'select[name="oer_curriculum_type"]', function (e) {
                 var dis = $(this);
                 if (dis.val()=="Other")
                     $('.other-type-group').removeClass('hidden').show();
@@ -1104,7 +1104,7 @@ jQuery(document).ready(function ($) {
         /** Add Featured Image Selection on Add Textbox/Resource **/
         addFeaturedImageOnResourceTextBox: function(){
             var frame, metabox, btn, input, imageholder;
-            $(document).on('click', 'button.oer_oer_curriculum_primary_resources_thumbnail_button',function(e) {
+            $(document).on('click', 'button.oer_curriculum_primary_resources_thumbnail_button',function(e) {
                 metabox = $(this).closest(".oer-curriculum-primary-resource-element-wrapper");
                 btn = $(this);
                 input = metabox.find('.oer_primary_resourceurl');
@@ -1152,7 +1152,7 @@ jQuery(document).ready(function ($) {
                 input.val("");
                 imageholder.find("img").remove();
                 btn.remove();
-                metabox.find('button.oer_oer_curriculum_primary_resources_thumbnail_button').text("Set Thumbnail");
+                metabox.find('button.oer_curriculum_primary_resources_thumbnail_button').text("Set Thumbnail");
             });
         }
     };

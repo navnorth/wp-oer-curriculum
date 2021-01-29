@@ -26,7 +26,7 @@
                 <div class="oer-curriculum-standard-default-result">
                     <?php
                     if (function_exists('was_selectable_admin_standards')){
-                        was_selectable_admin_standards($inquiryset_post->ID, 'oer_oer_curriculum_standards');
+                        was_selectable_admin_standards($inquiryset_post->ID, 'oer_curriculum_standards');
                     }?>
                 </div>
             </div>

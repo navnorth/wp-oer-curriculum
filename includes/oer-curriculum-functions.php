@@ -120,7 +120,7 @@ if (! function_exists('oer_curriculum_get_standard_notations')) {
                 <ul class="oer_curriculum_notations">
                     <?php
                     // Check if data already saved for current editing post
-                    $post_standards = get_post_meta($post->ID, 'oer_oer_curriculum_standards' );
+                    $post_standards = get_post_meta($post->ID, 'oer_curriculum_standards' );
                     $post_standards_array = array();
                     if (isset($post_standards[0]) && !empty($post_standards[0])){
                         $post_standards_array = explode(',', $post_standards[0]);
@@ -409,7 +409,7 @@ if (! function_exists('oer_curriculum_title_from_slug')){
 
 if (! function_exists('oer_curriculum_grade_level')){
     function oer_curriculum_grade_level($inquiry_set_id){
-        $grades = get_post_meta($inquiry_set_id, "oer_oer_curriculum_grades", true);
+        $grades = get_post_meta($inquiry_set_id, "oer_curriculum_grades", true);
         if(empty($grades)){
           $_tmp = '';
         }else{
@@ -558,64 +558,64 @@ if (!function_exists('oer_curriculum_get_meta_label')){
 	function oer_curriculum_get_meta_label($key){
             $label = "";
             switch ($key){
-            case "oer_oer_curriculum_authors":
+            case "oer_curriculum_authors":
                 $label = __("Author", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_primary_resources":
+            case "oer_curriculum_primary_resources":
                 $label = __("Primary Resources", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_iq":
+            case "oer_curriculum_iq":
                 $label = __("Investigative Question", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_related_objective":
+            case "oer_curriculum_related_objective":
                 $label = __("Related Instructional Objectives (SWBAT...)", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_custom_editor_historical_background":
+            case "oer_curriculum_custom_editor_historical_background":
                 $label = __("Historical Background", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_download_copy":
+            case "oer_curriculum_download_copy":
                 $label = __("Download Copy", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_download_copy_document":
+            case "oer_curriculum_download_copy_document":
                 $label = __("Download Copy Document", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_related_inquiry_set":
+            case "oer_curriculum_related_inquiry_set":
                 $label = __("Related Inquiry Sets", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_related_inquiry_set_1":
+            case "oer_curriculum_related_inquiry_set_1":
                 $label = __("Inquiry Set 1", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_related_inquiry_set_2":
+            case "oer_curriculum_related_inquiry_set_2":
                 $label = __("Inquiry Set 2", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_related_inquiry_set_3":
+            case "oer_curriculum_related_inquiry_set_3":
                 $label = __("Inquiry Set 3", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_required_materials":
+            case "oer_curriculum_required_materials":
                 $label = __("Required Equipment Materials", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_grades":
+            case "oer_curriculum_grades":
                 $label = __("Grade Level", OER_LESSON_PLAN_SLUG);
                 break;
             case "oer_curriculum_oer_materials":
                 $label = __("Materials", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_type":
+            case "oer_curriculum_type":
                 $label = __("Type", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_type_other":
+            case "oer_curriculum_type_other":
                 $label = __("Other Type", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_age_levels":
+            case "oer_curriculum_age_levels":
                 $label = __("Appropriate Age Levels", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_suggested_instructional_time":
+            case "oer_curriculum_suggested_instructional_time":
                 $label = __("Suggested Instructional Time", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_standards":
+            case "oer_curriculum_standards":
                 $label = __("Standards", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_oer_curriculum_additional_sections":
+            case "oer_curriculum_additional_sections":
                 $label = __("Additional Sections", OER_LESSON_PLAN_SLUG);
                 break;
 	    }
@@ -719,12 +719,12 @@ if (!function_exists('oer_curriculum_modules')){
             
             foreach($elements_orders as $elementKey=>$order){
                 if (!in_array($elementKey,$keys)){
-                    if (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_oer_curriculum_vocabulary_list_title_') === false) 
+                    if (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_vocabulary_list_title_') === false) 
                         $module = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                     
-                    if (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_oer_curriculum_custom_text_list_') !== false){
+                    if (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_custom_text_list_') !== false){
                         $module['title'] = "Text List";
-                    } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_oer_curriculum_vocabulary_list_title_') !== false) {
+                    } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_vocabulary_list_title_') !== false) {
                         $oer_curriculum_vocabulary_list_title = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
                         $module['title'] = $oer_curriculum_vocabulary_list_title;
                     } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_oer_materials_list_') !== false) {

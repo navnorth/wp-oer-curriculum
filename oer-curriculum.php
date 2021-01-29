@@ -56,30 +56,30 @@ $oer_curriculum_default_structure = array(
     'oer_curriculum_required_materials',
     'oer_curriculum_additional_sections',
     'oer_curriculum_primary_resources',
-    // 'oer_oer_curriculum_custom_editor_teacher_background',
-    // 'oer_oer_curriculum_custom_editor_student_background',
-    //'oer_oer_curriculum_custom_editor_historical_background',
+    // 'oer_curriculum_custom_editor_teacher_background',
+    // 'oer_curriculum_custom_editor_student_background',
+    //'oer_curriculum_custom_editor_historical_background',
     'oer_curriculum_oer_materials',
     //'oer_curriculum_add_module'
 );
 
 $oer_curriculum_deleted_fields = array(
     'oer_curriculum_oer_materials',
-    'oer_oer_curriculum_custom_editor_6',
-    'oer_oer_curriculum_vocabulary_list_title_6',
-    'oer_oer_curriculum_vocabulary_details_6',
-    'oer_oer_curriculum_custom_editor_7',
-    'oer_oer_curriculum_custom_text_list_7',
-    'oer_oer_curriculum_custom_text_list_8',
+    'oer_curriculum_custom_editor_6',
+    'oer_curriculum_vocabulary_list_title_6',
+    'oer_curriculum_vocabulary_details_6',
+    'oer_curriculum_custom_editor_7',
+    'oer_curriculum_custom_text_list_7',
+    'oer_curriculum_custom_text_list_8',
     'oer_curriculum_oer_materials_list_8',
     'oer_curriculum_oer_materials_list_9',
-    'oer_oer_curriculum_custom_text_list_6',
-    'oer_oer_curriculum_vocabulary_list_title_7',
-    'oer_oer_curriculum_vocabulary_details_7',
-    'oer_oer_curriculum_vocabulary_list_title_8',
-    'oer_oer_curriculum_vocabulary_details_8',
-    'oer_oer_curriculum_vocabulary_list_title_9',
-    'oer_oer_curriculum_vocabulary_details_9'
+    'oer_curriculum_custom_text_list_6',
+    'oer_curriculum_vocabulary_list_title_7',
+    'oer_curriculum_vocabulary_details_7',
+    'oer_curriculum_vocabulary_list_title_8',
+    'oer_curriculum_vocabulary_details_8',
+    'oer_curriculum_vocabulary_list_title_9',
+    'oer_curriculum_vocabulary_details_9'
 );
 
 $oer_convert_info = true;
@@ -256,7 +256,7 @@ add_action( 'rest_api_init', 'oer_curriculum_add_meta_to_api');
 function oer_curriculum_add_meta_to_api() {
 	// Register Grade Levels to REST API
 	register_rest_field( 'oer-curriculum',
-			    'oer_oer_curriculum_grades',
+			    'oer_curriculum_grades',
 			    array(
 				'get_callback' => 'oer_curriculum_rest_get_meta_field',
 				'update_callback' => null,
@@ -279,8 +279,8 @@ function oer_curriculum_retrieve_rootslug(){
   foreach ($_segments as $_segment){
     if(trim($_segment," ") !== '' && substr_count($_segment,'%') == 0){$_pref .= $_segment.'/';}
   }
-  if(get_option('oer_oer_curriculum_general_setting')){
-    $_genset = json_decode(get_option('oer_oer_curriculum_general_setting'));
+  if(get_option('oer_curriculum_general_setting')){
+    $_genset = json_decode(get_option('oer_curriculum_general_setting'));
     $_root_slug = ($_genset->rootslug_enabled > 0 && trim($_genset->rootslug)!= '')? $_genset->rootslug: 'curriculum'; 
   }else{
     $_root_slug = 'curriculum';
@@ -289,7 +289,7 @@ function oer_curriculum_retrieve_rootslug(){
 }
 
 function oer_curriculum_rest_get_meta_field($inquiryset, $field, $request){
-	if ($field=="oer_oer_curriculum_grades") {
+	if ($field=="oer_curriculum_grades") {
 		$grades = get_post_meta($inquiryset['id'], $field, true);
                 if (is_array($grades))
                     $grades = $grades[0];

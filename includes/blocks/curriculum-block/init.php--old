@@ -153,11 +153,11 @@ function render_posts_block($attributes, $ajx=false){
 			$_content .= '<div class="oer-curriculum-cur-blk-right">';
 				$_content .= '<div class="ttl"><a href="'.get_post_permalink($post->ID).'">'.$post->post_title.'</a></div>';
 				$_content .= '<div class="oer-curriculum-cur-postmeta">';
-					if(count($post->oer_oer_curriculum_grades)>1){
-						$_content .= '<span class="oer-curriculum-cur-postmeta-grades"><strong>Grades:</strong> '. $post->oer_oer_curriculum_grades[0].'-'.$post->oer_oer_curriculum_grades[count($post->oer_oer_curriculum_grades)-1].'</span>';
+					if(count($post->oer_curriculum_grades)>1){
+						$_content .= '<span class="oer-curriculum-cur-postmeta-grades"><strong>Grades:</strong> '. $post->oer_curriculum_grades[0].'-'.$post->oer_curriculum_grades[count($post->oer_curriculum_grades)-1].'</span>';
 					}else{
-						if($post->oer_oer_curriculum_grades[0] != ''){
-								$_content .= '<span class="oer-curriculum-cur-postmeta-grades"><strong>Grade:</strong> '. $post->oer_oer_curriculum_grades[0].'</span>';
+						if($post->oer_curriculum_grades[0] != ''){
+								$_content .= '<span class="oer-curriculum-cur-postmeta-grades"><strong>Grade:</strong> '. $post->oer_curriculum_grades[0].'</span>';
 						}
 					}
 				$_content .= '</div>';					
@@ -326,7 +326,7 @@ function curriculum_tax_query(){
 			$_ret[$i]['content']            = substr(html_entity_decode(strip_tags($post->post_content)),0,180);
 			$_ret[$i]['link']               = get_post_permalink($post->ID);
 			$_ret[$i]['featured_image_url'] = get_the_post_thumbnail_url($post->ID,'medium');
-			$_ret[$i]['oer_oer_curriculum_grades']      = $post->oer_oer_curriculum_grades;	
+			$_ret[$i]['oer_curriculum_grades']      = $post->oer_curriculum_grades;	
 			$_ret[$i]['tags']               = wp_get_post_tags($post->ID, array('fields' => 'ids'));
 			
 			

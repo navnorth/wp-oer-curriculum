@@ -13,14 +13,14 @@ $post_meta_data = get_post_meta($post->ID );
 //echo "<pre>"; print_r(get_post_custom($post->ID, '', true ));
 
 // Lesson activity data
-$oer_curriculum_activity_title  = isset($post_meta_data['oer_oer_curriculum_activity_title'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_activity_title'][0]) : array();
-$oer_curriculum_activity_type   = isset($post_meta_data['oer_oer_curriculum_activity_type'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_activity_type'][0]) : array();
-$oer_curriculum_activity_detail = isset($post_meta_data['oer_oer_curriculum_activity_detail'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_activity_detail'][0]) : array();
+$oer_curriculum_activity_title  = isset($post_meta_data['oer_curriculum_activity_title'][0]) ? unserialize($post_meta_data['oer_curriculum_activity_title'][0]) : array();
+$oer_curriculum_activity_type   = isset($post_meta_data['oer_curriculum_activity_type'][0]) ? unserialize($post_meta_data['oer_curriculum_activity_type'][0]) : array();
+$oer_curriculum_activity_detail = isset($post_meta_data['oer_curriculum_activity_detail'][0]) ? unserialize($post_meta_data['oer_curriculum_activity_detail'][0]) : array();
 
 $elements_orders        = isset($post_meta_data['oer_curriculum_order'][0]) ? unserialize($post_meta_data['oer_curriculum_order'][0]) : array();
 //was_selectable_admin_standards($post->ID, "oer_standard");
 foreach ($elements_orders as $orderKey => $orderValue) {
-    if (isset($post_meta_data[$orderKey]) && strpos($orderKey, 'oer_oer_curriculum_custom_text_list_') !== false) {
+    if (isset($post_meta_data[$orderKey]) && strpos($orderKey, 'oer_curriculum_custom_text_list_') !== false) {
       // print_r($post_meta_data[$orderKey]); echo  "<br/>";
     }
     //echo "Key -> " . $orderKey . "  value -> " . $orderValue ."<br/>";
@@ -28,24 +28,24 @@ foreach ($elements_orders as $orderKey => $orderValue) {
 $default = false;
 
 // Check Metadata settings for label and if enabled
-$author_set = (get_option('oer_oer_curriculum_authors_label'))?true:false;
-$author_enabled = (get_option('oer_oer_curriculum_authors_enabled'))?true:false;
-$primary_resources_set = (get_option('oer_oer_curriculum_primary_resources_label'))?true:false;
-$primary_resources_enabled = (get_option('oer_oer_curriculum_primary_resources_enabled'))?true:false;
+$author_set = (get_option('oer_curriculum_authors_label'))?true:false;
+$author_enabled = (get_option('oer_curriculum_authors_enabled'))?true:false;
+$primary_resources_set = (get_option('oer_curriculum_primary_resources_label'))?true:false;
+$primary_resources_enabled = (get_option('oer_curriculum_primary_resources_enabled'))?true:false;
 $materials_set = (get_option('oer_curriculum_oer_materials_label'))?true:false;
 $materials_enabled = (get_option('oer_curriculum_oer_materials_enabled'))?true:false;
-$iq_set = (get_option('oer_oer_curriculum_iq_label'))?true:false;
-$iq_enabled = (get_option('oer_oer_curriculum_iq_enabled'))?true:false;
-$req_materials_set = (get_option('oer_oer_curriculum_required_materials_label'))?true:false;
-$req_materials_enabled = (get_option('oer_oer_curriculum_required_materials_enabled'))?true:false;
-$additional_sections_set = (get_option('oer_oer_curriculum_additional_sections_label'))?true:false;
-$additional_sections_enabled = (get_option('oer_oer_curriculum_additional_sections_enabled'))?true:false;
-$history_bg_set = (get_option('oer_oer_curriculum_custom_editor_historical_background_label'))?true:false;
-$history_bg_enabled = (get_option('oer_oer_curriculum_custom_editor_historical_background_enabled'))?true:false;
-$type_set = (get_option('oer_oer_curriculum_type_label'))?true:false;
-$type_enabled = (get_option('oer_oer_curriculum_type_enabled'))?true:false;
-$standards_set = (get_option('oer_oer_curriculum_standards_label'))?true:false;
-$standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:false;
+$iq_set = (get_option('oer_curriculum_iq_label'))?true:false;
+$iq_enabled = (get_option('oer_curriculum_iq_enabled'))?true:false;
+$req_materials_set = (get_option('oer_curriculum_required_materials_label'))?true:false;
+$req_materials_enabled = (get_option('oer_curriculum_required_materials_enabled'))?true:false;
+$additional_sections_set = (get_option('oer_curriculum_additional_sections_label'))?true:false;
+$additional_sections_enabled = (get_option('oer_curriculum_additional_sections_enabled'))?true:false;
+$history_bg_set = (get_option('oer_curriculum_custom_editor_historical_background_label'))?true:false;
+$history_bg_enabled = (get_option('oer_curriculum_custom_editor_historical_background_enabled'))?true:false;
+$type_set = (get_option('oer_curriculum_type_label'))?true:false;
+$type_enabled = (get_option('oer_curriculum_type_enabled'))?true:false;
+$standards_set = (get_option('oer_curriculum_standards_label'))?true:false;
+$standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false;
 
 ?>
 <div class="oer_curriculum_meta_wrapper">
@@ -74,7 +74,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                             <li class="list-group-item">
                                 <a href="#oer-curriculum-authors" title="Lesson Times">
                                     <?php
-                                    echo oer_curriculum_get_field_label('oer_oer_curriculum_authors');
+                                    echo oer_curriculum_get_field_label('oer_curriculum_authors');
                                     ?>
                                 </a>
                             </li>
@@ -86,7 +86,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                             <li class="list-group-item">
                                 <a href="#oer-curriculum-primary-resources" title="Primary Resources">
                                     <?php
-                                    echo oer_curriculum_get_field_label('oer_oer_curriculum_primary_resources');
+                                    echo oer_curriculum_get_field_label('oer_curriculum_primary_resources');
                                     ?>
                                 </a>
                             </li>
@@ -107,21 +107,21 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                             if (($iq_set && $iq_enabled) || !$iq_set) {
                             ?>
                             <li class="list-group-item">
-                                <a href="#oer-curriculum-iq" title="Investigative Question"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_iq'); ?></a>
+                                <a href="#oer-curriculum-iq" title="Investigative Question"><?php echo oer_curriculum_get_field_label('oer_curriculum_iq'); ?></a>
                             </li>
                         <?php }
                         } elseif ($elementKey == 'oer_curriculum_required_materials') {
                             if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
                             ?>
                             <li class="list-group-item">
-                                <a href="#oer-curriculum-required-materials" title="Required Materials"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_required_materials');  ?></a>
+                                <a href="#oer-curriculum-required-materials" title="Required Materials"><?php echo oer_curriculum_get_field_label('oer_curriculum_required_materials');  ?></a>
                             </li>
                         <?php }
                         } elseif ($elementKey == 'oer_curriculum_additional_sections') {
                             if (($additional_sections_set && $additional_sections_enabled) || !$additional_sections_set) {
                             ?>
                             <li class="list-group-item">
-                                <a href="#oer-curriculum-additional-sections" title="Additional Sections"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_additional_sections');  ?></a>
+                                <a href="#oer-curriculum-additional-sections" title="Additional Sections"><?php echo oer_curriculum_get_field_label('oer_curriculum_additional_sections');  ?></a>
                             </li>
                         <?php }
                         } elseif ($elementKey == 'oer_curriculum_lesson_times_order') {?>
@@ -131,7 +131,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                         <?php } elseif ($elementKey == 'oer_curriculum_standard_order') {
                              if (($standards_set && $standards_enabled) || !$standards_set) { ?>
                             <li class="list-group-item">
-                                <a href="#oer-curriculum-standards-group" title="Standards and Objectives"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_standards');  ?></a>
+                                <a href="#oer-curriculum-standards-group" title="Standards and Objectives"><?php echo oer_curriculum_get_field_label('oer_curriculum_standards');  ?></a>
                             </li>
                         <?php }
                         } elseif ($elementKey == 'oer_curriculum_activities_order') {?>
@@ -160,11 +160,11 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                             <li class="list-group-item">
                                 <a href="#oer-curriculum-summative-group" title="Summative Assessment">Summative Assessment</a>
                             </li>
-                        <?php } elseif (strpos($elementKey, 'oer_oer_curriculum_custom_editor_teacher_background') !== false) {?>
+                        <?php } elseif (strpos($elementKey, 'oer_curriculum_custom_editor_teacher_background') !== false) {?>
                             <li class="list-group-item">
                                 <a href="#oer-curriculum-custom-editor-group-teacher-background" title="Teacher Background">Teacher Background</a>
                             </li>
-                        <?php } elseif (strpos($elementKey, 'oer_oer_curriculum_custom_editor_student_background') !== false) {?>
+                        <?php } elseif (strpos($elementKey, 'oer_curriculum_custom_editor_student_background') !== false) {?>
                             <li class="list-group-item">
                                 <a href="#oer-curriculum-custom-editor-group-student-background" title="Student Background">Student Background</a>
                             </li>
@@ -178,13 +178,13 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                     </li>
                     <?php if (($author_set && $author_enabled) || !$author_set) { ?>
                     <li class="list-group-item">
-                        <a href="#oer-curriculum-authors" title="Authors"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_authors'); ?></a>
+                        <a href="#oer-curriculum-authors" title="Authors"><?php echo oer_curriculum_get_field_label('oer_curriculum_authors'); ?></a>
                     </li>
                     <?php } ?>
                     <?php if (is_oer_plugin_installed()){ ?>
                     <?php if (($primary_resources_set && $primary_resources_enabled) || !$primary_resources_set) { ?>
                     <li class="list-group-item">
-                        <a href="#oer-curriculum-primary-resources" title="Primary Resources"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_primary_resources'); ?></a>
+                        <a href="#oer-curriculum-primary-resources" title="Primary Resources"><?php echo oer_curriculum_get_field_label('oer_curriculum_primary_resources'); ?></a>
                     </li>
                     <?php } ?>
                     <?php } ?>
@@ -195,12 +195,12 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                     <?php } ?>
                     <?php if (($iq_set && $iq_enabled) || !$iq_set) { ?>
                     <li class="list-group-item">
-                        <a href="#oer-curriculum-iq" title="Investigative Question"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_iq'); ?></a>
+                        <a href="#oer-curriculum-iq" title="Investigative Question"><?php echo oer_curriculum_get_field_label('oer_curriculum_iq'); ?></a>
                     </li>
                     <?php } ?>
                     <?php if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) { ?>
                      <li class="list-group-item">
-                        <a href="#oer-curriculum-required-materials" title="Required Materials"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_required_materials'); ?></a>
+                        <a href="#oer-curriculum-required-materials" title="Required Materials"><?php echo oer_curriculum_get_field_label('oer_curriculum_required_materials'); ?></a>
                     </li>
                      <?php } ?>
                     <li class="list-group-item">
@@ -208,7 +208,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                     </li>
                     <?php if (($standards_set && $standards_enabled) || !$standards_set) { ?>
                     <li class="list-group-item">
-                        <a href="#oer-curriculum-standards-group" title="Standards and Objectives"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_standards');  ?></a>
+                        <a href="#oer-curriculum-standards-group" title="Standards and Objectives"><?php echo oer_curriculum_get_field_label('oer_curriculum_standards');  ?></a>
                     </li>
                     <?php } ?>
                     <li class="list-group-item">
@@ -251,8 +251,8 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                 </div>
                 <div class="panel-body">
                     <?php
-                    $oer_curriculum_type = isset($post_meta_data['oer_oer_curriculum_type'][0]) ? $post_meta_data['oer_oer_curriculum_type'][0] : "";
-                    $oer_curriculum_type_other = isset($post_meta_data['oer_oer_curriculum_type_other'][0]) ? $post_meta_data['oer_oer_curriculum_type_other'][0] : "";
+                    $oer_curriculum_type = isset($post_meta_data['oer_curriculum_type'][0]) ? $post_meta_data['oer_curriculum_type'][0] : "";
+                    $oer_curriculum_type_other = isset($post_meta_data['oer_curriculum_type_other'][0]) ? $post_meta_data['oer_curriculum_type_other'][0] : "";
                     $xclass = " hidden";
                     if (($type_set && $type_enabled) || !$type_set) {
                         if ($oer_curriculum_type=="Other")
@@ -260,16 +260,16 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                         
                     ?>
                     <div class="form-group">
-                        <label for="oer_oer_curriculum_type"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_type'); ?></label>
-                        <select name="oer_oer_curriculum_type" id="oer_oer_curriculum_type" class="form-control">
+                        <label for="oer_curriculum_type"><?php echo oer_curriculum_get_field_label('oer_curriculum_type'); ?></label>
+                        <select name="oer_curriculum_type" id="oer_curriculum_type" class="form-control">
                             <?php echo oer_curriculum_get_curriculum_type($oer_curriculum_type); ?>
                         </select>
                     </div>
                     <div class="form-group other-type-group<?php echo $xclass; ?>">
-                        <label for="oer_oer_curriculum_type_other"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_type_other'); ?></label>
+                        <label for="oer_curriculum_type_other"><?php echo oer_curriculum_get_field_label('oer_curriculum_type_other'); ?></label>
                         <input type="text"
                                class="form-control"
-                               name="oer_oer_curriculum_type_other"
+                               name="oer_curriculum_type_other"
                                placeholder="Curriculum Type"
                                value="<?php echo isset($oer_curriculum_type_other) ? $oer_curriculum_type_other : "";?>"
                         >
@@ -295,11 +295,11 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                             </div>
                             <div class="panel-body">
                                 <?php
-                                $oer_curriculum_introduction = isset($post_meta_data['oer_oer_curriculum_introduction'][0]) ? $post_meta_data['oer_oer_curriculum_introduction'][0] : "";
+                                $oer_curriculum_introduction = isset($post_meta_data['oer_curriculum_introduction'][0]) ? $post_meta_data['oer_curriculum_introduction'][0] : "";
                                 wp_editor( $oer_curriculum_introduction,
                                     'oer-curriculum-introduction',
                                     $settings = array(
-                                        'textarea_name' => 'oer_oer_curriculum_introduction',
+                                        'textarea_name' => 'oer_curriculum_introduction',
                                         'media_buttons' => true,
                                         'textarea_rows' => 10,
                                         'drag_drop_upload' => true,
@@ -313,13 +313,13 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                         if (($author_set && $author_enabled) || !$author_set) { 
                         ?>
                         <?php
-                        $authors = (isset($post_meta_data['oer_oer_curriculum_authors'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_authors'][0]) : array());
+                        $authors = (isset($post_meta_data['oer_curriculum_authors'][0]) ? unserialize($post_meta_data['oer_curriculum_authors'][0]) : array());
                         if(!empty($authors)) { ?>
                             <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-authors-group" id="oer-curriculum-authors">
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_authors_order]" class="element-order" value="<?php echo $value;?>">
                                 <div class="panel-heading">
                                     <h3 class="panel-title oer-curriculum-module-title">
-                                        <?php echo oer_curriculum_get_field_label('oer_oer_curriculum_authors'); ?>
+                                        <?php echo oer_curriculum_get_field_label('oer_curriculum_authors'); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -351,7 +351,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                                 <div class="form-group">
                                                                     <input type="text"
                                                                            class="form-control"
-                                                                           name="oer_oer_curriculum_authors[name][]"
+                                                                           name="oer_curriculum_authors[name][]"
                                                                            placeholder="Name"
                                                                            value="<?php echo $authorName;?>"
                                                                     >
@@ -361,7 +361,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                                 <div class="form-group">
                                                                     <input type="text"
                                                                            class="form-control"
-                                                                           name="oer_oer_curriculum_authors[role][]"
+                                                                           name="oer_curriculum_authors[role][]"
                                                                            placeholder="Role"
                                                                            value="<?php echo isset($authors['role'][$authorKey]) ? $authors['role'][$authorKey] : "";?>"
                                                                     >
@@ -371,7 +371,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                                 <div class="form-group">
                                                                     <input type="text"
                                                                            class="form-control"
-                                                                           name="oer_oer_curriculum_authors[author_url][]"
+                                                                           name="oer_curriculum_authors[author_url][]"
                                                                            placeholder="Author URL"
                                                                            value="<?php echo isset($authors['author_url'][$authorKey]) ? $authors['author_url'][$authorKey] : "";?>"
                                                                     >
@@ -381,7 +381,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                                 <div class="form-group">
                                                                     <input type="text"
                                                                            class="form-control"
-                                                                           name="oer_oer_curriculum_authors[institution][]"
+                                                                           name="oer_curriculum_authors[institution][]"
                                                                            placeholder="Institution"
                                                                            value="<?php echo isset($authors['institution'][$authorKey]) ? $authors['institution'][$authorKey] : "";?>"
                                                                     >
@@ -391,7 +391,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                                 <div class="form-group">
                                                                     <input type="text"
                                                                            class="form-control"
-                                                                           name="oer_oer_curriculum_authors[institution_url][]"
+                                                                           name="oer_curriculum_authors[institution_url][]"
                                                                            placeholder="Institution URL"
                                                                            value="<?php echo isset($authors['institution_url'][$authorKey]) ? $authors['institution_url'][$authorKey] : "";?>"
                                                                     >
@@ -399,7 +399,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <input type="hidden"
-                                                                       name="oer_oer_curriculum_authors[author_pic][]"
+                                                                       name="oer_curriculum_authors[author_pic][]"
                                                                        value="<?php echo isset($authors['author_pic'][$authorKey]) ? $authors['author_pic'][$authorKey] : "";?>"
                                                                 >
                                                                 <?php
@@ -441,7 +441,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_primary_resources]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title oer-curriculum-module-title">
-                                    <?php echo oer_curriculum_get_field_label('oer_oer_curriculum_primary_resources'); ?>
+                                    <?php echo oer_curriculum_get_field_label('oer_curriculum_primary_resources'); ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -459,7 +459,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                         'orderby' => 'title',
                                         'order'    => 'ASC'
                                     ]);
-                                    $primary_resources = (isset($post_meta_data['oer_oer_curriculum_primary_resources'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_primary_resources'][0]) : array());
+                                    $primary_resources = (isset($post_meta_data['oer_curriculum_primary_resources'][0]) ? unserialize($post_meta_data['oer_curriculum_primary_resources'][0]) : array());
                                     if (count($primary_resources) && isset($primary_resources['resource'])) {
                                         foreach ($primary_resources['resource'] as $resourceKey => $resource) { ?>
                                             <?php
@@ -500,20 +500,20 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                                 <span class="btn btn-danger btn-sm oer-curriculum-remove-source-featured-image" title="Remove Thumbnail"><i class="fas fa-minus-circle"></i></span>
                                                                 <?php endif; ?>
                                                             </div>
-                                                            <button name="oer_oer_curriculum_primary_resources_thumbnail_button" class="oer_oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
-                                                            <input type="hidden" name="oer_oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="<?php echo $custom_thumbnail; ?>" />
+                                                            <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                                            <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="<?php echo $custom_thumbnail; ?>" />
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                                <div class="oer_oer_curriculum_primary_resources_image_wrappper">
+                                                                <div class="oer_curriculum_primary_resources_image_wrappper">
                                                                   <label>Resource</label>
                                                               
                                                                   <?php $btn_text = (htmlspecialchars($resource) > '')? 'Change Resource' : 'Select Resource' ?>
                                                                   
-                                                                  <div class="oer_oer_curriculum_primary_resources_image">
-                                                                    <div class="oer_oer_curriculum_primary_resources_image_display">
+                                                                  <div class="oer_curriculum_primary_resources_image">
+                                                                    <div class="oer_curriculum_primary_resources_image_display">
                                                                       <?php 
                                                                       if(!empty($resource)){
                                                                           $rsrc = get_page_by_title($resource,OBJECT,"resource");
@@ -533,19 +533,19 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                                       }
                                                                       ?>
                                                                     </div>
-                                                                    <div class="oer_oer_curriculum_primary_resources_image_preloader" style="display:none;">
+                                                                    <div class="oer_curriculum_primary_resources_image_preloader" style="display:none;">
                                                                       <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                                                                     </div>
                                                                   </div>
                                                                   
-                                                                  <div class="oer_oer_curriculum_primary_resources_display"><?php echo htmlspecialchars($resource);?></div>
-                                                                  <input type="hidden" name="oer_oer_curriculum_primary_resources[resource][]" value="<?php echo htmlspecialchars($resource);?>">
+                                                                  <div class="oer_curriculum_primary_resources_display"><?php echo htmlspecialchars($resource);?></div>
+                                                                  <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="<?php echo htmlspecialchars($resource);?>">
                                                                   <input type="button" class="button oer-curriculum-resource-selector-button" value="<?php echo $btn_text; ?>">
                                                                 </div>
                                                               
                                                                 
                                                                 <!--
-                                                                <select name="oer_oer_curriculum_primary_resources[resource][]" itm="1" class="form-control">
+                                                                <select name="oer_curriculum_primary_resources[resource][]" itm="1" class="form-control">
                                                                     <option value="">Select Resource</option>
                                                                     <?php
                                                                     if (count($posts)) {
@@ -563,13 +563,13 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                         <div class="col-md-5">
                                                             <div class="checkbox pull-right">
                                                                 <label>
-                                                                    <input type="hidden" name="oer_oer_curriculum_primary_resources[field_type][]" value="<?php echo $resource_field_type; ?>">
+                                                                    <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="<?php echo $resource_field_type; ?>">
                                                                     <input type="hidden"
-                                                                           name="oer_oer_curriculum_primary_resources[sensitive_material_value][]"
+                                                                           name="oer_curriculum_primary_resources[sensitive_material_value][]"
                                                                            value="<?php echo (($sensitiveMaterial == 'yes')? 'yes' : 'no'); ?>"
                                                                     >
                                                                     <input type="checkbox"
-                                                                           name="oer_oer_curriculum_primary_resources[sensitive_material][]"
+                                                                           name="oer_curriculum_primary_resources[sensitive_material][]"
                                                                            value="yes"
                                                                            <?php echo (($sensitiveMaterial == 'yes')? 'checked="checked"' : '');?>
                                                                     >
@@ -604,20 +604,20 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                                     <span class="btn btn-danger btn-sm oer-curriculum-remove-source-featured-image" title="Remove Thumbnail"><i class="fas fa-minus-circle"></i></span>
                                                                     <?php endif; ?>
                                                                 </div>
-                                                                <button name="oer_oer_curriculum_primary_resources_thumbnail_button" class="oer_oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
-                                                                <input type="hidden" name="oer_oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="<?php echo $custom_thumbnail; ?>" />
+                                                                <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                                                <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="<?php echo $custom_thumbnail; ?>" />
                                                             </div>
                                                             <div class="col-md-5">
                                                                 <div class="checkbox pull-left">
                                                                     <label>
-                                                                        <input type="hidden" name="oer_oer_curriculum_primary_resources[resource][]" itm="2" value="">
-                                                                        <input type="hidden" name="oer_oer_curriculum_primary_resources[field_type][]" value="<?php echo $resource_field_type; ?>">
+                                                                        <input type="hidden" name="oer_curriculum_primary_resources[resource][]" itm="2" value="">
+                                                                        <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="<?php echo $resource_field_type; ?>">
                                                                         <input type="hidden"
-                                                                               name="oer_oer_curriculum_primary_resources[sensitive_material_value][]"
+                                                                               name="oer_curriculum_primary_resources[sensitive_material_value][]"
                                                                                value="<?php echo (($sensitiveMaterial == 'yes')? 'yes' : 'no'); ?>"
                                                                         >
                                                                         <input type="checkbox"
-                                                                               name="oer_oer_curriculum_primary_resources[sensitive_material][]"
+                                                                               name="oer_curriculum_primary_resources[sensitive_material][]"
                                                                                value="yes"
                                                                                <?php echo (($sensitiveMaterial == 'yes')? 'checked="checked"' : '');?>
                                                                         >
@@ -632,7 +632,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                         <label>Title</label>
                                                           <input type="text"
                                                               class="form-control"
-                                                              name="oer_oer_curriculum_primary_resources[title][]"
+                                                              name="oer_curriculum_primary_resources[title][]"
                                                               placeholder="Resource Title"
                                                               value="<?php echo isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey] : "";?>">
                                                     </div>
@@ -642,7 +642,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                         <?php wp_editor( $resource_description,
                                                             'oer-curriculum-resource-student-' . $resourceKey,
                                                             $settings = array(
-                                                                'textarea_name' => 'oer_oer_curriculum_primary_resources[description][]',
+                                                                'textarea_name' => 'oer_curriculum_primary_resources[description][]',
                                                                 'media_buttons' => true,
                                                                 'textarea_rows' => 6,
                                                                 'drag_drop_upload' => true,
@@ -657,7 +657,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                         <label>Title</label>
                                                         <input type="text"
                                                             class="form-control"
-                                                            name="oer_oer_curriculum_primary_resources[title][]"
+                                                            name="oer_curriculum_primary_resources[title][]"
                                                             placeholder="Resource Title"
                                                             value="<?php echo isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey] : "";?>">
                                                         <?php else: ?>
@@ -665,7 +665,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                         <?php wp_editor( $teacherInfo,
                                                            'oer-curriculum-resource-teacher-' . $resourceKey,
                                                            $settings = array(
-                                                               'textarea_name' => 'oer_oer_curriculum_primary_resources[teacher_info][]',
+                                                               'textarea_name' => 'oer_curriculum_primary_resources[teacher_info][]',
                                                                'media_buttons' => true,
                                                                'textarea_rows' => 6,
                                                                'drag_drop_upload' => true,
@@ -682,7 +682,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                         <?php wp_editor( $resource_description,
                                                             'oer-curriculum-resource-student-' . $resourceKey,
                                                             $settings = array(
-                                                                'textarea_name' => 'oer_oer_curriculum_primary_resources[description][]',
+                                                                'textarea_name' => 'oer_curriculum_primary_resources[description][]',
                                                                 'media_buttons' => true,
                                                                 'textarea_rows' => 6,
                                                                 'drag_drop_upload' => true,
@@ -694,7 +694,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                         <?php wp_editor( $studentInfo,
                                                             'oer-curriculum-resource-student-' . $resourceKey,
                                                             $settings = array(
-                                                                'textarea_name' => 'oer_oer_curriculum_primary_resources[student_info][]',
+                                                                'textarea_name' => 'oer_curriculum_primary_resources[student_info][]',
                                                                 'media_buttons' => true,
                                                                 'textarea_rows' => 6,
                                                                 'drag_drop_upload' => true,
@@ -734,7 +734,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                         'order'    => 'ASC'
                                                     ]);
                                                     ?>
-                                                    <select name="oer_oer_curriculum_primary_resources[resource][]" itm="3" class="form-control">
+                                                    <select name="oer_curriculum_primary_resources[resource][]" itm="3" class="form-control">
                                                         <option>Select Resource</option>
                                                         <?php
                                                         if (count($posts)) {
@@ -749,9 +749,9 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                 <div class="col-md-5">
                                                     <div class="checkbox pull-right">
                                                         <label>
-                                                            <input type="hidden" name="oer_oer_curriculum_primary_resources[field_type][]" value="resource">
-                                                            <input type="hidden" name="oer_oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
-                                                            <input type="checkbox" name="oer_oer_curriculum_primary_resources[sensitive_material][]" value="yes">
+                                                            <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="resource">
+                                                            <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
+                                                            <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
                                                             Sensitive Material
                                                         </label>
                                                     </div>
@@ -760,7 +760,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                     <label>Title</label>
                                                       <input type="text"
                                                           class="form-control"
-                                                          name="oer_oer_curriculum_primary_resources[title][]"
+                                                          name="oer_curriculum_primary_resources[title][]"
                                                           placeholder="Resource Title"
                                                           value="<?php echo isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey] : "";?>">
                                                 </div>
@@ -769,7 +769,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                     <?php wp_editor( '',
                                                         'oer-curriculum-resource-student-1',
                                                         $settings = array(
-                                                            'textarea_name' => 'oer_oer_curriculum_primary_resources[description][]',
+                                                            'textarea_name' => 'oer_curriculum_primary_resources[description][]',
                                                             'media_buttons' => true,
                                                             'textarea_rows' => 6,
                                                             'drag_drop_upload' => true,
@@ -783,7 +783,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                     <?php wp_editor( '',
                                                         'oer-curriculum-resource-teacher-1',
                                                         $settings = array(
-                                                            'textarea_name' => 'oer_oer_curriculum_primary_resources[teacher_info][]',
+                                                            'textarea_name' => 'oer_curriculum_primary_resources[teacher_info][]',
                                                             'media_buttons' => true,
                                                             'textarea_rows' => 6,
                                                             'drag_drop_upload' => true,
@@ -796,7 +796,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                     <?php wp_editor( '',
                                                         'oer-curriculum-resource-student-1',
                                                         $settings = array(
-                                                            'textarea_name' => 'oer_oer_curriculum_primary_resources[student_info][]',
+                                                            'textarea_name' => 'oer_curriculum_primary_resources[student_info][]',
                                                             'media_buttons' => true,
                                                             'textarea_rows' => 6,
                                                             'drag_drop_upload' => true,
@@ -908,13 +908,13 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                         ?>
                         <!--Investigative Question Module-->
                         <?php
-                        $oer_curriculum_iq  = isset($post_meta_data['oer_oer_curriculum_iq'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_iq'][0]) : array();
+                        $oer_curriculum_iq  = isset($post_meta_data['oer_curriculum_iq'][0]) ? unserialize($post_meta_data['oer_curriculum_iq'][0]) : array();
                         ?>
                         <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-iq" id="oer-curriculum-iq">
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_iq]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title oer-curriculum-module-title">
-                                    <?php echo oer_curriculum_get_field_label('oer_oer_curriculum_iq'); ?>
+                                    <?php echo oer_curriculum_get_field_label('oer_curriculum_iq'); ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -926,7 +926,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 <div class="form-group">
                                     <label>Investigative Question</label>
                                     <input type="text"
-                                           name="oer_oer_curriculum_iq[question]"
+                                           name="oer_curriculum_iq[question]"
                                            maxlength="512"
                                            class="form-control"
                                            placeholder="Investigative Question"
@@ -936,9 +936,9 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 <div class="form-group">
                                     <label>Framework Excerpt</label>
                                     <?php wp_editor( (isset($oer_curriculum_iq['excerpt']) ? $oer_curriculum_iq['excerpt'] : ""),
-                                        'oer_oer_curriculum_iq_excerpt',
+                                        'oer_curriculum_iq_excerpt',
                                         $settings = array(
-                                            'textarea_name' => 'oer_oer_curriculum_iq[excerpt]',
+                                            'textarea_name' => 'oer_curriculum_iq[excerpt]',
                                             'media_buttons' => true,
                                             'textarea_rows' => 6,
                                             'drag_drop_upload' => true,
@@ -954,8 +954,8 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                         ?>
                         <!--Required Equipment Materials Module-->
                         <?php
-                        $oer_curriculum_required_materials  = isset($post_meta_data['oer_oer_curriculum_required_materials'][0]) ? $post_meta_data['oer_oer_curriculum_required_materials'][0] : array();
-                        $oer_curriculum_required_materials_label = isset($post_meta_data['oer_oer_curriculum_required_materials_label'][0]) ? $post_meta_data['oer_oer_curriculum_required_materials_label'][0] : "";
+                        $oer_curriculum_required_materials  = isset($post_meta_data['oer_curriculum_required_materials'][0]) ? $post_meta_data['oer_curriculum_required_materials'][0] : array();
+                        $oer_curriculum_required_materials_label = isset($post_meta_data['oer_curriculum_required_materials_label'][0]) ? $post_meta_data['oer_curriculum_required_materials_label'][0] : "";
                         ?>
                         <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-required-materials" id="oer-curriculum-required-materials">
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_required_materials]" class="element-order" value="<?php echo $value;?>">
@@ -971,10 +971,10 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                             </div>
                             <div class="panel-body">
                                 <?php
-                                $text_features = isset($post_meta_data['oer_oer_curriculum_required_materials'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_required_materials'][0]) : array();
+                                $text_features = isset($post_meta_data['oer_curriculum_required_materials'][0]) ? unserialize($post_meta_data['oer_curriculum_required_materials'][0]) : array();
                                 if (is_array($text_features) && !empty($text_features)){
-                                    $label_id = "oer_oer_curriculum_required_materials[label][]";
-                                    $editor_id = "oer_oer_curriculum_required_materials[editor][]";
+                                    $label_id = "oer_curriculum_required_materials[label][]";
+                                    $editor_id = "oer_curriculum_required_materials[editor][]";
                                     
                                     $cnt = 0;
                                     if (isset($text_features['label']))
@@ -1034,14 +1034,14 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                         ?>
                         <!--Required Equipment Materials Module-->
                         <?php
-                        $oer_curriculum_additional_sections  = isset($post_meta_data['oer_oer_curriculum_additional_sections'][0]) ? $post_meta_data['oer_oer_curriculum_additional_sections'][0] : array();
-                        $oer_curriculum_additional_sections_label = isset($post_meta_data['oer_oer_curriculum_additional_sections_label'][0]) ? $post_meta_data['oer_oer_curriculum_additional_sections_label'][0] : "";
+                        $oer_curriculum_additional_sections  = isset($post_meta_data['oer_curriculum_additional_sections'][0]) ? $post_meta_data['oer_curriculum_additional_sections'][0] : array();
+                        $oer_curriculum_additional_sections_label = isset($post_meta_data['oer_curriculum_additional_sections_label'][0]) ? $post_meta_data['oer_curriculum_additional_sections_label'][0] : "";
                         ?>
                         <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-required-materials" id="oer-curriculum-additional-sections">
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_additional_sections]" class="element-order" value="<?php echo $value;?>">
                             <div class="panel-heading">
                                 <h3 class="panel-title oer-curriculum-module-title">
-                                <?php echo oer_curriculum_get_field_label('oer_oer_curriculum_additional_sections'); ?>
+                                <?php echo oer_curriculum_get_field_label('oer_curriculum_additional_sections'); ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1051,10 +1051,10 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                             </div>
                             <div class="panel-body">
                                 <?php
-                                $text_features = isset($post_meta_data['oer_oer_curriculum_additional_sections'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_additional_sections'][0]) : array();
+                                $text_features = isset($post_meta_data['oer_curriculum_additional_sections'][0]) ? unserialize($post_meta_data['oer_curriculum_additional_sections'][0]) : array();
                                 if (is_array($text_features)){
-                                    $label_id = "oer_oer_curriculum_additional_sections[label][]";
-                                    $editor_id = "oer_oer_curriculum_additional_sections[editor][]";
+                                    $label_id = "oer_curriculum_additional_sections[label][]";
+                                    $editor_id = "oer_curriculum_additional_sections[editor][]";
                                     
                                     $cnt = 0;
                                     if (isset($text_features['label']))
@@ -1125,9 +1125,9 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                             </div>
                             <div class="panel-body">
                                 <?php
-                                $oer_curriculum_times_label  = isset($post_meta_data['oer_oer_curriculum_times_label'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_times_label'][0]) : array();
-                                $oer_curriculum_times_number = isset($post_meta_data['oer_oer_curriculum_times_number'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_times_number'][0]) : array();
-                                $oer_curriculum_times_type   = isset($post_meta_data['oer_oer_curriculum_times_type'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_times_type'][0]) : array();
+                                $oer_curriculum_times_label  = isset($post_meta_data['oer_curriculum_times_label'][0]) ? unserialize($post_meta_data['oer_curriculum_times_label'][0]) : array();
+                                $oer_curriculum_times_number = isset($post_meta_data['oer_curriculum_times_number'][0]) ? unserialize($post_meta_data['oer_curriculum_times_number'][0]) : array();
+                                $oer_curriculum_times_type   = isset($post_meta_data['oer_curriculum_times_type'][0]) ? unserialize($post_meta_data['oer_curriculum_times_type'][0]) : array();
                                 ?>
 
                                 <?php
@@ -1141,7 +1141,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                 <div class="form-group">
                                                     <input type="text"
                                                            class="form-control"
-                                                           name="oer_oer_curriculum_times_label[]"
+                                                           name="oer_curriculum_times_label[]"
                                                            value="<?php echo $item;?>"
                                                            placeholder="label">
                                                 </div>
@@ -1150,14 +1150,14 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                 <div class="form-group">
                                                     <input type="text"
                                                            class="form-control"
-                                                           name="oer_oer_curriculum_times_number[]"
+                                                           name="oer_curriculum_times_number[]"
                                                            value="<?php echo isset($oer_curriculum_times_number[$key]) ? $oer_curriculum_times_number[$key] : '';?>"
                                                            placeholder="40">
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <select name="oer_oer_curriculum_times_type[]" class="form-control">
+                                                    <select name="oer_curriculum_times_type[]" class="form-control">
                                                         <option value="minutes" <?php echo (isset($oer_curriculum_times_type[$key]) ? oer_curriculum_show_selected('minutes', $oer_curriculum_times_type[$key]) : '');?>>Minute(s)</option>
                                                         <option value="hours" <?php echo (isset($oer_curriculum_times_type[$key]) ? oer_curriculum_show_selected('hours', $oer_curriculum_times_type[$key]) : '');?>>Hour(s)</option>
                                                         <option value="days" <?php echo (isset($oer_curriculum_times_type[$key]) ? oer_curriculum_show_selected('days', $oer_curriculum_times_type[$key]) : '');?>>Days(s)</option>
@@ -1179,17 +1179,17 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                     <div class="row oer-curriculum-time-element-row">
                                         <div class="col-md-5">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="oer_oer_curriculum_times_label[]" placeholder="label">
+                                                <input type="text" class="form-control" name="oer_curriculum_times_label[]" placeholder="label">
                                             </div>
                                         </div>
                                         <div class="col-md-1">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="oer_oer_curriculum_times_number[]" placeholder="40">
+                                                <input type="text" class="form-control" name="oer_curriculum_times_number[]" placeholder="40">
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <select name="oer_oer_curriculum_times_type[]" class="form-control">
+                                                <select name="oer_curriculum_times_type[]" class="form-control">
                                                     <option value="minutes">Minute(s)</option>
                                                     <option value="hours">Hour(s)</option>
                                                     <option value="days">Days(s)</option>
@@ -1237,11 +1237,11 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
 
                                 <div id="selected-standard-wrapper">
                                     <?php
-                                    $standards = (isset($post_meta_data['oer_oer_curriculum_standards'][0])? $post_meta_data['oer_oer_curriculum_standards'][0] : "");
+                                    $standards = (isset($post_meta_data['oer_curriculum_standards'][0])? $post_meta_data['oer_curriculum_standards'][0] : "");
                                     get_standard_notations_from_ids($standards, true);
                                     ?>
                                 </div>
-                                <input type="hidden" name="oer_oer_curriculum_standards" value="<?php echo $standards;?>">
+                                <input type="hidden" name="oer_curriculum_standards" value="<?php echo $standards;?>">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <button type="button"
@@ -1258,7 +1258,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                     </div>
 
                                     <?php
-                                    $oer_curriculum_related_objective  = isset($post_meta_data['oer_oer_curriculum_related_objective'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_related_objective'][0]) : array();
+                                    $oer_curriculum_related_objective  = isset($post_meta_data['oer_curriculum_related_objective'][0]) ? unserialize($post_meta_data['oer_curriculum_related_objective'][0]) : array();
                                     if(!empty($oer_curriculum_related_objective)) {
                                         foreach ( $oer_curriculum_related_objective as $key => $item) { ?>
                                             <div class="oer-curriculum-related-objective-row" id="oer-curriculum-related-objective-row">
@@ -1266,7 +1266,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                     <div class="form-group">
                                                         <input type="text"
                                                                class="form-control"
-                                                               name="oer_oer_curriculum_related_objective[]"
+                                                               name="oer_curriculum_related_objective[]"
                                                                value="<?php echo $item;?>"
                                                         >
                                                     </div>
@@ -1285,7 +1285,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                 <div class="form-group">
                                                     <input type="text"
                                                            class="form-control"
-                                                           name="oer_oer_curriculum_related_objective[]"
+                                                           name="oer_curriculum_related_objective[]"
                                                     >
                                                 </div>
                                             </div>
@@ -1345,7 +1345,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                     <div class="form-group">
                                                         <label>Activity Title</label>
                                                         <input type="text"
-                                                               name="oer_oer_curriculum_activity_title[]"
+                                                               name="oer_curriculum_activity_title[]"
                                                                class="form-control"
                                                                placeholder="Activity Title"
                                                                value="<?php echo $item; ?>"
@@ -1354,7 +1354,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                     <div class="row">
                                                         <div class="form-group col-md-8">
                                                             <label for="activity-title">Activity Type</label>
-                                                            <select name="oer_oer_curriculum_activity_type[]" class="form-control">
+                                                            <select name="oer_curriculum_activity_type[]" class="form-control">
                                                                 <option value=""> - Activity Type -</option>
                                                                 <option value="hooks_set" <?php echo (isset($oer_curriculum_activity_type[$key]) ? oer_curriculum_show_selected('hooks_set', $oer_curriculum_activity_type[$key]) : "");?>>Hooks / Set</option>
                                                                 <option value="lecture" <?php echo (isset($oer_curriculum_activity_type[$key]) ? oer_curriculum_show_selected('lecture', $oer_curriculum_activity_type[$key]) : "");?>>Lecture</option>
@@ -1378,7 +1378,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                         wp_editor( $content,
                                                             'oer-curriculum-activity-detail-'.$key,
                                                             $settings = array(
-                                                                'textarea_name' => 'oer_oer_curriculum_activity_detail[]',
+                                                                'textarea_name' => 'oer_curriculum_activity_detail[]',
                                                                 'media_buttons' => true,
                                                                 'textarea_rows' => 10,
                                                                 'drag_drop_upload' => true,
@@ -1419,7 +1419,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 <h4><?php _e("Assessment Type(s):", OER_LESSON_PLAN_SLUG); ?></h4>
                                 <div class="row">
                                     <?php
-                                    $oer_curriculum_assessment_type = (isset($post_meta_data['oer_oer_curriculum_assessment_type'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_assessment_type'][0]) : array());
+                                    $oer_curriculum_assessment_type = (isset($post_meta_data['oer_curriculum_assessment_type'][0]) ? unserialize($post_meta_data['oer_curriculum_assessment_type'][0]) : array());
                                     // Prepare array for the Assessment options checkboxes
                                     $assessment_options = array(
                                         'demonstrations' => 'Demonstrations',
@@ -1438,7 +1438,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                         <div class="col-md-3">
                                             <div class="checkbox oer-summative-checkbox">
                                                 <label>
-                                                    <input name="oer_oer_curriculum_assessment_type[]"
+                                                    <input name="oer_curriculum_assessment_type[]"
                                                            type="checkbox"
                                                            value="<?php echo $key;?>"
                                                         <?php echo oer_curriculum_show_selected($key, $oer_curriculum_assessment_type, 'checkbox')?>
@@ -1450,12 +1450,12 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 </div>
                                 <div class="row">
                                     <?php
-                                    $oer_curriculum_other_assessment_type = (isset($post_meta_data['oer_oer_curriculum_other_assessment_type'][0]) ? $post_meta_data['oer_oer_curriculum_other_assessment_type'][0] : '');
+                                    $oer_curriculum_other_assessment_type = (isset($post_meta_data['oer_curriculum_other_assessment_type'][0]) ? $post_meta_data['oer_curriculum_other_assessment_type'][0] : '');
                                     ?>
                                     <div class="form-group col-md-8">
                                         <label><?php _e("Other", OER_LESSON_PLAN_SLUG); ?></label>
                                         <input type="text"
-                                               name="oer_oer_curriculum_other_assessment_type"
+                                               name="oer_curriculum_other_assessment_type"
                                                class="form-control"
                                                placeholder="Other Assessment Type(s)"
                                                value="<?php echo $oer_curriculum_other_assessment_type;?>"
@@ -1464,11 +1464,11 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 </div>
                                 <div class="form-group">
                                     <?php
-                                    $oer_curriculum_assessment = (isset($post_meta_data['oer_oer_curriculum_assessment'][0]) ? $post_meta_data['oer_oer_curriculum_assessment'][0] : '');
+                                    $oer_curriculum_assessment = (isset($post_meta_data['oer_curriculum_assessment'][0]) ? $post_meta_data['oer_curriculum_assessment'][0] : '');
                                     wp_editor( $oer_curriculum_assessment,
                                         'oer-curriculum-other-assessment',
                                         $settings = array(
-                                            'textarea_name' => 'oer_oer_curriculum_assessment',
+                                            'textarea_name' => 'oer_curriculum_assessment',
                                             'media_buttons' => true,
                                             'textarea_rows' => 10,
                                             'drag_drop_upload' => true,
@@ -1478,9 +1478,9 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 </div>
                             </div>
                         </div>
-                    <?php } elseif ($elementKey == 'oer_oer_curriculum_custom_editor_teacher_background' || $elementKey == 'oer_oer_curriculum_custom_editor_student_background') {
+                    <?php } elseif ($elementKey == 'oer_curriculum_custom_editor_teacher_background' || $elementKey == 'oer_curriculum_custom_editor_student_background') {
                         $group_id = 'oer-curriculum-custom-editor-group-'.$key;
-                        if ($elementKey == 'oer_oer_curriculum_custom_editor_teacher_background')
+                        if ($elementKey == 'oer_curriculum_custom_editor_teacher_background')
                             $group_id = 'oer-curriculum-custom-editor-group-teacher-background';
                         else
                             $group_id = 'oer-curriculum-custom-editor-group-student-background';
@@ -1519,9 +1519,9 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 </div>
                             </div>
                         </div>
-                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_oer_curriculum_custom_editor_') !== false) {?>
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_custom_editor_') !== false) {?>
                         <?php
-                        if ($elementKey!=="oer_oer_curriculum_custom_editor_teacher_background" && $elementKey!=="oer_oer_curriculum_custom_editor_student_background") {
+                        if ($elementKey!=="oer_curriculum_custom_editor_teacher_background" && $elementKey!=="oer_curriculum_custom_editor_student_background") {
                         $oer_curriculum_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                         ?>
                             <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-custom-editor-group-<?php echo $key; ?>">
@@ -1539,14 +1539,14 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 <div class="panel-body">
                                      <div class="form-group">
                                         <label>Title</label>
-                                        <input type="text" name="oer_oer_curriculum_custom_editor_<?php echo $value; ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" value="<?php echo $oer_curriculum_custom_editor['title']; ?>" />
+                                        <input type="text" name="oer_curriculum_custom_editor_<?php echo $value; ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" value="<?php echo $oer_curriculum_custom_editor['title']; ?>" />
                                     </div>
                                     <div class="form-group">
                                     <?php
                                     wp_editor( $oer_curriculum_custom_editor['description'],
                                         'oer-curriculum-custom-editor-'.$value,
                                         $settings = array(
-                                            'textarea_name' => "oer_oer_curriculum_custom_editor_" . $value ."[description]",
+                                            'textarea_name' => "oer_curriculum_custom_editor_" . $value ."[description]",
                                             'media_buttons' => true,
                                             'textarea_rows' => 10,
                                             'drag_drop_upload' => true,
@@ -1558,7 +1558,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 </div>
                             </div>
                     <?php }
-                    } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_oer_curriculum_custom_text_list_') !== false) {?>
+                    } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_custom_text_list_') !== false) {?>
                         <?php
                         $oer_curriculum_custom_text_list = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : array());
                         //echo "<pre>"; echo $elementKey; print_r($post_meta_data[$elementKey]);
@@ -1671,12 +1671,12 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 ><i class="fa fa-plus"></i> Add Materials</button>
                             </div>
                         </div>
-                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_oer_curriculum_vocabulary_list_title_') !== false) {?>
+                    <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_vocabulary_list_title_') !== false) {?>
                         <?php
                         $oer_curriculum_vocabulary_list_title = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
                         $oer_keys = explode('_', $elementKey);
                         $listOrder = end($oer_keys);
-                        $oer_curriculum_vocabulary_details = (isset($post_meta_data['oer_oer_curriculum_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_oer_curriculum_vocabulary_details_'.$listOrder][0] : "");
+                        $oer_curriculum_vocabulary_details = (isset($post_meta_data['oer_curriculum_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_curriculum_vocabulary_details_'.$listOrder][0] : "");
                         ?>
                             <div class="panel panel-default oer-curriculum-element-wrapper" id="oer-curriculum-vocabulary-list-group-<?php echo $key;?>">
                                 <input type="hidden" name="oer_curriculum_order[<?php echo $elementKey?>]" class="element-order" value="<?php echo $value;?>">
@@ -1699,7 +1699,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                         >
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control" name="oer_oer_curriculum_vocabulary_details_<?php echo $listOrder;?>" rows="6"><?php echo $oer_curriculum_vocabulary_details;?></textarea>
+                                        <textarea class="form-control" name="oer_curriculum_vocabulary_details_<?php echo $listOrder;?>" rows="6"><?php echo $oer_curriculum_vocabulary_details;?></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -1729,11 +1729,11 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 </div>
                                 <div class="panel-body">
                                     <?php
-                                    $oer_curriculum_introduction = isset($post_meta_data['oer_oer_curriculum_introduction'][0]) ? $post_meta_data['oer_oer_curriculum_introduction'][0] : "";
+                                    $oer_curriculum_introduction = isset($post_meta_data['oer_curriculum_introduction'][0]) ? $post_meta_data['oer_curriculum_introduction'][0] : "";
                                     wp_editor( $oer_curriculum_introduction,
                                         'oer-curriculum-introduction',
                                         $settings = array(
-                                            'textarea_name' => 'oer_oer_curriculum_introduction',
+                                            'textarea_name' => 'oer_curriculum_introduction',
                                             'media_buttons' => true,
                                             'textarea_rows' => 10,
                                             'drag_drop_upload' => true,
@@ -1752,7 +1752,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_authors_order]" class="element-order" value="<?php echo $index; ?>">
                                 <div class="panel-heading">
                                     <h3 class="panel-title oer-curriculum-module-title">
-                                        <?php echo oer_curriculum_get_field_label('oer_oer_curriculum_authors'); ?>
+                                        <?php echo oer_curriculum_get_field_label('oer_curriculum_authors'); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1780,31 +1780,31 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                 <div class="row oer-curriculum-authors-element-row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="oer_oer_curriculum_authors[name][]" placeholder="Name">
+                                                            <input type="text" class="form-control" name="oer_curriculum_authors[name][]" placeholder="Name">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="oer_oer_curriculum_authors[role][]" placeholder="Role">
+                                                            <input type="text" class="form-control" name="oer_curriculum_authors[role][]" placeholder="Role">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="oer_oer_curriculum_authors[author_url][]" placeholder="Author URL">
+                                                            <input type="text" class="form-control" name="oer_curriculum_authors[author_url][]" placeholder="Author URL">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="oer_oer_curriculum_authors[institution][]" placeholder="Institution">
+                                                            <input type="text" class="form-control" name="oer_curriculum_authors[institution][]" placeholder="Institution">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="oer_oer_curriculum_authors[institution_url][]" placeholder="Institution URL">
+                                                            <input type="text" class="form-control" name="oer_curriculum_authors[institution_url][]" placeholder="Institution URL">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="hidden" name="oer_oer_curriculum_authors[author_pic][]">
+                                                        <input type="hidden" name="oer_curriculum_authors[author_pic][]">
                                                         <img src="<?php echo OER_LESSON_PLAN_URL;?>images/oer-curriculum-person-placeholder.png"
                                                             class="img-circle oer-curriculum-oer-person-placeholder"
                                                             width="50px"
@@ -1835,7 +1835,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_primary_resources]" class="element-order" value="<?php echo $index; ?>">
                                 <div class="panel-heading">
                                     <h3 class="panel-title oer-curriculum-module-title">
-                                        <?php echo oer_curriculum_get_field_label('oer_oer_curriculum_primary_resources'); ?>
+                                        <?php echo oer_curriculum_get_field_label('oer_curriculum_primary_resources'); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1864,13 +1864,13 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                 <div class="col-md-12">
                                                     <label>Thumbnail Image</label>
                                                     <div class="oer_primary_resource_thumbnail_holder"></div>
-                                                    <button name="oer_oer_curriculum_primary_resources_thumbnail_button" class="oer_oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
-                                                    <input type="hidden" name="oer_oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
+                                                    <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                                    <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
                                                 </div></div>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <div class="oer_oer_curriculum_primary_resources_image_wrappper">
+                                                            <div class="oer_curriculum_primary_resources_image_wrappper">
                                                               <label>Resource</label>
                                                               <?php
                                                               $posts = get_posts([
@@ -1881,20 +1881,20 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                                   'order'    => 'ASC'
                                                               ]);
                                                               ?>
-                                                              <div class="oer_oer_curriculum_primary_resources_image">
-                                                                <div class="oer_oer_curriculum_primary_resources_image_display">
-                                                                  <div class="oer_oer_curriculum_primary_resources_display"></div>
-                                                                  <input type="hidden" name="oer_oer_curriculum_primary_resources[resource][]" value="">
+                                                              <div class="oer_curriculum_primary_resources_image">
+                                                                <div class="oer_curriculum_primary_resources_image_display">
+                                                                  <div class="oer_curriculum_primary_resources_display"></div>
+                                                                  <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="">
                                                                   <input type="button" class="button oer-curriculum-resource-selector-button" value="Select Resource">
                                                                 </div>
-                                                                <div class="oer_oer_curriculum_primary_resources_image_preloader" style="display:none;">
+                                                                <div class="oer_curriculum_primary_resources_image_preloader" style="display:none;">
                                                                   <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                                                                 </div>
                                                               </div>
                                                             </div>
 
                                                             <!--
-                                                            <select name="oer_oer_curriculum_primary_resources[resource][]" itm="4" class="form-control">
+                                                            <select name="oer_curriculum_primary_resources[resource][]" itm="4" class="form-control">
                                                                 <option>Select Resource</option>
                                                                 <?php
                                                                 if (count($posts)) {
@@ -1911,9 +1911,9 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                     <div class="col-md-5">
                                                         <div class="checkbox pull-right">
                                                             <label>
-                                                                <input type="hidden" name="oer_oer_curriculum_primary_resources[field_type][]" value="resource">
-                                                                <input type="hidden" name="oer_oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
-                                                                <input type="checkbox" name="oer_oer_curriculum_primary_resources[sensitive_material][]" value="yes">
+                                                                <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="resource">
+                                                                <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
+                                                                <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
                                                                 Sensitive Material
                                                             </label>
                                                         </div>
@@ -1923,7 +1923,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                     <label>Title</label>
                                                       <input type="text"
                                                           class="form-control"
-                                                          name="oer_oer_curriculum_primary_resources[title][]"
+                                                          name="oer_curriculum_primary_resources[title][]"
                                                           placeholder="Resource Title"
                                                           value="">
                                                 </div>
@@ -1932,7 +1932,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                     <?php wp_editor( '',
                                                         'oer-curriculum-resource-student-1',
                                                         $settings = array(
-                                                            'textarea_name' => 'oer_oer_curriculum_primary_resources[description][]',
+                                                            'textarea_name' => 'oer_curriculum_primary_resources[description][]',
                                                             'media_buttons' => true,
                                                             'textarea_rows' => 6,
                                                             'drag_drop_upload' => true,
@@ -1946,7 +1946,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                     <?php wp_editor( '',
                                                         'oer-curriculum-resource-teacher-1',
                                                         $settings = array(
-                                                            'textarea_name' => 'oer_oer_curriculum_primary_resources[teacher_info][]',
+                                                            'textarea_name' => 'oer_curriculum_primary_resources[teacher_info][]',
                                                             'media_buttons' => true,
                                                             'textarea_rows' => 6,
                                                             'drag_drop_upload' => true,
@@ -1959,7 +1959,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                     <?php wp_editor( '',
                                                         'oer-curriculum-resource-student-1',
                                                         $settings = array(
-                                                            'textarea_name' => 'oer_oer_curriculum_primary_resources[student_info][]',
+                                                            'textarea_name' => 'oer_curriculum_primary_resources[student_info][]',
                                                             'media_buttons' => true,
                                                             'textarea_rows' => 6,
                                                             'drag_drop_upload' => true,
@@ -2024,7 +2024,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_iq]" class="element-order" value="<?php echo $index; ?>">
                                 <div class="panel-heading">
                                     <h3 class="panel-title oer-curriculum-module-title">
-                                        <?php echo oer_curriculum_get_field_label('oer_oer_curriculum_iq'); ?>
+                                        <?php echo oer_curriculum_get_field_label('oer_curriculum_iq'); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2036,7 +2036,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                     <div class="form-group">
                                         <label>Investigative Question</label>
                                         <input type="text"
-                                               name="oer_oer_curriculum_iq[question]"
+                                               name="oer_curriculum_iq[question]"
                                                maxlength="512"
                                                class="form-control"
                                                placeholder="Investigative Question"
@@ -2045,9 +2045,9 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                     <div class="form-group">
                                         <label>Framework Excerpt</label>
                                         <?php wp_editor( '',
-                                            'oer_oer_curriculum_iq_excerpt',
+                                            'oer_curriculum_iq_excerpt',
                                             $settings = array(
-                                                'textarea_name' => 'oer_oer_curriculum_iq[excerpt]',
+                                                'textarea_name' => 'oer_curriculum_iq[excerpt]',
                                                 'media_buttons' => true,
                                                 'textarea_rows' => 6,
                                                 'drag_drop_upload' => true,
@@ -2066,7 +2066,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_required_materials]" class="element-order" value="<?php echo $index; ?>">
                                 <div class="panel-heading">
                                     <h3 class="panel-title oer-curriculum-module-title">                                        
-                                        <?php echo oer_curriculum_get_field_label('oer_oer_curriculum_required_materials'); ?>
+                                        <?php echo oer_curriculum_get_field_label('oer_curriculum_required_materials'); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2091,13 +2091,13 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                         </div>
                                         <div class="panel-body">
                                             <div class="form-group">
-                                               <input type="text" class="form-control" name="oer_oer_curriculum_required_materials[label][]" placeholder="Label" id="oer_oer_curriculum_additional_sections_label" value="">
+                                               <input type="text" class="form-control" name="oer_curriculum_required_materials[label][]" placeholder="Label" id="oer_curriculum_additional_sections_label" value="">
                                            </div>
                                            <div class="form-group">
                                                <?php wp_editor( '',
                                                    'oer-curriculum-required-material-section-1',
                                                    $settings = array(
-                                                       'textarea_name' => 'oer_oer_curriculum_required_materials[editor][]',
+                                                       'textarea_name' => 'oer_curriculum_required_materials[editor][]',
                                                        'media_buttons' => true,
                                                        'textarea_rows' => 10,
                                                        'drag_drop_upload' => true,
@@ -2121,7 +2121,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_additional_sections]" class="element-order" value="<?php echo $index; ?>">
                                 <div class="panel-heading">
                                     <h3 class="panel-title oer-curriculum-module-title">                                        
-                                        <?php echo oer_curriculum_get_field_label('oer_oer_curriculum_additional_sections'); ?>
+                                        <?php echo oer_curriculum_get_field_label('oer_curriculum_additional_sections'); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2146,13 +2146,13 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                         </div>
                                         <div class="panel-body">
                                             <div class="form-group">
-                                               <input type="text" class="form-control" name="oer_oer_curriculum_additional_sections[label][]" placeholder="Additional Section" id="oer_oer_curriculum_additional_sections_label" value="">
+                                               <input type="text" class="form-control" name="oer_curriculum_additional_sections[label][]" placeholder="Additional Section" id="oer_curriculum_additional_sections_label" value="">
                                            </div>
                                            <div class="form-group">
                                                <?php wp_editor( '',
                                                    'oer-curriculum-additional-section-1',
                                                    $settings = array(
-                                                       'textarea_name' => 'oer_oer_curriculum_additional_sections[editor][]',
+                                                       'textarea_name' => 'oer_curriculum_additional_sections[editor][]',
                                                        'media_buttons' => true,
                                                        'textarea_rows' => 6,
                                                        'drag_drop_upload' => true,
@@ -2187,17 +2187,17 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                     <div class="row oer-curriculum-time-element-row">
                                         <div class="col-md-5">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="oer_oer_curriculum_times_label[]" placeholder="label">
+                                                <input type="text" class="form-control" name="oer_curriculum_times_label[]" placeholder="label">
                                             </div>
                                         </div>
                                         <div class="col-md-1">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="oer_oer_curriculum_times_number[]" placeholder="40">
+                                                <input type="text" class="form-control" name="oer_curriculum_times_number[]" placeholder="40">
                                             </div>
                                         </div>
                                         <div class="col-md-2">
                                             <div class="form-group">
-                                                <select name="oer_oer_curriculum_times_type[]" class="form-control">
+                                                <select name="oer_curriculum_times_type[]" class="form-control">
                                                     <option value="minutes">Minute(s)</option>
                                                     <option value="hours">Hour(s)</option>
                                                     <option value="days">Days(s)</option>
@@ -2246,7 +2246,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                     <div id="selected-standard-wrapper">
                                         <p><?php _e("You have not selected any academic standards", OER_LESSON_PLAN_SLUG); ?></p>
                                     </div>
-                                    <input type="hidden" name="oer_oer_curriculum_standards">
+                                    <input type="hidden" name="oer_curriculum_standards">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <button type="button"
@@ -2266,7 +2266,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                 <div class="form-group">
                                                     <input type="text"
                                                            class="form-control"
-                                                           name="oer_oer_curriculum_related_objective[]"
+                                                           name="oer_curriculum_related_objective[]"
                                                     >
                                                 </div>
                                             </div>
@@ -2321,12 +2321,12 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                 <div class="panel-body">
                                                     <div class="form-group">
                                                         <label>Activity Title</label>
-                                                        <input type="text" name="oer_oer_curriculum_activity_title[]" class="form-control" placeholder="Activity Title">
+                                                        <input type="text" name="oer_curriculum_activity_title[]" class="form-control" placeholder="Activity Title">
                                                     </div>
                                                     <div class="row">
                                                         <div class="form-group col-md-8">
                                                             <label for="activity-title">Activity Type</label>
-                                                            <select name="oer_oer_curriculum_activity_type[]" class="form-control">
+                                                            <select name="oer_curriculum_activity_type[]" class="form-control">
                                                                 <option value=""> - Activity Type -</option>
                                                                 <option value="hooks_set">Hooks / Set</option>
                                                                 <option value="lecture">Lecture</option>
@@ -2348,7 +2348,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                         <?php wp_editor( '',
                                                             'oer-curriculum-activity-detail-'.$i,
                                                             $settings = array(
-                                                                'textarea_name' => 'oer_oer_curriculum_activity_detail[]',
+                                                                'textarea_name' => 'oer_curriculum_activity_detail[]',
                                                                 'media_buttons' => true,
                                                                 'textarea_rows' => 10,
                                                                 'drag_drop_upload' => true,
@@ -2391,7 +2391,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 <h4><?php _e("Assessment Type(s):", OER_LESSON_PLAN_SLUG); ?></h4>
                                 <div class="row">
                                     <?php
-                                    $oer_curriculum_assessment_type = (isset($post_meta_data['oer_oer_curriculum_assessment_type'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_assessment_type'][0]) : array());
+                                    $oer_curriculum_assessment_type = (isset($post_meta_data['oer_curriculum_assessment_type'][0]) ? unserialize($post_meta_data['oer_curriculum_assessment_type'][0]) : array());
                                     // Prepare array for the Assessment options checkboxes
                                     $assessment_options = array(
                                         'demonstrations' => 'Demonstrations',
@@ -2410,7 +2410,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                         <div class="col-md-3">
                                             <div class="checkbox oer-summative-checkbox">
                                                 <label>
-                                                    <input name="oer_oer_curriculum_assessment_type[]"
+                                                    <input name="oer_curriculum_assessment_type[]"
                                                            type="checkbox"
                                                            value="<?php echo $key;?>"
                                                         <?php echo oer_curriculum_show_selected($key, $oer_curriculum_assessment_type, 'checkbox')?>
@@ -2422,12 +2422,12 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 </div>
                                 <div class="row">
                                     <?php
-                                    $oer_curriculum_other_assessment_type = (isset($post_meta_data['oer_oer_curriculum_other_assessment_type'][0]) ? $post_meta_data['oer_oer_curriculum_other_assessment_type'][0] : '');
+                                    $oer_curriculum_other_assessment_type = (isset($post_meta_data['oer_curriculum_other_assessment_type'][0]) ? $post_meta_data['oer_curriculum_other_assessment_type'][0] : '');
                                     ?>
                                     <div class="form-group col-md-8">
                                         <label><?php _e("Other", OER_LESSON_PLAN_SLUG); ?></label>
                                         <input type="text"
-                                               name="oer_oer_curriculum_other_assessment_type"
+                                               name="oer_curriculum_other_assessment_type"
                                                class="form-control"
                                                placeholder="Other Assessment Type(s)"
                                                value="<?php echo $oer_curriculum_other_assessment_type;?>"
@@ -2436,11 +2436,11 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 </div>
                                 <div class="form-group">
                                     <?php
-                                    $oer_curriculum_assessment = (isset($post_meta_data['oer_oer_curriculum_assessment'][0]) ? $post_meta_data['oer_oer_curriculum_assessment'][0] : '');
+                                    $oer_curriculum_assessment = (isset($post_meta_data['oer_curriculum_assessment'][0]) ? $post_meta_data['oer_curriculum_assessment'][0] : '');
                                     wp_editor( $oer_curriculum_assessment,
                                         'oer-curriculum-other-assessment',
                                         $settings = array(
-                                            'textarea_name' => 'oer_oer_curriculum_assessment',
+                                            'textarea_name' => 'oer_curriculum_assessment',
                                             'media_buttons' => true,
                                             'textarea_rows' => 10,
                                             'drag_drop_upload' => true,
@@ -2451,7 +2451,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                             </div>
                         </div>
                         <?php
-                        } elseif($module=="oer_oer_curriculum_custom_editor_teacher_background"){
+                        } elseif($module=="oer_curriculum_custom_editor_teacher_background"){
                             ?>
                             <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-custom-editor-group-teacher-background">
                                 <input type="hidden" name="oer_curriculum_order[<?php echo $module; ?>]" class="element-order" value="<?php echo $index;?>">
@@ -2487,7 +2487,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 </div>
                             </div>
                             <?php
-                        } elseif($module=="oer_oer_curriculum_custom_editor_historical_background"){
+                        } elseif($module=="oer_curriculum_custom_editor_historical_background"){
                             ?>
                             <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-custom-editor-group-historical-background">
                                 <input type="hidden" name="oer_curriculum_order[<?php echo $module; ?>]" class="element-order" value="<?php echo $index;?>">
@@ -2523,7 +2523,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                 </div>
                             </div>
                             <?php
-                         } elseif($module=="oer_oer_curriculum_custom_editor_student_background"){
+                         } elseif($module=="oer_curriculum_custom_editor_student_background"){
                             ?>
                             <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-custom-editor-group-student-background">
                                 <input type="hidden" name="oer_curriculum_order[<?php echo $module; ?>]" class="element-order" value="<?php echo $index;?>">
@@ -2577,11 +2577,11 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                     </div>
                     <div class="panel-body">
                         <?php
-                        $oer_curriculum_introduction = isset($post_meta_data['oer_oer_curriculum_introduction'][0]) ? $post_meta_data['oer_oer_curriculum_introduction'][0] : "";
+                        $oer_curriculum_introduction = isset($post_meta_data['oer_curriculum_introduction'][0]) ? $post_meta_data['oer_curriculum_introduction'][0] : "";
                         wp_editor( $oer_curriculum_introduction,
                             'oer-curriculum-introduction',
                             $settings = array(
-                                'textarea_name' => 'oer_oer_curriculum_introduction',
+                                'textarea_name' => 'oer_curriculum_introduction',
                                 'media_buttons' => true,
                                 'textarea_rows' => 10,
                                 'drag_drop_upload' => true,
@@ -2624,31 +2624,31 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                     <div class="row oer-curriculum-authors-element-row">
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="oer_oer_curriculum_authors[name][]" placeholder="Name">
+                                                <input type="text" class="form-control" name="oer_curriculum_authors[name][]" placeholder="Name">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="oer_oer_curriculum_authors[role][]" placeholder="Role">
+                                                <input type="text" class="form-control" name="oer_curriculum_authors[role][]" placeholder="Role">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="oer_oer_curriculum_authors[author_url][]" placeholder="Author URL">
+                                                <input type="text" class="form-control" name="oer_curriculum_authors[author_url][]" placeholder="Author URL">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="oer_oer_curriculum_authors[institution][]" placeholder="Institution">
+                                                <input type="text" class="form-control" name="oer_curriculum_authors[institution][]" placeholder="Institution">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="oer_oer_curriculum_authors[institution_url][]" placeholder="Institution URL">
+                                                <input type="text" class="form-control" name="oer_curriculum_authors[institution_url][]" placeholder="Institution URL">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <input type="hidden" name="oer_oer_curriculum_authors[author_pic][]">
+                                            <input type="hidden" name="oer_curriculum_authors[author_pic][]">
                                             <img src="<?php echo OER_LESSON_PLAN_URL;?>images/oer-curriculum-person-placeholder.png"
                                                  class="img-circle oer-curriculum-oer-person-placeholder"
                                                  width="50px"
@@ -2713,7 +2713,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                                     'order'    => 'ASC'
                                                 ]);
                                                 ?>
-                                                <select name="oer_oer_curriculum_primary_resources[resource][]" itm="5" class="form-control">
+                                                <select name="oer_curriculum_primary_resources[resource][]" itm="5" class="form-control">
                                                     <option value="">Select Resource</option>
                                                     <?php
                                                     if (count($posts)) {
@@ -2728,9 +2728,9 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                         <div class="col-md-5">
                                             <div class="checkbox pull-right">
                                                 <label>
-                                                    <input type="hidden" name="oer_oer_curriculum_primary_resources[field_type][]" value="resource">
-                                                    <input type="hidden" name="oer_oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
-                                                    <input type="checkbox" name="oer_oer_curriculum_primary_resources[sensitive_material][]" value="yes">
+                                                    <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="resource">
+                                                    <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
+                                                    <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
                                                     Sensitive Material
                                                 </label>
                                             </div>
@@ -2740,7 +2740,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                         <label>Title</label>
                                           <input type="text"
                                               class="form-control"
-                                              name="oer_oer_curriculum_primary_resources[title][]"
+                                              name="oer_curriculum_primary_resources[title][]"
                                               placeholder="Resource Title"
                                               value="<?php echo isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey] : "";?>">
                                     </div>
@@ -2749,7 +2749,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                         <?php wp_editor( '',
                                             'oer-curriculum-resource-student-1',
                                             $settings = array(
-                                                'textarea_name' => 'oer_oer_curriculum_primary_resources[description][]',
+                                                'textarea_name' => 'oer_curriculum_primary_resources[description][]',
                                                 'media_buttons' => true,
                                                 'textarea_rows' => 6,
                                                 'drag_drop_upload' => true,
@@ -2763,7 +2763,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                         <?php wp_editor( '',
                                             'oer-curriculum-resource-teacher-1',
                                             $settings = array(
-                                                'textarea_name' => 'oer_oer_curriculum_primary_resources[teacher_info][]',
+                                                'textarea_name' => 'oer_curriculum_primary_resources[teacher_info][]',
                                                 'media_buttons' => true,
                                                 'textarea_rows' => 6,
                                                 'drag_drop_upload' => true,
@@ -2776,7 +2776,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                         <?php wp_editor( '',
                                             'oer-curriculum-resource-student-1',
                                             $settings = array(
-                                                'textarea_name' => 'oer_oer_curriculum_primary_resources[student_info][]',
+                                                'textarea_name' => 'oer_curriculum_primary_resources[student_info][]',
                                                 'media_buttons' => true,
                                                 'textarea_rows' => 6,
                                                 'drag_drop_upload' => true,
@@ -2838,7 +2838,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                         <div class="form-group">
                             <label>Investigative Question</label>
                             <input type="text"
-                                   name="oer_oer_curriculum_iq[question]"
+                                   name="oer_curriculum_iq[question]"
                                    maxlength="512"
                                    class="form-control"
                                    placeholder="Investigative Question"
@@ -2847,9 +2847,9 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                         <div class="form-group">
                             <label>Framework Excerpt</label>
                             <?php wp_editor( '',
-                                'oer_oer_curriculum_iq_excerpt',
+                                'oer_curriculum_iq_excerpt',
                                 $settings = array(
-                                    'textarea_name' => 'oer_oer_curriculum_iq[excerpt]',
+                                    'textarea_name' => 'oer_curriculum_iq[excerpt]',
                                     'media_buttons' => true,
                                     'textarea_rows' => 6,
                                     'drag_drop_upload' => true,
@@ -2876,17 +2876,17 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                         <div class="row oer-curriculum-time-element-row">
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="oer_oer_curriculum_times_label[]" placeholder="label">
+                                    <input type="text" class="form-control" name="oer_curriculum_times_label[]" placeholder="label">
                                 </div>
                             </div>
                             <div class="col-md-1">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="oer_oer_curriculum_times_number[]" placeholder="40">
+                                    <input type="text" class="form-control" name="oer_curriculum_times_number[]" placeholder="40">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <select name="oer_oer_curriculum_times_type[]" class="form-control">
+                                    <select name="oer_curriculum_times_type[]" class="form-control">
                                         <option value="minutes">Minute(s)</option>
                                         <option value="hours">Hour(s)</option>
                                         <option value="days">Days(s)</option>
@@ -2931,7 +2931,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                         <div id="selected-standard-wrapper">
                             <p><?php _e("You have not selected any academic standards", OER_LESSON_PLAN_SLUG); ?></p>
                         </div>
-                        <input type="hidden" name="oer_oer_curriculum_standards" value="">
+                        <input type="hidden" name="oer_curriculum_standards" value="">
                         <div class="row">
                             <div class="col-md-12">
                                 <button type="button"
@@ -2950,7 +2950,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                     <div class="form-group">
                                         <input type="text"
                                                class="form-control"
-                                               name="oer_oer_curriculum_related_objective[]"
+                                               name="oer_curriculum_related_objective[]"
                                         >
                                     </div>
                                 </div>
@@ -3002,12 +3002,12 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                     <div class="panel-body">
                                         <div class="form-group">
                                             <label>Activity Title</label>
-                                            <input type="text" name="oer_oer_curriculum_activity_title[]" class="form-control" placeholder="Activity Title">
+                                            <input type="text" name="oer_curriculum_activity_title[]" class="form-control" placeholder="Activity Title">
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-8">
                                                 <label for="activity-title">Activity Type</label>
-                                                <select name="oer_oer_curriculum_activity_type[]" class="form-control">
+                                                <select name="oer_curriculum_activity_type[]" class="form-control">
                                                     <option value=""> - Activity Type -</option>
                                                     <option value="hooks_set">Hooks / Set</option>
                                                     <option value="lecture">Lecture</option>
@@ -3029,7 +3029,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                                             <?php wp_editor( '',
                                                 'oer-curriculum-activity-detail-'.$i,
                                                 $settings = array(
-                                                    'textarea_name' => 'oer_oer_curriculum_activity_detail[]',
+                                                    'textarea_name' => 'oer_curriculum_activity_detail[]',
                                                     'media_buttons' => true,
                                                     'textarea_rows' => 10,
                                                     'drag_drop_upload' => true,
@@ -3069,7 +3069,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                     <h4><?php _e("Assessment Type(s):", OER_LESSON_PLAN_SLUG); ?></h4>
                     <div class="row">
                         <?php
-                        $oer_curriculum_assessment_type = (isset($post_meta_data['oer_oer_curriculum_assessment_type'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_assessment_type'][0]) : array());
+                        $oer_curriculum_assessment_type = (isset($post_meta_data['oer_curriculum_assessment_type'][0]) ? unserialize($post_meta_data['oer_curriculum_assessment_type'][0]) : array());
                         // Prepare array for the Assessment options checkboxes
                         $assessment_options = array(
                             'demonstrations' => 'Demonstrations',
@@ -3088,7 +3088,7 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                             <div class="col-md-3">
                                 <div class="checkbox oer-summative-checkbox">
                                     <label>
-                                        <input name="oer_oer_curriculum_assessment_type[]"
+                                        <input name="oer_curriculum_assessment_type[]"
                                                type="checkbox"
                                                value="<?php echo $key;?>"
                                             <?php echo oer_curriculum_show_selected($key, $oer_curriculum_assessment_type, 'checkbox')?>
@@ -3100,12 +3100,12 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                     </div>
                     <div class="row">
                         <?php
-                        $oer_curriculum_other_assessment_type = (isset($post_meta_data['oer_oer_curriculum_other_assessment_type'][0]) ? $post_meta_data['oer_oer_curriculum_other_assessment_type'][0] : '');
+                        $oer_curriculum_other_assessment_type = (isset($post_meta_data['oer_curriculum_other_assessment_type'][0]) ? $post_meta_data['oer_curriculum_other_assessment_type'][0] : '');
                         ?>
                         <div class="form-group col-md-8">
                             <label><?php _e("Other", OER_LESSON_PLAN_SLUG); ?></label>
                             <input type="text"
-                                   name="oer_oer_curriculum_other_assessment_type"
+                                   name="oer_curriculum_other_assessment_type"
                                    class="form-control"
                                    placeholder="Other Assessment Type(s)"
                                    value="<?php echo $oer_curriculum_other_assessment_type;?>"
@@ -3114,11 +3114,11 @@ $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:f
                     </div>
                     <div class="form-group">
                         <?php
-                        $oer_curriculum_assessment = (isset($post_meta_data['oer_oer_curriculum_assessment'][0]) ? $post_meta_data['oer_oer_curriculum_assessment'][0] : '');
+                        $oer_curriculum_assessment = (isset($post_meta_data['oer_curriculum_assessment'][0]) ? $post_meta_data['oer_curriculum_assessment'][0] : '');
                         wp_editor( $oer_curriculum_assessment,
                             'oer-curriculum-other-assessment',
                             $settings = array(
-                                'textarea_name' => 'oer_oer_curriculum_assessment',
+                                'textarea_name' => 'oer_curriculum_assessment',
                                 'media_buttons' => true,
                                 'textarea_rows' => 10,
                                 'drag_drop_upload' => true,

@@ -32,19 +32,19 @@
   $elements_orders = isset($post_meta_data['oer_curriculum_order'][0]) ? unserialize($post_meta_data['oer_curriculum_order'][0]) : array();
 
   //Grade Level
-  $oer_curriculum_grade = isset($post_meta_data['oer_oer_curriculum_grades'][0])? unserialize($post_meta_data['oer_oer_curriculum_grades'][0])[0]:"";
+  $oer_curriculum_grade = isset($post_meta_data['oer_curriculum_grades'][0])? unserialize($post_meta_data['oer_curriculum_grades'][0])[0]:"";
   if ($oer_curriculum_grade!=="pre-k" && $oer_curriculum_grade!=="k")
       $oer_curriculum_grade = "Grade ".$oer_curriculum_grade;
       
   // Download Copy
-  $oer_curriculum_download_copy_document = (isset($post_meta_data['oer_oer_curriculum_download_copy_document'][0]) ? $post_meta_data['oer_oer_curriculum_download_copy_document'][0] : '');
-  $oer_curriculum_standards = isset($post_meta_data['oer_oer_curriculum_standards'][0])?$post_meta_data['oer_oer_curriculum_standards'][0]:"";
-  $oer_curriculum_related_objectives = isset($post_meta_data['oer_oer_curriculum_related_objective'][0])? unserialize($post_meta_data['oer_oer_curriculum_related_objective'][0]): array('');
+  $oer_curriculum_download_copy_document = (isset($post_meta_data['oer_curriculum_download_copy_document'][0]) ? $post_meta_data['oer_curriculum_download_copy_document'][0] : '');
+  $oer_curriculum_standards = isset($post_meta_data['oer_curriculum_standards'][0])?$post_meta_data['oer_curriculum_standards'][0]:"";
+  $oer_curriculum_related_objectives = isset($post_meta_data['oer_curriculum_related_objective'][0])? unserialize($post_meta_data['oer_curriculum_related_objective'][0]): array('');
   $tags = get_the_terms($post->ID,"post_tag");
-  $authors = (isset($post_meta_data['oer_oer_curriculum_authors'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_authors'][0]) : array());
+  $authors = (isset($post_meta_data['oer_curriculum_authors'][0]) ? unserialize($post_meta_data['oer_curriculum_authors'][0]) : array());
 
   // check if there is a resource with sensitive material set
-  $oer_resources = (isset($post_meta_data['oer_oer_curriculum_primary_resources'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_primary_resources'][0]) : array());
+  $oer_resources = (isset($post_meta_data['oer_curriculum_primary_resources'][0]) ? unserialize($post_meta_data['oer_curriculum_primary_resources'][0]) : array());
 
   if (isset($oer_resources['sensitive_material']))
       $sensitive_material = $oer_resources['sensitive_material'];
@@ -53,26 +53,26 @@
       $oer_sensitive = true;
   }
 
-  $oer_curriculum_type_set = (get_option('oer_oer_curriculum_type_label'))?true:false;
-  $oer_curriculum_type_enabled = (get_option('oer_oer_curriculum_type_enabled'))?true:false;
-  $related_inquiry_set = (get_option('oer_oer_curriculum_related_inquiry_set_label'))?true:false;
-  $related_inquiry_enabled = (get_option('oer_oer_curriculum_related_inquiry_set_enabled'))?true:false;
-  $author_set = (get_option('oer_oer_curriculum_authors_label'))?true:false;
-  $author_enabled = (get_option('oer_oer_curriculum_authors_enabled'))?true:false;
-  $standards_set = (get_option('oer_oer_curriculum_standards_label'))?true:false;
-  $standards_enabled = (get_option('oer_oer_curriculum_standards_enabled'))?true:false;
-  $objectives_set = (get_option('oer_oer_curriculum_related_objective_label'))?true:false;
-  $objectives_enabled = (get_option('oer_oer_curriculum_related_objective_enabled'))?true:false;
-  $age_levels_set = (get_option('oer_oer_curriculum_age_levels_label'))?true:false;
-  $age_levels_enabled = (get_option('oer_oer_curriculum_age_levels_enabled'))?true:false;
-  $suggested_time_set = (get_option('oer_oer_curriculum_suggested_instructional_time_label'))?true:false;
-  $suggested_time_enabled = (get_option('oer_oer_curriculum_suggested_instructional_time_enabled'))?true:false;
-  $req_materials_set = (get_option('oer_oer_curriculum_required_materials_label'))?true:false;
-  $req_materials_enabled = (get_option('oer_oer_curriculum_required_materials_enabled'))?true:false;
-  $addtl_materials_set = (get_option('oer_oer_curriculum_required_materials_label'))?true:false;
-  $addtl_materials_enabled = (get_option('oer_oer_curriculum_required_materials_enabled'))?true:false;
-  $iq_set = (get_option('oer_oer_curriculum_required_materials_label'))?true:false;
-  $iq_enabled = (get_option('oer_oer_curriculum_required_materials_enabled'))?true:false;
+  $oer_curriculum_type_set = (get_option('oer_curriculum_type_label'))?true:false;
+  $oer_curriculum_type_enabled = (get_option('oer_curriculum_type_enabled'))?true:false;
+  $related_inquiry_set = (get_option('oer_curriculum_related_inquiry_set_label'))?true:false;
+  $related_inquiry_enabled = (get_option('oer_curriculum_related_inquiry_set_enabled'))?true:false;
+  $author_set = (get_option('oer_curriculum_authors_label'))?true:false;
+  $author_enabled = (get_option('oer_curriculum_authors_enabled'))?true:false;
+  $standards_set = (get_option('oer_curriculum_standards_label'))?true:false;
+  $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false;
+  $objectives_set = (get_option('oer_curriculum_related_objective_label'))?true:false;
+  $objectives_enabled = (get_option('oer_curriculum_related_objective_enabled'))?true:false;
+  $age_levels_set = (get_option('oer_curriculum_age_levels_label'))?true:false;
+  $age_levels_enabled = (get_option('oer_curriculum_age_levels_enabled'))?true:false;
+  $suggested_time_set = (get_option('oer_curriculum_suggested_instructional_time_label'))?true:false;
+  $suggested_time_enabled = (get_option('oer_curriculum_suggested_instructional_time_enabled'))?true:false;
+  $req_materials_set = (get_option('oer_curriculum_required_materials_label'))?true:false;
+  $req_materials_enabled = (get_option('oer_curriculum_required_materials_enabled'))?true:false;
+  $addtl_materials_set = (get_option('oer_curriculum_required_materials_label'))?true:false;
+  $addtl_materials_enabled = (get_option('oer_curriculum_required_materials_enabled'))?true:false;
+  $iq_set = (get_option('oer_curriculum_required_materials_label'))?true:false;
+  $iq_enabled = (get_option('oer_curriculum_required_materials_enabled'))?true:false;
 
   if (have_posts()) : while (have_posts()) : the_post();
       
@@ -99,14 +99,14 @@
                       <div class="tc-oer-curriculum-type">
                           <?php
                           $_tclptype='';
-                          if(isset($post_meta_data['oer_oer_curriculum_type'][0])){
-                            $_tclptype = $post_meta_data['oer_oer_curriculum_type'][0];
-                            if($_tclptype=='Other' && !empty(trim($post_meta_data['oer_oer_curriculum_type_other'][0], ' '))){
-                              $_tclptype = $post_meta_data['oer_oer_curriculum_type_other'][0];
+                          if(isset($post_meta_data['oer_curriculum_type'][0])){
+                            $_tclptype = $post_meta_data['oer_curriculum_type'][0];
+                            if($_tclptype=='Other' && !empty(trim($post_meta_data['oer_curriculum_type_other'][0], ' '))){
+                              $_tclptype = $post_meta_data['oer_curriculum_type_other'][0];
                             }
                           }
                           $oer_curriculum_type = $_tclptype;
-                          //$oer_curriculum_type = (isset($post_meta_data['oer_oer_curriculum_type'][0]) ? $post_meta_data['oer_oer_curriculum_type'][0] : '');
+                          //$oer_curriculum_type = (isset($post_meta_data['oer_curriculum_type'][0]) ? $post_meta_data['oer_curriculum_type'][0] : '');
                           echo $oer_curriculum_type;
                           ?>
                       </div>
@@ -120,7 +120,7 @@
                           <?php endif; ?>
                       </div>
                       <?php
-                      $related_inquiry_sets = (isset($post_meta_data['oer_oer_curriculum_related_inquiry_set'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_related_inquiry_set'][0]) : array());
+                      $related_inquiry_sets = (isset($post_meta_data['oer_curriculum_related_inquiry_set'][0]) ? unserialize($post_meta_data['oer_curriculum_related_inquiry_set'][0]) : array());
                       $show_related_inquiry_sets = false;
                       foreach($related_inquiry_sets as $rset){
                           if ($rset!=="0"){
@@ -134,7 +134,7 @@
                       <div class="tc-related-inquiry-sets">
                           <a href="#collapse_oer_curriculum_related_inquiry_sets" data-toggle="collapse" class="tc_oer_curriculum_collapse_button collapsed" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <h4 class="tc-related-inquiry-sets-heading clearfix">
-                                <span class="oer_oer_curriculum_related_fields"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_related_inquiry_set'); ?></span><span class="oer_oer_curriculum_acicon"></span>
+                                <span class="oer_curriculum_related_fields"><?php echo oer_curriculum_get_field_label('oer_curriculum_related_inquiry_set'); ?></span><span class="oer_curriculum_acicon"></span>
                             </h4>
                           </a>
                           <div class="tc-related-inquiry-sets-details clearfix collapse" id="collapse_oer_curriculum_related_inquiry_sets">
@@ -159,7 +159,7 @@
                       <div class="tc-oer-curriculum-standards">
                           <a href="#collapse_oer_curriculum_standards" data-toggle="collapse" class="tc_oer_curriculum_collapse_button collapsed" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <h4 class="tc-oer-curriculum-field-heading clearfix">
-                                <span class="oer_oer_curriculum_related_fields"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_standards'); ?></span><span class="oer_oer_curriculum_acicon"></span>
+                                <span class="oer_curriculum_related_fields"><?php echo oer_curriculum_get_field_label('oer_curriculum_standards'); ?></span><span class="oer_curriculum_acicon"></span>
                             </h4>
                           </a>
                           <div class="tc-oer-curriculum-standards-details clearfix collapse" id="collapse_oer_curriculum_standards">
@@ -231,7 +231,7 @@
                       <div class="tc-oer-curriculum-subject-areas">
                          <a href="#collapse_oer_curriculum_subjects" class="tc_oer_curriculum_collapse_button collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
                            <h4 class="tc-oer-curriculum-field-heading clearfix">
-                                <span class="oer_oer_curriculum_related_fields"><?php _e("Subjects",OER_LESSON_PLAN_SLUG); ?></span><span class="oer_oer_curriculum_acicon"></span>
+                                <span class="oer_curriculum_related_fields"><?php _e("Subjects",OER_LESSON_PLAN_SLUG); ?></span><span class="oer_curriculum_acicon"></span>
                             </h4>
                          </a>
                          <div class="tc-oer-curriculum-subject-details clearfix collapse" id="collapse_oer_curriculum_subjects">
@@ -270,7 +270,7 @@
                         if ($_tmp_html > ''): ?>
                         <div class="tc-oer-curriculum-objectives">
                           <a href="#collapse_oer_curriculum_objectives" class="tc_oer_curriculum_collapse_button collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            <h4 class="tc-oer-curriculum-field-heading clearfix"><span class="oer_oer_curriculum_related_fields"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_related_objective'); ?></span><span class="oer_oer_curriculum_acicon"></span></h4>
+                            <h4 class="tc-oer-curriculum-field-heading clearfix"><span class="oer_curriculum_related_fields"><?php echo oer_curriculum_get_field_label('oer_curriculum_related_objective'); ?></span><span class="oer_curriculum_acicon"></span></h4>
                           </a>                
                           <div class="tc-oer-curriculum-objectives-details clearfix collapse" id="collapse_oer_curriculum_objectives">
                               <ul class="tc-oer-curriculum-objectives-list"><?php echo $_tmp_html; ?></ul>
@@ -293,8 +293,8 @@
 
                           // Investigative Question
                           if (($iq_set && $iq_enabled) || !$iq_set) {
-                              $iq_label = oer_curriculum_get_field_label('oer_oer_curriculum_iq_label');
-                              $iq_data = (isset($post_meta_data['oer_oer_curriculum_iq'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_iq'][0]) : "");
+                              $iq_label = oer_curriculum_get_field_label('oer_curriculum_iq_label');
+                              $iq_data = (isset($post_meta_data['oer_curriculum_iq'][0]) ? unserialize($post_meta_data['oer_curriculum_iq'][0]) : "");
                               if (!empty($iq_data)){
                               ?>
                               <div class="form-field">
@@ -307,8 +307,8 @@
 
                           // Appropriate Age Levels Display
                           if (($age_levels_set && $age_levels_enabled) || !$age_levels_set) {
-                              $age_label = oer_curriculum_get_field_label('oer_oer_curriculum_age_levels');
-                              $age_levels = (isset($post_meta_data['oer_oer_curriculum_age_levels'][0]) ? $post_meta_data['oer_oer_curriculum_age_levels'][0] : "");
+                              $age_label = oer_curriculum_get_field_label('oer_curriculum_age_levels');
+                              $age_levels = (isset($post_meta_data['oer_curriculum_age_levels'][0]) ? $post_meta_data['oer_curriculum_age_levels'][0] : "");
                               if (!empty($age_levels)){
                               ?>
                               <div class="form-field">
@@ -320,8 +320,8 @@
                           
                           // Suggested Instructional Time Display
                          if (($suggested_time_set && $suggested_time_enabled) || !$suggested_time_set) {
-                              $suggested_label = oer_curriculum_get_field_label('oer_oer_curriculum_suggested_instructional_time');
-                              $suggested_time = (isset($post_meta_data['oer_oer_curriculum_suggested_instructional_time'][0]) ? $post_meta_data['oer_oer_curriculum_suggested_instructional_time'][0] : "");
+                              $suggested_label = oer_curriculum_get_field_label('oer_curriculum_suggested_instructional_time');
+                              $suggested_time = (isset($post_meta_data['oer_curriculum_suggested_instructional_time'][0]) ? $post_meta_data['oer_curriculum_suggested_instructional_time'][0] : "");
                               if (!empty($suggested_time)){
                               ?>
                               <div class="form-field">
@@ -334,8 +334,8 @@
                           
                           // Required Equipment Materials Display
                           if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
-                              $req_materials_label = (isset($post_meta_data['oer_oer_curriculum_required_materials_label'][0]) ? $post_meta_data['oer_oer_curriculum_required_materials_label'][0] : "Required Materials");
-                              $req_materials = (isset($post_meta_data['oer_oer_curriculum_required_materials'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_required_materials'][0]) : "");
+                              $req_materials_label = (isset($post_meta_data['oer_curriculum_required_materials_label'][0]) ? $post_meta_data['oer_curriculum_required_materials_label'][0] : "Required Materials");
+                              $req_materials = (isset($post_meta_data['oer_curriculum_required_materials'][0]) ? unserialize($post_meta_data['oer_curriculum_required_materials'][0]) : "");
                               if (!empty($req_materials)){
                                 $cnt = 0;
                                 if (isset($req_materials['label']))
@@ -357,7 +357,7 @@
 
                           // Additional Materials Display
                           if (($addtl_materials_set && $addtl_materials_enabled) || !$addtl_materials_set) {
-                              $addtl_materials_label = (isset($post_meta_data['oer_oer_curriculum_oer_materials_label'][0]) ? $post_meta_data['oer_oer_curriculum_oer_materials_label'][0] : "Additional Materials");
+                              $addtl_materials_label = (isset($post_meta_data['oer_curriculum_oer_materials_label'][0]) ? $post_meta_data['oer_curriculum_oer_materials_label'][0] : "Additional Materials");
                               $addtl_materials = (isset($post_meta_data['oer_curriculum_oer_materials'][0]) ? unserialize($post_meta_data['oer_curriculum_oer_materials'][0]) : array());
                               if (!empty($addtl_materials)){
                               ?>
@@ -396,7 +396,7 @@
                           }
                           
                           // Additional Section
-                          $additional_sections = isset($post_meta_data['oer_oer_curriculum_additional_sections'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_additional_sections'][0]) : array();
+                          $additional_sections = isset($post_meta_data['oer_curriculum_additional_sections'][0]) ? unserialize($post_meta_data['oer_curriculum_additional_sections'][0]) : array();
                            if (is_array($additional_sections)){
                               $cnt = 0;
                               if (isset($additional_sections['label']))
@@ -433,7 +433,7 @@
                       }
                       if ($author_display){
                           ?>
-                           <span class="oer-curriculum-author-label"><?php echo oer_curriculum_get_field_label('oer_oer_curriculum_authors'); ?></span>
+                           <span class="oer-curriculum-author-label"><?php echo oer_curriculum_get_field_label('oer_curriculum_authors'); ?></span>
                           <?php 
                           $aIndex = 0;
                           
@@ -489,7 +489,7 @@
       </div>
       <div class="row oer-curriculum-primary-sources-row">
           <?php
-          $primary_resources = (isset($post_meta_data['oer_oer_curriculum_primary_resources'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_primary_resources'][0]) : array());
+          $primary_resources = (isset($post_meta_data['oer_curriculum_primary_resources'][0]) ? unserialize($post_meta_data['oer_curriculum_primary_resources'][0]) : array());
           if (!empty($primary_resources) && oer_curriculum_scan_array($primary_resources)) {
               if (!empty(array_filter($primary_resources['resource']))) {
                   $_idx = 0;
@@ -593,7 +593,7 @@
               );
               foreach($elements_orders as $elementKey=>$order){
                   if (!in_array($elementKey,$keys)){
-                      if (strpos($elementKey, 'oer_oer_curriculum_custom_editor_historical_background') !== false) {
+                      if (strpos($elementKey, 'oer_curriculum_custom_editor_historical_background') !== false) {
                           $oer_curriculum_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                           if(!empty($oer_curriculum_custom_editor)) {
                               
@@ -620,7 +620,7 @@
                           </div>
                           <?php
                           }
-                      } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_oer_curriculum_custom_editor_') !== false) {
+                      } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_custom_editor_') !== false) {
                           $oer_curriculum_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                           if(!empty($oer_curriculum_custom_editor)) {
                           ?>
@@ -645,7 +645,7 @@
                               </div>
                           </div>
                           <?php } ?>
-                      <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_oer_curriculum_custom_text_list_') !== false) {
+                      <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_custom_text_list_') !== false) {
                       ?>
                       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                           <div class="media-image">
@@ -667,11 +667,11 @@
                               </div>
                           </div>
                       </div>
-                      <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_oer_curriculum_vocabulary_list_title_') !== false) {
+                      <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_vocabulary_list_title_') !== false) {
                           $oer_curriculum_vocabulary_list_title = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
                           $oer_keys = explode('_', $elementKey); 
                           $listOrder = end($oer_keys);
-                          $oer_curriculum_vocabulary_details = (isset($post_meta_data['oer_oer_curriculum_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_oer_curriculum_vocabulary_details_'.$listOrder][0] : "");
+                          $oer_curriculum_vocabulary_details = (isset($post_meta_data['oer_curriculum_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_curriculum_vocabulary_details_'.$listOrder][0] : "");
                           if (!empty($oer_curriculum_vocabulary_list_title)) { ?>
                           <div class="col-md-3 col-sm-3 padding-0">
                               <div class="media-image">

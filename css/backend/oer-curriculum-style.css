@@ -80,9 +80,9 @@
     max-height: 400px;
     overflow-y: scroll;
 }
-.oer_oer_curriculum_grades .form-checkbox { margin-bottom:5px; }
-.oer_oer_curriculum_grades .form-checkbox input[type=radio] { margin:0; }
-.oer_oer_curriculum_radio_label { margin-bottom:0; margin-left:5px; }
+.oer_curriculum_grades .form-checkbox { margin-bottom:5px; }
+.oer_curriculum_grades .form-checkbox input[type=radio] { margin:0; }
+.oer_curriculum_radio_label { margin-bottom:0; margin-left:5px; }
 .full-width { width:100%; }
 .oer-curriculum-download-copy-icon {
     display: inline-block;
@@ -156,4 +156,4 @@
 .button-row { margin:10px 0; }
 .text-editor-group { margin:10px 0; }
 .panel-group .panel .panel-body div {box-sizing: border-box !important;}
-.oer_oer_curriculum_primary_resources_thumbnail_button { margin:10px 0; }
+.oer_curriculum_primary_resources_thumbnail_button { margin:10px 0; }

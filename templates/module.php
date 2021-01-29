@@ -45,17 +45,17 @@ if (!empty($elements_orders)) {
     $eIndex = 0;
     foreach($elements_orders as $elementKey=>$order){
         if (!in_array($elementKey,$keys)){
-            if (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_oer_curriculum_vocabulary_list_title_') === false) 
+            if (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_vocabulary_list_title_') === false) 
                 $module = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
             
-            if (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_oer_curriculum_custom_text_list_') !== false){
+            if (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_custom_text_list_') !== false){
                 $module['title'] = "Text List";
                 $module['description'] = $module[0];
-            } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_oer_curriculum_vocabulary_list_title_') !== false) {
+            } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_vocabulary_list_title_') !== false) {
                 $oer_curriculum_vocabulary_list_title = (isset($post_meta_data[$elementKey][0]) ? $post_meta_data[$elementKey][0] : "");
                 $oer_keys = explode('_', $elementKey); 
                 $listOrder = end($oer_keys);
-                $oer_curriculum_vocabulary_details = (isset($post_meta_data['oer_oer_curriculum_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_oer_curriculum_vocabulary_details_'.$listOrder][0] : "");
+                $oer_curriculum_vocabulary_details = (isset($post_meta_data['oer_curriculum_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_curriculum_vocabulary_details_'.$listOrder][0] : "");
                 $module['title'] = $oer_curriculum_vocabulary_list_title;
                 $module['description'] = $oer_curriculum_vocabulary_details;
             } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_oer_materials_list_') !== false) {
@@ -89,7 +89,7 @@ if (!empty($elements_orders)) {
 
 // Get Curriculum Meta for Primary Sources
 $post_meta_data = get_post_meta($curriculum_id);
-$primary_resources = (isset($post_meta_data['oer_oer_curriculum_primary_resources'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_primary_resources'][0]) : array());
+$primary_resources = (isset($post_meta_data['oer_curriculum_primary_resources'][0]) ? unserialize($post_meta_data['oer_curriculum_primary_resources'][0]) : array());
 $index = 0;
 $prev_url = null;
 $next_url = null;

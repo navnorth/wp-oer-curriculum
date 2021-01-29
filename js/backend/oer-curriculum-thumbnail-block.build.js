@@ -130,7 +130,7 @@ var oerCurriculumSets = function (_Component) {
                 selectedInquirySet: parseInt(value),
                 title: post.title.rendered,
                 link: post.link,
-                grade: post.oer_oer_curriculum_grades,
+                grade: post.oer_curriculum_grades,
                 featuredImage: image_url
             });
         }

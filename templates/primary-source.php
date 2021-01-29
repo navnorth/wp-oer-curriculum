@@ -50,7 +50,7 @@ $isPDF = is_pdf_resource($resource_url);
 
 // Get Curriculum Meta for Primary Sources
 $post_meta_data = get_post_meta($curriculum_id);
-$primary_resources = (isset($post_meta_data['oer_oer_curriculum_primary_resources'][0]) ? unserialize($post_meta_data['oer_oer_curriculum_primary_resources'][0]) : array());
+$primary_resources = (isset($post_meta_data['oer_curriculum_primary_resources'][0]) ? unserialize($post_meta_data['oer_curriculum_primary_resources'][0]) : array());
 $index = 0;
 $teacher_info = "";
 $student_info = "";

@@ -65,18 +65,18 @@ function oer_curriculum_show_general_settings(){
 						</tr>
 					</thead>
 					<tbody>
-							<?php	$_genset = json_decode(get_option('oer_oer_curriculum_general_setting')); ?>
+							<?php	$_genset = json_decode(get_option('oer_curriculum_general_setting')); ?>
 							<tr>	
 									<td>Curriculum Root Slug</td>
-									<td><input type="text" name="oer_oer_curriculum_general_setting[rootslug]" value="<? echo (isset($_genset->rootslug))? $_genset->rootslug: 'curriculum'; ?>"></td>
+									<td><input type="text" name="oer_curriculum_general_setting[rootslug]" value="<? echo (isset($_genset->rootslug))? $_genset->rootslug: 'curriculum'; ?>"></td>
 									<td>
-										<input type="hidden" name="oer_oer_curriculum_general_setting[rootslug_enabled]" value="0">
-										<input type="checkbox" name="oer_oer_curriculum_general_setting[rootslug_enabled]" value="1" <? echo (isset($_genset->rootslug_enabled) && $_genset->rootslug_enabled > 0)? 'checked': ''; ?> />
+										<input type="hidden" name="oer_curriculum_general_setting[rootslug_enabled]" value="0">
+										<input type="checkbox" name="oer_curriculum_general_setting[rootslug_enabled]" value="1" <? echo (isset($_genset->rootslug_enabled) && $_genset->rootslug_enabled > 0)? 'checked': ''; ?> />
 									</td>
 							</tr>
 					</tbody>
 				</table>
-				<p class="submit"><input type="submit" name="oer_oer_curriculum_general_setting_submit" id="submit" class="button button-primary" value="Save General Options"></p></form>
+				<p class="submit"><input type="submit" name="oer_curriculum_general_setting_submit" id="submit" class="button button-primary" value="Save General Options"></p></form>
 			</form>
 		</div>
 	</div>
@@ -84,18 +84,18 @@ function oer_curriculum_show_general_settings(){
 }
 
 function oer_curriculum_save_general_setting(){
-	$_forbidkey = array("oer_oer_curriculum_general_setting_submit");
+	$_forbidkey = array("oer_curriculum_general_setting_submit");
 	global $pagenow;
 	if ( 'edit.php' !== $pagenow || !current_user_can('edit_others_posts')) return $query;
-	if (!isset( $_POST['oer_oer_curriculum_general_setting'] )) return;											
+	if (!isset( $_POST['oer_curriculum_general_setting'] )) return;											
 	$_arr = array();			
-	foreach ($_POST['oer_oer_curriculum_general_setting'] as $key => $genset){
+	foreach ($_POST['oer_curriculum_general_setting'] as $key => $genset){
 		if(!in_array($genset)) $_arr[$key] = $genset;
 	}
-	if(!get_option('oer_oer_curriculum_general_setting')){
-	    add_option('oer_oer_curriculum_general_setting', json_encode($_arr));
+	if(!get_option('oer_curriculum_general_setting')){
+	    add_option('oer_curriculum_general_setting', json_encode($_arr));
 	}else{
-			update_option('oer_oer_curriculum_general_setting', json_encode($_arr));
+			update_option('oer_curriculum_general_setting', json_encode($_arr));
 	}
 }
 
@@ -115,7 +115,7 @@ function oer_curriculum_show_metadata_settings() {
 	
 	// Add Options for related inquiry sets 1-3
 	for($i=1;$i<=3;$i++){
-		$metadata[] = $inquirysets[] = 'oer_oer_curriculum_related_inquiry_set_'.$i;
+		$metadata[] = $inquirysets[] = 'oer_curriculum_related_inquiry_set_'.$i;
 	}
 	
 	$meta = array_unique($metadata);

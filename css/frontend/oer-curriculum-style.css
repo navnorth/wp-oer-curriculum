@@ -774,7 +774,7 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
 }
 .tc-oer-curriculum-controls .sharethis-inline-share-buttons#st-1 .st-btn[data-network='sharethis']:hover svg{ fill:#fff; }
 h4.tc-related-inquiry-sets-heading, h4.tc-oer-curriculum-field-heading { font-size:16px; text-transform:uppercase; font-weight:bold; color:#356483; line-height:19px; margin:0; float: left;}
-h4.tc-oer-curriculum-field-heading span.oer_oer_curriculum_related_fields, h4.tc-related-inquiry-sets-heading span.oer_oer_curriculum_related_fields {text-decoration: underline;}
+h4.tc-oer-curriculum-field-heading span.oer_curriculum_related_fields, h4.tc-related-inquiry-sets-heading span.oer_curriculum_related_fields {text-decoration: underline;}
 .tc-related-inquiry-sets-details { width:100%; overflow:hidden; }
 .tc-oer-curriculum-label-heading { display:block; }
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list { padding-left:0;}
@@ -797,7 +797,7 @@ h4.tc-oer-curriculum-field-heading span.oer_oer_curriculum_related_fields, h4.tc
 a.tc_oer_curriculum_collapse_button h4 {line-height: 1.8em;}
 .tc-related-inquiry-sets, .tc-oer-curriculum-standards, .tc-oer-curriculum-subject-areas, .tc-oer-curriculum-objectives {float: left;width: 100%;}
 .tc-oer-curriculum-details-content .curriculum-detail, .tc-oer-curriculum-details-content .featured-image {float: left;}
-a.tc_oer_curriculum_collapse_button>h4 span.oer_oer_curriculum_acicon {position: relative;}
+a.tc_oer_curriculum_collapse_button>h4 span.oer_curriculum_acicon {position: relative;}
 a.tc_oer_curriculum_collapse_button {
   display: block;
   position: relative;
@@ -806,7 +806,7 @@ a.tc_oer_curriculum_collapse_button {
   float: left;
   margin-bottom: 10px;
 }
-a.tc_oer_curriculum_collapse_button>h4 span.oer_oer_curriculum_acicon:after {
+a.tc_oer_curriculum_collapse_button>h4 span.oer_curriculum_acicon:after {
     content: "\f460";
     font: 400 16px dashicons;
     color: #356483;
@@ -815,7 +815,7 @@ a.tc_oer_curriculum_collapse_button>h4 span.oer_oer_curriculum_acicon:after {
     padding-left: 5px;
     bottom: 1px;
 }
-a.tc_oer_curriculum_collapse_button.collapsed>h4 span.oer_oer_curriculum_acicon:after {
+a.tc_oer_curriculum_collapse_button.collapsed>h4 span.oer_curriculum_acicon:after {
     content: "\f132";
 }
 div#tcHiddenFields {float: left;}

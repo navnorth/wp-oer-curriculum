@@ -5,9 +5,9 @@ jQuery( document ).ready(function() {
 	  //SELECT THE CHECKED ITEM IN THE LIST
     jQuery(document).on('click','.oer-curriculum-resource-selector-select',function(e){
   		e.preventDefault ? e.preventDefault() : e.returnValue = false;
-      tmp_this.siblings('.oer_oer_curriculum_primary_resources_image').children('.oer_oer_curriculum_primary_resources_image_display').html('');
-      tmp_this.siblings('.oer_oer_curriculum_primary_resources_display').html('');
-      tmp_this.siblings('.oer_oer_curriculum_primary_resources_image').children('.oer_oer_curriculum_primary_resources_image_preloader').show();
+      tmp_this.siblings('.oer_curriculum_primary_resources_image').children('.oer_curriculum_primary_resources_image_display').html('');
+      tmp_this.siblings('.oer_curriculum_primary_resources_display').html('');
+      tmp_this.siblings('.oer_curriculum_primary_resources_image').children('.oer_curriculum_primary_resources_image_preloader').show();
   		var selone = jQuery('input[name="oer-curriculum-resource-selector-rad"]:checked');
   		var resid = selone.parent().attr('data-postid');
   		var resname = selone.attr('title');
@@ -39,12 +39,12 @@ jQuery( document ).ready(function() {
             if(p_title){
               if(p_imgtyp == 'image'){
                   var _shtml  = '<a href="'+p_url+'" target="_blank"><img src="'+p_imgurl+'"></a>';
-                  jQuery('.oer_oer_curriculum_primary_resources_image_display a').imagesLoaded( function() {
+                  jQuery('.oer_curriculum_primary_resources_image_display a').imagesLoaded( function() {
                     setTimeout(function(){
-                      tmp_this.siblings('.oer_oer_curriculum_primary_resources_display').html(resname);
-                      tmp_this.siblings('input[name="oer_oer_curriculum_primary_resources[resource][]"]').val(resname);
-                      tmp_this.siblings('.oer_oer_curriculum_primary_resources_image').children('.oer_oer_curriculum_primary_resources_image_preloader').hide(); 
-                      tmp_this.siblings('.oer_oer_curriculum_primary_resources_image').children('.oer_oer_curriculum_primary_resources_image_display').html(_shtml);
+                      tmp_this.siblings('.oer_curriculum_primary_resources_display').html(resname);
+                      tmp_this.siblings('input[name="oer_curriculum_primary_resources[resource][]"]').val(resname);
+                      tmp_this.siblings('.oer_curriculum_primary_resources_image').children('.oer_curriculum_primary_resources_image_preloader').hide(); 
+                      tmp_this.siblings('.oer_curriculum_primary_resources_image').children('.oer_curriculum_primary_resources_image_display').html(_shtml);
                       tmp_this.val('Change Resource');
                     }, 500);
                   });
@@ -54,18 +54,18 @@ jQuery( document ).ready(function() {
                           _shtml += '<span class="dashicons '+p_imgurl+'"></span>';
                         _shtml += '</div>';
                       _shtml += '</a>';
-                  tmp_this.siblings('.oer_oer_curriculum_primary_resources_display').html(resname);
-                  tmp_this.siblings('input[name="oer_oer_curriculum_primary_resources[resource][]"]').val(resname);
-                  tmp_this.siblings('.oer_oer_curriculum_primary_resources_image').children('.oer_oer_curriculum_primary_resources_image_preloader').hide(); 
-                  tmp_this.siblings('.oer_oer_curriculum_primary_resources_image').children('.oer_oer_curriculum_primary_resources_image_display').html(_shtml);
+                  tmp_this.siblings('.oer_curriculum_primary_resources_display').html(resname);
+                  tmp_this.siblings('input[name="oer_curriculum_primary_resources[resource][]"]').val(resname);
+                  tmp_this.siblings('.oer_curriculum_primary_resources_image').children('.oer_curriculum_primary_resources_image_preloader').hide(); 
+                  tmp_this.siblings('.oer_curriculum_primary_resources_image').children('.oer_curriculum_primary_resources_image_display').html(_shtml);
                   tmp_this.val('Change Resource');
               }             
             }else{
               var _shtml = '<p class="error">Failed to retrieve a resource: please try again</p>';
-              tmp_this.siblings('.oer_oer_curriculum_primary_resources_display').html('');
-              tmp_this.siblings('input[name="oer_oer_curriculum_primary_resources[resource][]"]').val('');
-              tmp_this.siblings('.oer_oer_curriculum_primary_resources_image').children('.oer_oer_curriculum_primary_resources_image_preloader').hide(); 
-              tmp_this.siblings('.oer_oer_curriculum_primary_resources_image').children('.oer_oer_curriculum_primary_resources_image_display').html(_shtml);
+              tmp_this.siblings('.oer_curriculum_primary_resources_display').html('');
+              tmp_this.siblings('input[name="oer_curriculum_primary_resources[resource][]"]').val('');
+              tmp_this.siblings('.oer_curriculum_primary_resources_image').children('.oer_curriculum_primary_resources_image_preloader').hide(); 
+              tmp_this.siblings('.oer_curriculum_primary_resources_image').children('.oer_curriculum_primary_resources_image_display').html(_shtml);
               tmp_this.val('Select Resource');
             }
             
@@ -73,20 +73,20 @@ jQuery( document ).ready(function() {
   				},
   				error: function(XMLHttpRequest, textStatus, errorThrown) {
              var _shtml = '<p class="error">Failed to retrieve a resource: please try again</p>';
-             tmp_this.siblings('.oer_oer_curriculum_primary_resources_display').html('');
-             tmp_this.siblings('input[name="oer_oer_curriculum_primary_resources[resource][]"]').val('');
-             tmp_this.siblings('.oer_oer_curriculum_primary_resources_image').children('.oer_oer_curriculum_primary_resources_image_preloader').hide(); 
-             tmp_this.siblings('.oer_oer_curriculum_primary_resources_image').children('.oer_oer_curriculum_primary_resources_image_display').html(_shtml);
+             tmp_this.siblings('.oer_curriculum_primary_resources_display').html('');
+             tmp_this.siblings('input[name="oer_curriculum_primary_resources[resource][]"]').val('');
+             tmp_this.siblings('.oer_curriculum_primary_resources_image').children('.oer_curriculum_primary_resources_image_preloader').hide(); 
+             tmp_this.siblings('.oer_curriculum_primary_resources_image').children('.oer_curriculum_primary_resources_image_display').html(_shtml);
              tmp_this.val('Select Resource');
   				}
   			});
         
       }else{
         var _shtml = '<p>You have not selected a resource</p>';
-        tmp_this.siblings('.oer_oer_curriculum_primary_resources_display').html('');
-        tmp_this.siblings('input[name="oer_oer_curriculum_primary_resources[resource][]"]').val('');
-        tmp_this.siblings('.oer_oer_curriculum_primary_resources_image').children('.oer_oer_curriculum_primary_resources_image_preloader').hide(); 
-        tmp_this.siblings('.oer_oer_curriculum_primary_resources_image').children('.oer_oer_curriculum_primary_resources_image_display').html(_shtml);
+        tmp_this.siblings('.oer_curriculum_primary_resources_display').html('');
+        tmp_this.siblings('input[name="oer_curriculum_primary_resources[resource][]"]').val('');
+        tmp_this.siblings('.oer_curriculum_primary_resources_image').children('.oer_curriculum_primary_resources_image_preloader').hide(); 
+        tmp_this.siblings('.oer_curriculum_primary_resources_image').children('.oer_curriculum_primary_resources_image_display').html(_shtml);
         tmp_this.val('Select Resource');
       }
         
@@ -97,7 +97,7 @@ jQuery( document ).ready(function() {
 		e.preventDefault ? e.preventDefault() : e.returnValue = false;
     tmp_this = jQuery(this);
 		jQuery('.oer-curriculum-resource-selector-tag-p').removeClass('checked');
-    var prv = jQuery(this).siblings('input[name="oer_oer_curriculum_primary_resources[resource][]"]').val();
+    var prv = jQuery(this).siblings('input[name="oer_curriculum_primary_resources[resource][]"]').val();
     var rad = jQuery('input[name="oer-curriculum-resource-selector-rad"][value="'+prv+'"]');
 		rad.attr('checked', true);
 		rad.parent().addClass('checked');
