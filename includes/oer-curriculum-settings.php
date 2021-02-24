@@ -115,7 +115,7 @@ function oer_curriculum_show_metadata_settings() {
 	
 	// Add Options for related inquiry sets 1-3
 	for($i=1;$i<=3;$i++){
-		$metadata[] = $inquirysets[] = 'oer_curriculum_related_inquiry_set_'.$i;
+		$metadata[] = $inquirysets[] = 'oer_curriculum_related_curriculum_'.$i;
 	}
 	
 	$meta = array_unique($metadata);

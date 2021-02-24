@@ -68,15 +68,15 @@ function oer_curriculum_custom_meta_boxes() {
     add_meta_box( 'oer_curriculum_meta_download_copy', 'Downloadable Copy', 'oer_curriculum_download_copy_cb', 'oer-curriculum', 'side', 'high' );
     
     // Add Related Inquiry Sets metabox
-    $related_inquiry_set = (get_option('oer_curriculum_related_inquiry_set_label'))?true:false;
-    $related_inquiry_set_enabled = (get_option('oer_curriculum_related_inquiry_set_enabled'))?true:false;
+    $related_inquiry_set = (get_option('oer_curriculum_related_curriculum_label'))?true:false;
+    $related_inquiry_set_enabled = (get_option('oer_curriculum_related_curriculum_enabled'))?true:false;
     $related_curriculum_enabled = false;
     if (($related_inquiry_set && $related_inquiry_set_enabled) || !$related_inquiry_set) {
         if (!$related_inquiry_set){
             $related_curriculum_enabled = true;
         } else {
             for ($i=1;$i<=3;$i++){
-                $enabled = (get_option('oer_curriculum_related_inquiry_set_'.$i.'_enabled'))?true:false;
+                $enabled = (get_option('oer_curriculum_related_curriculum_'.$i.'_enabled'))?true:false;
                 if ($enabled) {
                     $related_curriculum_enabled = true;
                     break;
@@ -84,7 +84,7 @@ function oer_curriculum_custom_meta_boxes() {
             }
         }
         if ($related_curriculum_enabled) {
-            $label = oer_curriculum_get_field_label('oer_curriculum_related_inquiry_set');
+            $label = oer_curriculum_get_field_label('oer_curriculum_related_curriculum');
             add_meta_box('oer_curriculum_meta_related_inquiry', $label, 'oer_curriculum_related_inquiry_callback', 'oer-curriculum', 'advanced');
         }
     }
@@ -445,8 +445,8 @@ function oer_curriculum_save_custom_fields() {
             }
 
             // Save related inquiry sets
-            if (isset($_POST['oer_curriculum_related_inquiry_set'])) {
-                update_post_meta($post->ID, 'oer_curriculum_related_inquiry_set', $_POST['oer_curriculum_related_inquiry_set']);
+            if (isset($_POST['oer_curriculum_related_curriculum'])) {
+                update_post_meta($post->ID, 'oer_curriculum_related_curriculum', $_POST['oer_curriculum_related_curriculum']);
             }
         }
     }
@@ -558,17 +558,15 @@ function oer_curriculum_add_more_pr_callback() {
                                       <div class="oer_curriculum_primary_resources_image_wrappper">
                                         <label>Resource</label>
                                         <div class="oer_curriculum_primary_resources_image">
-                                          <div class="oer_curriculum_primary_resources_image_display">
-                                            <p>You have not selected a resource</p>
-                                          </div>
                                           <div class="oer_curriculum_primary_resources_image_preloader" style="display:none;">
                                             <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                                           </div>
+                                          <div class="oer_curriculum_primary_resources_image_display">
+                                            <div class="oer_curriculum_primary_resources_display"><p>You have not selected a resource</p></div>
+                                            <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="">
+                                            <input type="button" class="button oer-curriculum-resource-selector-button" value="Select Resource">
+                                          </div>                                    
                                         </div>
-                                        
-                                        <div class="oer_curriculum_primary_resources_display"><?php echo htmlspecialchars($resource);?></div>
-                                        <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="">
-                                        <input type="button" class="button oer-curriculum-resource-selector-button" value="Select Resource">
                                       </div>';
                                       
                                       /*

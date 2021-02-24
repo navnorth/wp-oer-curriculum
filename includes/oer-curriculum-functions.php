@@ -579,17 +579,17 @@ if (!function_exists('oer_curriculum_get_meta_label')){
             case "oer_curriculum_download_copy_document":
                 $label = __("Download Copy Document", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_curriculum_related_inquiry_set":
-                $label = __("Related Inquiry Sets", OER_LESSON_PLAN_SLUG);
+            case "oer_curriculum_related_curriculum":
+                $label = __("Related Curriculum", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_curriculum_related_inquiry_set_1":
-                $label = __("Inquiry Set 1", OER_LESSON_PLAN_SLUG);
+            case "oer_curriculum_related_curriculum_1":
+                $label = __("Related Curriculum 1", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_curriculum_related_inquiry_set_2":
-                $label = __("Inquiry Set 2", OER_LESSON_PLAN_SLUG);
+            case "oer_curriculum_related_curriculum_2":
+                $label = __("Related Curriculum 2", OER_LESSON_PLAN_SLUG);
                 break;
-            case "oer_curriculum_related_inquiry_set_3":
-                $label = __("Inquiry Set 3", OER_LESSON_PLAN_SLUG);
+            case "oer_curriculum_related_curriculum_3":
+                $label = __("Related Curriculum 3", OER_LESSON_PLAN_SLUG);
                 break;
             case "oer_curriculum_required_materials":
                 $label = __("Required Equipment Materials", OER_LESSON_PLAN_SLUG);

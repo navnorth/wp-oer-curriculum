@@ -65,10 +65,15 @@ $new_description = "";
 $prev_title = "";
 $next_title = "";
 $next_image = "";
+$prev_resource = "";
+$next_resource = "";
 if (!empty($primary_resources) && oer_curriculum_scan_array($primary_resources)) {
     if (!empty(array_filter($primary_resources['resource']))) {
-        foreach ($primary_resources['resource'] as $resourceKey => $source) {
-            if ($psindex == $resourceKey){
+        foreach ($primary_resources['resource'] as $resourceKey => $source) {            
+            if ($psindex == $resourceKey){                
+                if(!empty($primary_resources['image'][$resourceKey])){ // Image override
+                  $featured_image_url = $primary_resources['image'][$resourceKey];
+                }
                 $new_title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
                 $new_description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
                 break;
@@ -92,6 +97,7 @@ if (!empty($primary_resources) && oer_curriculum_scan_array($primary_resources))
                 $next_url = $back_source_url."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID.'/idx/'.($index+1);
             else
                 $next_url = $back_source_url."/source/".sanitize_title($next_title)."-0/idx/".($index+1);
+              
         }
         if ($index==0)
             $oer_curriculum_prev_class = "ps-nav-hidden";
@@ -108,30 +114,36 @@ if ($youtube || $isPDF)
 if (function_exists('oer_get_resource_metadata')){
     $resource_meta = oer_get_resource_metadata($resource->ID);
 }
+
+/*
 if (empty($next_resource)){
     $modules = oer_curriculum_modules($post->ID);
     if (isset($modules[0])){
         $oer_curriculum_next_class = "";
-        $next_resource = $modules[0];
-        $next_url = $back_url."/module/".sanitize_title($next_resource['title']);
+        //$next_resource = NULL;
+        //$next_resource = $modules[0];
+        //$next_url = $back_url."/module/".sanitize_title($next_resource['title']);
     } else {
         if (!empty($next_title)){
             $next_resource['title'] = $next_title;
         }
     }
 }
+
 if (empty($prev_resource)){
     $modules = oer_curriculum_modules($post->ID);
     if (isset($modules[0])){
         $oer_curriculum_prev_class = "";
-        $prev_resource = $modules[0];
-        $prev_url = $back_url."/module/".sanitize_title($prev_resource['title']);
+        //$prev_resource = NULL;
+        //$prev_resource = $modules[0];
+        //$prev_url = $back_url."/module/".sanitize_title($prev_resource['title']);
     } else {
         if (!empty($prev_title)){
             $prev_resource['title'] = $prev_title;
         }
     }
 }
+*/
 
 $type = get_post_meta($resource->ID,"oer_mediatype");
 $type = $type[0];
@@ -246,7 +258,7 @@ $type = $type[0];
 </div>
 <div class="ps-related-sources oer-curriculum-primary-sources-row">
     <div class="oer-curriculum-ps-nav-left-block <?php echo $oer_curriculum_prev_class; ?> col-md-6 col-sm-12">
-        <?php if (!empty($prev_resource)):
+        <?php //if (!empty($prev_resource)):
         $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($prev_resource), 'resource-thumbnail' );
         if (empty($resource_img))
             $resource_img = $prev_image;
@@ -278,10 +290,10 @@ $type = $type[0];
                 </span>
             </span>
         </a>
-        <?php endif; ?>
+        <?php //endif; ?>
     </div>
     <div class="oer-curriculum-ps-nav-right-block <?php echo $oer_curriculum_next_class; ?> col-md-6 col-sm-12">
-        <?php if (!empty($next_resource)):
+        <?php //if (!empty($next_resource)):
         $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($next_resource), 'resource-thumbnail' );
         if (empty($resource_img))
             $resource_img = $next_image;
@@ -321,7 +333,7 @@ $type = $type[0];
             <span class="nav-media-icon"><i class="fas fa-arrow-right fa-2x"></i></span>
             <span class="col-md-3">&nbsp;</span>
         </a>
-        <?php endif; ?>
+        <?php //endif; ?>
     </div>
 </div>
 <div class="oer-curriculum-ajax-loader" role="status">

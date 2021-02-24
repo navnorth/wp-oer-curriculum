@@ -382,7 +382,7 @@
                                       <span class="tc-oer-curriculum-label"><a href="<?php echo $addtl_materials['url'][$i]; ?>"><?php echo $addtl_materials['title'][$i]; ?></a></span>
                                     </div>
                                     <div>
-                                      <span class="tc-oer-curriculum-value"><?php echo $addtl_materials['description'][$i]; ?></span>
+                                      <span class="tc-oer-curriculum-value"><p><?php echo $addtl_materials['description'][$i]; ?></p></span>
                                     </div>
                                     </li>
                                     <?php

@@ -513,34 +513,41 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                                                   <?php $btn_text = (htmlspecialchars($resource) > '')? 'Change Resource' : 'Select Resource' ?>
                                                                   
                                                                   <div class="oer_curriculum_primary_resources_image">
-                                                                    <div class="oer_curriculum_primary_resources_image_display">
-                                                                      <?php 
-                                                                      if(!empty($resource)){
-                                                                          $rsrc = get_page_by_title($resource,OBJECT,"resource");
-                                                                          $url = get_permalink($rsrc->ID);
-                                                                          $type = get_post_meta($rsrc->ID,"oer_mediatype")[0];
-                                                                          $rsrcThumbID = get_post_thumbnail_id($rsrc);
-                                                                          $resource_img='';
-                                                                          if (!empty($rsrcThumbID)){
-                                                                              $resource_img = wp_get_attachment_image_url(get_post_thumbnail_id($rsrc), 'resource-thumbnail' );
-                                                                              ?><a href="<?php echo $url; ?>" target="_blank"><img src="<?php echo $resource_img ?>"/></a><?php
-                                                                          }else{
-                                                                            $_avtr = getResourceIcon($type,$url);
-                                                                            ?><a href="<?php echo $url; ?>" target="_blank"><div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div></a><?php
-                                                                          }
-                                                                      }else{
-                                                                        ?><p>You have not selected a resource</p><?php
-                                                                      }
-                                                                      ?>
-                                                                    </div>
                                                                     <div class="oer_curriculum_primary_resources_image_preloader" style="display:none;">
                                                                       <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                                                                     </div>
+                                                                    <div class="oer_curriculum_primary_resources_image_display">
+                                                                      
+                                                                      <div class="oer_curriculum_primary_resources_display">
+                                                                        <?php 
+                                                                        if(!empty($resource)){
+                                                                            $rsrc = get_page_by_title($resource,OBJECT,"resource");
+                                                                            $url = get_permalink($rsrc->ID);
+                                                                            $type = get_post_meta($rsrc->ID,"oer_mediatype")[0];
+                                                                            $rsrcThumbID = get_post_thumbnail_id($rsrc);
+                                                                            $resource_img='';
+                                                                            if (!empty($rsrcThumbID)){
+                                                                                $resource_img = wp_get_attachment_image_url(get_post_thumbnail_id($rsrc), 'resource-thumbnail' );
+                                                                                ?><a href="<?php echo $url; ?>" target="_blank"><img src="<?php echo $resource_img ?>"/></a><br><?php echo htmlspecialchars($resource);
+                                                                            }else{
+                                                                              $_avtr = getResourceIcon($type,$url);
+                                                                              ?><a href="<?php echo $url; ?>" target="_blank"><div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div></a><?php
+                                                                            }
+                                                                        }else{
+                                                                          ?><p>You have not selected a resources</p><?php
+                                                                        }
+                                                                        ?>
+                                                                        <?php echo htmlspecialchars($resource);?>
+                                                                      
+                                                                      </div>
+                                                                      <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="<?php echo htmlspecialchars($resource);?>">
+                                                                      <input type="button" class="button oer-curriculum-resource-selector-button" value="<?php echo $btn_text; ?>">
+
+                                                                    </div>
+                                                                    
                                                                   </div>
                                                                   
-                                                                  <div class="oer_curriculum_primary_resources_display"><?php echo htmlspecialchars($resource);?></div>
-                                                                  <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="<?php echo htmlspecialchars($resource);?>">
-                                                                  <input type="button" class="button oer-curriculum-resource-selector-button" value="<?php echo $btn_text; ?>">
+                                                                  
                                                                 </div>
                                                               
                                                                 
@@ -1882,13 +1889,13 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                                               ]);
                                                               ?>
                                                               <div class="oer_curriculum_primary_resources_image">
+                                                                <div class="oer_curriculum_primary_resources_image_preloader" style="display:none;">
+                                                                  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                                                                </div>
                                                                 <div class="oer_curriculum_primary_resources_image_display">
                                                                   <div class="oer_curriculum_primary_resources_display"></div>
                                                                   <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="">
                                                                   <input type="button" class="button oer-curriculum-resource-selector-button" value="Select Resource">
-                                                                </div>
-                                                                <div class="oer_curriculum_primary_resources_image_preloader" style="display:none;">
-                                                                  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                                                                 </div>
                                                               </div>
                                                             </div>

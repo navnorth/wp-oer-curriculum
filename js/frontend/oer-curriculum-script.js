@@ -1,64 +1,66 @@
 jQuery(document).ready(function($){
     // When the user scrolls down 50px from the top of the document, fixed the header to the top
-    var headerHeight = jQuery('#side-header.fusion-mobile-menu-design-classic').outerHeight();
-    window.onscroll = function() {
-        if (jQuery(window).width()<=600){
-            var rightWidth = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').width();
-            var oerCurriculumTop = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().top;
-            var leftedge = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().left;   
-            if (document.body.scrollTop > oerCurriculumTop || document.documentElement.scrollTop > oerCurriculumTop) {
-                jQuery('.tc-oer-curriculum-details-header').css({
-                    "background":"#ffffff",
-                    "padding":"15px 50px",
-                    "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
-                    "z-index":"999999",
-                    "top":"0"
-                });
-                jQuery('.tc-oer-curriculum-details-header').addClass('fixed');
-            } else {
-                topPos = headerHeight - document.documentElement.scrollTop;
-                topPos += 60;
-                if (jQuery('#wpadminbar').length>0)
-                    topPos = topPos + 32;
-                jQuery('.tc-oer-curriculum-details-header').css({
-                    "background":"none",
-                    "padding":"25px 0px",
-                    "box-shadow":"none",
-                    "z-index":"0",
-                    "width":"100%",
-                    "top": topPos + "px",
-                    "width": rightWidth + "px",
-                    "left": leftedge + "px"
-                });
-                jQuery('.tc-oer-curriculum-details-header').removeClass('fixed');
-            }
-        } else {
-            var rightWidth = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').width();
-            var leftedge = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().left;    
-            var oerCurriculumTop = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().top;      
-            if (document.body.scrollTop > oerCurriculumTop || document.documentElement.scrollTop > oerCurriculumTop) {
-                jQuery('.tc-oer-curriculum-details-header').css({
-                    "background":"#ffffff",
-                    "padding":"15px 50px",
-                    "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
-                    "z-index":"999999",
-                    "width": rightWidth + "px",
-                    "left": leftedge + "px"
-                });
-                jQuery('.tc-oer-curriculum-details-header').addClass('fixed');
-            } else {
-                jQuery('.tc-oer-curriculum-details-header').css({
-                    "background":"none",
-                    "padding":"25px 0px",
-                    "box-shadow":"none",
-                    "z-index":"0",
-                    "width":"100%"
-                });
-                jQuery('.tc-oer-curriculum-details-header').removeClass('fixed');
-            }
-        }
-    };
+    if(jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').length){
+      var headerHeight = jQuery('#side-header.fusion-mobile-menu-design-classic').outerHeight();
+      window.onscroll = function() {
+          if (jQuery(window).width()<=600){
+              var rightWidth = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').width();
+              var oerCurriculumTop = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().top;
+              var leftedge = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().left;   
+              if (document.body.scrollTop > oerCurriculumTop || document.documentElement.scrollTop > oerCurriculumTop) {
+                  jQuery('.tc-oer-curriculum-details-header').css({
+                      "background":"#ffffff",
+                      "padding":"15px 50px",
+                      "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
+                      "z-index":"999999",
+                      "top":"0"
+                  });
+                  jQuery('.tc-oer-curriculum-details-header').addClass('fixed');
+              } else {
+                  topPos = headerHeight - document.documentElement.scrollTop;
+                  topPos += 60;
+                  if (jQuery('#wpadminbar').length>0)
+                      topPos = topPos + 32;
+                  jQuery('.tc-oer-curriculum-details-header').css({
+                      "background":"none",
+                      "padding":"25px 0px",
+                      "box-shadow":"none",
+                      "z-index":"0",
+                      "width":"100%",
+                      "top": topPos + "px",
+                      "width": rightWidth + "px",
+                      "left": leftedge + "px"
+                  });
+                  jQuery('.tc-oer-curriculum-details-header').removeClass('fixed');
+              }
+          } else {
+              var rightWidth = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').width();
+              var leftedge = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().left;    
+              var oerCurriculumTop = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().top;      
+              if (document.body.scrollTop > oerCurriculumTop || document.documentElement.scrollTop > oerCurriculumTop) {
+                  jQuery('.tc-oer-curriculum-details-header').css({
+                      "background":"#ffffff",
+                      "padding":"15px 50px",
+                      "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
+                      "z-index":"999999",
+                      "width": rightWidth + "px",
+                      "left": leftedge + "px"
+                  });
+                  jQuery('.tc-oer-curriculum-details-header').addClass('fixed');
+              } else {
+                  jQuery('.tc-oer-curriculum-details-header').css({
+                      "background":"none",
+                      "padding":"25px 0px",
+                      "box-shadow":"none",
+                      "z-index":"0",
+                      "width":"100%"
+                  });
+                  jQuery('.tc-oer-curriculum-details-header').removeClass('fixed');
+              }
+          }
+      }
     
+    }
     
     
     
