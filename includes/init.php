@@ -97,7 +97,7 @@ function oer_curriculum_meta_callback() {
 
 // Related Inquiry Sets Callback
 function oer_curriculum_related_inquiry_callback(){
-    include_once(OER_LESSON_PLAN_PATH . 'includes/oer-curriculum-related-inquiry-sets.php');
+    include_once(OER_LESSON_PLAN_PATH . 'includes/oer-curriculum-related-curriculum.php');
 }
 
 // Age Levels Callback

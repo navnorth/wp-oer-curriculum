@@ -55,8 +55,8 @@
 
   $oer_curriculum_type_set = (get_option('oer_curriculum_type_label'))?true:false;
   $oer_curriculum_type_enabled = (get_option('oer_curriculum_type_enabled'))?true:false;
-  $related_inquiry_set = (get_option('oer_curriculum_related_inquiry_set_label'))?true:false;
-  $related_inquiry_enabled = (get_option('oer_curriculum_related_inquiry_set_enabled'))?true:false;
+  $related_curriculum_label = (get_option('oer_curriculum_related_curriculum_label'))?true:false;
+  $related_curriculum_enabled = (get_option('oer_curriculum_related_curriculum_enabled'))?true:false;
   $author_set = (get_option('oer_curriculum_authors_label'))?true:false;
   $author_enabled = (get_option('oer_curriculum_authors_enabled'))?true:false;
   $standards_set = (get_option('oer_curriculum_standards_label'))?true:false;
@@ -120,27 +120,27 @@
                           <?php endif; ?>
                       </div>
                       <?php
-                      $related_inquiry_sets = (isset($post_meta_data['oer_curriculum_related_inquiry_set'][0]) ? unserialize($post_meta_data['oer_curriculum_related_inquiry_set'][0]) : array());
-                      $show_related_inquiry_sets = false;
-                      foreach($related_inquiry_sets as $rset){
+                      $related_curriculum_collection = (isset($post_meta_data['oer_curriculum_related_curriculum'][0]) ? unserialize($post_meta_data['oer_curriculum_related_curriculum'][0]) : array());
+                      $show_curriculum_section = false;
+                      foreach($related_curriculum_collection as $rset){
                           if ($rset!=="0"){
-                              $show_related_inquiry_sets = true;
+                              $show_curriculum_section = true;
                               break;
                           }
                       }
-                      if ($show_related_inquiry_sets) {
-                          if (($related_inquiry_set && $related_inquiry_enabled) || !$related_inquiry_set) {
+                      if ($show_curriculum_section) {
+                          if (($related_curriculum_label && $related_curriculum_enabled) || !$related_curriculum_label) {
                       ?>
-                      <div class="tc-related-inquiry-sets">
-                          <a href="#collapse_oer_curriculum_related_inquiry_sets" data-toggle="collapse" class="tc_oer_curriculum_collapse_button collapsed" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            <h4 class="tc-related-inquiry-sets-heading clearfix">
-                                <span class="oer_curriculum_related_fields"><?php echo oer_curriculum_get_field_label('oer_curriculum_related_inquiry_set'); ?></span><span class="oer_curriculum_acicon"></span>
+                      <div class="tc-related-curriculum-section">
+                          <a href="#collapse_oer_curriculum_related_curriculum" data-toggle="collapse" class="tc_oer_curriculum_collapse_button collapsed" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <h4 class="tc-related-curriculum-section-heading clearfix">
+                                <span class="oer_curriculum_related_fields"><?php echo oer_curriculum_get_field_label('oer_curriculum_related_curriculum'); ?></span><span class="oer_curriculum_acicon"></span>
                             </h4>
                           </a>
-                          <div class="tc-related-inquiry-sets-details clearfix collapse" id="collapse_oer_curriculum_related_inquiry_sets">
-                              <ul class="tc-related-inquiry-sets-list">
+                          <div class="tc-related-curriculum-details clearfix collapse" id="collapse_oer_curriculum_related_curriculum">
+                              <ul class="tc-related-curriculum-list">
                               <?php
-                              foreach($related_inquiry_sets as $inquiry_set) {
+                              foreach($related_curriculum_collection as $inquiry_set) {
                                   if ($inquiry_set!=="0") {
                                       $inquiry = oer_curriculum_get_inquiry_set_details($inquiry_set);
                                       $inquiry_link = get_permalink($inquiry_set);

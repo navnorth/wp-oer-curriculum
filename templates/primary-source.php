@@ -76,6 +76,7 @@ if (!empty($primary_resources) && oer_curriculum_scan_array($primary_resources))
                 }
                 $new_title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
                 $new_description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
+                $new_description = str_replace ( "../wp-content" , get_bloginfo( 'url' ).'/wp-content', $new_description);
                 break;
             }
             $index++;
@@ -280,7 +281,7 @@ $type = $type[0];
                     <div class="navigation-avatar"><span class="dashicons <?php echo getResourceIcon($prev_resource_type,$prev_resource_url); ?>"></span></div>
                     <?php endif; ?>
                 </span>
-                <span class="nav-oer-curriculum-resource-title col-md-8">
+                <span class="nav-oer-curriculum-resource-title wow1 col-md-8">
                     <?php
                     if (!empty($prev_title))
                         echo $prev_title;
@@ -317,16 +318,13 @@ $type = $type[0];
                       <div class="navigation-avatar"><span class="dashicons <?php echo getResourceIcon($next_resource_type,$next_resource_url); ?>"></span></div>
                     <?php endif; ?>
                 </span>
-                <span class="nav-oer-curriculum-resource-title col-md-8">
-                    <?php
-                     if (is_object($next_resource)){
+                <span class="nav-oer-curriculum-resource-title wow2 col-md-8">
+                    <?php             
                         if (!empty($next_title))
                             echo $next_title;
                         else
                             echo $next_resource->post_title;
-                     }
-                    else
-                        echo $next_resource['title'];
+
                     ?>
                 </span>
             </span>
