@@ -32,7 +32,7 @@
   $elements_orders = isset($post_meta_data['oer_curriculum_order'][0]) ? unserialize($post_meta_data['oer_curriculum_order'][0]) : array();
 
   //Grade Level
-  $oer_curriculum_grade = isset($post_meta_data['oer_curriculum_grades'][0])? unserialize($post_meta_data['oer_curriculum_grades'][0])[0]:"";
+  $oer_curriculum_grade = (isset($post_meta_data['oer_curriculum_grades'][0]) && $post_meta_data['oer_curriculum_grades'][0]!=="")? unserialize($post_meta_data['oer_curriculum_grades'][0])[0]:"";
   if ($oer_curriculum_grade!=="pre-k" && $oer_curriculum_grade!=="k")
       $oer_curriculum_grade = "Grade ".$oer_curriculum_grade;
       
