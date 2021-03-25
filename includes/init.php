@@ -225,7 +225,7 @@ function oer_curriculum_get_assets() {
         
         //Enqueue script
         if (!wp_script_is('admin-oer-curriculum-bootstrap', 'enqueued')) {
-            wp_enqueue_script('admin-oer-curriculum-bootstrap', OER_LESSON_PLAN_URL . 'lib/bootstrap-3.3.7/js/bootstrap.min.js');
+            wp_enqueue_script('admin-oer-curriculum-bootstrap', OER_LESSON_PLAN_URL . 'lib/bootstrap-3.3.7/js/bootstrap.min.js',array('jquery') , null, true);
         }
         
         wp_register_script('oer-curriculum-script', OER_LESSON_PLAN_URL . 'js/backend/oer-curriculum.js');
@@ -248,7 +248,7 @@ if (!function_exists('oer_curriculum_enqueue_scripts_and_styles')) {
         ) {
             //Enqueue script
             if (!wp_script_is('bootstrap-js', 'enqueued')) {
-                wp_enqueue_script('bootstrap-js', OER_LESSON_PLAN_URL . 'lib/bootstrap-3.3.7/js/bootstrap.min.js');
+                wp_enqueue_script('bootstrap-js', OER_LESSON_PLAN_URL . 'lib/bootstrap-3.3.7/js/bootstrap.min.js',array('jquery') , null, true);
             }
 
             if (!wp_style_is('oer-curriculum-load-fa', 'enqueued') && 
