@@ -28,7 +28,7 @@ $inquiry = ((is_array($inquiry)&& count($inquiry)>0)?$inquiry[0]:array());
                             <?php if (count($inquirysets)>0) {
                                 foreach($inquirysets as $inquiryset) {
                             ?>
-                                <option value="<?php echo $inquiryset->ID;?>" <?php echo (($inquiry[$i-1] == $inquiryset->ID) ? 'selected="selected"' : "");?>><?php echo $inquiryset->post_title;?></option>        
+                                <option value="<?php echo $inquiryset->ID;?>" <?php if (!empty($inquiry)) selected($inquiry[$i-1],$inquiryset->ID, true); ?>><?php echo $inquiryset->post_title;?></option>        
                             <?php
                                 }
                             } ?>
