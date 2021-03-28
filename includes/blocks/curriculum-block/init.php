@@ -28,9 +28,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
  
- wp_enqueue_script( 'curriculum_block-front-js', plugins_url( '/curriculum-block/front.build.js', dirname( __FILE__ ) ), array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),'1.0.1' , true );
- wp_localize_script( 'curriculum_block-front-js', 'curriculum_block_ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
- 
+
+function wp_curriculum_enqueue_script_function(){
+	wp_enqueue_script( 'curriculum_block-front-js', plugins_url( '/curriculum-block/front.build.js', dirname( __FILE__ ) ), array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),'1.0.1' , true );
+	wp_localize_script( 'curriculum_block-front-js', 'curriculum_block_ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+}
+add_action( 'wp_enqueue_scripts', 'wp_curriculum_enqueue_script_function' );
+
 function curriculum_block_cgb_block_assets() { // phpcs:ignore
 	
 	// Register block editor script for backend.
@@ -279,17 +283,20 @@ add_action( 'rest_api_init', function () {
     //Path to meta query route
     register_rest_route( 'curriculum/v2', 'taxquery', array(
             'methods' => 'GET', 
-            'callback' => 'curriculum_tax_query' 
+            'callback' => 'curriculum_tax_query',
+						'permission_callback' => '__return_true'
     ) );
 		
 		register_rest_route( 'curriculum/v2', 'catquery', array(
             'methods' => 'GET', 
-            'callback' => 'curriculum_cat_query' 
+            'callback' => 'curriculum_cat_query',
+						'permission_callback' => '__return_true'
     ) );
 		
 		register_rest_route( 'curriculum/v2', 'tagsquery', array(
             'methods' => 'GET', 
-            'callback' => 'curriculum_tags_query' 
+            'callback' => 'curriculum_tags_query',
+						'permission_callback' => '__return_true'
     ) );
 });
 

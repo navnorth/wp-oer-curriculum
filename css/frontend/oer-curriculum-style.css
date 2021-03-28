@@ -795,6 +795,7 @@ h4.tc-oer-curriculum-field-heading span.oer_curriculum_related_fields, h4.tc-rel
 .tc-oer-curriculum-objectives-details ul.tc-oer-curriculum-objectives-list { padding-left:0;}
 .oer_curriculum_keywords_container span a { color:#77B143; border-color:#E0E0E0; }
 .oer_curriculum_keywords_container span { margin: 5px; display: inline-block;}
+.oer_curriculum_keywords_container span {margin-left: 0px !important; margin-right: 10px !important;}
 .tc-oer-curriculum-objectives, .tc-oer-curriculum-standards, .tc-related-curriculum-section {margin-bottom: 0px;}
 a.tc_oer_curriculum_collapse_button h4 {line-height: 1.8em;}
 .tc-related-curriculum-section, .tc-oer-curriculum-standards, .tc-oer-curriculum-subject-areas, .tc-oer-curriculum-objectives {float: left;width: 100%;}
