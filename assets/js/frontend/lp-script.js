@@ -26,7 +26,7 @@ jQuery(document).ready(function($){
                 });
             }
         } else {
-            rightWidth = jQuery('.single-lesson-plans #main .container .lp-featured-section').outerWidth()
+            /*rightWidth = jQuery('.single-lesson-plans #main .container .lp-featured-section').outerWidth()
             if (document.body.scrollTop > 52 || document.documentElement.scrollTop > 52) {
                 jQuery('.tc-lp-details-header').css({
                     "background":"#ffffff",
@@ -43,7 +43,7 @@ jQuery(document).ready(function($){
                     "z-index":"0",
                     "width":"100%"
                 });
-            }
+            }*/
         }
     };
     

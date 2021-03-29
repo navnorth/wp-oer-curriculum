@@ -72,11 +72,15 @@ function oer_lesson_plan_custom_meta_boxes() {
     $related_inquiry_set_enabled = (get_option('oer_lp_related_inquiry_set_enabled'))?true:false;
     $related_curriculum_enabled = false;
     if (($related_inquiry_set && $related_inquiry_set_enabled) || !$related_inquiry_set) {
-        for ($i=1;$i<=3;$i++){
-            $enabled = (get_option('oer_lp_related_inquiry_set_'.$i.'_enabled'))?true:false;
-            if ($enabled) {
-                $related_curriculum_enabled = true;
-                break;
+        if (!$related_inquiry_set){
+            $related_curriculum_enabled = true;
+        } else {
+            for ($i=1;$i<=3;$i++){
+                $enabled = (get_option('oer_lp_related_inquiry_set_'.$i.'_enabled'))?true:false;
+                if ($enabled) {
+                    $related_curriculum_enabled = true;
+                    break;
+                }
             }
         }
         if ($related_curriculum_enabled) {
@@ -214,7 +218,7 @@ function oer_lesson_plan_assets() {
         (isset($_GET['post_type']) && $_GET['post_type'] == 'lesson-plans') ||
         (isset($post->post_type) && $post->post_type == 'lesson-plans')
     ) {
-        wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL . 'assets/lib/font-awesome/css/all.min.css');
+        wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL . 'assets/lib/fontawesome/css/all.min.css');
         wp_enqueue_style('lesson-plan-bootstrap', OER_LESSON_PLAN_URL . 'assets/lib/bootstrap-3.3.7/css/bootstrap.min.css');
         wp_enqueue_style('admin-lesson-plan', OER_LESSON_PLAN_URL . 'assets/css/backend/lp-style.css');
         wp_enqueue_style('lesson-plan-resource-selector-style', OER_LESSON_PLAN_URL . 'assets/css/backend/lp-resource-selector-style.css', array() , null, 'all');
@@ -242,6 +246,16 @@ if (!function_exists('lp_enqueue_scripts_and_styles')) {
             (isset($_GET['post_type']) && $_GET['post_type'] == 'lesson-plans') ||
             (isset($post->post_type) && $post->post_type == 'lesson-plans')
         ) {
+            //Enqueue script
+            if (!wp_script_is('bootstrap-js', 'enqueued')) {
+                wp_enqueue_script('bootstrap-js', OER_LESSON_PLAN_URL . 'assets/lib/bootstrap-3.3.7/js/bootstrap.min.js');
+            }
+
+            if (!wp_style_is('lesson-plan-load-fa', 'enqueued') && 
+                !wp_style_is('fontawesome-style', 'enqueued') && 
+                !wp_style_is('fontawesome', 'enqueued')) {
+                wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL . 'assets/lib/fontawesome/css/all.min.css');
+            }
             wp_enqueue_style('lp-style', OER_LESSON_PLAN_URL . 'assets/css/frontend/lp-style.css');
             wp_enqueue_script('lp-script', OER_LESSON_PLAN_URL . 'assets/js/frontend/lp-script.js', array('jquery'));
             wp_localize_script( 'lp-script', 'lp_ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
@@ -986,9 +1000,17 @@ add_action('wp_ajax_nopriv_lp_add_text_feature_callback', 'lp_add_text_feature_c
 function lp_add_text_feature_callback() {
     
     $element_id = (isset($_REQUEST['row_id']))?$_REQUEST['row_id']:1;
+    $ed_id = (isset($_REQUEST['editor_id'])?$_REQUEST['editor_id']:'oer-lp-additional-section-');
+    $req_mat = (isset($_REQUEST['required_material'])?true:false);
     $element_id++;
-    $label_id = "oer_lp_additional_sections[label][]";
-    $editor_id = "oer_lp_additional_sections[editor][]";
+
+    if ($req_mat){
+        $label_id = "oer_lp_required_materials[label][]";
+        $editor_id = "oer_lp_required_materials[editor][]";
+    } else {
+        $label_id = "oer_lp_additional_sections[label][]";
+        $editor_id = "oer_lp_additional_sections[editor][]";
+    }
     $content = '<div class="panel panel-default lp-section-element-wrapper" id="lp_section_element_wrapper-'.$element_id.'">';
     $content .= '   <div class="panel-heading">';
     $content .= '       <h3 class="panel-title lp-module-title">';
@@ -1001,14 +1023,14 @@ function lp_add_text_feature_callback() {
     $content .= '       </h3>';
     $content .= '   </div>';
     $content .= '   <div class="panel-body">';
-    $content .= '        <div class="text-editor-group">';
-    $content .= '           <div class="form-group">';
-    $content .= '               <input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" placeholder="Text Title">';
-    $content .= '           </div>';
-    $content .= '       <div class="form-group';
+    $content .= '       <div class="form-group">';
+    $content .= '           <input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" placeholder="Text Title">';
+    $content .= '       </div>';
+    $content .= '       <div class="form-group">';
+    $content .= '           <div class="text-editor-group">';
                             ob_start(); // Start output buffer
                             wp_editor('',
-                                'oer-lp-additional-sections-editor-' . $element_id,
+                                $ed_id . $element_id,
                                 $settings = array(
                                     'textarea_name' => $editor_id,
                                     'media_buttons' => true,
@@ -1018,6 +1040,7 @@ function lp_add_text_feature_callback() {
                                 )
                             );
     $content .=             ob_get_clean();
+    $content .= '           </div>';
     $content .= '       </div>';
     $content .= '   </div>';
     $content .= '</div>';

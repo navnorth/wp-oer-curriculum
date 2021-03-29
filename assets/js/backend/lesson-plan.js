@@ -399,7 +399,7 @@ jQuery(document).ready(function ($) {
                 })
                     .on('click', '#lp-author-delete-confirm', function(e) {
                         author.remove();
-                        $('a[href=#' + elementId +']').parent('li').remove();
+                        $('a[href="#' + elementId +'"]').parent('li').remove();
                         $('#lp-delete-author').modal('hide');
 
                         // Disable delete button for author
@@ -986,6 +986,36 @@ jQuery(document).ready(function ($) {
                     $('.other-type-group').hide();
             });
         },
+
+        // Add Required Material
+        lpAddRequiredMaterial: function(){
+            $(document).on("click", "#addMatlBtn", function(e){
+                e.preventDefault();
+                var dis = $(this).closest('.button-row.form-group');
+                
+                var total_text_features = parseInt($('#oer-lp-required-materials .lp-section-element-wrapper').length, 10);
+                var id = total_text_features + 1;
+                const editor_prefix = 'oer-lp-required-material-section-';
+                $.post(ajaxurl,
+                       {
+                        action:'lp_add_text_feature_callback',
+                        row_id: total_text_features,
+                        editor_id: editor_prefix,
+                        required_material: true
+                       }).done(function (response) {
+                    if($('#oer-lp-required-materials div.lp-section-element-wrapper').length) {
+                        $(response).insertAfter('#oer-lp-required-materials div.lp-section-element-wrapper:last').tinymce_textareas();
+                    } else {
+                        $('.lp-section-element-panel').html(response).tinymce_textareas();
+                    }
+                    tinymce.execCommand( 'mceRemoveEditor', false, editor_prefix + id );
+                    tinymce.execCommand( 'mceAddEditor', false, editor_prefix + id );
+                    quicktags({ id: editor_prefix + id });
+                    
+                    LessonPlan.toggleUpDownButton();
+                });
+            });
+        },
         
         // Add Text Feature
         lpAddTextFeature: function(){
@@ -993,19 +1023,24 @@ jQuery(document).ready(function ($) {
                 e.preventDefault();
                 var dis = $(this).closest('.button-row.form-group');
                 
-                var total_text_features = parseInt($('.text-editor-group').length, 10);
+                var total_text_features = parseInt($('#oer-lp-additional-sections .lp-section-element-wrapper').length, 10);
                 var id = total_text_features + 1;
+                console.log(id);
                 $.post(ajaxurl,
                        {
                         action:'lp_add_text_feature_callback',
                         row_id: total_text_features
                        }).done(function (response) {
                     dis.before(response);
-
-                    tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-text-feature-editor-' + id );
-                    tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-text-feature-editor-' + id );
-                    quicktags({ id: 'oer-lp-text-feature-editor-' + id });
-                    /*LessonPlan.initializeEditor('oer-lp-text-feature-editor-' + id);*/
+                    /*if($('#oer-lp-additional-sections div.lp-section-element-wrapper').length) {
+                        $(response).insertAfter('#oer-lp-additional-sections div.lp-section-element-wrapper:last').tinymce_textareas();
+                    } else {
+                        $('.lp-section-element-panel').html(response).tinymce_textareas();
+                    }
+                    LessonPlan.initializeEditor('oer-lp-additional-section-' + id);*/
+                    tinymce.execCommand( 'mceRemoveEditor', false, 'oer-lp-additional-section-' + id );
+                    tinymce.execCommand( 'mceAddEditor', false, 'oer-lp-additional-section-' + id );
+                    quicktags({ id: 'oer-lp-additional-section-' + id });
                     
                     LessonPlan.toggleUpDownButton();
                 });
@@ -1032,14 +1067,14 @@ jQuery(document).ready(function ($) {
                 var section = $(this).closest('.panel-default');
                 var elementId = section.attr('id');
                 e.preventDefault();
-                $('#lp-delete-section').modal({
+                $('#lp-delete-confirm-popup').modal({
                     backdrop: 'static',
                     keyboard: false
                 })
-                    .on('click', '#lp-section-delete-confirm', function(e) {
+                    .on('click', '#lp-delete-confirm-popup-btn', function(e) {
                         section.remove();
-                        $('a[href=#' + elementId +']').parent('li').remove();
-                        $('#lp-delete-section').modal('hide');
+                        $('a[href="#' + elementId +'"]').parent('li').remove();
+                        $('#lp-delete-confirm-popup').modal('hide');
 
                         // Disable delete button for section
                         if($('.lp-section-element-wrapper').length === 1) {
@@ -1150,6 +1185,7 @@ jQuery(document).ready(function ($) {
     LessonPlan.lpRemoveCopyLesson();
     LessonPlan.lpPrimarySourceSensitiveMaterial();
     LessonPlan.lpOtherCurriculumType();
+    LessonPlan.lpAddRequiredMaterial();
     LessonPlan.lpAddTextFeature();
     LessonPlan.deleteSection();
     LessonPlan.lpTinyMCESave();

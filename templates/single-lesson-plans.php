@@ -6,7 +6,7 @@
   /**
    * Enqueue the assets
    */
-  wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL.'assets/lib/font-awesome/css/all.min.css');
+  wp_enqueue_style('lesson-plan-load-fa', OER_LESSON_PLAN_URL.'assets/lib/fontawesome/css/all.min.css');
   wp_enqueue_style('lesson-plan-bootstrap', OER_LESSON_PLAN_URL.'assets/lib/bootstrap-3.3.7/css/bootstrap.min.css');
   wp_enqueue_script('lesson-plan-frontend', OER_LESSON_PLAN_URL.'assets/js/frontend/lesson-plan.js', array('jquery'), null, true);
   wp_enqueue_script( 'jquery-ui-slider' );
@@ -14,6 +14,7 @@
   get_header();
 
   global $_css_oer;
+  global $root_slug;
   if ($_css_oer) {
   $output = "<style>"."\n";
   $output .= $_css_oer."\n";
@@ -23,6 +24,7 @@
 
   global $post;
   global $wpdb;
+
   $oer_sensitive = false;
   $sensitive_material = null;
 
@@ -67,6 +69,10 @@
   $suggested_time_enabled = (get_option('oer_lp_suggested_instructional_time_enabled'))?true:false;
   $req_materials_set = (get_option('oer_lp_required_materials_label'))?true:false;
   $req_materials_enabled = (get_option('oer_lp_required_materials_enabled'))?true:false;
+  $addtl_materials_set = (get_option('oer_lp_required_materials_label'))?true:false;
+  $addtl_materials_enabled = (get_option('oer_lp_required_materials_enabled'))?true:false;
+  $iq_set = (get_option('oer_lp_required_materials_label'))?true:false;
+  $iq_enabled = (get_option('oer_lp_required_materials_enabled'))?true:false;
 
   if (have_posts()) : while (have_posts()) : the_post();
       if (function_exists('oer_breadcrumb_display'))
@@ -275,7 +281,21 @@
                               </div>
                               <?php
                           }
-                          
+
+                          // Investigative Question
+                          if (($iq_set && $iq_enabled) || !$iq_set) {
+                              $iq_label = oer_lp_get_field_label('oer_lp_iq_label');
+                              $iq_data = (isset($post_meta_data['oer_lp_iq'][0]) ? unserialize($post_meta_data['oer_lp_iq'][0]) : "");
+                              if (!empty($iq_data)){
+                              ?>
+                              <div class="form-field">
+                                  <div><span class="tc-lp-label"><?php echo $iq_data['question']; ?></span></div>
+                                  <div><span class="tc-lp-value"><?php echo $iq_data['excerpt']; ?></span></div>
+                              </div>
+                              <?php
+                              }
+                          }
+
                           // Appropriate Age Levels Display
                           if (($age_levels_set && $age_levels_enabled) || !$age_levels_set) {
                               $age_label = oer_lp_get_field_label('oer_lp_age_levels');
@@ -302,18 +322,69 @@
                               }
                           }
                           
-                           // Required Equipment Materials Display
-                         /*if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
-                              $req_materials_label = (isset($post_meta_data['oer_lp_required_materials_label'][0]) ? $post_meta_data['oer_lp_required_materials_label'][0] : "");
-                              $req_materials = (isset($post_meta_data['oer_lp_required_materials'][0]) ? $post_meta_data['oer_lp_required_materials'][0] : "");
-                              if (!empty($req_materials)){*/
+                          
+                          // Required Equipment Materials Display
+                          if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
+                              $req_materials_label = (isset($post_meta_data['oer_lp_required_materials_label'][0]) ? $post_meta_data['oer_lp_required_materials_label'][0] : "Required Materials");
+                              $req_materials = (isset($post_meta_data['oer_lp_required_materials'][0]) ? unserialize($post_meta_data['oer_lp_required_materials'][0]) : "");
+                              if (!empty($req_materials)){
+                                $cnt = 0;
+                                if (isset($req_materials['label']))
+                                    $cnt = count($req_materials['label']);
+                                if (isset($req_materials['editor'])){
+                                    $cnt = (count($req_materials['editor'])>$cnt) ? count($req_materials['editor']) : $cnt;
+                                }
+                                for ($i=0;$i<$cnt;$i++){
+                                  if (!empty($req_materials['label'][$i]) || !empty($req_materials['editor'][$i])) {
+                                  ?>
+                                  <div class="form-field">
+                                      <span class="tc-lp-label-heading"><?php echo $req_materials['label'][$i]; ?>:</span> <span class="tc-lp-value"><?php echo $req_materials['editor'][$i]; ?></span>
+                                  </div>
+                                  <?php
+                                  }
+                                }
+                              }
+                          }
+
+                          // Additional Materials Display
+                          if (($addtl_materials_set && $addtl_materials_enabled) || !$addtl_materials_set) {
+                              $addtl_materials_label = (isset($post_meta_data['oer_lp_oer_materials_label'][0]) ? $post_meta_data['oer_lp_oer_materials_label'][0] : "Additional Materials");
+                              $addtl_materials = (isset($post_meta_data['lp_oer_materials'][0]) ? unserialize($post_meta_data['lp_oer_materials'][0]) : array());
+                              if (!empty($addtl_materials)){
                               ?>
-                              <!--<div class="form-field">
-                                  <span class="tc-lp-label"><?php //echo $req_materials_label; ?>:</span> <span class="tc-lp-value"><?php echo $req_materials; ?></span>
-                              </div>-->
+                              <div class="form-field">
+                                  <span class="tc-lp-label"><?php echo $addtl_materials_label; ?>:</span>
+                                  <?php 
+                                  $cnt = 0;
+                                  if (isset($addtl_materials['title']))
+                                    $cnt = count($addtl_materials['title']);
+                                  if (isset($addtl_materials['url'])){
+                                    $cnt = (count($addtl_materials['url'])>$cnt) ? count($addtl_materials['url']) : $cnt;
+                                  }
+                                  if (isset($addtl_materials['description'])){
+                                    $cnt = (count($addtl_materials['description'])>$cnt) ? count($addtl_materials['description']) : $cnt;
+                                  }
+                                  echo "<ul>";
+                                  for ($i=0;$i<$cnt;$i++){
+                                    if (!empty($addtl_materials['title'][$i]) || !empty($addtl_materials['url'][$i]) || !empty($addtl_materials['description'][$i])) {
+                                    ?>
+                                    <li>
+                                    <div class="form-field">
+                                      <span class="tc-lp-label"><a href="<?php echo $addtl_materials['url']; ?>"><?php echo $addtl_materials['title'][$i]; ?></a></span>
+                                    </div>
+                                    <div>
+                                      <span class="tc-lp-value"><?php echo $addtl_materials['description'][$i]; ?></span>
+                                    </div>
+                                    </li>
+                                    <?php
+                                    }
+                                  } 
+                                  echo "</ul>";
+                                  ?>
+                              </div>
                               <?php
-                              /*}
-                          }*/
+                              }
+                          }
                           
                           // Additional Section
                           $additional_sections = isset($post_meta_data['oer_lp_additional_sections'][0]) ? unserialize($post_meta_data['oer_lp_additional_sections'][0]) : array();
@@ -326,11 +397,11 @@
                               }
                               for ($i=0;$i<$cnt;$i++){
                                   if (!empty($additional_sections['label'][$i]) || !empty($additional_sections['editor'][$i])) {
-                                  ?>
+                                    ?>
                                   <div class="form-field">
-                                      <span class="tc-lp-label"><?php echo $additional_sections['label'][$i]; ?>:</span> <span class="tc-lp-value"><?php echo $additional_sections['editor'][$i]; ?></span>
+                                      <span class="tc-lp-label-heading"><?php echo $additional_sections['label'][$i]; ?>:</span> <span class="tc-lp-value"><?php echo $additional_sections['editor'][$i]; ?></span>
                                   </div>
-                                  <?php
+                                    <?php
                                   }
                               }
                            }
@@ -372,14 +443,14 @@
                       <div class="tc-lp-controls">
                           <div class="sharethis-inline-share-buttons"></div>
                           <?php if ($oer_lp_download_copy_document): ?>
-                          <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank"><i class="fal fa-download"></i></a>
+                          <a href="<?php echo $oer_lp_download_copy_document; ?>" target="_blank"><i class="fa fa-download"></i></a>
                           <?php endif; ?>
                       </div>
                   <?php } ?>
                   </div>
                   <?php if ($oer_sensitive) : ?>
                   <div class="tc-sensitive-material-section">
-                      <p><i class="fal fa-exclamation-triangle"></i><span class="sensitive-material-text">Potentially Sensitive Material</span></p>
+                      <p><i class="fa fa-exclamation-triangle"></i><span class="sensitive-material-text">Potentially Sensitive Material</span></p>
                       <!--<button class="question-popup-button"><i class="fal fa-question-circle"></i></button>-->
                   </div>
                   <?php endif;
@@ -473,7 +544,7 @@
                                       </div>
                                       <?php if ($sensitiveMaterial!=="" && $sensitiveMaterial!=="no"): ?>
                                       <div class="sensitive-source">
-                                          <p><i class="fal fa-exclamation-triangle"></i></p>
+                                          <p><i class="fa fa-exclamation-triangle"></i></p>
                                       </div>
                                       <?php endif; ?>
                                   </a>
@@ -520,7 +591,7 @@
                           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                               <div class="media-image">
                                   <div class="image-thumbnail">
-                                      <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_custom_editor['title'])); ?>
+                                      <?php  $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_custom_editor['title'])); ?>
                                       <a href="<?php echo $ps_url;  ?>">
                                           <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                           <span class="resource-overlay"></span>
@@ -546,7 +617,7 @@
                           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                               <div class="media-image">
                                   <div class="image-thumbnail">
-                                      <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_custom_editor['title'])); ?>
+                                      <?php  $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_custom_editor['title'])); ?>
                                       <a href="<?php echo $ps_url;  ?>">
                                           <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                           <span class="resource-overlay"></span>
@@ -569,7 +640,7 @@
                       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                           <div class="media-image">
                               <div class="image-thumbnail">
-                                  <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title("Text List")); ?>
+                                  <?php  $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title("Text List")); ?>
                                   <a href="<?php echo $ps_url;  ?>">
                                       <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                       <span class="resource-overlay"></span>
@@ -595,7 +666,7 @@
                           <div class="col-md-3 col-sm-3 padding-0">
                               <div class="media-image">
                                   <div class="image-thumbnail">
-                                      <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_vocabulary_list_title)); ?>
+                                      <?php  $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_vocabulary_list_title)); ?>
                                       <a href="<?php echo $ps_url;  ?>">
                                           <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                           <span class="resource-overlay"></span>
@@ -617,7 +688,7 @@
                       <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 padding-0">
                           <div class="media-image">
                               <div class="image-thumbnail">
-                                  <?php  $ps_url = site_url("inquiry-sets/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_vocabulary_list_title)); ?>
+                                  <?php  $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_lp_vocabulary_list_title)); ?>
                                   <a href="<?php echo $ps_url;  ?>">
                                       <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                       <span class="resource-overlay"></span>

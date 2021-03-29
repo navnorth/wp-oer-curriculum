@@ -17,7 +17,7 @@ body.single-lesson-plans {
     padding: 5px 0;
 }
 .tc-lp-controls a {
-    display: block;
+    display: inline;
     padding: 10px 14px;
 }
 .tc-lp-controls a i {
@@ -657,7 +657,7 @@ span.selected-standard-pill:last-child {
     transition: all .2s ease-in;
     font-size:14px;
 }
-.lp-nav-block { margin-bottom:15px; }
+.lp-nav-block { margin-bottom:15px; margin-top:15px; }
 .back-button i {
     margin-right: 15px;
 }
@@ -774,6 +774,8 @@ h1.ps-info-title { margin-bottom:40px; margin-top:0; font-size: 1.5em; }
 .tc-lp-controls .sharethis-inline-share-buttons#st-1 .st-btn[data-network='sharethis']:hover svg{ fill:#fff; }
 h4.tc-related-inquiry-sets-heading, h4.tc-lp-field-heading { font-size:16px; text-transform:uppercase; font-weight:bold; color:#356483; line-height:19px; margin:0; float: left;}
 h4.tc-lp-field-heading span.oer_lp_related_fields, h4.tc-related-inquiry-sets-heading span.oer_lp_related_fields {text-decoration: underline;}
+.tc-related-inquiry-sets-details { width:100%; overflow:hidden; }
+.tc-lp-label-heading { display:block; }
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list { padding-left:0;}
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li { font-size:14px; list-style:none; }
 .tc-related-inquiry-sets-details ul.tc-related-inquiry-sets-list li a { color:#77B143; text-decoration:none;  }
@@ -1106,9 +1108,11 @@ div#tcHiddenFields {float: left;}
     display:table;
     width:100%;
     height:100%;
+    margin: auto;
+    max-width: 600px;
 }
 .ps-youtube-video .youtubeVideoWrapper { display:table-cell; vertical-align:middle; }
-.ps-youtube-video .videoWrapper{ width: 100%; height: 100%; display: table; margin: 0 auto; padding-bottom:0; padding-top:0; min-height:200px;  }
+.ps-youtube-video .videoWrapper{ padding-top:0; }
 .ps-pdf-block { height:100%; }
 .ps-pdf-block .psPDFWrapper { margin: 0 auto; width: 100%; height: 100%; max-width:100%; }
 .padding-right-0 { padding-right:0 !important; }
@@ -1127,11 +1131,6 @@ div#tcHiddenFields {float: left;}
         top:286px;
     }
     .wp_oer_breadcrumb { margin-top:60px; }
-}
-.fa-exclamation-triangle::before,
-.fa-question-circle::before,
-.fa-warning::before, .fa-download:before {
-    font-family: 'fontawesome' !important;
 }
 .tc-lp-standards-details,
 .tc-lp-subject-details,

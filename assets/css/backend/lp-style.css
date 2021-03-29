@@ -134,13 +134,13 @@
     float: right;
 }
 .js #side-sortables.meta-box-sortables .postbox .toggle-indicator:before {
-    content: "\f343";
+    /*content: "\f343";*/
     font-size: 17px;
     color: #191e23;
     font-weight: 600;
 }
 .js #side-sortables.meta-box-sortables .postbox.closed .toggle-indicator:before {
-    content: "\f347";
+    /*content: "\f347";*/
     font-size: 17px;
     color: #191e23;
     font-weight: 600;
