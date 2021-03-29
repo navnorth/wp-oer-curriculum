@@ -147,7 +147,7 @@ if (empty($prev_resource)){
 */
 
 $type = get_post_meta($resource->ID,"oer_mediatype");
-$type = $type[0];
+$type = (isset($type[0]))?$type[0]:'textbox';
 ?>
 <?php 
   //Breadcrumb trail 
@@ -295,9 +295,7 @@ $type = $type[0];
     </div>
     <div class="oer-curriculum-ps-nav-right-block <?php echo $oer_curriculum_next_class; ?> col-md-6 col-sm-12">
         <?php //if (!empty($next_resource)):
-        $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($next_resource), 'resource-thumbnail' );
-        if (empty($resource_img))
-            $resource_img = $next_image;
+        $resource_img = (empty($next_resource))? $next_image: wp_get_attachment_image_url( get_post_thumbnail_id($next_resource), 'resource-thumbnail' );
         ?>
         <a class="oer-curriculum-ps-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>">
             <span class="nav-media-image col-md-8">
@@ -306,8 +304,10 @@ $type = $type[0];
                         if (is_object($next_resource)){
                             $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
                         }
+                        /*
                         else
                             $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($next_resource['title']));
+                        */
                         ?>
                         <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
                     <?php else: ?>

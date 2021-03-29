@@ -97,3 +97,15 @@ function splitTextIntoColumns(selector) {
     $(selector).text(part1);
     $(`<span id="appended_text">${part2}</span>`).insertAfter(selector);
 }
+
+
+jQuery(window).load(function() {
+    var maxOerResourceBlockHeight = 356;
+    //setTimeout(function(){
+      jQuery('.oer-curriculum-primary-sources-row').find('.media-image').each(function(i, obj) {
+          var tempheight = obj.offsetHeight;
+          maxOerResourceBlockHeight = (tempheight > maxOerResourceBlockHeight)? tempheight: maxOerResourceBlockHeight;
+      });
+      jQuery('.oer-curriculum-primary-sources-row').find('.media-image').height(maxOerResourceBlockHeight);
+    //}, 3000);
+});

@@ -265,12 +265,13 @@ ul.featuredwpr_bxslider_front li .frtdsnglwpr .ttl a {
     position: absolute;
     top: -12px;
     font-size: 24px;
+    line-height: 1.2em;
     width: 100%;
     border-bottom: 1px solid #d2d2d2 !important;
     height: 36px;
 }
 .oer_curriculum_right_featuredwpr .bx-wrapper .bx-controls-direction a {
-    top: 0px !important;
+    top: 4px !important;
 }
 .oer_curriculum_right_featuredwpr {
     padding: 25px 15px 25px 15px !important;

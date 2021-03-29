@@ -586,7 +586,7 @@ function initiate_admin_bx_slider() {
 																			
 													let blkwidth = localStorage.getItem("lpInspectorFeatBlockwidth-"+blkid);			
 													//jQuery('#block-'+blkid).css({"width": blkwidth});
-													jQuery('#block-'+blkid).css({"width": "100%"});
+													//jQuery('#block-'+blkid).css({"width": "100%"});
 													
 													let imgwidth = localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slideimageheight");
 													jQuery('.featuredwpr_bxslider_'+blkid+' li div.frtdsnglwpr a div.img img').css({'height':'100%', 'max-height': imgwidth+'px', 'max-width':'100%' });
@@ -704,3 +704,8 @@ function initiate_admin_bx_slider() {
 }
 add_action( 'admin_footer', 'initiate_admin_bx_slider' );
 
+function fontawesome_dashboard() {
+  wp_enqueue_style('fontawesome-style', OER_URL.'css/fontawesome.css');
+}
+
+add_action('admin_init', 'fontawesome_dashboard');
