@@ -116,36 +116,6 @@ if (function_exists('oer_get_resource_metadata')){
     $resource_meta = oer_get_resource_metadata($resource->ID);
 }
 
-/*
-if (empty($next_resource)){
-    $modules = oer_curriculum_modules($post->ID);
-    if (isset($modules[0])){
-        $oer_curriculum_next_class = "";
-        //$next_resource = NULL;
-        //$next_resource = $modules[0];
-        //$next_url = $back_url."/module/".sanitize_title($next_resource['title']);
-    } else {
-        if (!empty($next_title)){
-            $next_resource['title'] = $next_title;
-        }
-    }
-}
-
-if (empty($prev_resource)){
-    $modules = oer_curriculum_modules($post->ID);
-    if (isset($modules[0])){
-        $oer_curriculum_prev_class = "";
-        //$prev_resource = NULL;
-        //$prev_resource = $modules[0];
-        //$prev_url = $back_url."/module/".sanitize_title($prev_resource['title']);
-    } else {
-        if (!empty($prev_title)){
-            $prev_resource['title'] = $prev_title;
-        }
-    }
-}
-*/
-
 $type = get_post_meta($resource->ID,"oer_mediatype");
 $type = (isset($type[0]))?$type[0]:'textbox';
 ?>
@@ -259,9 +229,9 @@ $type = (isset($type[0]))?$type[0]:'textbox';
 </div>
 <div class="ps-related-sources oer-curriculum-primary-sources-row">
     <div class="oer-curriculum-ps-nav-left-block <?php echo $oer_curriculum_prev_class; ?> col-md-6 col-sm-12">
-        <?php //if (!empty($prev_resource)):
-        $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($prev_resource), 'resource-thumbnail' );
-        if (empty($resource_img))
+        <?php
+        $resource_img = (empty($prev_resource))? $prev_image: wp_get_attachment_image_url( get_post_thumbnail_id($prev_resource), 'resource-thumbnail' );
+        if (!empty($prev_image))
             $resource_img = $prev_image;
         ?>
         <a class="oer-curriculum-ps-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>">
@@ -269,16 +239,19 @@ $type = (isset($type[0]))?$type[0]:'textbox';
             <span class="nav-media-icon"><i class="fas fa-arrow-left fa-2x"></i></span>
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
-                    <?php if ($resource_img!=""):
-                        $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID);
-                    ?>
-                    <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
+                    <?php if (!empty($resource_img)): ?>
+                      <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
                     <?php else: ?>
                     <?php
-                     $prev_resource_url = get_post_meta($prev_resource->ID, "oer_resourceurl", true);
-                     $prev_resource_type = get_post_meta($prev_resource->ID,"oer_mediatype")[0];
+                      if($prev_resource == null){
+                        $prev_resource_icon = 'dashicons-media-text';
+                      }else{
+                        $prev_resource_url = get_post_meta($prev_resource->ID, "oer_resourceurl", true);
+                        $prev_resource_type = get_post_meta($prev_resource->ID,"oer_mediatype")[0];
+                        $prev_resource_icon = getResourceIcon($prev_resource_type,$prev_resource_url);
+                      }
                     ?>
-                    <div class="navigation-avatar"><span class="dashicons <?php echo getResourceIcon($prev_resource_type,$prev_resource_url); ?>"></span></div>
+                    <div class="navigation-avatar"><span class="dashicons <?php echo $prev_resource_icon; ?>"></span></div>
                     <?php endif; ?>
                 </span>
                 <span class="nav-oer-curriculum-resource-title wow1 col-md-8">
@@ -291,31 +264,28 @@ $type = (isset($type[0]))?$type[0]:'textbox';
                 </span>
             </span>
         </a>
-        <?php //endif; ?>
     </div>
     <div class="oer-curriculum-ps-nav-right-block <?php echo $oer_curriculum_next_class; ?> col-md-6 col-sm-12">
-        <?php //if (!empty($next_resource)):
+        <?php
         $resource_img = (empty($next_resource))? $next_image: wp_get_attachment_image_url( get_post_thumbnail_id($next_resource), 'resource-thumbnail' );
+        if (!empty($next_image))
+            $resource_img = $next_image;
         ?>
         <a class="oer-curriculum-ps-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>">
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
-                    <?php if (!empty($resource_img)):
-                        if (is_object($next_resource)){
-                            $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($next_resource->post_title)."-".$next_resource->ID);
-                        }
-                        /*
-                        else
-                            $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($next_resource['title']));
-                        */
-                        ?>
+                    <?php if (!empty($resource_img)): ?>
                         <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
-                    <?php else: ?>
-                      <?php
-                       $next_resource_url = get_post_meta($next_resource->ID, "oer_resourceurl", true);
-                       $next_resource_type = get_post_meta($next_resource->ID,"oer_mediatype")[0];
-                      ?>
-                      <div class="navigation-avatar"><span class="dashicons <?php echo getResourceIcon($next_resource_type,$next_resource_url); ?>"></span></div>
+                    <?php else:
+                        if($next_resource == null){
+                          $next_resource_icon = 'dashicons-media-text';
+                        }else{
+                          $next_resource_url = get_post_meta($next_resource->ID, "oer_resourceurl", true);
+                          $next_resource_type = get_post_meta($next_resource->ID,"oer_mediatype")[0];
+                          $next_resource_icon = getResourceIcon($next_resource_type,$next_resource_url);
+                        }
+                        ?>
+                        <div class="navigation-avatar"><span class="dashicons <?php echo $next_resource_icon; ?>"></span></div>
                     <?php endif; ?>
                 </span>
                 <span class="nav-oer-curriculum-resource-title wow2 col-md-8">
@@ -331,7 +301,6 @@ $type = (isset($type[0]))?$type[0]:'textbox';
             <span class="nav-media-icon"><i class="fas fa-arrow-right fa-2x"></i></span>
             <span class="col-md-3">&nbsp;</span>
         </a>
-        <?php //endif; ?>
     </div>
 </div>
 <div class="oer-curriculum-ajax-loader" role="status">
