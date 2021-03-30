@@ -32,7 +32,7 @@ function curriculum_featured_block_cgb_block_assets() { // phpcs:ignore
 	// Register block styles for both frontend + backend.
 	wp_register_style(
 		'curriculum_featured_block-cgb-style-css', // Handle.
-		plugins_url( 'curriculum-featured-block/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
+		plugins_url( '/curriculum-featured-block/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
 		is_admin() ? array( 'wp-editor' ) : null, // Dependency to include the CSS after it.
 		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
 	);
@@ -49,7 +49,7 @@ function curriculum_featured_block_cgb_block_assets() { // phpcs:ignore
 	// Register block editor styles for backend.
 	wp_register_style(
 		'curriculum_featured_block-cgb-block-editor-css', // Handle.
-		plugins_url( 'curriculum-featured-block/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
+		plugins_url( '/curriculum-featured-block/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
 		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
 		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
 	);
@@ -72,7 +72,8 @@ function curriculum_featured_block_cgb_block_assets() { // phpcs:ignore
 		'cgbGlobal', // Array containing dynamic data for a JS Global.
 		[
 			'pluginDirPath' => plugin_dir_path( __DIR__ ),
-			'pluginDirUrl' => plugin_dir_url( __DIR__ ),
+			//'pluginDirUrl' => plugin_dir_url( __DIR__ ),
+			'pluginDirUrl' => get_site_url()."/wp-content/plugins/curriculum-featured-block",
 			'base_url' => get_home_url(),
 			'curriculum_plugin_url' => OER_LESSON_PLAN_URL,
 			'bxresetblocked' => false,
@@ -112,17 +113,17 @@ function curriculum_featured_block_cgb_block_assets() { // phpcs:ignore
 add_action( 'init', 'curriculum_featured_block_cgb_block_assets' );
 
 function curriculum_featured_block_additional_script_front( $hook ) {
-		wp_enqueue_style('curriculum-feat-block-resource-category-style-css', OER_URL.'css/resource-category-style.css');
+		//wp_enqueue_style('curriculum-feat-block-resource-category-style-css', OER_URL.'css/resource-category-style.css');
 		wp_enqueue_style('curriculum-feat-block-jquery-bxslider-css', OER_URL.'css/jquery.bxslider.css');
 		wp_enqueue_script('curriculum-feat-block-jquery-bxslider-js', OER_URL.'js/jquery.bxslider.js',array('jquery'), '1.0' );
 }
 add_action( 'wp_enqueue_scripts', 'curriculum_featured_block_additional_script_front' );
 
 function curriculum_featured_block_additional_script( $hook ) {
-		wp_enqueue_style('curriculum-feat-block-resource-category-style-css', OER_URL.'css/resource-category-style.css');
+		//wp_enqueue_style('curriculum-feat-block-resource-category-style-css', OER_URL.'css/resource-category-style.css');
 		wp_enqueue_style('curriculum-feat-block-jquery-bxslider-css', OER_URL.'css/jquery.bxslider.css');
 		wp_enqueue_script('curriculum-feat-block-jquery-bxslider-js', OER_URL.'js/jquery.bxslider.js',array('jquery'), '1.0' );
-		wp_enqueue_script('curriculum-feat-block-jquery-ui-min-js', plugins_url( 'curriculum-featured-block/jquery-ui.min.js', dirname( __FILE__ ) ) ,array('jquery'), '1.0' );
+		//wp_enqueue_script('curriculum-feat-block-jquery-ui-min-js', plugins_url( 'dist/jquery-ui.min.js', dirname( __FILE__ ) ) ,array('jquery'), '1.0' );
 }
 add_action( 'admin_enqueue_scripts', 'curriculum_featured_block_additional_script' );
 
@@ -133,105 +134,109 @@ function render_featured_block($attributes, $ajx=false){
 	//print_r($attributes); echo '<br><br>';
 	//print_r($attributes['selectedfeatured']); echo '<br><br>';
 	//print_r($attributes['blockid']); echo '<br><br>';
-	if(!is_null($attributes['selectedfeatured'])){
-		$feats = explode(",",$attributes['selectedfeatured']);
-		$blkid = $attributes['blockid'];
-		$_sliddesclength = (!isset($attributes['slidedesclength']))? 150: $attributes['slidedesclength'];
-		$_slideimageheight = (!isset($attributes['slideimageheight']))? 255: $attributes['slideimageheight'];
-		$_ret .= '<div class="oer_right_featuredwpr">';
-			$_title = (isset($attributes['blocktitle']))? $attributes['blocktitle']: 'Featured';
-			$_ret .= '<div class="oer-ftrdttl curriculum-feat-title_'.$attributes['blockid'].'">'.$_title.'</div>';
-			$_ret .= '<ul class="featuredwpr_bxslider_front featuredwpr_bxslider_front_'.$attributes['blockid'].'" blk="'.$attributes['blockid'].'" style="visibility:hidden;">';
-			
-					foreach($feats as $val){
-						$feat = explode("|",$val);
-						$feat_id = $feat[0]; $feat_type = $feat[1];
-						
-						$_post = get_post($feat_id);
-						$_cfb_link = get_post_permalink($_post->ID);
-						$_cfb_title = $_post->post_title;
-						$_cfb_desc = html_entity_decode(strip_tags($_post->post_content));
-						$_cfb_desc = (strlen($_cfb_desc) > $_sliddesclength)? substr($_cfb_desc,0,$_sliddesclength).'...': $_cfb_desc;
-						$_tmp_image = get_the_post_thumbnail_url($_post->ID,'medium');
-						$_cfb_image = (!$_tmp_image)? OER_LESSON_PLAN_URL.'assets/images/default-img.jpg': $_tmp_image;
-						
+	//if(!is_null($attributes['selectedfeatured'])){
+	$_ret = '';
+	if(isset($attributes['selectedfeatured'])){
+		if(!empty($attributes['selectedfeatured'])){
+			$feats = explode(",",$attributes['selectedfeatured']);
+			$blkid = $attributes['blockid'];
+			$_sliddesclength = (!isset($attributes['slidedesclength']))? 150: $attributes['slidedesclength'];
+			$_slideimageheight = (!isset($attributes['slideimageheight']))? 255: $attributes['slideimageheight'];
+			$_ret .= '<div class="oer_curriculum_right_featuredwpr">';
+				$_title = (isset($attributes['blocktitle']))? $attributes['blocktitle']: 'Featured';
+				$_ret .= '<div class="oer-curriculum-ftrdttl curriculum-feat-title_'.$attributes['blockid'].'">'.$_title.'</div>';
+				$_ret .= '<ul class="featuredwpr_bxslider_front featuredwpr_bxslider_front_'.$attributes['blockid'].'" blk="'.$attributes['blockid'].'" style="visibility:hidden;">';
+				
+						foreach($feats as $val){
+							$feat = explode("|",$val);
+							$feat_id = $feat[0]; $feat_type = $feat[1];
 							
-								$_ret .= '<li>';
-									$_ret .= '<div class="frtdsnglwpr">';
-										$_ret .= '<a href="'.$_cfb_link.'">';
-											$_ret .= '<div class="img">';
-													
-													$_ret .= '<img src="'.$_cfb_image.'" alt="'.$_cfb_title.'" />';
-											
-											$_ret .= '</div>';
-										$_ret .= '</a>';
-										$_ret .= '<div class="ttl"><a href="'.$_cfb_link.'">'.$_cfb_title.'</a></div>';
-										$_ret .= '<div class="desc">'.$_cfb_desc.'</div>';
-									$_ret .= '</div>';
-								$_ret .= '</li>';
-					}
-					
-			$_ret .= '</ul>';
-		$_ret .= '</div>';
+							$_post = get_post($feat_id);
+							$_cfb_link = get_post_permalink($_post->ID);
+							$_cfb_title = $_post->post_title;
+							$_cfb_desc = html_entity_decode(strip_tags($_post->post_content));
+							$_cfb_desc = (strlen($_cfb_desc) > $_sliddesclength)? substr($_cfb_desc,0,$_sliddesclength).'...': $_cfb_desc;
+							$_tmp_image = get_the_post_thumbnail_url($_post->ID,'medium');
+							$_cfb_image = (!$_tmp_image)? OER_LESSON_PLAN_URL.'assets/images/default-img.jpg': $_tmp_image;
+							
+								
+									$_ret .= '<li>';
+										$_ret .= '<div class="frtdsnglwpr">';
+											$_ret .= '<a href="'.$_cfb_link.'">';
+												$_ret .= '<div class="img">';
+														
+														$_ret .= '<img src="'.$_cfb_image.'" alt="'.$_cfb_title.'" />';
+												
+												$_ret .= '</div>';
+											$_ret .= '</a>';
+											$_ret .= '<div class="ttl"><a href="'.$_cfb_link.'">'.$_cfb_title.'</a></div>';
+											$_ret .= '<div class="desc">'.$_cfb_desc.'</div>';
+										$_ret .= '</div>';
+									$_ret .= '</li>';
+						}
+						
+				$_ret .= '</ul>';
+			$_ret .= '</div>';
 
-		
-		$_ret .= '<script>';
-			$_ret .= 'jQuery(document).ready(function(){';
-				
-				$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").bxSlider({';
-						
-						//print_r($attributes);
-						/*
-						echo $blkid.'<br>';
-						echo $attributes['minslides'].'<br>';
-						echo $attributes['maxslides'].'<br>';
-						echo $attributes['moveslides'].'<br>';
-						echo $attributes['slidewidth'].'<br>';
-						echo $attributes['slidemargin'].'<br>';
-						*/
-						
-						$_ret .= (!isset($attributes['minslides']))? 'minSlides: 1,' : 'minSlides: '.$attributes['minslides'].',';
-						$_ret .= (!isset($attributes['maxslides']))? 'maxSlides: 3,': 'maxSlides: '.$attributes['maxslides'].',';
-						$_ret .= (!isset($attributes['moveslides']))? 'moveSlides: 1,': 'moveSlides: '.$attributes['moveslides'].',';
-						$_ret .= (!isset($attributes['slidewidth']))? 'slideWidth: 375,': 'slideWidth: '.$attributes['slidewidth'].',';
-						$_ret .= (!isset($attributes['slidemargin']))? 'slideMargin: 20,': 'slideMargin: '.$attributes['slidemargin'].',';
-						//$_ret .= 'minSlides: '.$attributes['minslides'].',';
-						//$_ret .= 'maxSlides: '.$attributes['maxslides'].',';
-						//$_ret .= 'moveSlides: '.$attributes['moveslides'].',';
-						//$_ret .= 'slideWidth: '.$attributes['slidewidth'].',';
-						//$_ret .= 'slideMargin: '.$attributes['slidemargin'].',';
-						$_ret .= 'pager: false,';
-						$_ret .= 'onSliderLoad: function(currentIndex) {';
-								$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").css({"visibility":"visible","height":"auto"});';
-								
-								if(isset($attributes['slidealign'])){
-									if($attributes['slidealign'] == 'left'){
+			
+			$_ret .= '<script>';
+				$_ret .= 'jQuery(document).ready(function(){';
+					
+					$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").bxSlider({';
+							
+							//print_r($attributes);
+							/*
+							echo $blkid.'<br>';
+							echo $attributes['minslides'].'<br>';
+							echo $attributes['maxslides'].'<br>';
+							echo $attributes['moveslides'].'<br>';
+							echo $attributes['slidewidth'].'<br>';
+							echo $attributes['slidemargin'].'<br>';
+							*/
+							
+							$_ret .= (!isset($attributes['minslides']))? 'minSlides: 1,' : 'minSlides: '.$attributes['minslides'].',';
+							$_ret .= (!isset($attributes['maxslides']))? 'maxSlides: 3,': 'maxSlides: '.$attributes['maxslides'].',';
+							$_ret .= (!isset($attributes['moveslides']))? 'moveSlides: 1,': 'moveSlides: '.$attributes['moveslides'].',';
+							$_ret .= (!isset($attributes['slidewidth']))? 'slideWidth: 375,': 'slideWidth: '.$attributes['slidewidth'].',';
+							$_ret .= (!isset($attributes['slidemargin']))? 'slideMargin: 20,': 'slideMargin: '.$attributes['slidemargin'].',';
+							//$_ret .= 'minSlides: '.$attributes['minslides'].',';
+							//$_ret .= 'maxSlides: '.$attributes['maxslides'].',';
+							//$_ret .= 'moveSlides: '.$attributes['moveslides'].',';
+							//$_ret .= 'slideWidth: '.$attributes['slidewidth'].',';
+							//$_ret .= 'slideMargin: '.$attributes['slidemargin'].',';
+							$_ret .= 'pager: false,';
+							$_ret .= 'onSliderLoad: function(currentIndex) {';
+									$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").css({"visibility":"visible","height":"auto"});';
+									
+									if(isset($attributes['slidealign'])){
+										if($attributes['slidealign'] == 'left'){
+											$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport").parent(".bx-wrapper").css({"margin-left":"0px"});';
+										}elseif($attributes['slidealign'] == 'right'){
+											$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport").parent(".bx-wrapper").css({"margin-right":"0px"});';
+										}
+									}else{
 										$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport").parent(".bx-wrapper").css({"margin-left":"0px"});';
-									}elseif($attributes['slidealign'] == 'right'){
-										$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport").parent(".bx-wrapper").css({"margin-right":"0px"});';
 									}
-								}else{
-									$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport").parent(".bx-wrapper").css({"margin-left":"0px"});';
-								}
-								
-								$_ret .= 'let dtc = jQuery(".curriculum-feat-title_'.$attributes['blockid'].'").detach();';
-								$_ret .= 'jQuery(dtc).insertBefore(jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport"));';
-								
-								$_ret .= 'let imgwidth = localStorage.getItem("lpInspectorFeatSliderSetting-'.$attributes['blockid'].'-slideimageheight");';
-								$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].' li div.frtdsnglwpr a div.img img").css({"height":"100%", "max-height": "'.$_slideimageheight.'px", "max-width":"100%" });';
-								
-								$_ret .= 'let sldcnt = jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").find("li").length;';
-								$_sngsldmgn = (!isset($attributes['slidemargin']))? 20 : $attributes['slidemargin'];
-								$_sngsldwdt = (!isset($attributes['slidewidth']))? (375 + $_sngsldmgn) : ($attributes['slidewidth'] + $_sngsldmgn);
-								$_ret .= 'let whlsldwdt = sldcnt * '.$_sngsldwdt.';';
-								$_ret .= 'console.log(whlsldwdt);';
-								$_ret .= 'jQuery(".featuredwpr_bxslider_front").css({"width":whlsldwdt+"px"})';
-								
-						$_ret .= '}';
+									
+									$_ret .= 'let dtc = jQuery(".curriculum-feat-title_'.$attributes['blockid'].'").detach();';
+									$_ret .= 'jQuery(dtc).insertBefore(jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport"));';
+									
+									$_ret .= 'let imgwidth = localStorage.getItem("lpInspectorFeatSliderSetting-'.$attributes['blockid'].'-slideimageheight");';
+									$_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].' li div.frtdsnglwpr a div.img img").css({"height":"100%", "max-height": "'.$_slideimageheight.'px", "max-width":"100%" });';
+									
+									$_ret .= 'let sldcnt = jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").find("li").length;';
+									$_sngsldmgn = (!isset($attributes['slidemargin']))? 20 : $attributes['slidemargin'];
+									$_sngsldwdt = (!isset($attributes['slidewidth']))? (375 + $_sngsldmgn) : ($attributes['slidewidth'] + $_sngsldmgn);
+									$_ret .= 'let whlsldwdt = sldcnt * '.$_sngsldwdt.';';
+									$_ret .= 'console.log(whlsldwdt);';
+									$_ret .= 'jQuery(".featuredwpr_bxslider_front").css({"width":whlsldwdt+"px"})';
+									
+							$_ret .= '}';
+					$_ret .= '});';
+					
 				$_ret .= '});';
-				
-			$_ret .= '});';
-		$_ret .= '</script>';
+			$_ret .= '</script>';
+		}
 	}
 	
 	return $_ret;
@@ -242,7 +247,8 @@ add_action( 'rest_api_init', function () {
     //Path to meta query route
 		register_rest_route( 'curriculum/feat', 'dataquery', array(
             'methods' => 'GET', 
-            'callback' => 'curriculum_feat_dataquery' 
+            'callback' => 'curriculum_feat_dataquery',
+						'permission_callback' => '__return_true'
     ) );
 });
 
@@ -340,7 +346,7 @@ function curriculum_feat_dataquery(){
 			
 			$args = array(
 				'posts_per_page' => -1,
-				'post_type' => 'lesson-plans',
+				'post_type' => 'oer-curriculum',
 				'post_status' => 'publish',
 				'tax_query' => array(
 					array(
@@ -367,7 +373,7 @@ function curriculum_feat_dataquery(){
 
 					$args = array(
 						'posts_per_page' => -1,
-						'post_type' => 'lesson-plans',
+						'post_type' => 'oer-curriculum',
 						'post_status' => 'publish',
 						'tax_query' => array(
 							array(
@@ -437,7 +443,7 @@ function curriculum_feat_dataquery(){
 	// CURRICULUM POSTS
 	$args = array(
 		'posts_per_page' => -1,
-		'post_type' => 'lesson-plans',
+		'post_type' => 'oer-curriculum',
 		'orderby' => 'title',
   	'order'   => 'ASC',
 	);
@@ -500,33 +506,33 @@ function initiate_admin_bx_slider() {
 			jQuery(document).on('click', function(e){
 				var classlist = e.target.getAttribute('class');
 				var classArray = classlist.split(' ');
-				if(classArray.includes('lp_inspector_feat_modal_content_main')){
-					jQuery('.lp_inspector_feat_modal_resource_wrapper').hide(300);
-					jQuery('.lp_inspector_feat_modal_curriculum_wrapper').hide(300);
+				if(classArray.includes('oer_curriculum_inspector_feat_modal_content_main')){
+					jQuery('.oer_curriculum_inspector_feat_modal_resource_wrapper').hide(300);
+					jQuery('.oer_curriculum_inspector_feat_modal_curriculum_wrapper').hide(300);
 				}
 			})
 			*/
 			
-			jQuery(document).on('click','.lp_inspector_feat_addResources',function(e){
-		    jQuery('.lp_inspector_feat_modal_resource_wrapper').show(300);
+			jQuery(document).on('click','.oer_curriculum_inspector_feat_addResources',function(e){
+		    jQuery('.oer_curriculum_inspector_feat_modal_resource_wrapper').show(300);
 		  });
 		  
-		  jQuery(document).on('click','.lp_inspector_feat_addCurriculum',function(e){
-		    jQuery('.lp_inspector_feat_modal_curriculum_wrapper').show(300);
+		  jQuery(document).on('click','.oer_curriculum_inspector_feat_addCurriculum',function(e){
+		    jQuery('.oer_curriculum_inspector_feat_modal_curriculum_wrapper').show(300);
 		  });
 		  
-		  jQuery(document).on('click','.lp_inspector_feat_modal_wrapper_close span.dashicons',function(e){
-		    jQuery('.lp_inspector_feat_modal_resource_wrapper').hide(300);
-		    jQuery('.lp_inspector_feat_modal_curriculum_wrapper').hide(300);
+		  jQuery(document).on('click','.oer_curriculum_inspector_feat_modal_wrapper_close span.dashicons',function(e){
+		    jQuery('.oer_curriculum_inspector_feat_modal_resource_wrapper').hide(300);
+		    jQuery('.oer_curriculum_inspector_feat_modal_curriculum_wrapper').hide(300);
 		  })
 		  
-		  jQuery(document).on('click','.lp_inspector_feat_hlite_node span.dashicons',function(e){
+		  jQuery(document).on('click','.oer_curriculum_inspector_feat_hlite_node span.dashicons',function(e){
 				let itemid = jQuery(this).parent().attr('data');
-				let itemtype = jQuery(this).parent('.lp_inspector_feat_hlite_node').attr('typ');
-				jQuery(this).parent('.lp_inspector_feat_hlite_node').removeClass('stay');
-				jQuery('.lp_inspector_feat_hlite_remove_trigger').trigger('click');
+				let itemtype = jQuery(this).parent('.oer_curriculum_inspector_feat_hlite_node').attr('typ');
+				jQuery(this).parent('.oer_curriculum_inspector_feat_hlite_node').removeClass('stay');
+				jQuery('.oer_curriculum_inspector_feat_hlite_remove_trigger').trigger('click');
 				jQuery('input[data="'+itemid+'"]').prop('checked',false);
-				var blkid = jQuery('.lp_inspector_feat_hlite_remove_trigger').attr('blkid');
+				var blkid = jQuery('.oer_curriculum_inspector_feat_hlite_remove_trigger').attr('blkid');
 				curriculumfeatslider_reset(blkid, 750);
 		  })
 
@@ -579,7 +585,8 @@ function initiate_admin_bx_slider() {
 													jQuery(dtc).insertBefore(jQuery(slider).parent('.bx-viewport'));	
 																			
 													let blkwidth = localStorage.getItem("lpInspectorFeatBlockwidth-"+blkid);			
-													jQuery('#block-'+blkid).css({"width": blkwidth});
+													//jQuery('#block-'+blkid).css({"width": blkwidth});
+													//jQuery('#block-'+blkid).css({"width": "100%"});
 													
 													let imgwidth = localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slideimageheight");
 													jQuery('.featuredwpr_bxslider_'+blkid+' li div.frtdsnglwpr a div.img img').css({'height':'100%', 'max-height': imgwidth+'px', 'max-width':'100%' });
@@ -627,7 +634,7 @@ function initiate_admin_bx_slider() {
 						let bxidx = jQuery('.featuredwpr_bxslider_'+blkid).attr('idx');
 						let dtc = jQuery('.curriculum-feat-title_'+blkid).detach();
 						
-						jQuery('.featuredwpr_bxslider_'+blkid).parents('.bx-viewport').siblings('.oer-ftrdttl').remove();
+						jQuery('.featuredwpr_bxslider_'+blkid).parents('.bx-viewport').siblings('.oer-curriculum-ftrdttl').remove();
 						
 						let bxslidewidth = (isNaN(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidewidth")))? 375: localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidewidth");
 				
@@ -674,13 +681,13 @@ function initiate_admin_bx_slider() {
 		
 		
 		function sort(){
-				jQuery(".lp_inspector_feat_hlite_list div").sortable({
-					placeholder: "lp_inspector_feat_hlite_node-state-highlight",
-					connectWith: ".lp_inspector_feat_hlite_featured",
-					cancel: ".lp_inspector_feat_hlite_node .dashicons-dismiss",
+				jQuery(".oer_curriculum_inspector_feat_hlite_list div").sortable({
+					placeholder: "oer_curriculum_inspector_feat_hlite_node-state-highlight",
+					connectWith: ".oer_curriculum_inspector_feat_hlite_featured",
+					cancel: ".oer_curriculum_inspector_feat_hlite_node .dashicons-dismiss",
 					update: function(event, ui) {  
-						jQuery('.lp_inspector_feat_hlite_reposition_trigger').trigger('click');
-						var blkid = jQuery('.lp_inspector_feat_hlite_reposition_trigger').attr('blkid');
+						jQuery('.oer_curriculum_inspector_feat_hlite_reposition_trigger').trigger('click');
+						var blkid = jQuery('.oer_curriculum_inspector_feat_hlite_reposition_trigger').attr('blkid');
 						curriculumfeatslider_reset(blkid, 750);
 					}
 				});
@@ -697,3 +704,8 @@ function initiate_admin_bx_slider() {
 }
 add_action( 'admin_footer', 'initiate_admin_bx_slider' );
 
+function fontawesome_dashboard() {
+  wp_enqueue_style('fontawesome-style', OER_URL.'css/fontawesome.css');
+}
+
+add_action('admin_init', 'fontawesome_dashboard');

@@ -1,110 +1,2418 @@
-/******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/*!***********************!*\
-  !*** ./src/blocks.js ***!
-  \***********************/
-/*! no exports provided */
-/*! all exports used */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+const { __ } = wp.i18n; // Import __() from wp.i18n
 
-"use strict";
-eval("Object.defineProperty(__webpack_exports__, \"__esModule\", { value: true });\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__block_block_js__ = __webpack_require__(/*! ./block/block.js */ 1);\n/**\n * Gutenberg Blocks\n *\n * All blocks related JavaScript files should be imported here.\n * You can create a new block folder in this dir and include code\n * for that block here as well.\n *\n * All blocks should be included here since this is the file that\n * Webpack is compiling as the input file.\n */\n\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9ibG9ja3MuanM/N2I1YiJdLCJzb3VyY2VzQ29udGVudCI6WyIvKipcbiAqIEd1dGVuYmVyZyBCbG9ja3NcbiAqXG4gKiBBbGwgYmxvY2tzIHJlbGF0ZWQgSmF2YVNjcmlwdCBmaWxlcyBzaG91bGQgYmUgaW1wb3J0ZWQgaGVyZS5cbiAqIFlvdSBjYW4gY3JlYXRlIGEgbmV3IGJsb2NrIGZvbGRlciBpbiB0aGlzIGRpciBhbmQgaW5jbHVkZSBjb2RlXG4gKiBmb3IgdGhhdCBibG9jayBoZXJlIGFzIHdlbGwuXG4gKlxuICogQWxsIGJsb2NrcyBzaG91bGQgYmUgaW5jbHVkZWQgaGVyZSBzaW5jZSB0aGlzIGlzIHRoZSBmaWxlIHRoYXRcbiAqIFdlYnBhY2sgaXMgY29tcGlsaW5nIGFzIHRoZSBpbnB1dCBmaWxlLlxuICovXG5cbmltcG9ydCAnLi9ibG9jay9ibG9jay5qcyc7XG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvYmxvY2tzLmpzXG4vLyBtb2R1bGUgaWQgPSAwXG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7Iiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///0\n");
+const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
 
-/***/ }),
-/* 1 */
-/*!****************************!*\
-  !*** ./src/block/block.js ***!
-  \****************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+const { InspectorControls } = wp.blockEditor;
+const { PanelBody } = wp.components;
+const {
+  CheckboxControl,
+  RadioControl,
+  TextControl,
+  ToggleControl,
+  SelectControl
+} = wp.components;
+let resources_arr = [];
+let feats = [];
+let poschangeinitiated = false;
+let prevelem = "li";
+const globalSettingOptions = [1, 2, 3, 4, 5];
+const globalSettingMargin = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+const globalSettingAlign = ["middle", "left", "right"];
+registerBlockType("cgb/block-curriculum-featured-block", {
+  // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+  title: __("Curriculum Featured Block"),
+  // Block title.
+  icon: "welcome-learn-more",
+  // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
+  category: "common",
+  // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+  keywords: [
+    __("curriculum-featured-block"),
+    __("CGB Example"),
+    __("create-guten-block")
+  ],
+  attributes: {
+    blockwidth: {
+      type: "intiger",
+      default: 1170
+    },
+    blockid: {
+      type: "string"
+    },
+    highlight: {
+      type: "string",
+      default: "resources"
+    },
+    selectedfeatured: {
+      type: "string"
+    },
+    data: {
+      type: "string"
+    },
+    resources: {
+      type: "string"
+    },
+    curriculum: {
+      type: "string"
+    },
+    blocktitle: {
+      type: "string",
+      default: "Featured"
+    },
+    //SEARCH
+    searchstring: {
+      type: "string"
+    },
+    //FILTERING
+    resourcesubjects: {
+      type: "object"
+    },
+    curriculumsubjects: {
+      type: "object"
+    },
+    resourcesubjectfilter: {
+      type: "string"
+    },
+    curriculumsubjectfilter: {
+      type: "string"
+    },
+    filtertype: {
+      type: "string"
+    },
+    //SETTINGS
+    minslides: {
+      type: "intiger",
+      default: 1
+    },
+    maxslides: {
+      type: "intiger",
+      default: 3
+    },
+    moveslides: {
+      type: "intiger",
+      default: 1
+    },
+    slidewidth: {
+      type: "intiger",
+      default: 375
+    },
+    slidemargin: {
+      type: "intiger",
+      default: 20
+    },
+    slidealign: {
+      type: "string",
+      default: "left"
+    },
+    slidedesclength: {
+      type: "intiger",
+      default: cgbGlobal["slidedesclength"]
+    },
+    slideimageheight: {
+      type: "intiger",
+      default: cgbGlobal["slideimageheight"]
+    }
+  },
+  edit: function (props) {
+    const attributes = props.attributes;
+    const setAttributes = props.setAttributes; //console.log('BLOCK ID: '+attributes.blockid);
+    //SET BLOCK INSTANCE IDS
 
-"use strict";
-eval("/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__editor_scss__ = __webpack_require__(/*! ./editor.scss */ 2);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__editor_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__editor_scss__);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__style_scss__ = __webpack_require__(/*! ./style.scss */ 3);\n/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__style_scss__);\n/**\n * BLOCK: curriculum-featured-block\n *\n * Registering a basic block with Gutenberg.\n * Simple block, renders and saves the same content without any interactivity.\n */\n\n//  Import CSS.\n\n\n\nvar __ = wp.i18n.__; // Import __() from wp.i18n\n\nvar registerBlockType = wp.blocks.registerBlockType; // Import registerBlockType() from wp.blocks\n\nvar InspectorControls = wp.blockEditor.InspectorControls;\nvar PanelBody = wp.components.PanelBody;\nvar _wp$components = wp.components,\n    CheckboxControl = _wp$components.CheckboxControl,\n    RadioControl = _wp$components.RadioControl,\n    TextControl = _wp$components.TextControl,\n    ToggleControl = _wp$components.ToggleControl,\n    SelectControl = _wp$components.SelectControl;\n\n\nvar resources_arr = [];\nvar feats = [];\nvar poschangeinitiated = false;\nvar prevelem = 'li';\n\nvar globalSettingOptions = [1, 2, 3, 4, 5];\nvar globalSettingMargin = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];\nvar globalSettingAlign = ['middle', 'left', 'right'];\n\nregisterBlockType('cgb/block-curriculum-featured-block', {\n  // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.\n  title: __('Curriculum Featured Block'), // Block title.\n  icon: 'welcome-learn-more', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.\n  category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.\n  keywords: [__('curriculum-featured-block'), __('CGB Example'), __('create-guten-block')],\n\n  attributes: {\n    blockwidth: {\n      type: 'intiger',\n      default: 1170\n    },\n\n    blockid: {\n      type: 'string'\n    },\n    highlight: {\n      type: 'string',\n      default: 'resources'\n    },\n    selectedfeatured: {\n      type: 'string'\n    },\n    data: {\n      type: 'string'\n    },\n    resources: {\n      type: 'string'\n    },\n    curriculum: {\n      type: 'string'\n    },\n    blocktitle: {\n      type: 'string',\n      default: 'Featured'\n    },\n\n    //SEARCH\n    searchstring: {\n      type: 'string'\n    },\n\n    //FILTERING\n    resourcesubjects: {\n      type: 'object'\n    },\n    curriculumsubjects: {\n      type: 'object'\n    },\n    resourcesubjectfilter: {\n      type: 'string'\n    },\n    curriculumsubjectfilter: {\n      type: 'string'\n    },\n    filtertype: {\n      type: 'string'\n    },\n\n    //SETTINGS\n    minslides: {\n      type: 'intiger',\n      default: 1\n    },\n    maxslides: {\n      type: 'intiger',\n      default: 3\n    },\n    moveslides: {\n      type: 'intiger',\n      default: 1\n    },\n    slidewidth: {\n      type: 'intiger',\n      default: 375\n    },\n    slidemargin: {\n      type: 'intiger',\n      default: 20\n    },\n    slidealign: {\n      type: 'string',\n      default: 'left'\n    },\n    slidedesclength: {\n      type: 'intiger',\n      default: cgbGlobal['slidedesclength']\n    },\n    slideimageheight: {\n      type: 'intiger',\n      default: cgbGlobal['slideimageheight']\n    }\n\n  },\n\n  edit: function edit(props) {\n    var attributes = props.attributes;\n    var setAttributes = props.setAttributes;\n\n    //console.log('BLOCK ID: '+attributes.blockid);\n\n    //SET BLOCK INSTANCE IDS\n    var featblockcount = 0;var blkidx = 0;\n    var blocks = wp.data.select('core/block-editor').getBlocks();\n    //console.log('******************');\n    blocks.map(function (val, index) {\n\n      if (val.name == 'cgb/block-curriculum-featured-block') {\n        var uniq = 'cfb' + new Date().getTime();\n        var cid = val.clientId;\n        /*\n        var attr = wp.data.select( 'core/block-editor' ).getBlockAttributes(cid)\n        var blkid;;\n        if(!attributes.blockid){\n            wp.data.dispatch( 'core/block-editor' ).updateBlockAttributes( cid, { blockid: uniq } )\n            localStorage.setItem('curriculum-feat-blkid', uniq );\n            blkid = uniq;\n        }else{\n            blkid = attributes.blockid;\n        }\n        */\n        wp.data.dispatch('core/block-editor').updateBlockAttributes(cid, { blockid: cid });\n\n        /*\n        minslides\n        maxslides\n        moveslides\n        slidewidth\n        slidemargin\n        */\n        //set defaults\n        /*\n        if(attributes.minslides === undefined){\n            wp.data.dispatch( 'core/block-editor' ).updateBlockAttributes( cid, { minslides: 1 } )\n        }\n        if(attributes.maxslides === undefined){\n            wp.data.dispatch( 'core/block-editor' ).updateBlockAttributes( cid, { maxslides: 3 } )\n        }\n        if(attributes.moveslides === undefined){\n            wp.data.dispatch( 'core/block-editor' ).updateBlockAttributes( cid, { moveslides: 1 } )\n        }\n        console.log('UNDEFINED WIDTH: '+cid+' - '+attributes.slidewidth)\n        if(attributes.slidewidth === undefined){\n            wp.data.dispatch( 'core/block-editor' ).updateBlockAttributes( cid, { slidewidth: 375 } )\n        }\n        if(attributes.slidemargin === undefined){\n            wp.data.dispatch( 'core/block-editor' ).updateBlockAttributes( cid, { slidemargin: 10 } )\n        }\n        */\n\n        if (attributes.filtertype === undefined) {\n          wp.data.dispatch('core/block-editor').updateBlockAttributes(cid, { filtertype: 'search' });\n        }\n\n        /*\n        if(attributes.blocktitle === undefined){\n            wp.data.dispatch( 'core/block-editor' ).updateBlockAttributes( cid, { blocktitle: 'Featured' } )\n            cgbGlobal['curriculum_feat_title_'+blkid] = 'Featured';\n        }\n        */\n\n        //console.log('BLOCK '+blkid+ ' ('+blkidx+')');\n        blkidx++;\n        featblockcount++;\n      }\n    });\n    //console.log('******************');\n\n    // RETURN MESSAGE WHILE CATEGORIES AND CURRICULUMS ARE NOT YET FULLY LOADED\n    /*\n    if(!attributes.blockid || \n      !attributes.minslides || \n      !attributes.maxslides || \n      !attributes.moveslides || \n      !attributes.slidewidth || \n      !attributes.slidemargin ||\n      !attributes.filtertype){\n      return 'Setting up blocks...'\n    }\n    */\n    curriculumfeatslider_loadall(featblockcount);\n\n    //convert comma delimitted to array\n    var highlighted = [];\n    if (typeof attributes.selectedfeatured !== 'undefined') {\n      var tmparr = attributes.selectedfeatured.split(\",\");\n\n      tmparr.map(function (arr, index) {\n        var rowarr = arr.split(\"|\");\n        highlighted.push([parseInt(rowarr[0]), rowarr[1]]);\n      });\n    }\n\n    var resources_arr = [];\n    resources_arr = attributes.resources;\n    /*\n     0 - Resource taxonomy\n     1 - Curriculum taxonomy\n     2 - Resource List\n     3 - Curriculum List\n     */\n    /* GET ALL DATA */\n    if (!attributes.data) {\n      //wp.apiFetch({ url: '/wp-json/curriculum/feat/dataquery' }).then(data =>{  setAttributes({resources: data })  })\n      wp.apiFetch({ url: '/wp-json/curriculum/feat/dataquery' }).then(function (data) {\n\n        setAttributes({ data: data });\n        setAttributes({ resourcesubjects: data[0] });\n        setAttributes({ curriculumsubjects: data[1] });\n        setAttributes({ resources: data[2] });\n        setAttributes({ curriculum: data[3] });\n\n        //console.log(data[0]);\n        //console.log(data[1]);\n        //console.log(data[2]);\n        //console.log(data[3]);\n      });\n    }\n    if (!attributes.data) {\n      return 'Loading Featured Data...';\n    }\n    var data_arr = attributes.data;\n    var res_subj_arr = data_arr[0];\n    var cur_subj_arr = data_arr[1];\n    var res_list_arr = data_arr[2];\n    var cur_list_arr = data_arr[3];\n\n    /* SET RESOURCES LIST ATTRIBUTES */\n    /*\n    if(!attributes.resources){\n    wp.apiFetch({ url: '/wp-json/curriculum/feat/resourcequery' }).then(resources =>{  setAttributes({resources: resources })  })\n    }\n    if(!attributes.resources){ return 'Loading resources...'; }\t\n    let res_list_arr = [];\n    res_list_arr = attributes.resources;\n    */\n\n    /* SET CURRICULUM LIST ATTRIBUTES */\n    /*\n      if(!attributes.curriculum){\n    \twp.apiFetch({ url: '/wp-json/curriculum/feat/curriculumquery' }).then(resources =>{  setAttributes({curriculum: resources })  })\n    }\n    if(!attributes.curriculum){ return 'Loading curriculum...'; }\n    let cur_list_arr = [];\n      cur_list_arr = attributes.curriculum;\n      */\n\n    /* SET RESOURCE SUBJECTS LIST ATTRIBUTES */\n    /*\n    if(!attributes.resourcesubjects){\n    wp.apiFetch({ url: '/wp-json/curriculum/feat/taxquery?posttype=resource' }).then(taxonimies =>{  setAttributes({resourcesubjects: taxonimies })  })\n    }\n    if(!attributes.resourcesubjects){ return 'Loading Subjects...'; }\n    let res_subj_arr = [];\n    res_subj_arr = attributes.resourcesubjects;\n    */\n\n    /* SET CURRICULUM SUBJECTS LIST ATTRIBUTES */\n    /*\n    if(!attributes.curriculumsubjects){\n    wp.apiFetch({ url: '/wp-json/curriculum/feat/taxquery?posttype=lesson-plans' }).then(taxonimies =>{  setAttributes({curriculumsubjects: taxonimies })  })\n    }\n    if(!attributes.curriculumsubjects){ return 'Loading Subjects...'; }\n    let cur_subj_arr = [];\n    cur_subj_arr = attributes.curriculumsubjects;\n    */\n\n    function updateHighlight(newValue, index) {\n\n      if (cgbGlobal['bxresetblocked']) {\n        return;\n      }\n\n      var type = newValue.target.getAttribute('fet');\n      if (newValue.target.checked) {\n        var selfeat = newValue.target.getAttribute('data');\n        highlighted.push([parseInt(selfeat), type]);\n      } else {\n        var todel = parseInt(newValue.target.getAttribute('data'));\n        var ex = highlighted.findIndex(findMatch(todel));\n        if (ex != -1) {\n          highlighted.splice(ex, 1);\n        }\n      }\n\n      feats = [];\n      highlighted.map(function (feat, index) {\n        var obj = void 0;var idx = void 0;\n\n        if (feat[1] == \"cur\") {\n          obj = attributes.curriculum.find(function (obj) {\n            return obj.id == parseInt(feat[0]);\n          });\n          idx = attributes.curriculum.indexOf(parseInt(feat[0]));\n        } else {\n          obj = attributes.resources.find(function (obj) {\n            return obj.id == parseInt(feat[0]);\n          });\n          idx = attributes.resources.indexOf(parseInt(feat[0]));\n        }\n\n        if (typeof obj != 'undefined') {\n          feats.push(Object.values(obj));\n        }\n      });\n\n      var str = '';\n      highlighted.map(function (hlite, index) {\n        if (hlite[0] !== undefined && hlite[1] !== undefined) {\n          if (str == '') {\n            str += hlite[0] + '|' + hlite[1];\n          } else {\n            str += ',' + hlite[0] + '|' + hlite[1];\n          }\n        }\n      });\n\n      setAttributes({ selectedfeatured: str });\n      curriculumfeatslider_reset(attributes.blockid, 750, newValue.target);\n    }\n\n    function findMatch(todel) {\n      return function (innerArr) {\n        return innerArr[0] === todel;\n      };\n    }\n\n    //console.log(attributes.resources);\n    //console.log(attributes.selectedfeatured);  \n    //console.log(attributes.curriculum);\n    //const feats = attributes.selectedfeatured.split(',');\n    //console.log(highlighted);\n\n\n    function updateposition() {\n      prevelem = prevelem == 'li' ? 'div' : 'li';\n\n      highlighted = [];\n      jQuery('.lp_inspector_feat_hlite_node').each(function () {\n        var h_id = jQuery(this).attr('data');\n        var h_tp = jQuery(this).attr('typ');\n        highlighted.push([parseInt(h_id), h_tp]);\n      });\n\n      feats = [];\n      highlighted.map(function (feat, index) {\n        var obj = void 0;\n        if (feat[1] == \"cur\") {\n          obj = attributes.curriculum.find(function (obj) {\n            return obj.id == parseInt(feat[0]);\n          });\n          var idx = attributes.curriculum.indexOf(parseInt(feat[0]));\n        } else {\n          obj = attributes.resources.find(function (obj) {\n            return obj.id == parseInt(feat[0]);\n          });\n          var _idx = attributes.resources.indexOf(parseInt(feat[0]));\n        }\n\n        if (typeof obj != 'undefined') {\n          feats.push(Object.values(obj));\n        }\n      });\n\n      var str = '';\n      highlighted.map(function (hlite, index) {\n        if (hlite[0] !== undefined && hlite[1] !== undefined) {\n          if (str == '') {\n            str += hlite[0] + '|' + hlite[1];\n          } else {\n            str += ',' + hlite[0] + '|' + hlite[1];\n          }\n        }\n      });\n\n      setAttributes({ selectedfeatured: str });\n    }\n\n    function removefeatured() {\n      highlighted = [];\n      jQuery('.lp_inspector_feat_hlite_node.stay').each(function () {\n        var h_id = jQuery(this).attr('data');\n        var h_tp = jQuery(this).attr('typ');\n        highlighted.push([parseInt(h_id), h_tp]);\n      });\n\n      feats = [];\n      highlighted.map(function (feat, index) {\n        var obj = void 0;\n        if (feat[1] == \"cur\") {\n          obj = attributes.curriculum.find(function (obj) {\n            return obj.id == parseInt(feat[0]);\n          });\n          var idx = attributes.curriculum.indexOf(parseInt(feat[0]));\n        } else {\n          obj = attributes.resources.find(function (obj) {\n            return obj.id == parseInt(feat[0]);\n          });\n          var _idx2 = attributes.resources.indexOf(parseInt(feat[0]));\n        }\n\n        if (typeof obj != 'undefined') {\n          feats.push(Object.values(obj));\n        }\n      });\n\n      var str = '';\n      highlighted.map(function (hlite, index) {\n        if (hlite[0] !== undefined && hlite[1] !== undefined) {\n          if (str == '') {\n            str += hlite[0] + '|' + hlite[1];\n          } else {\n            str += ',' + hlite[0] + '|' + hlite[1];\n          }\n        }\n      });\n\n      setAttributes({ selectedfeatured: str });\n    }\n\n    //console.log(highlighted);\n    //console.log(typeof attributes.selectedfeatured);\n    if (typeof attributes.selectedfeatured != 'undefined') {\n      feats = [];\n      highlighted.map(function (feat, index) {\n        var obj = void 0;\n        if (feat[1] == \"cur\") {\n          obj = attributes.curriculum.find(function (obj) {\n            return obj.id == parseInt(feat[0]);\n          });\n          var idx = attributes.curriculum.indexOf(parseInt(feat[0]));\n        } else {\n          obj = attributes.resources.find(function (obj) {\n            return obj.id == parseInt(feat[0]);\n          });\n          var _idx3 = attributes.resources.indexOf(parseInt(feat[0]));\n        }\n\n        if (typeof obj != 'undefined') {\n          feats.push(Object.values(obj));\n        }\n      });\n    } else {\n      feats = [];\n    }\n\n    function onInspectorLoad() {\n      var featexist = setInterval(function () {\n        if (jQuery('.lp_inspector_feat_hlite_list').length) {\n          clearInterval(featexist);\n          setTimeout(function () {\n            sort();\n          }, 500);\n        }\n      }, 100); // check every 100ms\n    }\n\n    function onModalQuickButton(elem, index) {\n      var type = elem.target.getAttribute('typ');\n      if (type == 'res') {\n        jQuery('.lp_inspector_feat_modal_resource_wrapper').hide(300, function () {\n          jQuery('.lp_inspector_feat_modal_curriculum_wrapper').show(300);\n        });\n      } else {\n        jQuery('.lp_inspector_feat_modal_curriculum_wrapper').hide(300, function () {\n          jQuery('.lp_inspector_feat_modal_resource_wrapper').show(300);\n        });\n      }\n    }\n\n    /*\n    minslides\n    maxslides\n    moveslides\n    slidewidth\n    slidemargin\n    */\n\n    function onSettingChange(elem, index) {\n      var type = elem.target.getAttribute('typ');\n      var val = elem.target.value;\n      switch (type) {\n        case 'minslides':\n          setAttributes({ minslides: parseInt(val) });\n          break;\n        case 'maxslides':\n          setAttributes({ maxslides: parseInt(val) });\n          break;\n        case 'moveslides':\n          setAttributes({ moveslides: parseInt(val) });\n          break;\n        case 'slidewidth':\n          setAttributes({ slidewidth: parseInt(val) });\n          break;\n        case 'slidemargin':\n          setAttributes({ slidemargin: parseInt(val) });\n          break;\n        case 'slidealign':\n          setAttributes({ slidealign: val });\n          break;\n        case 'slidedesclength':\n          setAttributes({ slidedesclength: parseInt(val) });\n          break;\n        case 'slideimageheight':\n          setAttributes({ slideimageheight: parseInt(val) });\n          break;\n      }\n\n      localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-minslides\", attributes.minslides);\n      localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-maxslides\", attributes.maxslides);\n      localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-moveslides\", attributes.moveslides);\n      localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-slidewidth\", attributes.slidewidth);\n      localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-slidemargin\", attributes.slidemargin);\n      localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-slidealign\", attributes.slidealign);\n      localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-slidedesclength\", attributes.slidedesclength);\n      localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-slideimageheight\", attributes.slideimageheight);\n\n      curriculumfeatslider_reset(attributes.blockid, 750);\n    }\n\n    localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-minslides\", attributes.minslides);\n    localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-maxslides\", attributes.maxslides);\n    localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-moveslides\", attributes.moveslides);\n    localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-slidewidth\", attributes.slidewidth);\n    localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-slidemargin\", attributes.slidemargin);\n    localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-slidealign\", attributes.slidealign);\n    localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-slidedesclength\", attributes.slidedesclength);\n    localStorage.setItem(\"lpInspectorFeatSliderSetting-\" + attributes.blockid + \"-slideimageheight\", attributes.slideimageheight);\n\n    function onTitleChange(elem, index) {\n      var blktitle = elem.target.value;\n      blktitle = blktitle == '' ? '' : blktitle;\n      var blkid = elem.target.getAttribute('blk');\n      cgbGlobal['curriculum_feat_title_' + blkid] = blktitle;\n      setAttributes({ blocktitle: blktitle });\n    }\n\n    function onSearch(elem, index) {\n      var searchstring = elem.target.value.toLowerCase();\n      setAttributes({ resourcesubjectfilter: '' });\n      setAttributes({ curriculumsubjectfilter: '' });\n      setAttributes({ searchstring: searchstring });\n    }\n\n    function onResourceFilterSubject(elem, index) {\n      var val = elem.target.value;\n      setAttributes({ searchstring: '' });\n      if (val !== '') {\n        //console.log('SEARCHSTRING:'+val);\n        setAttributes({ resourcesubjectfilter: val });\n      } else {\n        //console.log('SEARCHSTRING Blnk:'+val);\n        setAttributes({ resourcesubjectfilter: '' });\n      }\n    }\n\n    function onCurriculumFilterSubject(elem, index) {\n      var val = elem.target.value;\n      setAttributes({ searchstring: '' });\n      if (val !== '') {\n        //console.log('SEARCHSTRING:'+val);\n        setAttributes({ curriculumsubjectfilter: val });\n      } else {\n        //console.log('SEARCHSTRING Blnk:'+val);\n        setAttributes({ curriculumsubjectfilter: '' });\n      }\n    }\n\n    function onFilterSearchToggle(elem, index) {\n      //console.log('FILTER TOGGLE: '+attributes.filtertype)\n      setAttributes({ resourcesubjectfilter: '' });\n      setAttributes({ curriculumsubjectfilter: '' });\n      setAttributes({ searchstring: '' });\n      if (attributes.filtertype == 'search') {\n        setAttributes({ filtertype: 'subject' });\n      } else {\n        setAttributes({ filtertype: 'search' });\n      }\n    }\n\n    function onBlockWidthChange(elem, index) {\n      var val = elem.target.value;\n      setAttributes({ blockwidth: val });\n      jQuery(\"#block-\" + attributes.blockid).css({ \"width\": val });\n      localStorage.setItem(\"lpInspectorFeatBlockwidth-\" + attributes.blockid, attributes.blockwidth);\n    }\n\n    localStorage.setItem(\"lpInspectorFeatBlockwidth-\" + attributes.blockid, attributes.blockwidth);\n\n    //console.log(attributes.blockid);\n    //console.log(highlighted);\n    //console.log(attributes.selectedfeatured);\n    //console.log(attributes.blockid);\n    //console.log(feats);\n\n    //console.log(res_subj_arr);\n    //console.log(cur_subj_arr);\n\n    //console.log(attributes.minslides);\n    //console.log(attributes.maxslides);\n    //console.log(attributes.moveslides);\n    //console.log(attributes.slidewidth);\n    //console.log(attributes.slidemargin);\n\n\n    //const highlightDropdownOptions = ['resources','curriculum'];\n    //const dropClass = (attributes.highlight == 'resources')? 'button lp_inspector_feat_addResources': 'button lp_inspector_feat_addCurriculum';\n    //const dropText = (attributes.highlight == 'resources')? 'Resources': 'Curriculum';\n\n    var looper = [1];\n\n    return wp.element.createElement(\n      'div',\n      null,\n      wp.element.createElement(\n        InspectorControls,\n        null,\n        wp.element.createElement(\n          PanelBody,\n          { title: __('Curriculum Featured Block settings'), initialOpen: true },\n          wp.element.createElement(\n            'div',\n            { 'class': 'lp_inspector_wrapper' },\n            wp.element.createElement(\n              'label',\n              { 'class': 'components-base-control__label', 'for': 'lp_inspector_subject' },\n              'Block Title:'\n            ),\n            wp.element.createElement('input', { type: 'text', onChange: onTitleChange, 'class': 'ls_inspector_feat_title', value: attributes.blocktitle, blk: attributes.blockid })\n          ),\n          wp.element.createElement(\n            'div',\n            { 'class': 'lp_inspector_wrapper' },\n            wp.element.createElement(\n              'label',\n              { 'class': 'components-base-control__label', 'for': 'lp_inspector_subject' },\n              'Block Width'\n            ),\n            wp.element.createElement('input', { type: 'number', onChange: onBlockWidthChange, 'class': 'ls_inspector_feat_blockwidth', value: attributes.blockwidth, blk: attributes.blockid }),\n            wp.element.createElement(\n              'label',\n              { 'class': 'components-base-control__label', 'for': 'lp_inspector_subject' },\n              wp.element.createElement(\n                'em',\n                null,\n                'Note: Block width setting is only used to simulate the frontend width at backend and will not affect the frontend.'\n              )\n            )\n          ),\n          wp.element.createElement(\n            'div',\n            { 'class': 'lp_inspector_feat_modal_resource_wrapper' },\n            wp.element.createElement(\n              'div',\n              { 'class': 'lp_inspector_feat_modal_content_main' },\n              wp.element.createElement(\n                'div',\n                { 'class': 'lp_inspector_feat_modal_wrapper_close' },\n                wp.element.createElement('span', { 'class': 'dashicons dashicons-no' })\n              ),\n              wp.element.createElement(\n                'div',\n                { 'class': 'lp_inspector_feat_modal_center' },\n                wp.element.createElement(\n                  'div',\n                  { 'class': 'lp_inspector_feat_modal_table' },\n                  wp.element.createElement(\n                    'div',\n                    { 'class': 'lp_inspector_feat_modal_cell' },\n                    wp.element.createElement(\n                      'div',\n                      { 'class': 'lp_inspector_feat_modal' },\n                      wp.element.createElement(\n                        'div',\n                        { 'class': 'lp_inspector_feat_search_wrapper' },\n                        wp.element.createElement(\n                          'div',\n                          { 'class': 'lp_inspector_feat_search_header' },\n                          'Resources'\n                        ),\n                        looper.map(function (tmp, index) {\n                          if (attributes.filtertype == 'subject') {\n                            return wp.element.createElement('input', { type: 'button', onClick: onFilterSearchToggle, 'class': 'button', value: 'Filter by subject' });\n                          } else {\n                            return wp.element.createElement('input', { type: 'button', onClick: onFilterSearchToggle, 'class': 'button', value: 'Filter by search' });\n                          }\n                        }),\n                        looper.map(function (tmp, index) {\n                          if (attributes.filtertype == 'subject') {\n                            return wp.element.createElement('input', { type: 'text', onChange: onSearch, fet: 'res', id: 'lp_inspector_feat_search', 'class': 'lp_inspector_feat_search', value: attributes.searchstring });\n                          } else {\n                            return wp.element.createElement(\n                              'select',\n                              { id: 'lp_inspector_feat_subject_select', onChange: onResourceFilterSubject, value: attributes.resourcesubjectfilter },\n                              wp.element.createElement(\n                                'option',\n                                { value: '' },\n                                'All'\n                              ),\n                              res_subj_arr.map(function (subject, index) {\n                                if (subject.term_id == attributes.resourcesubjectfilter) {\n                                  if (subject.parent == 0) {\n                                    return wp.element.createElement(\n                                      'option',\n                                      { selected: 'selected', value: subject.term_id, 'class': 'lp_inspector_feat_subject_select_bold' },\n                                      subject.name + ' (' + subject.cnt + ')'\n                                    );\n                                  } else {\n                                    return wp.element.createElement(\n                                      'option',\n                                      { selected: 'selected', value: subject.term_id },\n                                      '├ ' + subject.name + ' (' + subject.cnt + ')'\n                                    );\n                                  }\n                                } else {\n                                  if (subject.parent == 0) {\n                                    return wp.element.createElement(\n                                      'option',\n                                      { value: subject.term_id, 'class': 'lp_inspector_feat_subject_select_bold' },\n                                      subject.name + ' (' + subject.cnt + ')'\n                                    );\n                                  } else {\n                                    return wp.element.createElement(\n                                      'option',\n                                      { value: subject.term_id },\n                                      '├ ' + subject.name + ' (' + subject.cnt + ')'\n                                    );\n                                  }\n                                }\n                              })\n                            );\n                          }\n                        })\n                      ),\n                      wp.element.createElement(\n                        'div',\n                        { 'class': 'lp_inspector_feat_modal_content' },\n                        wp.element.createElement(\n                          'div',\n                          { 'class': 'lp_inspector_feat_modal_content_subcontainer' },\n                          res_list_arr.map(function (resource, index) {\n                            var tex = highlighted.findIndex(findMatch(resource.id));\n                            var str = attributes.searchstring;\n                            var flt = attributes.resourcesubjectfilter;\n                            var ttl = resource.title.toLowerCase();\n                            var tax = resource.tax.toString();\n                            var taxarray = tax.split('|');\n\n                            if (attributes.searchstring == '' || !attributes.searchstring) {\n                              //empty search string\n                              if (flt != '' && flt !== undefined) {\n\n                                if (taxarray.includes(flt)) {\n                                  // Subject Matched\n                                  //if( tax.indexOf(flt) !== -1 ){ // Subject Matched\n                                  if (tex != -1) {\n                                    // Checked\n                                    return wp.element.createElement(\n                                      'label',\n                                      { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: resource.title.toLowerCase() },\n                                      wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                      wp.element.createElement('input', { checked: 'checked', onClick: updateHighlight, fet: 'res', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: resource.id, tax: tax }),\n                                      unescape(resource.title)\n                                    );\n                                  } else {\n                                    //Unchecked\n                                    return wp.element.createElement(\n                                      'label',\n                                      { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: resource.title.toLowerCase() },\n                                      wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                      wp.element.createElement('input', { onClick: updateHighlight, fet: 'res', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: resource.id, tax: tax }),\n                                      unescape(resource.title)\n                                    );\n                                  }\n                                }\n                              } else {\n\n                                if (tex != -1) {\n                                  // Checked\n                                  return wp.element.createElement(\n                                    'label',\n                                    { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: resource.title.toLowerCase() },\n                                    wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                    wp.element.createElement('input', { checked: 'checked', onClick: updateHighlight, fet: 'res', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: resource.id, tax: tax }),\n                                    unescape(resource.title)\n                                  );\n                                } else {\n                                  //Unchecked\n                                  return wp.element.createElement(\n                                    'label',\n                                    { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: resource.title.toLowerCase() },\n                                    wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                    wp.element.createElement('input', { onClick: updateHighlight, fet: 'res', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: resource.id, tax: tax }),\n                                    unescape(resource.title)\n                                  );\n                                }\n                              }\n                            } else {\n                              //search string is provided\n\n                              if (taxarray.includes(flt)) {\n                                // Subject Matched\n                                //if(tax.indexOf(flt) !== -1){ // subject filter matched\n\n                                if (ttl.indexOf(str) !== -1) {\n                                  // search string matched\n                                  if (tex != -1) {\n                                    // Checked\n                                    return wp.element.createElement(\n                                      'label',\n                                      { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: resource.title.toLowerCase() },\n                                      wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                      wp.element.createElement('input', { checked: 'checked', onClick: updateHighlight, fet: 'res', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: resource.id, tax: tax }),\n                                      unescape(resource.title)\n                                    );\n                                  } else {\n                                    return (// Unchecked\n                                      wp.element.createElement(\n                                        'label',\n                                        { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: resource.title.toLowerCase() },\n                                        wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                        wp.element.createElement('input', { onClick: updateHighlight, fet: 'res', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: resource.id, tax: tax }),\n                                        unescape(resource.title)\n                                      )\n                                    );\n                                  }\n                                }\n                              } else {\n                                //subject filter mismatch\n\n                                if (ttl.indexOf(str) !== -1) {\n                                  // search string matched\n                                  if (tex != -1) {\n                                    // Checked\n                                    return wp.element.createElement(\n                                      'label',\n                                      { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: resource.title.toLowerCase() },\n                                      wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                      wp.element.createElement('input', { checked: 'checked', onClick: updateHighlight, fet: 'res', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: resource.id, tax: tax }),\n                                      unescape(resource.title)\n                                    );\n                                  } else {\n                                    return (// Unchecked\n                                      wp.element.createElement(\n                                        'label',\n                                        { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: resource.title.toLowerCase() },\n                                        wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                        wp.element.createElement('input', { onClick: updateHighlight, fet: 'res', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: resource.id, tax: tax }),\n                                        unescape(resource.title)\n                                      )\n                                    );\n                                  }\n                                }\n                              }\n                            }\n                          })\n                        )\n                      ),\n                      wp.element.createElement(\n                        'div',\n                        { 'class': 'lp_inspector_feat_search_footer' },\n                        wp.element.createElement('input', { type: 'button', 'class': 'button lp_inspector_feat_quickswitchbutton', onClick: onModalQuickButton, typ: 'res', value: 'Curriculum lists >' })\n                      )\n                    )\n                  )\n                )\n              )\n            )\n          ),\n          wp.element.createElement(\n            'div',\n            { 'class': 'lp_inspector_feat_modal_curriculum_wrapper' },\n            wp.element.createElement(\n              'div',\n              { 'class': 'lp_inspector_feat_modal_content_main' },\n              wp.element.createElement(\n                'div',\n                { 'class': 'lp_inspector_feat_modal_wrapper_close' },\n                wp.element.createElement('span', { 'class': 'dashicons dashicons-no' })\n              ),\n              wp.element.createElement(\n                'div',\n                { 'class': 'lp_inspector_feat_modal_center' },\n                wp.element.createElement(\n                  'div',\n                  { 'class': 'lp_inspector_feat_modal_table' },\n                  wp.element.createElement(\n                    'div',\n                    { 'class': 'lp_inspector_feat_modal_cell' },\n                    wp.element.createElement(\n                      'div',\n                      { 'class': 'lp_inspector_feat_modal' },\n                      wp.element.createElement(\n                        'div',\n                        { 'class': 'lp_inspector_feat_search_wrapper' },\n                        wp.element.createElement(\n                          'div',\n                          { 'class': 'lp_inspector_feat_search_header' },\n                          'Curriculum'\n                        ),\n                        looper.map(function (tmp, index) {\n                          if (attributes.filtertype == 'subject') {\n                            return wp.element.createElement('input', { type: 'button', onClick: onFilterSearchToggle, 'class': 'button', value: 'Filter by subject' });\n                          } else {\n                            return wp.element.createElement('input', { type: 'button', onClick: onFilterSearchToggle, 'class': 'button', value: 'Filter by search' });\n                          }\n                        }),\n                        looper.map(function (tmp, index) {\n                          if (attributes.filtertype == 'subject') {\n                            return wp.element.createElement('input', { type: 'text', onChange: onSearch, fet: 'res', id: 'lp_inspector_feat_search', 'class': 'lp_inspector_feat_search', value: attributes.searchstring });\n                          } else {\n                            return wp.element.createElement(\n                              'select',\n                              { id: 'lp_inspector_feat_subject_select', onChange: onCurriculumFilterSubject, value: attributes.curriculumsubjectfilter },\n                              wp.element.createElement(\n                                'option',\n                                { value: '' },\n                                'All'\n                              ),\n                              cur_subj_arr.map(function (subject, index) {\n                                if (subject.term_id == attributes.curriculumsubjectfilter) {\n                                  if (subject.parent == 0) {\n                                    return wp.element.createElement(\n                                      'option',\n                                      { selected: 'selected', value: subject.term_id, 'class': 'lp_inspector_feat_subject_select_bold' },\n                                      subject.name + ' (' + subject.cnt + ')'\n                                    );\n                                  } else {\n                                    return wp.element.createElement(\n                                      'option',\n                                      { selected: 'selected', value: subject.term_id },\n                                      '├ ' + subject.name + ' (' + subject.cnt + ')'\n                                    );\n                                  }\n                                } else {\n                                  if (subject.parent == 0) {\n                                    return wp.element.createElement(\n                                      'option',\n                                      { value: subject.term_id, 'class': 'lp_inspector_feat_subject_select_bold' },\n                                      subject.name + ' (' + subject.cnt + ')'\n                                    );\n                                  } else {\n                                    return wp.element.createElement(\n                                      'option',\n                                      { value: subject.term_id },\n                                      '├ ' + subject.name + ' (' + subject.cnt + ')'\n                                    );\n                                  }\n                                }\n                              })\n                            );\n                          }\n                        })\n                      ),\n                      wp.element.createElement(\n                        'div',\n                        { 'class': 'lp_inspector_feat_modal_content' },\n                        wp.element.createElement(\n                          'div',\n                          { 'class': 'lp_inspector_feat_modal_content_subcontainer' },\n                          cur_list_arr.map(function (curriculum, index) {\n                            var tex = highlighted.findIndex(findMatch(curriculum.id));\n                            var str = attributes.searchstring;\n                            var flt = attributes.curriculumsubjectfilter;\n                            var ttl = curriculum.title.toLowerCase();\n                            var tax = curriculum.tax.toString();\n\n                            if (attributes.searchstring == '' || !attributes.searchstring) {\n                              //empty search string\n                              if (flt != '' && flt !== undefined) {\n\n                                if (tax.indexOf(flt) !== -1) {\n                                  // Subject Matched\n                                  if (tex != -1) {\n                                    // Checked\n                                    return wp.element.createElement(\n                                      'label',\n                                      { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: curriculum.title.toLowerCase() },\n                                      wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                      wp.element.createElement('input', { checked: 'checked', onClick: updateHighlight, fet: 'cur', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: curriculum.id, tax: tax }),\n                                      curriculum.title\n                                    );\n                                  } else {\n                                    //Unchecked\n                                    return wp.element.createElement(\n                                      'label',\n                                      { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: curriculum.title.toLowerCase() },\n                                      wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                      wp.element.createElement('input', { onClick: updateHighlight, fet: 'cur', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: curriculum.id, tax: tax }),\n                                      curriculum.title\n                                    );\n                                  }\n                                }\n                              } else {\n\n                                if (tex != -1) {\n                                  // Checked\n                                  return wp.element.createElement(\n                                    'label',\n                                    { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: curriculum.title.toLowerCase() },\n                                    wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                    wp.element.createElement('input', { checked: 'checked', onClick: updateHighlight, fet: 'cur', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: curriculum.id, tax: tax }),\n                                    curriculum.title\n                                  );\n                                } else {\n                                  //Unchecked\n                                  return wp.element.createElement(\n                                    'label',\n                                    { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: curriculum.title.toLowerCase() },\n                                    wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                    wp.element.createElement('input', { onClick: updateHighlight, fet: 'cur', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: curriculum.id, tax: tax }),\n                                    curriculum.title\n                                  );\n                                }\n                              }\n                            } else {\n                              //search string is provided\n\n                              if (tax.indexOf(flt) !== -1) {\n                                // subject filter matched\n\n                                if (ttl.indexOf(str) !== -1) {\n                                  // search string matched\n                                  if (tex != -1) {\n                                    // Checked\n                                    return wp.element.createElement(\n                                      'label',\n                                      { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: curriculum.title.toLowerCase() },\n                                      wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                      wp.element.createElement('input', { checked: 'checked', onClick: updateHighlight, fet: 'cur', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: curriculum.id, tax: tax }),\n                                      curriculum.title\n                                    );\n                                  } else {\n                                    return (// Unchecked\n                                      wp.element.createElement(\n                                        'label',\n                                        { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: curriculum.title.toLowerCase() },\n                                        wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                        wp.element.createElement('input', { onClick: updateHighlight, fet: 'cur', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: curriculum.id, tax: tax }),\n                                        curriculum.title\n                                      )\n                                    );\n                                  }\n                                }\n                              } else {\n                                //subject filter mismatch\n\n                                if (ttl.indexOf(str) !== -1) {\n                                  // search string matched\n                                  if (tex != -1) {\n                                    // Checked\n                                    return wp.element.createElement(\n                                      'label',\n                                      { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: curriculum.title.toLowerCase() },\n                                      wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                      wp.element.createElement('input', { checked: 'checked', onClick: updateHighlight, fet: 'cur', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: curriculum.id, tax: tax }),\n                                      curriculum.title\n                                    );\n                                  } else {\n                                    return (// Unchecked\n                                      wp.element.createElement(\n                                        'label',\n                                        { 'class': 'components-base-control__label ls_inspector_feat_modal_label', srch: curriculum.title.toLowerCase() },\n                                        wp.element.createElement('img', { src: cgbGlobal['pluginDirUrl'] + \"curriculum-featured-block/images/preloader.gif\" }),\n                                        wp.element.createElement('input', { onClick: updateHighlight, fet: 'cur', id: 'inspector-checkbox-control-' + index, idx: index, 'class': 'ls_inspector_feat_modal_checkbox', type: 'checkbox', data: curriculum.id, tax: tax }),\n                                        curriculum.title\n                                      )\n                                    );\n                                  }\n                                }\n                              }\n                            }\n                          })\n                        )\n                      ),\n                      wp.element.createElement(\n                        'div',\n                        { 'class': 'lp_inspector_feat_search_footer' },\n                        wp.element.createElement('input', { type: 'button', 'class': 'button lp_inspector_feat_quickswitchbutton', onClick: onModalQuickButton, typ: 'cur', value: 'Resources lists >' })\n                      )\n                    )\n                  )\n                )\n              )\n            )\n          ),\n          wp.element.createElement(\n            'div',\n            { 'class': 'lp_inspector_wrapper' },\n            wp.element.createElement(\n              'label',\n              { 'class': 'components-base-control__label', 'for': 'lp_inspector_subject' },\n              'Featured List:'\n            ),\n            wp.element.createElement(\n              'div',\n              { 'class': 'lp_inspector_feat_addbutton_wrapper' },\n              wp.element.createElement(\n                'div',\n                { 'class': 'button lp_inspector_feat_addResources' },\n                'Add Resources'\n              ),\n              wp.element.createElement(\n                'div',\n                { 'class': 'button lp_inspector_feat_addCurriculum' },\n                'Add Curriculum'\n              )\n            ),\n            wp.element.createElement(\n              'div',\n              { 'class': 'lp_inspector_feat_hlite_list' },\n              wp.element.createElement(\n                'div',\n                { id: 'lp_inspector_feat_hlite_featured', 'class': 'lp_inspector_feat_hlite_featured' },\n                feats.map(function (feat, index) {\n\n                  if (prevelem == 'li') {\n                    return wp.element.createElement(\n                      'div',\n                      { draggable: true, onMouseup: updateposition, 'class': \"lp_inspector_feat_hlite_node stay \" + feat[6], data: feat[0], typ: feat[6] },\n                      feat[1],\n                      wp.element.createElement('span', { 'class': 'dashicons dashicons-dismiss' })\n                    );\n                  } else {\n                    return wp.element.createElement(\n                      'li',\n                      { draggable: true, onMouseup: updateposition, 'class': \"lp_inspector_feat_hlite_node stay \" + feat[6], data: feat[0], typ: feat[6] },\n                      feat[1],\n                      wp.element.createElement('span', { 'class': 'dashicons dashicons-dismiss' })\n                    );\n                  }\n                })\n              ),\n              wp.element.createElement('div', { 'class': 'button lp_inspector_feat_hlite_reposition_trigger', onClick: updateposition, blkid: attributes.blockid }),\n              wp.element.createElement('div', { 'class': 'button lp_inspector_feat_hlite_remove_trigger', height: '0', width: '0', onClick: removefeatured, blkid: attributes.blockid })\n            )\n          ),\n          wp.element.createElement(\n            'div',\n            { 'class': 'lp_inspector_wrapper' },\n            wp.element.createElement(\n              'label',\n              { 'class': 'components-base-control__label', 'for': 'lp_inspector_subject' },\n              'Slider Setting:'\n            ),\n            wp.element.createElement(\n              'table',\n              { 'class': 'lp_inspector_feat_slider_setting', cellspacing: '2' },\n              wp.element.createElement(\n                'tr',\n                null,\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement(\n                    'span',\n                    { 'class': 'dashicons dashicons-info tooltipped' },\n                    wp.element.createElement(\n                      'span',\n                      { 'class': 'tooltiptext' },\n                      'The minimum number of slides to be shown. Slides will be sized down if slider becomes smaller than the original size.'\n                    )\n                  ),\n                  'Min. Slides:'\n                ),\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement(\n                    'select',\n                    { id: 'lp_inspector_feat_slider_minslides', onChange: onSettingChange, typ: 'minslides', value: attributes.minslides },\n                    globalSettingOptions.map(function (incr, index) {\n                      var ret = incr == attributes.minslides ? wp.element.createElement(\n                        'option',\n                        { selected: true, value: incr },\n                        incr\n                      ) : wp.element.createElement(\n                        'option',\n                        { value: incr },\n                        incr\n                      );\n                      return ret;\n                    })\n                  )\n                )\n              ),\n              wp.element.createElement(\n                'tr',\n                null,\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement(\n                    'span',\n                    { 'class': 'dashicons dashicons-info tooltipped' },\n                    wp.element.createElement(\n                      'span',\n                      { 'class': 'tooltiptext' },\n                      'The maximum number of slides to be shown. Slides will be sized up if slider becomes larger than the original size.'\n                    )\n                  ),\n                  'Max. Slides:'\n                ),\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement(\n                    'select',\n                    { id: 'lp_inspector_feat_slider_maxslides', onChange: onSettingChange, typ: 'maxslides', value: attributes.maxslides },\n                    globalSettingOptions.map(function (incr, index) {\n                      var ret = incr == attributes.maxslides ? wp.element.createElement(\n                        'option',\n                        { selected: true, value: incr },\n                        incr\n                      ) : wp.element.createElement(\n                        'option',\n                        { value: incr },\n                        incr\n                      );\n                      return ret;\n                    })\n                  )\n                )\n              ),\n              wp.element.createElement(\n                'tr',\n                null,\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement(\n                    'span',\n                    { 'class': 'dashicons dashicons-info tooltipped' },\n                    wp.element.createElement(\n                      'span',\n                      { 'class': 'tooltiptext' },\n                      'The number of slides to move on transition. This value must be greater than or equal to minSlides, and less than or equal to maxSlides. If value is greater than the fully-visible slides, then the count of fully-visible slides will be used.'\n                    )\n                  ),\n                  'Move Slides:'\n                ),\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement(\n                    'select',\n                    { id: 'lp_inspector_feat_slider_moveslides', onChange: onSettingChange, typ: 'moveslides', value: attributes.moveslides },\n                    globalSettingOptions.map(function (incr, index) {\n                      var ret = incr == attributes.moveslides ? wp.element.createElement(\n                        'option',\n                        { selected: true, value: incr },\n                        incr\n                      ) : wp.element.createElement(\n                        'option',\n                        { value: incr },\n                        incr\n                      );\n                      return ret;\n                    })\n                  )\n                )\n              ),\n              wp.element.createElement(\n                'tr',\n                null,\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement(\n                    'span',\n                    { 'class': 'dashicons dashicons-info tooltipped' },\n                    wp.element.createElement(\n                      'span',\n                      { 'class': 'tooltiptext' },\n                      'Width of each slide.'\n                    )\n                  ),\n                  'Slide Width:'\n                ),\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement('input', { type: 'number', id: 'lp_inspector_feat_slider_slidewidth', typ: 'slidewidth', onChange: onSettingChange, value: attributes.slidewidth })\n                )\n              ),\n              wp.element.createElement(\n                'tr',\n                null,\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement(\n                    'span',\n                    { 'class': 'dashicons dashicons-info tooltipped' },\n                    wp.element.createElement(\n                      'span',\n                      { 'class': 'tooltiptext' },\n                      'Space between slides'\n                    )\n                  ),\n                  'Slide Margin:'\n                ),\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement(\n                    'select',\n                    { id: 'lp_inspector_feat_slider_slidemargin', onChange: onSettingChange, typ: 'slidemargin', value: attributes.slidemargin },\n                    globalSettingMargin.map(function (incr, index) {\n                      var ret = incr == attributes.slidemargin ? wp.element.createElement(\n                        'option',\n                        { selected: true, value: incr },\n                        incr\n                      ) : wp.element.createElement(\n                        'option',\n                        { value: incr },\n                        incr\n                      );\n                      return ret;\n                    })\n                  )\n                )\n              ),\n              wp.element.createElement(\n                'tr',\n                null,\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement(\n                    'span',\n                    { 'class': 'dashicons dashicons-info tooltipped' },\n                    wp.element.createElement(\n                      'span',\n                      { 'class': 'tooltiptext' },\n                      'Left, right or middle alignment'\n                    )\n                  ),\n                  'Alignmnet:'\n                ),\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement(\n                    'select',\n                    { id: 'lp_inspector_feat_slider_slidealign', onChange: onSettingChange, typ: 'slidealign', value: attributes.slidealign },\n                    globalSettingAlign.map(function (incr, index) {\n                      var ret = incr == attributes.slidemargin ? wp.element.createElement(\n                        'option',\n                        { selected: true, value: incr },\n                        incr\n                      ) : wp.element.createElement(\n                        'option',\n                        { value: incr },\n                        incr\n                      );\n                      return ret;\n                    })\n                  )\n                )\n              ),\n              wp.element.createElement(\n                'tr',\n                null,\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement(\n                    'span',\n                    { 'class': 'dashicons dashicons-info tooltipped' },\n                    wp.element.createElement(\n                      'span',\n                      { 'class': 'tooltiptext' },\n                      'Length of description to display.'\n                    )\n                  ),\n                  'Description length:'\n                ),\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement('input', { type: 'number', id: 'lp_inspector_feat_slider_slidedesclength', typ: 'slidedesclength', onChange: onSettingChange, value: attributes.slidedesclength })\n                )\n              ),\n              wp.element.createElement(\n                'tr',\n                null,\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement(\n                    'span',\n                    { 'class': 'dashicons dashicons-info tooltipped' },\n                    wp.element.createElement(\n                      'span',\n                      { 'class': 'tooltiptext' },\n                      'Adjust image height'\n                    )\n                  ),\n                  'Image height:'\n                ),\n                wp.element.createElement(\n                  'td',\n                  null,\n                  wp.element.createElement('input', { type: 'number', id: 'lp_inspector_feat_slider_slideimageheight', typ: 'slideimageheight', onChange: onSettingChange, value: attributes.slideimageheight })\n                )\n              )\n            )\n          ),\n          wp.element.createElement('img', { // onload hack fires when block is added\n            className: 'onload-hack-pp',\n            height: '0',\n            width: '0',\n            onLoad: onInspectorLoad,\n            src: cgbGlobal['pluginDirUrl'] + \"/curriculum-featured-block/images/default-img.jpg\"\n          })\n        )\n      ),\n      wp.element.createElement(\n        'div',\n        { 'class': 'oer_right_featuredwpr' },\n        wp.element.createElement(\n          'div',\n          { 'class': \"oer-ftrdttl curriculum-feat-title_\" + attributes.blockid },\n          attributes.blocktitle\n        ),\n        wp.element.createElement(\n          'ul',\n          { 'class': \"featuredwpr_bxslider featuredwpr_bxslider_\" + attributes.blockid, blk: attributes.blockid },\n          feats.map(function (feat, index) {\n            //let ctnt = feat[2].replace(/<[^>]+>/g, '');\n            var ctnt = feat[2];\n            if (ctnt.length > attributes.slidedesclength) {\n              ctnt = unescape(ctnt.substr(0, attributes.slidedesclength)) + '...';\n            }\n\n            //console.log(feat);\n            return wp.element.createElement(\n              'li',\n              { atrr: feat[0] },\n              wp.element.createElement(\n                'div',\n                { 'class': 'frtdsnglwpr' },\n                wp.element.createElement(\n                  'a',\n                  { href: feat[3] },\n                  wp.element.createElement(\n                    'div',\n                    { 'class': 'img' },\n                    wp.element.createElement('img', { src: feat[4], alt: feat[1] })\n                  )\n                ),\n                wp.element.createElement(\n                  'div',\n                  { 'class': 'ttl' },\n                  wp.element.createElement(\n                    'a',\n                    { href: feat[3] },\n                    feat[1]\n                  )\n                ),\n                wp.element.createElement(\n                  'div',\n                  { 'class': 'desc' },\n                  ctnt\n                )\n              )\n            );\n          })\n        )\n      )\n    );\n  },\n\n  /**\n   * The save function defines the way in which the different attributes should be combined\n   * into the final markup, which is then serialized by Gutenberg into post_content.\n   *\n   * The \"save\" property must be specified and must be a valid function.\n   *\n   * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/\n   *\n   * @param {Object} props Props.\n   * @returns {Mixed} JSX Frontend HTML.\n   */\n  save: function save(props) {\n    return null;\n  }\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9ibG9jay9ibG9jay5qcz85MjFkIl0sInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogQkxPQ0s6IGN1cnJpY3VsdW0tZmVhdHVyZWQtYmxvY2tcbiAqXG4gKiBSZWdpc3RlcmluZyBhIGJhc2ljIGJsb2NrIHdpdGggR3V0ZW5iZXJnLlxuICogU2ltcGxlIGJsb2NrLCByZW5kZXJzIGFuZCBzYXZlcyB0aGUgc2FtZSBjb250ZW50IHdpdGhvdXQgYW55IGludGVyYWN0aXZpdHkuXG4gKi9cblxuLy8gIEltcG9ydCBDU1MuXG5pbXBvcnQgJy4vZWRpdG9yLnNjc3MnO1xuaW1wb3J0ICcuL3N0eWxlLnNjc3MnO1xuXG52YXIgX18gPSB3cC5pMThuLl9fOyAvLyBJbXBvcnQgX18oKSBmcm9tIHdwLmkxOG5cblxudmFyIHJlZ2lzdGVyQmxvY2tUeXBlID0gd3AuYmxvY2tzLnJlZ2lzdGVyQmxvY2tUeXBlOyAvLyBJbXBvcnQgcmVnaXN0ZXJCbG9ja1R5cGUoKSBmcm9tIHdwLmJsb2Nrc1xuXG52YXIgSW5zcGVjdG9yQ29udHJvbHMgPSB3cC5ibG9ja0VkaXRvci5JbnNwZWN0b3JDb250cm9scztcbnZhciBQYW5lbEJvZHkgPSB3cC5jb21wb25lbnRzLlBhbmVsQm9keTtcbnZhciBfd3AkY29tcG9uZW50cyA9IHdwLmNvbXBvbmVudHMsXG4gICAgQ2hlY2tib3hDb250cm9sID0gX3dwJGNvbXBvbmVudHMuQ2hlY2tib3hDb250cm9sLFxuICAgIFJhZGlvQ29udHJvbCA9IF93cCRjb21wb25lbnRzLlJhZGlvQ29udHJvbCxcbiAgICBUZXh0Q29udHJvbCA9IF93cCRjb21wb25lbnRzLlRleHRDb250cm9sLFxuICAgIFRvZ2dsZUNvbnRyb2wgPSBfd3AkY29tcG9uZW50cy5Ub2dnbGVDb250cm9sLFxuICAgIFNlbGVjdENvbnRyb2wgPSBfd3AkY29tcG9uZW50cy5TZWxlY3RDb250cm9sO1xuXG5cbnZhciByZXNvdXJjZXNfYXJyID0gW107XG52YXIgZmVhdHMgPSBbXTtcbnZhciBwb3NjaGFuZ2Vpbml0aWF0ZWQgPSBmYWxzZTtcbnZhciBwcmV2ZWxlbSA9ICdsaSc7XG5cbnZhciBnbG9iYWxTZXR0aW5nT3B0aW9ucyA9IFsxLCAyLCAzLCA0LCA1XTtcbnZhciBnbG9iYWxTZXR0aW5nTWFyZ2luID0gWzUsIDEwLCAxNSwgMjAsIDI1LCAzMCwgMzUsIDQwLCA0NSwgNTBdO1xudmFyIGdsb2JhbFNldHRpbmdBbGlnbiA9IFsnbWlkZGxlJywgJ2xlZnQnLCAncmlnaHQnXTtcblxucmVnaXN0ZXJCbG9ja1R5cGUoJ2NnYi9ibG9jay1jdXJyaWN1bHVtLWZlYXR1cmVkLWJsb2NrJywge1xuICAvLyBCbG9jayBuYW1lLiBCbG9jayBuYW1lcyBtdXN0IGJlIHN0cmluZyB0aGF0IGNvbnRhaW5zIGEgbmFtZXNwYWNlIHByZWZpeC4gRXhhbXBsZTogbXktcGx1Z2luL215LWN1c3RvbS1ibG9jay5cbiAgdGl0bGU6IF9fKCdDdXJyaWN1bHVtIEZlYXR1cmVkIEJsb2NrJyksIC8vIEJsb2NrIHRpdGxlLlxuICBpY29uOiAnd2VsY29tZS1sZWFybi1tb3JlJywgLy8gQmxvY2sgaWNvbiBmcm9tIERhc2hpY29ucyDihpIgaHR0cHM6Ly9kZXZlbG9wZXIud29yZHByZXNzLm9yZy9yZXNvdXJjZS9kYXNoaWNvbnMvLlxuICBjYXRlZ29yeTogJ2NvbW1vbicsIC8vIEJsb2NrIGNhdGVnb3J5IOKAlCBHcm91cCBibG9ja3MgdG9nZXRoZXIgYmFzZWQgb24gY29tbW9uIHRyYWl0cyBFLmcuIGNvbW1vbiwgZm9ybWF0dGluZywgbGF5b3V0IHdpZGdldHMsIGVtYmVkLlxuICBrZXl3b3JkczogW19fKCdjdXJyaWN1bHVtLWZlYXR1cmVkLWJsb2NrJyksIF9fKCdDR0IgRXhhbXBsZScpLCBfXygnY3JlYXRlLWd1dGVuLWJsb2NrJyldLFxuXG4gIGF0dHJpYnV0ZXM6IHtcbiAgICBibG9ja3dpZHRoOiB7XG4gICAgICB0eXBlOiAnaW50aWdlcicsXG4gICAgICBkZWZhdWx0OiAxMTcwXG4gICAgfSxcblxuICAgIGJsb2NraWQ6IHtcbiAgICAgIHR5cGU6ICdzdHJpbmcnXG4gICAgfSxcbiAgICBoaWdobGlnaHQ6IHtcbiAgICAgIHR5cGU6ICdzdHJpbmcnLFxuICAgICAgZGVmYXVsdDogJ3Jlc291cmNlcydcbiAgICB9LFxuICAgIHNlbGVjdGVkZmVhdHVyZWQ6IHtcbiAgICAgIHR5cGU6ICdzdHJpbmcnXG4gICAgfSxcbiAgICBkYXRhOiB7XG4gICAgICB0eXBlOiAnc3RyaW5nJ1xuICAgIH0sXG4gICAgcmVzb3VyY2VzOiB7XG4gICAgICB0eXBlOiAnc3RyaW5nJ1xuICAgIH0sXG4gICAgY3VycmljdWx1bToge1xuICAgICAgdHlwZTogJ3N0cmluZydcbiAgICB9LFxuICAgIGJsb2NrdGl0bGU6IHtcbiAgICAgIHR5cGU6ICdzdHJpbmcnLFxuICAgICAgZGVmYXVsdDogJ0ZlYXR1cmVkJ1xuICAgIH0sXG5cbiAgICAvL1NFQVJDSFxuICAgIHNlYXJjaHN0cmluZzoge1xuICAgICAgdHlwZTogJ3N0cmluZydcbiAgICB9LFxuXG4gICAgLy9GSUxURVJJTkdcbiAgICByZXNvdXJjZXN1YmplY3RzOiB7XG4gICAgICB0eXBlOiAnb2JqZWN0J1xuICAgIH0sXG4gICAgY3VycmljdWx1bXN1YmplY3RzOiB7XG4gICAgICB0eXBlOiAnb2JqZWN0J1xuICAgIH0sXG4gICAgcmVzb3VyY2VzdWJqZWN0ZmlsdGVyOiB7XG4gICAgICB0eXBlOiAnc3RyaW5nJ1xuICAgIH0sXG4gICAgY3VycmljdWx1bXN1YmplY3RmaWx0ZXI6IHtcbiAgICAgIHR5cGU6ICdzdHJpbmcnXG4gICAgfSxcbiAgICBmaWx0ZXJ0eXBlOiB7XG4gICAgICB0eXBlOiAnc3RyaW5nJ1xuICAgIH0sXG5cbiAgICAvL1NFVFRJTkdTXG4gICAgbWluc2xpZGVzOiB7XG4gICAgICB0eXBlOiAnaW50aWdlcicsXG4gICAgICBkZWZhdWx0OiAxXG4gICAgfSxcbiAgICBtYXhzbGlkZXM6IHtcbiAgICAgIHR5cGU6ICdpbnRpZ2VyJyxcbiAgICAgIGRlZmF1bHQ6IDNcbiAgICB9LFxuICAgIG1vdmVzbGlkZXM6IHtcbiAgICAgIHR5cGU6ICdpbnRpZ2VyJyxcbiAgICAgIGRlZmF1bHQ6IDFcbiAgICB9LFxuICAgIHNsaWRld2lkdGg6IHtcbiAgICAgIHR5cGU6ICdpbnRpZ2VyJyxcbiAgICAgIGRlZmF1bHQ6IDM3NVxuICAgIH0sXG4gICAgc2xpZGVtYXJnaW46IHtcbiAgICAgIHR5cGU6ICdpbnRpZ2VyJyxcbiAgICAgIGRlZmF1bHQ6IDIwXG4gICAgfSxcbiAgICBzbGlkZWFsaWduOiB7XG4gICAgICB0eXBlOiAnc3RyaW5nJyxcbiAgICAgIGRlZmF1bHQ6ICdsZWZ0J1xuICAgIH0sXG4gICAgc2xpZGVkZXNjbGVuZ3RoOiB7XG4gICAgICB0eXBlOiAnaW50aWdlcicsXG4gICAgICBkZWZhdWx0OiBjZ2JHbG9iYWxbJ3NsaWRlZGVzY2xlbmd0aCddXG4gICAgfSxcbiAgICBzbGlkZWltYWdlaGVpZ2h0OiB7XG4gICAgICB0eXBlOiAnaW50aWdlcicsXG4gICAgICBkZWZhdWx0OiBjZ2JHbG9iYWxbJ3NsaWRlaW1hZ2VoZWlnaHQnXVxuICAgIH1cblxuICB9LFxuXG4gIGVkaXQ6IGZ1bmN0aW9uIGVkaXQocHJvcHMpIHtcbiAgICB2YXIgYXR0cmlidXRlcyA9IHByb3BzLmF0dHJpYnV0ZXM7XG4gICAgdmFyIHNldEF0dHJpYnV0ZXMgPSBwcm9wcy5zZXRBdHRyaWJ1dGVzO1xuXG4gICAgLy9jb25zb2xlLmxvZygnQkxPQ0sgSUQ6ICcrYXR0cmlidXRlcy5ibG9ja2lkKTtcblxuICAgIC8vU0VUIEJMT0NLIElOU1RBTkNFIElEU1xuICAgIHZhciBmZWF0YmxvY2tjb3VudCA9IDA7dmFyIGJsa2lkeCA9IDA7XG4gICAgdmFyIGJsb2NrcyA9IHdwLmRhdGEuc2VsZWN0KCdjb3JlL2Jsb2NrLWVkaXRvcicpLmdldEJsb2NrcygpO1xuICAgIC8vY29uc29sZS5sb2coJyoqKioqKioqKioqKioqKioqKicpO1xuICAgIGJsb2Nrcy5tYXAoZnVuY3Rpb24gKHZhbCwgaW5kZXgpIHtcblxuICAgICAgaWYgKHZhbC5uYW1lID09ICdjZ2IvYmxvY2stY3VycmljdWx1bS1mZWF0dXJlZC1ibG9jaycpIHtcbiAgICAgICAgdmFyIHVuaXEgPSAnY2ZiJyArIG5ldyBEYXRlKCkuZ2V0VGltZSgpO1xuICAgICAgICB2YXIgY2lkID0gdmFsLmNsaWVudElkO1xuICAgICAgICAvKlxuICAgICAgICB2YXIgYXR0ciA9IHdwLmRhdGEuc2VsZWN0KCAnY29yZS9ibG9jay1lZGl0b3InICkuZ2V0QmxvY2tBdHRyaWJ1dGVzKGNpZClcbiAgICAgICAgdmFyIGJsa2lkOztcbiAgICAgICAgaWYoIWF0dHJpYnV0ZXMuYmxvY2tpZCl7XG4gICAgICAgICAgICB3cC5kYXRhLmRpc3BhdGNoKCAnY29yZS9ibG9jay1lZGl0b3InICkudXBkYXRlQmxvY2tBdHRyaWJ1dGVzKCBjaWQsIHsgYmxvY2tpZDogdW5pcSB9IClcbiAgICAgICAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKCdjdXJyaWN1bHVtLWZlYXQtYmxraWQnLCB1bmlxICk7XG4gICAgICAgICAgICBibGtpZCA9IHVuaXE7XG4gICAgICAgIH1lbHNle1xuICAgICAgICAgICAgYmxraWQgPSBhdHRyaWJ1dGVzLmJsb2NraWQ7XG4gICAgICAgIH1cbiAgICAgICAgKi9cbiAgICAgICAgd3AuZGF0YS5kaXNwYXRjaCgnY29yZS9ibG9jay1lZGl0b3InKS51cGRhdGVCbG9ja0F0dHJpYnV0ZXMoY2lkLCB7IGJsb2NraWQ6IGNpZCB9KTtcblxuICAgICAgICAvKlxuICAgICAgICBtaW5zbGlkZXNcbiAgICAgICAgbWF4c2xpZGVzXG4gICAgICAgIG1vdmVzbGlkZXNcbiAgICAgICAgc2xpZGV3aWR0aFxuICAgICAgICBzbGlkZW1hcmdpblxuICAgICAgICAqL1xuICAgICAgICAvL3NldCBkZWZhdWx0c1xuICAgICAgICAvKlxuICAgICAgICBpZihhdHRyaWJ1dGVzLm1pbnNsaWRlcyA9PT0gdW5kZWZpbmVkKXtcbiAgICAgICAgICAgIHdwLmRhdGEuZGlzcGF0Y2goICdjb3JlL2Jsb2NrLWVkaXRvcicgKS51cGRhdGVCbG9ja0F0dHJpYnV0ZXMoIGNpZCwgeyBtaW5zbGlkZXM6IDEgfSApXG4gICAgICAgIH1cbiAgICAgICAgaWYoYXR0cmlidXRlcy5tYXhzbGlkZXMgPT09IHVuZGVmaW5lZCl7XG4gICAgICAgICAgICB3cC5kYXRhLmRpc3BhdGNoKCAnY29yZS9ibG9jay1lZGl0b3InICkudXBkYXRlQmxvY2tBdHRyaWJ1dGVzKCBjaWQsIHsgbWF4c2xpZGVzOiAzIH0gKVxuICAgICAgICB9XG4gICAgICAgIGlmKGF0dHJpYnV0ZXMubW92ZXNsaWRlcyA9PT0gdW5kZWZpbmVkKXtcbiAgICAgICAgICAgIHdwLmRhdGEuZGlzcGF0Y2goICdjb3JlL2Jsb2NrLWVkaXRvcicgKS51cGRhdGVCbG9ja0F0dHJpYnV0ZXMoIGNpZCwgeyBtb3Zlc2xpZGVzOiAxIH0gKVxuICAgICAgICB9XG4gICAgICAgIGNvbnNvbGUubG9nKCdVTkRFRklORUQgV0lEVEg6ICcrY2lkKycgLSAnK2F0dHJpYnV0ZXMuc2xpZGV3aWR0aClcbiAgICAgICAgaWYoYXR0cmlidXRlcy5zbGlkZXdpZHRoID09PSB1bmRlZmluZWQpe1xuICAgICAgICAgICAgd3AuZGF0YS5kaXNwYXRjaCggJ2NvcmUvYmxvY2stZWRpdG9yJyApLnVwZGF0ZUJsb2NrQXR0cmlidXRlcyggY2lkLCB7IHNsaWRld2lkdGg6IDM3NSB9IClcbiAgICAgICAgfVxuICAgICAgICBpZihhdHRyaWJ1dGVzLnNsaWRlbWFyZ2luID09PSB1bmRlZmluZWQpe1xuICAgICAgICAgICAgd3AuZGF0YS5kaXNwYXRjaCggJ2NvcmUvYmxvY2stZWRpdG9yJyApLnVwZGF0ZUJsb2NrQXR0cmlidXRlcyggY2lkLCB7IHNsaWRlbWFyZ2luOiAxMCB9IClcbiAgICAgICAgfVxuICAgICAgICAqL1xuXG4gICAgICAgIGlmIChhdHRyaWJ1dGVzLmZpbHRlcnR5cGUgPT09IHVuZGVmaW5lZCkge1xuICAgICAgICAgIHdwLmRhdGEuZGlzcGF0Y2goJ2NvcmUvYmxvY2stZWRpdG9yJykudXBkYXRlQmxvY2tBdHRyaWJ1dGVzKGNpZCwgeyBmaWx0ZXJ0eXBlOiAnc2VhcmNoJyB9KTtcbiAgICAgICAgfVxuXG4gICAgICAgIC8qXG4gICAgICAgIGlmKGF0dHJpYnV0ZXMuYmxvY2t0aXRsZSA9PT0gdW5kZWZpbmVkKXtcbiAgICAgICAgICAgIHdwLmRhdGEuZGlzcGF0Y2goICdjb3JlL2Jsb2NrLWVkaXRvcicgKS51cGRhdGVCbG9ja0F0dHJpYnV0ZXMoIGNpZCwgeyBibG9ja3RpdGxlOiAnRmVhdHVyZWQnIH0gKVxuICAgICAgICAgICAgY2diR2xvYmFsWydjdXJyaWN1bHVtX2ZlYXRfdGl0bGVfJytibGtpZF0gPSAnRmVhdHVyZWQnO1xuICAgICAgICB9XG4gICAgICAgICovXG5cbiAgICAgICAgLy9jb25zb2xlLmxvZygnQkxPQ0sgJytibGtpZCsgJyAoJytibGtpZHgrJyknKTtcbiAgICAgICAgYmxraWR4Kys7XG4gICAgICAgIGZlYXRibG9ja2NvdW50Kys7XG4gICAgICB9XG4gICAgfSk7XG4gICAgLy9jb25zb2xlLmxvZygnKioqKioqKioqKioqKioqKioqJyk7XG5cbiAgICAvLyBSRVRVUk4gTUVTU0FHRSBXSElMRSBDQVRFR09SSUVTIEFORCBDVVJSSUNVTFVNUyBBUkUgTk9UIFlFVCBGVUxMWSBMT0FERURcbiAgICAvKlxuICAgIGlmKCFhdHRyaWJ1dGVzLmJsb2NraWQgfHwgXG4gICAgICAhYXR0cmlidXRlcy5taW5zbGlkZXMgfHwgXG4gICAgICAhYXR0cmlidXRlcy5tYXhzbGlkZXMgfHwgXG4gICAgICAhYXR0cmlidXRlcy5tb3Zlc2xpZGVzIHx8IFxuICAgICAgIWF0dHJpYnV0ZXMuc2xpZGV3aWR0aCB8fCBcbiAgICAgICFhdHRyaWJ1dGVzLnNsaWRlbWFyZ2luIHx8XG4gICAgICAhYXR0cmlidXRlcy5maWx0ZXJ0eXBlKXtcbiAgICAgIHJldHVybiAnU2V0dGluZyB1cCBibG9ja3MuLi4nXG4gICAgfVxuICAgICovXG4gICAgY3VycmljdWx1bWZlYXRzbGlkZXJfbG9hZGFsbChmZWF0YmxvY2tjb3VudCk7XG5cbiAgICAvL2NvbnZlcnQgY29tbWEgZGVsaW1pdHRlZCB0byBhcnJheVxuICAgIHZhciBoaWdobGlnaHRlZCA9IFtdO1xuICAgIGlmICh0eXBlb2YgYXR0cmlidXRlcy5zZWxlY3RlZGZlYXR1cmVkICE9PSAndW5kZWZpbmVkJykge1xuICAgICAgdmFyIHRtcGFyciA9IGF0dHJpYnV0ZXMuc2VsZWN0ZWRmZWF0dXJlZC5zcGxpdChcIixcIik7XG5cbiAgICAgIHRtcGFyci5tYXAoZnVuY3Rpb24gKGFyciwgaW5kZXgpIHtcbiAgICAgICAgdmFyIHJvd2FyciA9IGFyci5zcGxpdChcInxcIik7XG4gICAgICAgIGhpZ2hsaWdodGVkLnB1c2goW3BhcnNlSW50KHJvd2FyclswXSksIHJvd2FyclsxXV0pO1xuICAgICAgfSk7XG4gICAgfVxuXG4gICAgdmFyIHJlc291cmNlc19hcnIgPSBbXTtcbiAgICByZXNvdXJjZXNfYXJyID0gYXR0cmlidXRlcy5yZXNvdXJjZXM7XG4gICAgLypcbiAgICAgMCAtIFJlc291cmNlIHRheG9ub215XG4gICAgIDEgLSBDdXJyaWN1bHVtIHRheG9ub215XG4gICAgIDIgLSBSZXNvdXJjZSBMaXN0XG4gICAgIDMgLSBDdXJyaWN1bHVtIExpc3RcbiAgICAgKi9cbiAgICAvKiBHRVQgQUxMIERBVEEgKi9cbiAgICBpZiAoIWF0dHJpYnV0ZXMuZGF0YSkge1xuICAgICAgLy93cC5hcGlGZXRjaCh7IHVybDogJy93cC1qc29uL2N1cnJpY3VsdW0vZmVhdC9kYXRhcXVlcnknIH0pLnRoZW4oZGF0YSA9PnsgIHNldEF0dHJpYnV0ZXMoe3Jlc291cmNlczogZGF0YSB9KSAgfSlcbiAgICAgIHdwLmFwaUZldGNoKHsgdXJsOiAnL3dwLWpzb24vY3VycmljdWx1bS9mZWF0L2RhdGFxdWVyeScgfSkudGhlbihmdW5jdGlvbiAoZGF0YSkge1xuXG4gICAgICAgIHNldEF0dHJpYnV0ZXMoeyBkYXRhOiBkYXRhIH0pO1xuICAgICAgICBzZXRBdHRyaWJ1dGVzKHsgcmVzb3VyY2VzdWJqZWN0czogZGF0YVswXSB9KTtcbiAgICAgICAgc2V0QXR0cmlidXRlcyh7IGN1cnJpY3VsdW1zdWJqZWN0czogZGF0YVsxXSB9KTtcbiAgICAgICAgc2V0QXR0cmlidXRlcyh7IHJlc291cmNlczogZGF0YVsyXSB9KTtcbiAgICAgICAgc2V0QXR0cmlidXRlcyh7IGN1cnJpY3VsdW06IGRhdGFbM10gfSk7XG5cbiAgICAgICAgLy9jb25zb2xlLmxvZyhkYXRhWzBdKTtcbiAgICAgICAgLy9jb25zb2xlLmxvZyhkYXRhWzFdKTtcbiAgICAgICAgLy9jb25zb2xlLmxvZyhkYXRhWzJdKTtcbiAgICAgICAgLy9jb25zb2xlLmxvZyhkYXRhWzNdKTtcbiAgICAgIH0pO1xuICAgIH1cbiAgICBpZiAoIWF0dHJpYnV0ZXMuZGF0YSkge1xuICAgICAgcmV0dXJuICdMb2FkaW5nIEZlYXR1cmVkIERhdGEuLi4nO1xuICAgIH1cbiAgICB2YXIgZGF0YV9hcnIgPSBhdHRyaWJ1dGVzLmRhdGE7XG4gICAgdmFyIHJlc19zdWJqX2FyciA9IGRhdGFfYXJyWzBdO1xuICAgIHZhciBjdXJfc3Vial9hcnIgPSBkYXRhX2FyclsxXTtcbiAgICB2YXIgcmVzX2xpc3RfYXJyID0gZGF0YV9hcnJbMl07XG4gICAgdmFyIGN1cl9saXN0X2FyciA9IGRhdGFfYXJyWzNdO1xuXG4gICAgLyogU0VUIFJFU09VUkNFUyBMSVNUIEFUVFJJQlVURVMgKi9cbiAgICAvKlxuICAgIGlmKCFhdHRyaWJ1dGVzLnJlc291cmNlcyl7XG4gICAgd3AuYXBpRmV0Y2goeyB1cmw6ICcvd3AtanNvbi9jdXJyaWN1bHVtL2ZlYXQvcmVzb3VyY2VxdWVyeScgfSkudGhlbihyZXNvdXJjZXMgPT57ICBzZXRBdHRyaWJ1dGVzKHtyZXNvdXJjZXM6IHJlc291cmNlcyB9KSAgfSlcbiAgICB9XG4gICAgaWYoIWF0dHJpYnV0ZXMucmVzb3VyY2VzKXsgcmV0dXJuICdMb2FkaW5nIHJlc291cmNlcy4uLic7IH1cdFxuICAgIGxldCByZXNfbGlzdF9hcnIgPSBbXTtcbiAgICByZXNfbGlzdF9hcnIgPSBhdHRyaWJ1dGVzLnJlc291cmNlcztcbiAgICAqL1xuXG4gICAgLyogU0VUIENVUlJJQ1VMVU0gTElTVCBBVFRSSUJVVEVTICovXG4gICAgLypcbiAgICAgIGlmKCFhdHRyaWJ1dGVzLmN1cnJpY3VsdW0pe1xuICAgIFx0d3AuYXBpRmV0Y2goeyB1cmw6ICcvd3AtanNvbi9jdXJyaWN1bHVtL2ZlYXQvY3VycmljdWx1bXF1ZXJ5JyB9KS50aGVuKHJlc291cmNlcyA9PnsgIHNldEF0dHJpYnV0ZXMoe2N1cnJpY3VsdW06IHJlc291cmNlcyB9KSAgfSlcbiAgICB9XG4gICAgaWYoIWF0dHJpYnV0ZXMuY3VycmljdWx1bSl7IHJldHVybiAnTG9hZGluZyBjdXJyaWN1bHVtLi4uJzsgfVxuICAgIGxldCBjdXJfbGlzdF9hcnIgPSBbXTtcbiAgICAgIGN1cl9saXN0X2FyciA9IGF0dHJpYnV0ZXMuY3VycmljdWx1bTtcbiAgICAgICovXG5cbiAgICAvKiBTRVQgUkVTT1VSQ0UgU1VCSkVDVFMgTElTVCBBVFRSSUJVVEVTICovXG4gICAgLypcbiAgICBpZighYXR0cmlidXRlcy5yZXNvdXJjZXN1YmplY3RzKXtcbiAgICB3cC5hcGlGZXRjaCh7IHVybDogJy93cC1qc29uL2N1cnJpY3VsdW0vZmVhdC90YXhxdWVyeT9wb3N0dHlwZT1yZXNvdXJjZScgfSkudGhlbih0YXhvbmltaWVzID0+eyAgc2V0QXR0cmlidXRlcyh7cmVzb3VyY2VzdWJqZWN0czogdGF4b25pbWllcyB9KSAgfSlcbiAgICB9XG4gICAgaWYoIWF0dHJpYnV0ZXMucmVzb3VyY2VzdWJqZWN0cyl7IHJldHVybiAnTG9hZGluZyBTdWJqZWN0cy4uLic7IH1cbiAgICBsZXQgcmVzX3N1YmpfYXJyID0gW107XG4gICAgcmVzX3N1YmpfYXJyID0gYXR0cmlidXRlcy5yZXNvdXJjZXN1YmplY3RzO1xuICAgICovXG5cbiAgICAvKiBTRVQgQ1VSUklDVUxVTSBTVUJKRUNUUyBMSVNUIEFUVFJJQlVURVMgKi9cbiAgICAvKlxuICAgIGlmKCFhdHRyaWJ1dGVzLmN1cnJpY3VsdW1zdWJqZWN0cyl7XG4gICAgd3AuYXBpRmV0Y2goeyB1cmw6ICcvd3AtanNvbi9jdXJyaWN1bHVtL2ZlYXQvdGF4cXVlcnk/cG9zdHR5cGU9bGVzc29uLXBsYW5zJyB9KS50aGVuKHRheG9uaW1pZXMgPT57ICBzZXRBdHRyaWJ1dGVzKHtjdXJyaWN1bHVtc3ViamVjdHM6IHRheG9uaW1pZXMgfSkgIH0pXG4gICAgfVxuICAgIGlmKCFhdHRyaWJ1dGVzLmN1cnJpY3VsdW1zdWJqZWN0cyl7IHJldHVybiAnTG9hZGluZyBTdWJqZWN0cy4uLic7IH1cbiAgICBsZXQgY3VyX3N1YmpfYXJyID0gW107XG4gICAgY3VyX3N1YmpfYXJyID0gYXR0cmlidXRlcy5jdXJyaWN1bHVtc3ViamVjdHM7XG4gICAgKi9cblxuICAgIGZ1bmN0aW9uIHVwZGF0ZUhpZ2hsaWdodChuZXdWYWx1ZSwgaW5kZXgpIHtcblxuICAgICAgaWYgKGNnYkdsb2JhbFsnYnhyZXNldGJsb2NrZWQnXSkge1xuICAgICAgICByZXR1cm47XG4gICAgICB9XG5cbiAgICAgIHZhciB0eXBlID0gbmV3VmFsdWUudGFyZ2V0LmdldEF0dHJpYnV0ZSgnZmV0Jyk7XG4gICAgICBpZiAobmV3VmFsdWUudGFyZ2V0LmNoZWNrZWQpIHtcbiAgICAgICAgdmFyIHNlbGZlYXQgPSBuZXdWYWx1ZS50YXJnZXQuZ2V0QXR0cmlidXRlKCdkYXRhJyk7XG4gICAgICAgIGhpZ2hsaWdodGVkLnB1c2goW3BhcnNlSW50KHNlbGZlYXQpLCB0eXBlXSk7XG4gICAgICB9IGVsc2Uge1xuICAgICAgICB2YXIgdG9kZWwgPSBwYXJzZUludChuZXdWYWx1ZS50YXJnZXQuZ2V0QXR0cmlidXRlKCdkYXRhJykpO1xuICAgICAgICB2YXIgZXggPSBoaWdobGlnaHRlZC5maW5kSW5kZXgoZmluZE1hdGNoKHRvZGVsKSk7XG4gICAgICAgIGlmIChleCAhPSAtMSkge1xuICAgICAgICAgIGhpZ2hsaWdodGVkLnNwbGljZShleCwgMSk7XG4gICAgICAgIH1cbiAgICAgIH1cblxuICAgICAgZmVhdHMgPSBbXTtcbiAgICAgIGhpZ2hsaWdodGVkLm1hcChmdW5jdGlvbiAoZmVhdCwgaW5kZXgpIHtcbiAgICAgICAgdmFyIG9iaiA9IHZvaWQgMDt2YXIgaWR4ID0gdm9pZCAwO1xuXG4gICAgICAgIGlmIChmZWF0WzFdID09IFwiY3VyXCIpIHtcbiAgICAgICAgICBvYmogPSBhdHRyaWJ1dGVzLmN1cnJpY3VsdW0uZmluZChmdW5jdGlvbiAob2JqKSB7XG4gICAgICAgICAgICByZXR1cm4gb2JqLmlkID09IHBhcnNlSW50KGZlYXRbMF0pO1xuICAgICAgICAgIH0pO1xuICAgICAgICAgIGlkeCA9IGF0dHJpYnV0ZXMuY3VycmljdWx1bS5pbmRleE9mKHBhcnNlSW50KGZlYXRbMF0pKTtcbiAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICBvYmogPSBhdHRyaWJ1dGVzLnJlc291cmNlcy5maW5kKGZ1bmN0aW9uIChvYmopIHtcbiAgICAgICAgICAgIHJldHVybiBvYmouaWQgPT0gcGFyc2VJbnQoZmVhdFswXSk7XG4gICAgICAgICAgfSk7XG4gICAgICAgICAgaWR4ID0gYXR0cmlidXRlcy5yZXNvdXJjZXMuaW5kZXhPZihwYXJzZUludChmZWF0WzBdKSk7XG4gICAgICAgIH1cblxuICAgICAgICBpZiAodHlwZW9mIG9iaiAhPSAndW5kZWZpbmVkJykge1xuICAgICAgICAgIGZlYXRzLnB1c2goT2JqZWN0LnZhbHVlcyhvYmopKTtcbiAgICAgICAgfVxuICAgICAgfSk7XG5cbiAgICAgIHZhciBzdHIgPSAnJztcbiAgICAgIGhpZ2hsaWdodGVkLm1hcChmdW5jdGlvbiAoaGxpdGUsIGluZGV4KSB7XG4gICAgICAgIGlmIChobGl0ZVswXSAhPT0gdW5kZWZpbmVkICYmIGhsaXRlWzFdICE9PSB1bmRlZmluZWQpIHtcbiAgICAgICAgICBpZiAoc3RyID09ICcnKSB7XG4gICAgICAgICAgICBzdHIgKz0gaGxpdGVbMF0gKyAnfCcgKyBobGl0ZVsxXTtcbiAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgc3RyICs9ICcsJyArIGhsaXRlWzBdICsgJ3wnICsgaGxpdGVbMV07XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9KTtcblxuICAgICAgc2V0QXR0cmlidXRlcyh7IHNlbGVjdGVkZmVhdHVyZWQ6IHN0ciB9KTtcbiAgICAgIGN1cnJpY3VsdW1mZWF0c2xpZGVyX3Jlc2V0KGF0dHJpYnV0ZXMuYmxvY2tpZCwgNzUwLCBuZXdWYWx1ZS50YXJnZXQpO1xuICAgIH1cblxuICAgIGZ1bmN0aW9uIGZpbmRNYXRjaCh0b2RlbCkge1xuICAgICAgcmV0dXJuIGZ1bmN0aW9uIChpbm5lckFycikge1xuICAgICAgICByZXR1cm4gaW5uZXJBcnJbMF0gPT09IHRvZGVsO1xuICAgICAgfTtcbiAgICB9XG5cbiAgICAvL2NvbnNvbGUubG9nKGF0dHJpYnV0ZXMucmVzb3VyY2VzKTtcbiAgICAvL2NvbnNvbGUubG9nKGF0dHJpYnV0ZXMuc2VsZWN0ZWRmZWF0dXJlZCk7ICBcbiAgICAvL2NvbnNvbGUubG9nKGF0dHJpYnV0ZXMuY3VycmljdWx1bSk7XG4gICAgLy9jb25zdCBmZWF0cyA9IGF0dHJpYnV0ZXMuc2VsZWN0ZWRmZWF0dXJlZC5zcGxpdCgnLCcpO1xuICAgIC8vY29uc29sZS5sb2coaGlnaGxpZ2h0ZWQpO1xuXG5cbiAgICBmdW5jdGlvbiB1cGRhdGVwb3NpdGlvbigpIHtcbiAgICAgIHByZXZlbGVtID0gcHJldmVsZW0gPT0gJ2xpJyA/ICdkaXYnIDogJ2xpJztcblxuICAgICAgaGlnaGxpZ2h0ZWQgPSBbXTtcbiAgICAgIGpRdWVyeSgnLmxwX2luc3BlY3Rvcl9mZWF0X2hsaXRlX25vZGUnKS5lYWNoKGZ1bmN0aW9uICgpIHtcbiAgICAgICAgdmFyIGhfaWQgPSBqUXVlcnkodGhpcykuYXR0cignZGF0YScpO1xuICAgICAgICB2YXIgaF90cCA9IGpRdWVyeSh0aGlzKS5hdHRyKCd0eXAnKTtcbiAgICAgICAgaGlnaGxpZ2h0ZWQucHVzaChbcGFyc2VJbnQoaF9pZCksIGhfdHBdKTtcbiAgICAgIH0pO1xuXG4gICAgICBmZWF0cyA9IFtdO1xuICAgICAgaGlnaGxpZ2h0ZWQubWFwKGZ1bmN0aW9uIChmZWF0LCBpbmRleCkge1xuICAgICAgICB2YXIgb2JqID0gdm9pZCAwO1xuICAgICAgICBpZiAoZmVhdFsxXSA9PSBcImN1clwiKSB7XG4gICAgICAgICAgb2JqID0gYXR0cmlidXRlcy5jdXJyaWN1bHVtLmZpbmQoZnVuY3Rpb24gKG9iaikge1xuICAgICAgICAgICAgcmV0dXJuIG9iai5pZCA9PSBwYXJzZUludChmZWF0WzBdKTtcbiAgICAgICAgICB9KTtcbiAgICAgICAgICB2YXIgaWR4ID0gYXR0cmlidXRlcy5jdXJyaWN1bHVtLmluZGV4T2YocGFyc2VJbnQoZmVhdFswXSkpO1xuICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgIG9iaiA9IGF0dHJpYnV0ZXMucmVzb3VyY2VzLmZpbmQoZnVuY3Rpb24gKG9iaikge1xuICAgICAgICAgICAgcmV0dXJuIG9iai5pZCA9PSBwYXJzZUludChmZWF0WzBdKTtcbiAgICAgICAgICB9KTtcbiAgICAgICAgICB2YXIgX2lkeCA9IGF0dHJpYnV0ZXMucmVzb3VyY2VzLmluZGV4T2YocGFyc2VJbnQoZmVhdFswXSkpO1xuICAgICAgICB9XG5cbiAgICAgICAgaWYgKHR5cGVvZiBvYmogIT0gJ3VuZGVmaW5lZCcpIHtcbiAgICAgICAgICBmZWF0cy5wdXNoKE9iamVjdC52YWx1ZXMob2JqKSk7XG4gICAgICAgIH1cbiAgICAgIH0pO1xuXG4gICAgICB2YXIgc3RyID0gJyc7XG4gICAgICBoaWdobGlnaHRlZC5tYXAoZnVuY3Rpb24gKGhsaXRlLCBpbmRleCkge1xuICAgICAgICBpZiAoaGxpdGVbMF0gIT09IHVuZGVmaW5lZCAmJiBobGl0ZVsxXSAhPT0gdW5kZWZpbmVkKSB7XG4gICAgICAgICAgaWYgKHN0ciA9PSAnJykge1xuICAgICAgICAgICAgc3RyICs9IGhsaXRlWzBdICsgJ3wnICsgaGxpdGVbMV07XG4gICAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICAgIHN0ciArPSAnLCcgKyBobGl0ZVswXSArICd8JyArIGhsaXRlWzFdO1xuICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgfSk7XG5cbiAgICAgIHNldEF0dHJpYnV0ZXMoeyBzZWxlY3RlZGZlYXR1cmVkOiBzdHIgfSk7XG4gICAgfVxuXG4gICAgZnVuY3Rpb24gcmVtb3ZlZmVhdHVyZWQoKSB7XG4gICAgICBoaWdobGlnaHRlZCA9IFtdO1xuICAgICAgalF1ZXJ5KCcubHBfaW5zcGVjdG9yX2ZlYXRfaGxpdGVfbm9kZS5zdGF5JykuZWFjaChmdW5jdGlvbiAoKSB7XG4gICAgICAgIHZhciBoX2lkID0galF1ZXJ5KHRoaXMpLmF0dHIoJ2RhdGEnKTtcbiAgICAgICAgdmFyIGhfdHAgPSBqUXVlcnkodGhpcykuYXR0cigndHlwJyk7XG4gICAgICAgIGhpZ2hsaWdodGVkLnB1c2goW3BhcnNlSW50KGhfaWQpLCBoX3RwXSk7XG4gICAgICB9KTtcblxuICAgICAgZmVhdHMgPSBbXTtcbiAgICAgIGhpZ2hsaWdodGVkLm1hcChmdW5jdGlvbiAoZmVhdCwgaW5kZXgpIHtcbiAgICAgICAgdmFyIG9iaiA9IHZvaWQgMDtcbiAgICAgICAgaWYgKGZlYXRbMV0gPT0gXCJjdXJcIikge1xuICAgICAgICAgIG9iaiA9IGF0dHJpYnV0ZXMuY3VycmljdWx1bS5maW5kKGZ1bmN0aW9uIChvYmopIHtcbiAgICAgICAgICAgIHJldHVybiBvYmouaWQgPT0gcGFyc2VJbnQoZmVhdFswXSk7XG4gICAgICAgICAgfSk7XG4gICAgICAgICAgdmFyIGlkeCA9IGF0dHJpYnV0ZXMuY3VycmljdWx1bS5pbmRleE9mKHBhcnNlSW50KGZlYXRbMF0pKTtcbiAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICBvYmogPSBhdHRyaWJ1dGVzLnJlc291cmNlcy5maW5kKGZ1bmN0aW9uIChvYmopIHtcbiAgICAgICAgICAgIHJldHVybiBvYmouaWQgPT0gcGFyc2VJbnQoZmVhdFswXSk7XG4gICAgICAgICAgfSk7XG4gICAgICAgICAgdmFyIF9pZHgyID0gYXR0cmlidXRlcy5yZXNvdXJjZXMuaW5kZXhPZihwYXJzZUludChmZWF0WzBdKSk7XG4gICAgICAgIH1cblxuICAgICAgICBpZiAodHlwZW9mIG9iaiAhPSAndW5kZWZpbmVkJykge1xuICAgICAgICAgIGZlYXRzLnB1c2goT2JqZWN0LnZhbHVlcyhvYmopKTtcbiAgICAgICAgfVxuICAgICAgfSk7XG5cbiAgICAgIHZhciBzdHIgPSAnJztcbiAgICAgIGhpZ2hsaWdodGVkLm1hcChmdW5jdGlvbiAoaGxpdGUsIGluZGV4KSB7XG4gICAgICAgIGlmIChobGl0ZVswXSAhPT0gdW5kZWZpbmVkICYmIGhsaXRlWzFdICE9PSB1bmRlZmluZWQpIHtcbiAgICAgICAgICBpZiAoc3RyID09ICcnKSB7XG4gICAgICAgICAgICBzdHIgKz0gaGxpdGVbMF0gKyAnfCcgKyBobGl0ZVsxXTtcbiAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgc3RyICs9ICcsJyArIGhsaXRlWzBdICsgJ3wnICsgaGxpdGVbMV07XG4gICAgICAgICAgfVxuICAgICAgICB9XG4gICAgICB9KTtcblxuICAgICAgc2V0QXR0cmlidXRlcyh7IHNlbGVjdGVkZmVhdHVyZWQ6IHN0ciB9KTtcbiAgICB9XG5cbiAgICAvL2NvbnNvbGUubG9nKGhpZ2hsaWdodGVkKTtcbiAgICAvL2NvbnNvbGUubG9nKHR5cGVvZiBhdHRyaWJ1dGVzLnNlbGVjdGVkZmVhdHVyZWQpO1xuICAgIGlmICh0eXBlb2YgYXR0cmlidXRlcy5zZWxlY3RlZGZlYXR1cmVkICE9ICd1bmRlZmluZWQnKSB7XG4gICAgICBmZWF0cyA9IFtdO1xuICAgICAgaGlnaGxpZ2h0ZWQubWFwKGZ1bmN0aW9uIChmZWF0LCBpbmRleCkge1xuICAgICAgICB2YXIgb2JqID0gdm9pZCAwO1xuICAgICAgICBpZiAoZmVhdFsxXSA9PSBcImN1clwiKSB7XG4gICAgICAgICAgb2JqID0gYXR0cmlidXRlcy5jdXJyaWN1bHVtLmZpbmQoZnVuY3Rpb24gKG9iaikge1xuICAgICAgICAgICAgcmV0dXJuIG9iai5pZCA9PSBwYXJzZUludChmZWF0WzBdKTtcbiAgICAgICAgICB9KTtcbiAgICAgICAgICB2YXIgaWR4ID0gYXR0cmlidXRlcy5jdXJyaWN1bHVtLmluZGV4T2YocGFyc2VJbnQoZmVhdFswXSkpO1xuICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgIG9iaiA9IGF0dHJpYnV0ZXMucmVzb3VyY2VzLmZpbmQoZnVuY3Rpb24gKG9iaikge1xuICAgICAgICAgICAgcmV0dXJuIG9iai5pZCA9PSBwYXJzZUludChmZWF0WzBdKTtcbiAgICAgICAgICB9KTtcbiAgICAgICAgICB2YXIgX2lkeDMgPSBhdHRyaWJ1dGVzLnJlc291cmNlcy5pbmRleE9mKHBhcnNlSW50KGZlYXRbMF0pKTtcbiAgICAgICAgfVxuXG4gICAgICAgIGlmICh0eXBlb2Ygb2JqICE9ICd1bmRlZmluZWQnKSB7XG4gICAgICAgICAgZmVhdHMucHVzaChPYmplY3QudmFsdWVzKG9iaikpO1xuICAgICAgICB9XG4gICAgICB9KTtcbiAgICB9IGVsc2Uge1xuICAgICAgZmVhdHMgPSBbXTtcbiAgICB9XG5cbiAgICBmdW5jdGlvbiBvbkluc3BlY3RvckxvYWQoKSB7XG4gICAgICB2YXIgZmVhdGV4aXN0ID0gc2V0SW50ZXJ2YWwoZnVuY3Rpb24gKCkge1xuICAgICAgICBpZiAoalF1ZXJ5KCcubHBfaW5zcGVjdG9yX2ZlYXRfaGxpdGVfbGlzdCcpLmxlbmd0aCkge1xuICAgICAgICAgIGNsZWFySW50ZXJ2YWwoZmVhdGV4aXN0KTtcbiAgICAgICAgICBzZXRUaW1lb3V0KGZ1bmN0aW9uICgpIHtcbiAgICAgICAgICAgIHNvcnQoKTtcbiAgICAgICAgICB9LCA1MDApO1xuICAgICAgICB9XG4gICAgICB9LCAxMDApOyAvLyBjaGVjayBldmVyeSAxMDBtc1xuICAgIH1cblxuICAgIGZ1bmN0aW9uIG9uTW9kYWxRdWlja0J1dHRvbihlbGVtLCBpbmRleCkge1xuICAgICAgdmFyIHR5cGUgPSBlbGVtLnRhcmdldC5nZXRBdHRyaWJ1dGUoJ3R5cCcpO1xuICAgICAgaWYgKHR5cGUgPT0gJ3JlcycpIHtcbiAgICAgICAgalF1ZXJ5KCcubHBfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfcmVzb3VyY2Vfd3JhcHBlcicpLmhpZGUoMzAwLCBmdW5jdGlvbiAoKSB7XG4gICAgICAgICAgalF1ZXJ5KCcubHBfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfY3VycmljdWx1bV93cmFwcGVyJykuc2hvdygzMDApO1xuICAgICAgICB9KTtcbiAgICAgIH0gZWxzZSB7XG4gICAgICAgIGpRdWVyeSgnLmxwX2luc3BlY3Rvcl9mZWF0X21vZGFsX2N1cnJpY3VsdW1fd3JhcHBlcicpLmhpZGUoMzAwLCBmdW5jdGlvbiAoKSB7XG4gICAgICAgICAgalF1ZXJ5KCcubHBfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfcmVzb3VyY2Vfd3JhcHBlcicpLnNob3coMzAwKTtcbiAgICAgICAgfSk7XG4gICAgICB9XG4gICAgfVxuXG4gICAgLypcbiAgICBtaW5zbGlkZXNcbiAgICBtYXhzbGlkZXNcbiAgICBtb3Zlc2xpZGVzXG4gICAgc2xpZGV3aWR0aFxuICAgIHNsaWRlbWFyZ2luXG4gICAgKi9cblxuICAgIGZ1bmN0aW9uIG9uU2V0dGluZ0NoYW5nZShlbGVtLCBpbmRleCkge1xuICAgICAgdmFyIHR5cGUgPSBlbGVtLnRhcmdldC5nZXRBdHRyaWJ1dGUoJ3R5cCcpO1xuICAgICAgdmFyIHZhbCA9IGVsZW0udGFyZ2V0LnZhbHVlO1xuICAgICAgc3dpdGNoICh0eXBlKSB7XG4gICAgICAgIGNhc2UgJ21pbnNsaWRlcyc6XG4gICAgICAgICAgc2V0QXR0cmlidXRlcyh7IG1pbnNsaWRlczogcGFyc2VJbnQodmFsKSB9KTtcbiAgICAgICAgICBicmVhaztcbiAgICAgICAgY2FzZSAnbWF4c2xpZGVzJzpcbiAgICAgICAgICBzZXRBdHRyaWJ1dGVzKHsgbWF4c2xpZGVzOiBwYXJzZUludCh2YWwpIH0pO1xuICAgICAgICAgIGJyZWFrO1xuICAgICAgICBjYXNlICdtb3Zlc2xpZGVzJzpcbiAgICAgICAgICBzZXRBdHRyaWJ1dGVzKHsgbW92ZXNsaWRlczogcGFyc2VJbnQodmFsKSB9KTtcbiAgICAgICAgICBicmVhaztcbiAgICAgICAgY2FzZSAnc2xpZGV3aWR0aCc6XG4gICAgICAgICAgc2V0QXR0cmlidXRlcyh7IHNsaWRld2lkdGg6IHBhcnNlSW50KHZhbCkgfSk7XG4gICAgICAgICAgYnJlYWs7XG4gICAgICAgIGNhc2UgJ3NsaWRlbWFyZ2luJzpcbiAgICAgICAgICBzZXRBdHRyaWJ1dGVzKHsgc2xpZGVtYXJnaW46IHBhcnNlSW50KHZhbCkgfSk7XG4gICAgICAgICAgYnJlYWs7XG4gICAgICAgIGNhc2UgJ3NsaWRlYWxpZ24nOlxuICAgICAgICAgIHNldEF0dHJpYnV0ZXMoeyBzbGlkZWFsaWduOiB2YWwgfSk7XG4gICAgICAgICAgYnJlYWs7XG4gICAgICAgIGNhc2UgJ3NsaWRlZGVzY2xlbmd0aCc6XG4gICAgICAgICAgc2V0QXR0cmlidXRlcyh7IHNsaWRlZGVzY2xlbmd0aDogcGFyc2VJbnQodmFsKSB9KTtcbiAgICAgICAgICBicmVhaztcbiAgICAgICAgY2FzZSAnc2xpZGVpbWFnZWhlaWdodCc6XG4gICAgICAgICAgc2V0QXR0cmlidXRlcyh7IHNsaWRlaW1hZ2VoZWlnaHQ6IHBhcnNlSW50KHZhbCkgfSk7XG4gICAgICAgICAgYnJlYWs7XG4gICAgICB9XG5cbiAgICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKFwibHBJbnNwZWN0b3JGZWF0U2xpZGVyU2V0dGluZy1cIiArIGF0dHJpYnV0ZXMuYmxvY2tpZCArIFwiLW1pbnNsaWRlc1wiLCBhdHRyaWJ1dGVzLm1pbnNsaWRlcyk7XG4gICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShcImxwSW5zcGVjdG9yRmVhdFNsaWRlclNldHRpbmctXCIgKyBhdHRyaWJ1dGVzLmJsb2NraWQgKyBcIi1tYXhzbGlkZXNcIiwgYXR0cmlidXRlcy5tYXhzbGlkZXMpO1xuICAgICAgbG9jYWxTdG9yYWdlLnNldEl0ZW0oXCJscEluc3BlY3RvckZlYXRTbGlkZXJTZXR0aW5nLVwiICsgYXR0cmlidXRlcy5ibG9ja2lkICsgXCItbW92ZXNsaWRlc1wiLCBhdHRyaWJ1dGVzLm1vdmVzbGlkZXMpO1xuICAgICAgbG9jYWxTdG9yYWdlLnNldEl0ZW0oXCJscEluc3BlY3RvckZlYXRTbGlkZXJTZXR0aW5nLVwiICsgYXR0cmlidXRlcy5ibG9ja2lkICsgXCItc2xpZGV3aWR0aFwiLCBhdHRyaWJ1dGVzLnNsaWRld2lkdGgpO1xuICAgICAgbG9jYWxTdG9yYWdlLnNldEl0ZW0oXCJscEluc3BlY3RvckZlYXRTbGlkZXJTZXR0aW5nLVwiICsgYXR0cmlidXRlcy5ibG9ja2lkICsgXCItc2xpZGVtYXJnaW5cIiwgYXR0cmlidXRlcy5zbGlkZW1hcmdpbik7XG4gICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShcImxwSW5zcGVjdG9yRmVhdFNsaWRlclNldHRpbmctXCIgKyBhdHRyaWJ1dGVzLmJsb2NraWQgKyBcIi1zbGlkZWFsaWduXCIsIGF0dHJpYnV0ZXMuc2xpZGVhbGlnbik7XG4gICAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShcImxwSW5zcGVjdG9yRmVhdFNsaWRlclNldHRpbmctXCIgKyBhdHRyaWJ1dGVzLmJsb2NraWQgKyBcIi1zbGlkZWRlc2NsZW5ndGhcIiwgYXR0cmlidXRlcy5zbGlkZWRlc2NsZW5ndGgpO1xuICAgICAgbG9jYWxTdG9yYWdlLnNldEl0ZW0oXCJscEluc3BlY3RvckZlYXRTbGlkZXJTZXR0aW5nLVwiICsgYXR0cmlidXRlcy5ibG9ja2lkICsgXCItc2xpZGVpbWFnZWhlaWdodFwiLCBhdHRyaWJ1dGVzLnNsaWRlaW1hZ2VoZWlnaHQpO1xuXG4gICAgICBjdXJyaWN1bHVtZmVhdHNsaWRlcl9yZXNldChhdHRyaWJ1dGVzLmJsb2NraWQsIDc1MCk7XG4gICAgfVxuXG4gICAgbG9jYWxTdG9yYWdlLnNldEl0ZW0oXCJscEluc3BlY3RvckZlYXRTbGlkZXJTZXR0aW5nLVwiICsgYXR0cmlidXRlcy5ibG9ja2lkICsgXCItbWluc2xpZGVzXCIsIGF0dHJpYnV0ZXMubWluc2xpZGVzKTtcbiAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShcImxwSW5zcGVjdG9yRmVhdFNsaWRlclNldHRpbmctXCIgKyBhdHRyaWJ1dGVzLmJsb2NraWQgKyBcIi1tYXhzbGlkZXNcIiwgYXR0cmlidXRlcy5tYXhzbGlkZXMpO1xuICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKFwibHBJbnNwZWN0b3JGZWF0U2xpZGVyU2V0dGluZy1cIiArIGF0dHJpYnV0ZXMuYmxvY2tpZCArIFwiLW1vdmVzbGlkZXNcIiwgYXR0cmlidXRlcy5tb3Zlc2xpZGVzKTtcbiAgICBsb2NhbFN0b3JhZ2Uuc2V0SXRlbShcImxwSW5zcGVjdG9yRmVhdFNsaWRlclNldHRpbmctXCIgKyBhdHRyaWJ1dGVzLmJsb2NraWQgKyBcIi1zbGlkZXdpZHRoXCIsIGF0dHJpYnV0ZXMuc2xpZGV3aWR0aCk7XG4gICAgbG9jYWxTdG9yYWdlLnNldEl0ZW0oXCJscEluc3BlY3RvckZlYXRTbGlkZXJTZXR0aW5nLVwiICsgYXR0cmlidXRlcy5ibG9ja2lkICsgXCItc2xpZGVtYXJnaW5cIiwgYXR0cmlidXRlcy5zbGlkZW1hcmdpbik7XG4gICAgbG9jYWxTdG9yYWdlLnNldEl0ZW0oXCJscEluc3BlY3RvckZlYXRTbGlkZXJTZXR0aW5nLVwiICsgYXR0cmlidXRlcy5ibG9ja2lkICsgXCItc2xpZGVhbGlnblwiLCBhdHRyaWJ1dGVzLnNsaWRlYWxpZ24pO1xuICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKFwibHBJbnNwZWN0b3JGZWF0U2xpZGVyU2V0dGluZy1cIiArIGF0dHJpYnV0ZXMuYmxvY2tpZCArIFwiLXNsaWRlZGVzY2xlbmd0aFwiLCBhdHRyaWJ1dGVzLnNsaWRlZGVzY2xlbmd0aCk7XG4gICAgbG9jYWxTdG9yYWdlLnNldEl0ZW0oXCJscEluc3BlY3RvckZlYXRTbGlkZXJTZXR0aW5nLVwiICsgYXR0cmlidXRlcy5ibG9ja2lkICsgXCItc2xpZGVpbWFnZWhlaWdodFwiLCBhdHRyaWJ1dGVzLnNsaWRlaW1hZ2VoZWlnaHQpO1xuXG4gICAgZnVuY3Rpb24gb25UaXRsZUNoYW5nZShlbGVtLCBpbmRleCkge1xuICAgICAgdmFyIGJsa3RpdGxlID0gZWxlbS50YXJnZXQudmFsdWU7XG4gICAgICBibGt0aXRsZSA9IGJsa3RpdGxlID09ICcnID8gJycgOiBibGt0aXRsZTtcbiAgICAgIHZhciBibGtpZCA9IGVsZW0udGFyZ2V0LmdldEF0dHJpYnV0ZSgnYmxrJyk7XG4gICAgICBjZ2JHbG9iYWxbJ2N1cnJpY3VsdW1fZmVhdF90aXRsZV8nICsgYmxraWRdID0gYmxrdGl0bGU7XG4gICAgICBzZXRBdHRyaWJ1dGVzKHsgYmxvY2t0aXRsZTogYmxrdGl0bGUgfSk7XG4gICAgfVxuXG4gICAgZnVuY3Rpb24gb25TZWFyY2goZWxlbSwgaW5kZXgpIHtcbiAgICAgIHZhciBzZWFyY2hzdHJpbmcgPSBlbGVtLnRhcmdldC52YWx1ZS50b0xvd2VyQ2FzZSgpO1xuICAgICAgc2V0QXR0cmlidXRlcyh7IHJlc291cmNlc3ViamVjdGZpbHRlcjogJycgfSk7XG4gICAgICBzZXRBdHRyaWJ1dGVzKHsgY3VycmljdWx1bXN1YmplY3RmaWx0ZXI6ICcnIH0pO1xuICAgICAgc2V0QXR0cmlidXRlcyh7IHNlYXJjaHN0cmluZzogc2VhcmNoc3RyaW5nIH0pO1xuICAgIH1cblxuICAgIGZ1bmN0aW9uIG9uUmVzb3VyY2VGaWx0ZXJTdWJqZWN0KGVsZW0sIGluZGV4KSB7XG4gICAgICB2YXIgdmFsID0gZWxlbS50YXJnZXQudmFsdWU7XG4gICAgICBzZXRBdHRyaWJ1dGVzKHsgc2VhcmNoc3RyaW5nOiAnJyB9KTtcbiAgICAgIGlmICh2YWwgIT09ICcnKSB7XG4gICAgICAgIC8vY29uc29sZS5sb2coJ1NFQVJDSFNUUklORzonK3ZhbCk7XG4gICAgICAgIHNldEF0dHJpYnV0ZXMoeyByZXNvdXJjZXN1YmplY3RmaWx0ZXI6IHZhbCB9KTtcbiAgICAgIH0gZWxzZSB7XG4gICAgICAgIC8vY29uc29sZS5sb2coJ1NFQVJDSFNUUklORyBCbG5rOicrdmFsKTtcbiAgICAgICAgc2V0QXR0cmlidXRlcyh7IHJlc291cmNlc3ViamVjdGZpbHRlcjogJycgfSk7XG4gICAgICB9XG4gICAgfVxuXG4gICAgZnVuY3Rpb24gb25DdXJyaWN1bHVtRmlsdGVyU3ViamVjdChlbGVtLCBpbmRleCkge1xuICAgICAgdmFyIHZhbCA9IGVsZW0udGFyZ2V0LnZhbHVlO1xuICAgICAgc2V0QXR0cmlidXRlcyh7IHNlYXJjaHN0cmluZzogJycgfSk7XG4gICAgICBpZiAodmFsICE9PSAnJykge1xuICAgICAgICAvL2NvbnNvbGUubG9nKCdTRUFSQ0hTVFJJTkc6Jyt2YWwpO1xuICAgICAgICBzZXRBdHRyaWJ1dGVzKHsgY3VycmljdWx1bXN1YmplY3RmaWx0ZXI6IHZhbCB9KTtcbiAgICAgIH0gZWxzZSB7XG4gICAgICAgIC8vY29uc29sZS5sb2coJ1NFQVJDSFNUUklORyBCbG5rOicrdmFsKTtcbiAgICAgICAgc2V0QXR0cmlidXRlcyh7IGN1cnJpY3VsdW1zdWJqZWN0ZmlsdGVyOiAnJyB9KTtcbiAgICAgIH1cbiAgICB9XG5cbiAgICBmdW5jdGlvbiBvbkZpbHRlclNlYXJjaFRvZ2dsZShlbGVtLCBpbmRleCkge1xuICAgICAgLy9jb25zb2xlLmxvZygnRklMVEVSIFRPR0dMRTogJythdHRyaWJ1dGVzLmZpbHRlcnR5cGUpXG4gICAgICBzZXRBdHRyaWJ1dGVzKHsgcmVzb3VyY2VzdWJqZWN0ZmlsdGVyOiAnJyB9KTtcbiAgICAgIHNldEF0dHJpYnV0ZXMoeyBjdXJyaWN1bHVtc3ViamVjdGZpbHRlcjogJycgfSk7XG4gICAgICBzZXRBdHRyaWJ1dGVzKHsgc2VhcmNoc3RyaW5nOiAnJyB9KTtcbiAgICAgIGlmIChhdHRyaWJ1dGVzLmZpbHRlcnR5cGUgPT0gJ3NlYXJjaCcpIHtcbiAgICAgICAgc2V0QXR0cmlidXRlcyh7IGZpbHRlcnR5cGU6ICdzdWJqZWN0JyB9KTtcbiAgICAgIH0gZWxzZSB7XG4gICAgICAgIHNldEF0dHJpYnV0ZXMoeyBmaWx0ZXJ0eXBlOiAnc2VhcmNoJyB9KTtcbiAgICAgIH1cbiAgICB9XG5cbiAgICBmdW5jdGlvbiBvbkJsb2NrV2lkdGhDaGFuZ2UoZWxlbSwgaW5kZXgpIHtcbiAgICAgIHZhciB2YWwgPSBlbGVtLnRhcmdldC52YWx1ZTtcbiAgICAgIHNldEF0dHJpYnV0ZXMoeyBibG9ja3dpZHRoOiB2YWwgfSk7XG4gICAgICBqUXVlcnkoXCIjYmxvY2stXCIgKyBhdHRyaWJ1dGVzLmJsb2NraWQpLmNzcyh7IFwid2lkdGhcIjogdmFsIH0pO1xuICAgICAgbG9jYWxTdG9yYWdlLnNldEl0ZW0oXCJscEluc3BlY3RvckZlYXRCbG9ja3dpZHRoLVwiICsgYXR0cmlidXRlcy5ibG9ja2lkLCBhdHRyaWJ1dGVzLmJsb2Nrd2lkdGgpO1xuICAgIH1cblxuICAgIGxvY2FsU3RvcmFnZS5zZXRJdGVtKFwibHBJbnNwZWN0b3JGZWF0QmxvY2t3aWR0aC1cIiArIGF0dHJpYnV0ZXMuYmxvY2tpZCwgYXR0cmlidXRlcy5ibG9ja3dpZHRoKTtcblxuICAgIC8vY29uc29sZS5sb2coYXR0cmlidXRlcy5ibG9ja2lkKTtcbiAgICAvL2NvbnNvbGUubG9nKGhpZ2hsaWdodGVkKTtcbiAgICAvL2NvbnNvbGUubG9nKGF0dHJpYnV0ZXMuc2VsZWN0ZWRmZWF0dXJlZCk7XG4gICAgLy9jb25zb2xlLmxvZyhhdHRyaWJ1dGVzLmJsb2NraWQpO1xuICAgIC8vY29uc29sZS5sb2coZmVhdHMpO1xuXG4gICAgLy9jb25zb2xlLmxvZyhyZXNfc3Vial9hcnIpO1xuICAgIC8vY29uc29sZS5sb2coY3VyX3N1YmpfYXJyKTtcblxuICAgIC8vY29uc29sZS5sb2coYXR0cmlidXRlcy5taW5zbGlkZXMpO1xuICAgIC8vY29uc29sZS5sb2coYXR0cmlidXRlcy5tYXhzbGlkZXMpO1xuICAgIC8vY29uc29sZS5sb2coYXR0cmlidXRlcy5tb3Zlc2xpZGVzKTtcbiAgICAvL2NvbnNvbGUubG9nKGF0dHJpYnV0ZXMuc2xpZGV3aWR0aCk7XG4gICAgLy9jb25zb2xlLmxvZyhhdHRyaWJ1dGVzLnNsaWRlbWFyZ2luKTtcblxuXG4gICAgLy9jb25zdCBoaWdobGlnaHREcm9wZG93bk9wdGlvbnMgPSBbJ3Jlc291cmNlcycsJ2N1cnJpY3VsdW0nXTtcbiAgICAvL2NvbnN0IGRyb3BDbGFzcyA9IChhdHRyaWJ1dGVzLmhpZ2hsaWdodCA9PSAncmVzb3VyY2VzJyk/ICdidXR0b24gbHBfaW5zcGVjdG9yX2ZlYXRfYWRkUmVzb3VyY2VzJzogJ2J1dHRvbiBscF9pbnNwZWN0b3JfZmVhdF9hZGRDdXJyaWN1bHVtJztcbiAgICAvL2NvbnN0IGRyb3BUZXh0ID0gKGF0dHJpYnV0ZXMuaGlnaGxpZ2h0ID09ICdyZXNvdXJjZXMnKT8gJ1Jlc291cmNlcyc6ICdDdXJyaWN1bHVtJztcblxuICAgIHZhciBsb29wZXIgPSBbMV07XG5cbiAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgJ2RpdicsXG4gICAgICBudWxsLFxuICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICBJbnNwZWN0b3JDb250cm9scyxcbiAgICAgICAgbnVsbCxcbiAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgIFBhbmVsQm9keSxcbiAgICAgICAgICB7IHRpdGxlOiBfXygnQ3VycmljdWx1bSBGZWF0dXJlZCBCbG9jayBzZXR0aW5ncycpLCBpbml0aWFsT3BlbjogdHJ1ZSB9LFxuICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgeyAnY2xhc3MnOiAnbHBfaW5zcGVjdG9yX3dyYXBwZXInIH0sXG4gICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICdsYWJlbCcsXG4gICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2NvbXBvbmVudHMtYmFzZS1jb250cm9sX19sYWJlbCcsICdmb3InOiAnbHBfaW5zcGVjdG9yX3N1YmplY3QnIH0sXG4gICAgICAgICAgICAgICdCbG9jayBUaXRsZTonXG4gICAgICAgICAgICApLFxuICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbnB1dCcsIHsgdHlwZTogJ3RleHQnLCBvbkNoYW5nZTogb25UaXRsZUNoYW5nZSwgJ2NsYXNzJzogJ2xzX2luc3BlY3Rvcl9mZWF0X3RpdGxlJywgdmFsdWU6IGF0dHJpYnV0ZXMuYmxvY2t0aXRsZSwgYmxrOiBhdHRyaWJ1dGVzLmJsb2NraWQgfSlcbiAgICAgICAgICApLFxuICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgeyAnY2xhc3MnOiAnbHBfaW5zcGVjdG9yX3dyYXBwZXInIH0sXG4gICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICdsYWJlbCcsXG4gICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2NvbXBvbmVudHMtYmFzZS1jb250cm9sX19sYWJlbCcsICdmb3InOiAnbHBfaW5zcGVjdG9yX3N1YmplY3QnIH0sXG4gICAgICAgICAgICAgICdCbG9jayBXaWR0aCdcbiAgICAgICAgICAgICksXG4gICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2lucHV0JywgeyB0eXBlOiAnbnVtYmVyJywgb25DaGFuZ2U6IG9uQmxvY2tXaWR0aENoYW5nZSwgJ2NsYXNzJzogJ2xzX2luc3BlY3Rvcl9mZWF0X2Jsb2Nrd2lkdGgnLCB2YWx1ZTogYXR0cmlidXRlcy5ibG9ja3dpZHRoLCBibGs6IGF0dHJpYnV0ZXMuYmxvY2tpZCB9KSxcbiAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgJ2xhYmVsJyxcbiAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnY29tcG9uZW50cy1iYXNlLWNvbnRyb2xfX2xhYmVsJywgJ2Zvcic6ICdscF9pbnNwZWN0b3Jfc3ViamVjdCcgfSxcbiAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICdlbScsXG4gICAgICAgICAgICAgICAgbnVsbCxcbiAgICAgICAgICAgICAgICAnTm90ZTogQmxvY2sgd2lkdGggc2V0dGluZyBpcyBvbmx5IHVzZWQgdG8gc2ltdWxhdGUgdGhlIGZyb250ZW5kIHdpZHRoIGF0IGJhY2tlbmQgYW5kIHdpbGwgbm90IGFmZmVjdCB0aGUgZnJvbnRlbmQuJ1xuICAgICAgICAgICAgICApXG4gICAgICAgICAgICApXG4gICAgICAgICAgKSxcbiAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAnZGl2JyxcbiAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X21vZGFsX3Jlc291cmNlX3dyYXBwZXInIH0sXG4gICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgICB7ICdjbGFzcyc6ICdscF9pbnNwZWN0b3JfZmVhdF9tb2RhbF9jb250ZW50X21haW4nIH0sXG4gICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAnZGl2JyxcbiAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICdscF9pbnNwZWN0b3JfZmVhdF9tb2RhbF93cmFwcGVyX2Nsb3NlJyB9LFxuICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnc3BhbicsIHsgJ2NsYXNzJzogJ2Rhc2hpY29ucyBkYXNoaWNvbnMtbm8nIH0pXG4gICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAnZGl2JyxcbiAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICdscF9pbnNwZWN0b3JfZmVhdF9tb2RhbF9jZW50ZXInIH0sXG4gICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgJ2RpdicsXG4gICAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICdscF9pbnNwZWN0b3JfZmVhdF9tb2RhbF90YWJsZScgfSxcbiAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgJ2RpdicsXG4gICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X21vZGFsX2NlbGwnIH0sXG4gICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAnZGl2JyxcbiAgICAgICAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICdscF9pbnNwZWN0b3JfZmVhdF9tb2RhbCcgfSxcbiAgICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAnZGl2JyxcbiAgICAgICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X3NlYXJjaF93cmFwcGVyJyB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAnZGl2JyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnbHBfaW5zcGVjdG9yX2ZlYXRfc2VhcmNoX2hlYWRlcicgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgJ1Jlc291cmNlcydcbiAgICAgICAgICAgICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgICAgICAgICAgICBsb29wZXIubWFwKGZ1bmN0aW9uICh0bXAsIGluZGV4KSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChhdHRyaWJ1dGVzLmZpbHRlcnR5cGUgPT0gJ3N1YmplY3QnKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW5wdXQnLCB7IHR5cGU6ICdidXR0b24nLCBvbkNsaWNrOiBvbkZpbHRlclNlYXJjaFRvZ2dsZSwgJ2NsYXNzJzogJ2J1dHRvbicsIHZhbHVlOiAnRmlsdGVyIGJ5IHN1YmplY3QnIH0pO1xuICAgICAgICAgICAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2lucHV0JywgeyB0eXBlOiAnYnV0dG9uJywgb25DbGljazogb25GaWx0ZXJTZWFyY2hUb2dnbGUsICdjbGFzcyc6ICdidXR0b24nLCB2YWx1ZTogJ0ZpbHRlciBieSBzZWFyY2gnIH0pO1xuICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICB9KSxcbiAgICAgICAgICAgICAgICAgICAgICAgIGxvb3Blci5tYXAoZnVuY3Rpb24gKHRtcCwgaW5kZXgpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKGF0dHJpYnV0ZXMuZmlsdGVydHlwZSA9PSAnc3ViamVjdCcpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbnB1dCcsIHsgdHlwZTogJ3RleHQnLCBvbkNoYW5nZTogb25TZWFyY2gsIGZldDogJ3JlcycsIGlkOiAnbHBfaW5zcGVjdG9yX2ZlYXRfc2VhcmNoJywgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X3NlYXJjaCcsIHZhbHVlOiBhdHRyaWJ1dGVzLnNlYXJjaHN0cmluZyB9KTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ3NlbGVjdCcsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICB7IGlkOiAnbHBfaW5zcGVjdG9yX2ZlYXRfc3ViamVjdF9zZWxlY3QnLCBvbkNoYW5nZTogb25SZXNvdXJjZUZpbHRlclN1YmplY3QsIHZhbHVlOiBhdHRyaWJ1dGVzLnJlc291cmNlc3ViamVjdGZpbHRlciB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAnb3B0aW9uJyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgeyB2YWx1ZTogJycgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ0FsbCdcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXNfc3Vial9hcnIubWFwKGZ1bmN0aW9uIChzdWJqZWN0LCBpbmRleCkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAoc3ViamVjdC50ZXJtX2lkID09IGF0dHJpYnV0ZXMucmVzb3VyY2VzdWJqZWN0ZmlsdGVyKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHN1YmplY3QucGFyZW50ID09IDApIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICdvcHRpb24nLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB7IHNlbGVjdGVkOiAnc2VsZWN0ZWQnLCB2YWx1ZTogc3ViamVjdC50ZXJtX2lkLCAnY2xhc3MnOiAnbHBfaW5zcGVjdG9yX2ZlYXRfc3ViamVjdF9zZWxlY3RfYm9sZCcgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3ViamVjdC5uYW1lICsgJyAoJyArIHN1YmplY3QuY250ICsgJyknXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAnb3B0aW9uJyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgeyBzZWxlY3RlZDogJ3NlbGVjdGVkJywgdmFsdWU6IHN1YmplY3QudGVybV9pZCB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAn4pScICcgKyBzdWJqZWN0Lm5hbWUgKyAnICgnICsgc3ViamVjdC5jbnQgKyAnKSdcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICk7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChzdWJqZWN0LnBhcmVudCA9PSAwKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAnb3B0aW9uJyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgeyB2YWx1ZTogc3ViamVjdC50ZXJtX2lkLCAnY2xhc3MnOiAnbHBfaW5zcGVjdG9yX2ZlYXRfc3ViamVjdF9zZWxlY3RfYm9sZCcgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3ViamVjdC5uYW1lICsgJyAoJyArIHN1YmplY3QuY250ICsgJyknXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAnb3B0aW9uJyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgeyB2YWx1ZTogc3ViamVjdC50ZXJtX2lkIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICfilJwgJyArIHN1YmplY3QubmFtZSArICcgKCcgKyBzdWJqZWN0LmNudCArICcpJ1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0pXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgfSlcbiAgICAgICAgICAgICAgICAgICAgICApLFxuICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnbHBfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfY29udGVudCcgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAgICAgJ2RpdicsXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X21vZGFsX2NvbnRlbnRfc3ViY29udGFpbmVyJyB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgICByZXNfbGlzdF9hcnIubWFwKGZ1bmN0aW9uIChyZXNvdXJjZSwgaW5kZXgpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB2YXIgdGV4ID0gaGlnaGxpZ2h0ZWQuZmluZEluZGV4KGZpbmRNYXRjaChyZXNvdXJjZS5pZCkpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZhciBzdHIgPSBhdHRyaWJ1dGVzLnNlYXJjaHN0cmluZztcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB2YXIgZmx0ID0gYXR0cmlidXRlcy5yZXNvdXJjZXN1YmplY3RmaWx0ZXI7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgdmFyIHR0bCA9IHJlc291cmNlLnRpdGxlLnRvTG93ZXJDYXNlKCk7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgdmFyIHRheCA9IHJlc291cmNlLnRheC50b1N0cmluZygpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZhciB0YXhhcnJheSA9IHRheC5zcGxpdCgnfCcpO1xuXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKGF0dHJpYnV0ZXMuc2VhcmNoc3RyaW5nID09ICcnIHx8ICFhdHRyaWJ1dGVzLnNlYXJjaHN0cmluZykge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLy9lbXB0eSBzZWFyY2ggc3RyaW5nXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAoZmx0ICE9ICcnICYmIGZsdCAhPT0gdW5kZWZpbmVkKSB7XG5cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHRheGFycmF5LmluY2x1ZGVzKGZsdCkpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvLyBTdWJqZWN0IE1hdGNoZWRcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvL2lmKCB0YXguaW5kZXhPZihmbHQpICE9PSAtMSApeyAvLyBTdWJqZWN0IE1hdGNoZWRcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAodGV4ICE9IC0xKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvLyBDaGVja2VkXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAnbGFiZWwnLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICdjb21wb25lbnRzLWJhc2UtY29udHJvbF9fbGFiZWwgbHNfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfbGFiZWwnLCBzcmNoOiByZXNvdXJjZS50aXRsZS50b0xvd2VyQ2FzZSgpIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW1nJywgeyBzcmM6IGNnYkdsb2JhbFsncGx1Z2luRGlyVXJsJ10gKyBcImN1cnJpY3VsdW0tZmVhdHVyZWQtYmxvY2svaW1hZ2VzL3ByZWxvYWRlci5naWZcIiB9KSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbnB1dCcsIHsgY2hlY2tlZDogJ2NoZWNrZWQnLCBvbkNsaWNrOiB1cGRhdGVIaWdobGlnaHQsIGZldDogJ3JlcycsIGlkOiAnaW5zcGVjdG9yLWNoZWNrYm94LWNvbnRyb2wtJyArIGluZGV4LCBpZHg6IGluZGV4LCAnY2xhc3MnOiAnbHNfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfY2hlY2tib3gnLCB0eXBlOiAnY2hlY2tib3gnLCBkYXRhOiByZXNvdXJjZS5pZCwgdGF4OiB0YXggfSksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuZXNjYXBlKHJlc291cmNlLnRpdGxlKVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLy9VbmNoZWNrZWRcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICdsYWJlbCcsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2NvbXBvbmVudHMtYmFzZS1jb250cm9sX19sYWJlbCBsc19pbnNwZWN0b3JfZmVhdF9tb2RhbF9sYWJlbCcsIHNyY2g6IHJlc291cmNlLnRpdGxlLnRvTG93ZXJDYXNlKCkgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbWcnLCB7IHNyYzogY2diR2xvYmFsWydwbHVnaW5EaXJVcmwnXSArIFwiY3VycmljdWx1bS1mZWF0dXJlZC1ibG9jay9pbWFnZXMvcHJlbG9hZGVyLmdpZlwiIH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2lucHV0JywgeyBvbkNsaWNrOiB1cGRhdGVIaWdobGlnaHQsIGZldDogJ3JlcycsIGlkOiAnaW5zcGVjdG9yLWNoZWNrYm94LWNvbnRyb2wtJyArIGluZGV4LCBpZHg6IGluZGV4LCAnY2xhc3MnOiAnbHNfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfY2hlY2tib3gnLCB0eXBlOiAnY2hlY2tib3gnLCBkYXRhOiByZXNvdXJjZS5pZCwgdGF4OiB0YXggfSksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuZXNjYXBlKHJlc291cmNlLnRpdGxlKVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7XG5cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHRleCAhPSAtMSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIENoZWNrZWRcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ2xhYmVsJyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2NvbXBvbmVudHMtYmFzZS1jb250cm9sX19sYWJlbCBsc19pbnNwZWN0b3JfZmVhdF9tb2RhbF9sYWJlbCcsIHNyY2g6IHJlc291cmNlLnRpdGxlLnRvTG93ZXJDYXNlKCkgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW1nJywgeyBzcmM6IGNnYkdsb2JhbFsncGx1Z2luRGlyVXJsJ10gKyBcImN1cnJpY3VsdW0tZmVhdHVyZWQtYmxvY2svaW1hZ2VzL3ByZWxvYWRlci5naWZcIiB9KSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW5wdXQnLCB7IGNoZWNrZWQ6ICdjaGVja2VkJywgb25DbGljazogdXBkYXRlSGlnaGxpZ2h0LCBmZXQ6ICdyZXMnLCBpZDogJ2luc3BlY3Rvci1jaGVja2JveC1jb250cm9sLScgKyBpbmRleCwgaWR4OiBpbmRleCwgJ2NsYXNzJzogJ2xzX2luc3BlY3Rvcl9mZWF0X21vZGFsX2NoZWNrYm94JywgdHlwZTogJ2NoZWNrYm94JywgZGF0YTogcmVzb3VyY2UuaWQsIHRheDogdGF4IH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5lc2NhcGUocmVzb3VyY2UudGl0bGUpXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvL1VuY2hlY2tlZFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAnbGFiZWwnLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnY29tcG9uZW50cy1iYXNlLWNvbnRyb2xfX2xhYmVsIGxzX2luc3BlY3Rvcl9mZWF0X21vZGFsX2xhYmVsJywgc3JjaDogcmVzb3VyY2UudGl0bGUudG9Mb3dlckNhc2UoKSB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbWcnLCB7IHNyYzogY2diR2xvYmFsWydwbHVnaW5EaXJVcmwnXSArIFwiY3VycmljdWx1bS1mZWF0dXJlZC1ibG9jay9pbWFnZXMvcHJlbG9hZGVyLmdpZlwiIH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbnB1dCcsIHsgb25DbGljazogdXBkYXRlSGlnaGxpZ2h0LCBmZXQ6ICdyZXMnLCBpZDogJ2luc3BlY3Rvci1jaGVja2JveC1jb250cm9sLScgKyBpbmRleCwgaWR4OiBpbmRleCwgJ2NsYXNzJzogJ2xzX2luc3BlY3Rvcl9mZWF0X21vZGFsX2NoZWNrYm94JywgdHlwZTogJ2NoZWNrYm94JywgZGF0YTogcmVzb3VyY2UuaWQsIHRheDogdGF4IH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5lc2NhcGUocmVzb3VyY2UudGl0bGUpXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvL3NlYXJjaCBzdHJpbmcgaXMgcHJvdmlkZWRcblxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHRheGFycmF5LmluY2x1ZGVzKGZsdCkpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLy8gU3ViamVjdCBNYXRjaGVkXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vaWYodGF4LmluZGV4T2YoZmx0KSAhPT0gLTEpeyAvLyBzdWJqZWN0IGZpbHRlciBtYXRjaGVkXG5cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHR0bC5pbmRleE9mKHN0cikgIT09IC0xKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLy8gc2VhcmNoIHN0cmluZyBtYXRjaGVkXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHRleCAhPSAtMSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLy8gQ2hlY2tlZFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ2xhYmVsJyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnY29tcG9uZW50cy1iYXNlLWNvbnRyb2xfX2xhYmVsIGxzX2luc3BlY3Rvcl9mZWF0X21vZGFsX2xhYmVsJywgc3JjaDogcmVzb3VyY2UudGl0bGUudG9Mb3dlckNhc2UoKSB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2ltZycsIHsgc3JjOiBjZ2JHbG9iYWxbJ3BsdWdpbkRpclVybCddICsgXCJjdXJyaWN1bHVtLWZlYXR1cmVkLWJsb2NrL2ltYWdlcy9wcmVsb2FkZXIuZ2lmXCIgfSksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW5wdXQnLCB7IGNoZWNrZWQ6ICdjaGVja2VkJywgb25DbGljazogdXBkYXRlSGlnaGxpZ2h0LCBmZXQ6ICdyZXMnLCBpZDogJ2luc3BlY3Rvci1jaGVja2JveC1jb250cm9sLScgKyBpbmRleCwgaWR4OiBpbmRleCwgJ2NsYXNzJzogJ2xzX2luc3BlY3Rvcl9mZWF0X21vZGFsX2NoZWNrYm94JywgdHlwZTogJ2NoZWNrYm94JywgZGF0YTogcmVzb3VyY2UuaWQsIHRheDogdGF4IH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bmVzY2FwZShyZXNvdXJjZS50aXRsZSlcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICk7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiAoLy8gVW5jaGVja2VkXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAnbGFiZWwnLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2NvbXBvbmVudHMtYmFzZS1jb250cm9sX19sYWJlbCBsc19pbnNwZWN0b3JfZmVhdF9tb2RhbF9sYWJlbCcsIHNyY2g6IHJlc291cmNlLnRpdGxlLnRvTG93ZXJDYXNlKCkgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2ltZycsIHsgc3JjOiBjZ2JHbG9iYWxbJ3BsdWdpbkRpclVybCddICsgXCJjdXJyaWN1bHVtLWZlYXR1cmVkLWJsb2NrL2ltYWdlcy9wcmVsb2FkZXIuZ2lmXCIgfSksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbnB1dCcsIHsgb25DbGljazogdXBkYXRlSGlnaGxpZ2h0LCBmZXQ6ICdyZXMnLCBpZDogJ2luc3BlY3Rvci1jaGVja2JveC1jb250cm9sLScgKyBpbmRleCwgaWR4OiBpbmRleCwgJ2NsYXNzJzogJ2xzX2luc3BlY3Rvcl9mZWF0X21vZGFsX2NoZWNrYm94JywgdHlwZTogJ2NoZWNrYm94JywgZGF0YTogcmVzb3VyY2UuaWQsIHRheDogdGF4IH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuZXNjYXBlKHJlc291cmNlLnRpdGxlKVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLy9zdWJqZWN0IGZpbHRlciBtaXNtYXRjaFxuXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmICh0dGwuaW5kZXhPZihzdHIpICE9PSAtMSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIHNlYXJjaCBzdHJpbmcgbWF0Y2hlZFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmICh0ZXggIT0gLTEpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIENoZWNrZWRcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICdsYWJlbCcsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2NvbXBvbmVudHMtYmFzZS1jb250cm9sX19sYWJlbCBsc19pbnNwZWN0b3JfZmVhdF9tb2RhbF9sYWJlbCcsIHNyY2g6IHJlc291cmNlLnRpdGxlLnRvTG93ZXJDYXNlKCkgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbWcnLCB7IHNyYzogY2diR2xvYmFsWydwbHVnaW5EaXJVcmwnXSArIFwiY3VycmljdWx1bS1mZWF0dXJlZC1ibG9jay9pbWFnZXMvcHJlbG9hZGVyLmdpZlwiIH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2lucHV0JywgeyBjaGVja2VkOiAnY2hlY2tlZCcsIG9uQ2xpY2s6IHVwZGF0ZUhpZ2hsaWdodCwgZmV0OiAncmVzJywgaWQ6ICdpbnNwZWN0b3ItY2hlY2tib3gtY29udHJvbC0nICsgaW5kZXgsIGlkeDogaW5kZXgsICdjbGFzcyc6ICdsc19pbnNwZWN0b3JfZmVhdF9tb2RhbF9jaGVja2JveCcsIHR5cGU6ICdjaGVja2JveCcsIGRhdGE6IHJlc291cmNlLmlkLCB0YXg6IHRheCB9KSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5lc2NhcGUocmVzb3VyY2UudGl0bGUpXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gKC8vIFVuY2hlY2tlZFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ2xhYmVsJyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICdjb21wb25lbnRzLWJhc2UtY29udHJvbF9fbGFiZWwgbHNfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfbGFiZWwnLCBzcmNoOiByZXNvdXJjZS50aXRsZS50b0xvd2VyQ2FzZSgpIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbWcnLCB7IHNyYzogY2diR2xvYmFsWydwbHVnaW5EaXJVcmwnXSArIFwiY3VycmljdWx1bS1mZWF0dXJlZC1ibG9jay9pbWFnZXMvcHJlbG9hZGVyLmdpZlwiIH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW5wdXQnLCB7IG9uQ2xpY2s6IHVwZGF0ZUhpZ2hsaWdodCwgZmV0OiAncmVzJywgaWQ6ICdpbnNwZWN0b3ItY2hlY2tib3gtY29udHJvbC0nICsgaW5kZXgsIGlkeDogaW5kZXgsICdjbGFzcyc6ICdsc19pbnNwZWN0b3JfZmVhdF9tb2RhbF9jaGVja2JveCcsIHR5cGU6ICdjaGVja2JveCcsIGRhdGE6IHJlc291cmNlLmlkLCB0YXg6IHRheCB9KSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bmVzY2FwZShyZXNvdXJjZS50aXRsZSlcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICAgIH0pXG4gICAgICAgICAgICAgICAgICAgICAgICApXG4gICAgICAgICAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAnZGl2JyxcbiAgICAgICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X3NlYXJjaF9mb290ZXInIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2lucHV0JywgeyB0eXBlOiAnYnV0dG9uJywgJ2NsYXNzJzogJ2J1dHRvbiBscF9pbnNwZWN0b3JfZmVhdF9xdWlja3N3aXRjaGJ1dHRvbicsIG9uQ2xpY2s6IG9uTW9kYWxRdWlja0J1dHRvbiwgdHlwOiAncmVzJywgdmFsdWU6ICdDdXJyaWN1bHVtIGxpc3RzID4nIH0pXG4gICAgICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgICAgICApXG4gICAgICAgICAgICAgICAgICApXG4gICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICApXG4gICAgICAgICAgICApXG4gICAgICAgICAgKSxcbiAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAnZGl2JyxcbiAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X21vZGFsX2N1cnJpY3VsdW1fd3JhcHBlcicgfSxcbiAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgJ2RpdicsXG4gICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X21vZGFsX2NvbnRlbnRfbWFpbicgfSxcbiAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X21vZGFsX3dyYXBwZXJfY2xvc2UnIH0sXG4gICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJywgeyAnY2xhc3MnOiAnZGFzaGljb25zIGRhc2hpY29ucy1ubycgfSlcbiAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X21vZGFsX2NlbnRlcicgfSxcbiAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAnZGl2JyxcbiAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X21vZGFsX3RhYmxlJyB9LFxuICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAnZGl2JyxcbiAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnbHBfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfY2VsbCcgfSxcbiAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X21vZGFsJyB9LFxuICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnbHBfaW5zcGVjdG9yX2ZlYXRfc2VhcmNoX3dyYXBwZXInIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICdscF9pbnNwZWN0b3JfZmVhdF9zZWFyY2hfaGVhZGVyJyB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAnQ3VycmljdWx1bSdcbiAgICAgICAgICAgICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgICAgICAgICAgICBsb29wZXIubWFwKGZ1bmN0aW9uICh0bXAsIGluZGV4KSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChhdHRyaWJ1dGVzLmZpbHRlcnR5cGUgPT0gJ3N1YmplY3QnKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW5wdXQnLCB7IHR5cGU6ICdidXR0b24nLCBvbkNsaWNrOiBvbkZpbHRlclNlYXJjaFRvZ2dsZSwgJ2NsYXNzJzogJ2J1dHRvbicsIHZhbHVlOiAnRmlsdGVyIGJ5IHN1YmplY3QnIH0pO1xuICAgICAgICAgICAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2lucHV0JywgeyB0eXBlOiAnYnV0dG9uJywgb25DbGljazogb25GaWx0ZXJTZWFyY2hUb2dnbGUsICdjbGFzcyc6ICdidXR0b24nLCB2YWx1ZTogJ0ZpbHRlciBieSBzZWFyY2gnIH0pO1xuICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICB9KSxcbiAgICAgICAgICAgICAgICAgICAgICAgIGxvb3Blci5tYXAoZnVuY3Rpb24gKHRtcCwgaW5kZXgpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKGF0dHJpYnV0ZXMuZmlsdGVydHlwZSA9PSAnc3ViamVjdCcpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbnB1dCcsIHsgdHlwZTogJ3RleHQnLCBvbkNoYW5nZTogb25TZWFyY2gsIGZldDogJ3JlcycsIGlkOiAnbHBfaW5zcGVjdG9yX2ZlYXRfc2VhcmNoJywgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X3NlYXJjaCcsIHZhbHVlOiBhdHRyaWJ1dGVzLnNlYXJjaHN0cmluZyB9KTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ3NlbGVjdCcsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICB7IGlkOiAnbHBfaW5zcGVjdG9yX2ZlYXRfc3ViamVjdF9zZWxlY3QnLCBvbkNoYW5nZTogb25DdXJyaWN1bHVtRmlsdGVyU3ViamVjdCwgdmFsdWU6IGF0dHJpYnV0ZXMuY3VycmljdWx1bXN1YmplY3RmaWx0ZXIgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ29wdGlvbicsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHsgdmFsdWU6ICcnIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICdBbGwnXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICApLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY3VyX3N1YmpfYXJyLm1hcChmdW5jdGlvbiAoc3ViamVjdCwgaW5kZXgpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHN1YmplY3QudGVybV9pZCA9PSBhdHRyaWJ1dGVzLmN1cnJpY3VsdW1zdWJqZWN0ZmlsdGVyKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHN1YmplY3QucGFyZW50ID09IDApIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICdvcHRpb24nLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB7IHNlbGVjdGVkOiAnc2VsZWN0ZWQnLCB2YWx1ZTogc3ViamVjdC50ZXJtX2lkLCAnY2xhc3MnOiAnbHBfaW5zcGVjdG9yX2ZlYXRfc3ViamVjdF9zZWxlY3RfYm9sZCcgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3ViamVjdC5uYW1lICsgJyAoJyArIHN1YmplY3QuY250ICsgJyknXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAnb3B0aW9uJyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgeyBzZWxlY3RlZDogJ3NlbGVjdGVkJywgdmFsdWU6IHN1YmplY3QudGVybV9pZCB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAn4pScICcgKyBzdWJqZWN0Lm5hbWUgKyAnICgnICsgc3ViamVjdC5jbnQgKyAnKSdcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICk7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChzdWJqZWN0LnBhcmVudCA9PSAwKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAnb3B0aW9uJyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgeyB2YWx1ZTogc3ViamVjdC50ZXJtX2lkLCAnY2xhc3MnOiAnbHBfaW5zcGVjdG9yX2ZlYXRfc3ViamVjdF9zZWxlY3RfYm9sZCcgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3ViamVjdC5uYW1lICsgJyAoJyArIHN1YmplY3QuY250ICsgJyknXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAnb3B0aW9uJyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgeyB2YWx1ZTogc3ViamVjdC50ZXJtX2lkIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICfilJwgJyArIHN1YmplY3QubmFtZSArICcgKCcgKyBzdWJqZWN0LmNudCArICcpJ1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0pXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgfSlcbiAgICAgICAgICAgICAgICAgICAgICApLFxuICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnbHBfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfY29udGVudCcgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAgICAgJ2RpdicsXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X21vZGFsX2NvbnRlbnRfc3ViY29udGFpbmVyJyB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgICBjdXJfbGlzdF9hcnIubWFwKGZ1bmN0aW9uIChjdXJyaWN1bHVtLCBpbmRleCkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZhciB0ZXggPSBoaWdobGlnaHRlZC5maW5kSW5kZXgoZmluZE1hdGNoKGN1cnJpY3VsdW0uaWQpKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB2YXIgc3RyID0gYXR0cmlidXRlcy5zZWFyY2hzdHJpbmc7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgdmFyIGZsdCA9IGF0dHJpYnV0ZXMuY3VycmljdWx1bXN1YmplY3RmaWx0ZXI7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgdmFyIHR0bCA9IGN1cnJpY3VsdW0udGl0bGUudG9Mb3dlckNhc2UoKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB2YXIgdGF4ID0gY3VycmljdWx1bS50YXgudG9TdHJpbmcoKTtcblxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChhdHRyaWJ1dGVzLnNlYXJjaHN0cmluZyA9PSAnJyB8fCAhYXR0cmlidXRlcy5zZWFyY2hzdHJpbmcpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vZW1wdHkgc2VhcmNoIHN0cmluZ1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKGZsdCAhPSAnJyAmJiBmbHQgIT09IHVuZGVmaW5lZCkge1xuXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmICh0YXguaW5kZXhPZihmbHQpICE9PSAtMSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIFN1YmplY3QgTWF0Y2hlZFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmICh0ZXggIT0gLTEpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIENoZWNrZWRcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICdsYWJlbCcsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2NvbXBvbmVudHMtYmFzZS1jb250cm9sX19sYWJlbCBsc19pbnNwZWN0b3JfZmVhdF9tb2RhbF9sYWJlbCcsIHNyY2g6IGN1cnJpY3VsdW0udGl0bGUudG9Mb3dlckNhc2UoKSB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2ltZycsIHsgc3JjOiBjZ2JHbG9iYWxbJ3BsdWdpbkRpclVybCddICsgXCJjdXJyaWN1bHVtLWZlYXR1cmVkLWJsb2NrL2ltYWdlcy9wcmVsb2FkZXIuZ2lmXCIgfSksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW5wdXQnLCB7IGNoZWNrZWQ6ICdjaGVja2VkJywgb25DbGljazogdXBkYXRlSGlnaGxpZ2h0LCBmZXQ6ICdjdXInLCBpZDogJ2luc3BlY3Rvci1jaGVja2JveC1jb250cm9sLScgKyBpbmRleCwgaWR4OiBpbmRleCwgJ2NsYXNzJzogJ2xzX2luc3BlY3Rvcl9mZWF0X21vZGFsX2NoZWNrYm94JywgdHlwZTogJ2NoZWNrYm94JywgZGF0YTogY3VycmljdWx1bS5pZCwgdGF4OiB0YXggfSksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGN1cnJpY3VsdW0udGl0bGVcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICk7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vVW5jaGVja2VkXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAnbGFiZWwnLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICdjb21wb25lbnRzLWJhc2UtY29udHJvbF9fbGFiZWwgbHNfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfbGFiZWwnLCBzcmNoOiBjdXJyaWN1bHVtLnRpdGxlLnRvTG93ZXJDYXNlKCkgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbWcnLCB7IHNyYzogY2diR2xvYmFsWydwbHVnaW5EaXJVcmwnXSArIFwiY3VycmljdWx1bS1mZWF0dXJlZC1ibG9jay9pbWFnZXMvcHJlbG9hZGVyLmdpZlwiIH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2lucHV0JywgeyBvbkNsaWNrOiB1cGRhdGVIaWdobGlnaHQsIGZldDogJ2N1cicsIGlkOiAnaW5zcGVjdG9yLWNoZWNrYm94LWNvbnRyb2wtJyArIGluZGV4LCBpZHg6IGluZGV4LCAnY2xhc3MnOiAnbHNfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfY2hlY2tib3gnLCB0eXBlOiAnY2hlY2tib3gnLCBkYXRhOiBjdXJyaWN1bHVtLmlkLCB0YXg6IHRheCB9KSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY3VycmljdWx1bS50aXRsZVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7XG5cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHRleCAhPSAtMSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIENoZWNrZWRcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ2xhYmVsJyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2NvbXBvbmVudHMtYmFzZS1jb250cm9sX19sYWJlbCBsc19pbnNwZWN0b3JfZmVhdF9tb2RhbF9sYWJlbCcsIHNyY2g6IGN1cnJpY3VsdW0udGl0bGUudG9Mb3dlckNhc2UoKSB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbWcnLCB7IHNyYzogY2diR2xvYmFsWydwbHVnaW5EaXJVcmwnXSArIFwiY3VycmljdWx1bS1mZWF0dXJlZC1ibG9jay9pbWFnZXMvcHJlbG9hZGVyLmdpZlwiIH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbnB1dCcsIHsgY2hlY2tlZDogJ2NoZWNrZWQnLCBvbkNsaWNrOiB1cGRhdGVIaWdobGlnaHQsIGZldDogJ2N1cicsIGlkOiAnaW5zcGVjdG9yLWNoZWNrYm94LWNvbnRyb2wtJyArIGluZGV4LCBpZHg6IGluZGV4LCAnY2xhc3MnOiAnbHNfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfY2hlY2tib3gnLCB0eXBlOiAnY2hlY2tib3gnLCBkYXRhOiBjdXJyaWN1bHVtLmlkLCB0YXg6IHRheCB9KSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGN1cnJpY3VsdW0udGl0bGVcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vVW5jaGVja2VkXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICdsYWJlbCcsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICdjb21wb25lbnRzLWJhc2UtY29udHJvbF9fbGFiZWwgbHNfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfbGFiZWwnLCBzcmNoOiBjdXJyaWN1bHVtLnRpdGxlLnRvTG93ZXJDYXNlKCkgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW1nJywgeyBzcmM6IGNnYkdsb2JhbFsncGx1Z2luRGlyVXJsJ10gKyBcImN1cnJpY3VsdW0tZmVhdHVyZWQtYmxvY2svaW1hZ2VzL3ByZWxvYWRlci5naWZcIiB9KSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW5wdXQnLCB7IG9uQ2xpY2s6IHVwZGF0ZUhpZ2hsaWdodCwgZmV0OiAnY3VyJywgaWQ6ICdpbnNwZWN0b3ItY2hlY2tib3gtY29udHJvbC0nICsgaW5kZXgsIGlkeDogaW5kZXgsICdjbGFzcyc6ICdsc19pbnNwZWN0b3JfZmVhdF9tb2RhbF9jaGVja2JveCcsIHR5cGU6ICdjaGVja2JveCcsIGRhdGE6IGN1cnJpY3VsdW0uaWQsIHRheDogdGF4IH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY3VycmljdWx1bS50aXRsZVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICk7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLy9zZWFyY2ggc3RyaW5nIGlzIHByb3ZpZGVkXG5cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmICh0YXguaW5kZXhPZihmbHQpICE9PSAtMSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvLyBzdWJqZWN0IGZpbHRlciBtYXRjaGVkXG5cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHR0bC5pbmRleE9mKHN0cikgIT09IC0xKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLy8gc2VhcmNoIHN0cmluZyBtYXRjaGVkXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHRleCAhPSAtMSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLy8gQ2hlY2tlZFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ2xhYmVsJyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnY29tcG9uZW50cy1iYXNlLWNvbnRyb2xfX2xhYmVsIGxzX2luc3BlY3Rvcl9mZWF0X21vZGFsX2xhYmVsJywgc3JjaDogY3VycmljdWx1bS50aXRsZS50b0xvd2VyQ2FzZSgpIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW1nJywgeyBzcmM6IGNnYkdsb2JhbFsncGx1Z2luRGlyVXJsJ10gKyBcImN1cnJpY3VsdW0tZmVhdHVyZWQtYmxvY2svaW1hZ2VzL3ByZWxvYWRlci5naWZcIiB9KSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbnB1dCcsIHsgY2hlY2tlZDogJ2NoZWNrZWQnLCBvbkNsaWNrOiB1cGRhdGVIaWdobGlnaHQsIGZldDogJ2N1cicsIGlkOiAnaW5zcGVjdG9yLWNoZWNrYm94LWNvbnRyb2wtJyArIGluZGV4LCBpZHg6IGluZGV4LCAnY2xhc3MnOiAnbHNfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfY2hlY2tib3gnLCB0eXBlOiAnY2hlY2tib3gnLCBkYXRhOiBjdXJyaWN1bHVtLmlkLCB0YXg6IHRheCB9KSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY3VycmljdWx1bS50aXRsZVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuICgvLyBVbmNoZWNrZWRcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICdsYWJlbCcsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnY29tcG9uZW50cy1iYXNlLWNvbnRyb2xfX2xhYmVsIGxzX2luc3BlY3Rvcl9mZWF0X21vZGFsX2xhYmVsJywgc3JjaDogY3VycmljdWx1bS50aXRsZS50b0xvd2VyQ2FzZSgpIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbWcnLCB7IHNyYzogY2diR2xvYmFsWydwbHVnaW5EaXJVcmwnXSArIFwiY3VycmljdWx1bS1mZWF0dXJlZC1ibG9jay9pbWFnZXMvcHJlbG9hZGVyLmdpZlwiIH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW5wdXQnLCB7IG9uQ2xpY2s6IHVwZGF0ZUhpZ2hsaWdodCwgZmV0OiAnY3VyJywgaWQ6ICdpbnNwZWN0b3ItY2hlY2tib3gtY29udHJvbC0nICsgaW5kZXgsIGlkeDogaW5kZXgsICdjbGFzcyc6ICdsc19pbnNwZWN0b3JfZmVhdF9tb2RhbF9jaGVja2JveCcsIHR5cGU6ICdjaGVja2JveCcsIGRhdGE6IGN1cnJpY3VsdW0uaWQsIHRheDogdGF4IH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGN1cnJpY3VsdW0udGl0bGVcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vc3ViamVjdCBmaWx0ZXIgbWlzbWF0Y2hcblxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAodHRsLmluZGV4T2Yoc3RyKSAhPT0gLTEpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvLyBzZWFyY2ggc3RyaW5nIG1hdGNoZWRcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAodGV4ICE9IC0xKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvLyBDaGVja2VkXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAnbGFiZWwnLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICdjb21wb25lbnRzLWJhc2UtY29udHJvbF9fbGFiZWwgbHNfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfbGFiZWwnLCBzcmNoOiBjdXJyaWN1bHVtLnRpdGxlLnRvTG93ZXJDYXNlKCkgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbWcnLCB7IHNyYzogY2diR2xvYmFsWydwbHVnaW5EaXJVcmwnXSArIFwiY3VycmljdWx1bS1mZWF0dXJlZC1ibG9jay9pbWFnZXMvcHJlbG9hZGVyLmdpZlwiIH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2lucHV0JywgeyBjaGVja2VkOiAnY2hlY2tlZCcsIG9uQ2xpY2s6IHVwZGF0ZUhpZ2hsaWdodCwgZmV0OiAnY3VyJywgaWQ6ICdpbnNwZWN0b3ItY2hlY2tib3gtY29udHJvbC0nICsgaW5kZXgsIGlkeDogaW5kZXgsICdjbGFzcyc6ICdsc19pbnNwZWN0b3JfZmVhdF9tb2RhbF9jaGVja2JveCcsIHR5cGU6ICdjaGVja2JveCcsIGRhdGE6IGN1cnJpY3VsdW0uaWQsIHRheDogdGF4IH0pLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjdXJyaWN1bHVtLnRpdGxlXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gKC8vIFVuY2hlY2tlZFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJ2xhYmVsJyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICdjb21wb25lbnRzLWJhc2UtY29udHJvbF9fbGFiZWwgbHNfaW5zcGVjdG9yX2ZlYXRfbW9kYWxfbGFiZWwnLCBzcmNoOiBjdXJyaWN1bHVtLnRpdGxlLnRvTG93ZXJDYXNlKCkgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2ltZycsIHsgc3JjOiBjZ2JHbG9iYWxbJ3BsdWdpbkRpclVybCddICsgXCJjdXJyaWN1bHVtLWZlYXR1cmVkLWJsb2NrL2ltYWdlcy9wcmVsb2FkZXIuZ2lmXCIgfSksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbnB1dCcsIHsgb25DbGljazogdXBkYXRlSGlnaGxpZ2h0LCBmZXQ6ICdjdXInLCBpZDogJ2luc3BlY3Rvci1jaGVja2JveC1jb250cm9sLScgKyBpbmRleCwgaWR4OiBpbmRleCwgJ2NsYXNzJzogJ2xzX2luc3BlY3Rvcl9mZWF0X21vZGFsX2NoZWNrYm94JywgdHlwZTogJ2NoZWNrYm94JywgZGF0YTogY3VycmljdWx1bS5pZCwgdGF4OiB0YXggfSksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY3VycmljdWx1bS50aXRsZVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgfSlcbiAgICAgICAgICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgICAgICAgICApLFxuICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnbHBfaW5zcGVjdG9yX2ZlYXRfc2VhcmNoX2Zvb3RlcicgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW5wdXQnLCB7IHR5cGU6ICdidXR0b24nLCAnY2xhc3MnOiAnYnV0dG9uIGxwX2luc3BlY3Rvcl9mZWF0X3F1aWNrc3dpdGNoYnV0dG9uJywgb25DbGljazogb25Nb2RhbFF1aWNrQnV0dG9uLCB0eXA6ICdjdXInLCB2YWx1ZTogJ1Jlc291cmNlcyBsaXN0cyA+JyB9KVxuICAgICAgICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgKVxuICAgICAgICAgICksXG4gICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgJ2RpdicsXG4gICAgICAgICAgICB7ICdjbGFzcyc6ICdscF9pbnNwZWN0b3Jfd3JhcHBlcicgfSxcbiAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgJ2xhYmVsJyxcbiAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnY29tcG9uZW50cy1iYXNlLWNvbnRyb2xfX2xhYmVsJywgJ2Zvcic6ICdscF9pbnNwZWN0b3Jfc3ViamVjdCcgfSxcbiAgICAgICAgICAgICAgJ0ZlYXR1cmVkIExpc3Q6J1xuICAgICAgICAgICAgKSxcbiAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgJ2RpdicsXG4gICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X2FkZGJ1dHRvbl93cmFwcGVyJyB9LFxuICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgJ2RpdicsXG4gICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnYnV0dG9uIGxwX2luc3BlY3Rvcl9mZWF0X2FkZFJlc291cmNlcycgfSxcbiAgICAgICAgICAgICAgICAnQWRkIFJlc291cmNlcydcbiAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2J1dHRvbiBscF9pbnNwZWN0b3JfZmVhdF9hZGRDdXJyaWN1bHVtJyB9LFxuICAgICAgICAgICAgICAgICdBZGQgQ3VycmljdWx1bSdcbiAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgKSxcbiAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgJ2RpdicsXG4gICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X2hsaXRlX2xpc3QnIH0sXG4gICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAnZGl2JyxcbiAgICAgICAgICAgICAgICB7IGlkOiAnbHBfaW5zcGVjdG9yX2ZlYXRfaGxpdGVfZmVhdHVyZWQnLCAnY2xhc3MnOiAnbHBfaW5zcGVjdG9yX2ZlYXRfaGxpdGVfZmVhdHVyZWQnIH0sXG4gICAgICAgICAgICAgICAgZmVhdHMubWFwKGZ1bmN0aW9uIChmZWF0LCBpbmRleCkge1xuXG4gICAgICAgICAgICAgICAgICBpZiAocHJldmVsZW0gPT0gJ2xpJykge1xuICAgICAgICAgICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgICAgICAgICAgIHsgZHJhZ2dhYmxlOiB0cnVlLCBvbk1vdXNldXA6IHVwZGF0ZXBvc2l0aW9uLCAnY2xhc3MnOiBcImxwX2luc3BlY3Rvcl9mZWF0X2hsaXRlX25vZGUgc3RheSBcIiArIGZlYXRbNl0sIGRhdGE6IGZlYXRbMF0sIHR5cDogZmVhdFs2XSB9LFxuICAgICAgICAgICAgICAgICAgICAgIGZlYXRbMV0sXG4gICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJywgeyAnY2xhc3MnOiAnZGFzaGljb25zIGRhc2hpY29ucy1kaXNtaXNzJyB9KVxuICAgICAgICAgICAgICAgICAgICApO1xuICAgICAgICAgICAgICAgICAgfSBlbHNlIHtcbiAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAnbGknLFxuICAgICAgICAgICAgICAgICAgICAgIHsgZHJhZ2dhYmxlOiB0cnVlLCBvbk1vdXNldXA6IHVwZGF0ZXBvc2l0aW9uLCAnY2xhc3MnOiBcImxwX2luc3BlY3Rvcl9mZWF0X2hsaXRlX25vZGUgc3RheSBcIiArIGZlYXRbNl0sIGRhdGE6IGZlYXRbMF0sIHR5cDogZmVhdFs2XSB9LFxuICAgICAgICAgICAgICAgICAgICAgIGZlYXRbMV0sXG4gICAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdzcGFuJywgeyAnY2xhc3MnOiAnZGFzaGljb25zIGRhc2hpY29ucy1kaXNtaXNzJyB9KVxuICAgICAgICAgICAgICAgICAgICApO1xuICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgIH0pXG4gICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnZGl2JywgeyAnY2xhc3MnOiAnYnV0dG9uIGxwX2luc3BlY3Rvcl9mZWF0X2hsaXRlX3JlcG9zaXRpb25fdHJpZ2dlcicsIG9uQ2xpY2s6IHVwZGF0ZXBvc2l0aW9uLCBibGtpZDogYXR0cmlidXRlcy5ibG9ja2lkIH0pLFxuICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2RpdicsIHsgJ2NsYXNzJzogJ2J1dHRvbiBscF9pbnNwZWN0b3JfZmVhdF9obGl0ZV9yZW1vdmVfdHJpZ2dlcicsIGhlaWdodDogJzAnLCB3aWR0aDogJzAnLCBvbkNsaWNrOiByZW1vdmVmZWF0dXJlZCwgYmxraWQ6IGF0dHJpYnV0ZXMuYmxvY2tpZCB9KVxuICAgICAgICAgICAgKVxuICAgICAgICAgICksXG4gICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgJ2RpdicsXG4gICAgICAgICAgICB7ICdjbGFzcyc6ICdscF9pbnNwZWN0b3Jfd3JhcHBlcicgfSxcbiAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgJ2xhYmVsJyxcbiAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnY29tcG9uZW50cy1iYXNlLWNvbnRyb2xfX2xhYmVsJywgJ2Zvcic6ICdscF9pbnNwZWN0b3Jfc3ViamVjdCcgfSxcbiAgICAgICAgICAgICAgJ1NsaWRlciBTZXR0aW5nOidcbiAgICAgICAgICAgICksXG4gICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICd0YWJsZScsXG4gICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2xwX2luc3BlY3Rvcl9mZWF0X3NsaWRlcl9zZXR0aW5nJywgY2VsbHNwYWNpbmc6ICcyJyB9LFxuICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgJ3RyJyxcbiAgICAgICAgICAgICAgICBudWxsLFxuICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICd0ZCcsXG4gICAgICAgICAgICAgICAgICBudWxsLFxuICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAnc3BhbicsXG4gICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2Rhc2hpY29ucyBkYXNoaWNvbnMtaW5mbyB0b29sdGlwcGVkJyB9LFxuICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgJ3NwYW4nLFxuICAgICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ3Rvb2x0aXB0ZXh0JyB9LFxuICAgICAgICAgICAgICAgICAgICAgICdUaGUgbWluaW11bSBudW1iZXIgb2Ygc2xpZGVzIHRvIGJlIHNob3duLiBTbGlkZXMgd2lsbCBiZSBzaXplZCBkb3duIGlmIHNsaWRlciBiZWNvbWVzIHNtYWxsZXIgdGhhbiB0aGUgb3JpZ2luYWwgc2l6ZS4nXG4gICAgICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgICAgICAnTWluLiBTbGlkZXM6J1xuICAgICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgJ3RkJyxcbiAgICAgICAgICAgICAgICAgIG51bGwsXG4gICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICdzZWxlY3QnLFxuICAgICAgICAgICAgICAgICAgICB7IGlkOiAnbHBfaW5zcGVjdG9yX2ZlYXRfc2xpZGVyX21pbnNsaWRlcycsIG9uQ2hhbmdlOiBvblNldHRpbmdDaGFuZ2UsIHR5cDogJ21pbnNsaWRlcycsIHZhbHVlOiBhdHRyaWJ1dGVzLm1pbnNsaWRlcyB9LFxuICAgICAgICAgICAgICAgICAgICBnbG9iYWxTZXR0aW5nT3B0aW9ucy5tYXAoZnVuY3Rpb24gKGluY3IsIGluZGV4KSB7XG4gICAgICAgICAgICAgICAgICAgICAgdmFyIHJldCA9IGluY3IgPT0gYXR0cmlidXRlcy5taW5zbGlkZXMgPyB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAnb3B0aW9uJyxcbiAgICAgICAgICAgICAgICAgICAgICAgIHsgc2VsZWN0ZWQ6IHRydWUsIHZhbHVlOiBpbmNyIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICBpbmNyXG4gICAgICAgICAgICAgICAgICAgICAgKSA6IHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAgICdvcHRpb24nLFxuICAgICAgICAgICAgICAgICAgICAgICAgeyB2YWx1ZTogaW5jciB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgaW5jclxuICAgICAgICAgICAgICAgICAgICAgICk7XG4gICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHJldDtcbiAgICAgICAgICAgICAgICAgICAgfSlcbiAgICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgICApXG4gICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAndHInLFxuICAgICAgICAgICAgICAgIG51bGwsXG4gICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgJ3RkJyxcbiAgICAgICAgICAgICAgICAgIG51bGwsXG4gICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICdzcGFuJyxcbiAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnZGFzaGljb25zIGRhc2hpY29ucy1pbmZvIHRvb2x0aXBwZWQnIH0sXG4gICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAnc3BhbicsXG4gICAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAndG9vbHRpcHRleHQnIH0sXG4gICAgICAgICAgICAgICAgICAgICAgJ1RoZSBtYXhpbXVtIG51bWJlciBvZiBzbGlkZXMgdG8gYmUgc2hvd24uIFNsaWRlcyB3aWxsIGJlIHNpemVkIHVwIGlmIHNsaWRlciBiZWNvbWVzIGxhcmdlciB0aGFuIHRoZSBvcmlnaW5hbCBzaXplLidcbiAgICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgICAgICdNYXguIFNsaWRlczonXG4gICAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAndGQnLFxuICAgICAgICAgICAgICAgICAgbnVsbCxcbiAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgJ3NlbGVjdCcsXG4gICAgICAgICAgICAgICAgICAgIHsgaWQ6ICdscF9pbnNwZWN0b3JfZmVhdF9zbGlkZXJfbWF4c2xpZGVzJywgb25DaGFuZ2U6IG9uU2V0dGluZ0NoYW5nZSwgdHlwOiAnbWF4c2xpZGVzJywgdmFsdWU6IGF0dHJpYnV0ZXMubWF4c2xpZGVzIH0sXG4gICAgICAgICAgICAgICAgICAgIGdsb2JhbFNldHRpbmdPcHRpb25zLm1hcChmdW5jdGlvbiAoaW5jciwgaW5kZXgpIHtcbiAgICAgICAgICAgICAgICAgICAgICB2YXIgcmV0ID0gaW5jciA9PSBhdHRyaWJ1dGVzLm1heHNsaWRlcyA/IHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAgICdvcHRpb24nLFxuICAgICAgICAgICAgICAgICAgICAgICAgeyBzZWxlY3RlZDogdHJ1ZSwgdmFsdWU6IGluY3IgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgIGluY3JcbiAgICAgICAgICAgICAgICAgICAgICApIDogd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgJ29wdGlvbicsXG4gICAgICAgICAgICAgICAgICAgICAgICB7IHZhbHVlOiBpbmNyIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICBpbmNyXG4gICAgICAgICAgICAgICAgICAgICAgKTtcbiAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gcmV0O1xuICAgICAgICAgICAgICAgICAgICB9KVxuICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICd0cicsXG4gICAgICAgICAgICAgICAgbnVsbCxcbiAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAndGQnLFxuICAgICAgICAgICAgICAgICAgbnVsbCxcbiAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgJ3NwYW4nLFxuICAgICAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICdkYXNoaWNvbnMgZGFzaGljb25zLWluZm8gdG9vbHRpcHBlZCcgfSxcbiAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICdzcGFuJyxcbiAgICAgICAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICd0b29sdGlwdGV4dCcgfSxcbiAgICAgICAgICAgICAgICAgICAgICAnVGhlIG51bWJlciBvZiBzbGlkZXMgdG8gbW92ZSBvbiB0cmFuc2l0aW9uLiBUaGlzIHZhbHVlIG11c3QgYmUgZ3JlYXRlciB0aGFuIG9yIGVxdWFsIHRvIG1pblNsaWRlcywgYW5kIGxlc3MgdGhhbiBvciBlcXVhbCB0byBtYXhTbGlkZXMuIElmIHZhbHVlIGlzIGdyZWF0ZXIgdGhhbiB0aGUgZnVsbHktdmlzaWJsZSBzbGlkZXMsIHRoZW4gdGhlIGNvdW50IG9mIGZ1bGx5LXZpc2libGUgc2xpZGVzIHdpbGwgYmUgdXNlZC4nXG4gICAgICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgICAgICAnTW92ZSBTbGlkZXM6J1xuICAgICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgJ3RkJyxcbiAgICAgICAgICAgICAgICAgIG51bGwsXG4gICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICdzZWxlY3QnLFxuICAgICAgICAgICAgICAgICAgICB7IGlkOiAnbHBfaW5zcGVjdG9yX2ZlYXRfc2xpZGVyX21vdmVzbGlkZXMnLCBvbkNoYW5nZTogb25TZXR0aW5nQ2hhbmdlLCB0eXA6ICdtb3Zlc2xpZGVzJywgdmFsdWU6IGF0dHJpYnV0ZXMubW92ZXNsaWRlcyB9LFxuICAgICAgICAgICAgICAgICAgICBnbG9iYWxTZXR0aW5nT3B0aW9ucy5tYXAoZnVuY3Rpb24gKGluY3IsIGluZGV4KSB7XG4gICAgICAgICAgICAgICAgICAgICAgdmFyIHJldCA9IGluY3IgPT0gYXR0cmlidXRlcy5tb3Zlc2xpZGVzID8gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgJ29wdGlvbicsXG4gICAgICAgICAgICAgICAgICAgICAgICB7IHNlbGVjdGVkOiB0cnVlLCB2YWx1ZTogaW5jciB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgaW5jclxuICAgICAgICAgICAgICAgICAgICAgICkgOiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAnb3B0aW9uJyxcbiAgICAgICAgICAgICAgICAgICAgICAgIHsgdmFsdWU6IGluY3IgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgIGluY3JcbiAgICAgICAgICAgICAgICAgICAgICApO1xuICAgICAgICAgICAgICAgICAgICAgIHJldHVybiByZXQ7XG4gICAgICAgICAgICAgICAgICAgIH0pXG4gICAgICAgICAgICAgICAgICApXG4gICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICApLFxuICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgJ3RyJyxcbiAgICAgICAgICAgICAgICBudWxsLFxuICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICd0ZCcsXG4gICAgICAgICAgICAgICAgICBudWxsLFxuICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAnc3BhbicsXG4gICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2Rhc2hpY29ucyBkYXNoaWNvbnMtaW5mbyB0b29sdGlwcGVkJyB9LFxuICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgJ3NwYW4nLFxuICAgICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ3Rvb2x0aXB0ZXh0JyB9LFxuICAgICAgICAgICAgICAgICAgICAgICdXaWR0aCBvZiBlYWNoIHNsaWRlLidcbiAgICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgICAgICdTbGlkZSBXaWR0aDonXG4gICAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAndGQnLFxuICAgICAgICAgICAgICAgICAgbnVsbCxcbiAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudCgnaW5wdXQnLCB7IHR5cGU6ICdudW1iZXInLCBpZDogJ2xwX2luc3BlY3Rvcl9mZWF0X3NsaWRlcl9zbGlkZXdpZHRoJywgdHlwOiAnc2xpZGV3aWR0aCcsIG9uQ2hhbmdlOiBvblNldHRpbmdDaGFuZ2UsIHZhbHVlOiBhdHRyaWJ1dGVzLnNsaWRld2lkdGggfSlcbiAgICAgICAgICAgICAgICApXG4gICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAndHInLFxuICAgICAgICAgICAgICAgIG51bGwsXG4gICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgJ3RkJyxcbiAgICAgICAgICAgICAgICAgIG51bGwsXG4gICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICdzcGFuJyxcbiAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnZGFzaGljb25zIGRhc2hpY29ucy1pbmZvIHRvb2x0aXBwZWQnIH0sXG4gICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAnc3BhbicsXG4gICAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAndG9vbHRpcHRleHQnIH0sXG4gICAgICAgICAgICAgICAgICAgICAgJ1NwYWNlIGJldHdlZW4gc2xpZGVzJ1xuICAgICAgICAgICAgICAgICAgICApXG4gICAgICAgICAgICAgICAgICApLFxuICAgICAgICAgICAgICAgICAgJ1NsaWRlIE1hcmdpbjonXG4gICAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAndGQnLFxuICAgICAgICAgICAgICAgICAgbnVsbCxcbiAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgJ3NlbGVjdCcsXG4gICAgICAgICAgICAgICAgICAgIHsgaWQ6ICdscF9pbnNwZWN0b3JfZmVhdF9zbGlkZXJfc2xpZGVtYXJnaW4nLCBvbkNoYW5nZTogb25TZXR0aW5nQ2hhbmdlLCB0eXA6ICdzbGlkZW1hcmdpbicsIHZhbHVlOiBhdHRyaWJ1dGVzLnNsaWRlbWFyZ2luIH0sXG4gICAgICAgICAgICAgICAgICAgIGdsb2JhbFNldHRpbmdNYXJnaW4ubWFwKGZ1bmN0aW9uIChpbmNyLCBpbmRleCkge1xuICAgICAgICAgICAgICAgICAgICAgIHZhciByZXQgPSBpbmNyID09IGF0dHJpYnV0ZXMuc2xpZGVtYXJnaW4gPyB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAnb3B0aW9uJyxcbiAgICAgICAgICAgICAgICAgICAgICAgIHsgc2VsZWN0ZWQ6IHRydWUsIHZhbHVlOiBpbmNyIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICBpbmNyXG4gICAgICAgICAgICAgICAgICAgICAgKSA6IHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAgICdvcHRpb24nLFxuICAgICAgICAgICAgICAgICAgICAgICAgeyB2YWx1ZTogaW5jciB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgaW5jclxuICAgICAgICAgICAgICAgICAgICAgICk7XG4gICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIHJldDtcbiAgICAgICAgICAgICAgICAgICAgfSlcbiAgICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgICApXG4gICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAndHInLFxuICAgICAgICAgICAgICAgIG51bGwsXG4gICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgJ3RkJyxcbiAgICAgICAgICAgICAgICAgIG51bGwsXG4gICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICdzcGFuJyxcbiAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnZGFzaGljb25zIGRhc2hpY29ucy1pbmZvIHRvb2x0aXBwZWQnIH0sXG4gICAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgICAnc3BhbicsXG4gICAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAndG9vbHRpcHRleHQnIH0sXG4gICAgICAgICAgICAgICAgICAgICAgJ0xlZnQsIHJpZ2h0IG9yIG1pZGRsZSBhbGlnbm1lbnQnXG4gICAgICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgICAgICAnQWxpZ25tbmV0OidcbiAgICAgICAgICAgICAgICApLFxuICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICd0ZCcsXG4gICAgICAgICAgICAgICAgICBudWxsLFxuICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAnc2VsZWN0JyxcbiAgICAgICAgICAgICAgICAgICAgeyBpZDogJ2xwX2luc3BlY3Rvcl9mZWF0X3NsaWRlcl9zbGlkZWFsaWduJywgb25DaGFuZ2U6IG9uU2V0dGluZ0NoYW5nZSwgdHlwOiAnc2xpZGVhbGlnbicsIHZhbHVlOiBhdHRyaWJ1dGVzLnNsaWRlYWxpZ24gfSxcbiAgICAgICAgICAgICAgICAgICAgZ2xvYmFsU2V0dGluZ0FsaWduLm1hcChmdW5jdGlvbiAoaW5jciwgaW5kZXgpIHtcbiAgICAgICAgICAgICAgICAgICAgICB2YXIgcmV0ID0gaW5jciA9PSBhdHRyaWJ1dGVzLnNsaWRlbWFyZ2luID8gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICAgJ29wdGlvbicsXG4gICAgICAgICAgICAgICAgICAgICAgICB7IHNlbGVjdGVkOiB0cnVlLCB2YWx1ZTogaW5jciB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgaW5jclxuICAgICAgICAgICAgICAgICAgICAgICkgOiB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgICAnb3B0aW9uJyxcbiAgICAgICAgICAgICAgICAgICAgICAgIHsgdmFsdWU6IGluY3IgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgIGluY3JcbiAgICAgICAgICAgICAgICAgICAgICApO1xuICAgICAgICAgICAgICAgICAgICAgIHJldHVybiByZXQ7XG4gICAgICAgICAgICAgICAgICAgIH0pXG4gICAgICAgICAgICAgICAgICApXG4gICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICApLFxuICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgJ3RyJyxcbiAgICAgICAgICAgICAgICBudWxsLFxuICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICd0ZCcsXG4gICAgICAgICAgICAgICAgICBudWxsLFxuICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAnc3BhbicsXG4gICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2Rhc2hpY29ucyBkYXNoaWNvbnMtaW5mbyB0b29sdGlwcGVkJyB9LFxuICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAgICAgJ3NwYW4nLFxuICAgICAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ3Rvb2x0aXB0ZXh0JyB9LFxuICAgICAgICAgICAgICAgICAgICAgICdMZW5ndGggb2YgZGVzY3JpcHRpb24gdG8gZGlzcGxheS4nXG4gICAgICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgICAgICAnRGVzY3JpcHRpb24gbGVuZ3RoOidcbiAgICAgICAgICAgICAgICApLFxuICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICd0ZCcsXG4gICAgICAgICAgICAgICAgICBudWxsLFxuICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KCdpbnB1dCcsIHsgdHlwZTogJ251bWJlcicsIGlkOiAnbHBfaW5zcGVjdG9yX2ZlYXRfc2xpZGVyX3NsaWRlZGVzY2xlbmd0aCcsIHR5cDogJ3NsaWRlZGVzY2xlbmd0aCcsIG9uQ2hhbmdlOiBvblNldHRpbmdDaGFuZ2UsIHZhbHVlOiBhdHRyaWJ1dGVzLnNsaWRlZGVzY2xlbmd0aCB9KVxuICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICd0cicsXG4gICAgICAgICAgICAgICAgbnVsbCxcbiAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAndGQnLFxuICAgICAgICAgICAgICAgICAgbnVsbCxcbiAgICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICAgJ3NwYW4nLFxuICAgICAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICdkYXNoaWNvbnMgZGFzaGljb25zLWluZm8gdG9vbHRpcHBlZCcgfSxcbiAgICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAgICdzcGFuJyxcbiAgICAgICAgICAgICAgICAgICAgICB7ICdjbGFzcyc6ICd0b29sdGlwdGV4dCcgfSxcbiAgICAgICAgICAgICAgICAgICAgICAnQWRqdXN0IGltYWdlIGhlaWdodCdcbiAgICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgICAgICdJbWFnZSBoZWlnaHQ6J1xuICAgICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgJ3RkJyxcbiAgICAgICAgICAgICAgICAgIG51bGwsXG4gICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2lucHV0JywgeyB0eXBlOiAnbnVtYmVyJywgaWQ6ICdscF9pbnNwZWN0b3JfZmVhdF9zbGlkZXJfc2xpZGVpbWFnZWhlaWdodCcsIHR5cDogJ3NsaWRlaW1hZ2VoZWlnaHQnLCBvbkNoYW5nZTogb25TZXR0aW5nQ2hhbmdlLCB2YWx1ZTogYXR0cmlidXRlcy5zbGlkZWltYWdlaGVpZ2h0IH0pXG4gICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICApXG4gICAgICAgICAgICApXG4gICAgICAgICAgKSxcbiAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2ltZycsIHsgLy8gb25sb2FkIGhhY2sgZmlyZXMgd2hlbiBibG9jayBpcyBhZGRlZFxuICAgICAgICAgICAgY2xhc3NOYW1lOiAnb25sb2FkLWhhY2stcHAnLFxuICAgICAgICAgICAgaGVpZ2h0OiAnMCcsXG4gICAgICAgICAgICB3aWR0aDogJzAnLFxuICAgICAgICAgICAgb25Mb2FkOiBvbkluc3BlY3RvckxvYWQsXG4gICAgICAgICAgICBzcmM6IGNnYkdsb2JhbFsncGx1Z2luRGlyVXJsJ10gKyBcIi9jdXJyaWN1bHVtLWZlYXR1cmVkLWJsb2NrL2ltYWdlcy9kZWZhdWx0LWltZy5qcGdcIlxuICAgICAgICAgIH0pXG4gICAgICAgIClcbiAgICAgICksXG4gICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICdkaXYnLFxuICAgICAgICB7ICdjbGFzcyc6ICdvZXJfcmlnaHRfZmVhdHVyZWR3cHInIH0sXG4gICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAnZGl2JyxcbiAgICAgICAgICB7ICdjbGFzcyc6IFwib2VyLWZ0cmR0dGwgY3VycmljdWx1bS1mZWF0LXRpdGxlX1wiICsgYXR0cmlidXRlcy5ibG9ja2lkIH0sXG4gICAgICAgICAgYXR0cmlidXRlcy5ibG9ja3RpdGxlXG4gICAgICAgICksXG4gICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAndWwnLFxuICAgICAgICAgIHsgJ2NsYXNzJzogXCJmZWF0dXJlZHdwcl9ieHNsaWRlciBmZWF0dXJlZHdwcl9ieHNsaWRlcl9cIiArIGF0dHJpYnV0ZXMuYmxvY2tpZCwgYmxrOiBhdHRyaWJ1dGVzLmJsb2NraWQgfSxcbiAgICAgICAgICBmZWF0cy5tYXAoZnVuY3Rpb24gKGZlYXQsIGluZGV4KSB7XG4gICAgICAgICAgICAvL2xldCBjdG50ID0gZmVhdFsyXS5yZXBsYWNlKC88W14+XSs+L2csICcnKTtcbiAgICAgICAgICAgIHZhciBjdG50ID0gZmVhdFsyXTtcbiAgICAgICAgICAgIGlmIChjdG50Lmxlbmd0aCA+IGF0dHJpYnV0ZXMuc2xpZGVkZXNjbGVuZ3RoKSB7XG4gICAgICAgICAgICAgIGN0bnQgPSB1bmVzY2FwZShjdG50LnN1YnN0cigwLCBhdHRyaWJ1dGVzLnNsaWRlZGVzY2xlbmd0aCkpICsgJy4uLic7XG4gICAgICAgICAgICB9XG5cbiAgICAgICAgICAgIC8vY29uc29sZS5sb2coZmVhdCk7XG4gICAgICAgICAgICByZXR1cm4gd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAnbGknLFxuICAgICAgICAgICAgICB7IGF0cnI6IGZlYXRbMF0gfSxcbiAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2ZydGRzbmdsd3ByJyB9LFxuICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICdhJyxcbiAgICAgICAgICAgICAgICAgIHsgaHJlZjogZmVhdFszXSB9LFxuICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAnZGl2JyxcbiAgICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAnaW1nJyB9LFxuICAgICAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoJ2ltZycsIHsgc3JjOiBmZWF0WzRdLCBhbHQ6IGZlYXRbMV0gfSlcbiAgICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgICApLFxuICAgICAgICAgICAgICAgIHdwLmVsZW1lbnQuY3JlYXRlRWxlbWVudChcbiAgICAgICAgICAgICAgICAgICdkaXYnLFxuICAgICAgICAgICAgICAgICAgeyAnY2xhc3MnOiAndHRsJyB9LFxuICAgICAgICAgICAgICAgICAgd3AuZWxlbWVudC5jcmVhdGVFbGVtZW50KFxuICAgICAgICAgICAgICAgICAgICAnYScsXG4gICAgICAgICAgICAgICAgICAgIHsgaHJlZjogZmVhdFszXSB9LFxuICAgICAgICAgICAgICAgICAgICBmZWF0WzFdXG4gICAgICAgICAgICAgICAgICApXG4gICAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgICB3cC5lbGVtZW50LmNyZWF0ZUVsZW1lbnQoXG4gICAgICAgICAgICAgICAgICAnZGl2JyxcbiAgICAgICAgICAgICAgICAgIHsgJ2NsYXNzJzogJ2Rlc2MnIH0sXG4gICAgICAgICAgICAgICAgICBjdG50XG4gICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICApXG4gICAgICAgICAgICApO1xuICAgICAgICAgIH0pXG4gICAgICAgIClcbiAgICAgIClcbiAgICApO1xuICB9LFxuXG4gIC8qKlxuICAgKiBUaGUgc2F2ZSBmdW5jdGlvbiBkZWZpbmVzIHRoZSB3YXkgaW4gd2hpY2ggdGhlIGRpZmZlcmVudCBhdHRyaWJ1dGVzIHNob3VsZCBiZSBjb21iaW5lZFxuICAgKiBpbnRvIHRoZSBmaW5hbCBtYXJrdXAsIHdoaWNoIGlzIHRoZW4gc2VyaWFsaXplZCBieSBHdXRlbmJlcmcgaW50byBwb3N0X2NvbnRlbnQuXG4gICAqXG4gICAqIFRoZSBcInNhdmVcIiBwcm9wZXJ0eSBtdXN0IGJlIHNwZWNpZmllZCBhbmQgbXVzdCBiZSBhIHZhbGlkIGZ1bmN0aW9uLlxuICAgKlxuICAgKiBAbGluayBodHRwczovL3dvcmRwcmVzcy5vcmcvZ3V0ZW5iZXJnL2hhbmRib29rL2Jsb2NrLWFwaS9ibG9jay1lZGl0LXNhdmUvXG4gICAqXG4gICAqIEBwYXJhbSB7T2JqZWN0fSBwcm9wcyBQcm9wcy5cbiAgICogQHJldHVybnMge01peGVkfSBKU1ggRnJvbnRlbmQgSFRNTC5cbiAgICovXG4gIHNhdmU6IGZ1bmN0aW9uIHNhdmUocHJvcHMpIHtcbiAgICByZXR1cm4gbnVsbDtcbiAgfVxufSk7XG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvYmxvY2svYmxvY2suanNcbi8vIG1vZHVsZSBpZCA9IDFcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///1\n");
+    let featblockcount = 0;
+    let blkidx = 0;
+    const blocks = wp.data.select("core/block-editor").getBlocks(); //console.log('******************');
 
-/***/ }),
-/* 2 */
-/*!*******************************!*\
-  !*** ./src/block/editor.scss ***!
-  \*******************************/
-/*! dynamic exports provided */
-/***/ (function(module, exports) {
+    blocks.map((val, index) => {
+      if (val.name == "cgb/block-curriculum-featured-block") {
+        var uniq = "cfb" + new Date().getTime();
+        var cid = val.clientId;
+        /*
+        var attr = wp.data.select( 'core/block-editor' ).getBlockAttributes(cid)
+        var blkid;;
+        if(!attributes.blockid){
+            wp.data.dispatch( 'core/block-editor' ).updateBlockAttributes( cid, { blockid: uniq } )
+            localStorage.setItem('curriculum-feat-blkid', uniq );
+            blkid = uniq;
+        }else{
+            blkid = attributes.blockid;
+        }
+        */
 
-eval("// removed by extract-text-webpack-plugin//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9ibG9jay9lZGl0b3Iuc2Nzcz80OWQyIl0sInNvdXJjZXNDb250ZW50IjpbIi8vIHJlbW92ZWQgYnkgZXh0cmFjdC10ZXh0LXdlYnBhY2stcGx1Z2luXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9zcmMvYmxvY2svZWRpdG9yLnNjc3Ncbi8vIG1vZHVsZSBpZCA9IDJcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///2\n");
+        wp.data.dispatch("core/block-editor").updateBlockAttributes(cid, {
+          blockid: cid
+        });
+        /*
+        minslides
+        maxslides
+        moveslides
+        slidewidth
+        slidemargin
+        */
+        //set defaults
 
-/***/ }),
-/* 3 */
-/*!******************************!*\
-  !*** ./src/block/style.scss ***!
-  \******************************/
-/*! dynamic exports provided */
-/***/ (function(module, exports) {
+        /*
+        if(attributes.minslides === undefined){
+            wp.data.dispatch( 'core/block-editor' ).updateBlockAttributes( cid, { minslides: 1 } )
+        }
+        if(attributes.maxslides === undefined){
+            wp.data.dispatch( 'core/block-editor' ).updateBlockAttributes( cid, { maxslides: 3 } )
+        }
+        if(attributes.moveslides === undefined){
+            wp.data.dispatch( 'core/block-editor' ).updateBlockAttributes( cid, { moveslides: 1 } )
+        }
+        console.log('UNDEFINED WIDTH: '+cid+' - '+attributes.slidewidth)
+        if(attributes.slidewidth === undefined){
+            wp.data.dispatch( 'core/block-editor' ).updateBlockAttributes( cid, { slidewidth: 375 } )
+        }
+        if(attributes.slidemargin === undefined){
+            wp.data.dispatch( 'core/block-editor' ).updateBlockAttributes( cid, { slidemargin: 10 } )
+        }
+        */
 
-eval("// removed by extract-text-webpack-plugin//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9ibG9jay9zdHlsZS5zY3NzPzgwZjMiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gcmVtb3ZlZCBieSBleHRyYWN0LXRleHQtd2VicGFjay1wbHVnaW5cblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL3NyYy9ibG9jay9zdHlsZS5zY3NzXG4vLyBtb2R1bGUgaWQgPSAzXG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUEiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///3\n");
+        if (attributes.filtertype === undefined) {
+          wp.data.dispatch("core/block-editor").updateBlockAttributes(cid, {
+            filtertype: "search"
+          });
+        }
+        /*
+        if(attributes.blocktitle === undefined){
+            wp.data.dispatch( 'core/block-editor' ).updateBlockAttributes( cid, { blocktitle: 'Featured' } )
+            cgbGlobal['curriculum_feat_title_'+blkid] = 'Featured';
+        }
+        */
+        //console.log('BLOCK '+blkid+ ' ('+blkidx+')');
 
-/***/ })
-/******/ ]);
+        blkidx++;
+        featblockcount++;
+      }
+    }); //console.log('******************');
+    // RETURN MESSAGE WHILE CATEGORIES AND CURRICULUMS ARE NOT YET FULLY LOADED
+
+    /*
+    if(!attributes.blockid || 
+      !attributes.minslides || 
+      !attributes.maxslides || 
+      !attributes.moveslides || 
+      !attributes.slidewidth || 
+      !attributes.slidemargin ||
+      !attributes.filtertype){
+      return 'Setting up blocks...'
+    }
+    */
+
+    curriculumfeatslider_loadall(featblockcount); //convert comma delimitted to array
+
+    let highlighted = [];
+
+    if (typeof attributes.selectedfeatured !== "undefined") {
+      const tmparr = attributes.selectedfeatured.split(",");
+      tmparr.map((arr, index) => {
+        const rowarr = arr.split("|");
+        highlighted.push([parseInt(rowarr[0]), rowarr[1]]);
+      });
+    }
+
+    let resources_arr = [];
+    resources_arr = attributes.resources;
+    /*
+     0 - Resource taxonomy
+     1 - Curriculum taxonomy
+     2 - Resource List
+     3 - Curriculum List
+     */
+
+    /* GET ALL DATA */
+
+    if (!attributes.data) {
+      //wp.apiFetch({ url: '/wp-json/curriculum/feat/dataquery' }).then(data =>{  setAttributes({resources: data })  })
+      wp.apiFetch({
+        url: "/wp-json/curriculum/feat/dataquery"
+      }).then((data) => {
+        setAttributes({
+          data: data
+        });
+        setAttributes({
+          resourcesubjects: data[0]
+        });
+        setAttributes({
+          curriculumsubjects: data[1]
+        });
+        setAttributes({
+          resources: data[2]
+        });
+        setAttributes({
+          curriculum: data[3]
+        }); //console.log(data[0]);
+        //console.log(data[1]);
+        //console.log(data[2]);
+        //console.log(data[3]);
+      });
+    }
+
+    if (!attributes.data) {
+      return "Loading Featured Data...";
+    }
+
+    let data_arr = attributes.data;
+    let res_subj_arr = data_arr[0];
+    let cur_subj_arr = data_arr[1];
+    let res_list_arr = data_arr[2];
+    let cur_list_arr = data_arr[3];
+    /* SET RESOURCES LIST ATTRIBUTES */
+
+    /*
+    if(!attributes.resources){
+    wp.apiFetch({ url: '/wp-json/curriculum/feat/resourcequery' }).then(resources =>{  setAttributes({resources: resources })  })
+    }
+    if(!attributes.resources){ return 'Loading resources...'; }	
+    let res_list_arr = [];
+    res_list_arr = attributes.resources;
+    */
+
+    /* SET CURRICULUM LIST ATTRIBUTES */
+
+    /*
+      if(!attributes.curriculum){
+    	wp.apiFetch({ url: '/wp-json/curriculum/feat/curriculumquery' }).then(resources =>{  setAttributes({curriculum: resources })  })
+    }
+    if(!attributes.curriculum){ return 'Loading curriculum...'; }
+    let cur_list_arr = [];
+      cur_list_arr = attributes.curriculum;
+      */
+
+    /* SET RESOURCE SUBJECTS LIST ATTRIBUTES */
+
+    /*
+    if(!attributes.resourcesubjects){
+    wp.apiFetch({ url: '/wp-json/curriculum/feat/taxquery?posttype=resource' }).then(taxonimies =>{  setAttributes({resourcesubjects: taxonimies })  })
+    }
+    if(!attributes.resourcesubjects){ return 'Loading Subjects...'; }
+    let res_subj_arr = [];
+    res_subj_arr = attributes.resourcesubjects;
+    */
+
+    /* SET CURRICULUM SUBJECTS LIST ATTRIBUTES */
+
+    /*
+    if(!attributes.curriculumsubjects){
+    wp.apiFetch({ url: '/wp-json/curriculum/feat/taxquery?posttype=oer-curriculum' }).then(taxonimies =>{  setAttributes({curriculumsubjects: taxonimies })  })
+    }
+    if(!attributes.curriculumsubjects){ return 'Loading Subjects...'; }
+    let cur_subj_arr = [];
+    cur_subj_arr = attributes.curriculumsubjects;
+    */
+
+    function updateHighlight(newValue, index) {
+      if (cgbGlobal["bxresetblocked"]) {
+        return;
+      }
+
+      const type = newValue.target.getAttribute("fet");
+
+      if (newValue.target.checked) {
+        const selfeat = newValue.target.getAttribute("data");
+        highlighted.push([parseInt(selfeat), type]);
+      } else {
+        let todel = parseInt(newValue.target.getAttribute("data"));
+        let ex = highlighted.findIndex(findMatch(todel));
+
+        if (ex != -1) {
+          highlighted.splice(ex, 1);
+        }
+      }
+
+      feats = [];
+      highlighted.map((feat, index) => {
+        let obj;
+        let idx;
+
+        if (feat[1] == "cur") {
+          obj = attributes.curriculum.find(
+            (obj) => obj.id == parseInt(feat[0])
+          );
+          idx = attributes.curriculum.indexOf(parseInt(feat[0]));
+        } else {
+          obj = attributes.resources.find((obj) => obj.id == parseInt(feat[0]));
+          idx = attributes.resources.indexOf(parseInt(feat[0]));
+        }
+
+        if (typeof obj != "undefined") {
+          feats.push(Object.values(obj));
+        }
+      });
+      let str = "";
+      highlighted.map((hlite, index) => {
+        if (hlite[0] !== undefined && hlite[1] !== undefined) {
+          if (str == "") {
+            str += hlite[0] + "|" + hlite[1];
+          } else {
+            str += "," + hlite[0] + "|" + hlite[1];
+          }
+        }
+      });
+      setAttributes({
+        selectedfeatured: str
+      });
+      curriculumfeatslider_reset(attributes.blockid, 750, newValue.target);
+    }
+
+    function findMatch(todel) {
+      return function (innerArr) {
+        return innerArr[0] === todel;
+      };
+    } //console.log(attributes.resources);
+    //console.log(attributes.selectedfeatured);
+    //console.log(attributes.curriculum);
+    //const feats = attributes.selectedfeatured.split(',');
+    //console.log(highlighted);
+
+    function updateposition() {
+      prevelem = prevelem == "li" ? "div" : "li";
+      highlighted = [];
+      jQuery(".oer_curriculum_inspector_feat_hlite_node").each(function () {
+        let h_id = jQuery(this).attr("data");
+        let h_tp = jQuery(this).attr("typ");
+        highlighted.push([parseInt(h_id), h_tp]);
+      });
+      feats = [];
+      highlighted.map((feat, index) => {
+        let obj;
+
+        if (feat[1] == "cur") {
+          obj = attributes.curriculum.find(
+            (obj) => obj.id == parseInt(feat[0])
+          );
+          const idx = attributes.curriculum.indexOf(parseInt(feat[0]));
+        } else {
+          obj = attributes.resources.find((obj) => obj.id == parseInt(feat[0]));
+          const idx = attributes.resources.indexOf(parseInt(feat[0]));
+        }
+
+        if (typeof obj != "undefined") {
+          feats.push(Object.values(obj));
+        }
+      });
+      let str = "";
+      highlighted.map((hlite, index) => {
+        if (hlite[0] !== undefined && hlite[1] !== undefined) {
+          if (str == "") {
+            str += hlite[0] + "|" + hlite[1];
+          } else {
+            str += "," + hlite[0] + "|" + hlite[1];
+          }
+        }
+      });
+      setAttributes({
+        selectedfeatured: str
+      });
+    }
+
+    function removefeatured() {
+      highlighted = [];
+      jQuery(".oer_curriculum_inspector_feat_hlite_node.stay").each(
+        function () {
+          let h_id = jQuery(this).attr("data");
+          let h_tp = jQuery(this).attr("typ");
+          highlighted.push([parseInt(h_id), h_tp]);
+        }
+      );
+      feats = [];
+      highlighted.map((feat, index) => {
+        let obj;
+
+        if (feat[1] == "cur") {
+          obj = attributes.curriculum.find(
+            (obj) => obj.id == parseInt(feat[0])
+          );
+          const idx = attributes.curriculum.indexOf(parseInt(feat[0]));
+        } else {
+          obj = attributes.resources.find((obj) => obj.id == parseInt(feat[0]));
+          const idx = attributes.resources.indexOf(parseInt(feat[0]));
+        }
+
+        if (typeof obj != "undefined") {
+          feats.push(Object.values(obj));
+        }
+      });
+      let str = "";
+      highlighted.map((hlite, index) => {
+        if (hlite[0] !== undefined && hlite[1] !== undefined) {
+          if (str == "") {
+            str += hlite[0] + "|" + hlite[1];
+          } else {
+            str += "," + hlite[0] + "|" + hlite[1];
+          }
+        }
+      });
+      setAttributes({
+        selectedfeatured: str
+      });
+    } //console.log(highlighted);
+    //console.log(typeof attributes.selectedfeatured);
+
+    if (typeof attributes.selectedfeatured != "undefined") {
+      feats = [];
+      highlighted.map((feat, index) => {
+        let obj;
+
+        if (feat[1] == "cur") {
+          obj = attributes.curriculum.find(
+            (obj) => obj.id == parseInt(feat[0])
+          );
+          const idx = attributes.curriculum.indexOf(parseInt(feat[0]));
+        } else {
+          obj = attributes.resources.find((obj) => obj.id == parseInt(feat[0]));
+          const idx = attributes.resources.indexOf(parseInt(feat[0]));
+        }
+
+        if (typeof obj != "undefined") {
+          feats.push(Object.values(obj));
+        }
+      });
+    } else {
+      feats = [];
+    }
+
+    function onInspectorLoad() {
+      var featexist = setInterval(function () {
+        if (jQuery(".oer_curriculum_inspector_feat_hlite_list").length) {
+          clearInterval(featexist);
+          setTimeout(function () {
+            sort();
+          }, 500);
+        }
+      }, 100); // check every 100ms
+    }
+
+    function onModalQuickButton(elem, index) {
+      var type = elem.target.getAttribute("typ");
+
+      if (type == "res") {
+        jQuery(".oer_curriculum_inspector_feat_modal_resource_wrapper").hide(
+          300,
+          function () {
+            jQuery(
+              ".oer_curriculum_inspector_feat_modal_curriculum_wrapper"
+            ).show(300);
+          }
+        );
+      } else {
+        jQuery(".oer_curriculum_inspector_feat_modal_curriculum_wrapper").hide(
+          300,
+          function () {
+            jQuery(
+              ".oer_curriculum_inspector_feat_modal_resource_wrapper"
+            ).show(300);
+          }
+        );
+      }
+    }
+    /*
+    minslides
+    maxslides
+    moveslides
+    slidewidth
+    slidemargin
+    */
+
+    function onSettingChange(elem, index) {
+      var type = elem.target.getAttribute("typ");
+      var val = elem.target.value;
+
+      switch (type) {
+        case "minslides":
+          setAttributes({
+            minslides: parseInt(val)
+          });
+          break;
+
+        case "maxslides":
+          setAttributes({
+            maxslides: parseInt(val)
+          });
+          break;
+
+        case "moveslides":
+          setAttributes({
+            moveslides: parseInt(val)
+          });
+          break;
+
+        case "slidewidth":
+          setAttributes({
+            slidewidth: parseInt(val)
+          });
+          break;
+
+        case "slidemargin":
+          setAttributes({
+            slidemargin: parseInt(val)
+          });
+          break;
+
+        case "slidealign":
+          setAttributes({
+            slidealign: val
+          });
+          break;
+
+        case "slidedesclength":
+          setAttributes({
+            slidedesclength: parseInt(val)
+          });
+          break;
+
+        case "slideimageheight":
+          setAttributes({
+            slideimageheight: parseInt(val)
+          });
+          break;
+      }
+
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-minslides",
+        attributes.minslides
+      );
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-maxslides",
+        attributes.maxslides
+      );
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-moveslides",
+        attributes.moveslides
+      );
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidewidth",
+        attributes.slidewidth
+      );
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidemargin",
+        attributes.slidemargin
+      );
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidealign",
+        attributes.slidealign
+      );
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" +
+          attributes.blockid +
+          "-slidedesclength",
+        attributes.slidedesclength
+      );
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" +
+          attributes.blockid +
+          "-slideimageheight",
+        attributes.slideimageheight
+      );
+      curriculumfeatslider_reset(attributes.blockid, 750);
+    }
+
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-minslides",
+      attributes.minslides
+    );
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-maxslides",
+      attributes.maxslides
+    );
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-moveslides",
+      attributes.moveslides
+    );
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidewidth",
+      attributes.slidewidth
+    );
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidemargin",
+      attributes.slidemargin
+    );
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidealign",
+      attributes.slidealign
+    );
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidedesclength",
+      attributes.slidedesclength
+    );
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" +
+        attributes.blockid +
+        "-slideimageheight",
+      attributes.slideimageheight
+    );
+
+    function onTitleChange(elem, index) {
+      var blktitle = elem.target.value;
+      blktitle = blktitle == "" ? "" : blktitle;
+      var blkid = elem.target.getAttribute("blk");
+      cgbGlobal["curriculum_feat_title_" + blkid] = blktitle;
+      setAttributes({
+        blocktitle: blktitle
+      });
+    }
+
+    function onSearch(elem, index) {
+      var searchstring = elem.target.value.toLowerCase();
+      setAttributes({
+        resourcesubjectfilter: ""
+      });
+      setAttributes({
+        curriculumsubjectfilter: ""
+      });
+      setAttributes({
+        searchstring: searchstring
+      });
+    }
+
+    function onResourceFilterSubject(elem, index) {
+      var val = elem.target.value;
+      setAttributes({
+        searchstring: ""
+      });
+
+      if (val !== "") {
+        //console.log('SEARCHSTRING:'+val);
+        setAttributes({
+          resourcesubjectfilter: val
+        });
+      } else {
+        //console.log('SEARCHSTRING Blnk:'+val);
+        setAttributes({
+          resourcesubjectfilter: ""
+        });
+      }
+    }
+
+    function onCurriculumFilterSubject(elem, index) {
+      var val = elem.target.value;
+      setAttributes({
+        searchstring: ""
+      });
+
+      if (val !== "") {
+        //console.log('SEARCHSTRING:'+val);
+        setAttributes({
+          curriculumsubjectfilter: val
+        });
+      } else {
+        //console.log('SEARCHSTRING Blnk:'+val);
+        setAttributes({
+          curriculumsubjectfilter: ""
+        });
+      }
+    }
+
+    function onFilterSearchToggle(elem, index) {
+      //console.log('FILTER TOGGLE: '+attributes.filtertype)
+      setAttributes({
+        resourcesubjectfilter: ""
+      });
+      setAttributes({
+        curriculumsubjectfilter: ""
+      });
+      setAttributes({
+        searchstring: ""
+      });
+
+      if (attributes.filtertype == "search") {
+        setAttributes({
+          filtertype: "subject"
+        });
+      } else {
+        setAttributes({
+          filtertype: "search"
+        });
+      }
+    }
+
+    function onBlockWidthChange(elem, index) {
+      var val = elem.target.value;
+      setAttributes({
+        blockwidth: val
+      });
+      jQuery("#block-" + attributes.blockid).css({
+        maxWidth: val + "px"
+      });
+      localStorage.setItem(
+        "lpInspectorFeatBlockwidth-" + attributes.blockid,
+        attributes.blockwidth
+      );
+    }
+
+    jQuery("#block-" + attributes.blockid).css({
+      maxWidth: attributes.blockwidth + "px"
+    });
+    localStorage.setItem(
+      "lpInspectorFeatBlockwidth-" + attributes.blockid,
+      attributes.blockwidth
+    ); 
+    
+    jQuery(document).on('click','.oer_curriculum_right_featuredwpr', function(e){
+      var curblkid = jQuery(e.target).closest('.block-editor-block-list__block').attr('data-block');
+      wp.data.dispatch( 'core/block-editor' ).selectBlock(curblkid);
+    });
+    
+    //console.log(attributes.blockid);
+    //console.log(highlighted);
+    //console.log(attributes.selectedfeatured);
+    //console.log(attributes.blockid);
+    //console.log(feats);
+    //console.log(res_subj_arr);
+    //console.log(cur_subj_arr);
+    //console.log(attributes.minslides);
+    //console.log(attributes.maxslides);
+    //console.log(attributes.moveslides);
+    //console.log(attributes.slidewidth);
+    //console.log(attributes.slidemargin);
+    //const highlightDropdownOptions = ['resources','curriculum'];
+    //const dropClass = (attributes.highlight == 'resources')? 'button oer_curriculum_inspector_feat_addResources': 'button oer_curriculum_inspector_feat_addCurriculum';
+    //const dropText = (attributes.highlight == 'resources')? 'Resources': 'Curriculum';
+
+    let looper = [1];
+    return /*#__PURE__*/ React.createElement(
+      "div",
+      null,
+      /*#__PURE__*/ React.createElement(
+        InspectorControls,
+        null,
+        /*#__PURE__*/ React.createElement(
+          PanelBody,
+          {
+            title: __("Curriculum Featured Block settings"),
+            initialOpen: true
+          },
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oer_curriculum_inspector_wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "label",
+              {
+                class: "components-base-control__label",
+                for: "oer_curriculum_inspector_subject"
+              },
+              "Block Title:"
+            ),
+            /*#__PURE__*/ React.createElement("input", {
+              type: "text",
+              onChange: onTitleChange,
+              class: "ls_inspector_feat_title",
+              value: attributes.blocktitle,
+              blk: attributes.blockid
+            })
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oer_curriculum_inspector_wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "label",
+              {
+                class: "components-base-control__label",
+                for: "oer_curriculum_inspector_subject"
+              },
+              "Block Width"
+            ),
+            /*#__PURE__*/ React.createElement("input", {
+              type: "number",
+              onChange: onBlockWidthChange,
+              class: "ls_inspector_feat_blockwidth",
+              value: attributes.blockwidth,
+              blk: attributes.blockid
+            }),
+            /*#__PURE__*/ React.createElement(
+              "label",
+              {
+                class: "components-base-control__label",
+                for: "oer_curriculum_inspector_subject"
+              },
+              /*#__PURE__*/ React.createElement(
+                "em",
+                null,
+                "Note: Block width setting is only used to simulate the frontend width at backend and will not affect the frontend."
+              )
+            )
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oer_curriculum_inspector_feat_modal_resource_wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "oer_curriculum_inspector_feat_modal_content_main"
+              },
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "oer_curriculum_inspector_feat_modal_wrapper_close"
+                },
+                /*#__PURE__*/ React.createElement("span", {
+                  class: "dashicons dashicons-no"
+                })
+              ),
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "oer_curriculum_inspector_feat_modal_center"
+                },
+                /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class: "oer_curriculum_inspector_feat_modal_table"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "oer_curriculum_inspector_feat_modal_cell"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "div",
+                      {
+                        class: "oer_curriculum_inspector_feat_modal"
+                      },
+                      /*#__PURE__*/ React.createElement(
+                        "div",
+                        {
+                          class: "oer_curriculum_inspector_feat_search_wrapper"
+                        },
+                        /*#__PURE__*/ React.createElement(
+                          "div",
+                          {
+                            class: "oer_curriculum_inspector_feat_search_header"
+                          },
+                          "Resources"
+                        ),
+                        looper.map((tmp, index) => {
+                          if (attributes.filtertype == "subject") {
+                            return /*#__PURE__*/ React.createElement("input", {
+                              type: "button",
+                              onClick: onFilterSearchToggle,
+                              class: "button",
+                              value: "Filter by subject"
+                            });
+                          } else {
+                            return /*#__PURE__*/ React.createElement("input", {
+                              type: "button",
+                              onClick: onFilterSearchToggle,
+                              class: "button",
+                              value: "Filter by search"
+                            });
+                          }
+                        }),
+                        looper.map((tmp, index) => {
+                          if (attributes.filtertype == "subject") {
+                            return /*#__PURE__*/ React.createElement("input", {
+                              type: "text",
+                              onChange: onSearch,
+                              fet: "res",
+                              id: "oer_curriculum_inspector_feat_search",
+                              class: "oer_curriculum_inspector_feat_search",
+                              value: attributes.searchstring
+                            });
+                          } else {
+                            return /*#__PURE__*/ React.createElement(
+                              "select",
+                              {
+                                id:
+                                  "oer_curriculum_inspector_feat_subject_select",
+                                onChange: onResourceFilterSubject,
+                                value: attributes.resourcesubjectfilter
+                              },
+                              /*#__PURE__*/ React.createElement(
+                                "option",
+                                {
+                                  value: ""
+                                },
+                                "All"
+                              ),
+                              res_subj_arr.map((subject, index) => {
+                                if (
+                                  subject.term_id ==
+                                  attributes.resourcesubjectfilter
+                                ) {
+                                  if (subject.parent == 0) {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        selected: "selected",
+                                        value: subject.term_id,
+                                        class:
+                                          "oer_curriculum_inspector_feat_subject_select_bold"
+                                      },
+                                      subject.name + " (" + subject.cnt + ")"
+                                    );
+                                  } else {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        selected: "selected",
+                                        value: subject.term_id
+                                      },
+                                      "├ " +
+                                        subject.name +
+                                        " (" +
+                                        subject.cnt +
+                                        ")"
+                                    );
+                                  }
+                                } else {
+                                  if (subject.parent == 0) {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        value: subject.term_id,
+                                        class:
+                                          "oer_curriculum_inspector_feat_subject_select_bold"
+                                      },
+                                      subject.name + " (" + subject.cnt + ")"
+                                    );
+                                  } else {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        value: subject.term_id
+                                      },
+                                      "├ " +
+                                        subject.name +
+                                        " (" +
+                                        subject.cnt +
+                                        ")"
+                                    );
+                                  }
+                                }
+                              })
+                            );
+                          }
+                        })
+                      ),
+                      /*#__PURE__*/ React.createElement(
+                        "div",
+                        {
+                          class: "oer_curriculum_inspector_feat_modal_content"
+                        },
+                        /*#__PURE__*/ React.createElement(
+                          "div",
+                          {
+                            class:
+                              "oer_curriculum_inspector_feat_modal_content_subcontainer"
+                          },
+                          res_list_arr.map((resource, index) => {
+                            let tex = highlighted.findIndex(
+                              findMatch(resource.id)
+                            );
+                            let str = attributes.searchstring;
+                            let flt = attributes.resourcesubjectfilter;
+                            let ttl = resource.title.toLowerCase();
+                            let tax = resource.tax.toString();
+                            var taxarray = tax.split("|");
+
+                            if (
+                              attributes.searchstring == "" ||
+                              !attributes.searchstring
+                            ) {
+                              //empty search string
+                              if (flt != "" && flt !== undefined) {
+                                if (taxarray.includes(flt)) {
+                                  // Subject Matched
+                                  //if( tax.indexOf(flt) !== -1 ){ // Subject Matched
+                                  if (tex != -1) {
+                                    // Checked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: resource.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          cgbGlobal["pluginDirUrl"] +
+                                          "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          checked: "checked",
+                                          onClick: updateHighlight,
+                                          fet: "res",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: resource.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      unescape(resource.title)
+                                    );
+                                  } else {
+                                    //Unchecked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: resource.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          cgbGlobal["pluginDirUrl"] +
+                                          "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          onClick: updateHighlight,
+                                          fet: "res",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: resource.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      unescape(resource.title)
+                                    );
+                                  }
+                                }
+                              } else {
+                                if (tex != -1) {
+                                  // Checked
+                                  return /*#__PURE__*/ React.createElement(
+                                    "label",
+                                    {
+                                      class:
+                                        "components-base-control__label ls_inspector_feat_modal_label",
+                                      srch: resource.title.toLowerCase()
+                                    },
+                                    /*#__PURE__*/ React.createElement("img", {
+                                      src:
+                                        cgbGlobal["pluginDirUrl"] +
+                                        "/images/preloader.gif"
+                                    }),
+                                    /*#__PURE__*/ React.createElement("input", {
+                                      checked: "checked",
+                                      onClick: updateHighlight,
+                                      fet: "res",
+                                      id: "inspector-checkbox-control-" + index,
+                                      idx: index,
+                                      class: "ls_inspector_feat_modal_checkbox",
+                                      type: "checkbox",
+                                      data: resource.id,
+                                      tax: tax
+                                    }),
+                                    unescape(resource.title)
+                                  );
+                                } else {
+                                  //Unchecked
+                                  return /*#__PURE__*/ React.createElement(
+                                    "label",
+                                    {
+                                      class:
+                                        "components-base-control__label ls_inspector_feat_modal_label",
+                                      srch: resource.title.toLowerCase()
+                                    },
+                                    /*#__PURE__*/ React.createElement("img", {
+                                      src:
+                                        cgbGlobal["pluginDirUrl"] +
+                                        "/images/preloader.gif"
+                                    }),
+                                    /*#__PURE__*/ React.createElement("input", {
+                                      onClick: updateHighlight,
+                                      fet: "res",
+                                      id: "inspector-checkbox-control-" + index,
+                                      idx: index,
+                                      class: "ls_inspector_feat_modal_checkbox",
+                                      type: "checkbox",
+                                      data: resource.id,
+                                      tax: tax
+                                    }),
+                                    unescape(resource.title)
+                                  );
+                                }
+                              }
+                            } else {
+                              //search string is provided
+                              if (taxarray.includes(flt)) {
+                                // Subject Matched
+                                //if(tax.indexOf(flt) !== -1){ // subject filter matched
+                                if (ttl.indexOf(str) !== -1) {
+                                  // search string matched
+                                  if (tex != -1) {
+                                    // Checked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: resource.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          cgbGlobal["pluginDirUrl"] +
+                                          "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          checked: "checked",
+                                          onClick: updateHighlight,
+                                          fet: "res",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: resource.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      unescape(resource.title)
+                                    );
+                                  } else {
+                                    return (
+                                      /*#__PURE__*/
+                                      // Unchecked
+                                      React.createElement(
+                                        "label",
+                                        {
+                                          class:
+                                            "components-base-control__label ls_inspector_feat_modal_label",
+                                          srch: resource.title.toLowerCase()
+                                        },
+                                        /*#__PURE__*/ React.createElement(
+                                          "img",
+                                          {
+                                            src:
+                                              cgbGlobal["pluginDirUrl"] +
+                                              "/images/preloader.gif"
+                                          }
+                                        ),
+                                        /*#__PURE__*/ React.createElement(
+                                          "input",
+                                          {
+                                            onClick: updateHighlight,
+                                            fet: "res",
+                                            id:
+                                              "inspector-checkbox-control-" +
+                                              index,
+                                            idx: index,
+                                            class:
+                                              "ls_inspector_feat_modal_checkbox",
+                                            type: "checkbox",
+                                            data: resource.id,
+                                            tax: tax
+                                          }
+                                        ),
+                                        unescape(resource.title)
+                                      )
+                                    );
+                                  }
+                                }
+                              } else {
+                                //subject filter mismatch
+                                if (ttl.indexOf(str) !== -1) {
+                                  // search string matched
+                                  if (tex != -1) {
+                                    // Checked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: resource.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          cgbGlobal["pluginDirUrl"] +
+                                          "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          checked: "checked",
+                                          onClick: updateHighlight,
+                                          fet: "res",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: resource.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      unescape(resource.title)
+                                    );
+                                  } else {
+                                    return (
+                                      /*#__PURE__*/
+                                      // Unchecked
+                                      React.createElement(
+                                        "label",
+                                        {
+                                          class:
+                                            "components-base-control__label ls_inspector_feat_modal_label",
+                                          srch: resource.title.toLowerCase()
+                                        },
+                                        /*#__PURE__*/ React.createElement(
+                                          "img",
+                                          {
+                                            src:
+                                              cgbGlobal["pluginDirUrl"] +
+                                              "/images/preloader.gif"
+                                          }
+                                        ),
+                                        /*#__PURE__*/ React.createElement(
+                                          "input",
+                                          {
+                                            onClick: updateHighlight,
+                                            fet: "res",
+                                            id:
+                                              "inspector-checkbox-control-" +
+                                              index,
+                                            idx: index,
+                                            class:
+                                              "ls_inspector_feat_modal_checkbox",
+                                            type: "checkbox",
+                                            data: resource.id,
+                                            tax: tax
+                                          }
+                                        ),
+                                        unescape(resource.title)
+                                      )
+                                    );
+                                  }
+                                }
+                              }
+                            }
+                          })
+                        )
+                      ),
+                      /*#__PURE__*/ React.createElement(
+                        "div",
+                        {
+                          class: "oer_curriculum_inspector_feat_search_footer"
+                        },
+                        /*#__PURE__*/ React.createElement("input", {
+                          type: "button",
+                          class:
+                            "button oer_curriculum_inspector_feat_quickswitchbutton",
+                          onClick: onModalQuickButton,
+                          typ: "res",
+                          value: "Curriculum lists >"
+                        })
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oer_curriculum_inspector_feat_modal_curriculum_wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "oer_curriculum_inspector_feat_modal_content_main"
+              },
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "oer_curriculum_inspector_feat_modal_wrapper_close"
+                },
+                /*#__PURE__*/ React.createElement("span", {
+                  class: "dashicons dashicons-no"
+                })
+              ),
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "oer_curriculum_inspector_feat_modal_center"
+                },
+                /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class: "oer_curriculum_inspector_feat_modal_table"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "oer_curriculum_inspector_feat_modal_cell"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "div",
+                      {
+                        class: "oer_curriculum_inspector_feat_modal"
+                      },
+                      /*#__PURE__*/ React.createElement(
+                        "div",
+                        {
+                          class: "oer_curriculum_inspector_feat_search_wrapper"
+                        },
+                        /*#__PURE__*/ React.createElement(
+                          "div",
+                          {
+                            class: "oer_curriculum_inspector_feat_search_header"
+                          },
+                          "Curriculum"
+                        ),
+                        looper.map((tmp, index) => {
+                          if (attributes.filtertype == "subject") {
+                            return /*#__PURE__*/ React.createElement("input", {
+                              type: "button",
+                              onClick: onFilterSearchToggle,
+                              class: "button",
+                              value: "Filter by subject"
+                            });
+                          } else {
+                            return /*#__PURE__*/ React.createElement("input", {
+                              type: "button",
+                              onClick: onFilterSearchToggle,
+                              class: "button",
+                              value: "Filter by search"
+                            });
+                          }
+                        }),
+                        looper.map((tmp, index) => {
+                          if (attributes.filtertype == "subject") {
+                            return /*#__PURE__*/ React.createElement("input", {
+                              type: "text",
+                              onChange: onSearch,
+                              fet: "res",
+                              id: "oer_curriculum_inspector_feat_search",
+                              class: "oer_curriculum_inspector_feat_search",
+                              value: attributes.searchstring
+                            });
+                          } else {
+                            return /*#__PURE__*/ React.createElement(
+                              "select",
+                              {
+                                id:
+                                  "oer_curriculum_inspector_feat_subject_select",
+                                onChange: onCurriculumFilterSubject,
+                                value: attributes.curriculumsubjectfilter
+                              },
+                              /*#__PURE__*/ React.createElement(
+                                "option",
+                                {
+                                  value: ""
+                                },
+                                "All"
+                              ),
+                              cur_subj_arr.map((subject, index) => {
+                                if (
+                                  subject.term_id ==
+                                  attributes.curriculumsubjectfilter
+                                ) {
+                                  if (subject.parent == 0) {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        selected: "selected",
+                                        value: subject.term_id,
+                                        class:
+                                          "oer_curriculum_inspector_feat_subject_select_bold"
+                                      },
+                                      subject.name + " (" + subject.cnt + ")"
+                                    );
+                                  } else {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        selected: "selected",
+                                        value: subject.term_id
+                                      },
+                                      "├ " +
+                                        subject.name +
+                                        " (" +
+                                        subject.cnt +
+                                        ")"
+                                    );
+                                  }
+                                } else {
+                                  if (subject.parent == 0) {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        value: subject.term_id,
+                                        class:
+                                          "oer_curriculum_inspector_feat_subject_select_bold"
+                                      },
+                                      subject.name + " (" + subject.cnt + ")"
+                                    );
+                                  } else {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        value: subject.term_id
+                                      },
+                                      "├ " +
+                                        subject.name +
+                                        " (" +
+                                        subject.cnt +
+                                        ")"
+                                    );
+                                  }
+                                }
+                              })
+                            );
+                          }
+                        })
+                      ),
+                      /*#__PURE__*/ React.createElement(
+                        "div",
+                        {
+                          class: "oer_curriculum_inspector_feat_modal_content"
+                        },
+                        /*#__PURE__*/ React.createElement(
+                          "div",
+                          {
+                            class:
+                              "oer_curriculum_inspector_feat_modal_content_subcontainer"
+                          },
+                          cur_list_arr.map((curriculum, index) => {
+                            let tex = highlighted.findIndex(
+                              findMatch(curriculum.id)
+                            );
+                            let str = attributes.searchstring;
+                            let flt = attributes.curriculumsubjectfilter;
+                            let ttl = curriculum.title.toLowerCase();
+                            let tax = curriculum.tax.toString();
+
+                            if (
+                              attributes.searchstring == "" ||
+                              !attributes.searchstring
+                            ) {
+                              //empty search string
+                              if (flt != "" && flt !== undefined) {
+                                if (tax.indexOf(flt) !== -1) {
+                                  // Subject Matched
+                                  if (tex != -1) {
+                                    // Checked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: curriculum.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          cgbGlobal["pluginDirUrl"] +
+                                          "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          checked: "checked",
+                                          onClick: updateHighlight,
+                                          fet: "cur",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: curriculum.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      curriculum.title
+                                    );
+                                  } else {
+                                    //Unchecked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: curriculum.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          cgbGlobal["pluginDirUrl"] +
+                                          "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          onClick: updateHighlight,
+                                          fet: "cur",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: curriculum.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      curriculum.title
+                                    );
+                                  }
+                                }
+                              } else {
+                                if (tex != -1) {
+                                  // Checked
+                                  return /*#__PURE__*/ React.createElement(
+                                    "label",
+                                    {
+                                      class:
+                                        "components-base-control__label ls_inspector_feat_modal_label",
+                                      srch: curriculum.title.toLowerCase()
+                                    },
+                                    /*#__PURE__*/ React.createElement("img", {
+                                      src:
+                                        cgbGlobal["pluginDirUrl"] +
+                                        "/images/preloader.gif"
+                                    }),
+                                    /*#__PURE__*/ React.createElement("input", {
+                                      checked: "checked",
+                                      onClick: updateHighlight,
+                                      fet: "cur",
+                                      id: "inspector-checkbox-control-" + index,
+                                      idx: index,
+                                      class: "ls_inspector_feat_modal_checkbox",
+                                      type: "checkbox",
+                                      data: curriculum.id,
+                                      tax: tax
+                                    }),
+                                    curriculum.title
+                                  );
+                                } else {
+                                  //Unchecked
+                                  return /*#__PURE__*/ React.createElement(
+                                    "label",
+                                    {
+                                      class:
+                                        "components-base-control__label ls_inspector_feat_modal_label",
+                                      srch: curriculum.title.toLowerCase()
+                                    },
+                                    /*#__PURE__*/ React.createElement("img", {
+                                      src:
+                                        cgbGlobal["pluginDirUrl"] +
+                                        "/images/preloader.gif"
+                                    }),
+                                    /*#__PURE__*/ React.createElement("input", {
+                                      onClick: updateHighlight,
+                                      fet: "cur",
+                                      id: "inspector-checkbox-control-" + index,
+                                      idx: index,
+                                      class: "ls_inspector_feat_modal_checkbox",
+                                      type: "checkbox",
+                                      data: curriculum.id,
+                                      tax: tax
+                                    }),
+                                    curriculum.title
+                                  );
+                                }
+                              }
+                            } else {
+                              //search string is provided
+                              if (tax.indexOf(flt) !== -1) {
+                                // subject filter matched
+                                if (ttl.indexOf(str) !== -1) {
+                                  // search string matched
+                                  if (tex != -1) {
+                                    // Checked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: curriculum.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          cgbGlobal["pluginDirUrl"] +
+                                          "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          checked: "checked",
+                                          onClick: updateHighlight,
+                                          fet: "cur",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: curriculum.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      curriculum.title
+                                    );
+                                  } else {
+                                    return (
+                                      /*#__PURE__*/
+                                      // Unchecked
+                                      React.createElement(
+                                        "label",
+                                        {
+                                          class:
+                                            "components-base-control__label ls_inspector_feat_modal_label",
+                                          srch: curriculum.title.toLowerCase()
+                                        },
+                                        /*#__PURE__*/ React.createElement(
+                                          "img",
+                                          {
+                                            src:
+                                              cgbGlobal["pluginDirUrl"] +
+                                              "/images/preloader.gif"
+                                          }
+                                        ),
+                                        /*#__PURE__*/ React.createElement(
+                                          "input",
+                                          {
+                                            onClick: updateHighlight,
+                                            fet: "cur",
+                                            id:
+                                              "inspector-checkbox-control-" +
+                                              index,
+                                            idx: index,
+                                            class:
+                                              "ls_inspector_feat_modal_checkbox",
+                                            type: "checkbox",
+                                            data: curriculum.id,
+                                            tax: tax
+                                          }
+                                        ),
+                                        curriculum.title
+                                      )
+                                    );
+                                  }
+                                }
+                              } else {
+                                //subject filter mismatch
+                                if (ttl.indexOf(str) !== -1) {
+                                  // search string matched
+                                  if (tex != -1) {
+                                    // Checked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: curriculum.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          cgbGlobal["pluginDirUrl"] +
+                                          "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          checked: "checked",
+                                          onClick: updateHighlight,
+                                          fet: "cur",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: curriculum.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      curriculum.title
+                                    );
+                                  } else {
+                                    return (
+                                      /*#__PURE__*/
+                                      // Unchecked
+                                      React.createElement(
+                                        "label",
+                                        {
+                                          class:
+                                            "components-base-control__label ls_inspector_feat_modal_label",
+                                          srch: curriculum.title.toLowerCase()
+                                        },
+                                        /*#__PURE__*/ React.createElement(
+                                          "img",
+                                          {
+                                            src:
+                                              cgbGlobal["pluginDirUrl"] +
+                                              "/images/preloader.gif"
+                                          }
+                                        ),
+                                        /*#__PURE__*/ React.createElement(
+                                          "input",
+                                          {
+                                            onClick: updateHighlight,
+                                            fet: "cur",
+                                            id:
+                                              "inspector-checkbox-control-" +
+                                              index,
+                                            idx: index,
+                                            class:
+                                              "ls_inspector_feat_modal_checkbox",
+                                            type: "checkbox",
+                                            data: curriculum.id,
+                                            tax: tax
+                                          }
+                                        ),
+                                        curriculum.title
+                                      )
+                                    );
+                                  }
+                                }
+                              }
+                            }
+                          })
+                        )
+                      ),
+                      /*#__PURE__*/ React.createElement(
+                        "div",
+                        {
+                          class: "oer_curriculum_inspector_feat_search_footer"
+                        },
+                        /*#__PURE__*/ React.createElement("input", {
+                          type: "button",
+                          class:
+                            "button oer_curriculum_inspector_feat_quickswitchbutton",
+                          onClick: onModalQuickButton,
+                          typ: "cur",
+                          value: "Resources lists >"
+                        })
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oer_curriculum_inspector_wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "label",
+              {
+                class: "components-base-control__label",
+                for: "oer_curriculum_inspector_subject"
+              },
+              "Featured List:"
+            ),
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "oer_curriculum_inspector_feat_addbutton_wrapper"
+              },
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "button oer_curriculum_inspector_feat_addResources"
+                },
+                "Add Resources"
+              ),
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "button oer_curriculum_inspector_feat_addCurriculum"
+                },
+                "Add Curriculum"
+              )
+            ),
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "oer_curriculum_inspector_feat_hlite_list"
+              },
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  id: "oer_curriculum_inspector_feat_hlite_featured",
+                  class: "oer_curriculum_inspector_feat_hlite_featured"
+                },
+                feats.map((feat, index) => {
+                  if (prevelem == "li") {
+                    return /*#__PURE__*/ React.createElement(
+                      "div",
+                      {
+                        draggable: true,
+                        onMouseup: updateposition,
+                        class:
+                          "oer_curriculum_inspector_feat_hlite_node stay " +
+                          feat[6],
+                        data: feat[0],
+                        typ: feat[6]
+                      },
+                      feat[1],
+                      /*#__PURE__*/ React.createElement("span", {
+                        class: "dashicons dashicons-dismiss"
+                      })
+                    );
+                  } else {
+                    return /*#__PURE__*/ React.createElement(
+                      "li",
+                      {
+                        draggable: true,
+                        onMouseup: updateposition,
+                        class:
+                          "oer_curriculum_inspector_feat_hlite_node stay " +
+                          feat[6],
+                        data: feat[0],
+                        typ: feat[6]
+                      },
+                      feat[1],
+                      /*#__PURE__*/ React.createElement("span", {
+                        class: "dashicons dashicons-dismiss"
+                      })
+                    );
+                  }
+                })
+              ),
+              /*#__PURE__*/ React.createElement("div", {
+                class:
+                  "button oer_curriculum_inspector_feat_hlite_reposition_trigger",
+                onClick: updateposition,
+                blkid: attributes.blockid
+              }),
+              /*#__PURE__*/ React.createElement("div", {
+                class:
+                  "button oer_curriculum_inspector_feat_hlite_remove_trigger",
+                height: "0",
+                width: "0",
+                onClick: removefeatured,
+                blkid: attributes.blockid
+              })
+            )
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oer_curriculum_inspector_wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "label",
+              {
+                class: "components-base-control__label",
+                for: "oer_curriculum_inspector_subject"
+              },
+              "Slider Setting:"
+            ),
+            /*#__PURE__*/ React.createElement(
+              "table",
+              {
+                class: "oer_curriculum_inspector_feat_slider_setting",
+                cellspacing: "2"
+              },
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "The minimum number of slides to be shown. Slides will be sized down if slider becomes smaller than the original size."
+                    )
+                  ),
+                  "Min. Slides:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "select",
+                    {
+                      id: "oer_curriculum_inspector_feat_slider_minslides",
+                      onChange: onSettingChange,
+                      typ: "minslides",
+                      value: attributes.minslides
+                    },
+                    globalSettingOptions.map((incr, index) => {
+                      let ret =
+                        incr == attributes.minslides
+                          ? /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                selected: true,
+                                value: incr
+                              },
+                              incr
+                            )
+                          : /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                value: incr
+                              },
+                              incr
+                            );
+                      return ret;
+                    })
+                  )
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "The maximum number of slides to be shown. Slides will be sized up if slider becomes larger than the original size."
+                    )
+                  ),
+                  "Max. Slides:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "select",
+                    {
+                      id: "oer_curriculum_inspector_feat_slider_maxslides",
+                      onChange: onSettingChange,
+                      typ: "maxslides",
+                      value: attributes.maxslides
+                    },
+                    globalSettingOptions.map((incr, index) => {
+                      let ret =
+                        incr == attributes.maxslides
+                          ? /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                selected: true,
+                                value: incr
+                              },
+                              incr
+                            )
+                          : /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                value: incr
+                              },
+                              incr
+                            );
+                      return ret;
+                    })
+                  )
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "The number of slides to move on transition. This value must be greater than or equal to minSlides, and less than or equal to maxSlides. If value is greater than the fully-visible slides, then the count of fully-visible slides will be used."
+                    )
+                  ),
+                  "Move Slides:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "select",
+                    {
+                      id: "oer_curriculum_inspector_feat_slider_moveslides",
+                      onChange: onSettingChange,
+                      typ: "moveslides",
+                      value: attributes.moveslides
+                    },
+                    globalSettingOptions.map((incr, index) => {
+                      let ret =
+                        incr == attributes.moveslides
+                          ? /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                selected: true,
+                                value: incr
+                              },
+                              incr
+                            )
+                          : /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                value: incr
+                              },
+                              incr
+                            );
+                      return ret;
+                    })
+                  )
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "Width of each slide."
+                    )
+                  ),
+                  "Slide Width:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement("input", {
+                    type: "number",
+                    id: "oer_curriculum_inspector_feat_slider_slidewidth",
+                    typ: "slidewidth",
+                    onChange: onSettingChange,
+                    value: attributes.slidewidth
+                  })
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "Space between slides"
+                    )
+                  ),
+                  "Slide Margin:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "select",
+                    {
+                      id: "oer_curriculum_inspector_feat_slider_slidemargin",
+                      onChange: onSettingChange,
+                      typ: "slidemargin",
+                      value: attributes.slidemargin
+                    },
+                    globalSettingMargin.map((incr, index) => {
+                      let ret =
+                        incr == attributes.slidemargin
+                          ? /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                selected: true,
+                                value: incr
+                              },
+                              incr
+                            )
+                          : /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                value: incr
+                              },
+                              incr
+                            );
+                      return ret;
+                    })
+                  )
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "Left, right or middle alignment"
+                    )
+                  ),
+                  "Alignmnet:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "select",
+                    {
+                      id: "oer_curriculum_inspector_feat_slider_slidealign",
+                      onChange: onSettingChange,
+                      typ: "slidealign",
+                      value: attributes.slidealign
+                    },
+                    globalSettingAlign.map((incr, index) => {
+                      let ret =
+                        incr == attributes.slidemargin
+                          ? /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                selected: true,
+                                value: incr
+                              },
+                              incr
+                            )
+                          : /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                value: incr
+                              },
+                              incr
+                            );
+                      return ret;
+                    })
+                  )
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "Length of description to display."
+                    )
+                  ),
+                  "Description length:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement("input", {
+                    type: "number",
+                    id: "oer_curriculum_inspector_feat_slider_slidedesclength",
+                    typ: "slidedesclength",
+                    onChange: onSettingChange,
+                    value: attributes.slidedesclength
+                  })
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "Adjust image height"
+                    )
+                  ),
+                  "Image height:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement("input", {
+                    type: "number",
+                    id: "oer_curriculum_inspector_feat_slider_slideimageheight",
+                    typ: "slideimageheight",
+                    onChange: onSettingChange,
+                    value: attributes.slideimageheight
+                  })
+                )
+              )
+            )
+          ),
+          /*#__PURE__*/ React.createElement("img", {
+            // onload hack fires when block is added
+            className: "onload-hack-pp",
+            height: "0",
+            width: "0",
+            onLoad: onInspectorLoad,
+            src: cgbGlobal["pluginDirUrl"] + "//images/default-img.jpg"
+          })
+        )
+      ),
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          class: "oer_curriculum_right_featuredwpr"
+        },
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class:
+              "oer-curriculum-ftrdttl curriculum-feat-title_" +
+              attributes.blockid
+          },
+          attributes.blocktitle
+        ),
+        /*#__PURE__*/ React.createElement(
+          "ul",
+          {
+            class:
+              "featuredwpr_bxslider featuredwpr_bxslider_" + attributes.blockid,
+            blk: attributes.blockid
+          },
+          feats.map((feat, index) => {
+            //let ctnt = feat[2].replace(/<[^>]+>/g, '');
+            let ctnt = feat[2];
+
+            if (ctnt.length > attributes.slidedesclength) {
+              ctnt =
+                unescape(ctnt.substr(0, attributes.slidedesclength)) + "...";
+            } //console.log(feat);
+
+            return /*#__PURE__*/ React.createElement(
+              "li",
+              {
+                atrr: feat[0]
+              },
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "frtdsnglwpr"
+                },
+                /*#__PURE__*/ React.createElement(
+                  "a",
+                  {
+                    href: feat[3],
+                    tabindex: "-1"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "img"
+                    },
+                    /*#__PURE__*/ React.createElement("img", {
+                      src: feat[4],
+                      alt: feat[1]
+                    })
+                  )
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class: "ttl"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "a",
+                    {
+                      href: feat[3],
+                      tabindex: "-1"
+                    },
+                    feat[1]
+                  )
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class: "desc"
+                  },
+                  ctnt
+                )
+              )
+            );
+          })
+        )
+      )
+    );
+  },
+
+  /**
+   * The save function defines the way in which the different attributes should be combined
+   * into the final markup, which is then serialized by Gutenberg into post_content.
+   *
+   * The "save" property must be specified and must be a valid function.
+   *
+   * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+   *
+   * @param {Object} props Props.
+   * @returns {Mixed} JSX Frontend HTML.
+   */
+  save: (props) => {
+    return null;
+  }
+});
