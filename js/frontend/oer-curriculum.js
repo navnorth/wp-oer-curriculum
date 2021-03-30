@@ -101,11 +101,8 @@ function splitTextIntoColumns(selector) {
 
 jQuery(window).load(function() {
     var maxOerResourceBlockHeight = 356;
-    //setTimeout(function(){
       jQuery('.oer-curriculum-primary-sources-row').find('.media-image').each(function(i, obj) {
-          var tempheight = obj.offsetHeight;
-          maxOerResourceBlockHeight = (tempheight > maxOerResourceBlockHeight)? tempheight: maxOerResourceBlockHeight;
+          maxOerResourceBlockHeight = (obj.offsetHeight > maxOerResourceBlockHeight)? obj.offsetHeight: maxOerResourceBlockHeight;
       });
       jQuery('.oer-curriculum-primary-sources-row').find('.media-image').height(maxOerResourceBlockHeight);
-    //}, 3000);
 });

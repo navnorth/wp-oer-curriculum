@@ -93,12 +93,14 @@ $root_slug = oer_curriculum_retrieve_rootslug();
 register_activation_hook( __FILE__, 'check_parent_plugin' );
 function check_parent_plugin()
 {
-    // Require parent plugin
-    if( !current_user_can( 'activate_plugins' ))
-    {
+    // Require parent plugin  
+    if( !current_user_can( 'activate_plugins' )){
         wp_die('Sorry, but you don\'t have enough permission to install this plugin. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
+    }else{
+      if (!defined('OER_ADMIN_PLUGIN_NAME')) {
+        wp_die('This plugin requires Wordpress <a href="https://wordpress.org/plugins/wp-oer/" target="_new">Open Educational Resources (OER)</a> Plugin. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
+      }
     }
-
 }
 
 /**
