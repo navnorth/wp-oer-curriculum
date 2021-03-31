@@ -6,7 +6,7 @@
   /**
    * Enqueue the assets
    */
-  wp_enqueue_style('oer-curriculum-load-fa', OER_LESSON_PLAN_URL.'lib/font-awesome/css/all.min.css');
+  wp_enqueue_style('oer-curriculum-load-fa', OER_LESSON_PLAN_URL.'lib/fontawesome/css/all.min.css');
   wp_enqueue_style('oer-curriculum-bootstrap', OER_LESSON_PLAN_URL.'lib/bootstrap-3.3.7/css/bootstrap.min.css');
   wp_enqueue_script('oer-curriculum-frontend', OER_LESSON_PLAN_URL.'js/frontend/oer-curriculum.js', array('jquery'), null, true);
   wp_enqueue_script( 'jquery-ui-slider' );
@@ -81,6 +81,9 @@
       <div class="row oer-curriculum-featured-section">
           
           <div class="row tc-oer-curriculum-details-content">
+              <div class="row tc-oer-curriculum-details-header-fixed">
+                  <h1 class="tc-oer-curriculum-title"><?php echo the_title(); ?></h1>
+              </div>
               <div class="col-md-8 col-sm-12 col-xs-12 curriculum-detail padding-left-0">
                 <div class="row tc-oer-curriculum-details-header">
                     <h1 class="tc-oer-curriculum-title"><?php echo the_title(); ?></h1>

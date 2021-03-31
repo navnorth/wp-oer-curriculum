@@ -218,7 +218,7 @@ function oer_curriculum_get_assets() {
         (isset($_GET['post_type']) && $_GET['post_type'] == 'oer-curriculum') ||
         (isset($post->post_type) && $post->post_type == 'oer-curriculum')
     ) {
-        wp_enqueue_style('oer-curriculum-load-fa', OER_LESSON_PLAN_URL . 'lib/font-awesome/css/all.min.css');
+        wp_enqueue_style('oer-curriculum-load-fa', OER_LESSON_PLAN_URL . 'lib/fontawesome/css/all.min.css');
         wp_enqueue_style('oer-curriculum-bootstrap', OER_LESSON_PLAN_URL . 'lib/bootstrap-3.3.7/css/bootstrap.min.css');
         wp_enqueue_style('oer-curriculum-admin-style', OER_LESSON_PLAN_URL . 'css/backend/oer-curriculum-style.css');
         wp_enqueue_style('oer-curriculum-resource-selector-style', OER_LESSON_PLAN_URL . 'css/backend/oer-curriculum-resource-selector-style.css', array() , null, 'all');
@@ -254,7 +254,7 @@ if (!function_exists('oer_curriculum_enqueue_scripts_and_styles')) {
             if (!wp_style_is('oer-curriculum-load-fa', 'enqueued') && 
                 !wp_style_is('fontawesome-style', 'enqueued') && 
                 !wp_style_is('fontawesome', 'enqueued')) {
-                wp_enqueue_style('oer-curriculum-load-fa', OER_LESSON_PLAN_URL . 'lib/font-awesome/css/all.min.css');
+                wp_enqueue_style('oer-curriculum-load-fa', OER_LESSON_PLAN_URL . 'lib/fontawesome/css/all.min.css');
             }
             wp_enqueue_style('oer-curriculum-style', OER_LESSON_PLAN_URL . 'css/frontend/oer-curriculum-style.css');
             wp_enqueue_script('oer-curriculum-script', OER_LESSON_PLAN_URL . 'js/frontend/oer-curriculum-script.js', array('jquery'));

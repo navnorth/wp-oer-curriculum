@@ -1,68 +1,28 @@
-jQuery(document).ready(function($){
+jQuery(window).load(function() {
     // When the user scrolls down 50px from the top of the document, fixed the header to the top
+    $=jQuery;
     if(jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').length){
       var headerHeight = jQuery('#side-header.fusion-mobile-menu-design-classic').outerHeight();
-      window.onscroll = function() {
-          if (jQuery(window).width()<=600){
-              var rightWidth = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').width();
-              var oerCurriculumTop = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().top;
-              var leftedge = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().left;   
-              if (document.body.scrollTop > oerCurriculumTop || document.documentElement.scrollTop > oerCurriculumTop) {
-                  jQuery('.tc-oer-curriculum-details-header').css({
-                      "background":"#ffffff",
-                      "padding":"15px 50px",
-                      "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
-                      "z-index":"999999",
-                      "top":"0"
-                  });
-                  jQuery('.tc-oer-curriculum-details-header').addClass('fixed');
-              } else {
-                  topPos = headerHeight - document.documentElement.scrollTop;
-                  topPos += 60;
-                  if (jQuery('#wpadminbar').length>0)
-                      topPos = topPos + 32;
-                  jQuery('.tc-oer-curriculum-details-header').css({
-                      "background":"none",
-                      "padding":"25px 0px",
-                      "box-shadow":"none",
-                      "z-index":"0",
-                      "width":"100%",
-                      "top": topPos + "px",
-                      "width": rightWidth + "px",
-                      "left": leftedge + "px"
-                  });
-                  jQuery('.tc-oer-curriculum-details-header').removeClass('fixed');
-              }
-          } else {
-              var rightWidth = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').width();
-              var leftedge = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().left;    
-              var oerCurriculumTop = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().top;      
-              if (document.body.scrollTop > oerCurriculumTop || document.documentElement.scrollTop > oerCurriculumTop) {
-                  jQuery('.tc-oer-curriculum-details-header').css({
-                      "background":"#ffffff",
-                      "padding":"15px 50px",
-                      "box-shadow": "1px 1px 5px 0px rgba(0,0,0,0.2)",
-                      "z-index":"999999",
-                      "width": rightWidth + "px",
-                      "left": leftedge + "px"
-                  });
-                  jQuery('.tc-oer-curriculum-details-header').addClass('fixed');
-              } else {
-                  jQuery('.tc-oer-curriculum-details-header').css({
-                      "background":"none",
-                      "padding":"25px 0px",
-                      "box-shadow":"none",
-                      "z-index":"0",
-                      "width":"100%"
-                  });
-                  jQuery('.tc-oer-curriculum-details-header').removeClass('fixed');
-              }
-          }
-      }
+      var rightWidth = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').width();
+      var leftedge = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().left;    
+      var oerCurriculumTop = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().top;
+      jQuery('.tc-oer-curriculum-details-header-fixed').css({
+          "width": rightWidth + "px",
+          "minWidth": rightWidth + "px",
+          "left": leftedge + "px"
+      });
+      oer_resize_header();
+      oer_header_fixed(true);
+      window.onscroll = function() { oer_header_fixed(); }
+      var resizeit;
+      jQuery(window).resize(function(){
+        clearTimeout(resizeit);
+        resizeit = setTimeout(function(){
+          oer_resize_header();
+        }, 100);
+      });
     
     }
-    
-    
     
     $('.oer-curriculum-nav-right-ajax').on("click", function(){
         var id = $(this).attr('data-id');
@@ -177,19 +137,7 @@ jQuery(document).ready(function($){
     if ($('.oer-curriculum-nav-right,.oer-curriculum-nav-left').is(":visible")) {
          $('.oer-curriculum-nav-right,.oer-curriculum-nav-left').attr('data-activetab', $('.ps-info-tabs li a.nav-link.active').attr('id'));
     }
-    
-    /*
-    if (typeof wp.data !== "undefined") {
-  		wp.data.subscribe(function(){
-  			var isSav = wp.data.select('core/editor').isSavingPost();
-  			var isAutosavingPost = wp.data.select('core/editor').isAutosavingPost();
-  			
-  			if (isSavingPost && !isAutosavingPost) {
-  				window.tinyMCE.triggerSave();
-  			}
-  		});
-  	}
-    */
+
     
     // set external links to open in new window and have distinct style
     $('a').each(function() {
@@ -199,11 +147,6 @@ jQuery(document).ready(function($){
             $(this).attr( 'target','_blank' );
             $(this).addClass( 'external_link' );
         }
-        /*var a = new RegExp('' + window.location.host + '|mailto' , 'i');
-        if(!a.test(this.href)) {
-            $(this).attr( 'target','_blank' );
-            $(this).addClass( 'external_link' );
-        }*/
     });
     
     setTimeout(function(){
@@ -212,6 +155,59 @@ jQuery(document).ready(function($){
     
     
 });
+
+/* Adjust Header on window resize */
+function oer_resize_header(){
+  if (jQuery('#wpadminbar').length>0){
+    if (jQuery(window).width() > 586){
+      var adminbarheight = jQuery('#wpadminbar').height();
+    }else{
+      var adminbarheight = 0;
+    }
+  }
+  var rightWidth = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').width();
+  var leftedge = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().left;
+  jQuery('.tc-oer-curriculum-details-header-fixed').css({
+      "width": rightWidth + "px",
+      "left": leftedge + "px",
+      "top":adminbarheight+'px'
+  });
+}
+
+/* Float Header on scroll */
+function oer_header_fixed(isonload){
+  rightWidth = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').width();
+  leftedge = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().left;    
+  oerCurriculumTop = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().top;
+      
+  if (document.body.scrollTop > oerCurriculumTop || document.documentElement.scrollTop > oerCurriculumTop) {
+    if (jQuery(window).width()<=600){
+      jQuery('.tc-oer-curriculum-details-header-fixed').css({
+        "top":'0px',
+        "width": rightWidth + "px",
+        "minWidth": rightWidth + "px",
+        "left": leftedge + "px"
+      });
+    }else{
+      jQuery('.tc-oer-curriculum-details-header-fixed').css({
+          "width": rightWidth + "px",
+          "minWidth": rightWidth + "px",
+          "left": leftedge + "px"
+      });
+      
+      var adminbarheight = (jQuery('#wpadminbar').length>0)? jQuery('#wpadminbar').height(): 0;
+      if(isonload){
+        setTimeout(function(){
+          jQuery('.tc-oer-curriculum-details-header-fixed').css({"top":adminbarheight+'px'});
+        }, 500);
+      }else{
+        jQuery('.tc-oer-curriculum-details-header-fixed').css({"top":adminbarheight+'px'});
+      }
+    }
+  } else {
+    jQuery('.tc-oer-curriculum-details-header-fixed').css({"top": ""});  
+  }
+}
 
 function oer_curriculum_redirect_with_post(url, tab) {
     var form = document.createElement('form');

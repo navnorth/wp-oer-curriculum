@@ -39,7 +39,8 @@ body.single-oer-curriculum {
 }
 .tc-oer-curriculum-details {padding: 5px 0 25px; float: left; width: 100%;}
 .single-oer-curriculum .row { margin-right:0; margin-left:0; width:100%; display:block; float:none;}
-.tc-oer-curriculum-details-header .tc-oer-curriculum-title {
+.tc-oer-curriculum-details-header .tc-oer-curriculum-title,
+.tc-oer-curriculum-details-header-fixed .tc-oer-curriculum-title {
     color: #333;
     margin-top: 0;
     margin-bottom:0;
@@ -793,9 +794,14 @@ h4.tc-oer-curriculum-field-heading span.oer_curriculum_related_fields, h4.tc-rel
 .tc-oer-curriculum-objectives-list li a, .tc-oer-curriculum-objectives-list li a { color: #77B143; text-decoration: none; }
 .tc-oer-curriculum-standards-list li .collapse { color:#4f4f4f; /*margin-left:15px;*/ }
 .tc-oer-curriculum-objectives-details ul.tc-oer-curriculum-objectives-list { padding-left:0;}
-/*.oer_curriculum_keywords_container span a { color:#77B143; border-color:#E0E0E0; }*/
-.oer_curriculum_keywords_container span { margin: 5px; display: inline-block;}
-.oer_curriculum_keywords_container span {margin-left: 0px !important; margin-right: 10px !important; display: inline-block;}
+.oer_curriculum_keywords_container span {
+    margin-left: 0px !important;
+    margin-right: 8px !important;
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+    display: block;
+    float: left;
+}
 .oer_curriculum_keywords_container.tagcloud span a { float:left;}
 .tc-oer-curriculum-objectives, .tc-oer-curriculum-standards, .tc-related-curriculum-section {margin-bottom: 0px;}
 a.tc_oer_curriculum_collapse_button h4 {line-height: 1.8em;}
@@ -917,6 +923,8 @@ div#tcHiddenFields {float: left;}
     display: flex;
     flex-wrap: wrap;
 }
+.tc-oer-curriculum-details-header .tc-oer-curriculum-title:before,
+.tc-oer-curriculum-details-header-fixed .tc-oer-curriculum-title:before {content:unset !important;}
 .single-oer-curriculum .container .tc-oer-curriculum-details-header{
     top: 0;
     -webkit-transition:all .15s ease;
@@ -926,6 +934,34 @@ div#tcHiddenFields {float: left;}
             transition:all .15s ease;
     width: 100%;
     padding: 25px 0px;
+}
+.single-oer-curriculum .container .tc-oer-curriculum-details-header-fixed{
+    top: 0;
+    -webkit-transition:all .2s ease;
+       -moz-transition:all .2s ease;
+        -ms-transition:all .2s ease;
+         -o-transition:all .2s ease;
+            transition:all .2s ease;
+    -webkit-border-bottom-right-radius: 8px;
+     -webkit-border-bottom-left-radius: 8px;
+        -moz-border-radius-bottomright: 8px;
+         -moz-border-radius-bottomleft: 8px;
+            border-bottom-right-radius: 8px;
+             border-bottom-left-radius: 8px;
+    position: fixed;
+    top: 0px;
+    z-index: 99998;
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.2);
+    background-color: #fff;
+    padding: 15px 50px;
+    left: 0px;
+    width: 100%;
+    min-width: 100%;
+    top: -60px;
+}
+.single-oer-curriculum .container .tc-oer-curriculum-details-header.fixed{
+    position: fixed;
+    /*padding: 15px 50px !important;*/
 }
 .single-oer-curriculum .container .tc-oer-curriculum-details-header.fixed{
     position: fixed;
@@ -1221,4 +1257,14 @@ div#tcHiddenFields {float: left;}
     width: 100%;
     line-height: 1.2em;
     font-size: .9em;
+}
+
+.tc-oer-curriculum-details .tc-hidden-fields .form-field ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+.tc-oer-curriculum-details .tc-hidden-fields .form-field ul li {
+    list-style: none;
+    margin: 0px;
 }
