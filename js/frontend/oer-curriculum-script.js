@@ -169,6 +169,7 @@ function oer_resize_header(){
   var leftedge = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().left;
   jQuery('.tc-oer-curriculum-details-header-fixed').css({
       "width": rightWidth + "px",
+      "minWidth": rightWidth + "px",
       "left": leftedge + "px",
       "top":adminbarheight+'px'
   });
