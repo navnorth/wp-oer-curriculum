@@ -532,25 +532,25 @@ jQuery(document).ready(function ($) {
                         var icon = "";
                         if ($.inArray(attachment.subtype, ['zip', 'x-7z-compressed']) !== -1) {
                             title = 'Archived';
-                            icon = '<i class="fa fa-file-archive-o fa-2x"></i>';
+                            icon = '<i class="fa fa-file-archive"></i>';
                         } else if($.inArray(attachment.subtype, ['plain']) !== -1) {
                             title = 'Plain text';
-                            icon = '<i class="fa fa-file-text-o fa-2x"></i>';
+                            icon = '<i class="fa fa-file-alt"></i>';
                         } else if($.inArray(attachment.subtype, ['pdf']) !== -1) {
                             title = 'PDF';
-                            icon = '<i class="fa fa-file-pdf-o fa-2x"></i>';
+                            icon = '<i class="fa fa-file-pdf"></i>';
                         } else if($.inArray(attachment.type, ['image']) !== -1) {
                             title = 'Image';
-                            icon = '<i class="fa fa-file-image-o fa-2x"></i>';
+                            icon = '<i class="fa fa-file-image"></i>';
                         } else if($.inArray(attachment.subtype, ['msword', 'vnd.openxmlformats-officedocument.wordprocessingml.document']) !== -1) {
                             title = 'Microsoft Document';
-                            icon = '<i class="fa fa-file-word-o fa-2x"></i>';
+                            icon = '<i class="fa fa-file-word"></i>';
                         } else if($.inArray(attachment.subtype,['vnd.ms-excel'])) {
                             title = 'Microsoft Excel';
-                            icon = '<i class="fa fa-file-excel-o fa-2x"></i>';
+                            icon = '<i class="fa fa-file-excel"></i>';
                         } else if($.inArray(attachment.subtype,['vnd.ms-powerpoint'])) {
                             title = 'Microsoft Powerpoint';
-                            icon = '<i class="fa fa-file-powerpoint-o fa-2x"></i>';
+                            icon = '<i class="fa fa-file-powerpoint"></i>';
                         }
 
                         materialHTML += '<div class="panel panel-default oer-curriculum-material-element-wrapper">' +
@@ -605,25 +605,25 @@ jQuery(document).ready(function ($) {
             var icon = "";
             if ($.inArray(attachment.subtype, ['zip', 'x-7z-compressed']) !== -1) {
                 title = 'Archived';
-                icon = '<i class="fa fa-file-archive-o fa-2x"></i>';
+                icon = '<i class="fa fa-file-archive"></i>';
             } else if($.inArray(attachment.subtype, ['plain']) !== -1) {
                 title = 'Plain text';
-                icon = '<i class="fa fa-file-text-o fa-2x"></i>';
+                icon = '<i class="fa fa-file-alt"></i>';
             } else if($.inArray(attachment.subtype, ['pdf']) !== -1) {
                 title = 'PDF';
-                icon = '<i class="fa fa-file-pdf-o fa-2x"></i>';
+                icon = '<i class="fa fa-file-pdf"></i>';
             } else if($.inArray(attachment.type, ['image']) !== -1) {
                 title = 'Image';
-                icon = '<i class="fa fa-file-image-o fa-2x"></i>';
+                icon = '<i class="fa fa-file-image"></i>';
             } else if($.inArray(attachment.subtype, ['msword', 'vnd.openxmlformats-officedocument.wordprocessingml.document']) !== -1) {
                 title = 'Microsoft Document';
-                icon = '<i class="fa fa-file-word-o fa-2x"></i>';
+                icon = '<i class="fa fa-file-word"></i>';
             } else if($.inArray(attachment.subtype,['vnd.ms-excel'])) {
                 title = 'Microsoft Excel';
-                icon = '<i class="fa fa-file-excel-o fa-2x"></i>';
+                icon = '<i class="fa fa-file-excel"></i>';
             } else if($.inArray(attachment.subtype,['vnd.ms-powerpoint'])) {
                 title = 'Microsoft Powerpoint';
-                icon = '<i class="fa fa-file-powerpoint-o fa-2x"></i>';
+                icon = '<i class="fa fa-file-powerpoint"></i>';
             }
 
             return {title, icon};
