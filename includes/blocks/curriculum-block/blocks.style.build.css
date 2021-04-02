@@ -246,12 +246,13 @@ ul.oer-curriculum-blk-topbar-display-option li:before {
 	padding-bottom: 6px
 }
 
-.tagcloud {
+.oer-curriculum-tags .tagcloud {
 	margin: 0 0 10px !important
 }
 
 .oer-curriculum-tags.tagcloud span a {
-	margin: 0px 1px
+	margin: 0px 1px;
+	display:block;
 }
 
 .oer-curriculum-tags.tagcloud span a:focus {

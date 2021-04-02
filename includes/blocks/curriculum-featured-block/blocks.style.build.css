@@ -217,7 +217,8 @@ option.oer_curriculum_inspector_feat_subject_select_bold {
   z-index: 2;
   background-position: 0px !important;
 }
-.oer_curriculum_right_featuredwpr .bx-wrapper .bx-next {
+.oer_curriculum_right_featuredwpr .bx-wrapper .bx-next,
+.oer_curriculum_right_featuredwpr .bx-wrapper .bx-next:focus {
   background: #ccc url(images/bxnext.png) no-repeat scroll 0 0;
   left: auto;
   right: 5px;
@@ -235,6 +236,7 @@ option.oer_curriculum_inspector_feat_subject_select_bold {
   border:0px solid #d2d2d2 !important;
   left:0px !important;
   /*padding:15px !important;*/
+  background-color: transparent !important;
 }
 .editor-styles-wrapper ul, .editor-styles-wrapper ol {
     padding-left: 0 !important;

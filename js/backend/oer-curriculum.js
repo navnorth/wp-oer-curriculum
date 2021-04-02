@@ -4,7 +4,7 @@
  */
 jQuery(document).ready(function ($) {
 
-    var LessonPlan = {
+    var OerCurriculum = {
         updateActivityTitle: function () {
             $(document).on('keyup', '.oer-curriculum-ac-item input[type=text]', function () {
                 var InputValue = $(this).val();
@@ -74,7 +74,7 @@ jQuery(document).ready(function ($) {
                     cloned.find('a').text('Unnamed Activity');
                     cloned.insertAfter('.sidebar-lesson-activities-title li:last');
                     // Toggle reorder button
-                    LessonPlan.toggleUpDownButton();
+                    OerCurriculum.toggleUpDownButton();
                 });
             });
         },
@@ -104,7 +104,7 @@ jQuery(document).ready(function ($) {
                 var $previous = $current.prev('.oer-curriculum-element-wrapper');
                 if($previous.length !== 0){
                     $current.insertBefore($previous);
-                    LessonPlan.changeElementOrder();
+                    OerCurriculum.changeElementOrder();
                 }
                 return false;
             });
@@ -114,7 +114,7 @@ jQuery(document).ready(function ($) {
                 var $next = $current.next('.oer-curriculum-element-wrapper');
                 if($next.length !== 0){
                     $current.insertAfter($next);
-                    LessonPlan.changeElementOrder();
+                    OerCurriculum.changeElementOrder();
                 }
                 return false;
             });
@@ -125,7 +125,7 @@ jQuery(document).ready(function ($) {
                 var $previous = $current.prev('.oer-curriculum-author-element-wrapper');
                 if($previous.length !== 0){
                     $current.insertBefore($previous);
-                    LessonPlan.toggleUpDownButton();
+                    OerCurriculum.toggleUpDownButton();
                 }
                 return false;
             });
@@ -135,7 +135,7 @@ jQuery(document).ready(function ($) {
                 var $next = $current.next('.oer-curriculum-author-element-wrapper');
                 if($next.length !== 0){
                     $current.insertAfter($next);
-                    LessonPlan.toggleUpDownButton();
+                    OerCurriculum.toggleUpDownButton();
                 }
                 return false;
             });
@@ -184,7 +184,7 @@ jQuery(document).ready(function ($) {
                 var $previous = $current.prev('.oer-curriculum-material-element-wrapper');
                 if($previous.length !== 0){
                     $current.insertBefore($previous);
-                    LessonPlan.toggleUpDownButton();
+                    OerCurriculum.toggleUpDownButton();
                 }
                 return false;
             });
@@ -194,7 +194,7 @@ jQuery(document).ready(function ($) {
                 var $next = $current.next('.oer-curriculum-material-element-wrapper');
                 if($next.length !== 0){
                     $current.insertAfter($next);
-                    LessonPlan.toggleUpDownButton();
+                    OerCurriculum.toggleUpDownButton();
                 }
                 return false;
             });
@@ -210,7 +210,7 @@ jQuery(document).ready(function ($) {
                 }
                 if($previous.length !== 0){
                     $current.insertBefore($previous);
-                    LessonPlan.toggleUpDownButton();
+                    OerCurriculum.toggleUpDownButton();
                     if($x > 0){
                       tinyMCE.execCommand('mceAddEditor', false, $('#'+ret).attr('id'));
                     }
@@ -228,7 +228,7 @@ jQuery(document).ready(function ($) {
                 }
                 if($next.length !== 0){
                     $current.insertAfter($next);
-                    LessonPlan.toggleUpDownButton();
+                    OerCurriculum.toggleUpDownButton();
                     if($x > 0){
                       tinyMCE.execCommand('mceAddEditor', false, $('#'+ret).attr('id'));
                     }
@@ -247,7 +247,7 @@ jQuery(document).ready(function ($) {
                 }
                 if($previous.length !== 0){
                     $current.insertBefore($previous);
-                    LessonPlan.toggleUpDownButton();
+                    OerCurriculum.toggleUpDownButton();
                     if($x > 0){
                       tinyMCE.execCommand('mceAddEditor', false, $('#'+ret).attr('id'));
                     }
@@ -265,7 +265,7 @@ jQuery(document).ready(function ($) {
                 }
                 if($next.length !== 0){
                     $current.insertAfter($next);
-                    LessonPlan.toggleUpDownButton();
+                    OerCurriculum.toggleUpDownButton();
                     if($x > 0){
                       tinyMCE.execCommand('mceAddEditor', false, $('#'+ret).attr('id'));
                     }
@@ -291,7 +291,7 @@ jQuery(document).ready(function ($) {
                 }
             });
 
-            LessonPlan.toggleUpDownButton();
+            OerCurriculum.toggleUpDownButton();
         },
 
         // Show/Hide up/down button
@@ -361,7 +361,7 @@ jQuery(document).ready(function ($) {
 
                     $('#oer-curriculum-dynamic-module-modal').modal('hide');
                     // Toggle reorder button
-                    LessonPlan.toggleUpDownButton();
+                    OerCurriculum.toggleUpDownButton();
                 });
             });
         },
@@ -382,7 +382,7 @@ jQuery(document).ready(function ($) {
                 ClonedDiv.find('input[type=text]').val('');
                 ClonedDiv.find('img.oer-curriculum-oer-person-placeholder').attr('src',lpScript.image_placeholder_url);
                 $('.oer-curriculum-remove-author').removeAttr('disabled');
-                LessonPlan.toggleUpDownButton();
+                OerCurriculum.toggleUpDownButton();
             });
         },
 
@@ -586,12 +586,7 @@ jQuery(document).ready(function ($) {
                         materialsContainer.html(materialHTML);
                     }
 
-                    /*if($('.oer-curriculum-material-element-wrapper').length) {
-                        $(materialHTML).insertAfter('.oer-curriculum-material-element-wrapper:last');
-                    } else {
-                        $('#oer-curriculum-materials-container').html(materialHTML);
-                    }*/
-                    LessonPlan.toggleUpDownButton();
+                    OerCurriculum.toggleUpDownButton();
                 });
 
                 materialFrame.open();
@@ -662,7 +657,7 @@ jQuery(document).ready(function ($) {
 
                 materialFrame.on('select', function(){
                     var attachment = materialFrame.state().get('selection').first().toJSON();
-                    var response = LessonPlan.lpPrepareMaterialIcon(attachment);
+                    var response = OerCurriculum.lpPrepareMaterialIcon(attachment);
 
                     dis.html(response.icon);
                     $(elementWrapper).find(inputUrl).val(attachment.url);
@@ -708,7 +703,7 @@ jQuery(document).ready(function ($) {
             //on keyup, start the countdown
             $input.on('keyup', function () {
                 clearTimeout(typingTimer);
-                typingTimer = setTimeout(LessonPlan.lpProcessingStandardSearch, doneTypingInterval);
+                typingTimer = setTimeout(OerCurriculum.lpProcessingStandardSearch, doneTypingInterval);
             });
 
             //on keydown, clear the countdown
@@ -719,7 +714,7 @@ jQuery(document).ready(function ($) {
             $input.on('keypress', function (e) {
                 if (e.which == 13) {
                     if ($(this).val() !== '') {
-                        LessonPlan.lpProcessingStandardSearch();
+                        OerCurriculum.lpProcessingStandardSearch();
                     } else {
                         $('.oer-curriculum-standard-search-result').addClass('hide');
                         $('.oer-curriculum-standard-default-result').removeClass('hide');
@@ -774,7 +769,7 @@ jQuery(document).ready(function ($) {
 
                 materialFrame.on('select', function(){
                     var attachment = materialFrame.state().get('selection').first().toJSON();
-                    var response = LessonPlan.lpPrepareMaterialIcon(attachment);
+                    var response = OerCurriculum.lpPrepareMaterialIcon(attachment);
 
                     var icon = response.icon;
                         icon = icon.replace('fa-2x', '');
@@ -816,39 +811,13 @@ jQuery(document).ready(function ($) {
                         tinymce.execCommand( 'mceRemoveEditor', false, 'oer-curriculum-resource-student-' + total_form_box );
                         tinymce.execCommand( 'mceAddEditor', false, 'oer-curriculum-resource-student-' + total_form_box );
                         quicktags({ id: 'oer-curriculum-resource-student-' + total_form_box });
-                        
-                        //$('#oer-curriculum-resource-student-'+total_form_box+'-html').trigger('click');
-                        //$('#oer-curriculum-resource-student-'+total_form_box+'-tmce').trigger('click').focus();
-                        
-                          /*
-                          wp.editor.initialize(
-                          'oer-curriculum-resource-student-' + total_form_box ,
-                          {
-                            quicktags: true,
-                            mediaButtons: true,
-                            tinymce: {
-                            plugins : 'lists link fullscreen',
-                            toolbar1: 'bold italic underline blockquote strikethrough numlist bullist alignleft aligncenter alignright undo redo link fullscreen',
-                            //toolbar1: 'bold italic underline strikethrough | bullist numlist | blockquote hr wp_more | alignleft aligncenter alignright | link unlink | fullscreen | wp_adv'
-                            block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3'
-                          }, 
-                            }
-                          );
-                          quicktags({ id: 'oer-curriculum-resource-student-' + total_form_box });                
-                          $('#oer-curriculum-resource-student-'+total_form_box+'-html').trigger('click');
-                          $('#oer-curriculum-resource-student-'+total_form_box+'-tmce').trigger('click').focus();
-                          */
                     }
 
                     // Toggle reorder button
-                   LessonPlan.toggleUpDownButton();
+                   OerCurriculum.toggleUpDownButton();
                 });
             });
-            /*$.fn.tinymce_textareas = function(){
-                tinyMCE.init({
-                  mode: 'textareas',
-                });
-            }*/
+
               $.fn.tinymce_textareas = function(){
                 tinyMCE.init({
                     //plugins: 'print preview fullpage powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable',
@@ -856,7 +825,6 @@ jQuery(document).ready(function ($) {
                     skin: 'lightgray',
                     mode: 'exact',
                     menubar: false,
-                    //toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
                     toolbar: 'bold italic underline blockquote strikethrough numlist bullist alignleft aligncenter alignright undo redo link fullscreen'
                 });
             }
@@ -928,38 +896,6 @@ jQuery(document).ready(function ($) {
                 $('.oer-curriculum-select-label').removeClass('oer-curriculum-hidden');
                 $('.oer-curriculum-download-copy-icon').removeClass('oer-curriculum-hidden').html('<i class="fa fa-upload"></i>');
                 
-                /*var materialFrame;
-                if (materialFrame) {
-                    materialFrame.open();
-                    return;
-                }
-                materialFrame = wp.media({
-                    title: 'Select Material',
-                    library: { type: [ 'application/msword', 'application/pdf' ] },
-                    button: { text: 'Use Material' },
-                    multiple: false
-                });
-
-                materialFrame.on('select', function(){
-                    var attachment = materialFrame.state().get('selection').first().toJSON();
-                    var response = LessonPlan.lpPrepareMaterialIcon(attachment);
-
-                    var icon = response.icon;
-                        icon = icon.replace('fa-2x', '');
-
-                    $('.oer-curriculum-download-copy-icon').html(icon);
-                    
-                    $('input[name="oer_curriculum_download_copy_document"]').val(attachment.url);
-                    if (dis.parent().find('.oer-curriculum-selected-section')) {
-                        dis.parent().find('.oer-curriculum-selected-section a').attr('href',attachment.url);
-                        dis.parent().find('.oer-curriculum-selected-section a').text(attachment.url);
-                        dis.parent().find('.oer-curriculum-selected-section').removeClass('oer-curriculum-hidden');
-                        dis.parent().find('.oer-curriculum-select-label').addClass('oer-curriculum-hidden');
-                        dis.parent().find('.oer-curriculum-download-copy-icon').addClass('oer-curriculum-hidden');
-                    }
-                });
-
-                materialFrame.open();*/
             });
         },
         
@@ -1012,7 +948,7 @@ jQuery(document).ready(function ($) {
                     tinymce.execCommand( 'mceAddEditor', false, editor_prefix + id );
                     quicktags({ id: editor_prefix + id });
                     
-                    LessonPlan.toggleUpDownButton();
+                    OerCurriculum.toggleUpDownButton();
                 });
             });
         },
@@ -1032,17 +968,11 @@ jQuery(document).ready(function ($) {
                         row_id: total_text_features
                        }).done(function (response) {
                     dis.before(response);
-                    /*if($('#oer-curriculum-additional-sections div.oer-curriculum-section-element-wrapper').length) {
-                        $(response).insertAfter('#oer-curriculum-additional-sections div.oer-curriculum-section-element-wrapper:last').tinymce_textareas();
-                    } else {
-                        $('.oer-curriculum-section-element-panel').html(response).tinymce_textareas();
-                    }
-                    LessonPlan.initializeEditor('oer-curriculum-additional-section-' + id);*/
                     tinymce.execCommand( 'mceRemoveEditor', false, 'oer-curriculum-additional-section-' + id );
                     tinymce.execCommand( 'mceAddEditor', false, 'oer-curriculum-additional-section-' + id );
                     quicktags({ id: 'oer-curriculum-additional-section-' + id });
                     
-                    LessonPlan.toggleUpDownButton();
+                    OerCurriculum.toggleUpDownButton();
                 });
             });
         },
@@ -1158,39 +1088,39 @@ jQuery(document).ready(function ($) {
     };
     
     // Initialize all function on ready state
-    LessonPlan.updateActivityTitle();
-    LessonPlan.addMoreTimeElements();
-    LessonPlan.removeTimeElements();
-    LessonPlan.addMoreObjectives();
-    LessonPlan.removeObjectives();
-    LessonPlan.addActivityInLesson();
-    LessonPlan.deleteModule();
-    LessonPlan.lessonElementSortable();
-    LessonPlan.createDynamicModule();
-    LessonPlan.toggleUpDownButton();
-    LessonPlan.dismissInstallNotice();
-    LessonPlan.addMoreAuthor();
-    LessonPlan.deleteAuthor();
-    LessonPlan.lpUploadAuthorImage();
-    LessonPlan.lpSelectStandards();
-    LessonPlan.lpRemoveStandardsFromList();
-    LessonPlan.lpAddMaterials();
-    LessonPlan.lpUpdateMaterial();
-    LessonPlan.lpDeleteMaterials();
-    LessonPlan.lpSearchStandards();
-    LessonPlan.lpDownloadCopyLesson();
-    LessonPlan.addMorePrimaryResource();
-    LessonPlan.deletePrimarySource();
-    LessonPlan.requireModuleTitle();
-    LessonPlan.lpRemoveCopyLesson();
-    LessonPlan.lpPrimarySourceSensitiveMaterial();
-    LessonPlan.lpOtherCurriculumType();
-    LessonPlan.lpAddRequiredMaterial();
-    LessonPlan.lpAddTextFeature();
-    LessonPlan.deleteSection();
-    LessonPlan.lpTinyMCESave();
-    LessonPlan.addFeaturedImageOnResourceTextBox();
-    LessonPlan.removeFeaturedImageInResourceSelection();
+    OerCurriculum.updateActivityTitle();
+    OerCurriculum.addMoreTimeElements();
+    OerCurriculum.removeTimeElements();
+    OerCurriculum.addMoreObjectives();
+    OerCurriculum.removeObjectives();
+    OerCurriculum.addActivityInLesson();
+    OerCurriculum.deleteModule();
+    OerCurriculum.lessonElementSortable();
+    OerCurriculum.createDynamicModule();
+    OerCurriculum.toggleUpDownButton();
+    OerCurriculum.dismissInstallNotice();
+    OerCurriculum.addMoreAuthor();
+    OerCurriculum.deleteAuthor();
+    OerCurriculum.lpUploadAuthorImage();
+    OerCurriculum.lpSelectStandards();
+    OerCurriculum.lpRemoveStandardsFromList();
+    OerCurriculum.lpAddMaterials();
+    OerCurriculum.lpUpdateMaterial();
+    OerCurriculum.lpDeleteMaterials();
+    OerCurriculum.lpSearchStandards();
+    OerCurriculum.lpDownloadCopyLesson();
+    OerCurriculum.addMorePrimaryResource();
+    OerCurriculum.deletePrimarySource();
+    OerCurriculum.requireModuleTitle();
+    OerCurriculum.lpRemoveCopyLesson();
+    OerCurriculum.lpPrimarySourceSensitiveMaterial();
+    OerCurriculum.lpOtherCurriculumType();
+    OerCurriculum.lpAddRequiredMaterial();
+    OerCurriculum.lpAddTextFeature();
+    OerCurriculum.deleteSection();
+    OerCurriculum.lpTinyMCESave();
+    OerCurriculum.addFeaturedImageOnResourceTextBox();
+    OerCurriculum.removeFeaturedImageInResourceSelection();
 });
 
 //Process Initial Setup

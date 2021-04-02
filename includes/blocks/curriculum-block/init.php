@@ -170,9 +170,11 @@ function render_posts_block($attributes, $ajx=false){
 				}			
 				$_arr_tag = get_the_tags($post->ID);
 				$_content .= '<div class="oer-curriculum-tags tagcloud">';
+				if(!empty($_arr_tag)){
 					foreach($_arr_tag as $key => $tag) {
 						$_content .= '<span><a href="'.get_home_url().'/tag/'.$tag->slug.'" alt="" class="button">'.$tag->name.'</a></span>';
 					}
+				}
 				$_content .= '</div">';					
 			$_content .= '</div>';
 		$_content .= '</div>';

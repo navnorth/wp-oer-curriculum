@@ -27,7 +27,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @uses {wp-editor} for WP editor styles.
  * @since 1.0.0
  */
- 
+
+define( 'OER_CUR_FEAT_BLK_PLUGIN_DIR_PATH', plugin_dir_path( __DIR__ ) );
+define( 'OER_CUR_FEAT_BLK_PLUGIN_DIR_URL', get_site_url()."/wp-content/plugins/curriculum-featured-block" );
+define( 'OER_CUR_FEAT_BLK_BASE_URL', get_home_url() );
+define( 'OER_CUR_FEAT_BLK_CURRICULUM_PLUGIN_URL', OER_LESSON_PLAN_URL );
+define( 'OER_CUR_FEAT_BLK_BX_RESET_BLOCKED', false );
+define( 'OER_CUR_FEAT_BLK_SLIDE_DESC_LEN', 150 );
+define( 'OER_CUR_FEAT_BLK_BLOCK_WIDTH', 150 );
+define( 'OER_CUR_FEAT_BLK_SLIDE_IMG_HEIGHT', 225 );
+
 function curriculum_featured_block_cgb_block_assets() { // phpcs:ignore
 	// Register block styles for both frontend + backend.
 	wp_register_style(
@@ -71,15 +80,15 @@ function curriculum_featured_block_cgb_block_assets() { // phpcs:ignore
 		'curriculum_featured_block-cgb-block-js',
 		'cgbGlobal', // Array containing dynamic data for a JS Global.
 		[
-			'pluginDirPath' => plugin_dir_path( __DIR__ ),
+			'pluginDirPath' => OER_CUR_FEAT_BLK_PLUGIN_DIR_PATH,
 			//'pluginDirUrl' => plugin_dir_url( __DIR__ ),
-			'pluginDirUrl' => get_site_url()."/wp-content/plugins/curriculum-featured-block",
-			'base_url' => get_home_url(),
-			'curriculum_plugin_url' => OER_LESSON_PLAN_URL,
-			'bxresetblocked' => false,
-			'slidedesclength' => 150,
-			'blockwidth' => 150,
-			'slideimageheight' => 225,
+			'pluginDirUrl' => OER_CUR_FEAT_BLK_PLUGIN_DIR_URL,
+			'base_url' => OER_CUR_FEAT_BLK_BASE_URL,
+			'curriculum_plugin_url' => OER_CUR_FEAT_BLK_CURRICULUM_PLUGIN_URL,
+			'bxresetblocked' => OER_CUR_FEAT_BLK_BX_RESET_BLOCKED,
+			'slidedesclength' => OER_CUR_FEAT_BLK_SLIDE_DESC_LEN,
+			'blockwidth' => OER_CUR_FEAT_BLK_BLOCK_WIDTH,
+			'slideimageheight' => OER_CUR_FEAT_BLK_SLIDE_IMG_HEIGHT,
 			// Add more data here that you want to access from `cgbGlobal` object.
 		]
 	);
@@ -114,15 +123,15 @@ add_action( 'init', 'curriculum_featured_block_cgb_block_assets' );
 
 function curriculum_featured_block_additional_script_front( $hook ) {
 		//wp_enqueue_style('curriculum-feat-block-resource-category-style-css', OER_URL.'css/resource-category-style.css');
-		wp_enqueue_style('curriculum-feat-block-jquery-bxslider-css', OER_URL.'css/jquery.bxslider.css');
-		wp_enqueue_script('curriculum-feat-block-jquery-bxslider-js', OER_URL.'js/jquery.bxslider.js',array('jquery'), '1.0' );
+		wp_enqueue_style('curriculum-feat-block-jquery-bxslider-css', OER_LESSON_PLAN_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.css');
+		wp_enqueue_script('curriculum-feat-block-jquery-bxslider-js', OER_LESSON_PLAN_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.js',array('jquery'), '1.0' );
 }
 add_action( 'wp_enqueue_scripts', 'curriculum_featured_block_additional_script_front' );
 
 function curriculum_featured_block_additional_script( $hook ) {
 		//wp_enqueue_style('curriculum-feat-block-resource-category-style-css', OER_URL.'css/resource-category-style.css');
-		wp_enqueue_style('curriculum-feat-block-jquery-bxslider-css', OER_URL.'css/jquery.bxslider.css');
-		wp_enqueue_script('curriculum-feat-block-jquery-bxslider-js', OER_URL.'js/jquery.bxslider.js',array('jquery'), '1.0' );
+		wp_enqueue_style('curriculum-feat-block-jquery-bxslider-css', OER_LESSON_PLAN_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.css');
+		wp_enqueue_script('curriculum-feat-block-jquery-bxslider-js', OER_LESSON_PLAN_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.js',array('jquery'), '1.0' );
 		//wp_enqueue_script('curriculum-feat-block-jquery-ui-min-js', plugins_url( 'dist/jquery-ui.min.js', dirname( __FILE__ ) ) ,array('jquery'), '1.0' );
 }
 add_action( 'admin_enqueue_scripts', 'curriculum_featured_block_additional_script' );
@@ -140,8 +149,8 @@ function render_featured_block($attributes, $ajx=false){
 		if(!empty($attributes['selectedfeatured'])){
 			$feats = explode(",",$attributes['selectedfeatured']);
 			$blkid = $attributes['blockid'];
-			$_sliddesclength = (!isset($attributes['slidedesclength']))? 150: $attributes['slidedesclength'];
-			$_slideimageheight = (!isset($attributes['slideimageheight']))? 255: $attributes['slideimageheight'];
+			$_sliddesclength = (!isset($attributes['slidedesclength']))? OER_CUR_FEAT_BLK_SLIDE_DESC_LEN : $attributes['slidedesclength'];
+			$_slideimageheight = (!isset($attributes['slideimageheight']))? OER_CUR_FEAT_BLK_SLIDE_IMG_HEIGHT: $attributes['slideimageheight'];
 			$_ret .= '<div class="oer_curriculum_right_featuredwpr">';
 				$_title = (isset($attributes['blocktitle']))? $attributes['blocktitle']: 'Featured';
 				$_ret .= '<div class="oer-curriculum-ftrdttl curriculum-feat-title_'.$attributes['blockid'].'">'.$_title.'</div>';
@@ -199,6 +208,7 @@ function render_featured_block($attributes, $ajx=false){
 							$_ret .= (!isset($attributes['moveslides']))? 'moveSlides: 1,': 'moveSlides: '.$attributes['moveslides'].',';
 							$_ret .= (!isset($attributes['slidewidth']))? 'slideWidth: 375,': 'slideWidth: '.$attributes['slidewidth'].',';
 							$_ret .= (!isset($attributes['slidemargin']))? 'slideMargin: 20,': 'slideMargin: '.$attributes['slidemargin'].',';
+							//$_ret .= 'adaptiveHeight: true,';
 							//$_ret .= 'minSlides: '.$attributes['minslides'].',';
 							//$_ret .= 'maxSlides: '.$attributes['maxslides'].',';
 							//$_ret .= 'moveSlides: '.$attributes['moveslides'].',';
@@ -229,7 +239,7 @@ function render_featured_block($attributes, $ajx=false){
 									$_sngsldwdt = (!isset($attributes['slidewidth']))? (375 + $_sngsldmgn) : ($attributes['slidewidth'] + $_sngsldmgn);
 									$_ret .= 'let whlsldwdt = sldcnt * '.$_sngsldwdt.';';
 									$_ret .= 'console.log(whlsldwdt);';
-									$_ret .= 'jQuery(".featuredwpr_bxslider_front").css({"width":whlsldwdt+"px"})';
+									//$_ret .= 'jQuery(".featuredwpr_bxslider_front").css({"width":whlsldwdt+"px"})';
 									
 							$_ret .= '}';
 					$_ret .= '});';
@@ -416,7 +426,7 @@ function curriculum_feat_dataquery(){
 		foreach($posts as $post){
 			$_reslist[$i]['id'] = $post->ID;
 			$_reslist[$i]['title'] = $post->post_title;
-			$_sliddesclength = (!isset($attributes['slidedesclength']))? cgbGlobal['slidedesclength']: $attributes['slidedesclength'];
+			$_sliddesclength = (!isset($attributes['slidedesclength']))? OER_CUR_FEAT_BLK_SLIDE_DESC_LEN : $attributes['slidedesclength'];
 			$_reslist[$i]['content'] = html_entity_decode(strip_tags($post->post_content));
 			$_reslist[$i]['link'] = get_post_permalink($post->ID);
 				$_tmp_image = get_the_post_thumbnail_url($post->ID,'medium');
@@ -705,7 +715,7 @@ function initiate_admin_bx_slider() {
 add_action( 'admin_footer', 'initiate_admin_bx_slider' );
 
 function fontawesome_dashboard() {
-  wp_enqueue_style('fontawesome-style', OER_URL.'css/fontawesome.css');
+		wp_enqueue_style('fontawesome-style', OER_LESSON_PLAN_URL.'css/backend/fontawesome.css');
 }
 
 add_action('admin_init', 'fontawesome_dashboard');
