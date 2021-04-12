@@ -50,21 +50,25 @@ jQuery( document ).ready(function() {
                       tmp_this.val('Change Resource');
                     }, 500);
                   });
-              }else{
-                  /*
+              }else if(p_imgtyp == 'avatar'){
                   var _shtml = '<a href="'+p_url+'" target="_blank">';
-                        _shtml += '<div class="resource-avatar">';
-                          _shtml += '<span class="dashicons '+p_imgurl+'"></span>';
-                        _shtml += '</div>';
-                      _shtml += '</a>';
-                  */
+                      _shtml += '<div class="resource-avatar">';
+                        _shtml += '<span class="dashicons '+p_imgurl+'"></span>';
+                      _shtml += '</div>';
+                    _shtml += '</a>';
+                    tmp_this.siblings('.oer_curriculum_primary_resources_display').html(resname);
+                    tmp_this.siblings('input[name="oer_curriculum_primary_resources[resource][]"]').val(resname);
+                    tmp_parent.find('.oer_curriculum_primary_resources_image_preloader').hide();
+                    tmp_parent.find('.oer_curriculum_primary_resources_display').html(_shtml);
+                    tmp_this.val('Change Resource');
+              }else{
                   var _shtml  = '<a href="'+p_url+'" target="_blank"><img src="'+p_imgurl+'"></a>';
                   _shtml = (resname)?_shtml+'<br>'+resname : _shtml;
-                  tmp_this.siblings('.oer_curriculum_primary_resources_display').html(resname);
-                  tmp_this.siblings('input[name="oer_curriculum_primary_resources[resource][]"]').val(resname);
-                  tmp_parent.find('.oer_curriculum_primary_resources_image_preloader').hide();
-                  tmp_parent.find('.oer_curriculum_primary_resources_display').html(_shtml);
-                  tmp_this.val('Change Resource');
+                    tmp_this.siblings('.oer_curriculum_primary_resources_display').html(resname);
+                    tmp_this.siblings('input[name="oer_curriculum_primary_resources[resource][]"]').val(resname);
+                    tmp_parent.find('.oer_curriculum_primary_resources_image_preloader').hide();
+                    tmp_parent.find('.oer_curriculum_primary_resources_display').html(_shtml);
+                    tmp_this.val('Change Resource');
               }             
             }else{
               var _shtml = '<p class="error">Failed to retrieve a resource: please try again</p>';
