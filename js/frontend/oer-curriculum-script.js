@@ -224,3 +224,67 @@ function oer_curriculum_redirect_with_post(url, tab) {
     document.body.appendChild(form);
     form.submit();
 }
+
+
+/* SMOOTH RETRACTABLE CURRICULUM EXCERPT */
+jQuery(document).ready(function() {
+  // Configure/customize these variables.
+  var showChar = 360;  // How many characters are shown by default
+  var ellipsestext = " ..."; var moretext = "(read more)"; var lesstext = "(read less)";
+  jQuery('.oer-curriculum-excerpt-collapsible').each(function(e) {
+    var content = jQuery(this).siblings('.oer-curriculum-excerpt-collapsible-pseudo').html();
+    if(content.length > showChar) {
+      var ls = content.substr(0, showChar)+'<span class="oer-curriculum-moreellipses">'+ellipsestext+'</span>&nbsp;<a href="" class="oer-curriculum-morelink">' + moretext + '</a>';
+      var mr = content+'&nbsp;<a href="" class="oer-curriculum-morelink less">' + lesstext + '</a>';
+      jQuery(this).html(ls);
+      jQuery(this).parent('.tc-oer-curriculum-details-description').append('<div class="oer-curriculum-excerpt-collapsible-pseudo-less">'+ls+'</div>');  
+      jQuery(this).parent('.tc-oer-curriculum-details-description').append('<div class="oer-curriculum-excerpt-collapsible-pseudo-more">'+mr+'</div>');  
+      jQuery(this).height(jQuery(this).height());
+    }
+  });
+  
+  var retract_instance = [];
+  jQuery(document).on("click",".oer-curriculum-morelink",function(e){
+      e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      let obj = jQuery(e.target); let cnt = 0;
+      let target_ref = obj.closest('.oer-curriculum-excerpt-collapsible');
+      var ctnt = obj.closest('.tc-oer-curriculum-details-description').find('.oer-curriculum-excerpt-collapsible-pseudo').html();
+    
+      if(obj.hasClass("less")) {
+          var pseudo_excerpt_height = target_ref.siblings('.oer-curriculum-excerpt-collapsible-pseudo-less').height();
+          var cless = target_ref.siblings('.oer-curriculum-excerpt-collapsible-pseudo-less').html(); 
+          target_ref.height(pseudo_excerpt_height);      
+          retract_instance[cnt] = setTimeout(function(){
+            target_ref.find('.oer-curriculum-morecontent').find('span').toggle();
+            target_ref.find('.oer-curriculum-moreellipses').toggle();
+            obj.removeClass("less");
+            target_ref.addClass('less');
+            obj.html(moretext);
+            target_ref.html(cless);
+          }, 200);
+      } else {      
+          var pseudo_excerpt_height = target_ref.siblings('.oer-curriculum-excerpt-collapsible-pseudo-more').height();
+          var cmore = target_ref.siblings('.oer-curriculum-excerpt-collapsible-pseudo-more').html();
+          target_ref.html(cmore);
+          target_ref.height(pseudo_excerpt_height);            
+          target_ref.find('.oer-curriculum-morecontent').find('span').toggle();
+          target_ref.find('.oer-curriculum-moreellipses').toggle();
+          obj.addClass("less");
+          target_ref.removeClass('less');
+          obj.html(lesstext);
+      }
+      
+      cnt++;
+  });
+  
+  jQuery(window).resize(function(){
+    jQuery('.oer-curriculum-excerpt-collapsible').each(function() {
+      var ctyp = (jQuery(this).hasClass('less'))? 'less':'more';
+      var pseudo_excerpt_height = jQuery(this).siblings('.oer-curriculum-excerpt-collapsible-pseudo-'+ctyp).height();
+      jQuery(this).height(pseudo_excerpt_height);
+    });
+  });
+  
+});
+
+

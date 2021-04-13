@@ -114,6 +114,7 @@
                           ?>
                       </div>
                       <?php } ?>
+                      <?php /* ?>
                       <div class="tc-oer-curriculum-details-description">
                           <?php if (strlen($post->post_content)>360) : ?>
                           <div class="oer-curriculum-excerpt"><?php echo oer_curriculum_content(360); ?></div>
@@ -121,6 +122,12 @@
                           <?php else : ?>
                           <div class="oer-curriculum-content"><?php echo the_content(); ?></div>
                           <?php endif; ?>
+                      </div>
+                      <?php */ ?>
+                      
+                      <div class="tc-oer-curriculum-details-description collapsible">
+                          <div class="oer-curriculum-excerpt-collapsible less"></div>
+                          <div class="oer-curriculum-excerpt-collapsible-pseudo"><?php echo the_content(); ?></div>
                       </div>
                       <?php
                       $related_curriculum_collection = (isset($post_meta_data['oer_curriculum_related_curriculum'][0]) ? unserialize($post_meta_data['oer_curriculum_related_curriculum'][0]) : array());
@@ -376,7 +383,7 @@
                                   if (isset($addtl_materials['description'])){
                                     $cnt = (count($addtl_materials['description'])>$cnt) ? count($addtl_materials['description']) : $cnt;
                                   }
-                                  echo "<ul>";
+                                  echo '<ul class="nolist">';
                                   for ($i=0;$i<$cnt;$i++){
                                     if (!empty($addtl_materials['title'][$i]) || !empty($addtl_materials['url'][$i]) || !empty($addtl_materials['description'][$i])) {
                                     ?>

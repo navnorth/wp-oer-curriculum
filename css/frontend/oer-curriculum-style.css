@@ -14,7 +14,7 @@ body.single-oer-curriculum {
     top: 0;
     right: 0;
     background: #283d47 !important;
-    padding: 5px 0;
+    padding: 10px 0;
 }
 .tc-oer-curriculum-controls a {
     display: inline;
@@ -23,6 +23,7 @@ body.single-oer-curriculum {
 .tc-oer-curriculum-controls a i {
     font-size: 22px !important;
     transition: all .2s ease-in;
+    color: #c5c3c3;
 }
 .tc-oer-curriculum-controls a i:hover {
     color: #fff;
@@ -49,11 +50,11 @@ body.single-oer-curriculum {
 .tc-oer-curriculum-authors-list {
     font-weight: 600;
     font-size: 18px !important;
-    margin:10px 0;
+    margin:5px 0;
     line-height: 24px;
     position:relative;
 }
-.tc-oer-curriculum-authors-list.padded-right {padding-right: 50px;}
+.tc-oer-curriculum-authors-list.padded-right {padding-right: 55px;}
 .tc-oer-curriculum-details-description {
     padding: 10px 0 20px 0px;
     color: #333 !important;
@@ -95,8 +96,10 @@ body.single-oer-curriculum {
 }
 .tc-sensitive-material-section {
     display: inline-block;
-    margin: 10px 0;
+    margin: 5px 0;
     line-height: 24px;
+    width: 100%;
+    padding-right: 55px;
 }
 .tc-sensitive-material-section p {
     display: inline-block;
@@ -112,10 +115,15 @@ body.single-oer-curriculum {
     margin-left: 15px !important;
 }
 .tc-oer-curriculum-keywords {
-    margin: 10px 0;
+    margin: 5px 0;
     line-height: 24px;  
 }
-.tc-oer-curriculum-keywords.padded-right {padding-right: 50px;}
+
+.tc-oer-curriculum-keywords.padded-right {
+    padding-right: 55px;
+    float: left;
+    width: 100%;
+}
 .tc-sensitive-material-section i {
     color: #ED4141;
     font-size: 18px !important;
@@ -770,7 +778,7 @@ h4.tc-oer-curriculum-field-heading span.oer_curriculum_related_fields, h4.tc-rel
 .tc-related-curriculum-details ul.tc-related-curriculum-list li a:hover,
 .tc-related-curriculum-details ul.tc-related-curriculum-list li a:active,
 .tc-related-curriculum-details ul.tc-related-curriculum-list li a:focus { text-decoration: underline; }
-.oer-curriculum-author-label, .tc-oer-curriculum-label, .tc-oer-curriculum-label-heading { margin-right:10px; font-size:14px; color:#4F4F4F; font-weight:bold; text-transform: uppercase; }
+.oer-curriculum-author-label, .tc-oer-curriculum-label, .tc-oer-curriculum-label-heading { margin-right:10px; font-size:14px; /*color:#4F4F4F;*/ font-weight:bold; text-transform: uppercase; }
 .tc-oer-curriculum-author a { font-size:14px; }
 .tc-oer-curriculum-standards-list, .tc-related-curriculum-list, .tc-oer-curriculum-subject-areas-list, .tc-oer-curriculum-objectives-list { padding-left:0; margin-top: 0px; margin-bottom: 0px; padding-bottom:15px;}
 .tc-oer-curriculum-standards-list li, .tc-oer-curriculum-subject-areas-list li, .tc-oer-curriculum-objectives-list li { list-style:none; font-size:14px; }
@@ -786,7 +794,12 @@ h4.tc-oer-curriculum-field-heading span.oer_curriculum_related_fields, h4.tc-rel
     display: block;
     float: left;
 }
-.oer_curriculum_keywords_container.tagcloud span a { float:left;}
+.oer_curriculum_keywords_container.tagcloud span a {
+  float:left;
+  font-family: 'Helvetica Neue', 'Roboto', Helvetica, Arial, sans-serif;
+  font-size:14px;
+  padding:10px 15px;
+}
 .tc-oer-curriculum-objectives, .tc-oer-curriculum-standards, .tc-related-curriculum-section {margin-bottom: 0px;}
 a.tc_oer_curriculum_collapse_button h4 {line-height: 1.8em;}
 .tc-related-curriculum-section, .tc-oer-curriculum-standards, .tc-oer-curriculum-subject-areas, .tc-oer-curriculum-objectives {float: left;width: 100%;}
@@ -821,6 +834,7 @@ div#tcHiddenFields {float: left;}
 }
 @media (max-width: 991px){
   .oer-curriculum-featured-section .tc-oer-curriculum-details-content .wp_oer_breadcrumb { display: none; }
+  .featured-image {padding-left:0px !important;}
 }
 
 
@@ -836,8 +850,10 @@ div#tcHiddenFields {float: left;}
     position: absolute;
     right: 0;
     top: 0;
-    padding: 5px 15px;
+    padding: 12px 15px;
+    background: #222222;
     color: #ffffff;
+    font-size: 16px;
 }
 .oer-curriculum-primary-sources-row { padding:50px; background:#FBFBFB; border-top:1px solid #E0E0E0; }
 .oer-curriculum-primary-sources-row .media-image { background:rgba(255,255,255,0.8); width:200px; height:auto; margin-bottom:40px; }
@@ -1185,6 +1201,8 @@ div#tcHiddenFields {float: left;}
     overflow: hidden;
     position: relative;
     margin: 0px auto 40px auto;
+    border-radius: 3px;
+    overflow: hidden;
 }
 .oer-curriculum-primary-sources-row .image-thumbnail {
     height: 240px;
@@ -1212,6 +1230,7 @@ div#tcHiddenFields {float: left;}
     text-overflow: ellipsis;
     line-height: 1.5em;
     font-weight: 600;
+    font-size: 18px;
 }
 .oer-curriculum-resource-author {
     float: left;
@@ -1222,6 +1241,7 @@ div#tcHiddenFields {float: left;}
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: 600;
+    font-size: 18px;
 }
 .oer-curriculum-resource-author_block {
     display: block;
@@ -1234,7 +1254,7 @@ div#tcHiddenFields {float: left;}
     float: left;
     width: 100%;
     line-height: 1.2em;
-    font-size: .9em;
+    font-size: 18px;
 }
 
 .tc-oer-curriculum-details .tc-hidden-fields .form-field ul {
@@ -1251,4 +1271,35 @@ div#tcHiddenFields {float: left;}
 
 .tc-oer-curriculum-details .tc-hidden-fields .form-field ul.nolist li {
     list-style: none;
+}
+
+
+/* Curriculum Description Excerpt Transition Start */
+.oer-curriculum-excerpt-collapsible {overflow: hidden !important;}
+.oer-curriculum-morecontent span {display: none;}
+.oer-curriculum-morelink {display: block;}
+.tc-oer-curriculum-details-description.collapsible{position:relative;}
+.oer-curriculum-excerpt-collapsible-pseudo,
+.oer-curriculum-excerpt-collapsible-pseudo-less,
+.oer-curriculum-excerpt-collapsible-pseudo-more {display:none;}
+.oer-curriculum-excerpt-collapsible p,
+.oer-curriculum-excerpt-collapsible-pseudo p,
+.oer-curriculum-excerpt-collapsible-pseudo-less p,
+.oer-curriculum-excerpt-collapsible-pseudo-more p {display: inline !important;}
+a.oer-curriculum-morelink {display: inline-block !important;background: transparent !important;}
+.oer-curriculum-excerpt-collapsible,
+.oer-curriculum-collapsible-excerpt {
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition:  all .2s ease-in-out;
+  -o-transition:    all .2s ease-in-out;
+  -ms-transition:   all .2s ease-in-out;
+  transition:       all .2s ease-in-out;
+}
+/* Curriculum Description Excerpt Transition Start */
+
+img.attachment-inquiry-set-featured {
+    border: 1px solid #dedede;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 10px;
 }

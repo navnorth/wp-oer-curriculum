@@ -21,8 +21,8 @@ global $message, $type;
 	?>
      
     <h2 class="nav-tab-wrapper">
+				<a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php _e("General", OER_LESSON_PLAN_SLUG); ?></a>
         <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=metadata" class="nav-tab <?php echo $active_tab == 'metadata' ? 'nav-tab-active' : ''; ?>"><?php _e("Metadata", OER_LESSON_PLAN_SLUG); ?></a>
-    		<a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php _e("General", OER_LESSON_PLAN_SLUG); ?></a>
 		</h2>
     
     <?php
