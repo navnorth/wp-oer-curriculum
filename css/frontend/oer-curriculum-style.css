@@ -1230,7 +1230,6 @@ div#tcHiddenFields {float: left;}
     text-overflow: ellipsis;
     line-height: 1.5em;
     font-weight: 600;
-    font-size: 18px;
 }
 .oer-curriculum-resource-author {
     float: left;
@@ -1241,7 +1240,6 @@ div#tcHiddenFields {float: left;}
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: 600;
-    font-size: 18px;
 }
 .oer-curriculum-resource-author_block {
     display: block;
@@ -1254,7 +1252,7 @@ div#tcHiddenFields {float: left;}
     float: left;
     width: 100%;
     line-height: 1.2em;
-    font-size: 18px;
+    font-size: .9em;
 }
 
 .tc-oer-curriculum-details .tc-hidden-fields .form-field ul {
