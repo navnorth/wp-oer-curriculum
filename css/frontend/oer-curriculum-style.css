@@ -798,6 +798,7 @@ h4.tc-oer-curriculum-field-heading span.oer_curriculum_related_fields, h4.tc-rel
   float:left;
   font-family: 'Helvetica Neue', 'Roboto', Helvetica, Arial, sans-serif;
   font-size:14px;
+  line-height: 100%;
   padding:10px 15px;
 }
 .tc-oer-curriculum-objectives, .tc-oer-curriculum-standards, .tc-related-curriculum-section {margin-bottom: 0px;}
