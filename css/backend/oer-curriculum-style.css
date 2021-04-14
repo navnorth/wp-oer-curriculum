@@ -81,6 +81,7 @@
     max-height: 400px;
     overflow-y: scroll;
 }
+ul.oer-standard-list li a {cursor: pointer;}
 .oer_curriculum_grades .form-checkbox { margin-bottom:5px; }
 .oer_curriculum_grades .form-checkbox input[type=radio] { margin:0; }
 .oer_curriculum_radio_label { margin-bottom:0; margin-left:5px; }

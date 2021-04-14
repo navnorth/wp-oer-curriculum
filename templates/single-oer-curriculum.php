@@ -215,9 +215,9 @@
                                                           $standard_details = was_standard_details($notation);
                                                       if (!empty($standard_details)){
                                                           if (isset($standard_details->description))
-                                                              echo "<li>".$standard_details->description."</li>";
+                                                              echo "<li>".stripslashes($standard_details->description)."</li>";
                                                           else
-                                                              echo "<li>".$standard_details->standard_title."</li>";
+                                                              echo "<li>".stripslashes($standard_details->standard_title)."</li>";
                                                       }
                                                   }
                                                   echo "</ul>";

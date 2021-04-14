@@ -895,6 +895,8 @@ div#tcHiddenFields {float: left;}
 }
 .oer-curriculum-ps-nav-left .nav-media-icon { margin-right:15px; }
 .oer-curriculum-ps-nav-right .nav-media-icon { margin-left:15px; }
+.oer-curriculum-ps-nav-left:focus,
+.oer-curriculum-ps-nav-right:focus { outline: unset; }
 .nav-oer-curriculum-resource-title {
     display: inline-flex;
     justify-items: center;
