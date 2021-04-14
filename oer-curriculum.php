@@ -1,12 +1,14 @@
 <?php
 /*
- Plugin Name:  Curriculum Plugin
+ Plugin Name:  WP Curriculum
  Plugin URI:   https://www.wp-oer.com
- Description:  Manage and display lesson plans and other curriculum with connections to Open Educational Resources and alignment to academic content standards.
+ Description:  Manage and display collections of Open Educational Resources in lesson plans or curriculums with alignment to Common Core State Standards. 
  Version:      0.3.5
+ Requires at least: 4.4
+ Requires PHP:  7.4
  Author:       Navigation North
  Author URI:   https://www.navigationnorth.com
- Text Domain:  wp-oer
+ Text Domain:  wp-curriculum
  License:      GPL3
  License URI:  https://www.gnu.org/licenses/gpl-3.0.html
 
