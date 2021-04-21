@@ -1,16 +1,16 @@
 <?php
 /*
- Plugin Name:  WP OER Curriculum
- Plugin URI:   https://www.wp-oer.com
- Description:  Manage and display collections of Open Educational Resources in lesson plans or curriculums with alignment to Common Core State Standards. 
- Version:      0.5.0
- Requires at least: 4.4
- Requires PHP:  7.4
- Author:       Navigation North
- Author URI:   https://www.navigationnorth.com
- Text Domain:  wp-curriculum
- License:      GPL3
- License URI:  https://www.gnu.org/licenses/gpl-3.0.html
+ Plugin Name:        WP OER Curriculum
+ Plugin URI:         https://www.wp-oer.com/curriculum
+ Description:        Manage and display collections of Open Educational Resources in lesson plans or curriculums with alignment to Common Core State Standards. 
+ Version:            0.5.0
+ Requires at least:  4.4
+ Requires PHP:       7.4
+ Author:             Navigation North
+ Author URI:         https://www.navigationnorth.com
+ Text Domain:        wp-curriculum
+ License:            GPL3
+ License URI:        https://www.gnu.org/licenses/gpl-3.0.html
 
  Copyright (C) 2021 Navigation North
 
@@ -87,10 +87,10 @@ $oer_curriculum_deleted_fields = array(
 $oer_convert_info = true;
 $root_slug = oer_curriculum_retrieve_rootslug();
 /**
- * Parent plugin (WP OER) required to activate WP OER Lesson Plan Plugin
+ * Parent plugin (WP OER) required to activate WP OER Curriculum
  * Check if WP OER plugin already installed or not
  * If WP OER not installed then show the error message
- * And stop the installation process of WP OER Lesson Plan Plugin
+ * And stop the installation process of WP OER Curriculum plugin
  */
 register_activation_hook( __FILE__, 'check_parent_plugin' );
 function check_parent_plugin()
@@ -129,7 +129,7 @@ function my_plugin_activation_notice()
     )
     {?>
         <div class="notice notice-success is-dismissible" id="oer-curriculum-dismissible">
-            <p>Thank you for installing <strong>WP OER Lesson Plan</strong> plugin.</p>
+            <p>Thank you for installing <strong>WP OER Curriculum</strong> plugin.</p>
         </div>
     <?php }
 

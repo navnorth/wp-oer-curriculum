@@ -18,14 +18,10 @@ let prevelem = "li";
 const globalSettingOptions = [1, 2, 3, 4, 5];
 const globalSettingMargin = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
 const globalSettingAlign = ["middle", "left", "right"];
-registerBlockType("cgb/block-curriculum-featured-block", {
-  // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+registerBlockType("wp-curriculum/block-curriculum-featured-block", {
   title: __("Curriculum Featured Block"),
-  // Block title.
   icon: "welcome-learn-more",
-  // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
   category: "common",
-  // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
   keywords: [
     __("curriculum-featured-block"),
     __("curriculum"),
@@ -123,7 +119,7 @@ registerBlockType("cgb/block-curriculum-featured-block", {
     const blocks = wp.data.select("core/block-editor").getBlocks(); //console.log('******************');
 
     blocks.map((val, index) => {
-      if (val.name == "cgb/block-curriculum-featured-block") {
+      if (val.name == "wp-curriculum/block-curriculum-featured-block") {
         var uniq = "cfb" + new Date().getTime();
         var cid = val.clientId;
         /*

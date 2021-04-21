@@ -1,6 +1,6 @@
 === WP Curriculum ===
 Contributors: navigationnorth, joehobson, johnpaulbalagolan, josepheneldas
-Tags: OER, Open Educational Resources, Education, Learning
+Tags: curriculum, education, learning, teaching, OER, Open Educational Resources
 Requires at least: 4.9
 Tested up to: 5.7
 Requires PHP: 7.0
