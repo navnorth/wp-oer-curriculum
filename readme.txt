@@ -1,10 +1,10 @@
 === WP Curriculum ===
 Contributors: navigationnorth, joehobson, johnpaulbalagolan, josepheneldas
 Tags: OER, Open Educational Resources, Education, Learning
-Requires at least: 4.4
+Requires at least: 4.9
 Tested up to: 5.7
-Requires PHP: 7.4
-Stable tag: 1.0.0
+Requires PHP: 7.0
+Stable tag: 0.5.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -57,5 +57,5 @@ This is an intermittent issue in Firefox. Installing the Classic Editor fixes th
 
 == Changelog ==
 
-= 1.0.0 =
+= 0.5.0 =
 * Initial release
