@@ -237,7 +237,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                     </li>
                 <?php }?>
                 <li class="list-group-item">
-                    <a href="#oer_curriculum_meta_related_inquiry" title="Related Inquiry Sets">Related Inquiry Sets</a>
+                    <a href="#oer_curriculum_meta_related" title="Related Curriculum">Related Curriculum</a>
                 </li>
             </ul>
         </div>

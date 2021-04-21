@@ -28,8 +28,8 @@ registerBlockType("cgb/block-curriculum-featured-block", {
   // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
   keywords: [
     __("curriculum-featured-block"),
-    __("CGB Example"),
-    __("create-guten-block")
+    __("curriculum"),
+    __("featured"),
   ],
   attributes: {
     blockwidth: {

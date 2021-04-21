@@ -67,7 +67,7 @@ function oer_curriculum_custom_meta_boxes() {
     // Add a download copy option
     add_meta_box( 'oer_curriculum_meta_download_copy', 'Downloadable Copy', 'oer_curriculum_download_copy_cb', 'oer-curriculum', 'side', 'high' );
     
-    // Add Related Inquiry Sets metabox
+    // Add Related Curriculum metabox
     $related_inquiry_set = (get_option('oer_curriculum_related_curriculum_label'))?true:false;
     $related_inquiry_set_enabled = (get_option('oer_curriculum_related_curriculum_enabled'))?true:false;
     $related_curriculum_enabled = false;
@@ -85,7 +85,7 @@ function oer_curriculum_custom_meta_boxes() {
         }
         if ($related_curriculum_enabled) {
             $label = oer_curriculum_get_field_label('oer_curriculum_related_curriculum');
-            add_meta_box('oer_curriculum_meta_related_inquiry', $label, 'oer_curriculum_related_inquiry_callback', 'oer-curriculum', 'advanced');
+            add_meta_box('oer_curriculum_meta_related', $label, 'oer_curriculum_related_callback', 'oer-curriculum', 'advanced');
         }
     }
 }
@@ -95,8 +95,8 @@ function oer_curriculum_meta_callback() {
     include_once(OER_LESSON_PLAN_PATH . 'includes/oer-curriculum-meta-fields.php');
 }
 
-// Related Inquiry Sets Callback
-function oer_curriculum_related_inquiry_callback(){
+// Related Curriculum Callback
+function oer_curriculum_related_callback(){
     include_once(OER_LESSON_PLAN_PATH . 'includes/oer-curriculum-related-curriculum.php');
 }
 
@@ -444,7 +444,7 @@ function oer_curriculum_save_custom_fields() {
                 update_post_meta($post->ID, 'oer_curriculum_download_copy_document', sanitize_text_field($_POST['oer_curriculum_download_copy_document']));
             }
 
-            // Save related inquiry sets
+            // Save related curriculum
             if (isset($_POST['oer_curriculum_related_curriculum'])) {
                 update_post_meta($post->ID, 'oer_curriculum_related_curriculum', $_POST['oer_curriculum_related_curriculum']);
             }

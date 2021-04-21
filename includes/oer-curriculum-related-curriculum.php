@@ -15,7 +15,7 @@ $inquiry = ((is_array($inquiry)&& count($inquiry)>0)?$inquiry[0]:array());
                 <div class="panel-body">
                     <?php
                     for ($i=1;$i<=3;$i++){
-                        $inquirysets = oer_curriculum_related_inquiry_sets($inquiryset_post->ID);
+                        $inquirysets = oer_curriculum_related($inquiryset_post->ID);
                         $related_inquiry_set = (get_option('oer_curriculum_related_curriculum_'.$i.'_label'))?true:false;
                         $related_inquiry_set_enabled = (get_option('oer_curriculum_related_curriculum_'.$i.'_enabled'))?true:false;
                         if (($related_inquiry_set && $related_inquiry_set_enabled) || !$related_inquiry_set) {

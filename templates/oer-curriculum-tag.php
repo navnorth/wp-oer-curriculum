@@ -45,8 +45,8 @@ $inquiry_sets = get_posts( $args );
                     $grade_level = oer_curriculum_grade_level($inquiry_set->ID);
             ?>
             <div class="col-md-4 col-sm-6 padding-0">
-            <a href="<?php echo $link; ?>" class="wp-block-wp-curriculum-inquiry-set-thumbnail-block oer-curriculum-tc-related-inquiry-block-link">
-                <div class="oer-curriculum-tc-related-inquiry-blocks-padding">
+            <a href="<?php echo $link; ?>" class="wp-block-wp-curriculum-curriculum-thumbnail-block oer-curriculum-related-block-link">
+                <div class="oer-curriculum-related-blocks-padding">
                     <div class="media-image">
                         <div class="image-thumbnail">
                             <div class="image-section">
@@ -54,10 +54,10 @@ $inquiry_sets = get_posts( $args );
                             </div>
                         </div>
                     </div>
-                    <div class="oer-curriculum-tc-related-inquiry-grades">
+                    <div class="oer-curriculum-related-grades">
                         <span><?php echo $grade_level; ?></span>
                     </div>
-                    <div class="oer-curriculum-tc-related-inquiry-set-description">
+                    <div class="oer-curriculum-related-set-description">
                         <h4><?php echo $inquiry_set->post_title; ?></h4>
                     </div>
                 </div>

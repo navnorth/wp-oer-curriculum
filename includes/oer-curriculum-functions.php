@@ -373,8 +373,8 @@ if (! function_exists('oer_curriculum_get_resource_details')){
     }
 }
 
-if (! function_exists('oer_curriculum_related_inquiry_sets')){
-    function oer_curriculum_related_inquiry_sets($id=null){
+if (! function_exists('oer_curriculum_related')){
+    function oer_curriculum_related($id=null){
         $args = [
             'post_type' => 'oer-curriculum',
             'post_status' => 'publish',

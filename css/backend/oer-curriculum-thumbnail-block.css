@@ -1,5 +1,5 @@
-.oer-curriculum-tc-related-inquiry-blocks-padding { position:relative; }
-.oer-curriculum-tc-related-inquiry-grades {
+.oer-curriculum-related-blocks-padding { position:relative; }
+.oer-curriculum-related-grades {
     position: absolute;
     top: 0;
     left: 0;
@@ -9,16 +9,16 @@
 }
 .custom-bg-dark { background: #283d47 !important; }
 .custom-bg-dark-inquiry-sets { height: 15px; }
-.oer-curriculum-tc-related-inquiry-set-description {
+.oer-curriculum-related-set-description {
     padding: 16px;
     font-weight: 500;
     background: #436576;
     box-shadow: 0 10px 28px 0 #3333337a;
 }
-.oer-curriculum-tc-related-inquiry-set-description h4 {
+.oer-curriculum-related-set-description h4 {
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
     color:#ffffff !important;
 }
-.oer-curriculum-tc-related-inquiry-set-description h4 a { color:#ffffff !important; white-space:nowrap; }
+.oer-curriculum-related-set-description h4 a { color:#ffffff !important; white-space:nowrap; }

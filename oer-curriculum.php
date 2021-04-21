@@ -1,9 +1,9 @@
 <?php
 /*
- Plugin Name:  WP Curriculum
+ Plugin Name:  WP OER Curriculum
  Plugin URI:   https://www.wp-oer.com
  Description:  Manage and display collections of Open Educational Resources in lesson plans or curriculums with alignment to Common Core State Standards. 
- Version:      0.3.5
+ Version:      0.5.0
  Requires at least: 4.4
  Requires PHP:  7.4
  Author:       Navigation North
@@ -12,7 +12,7 @@
  License:      GPL3
  License URI:  https://www.gnu.org/licenses/gpl-3.0.html
 
- Copyright (C) 2020 Navigation North
+ Copyright (C) 2021 Navigation North
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ define( 'OER_LESSON_PLAN_FILE',__FILE__);
 // Plugin Name and Version
 define( 'OER_LESSON_PLAN_PLUGIN_NAME', 'WP OER Curriculum Plugin' );
 define( 'OER_LESSON_PLAN_ADMIN_PLUGIN_NAME', 'WP OER Curriculum Plugin');
-define( 'OER_LESSON_PLAN_VERSION', '0.3.5' );
+define( 'OER_LESSON_PLAN_VERSION', '0.5.0' );
 
 include_once(OER_LESSON_PLAN_PATH.'includes/oer-curriculum-functions.php');
 include_once(OER_LESSON_PLAN_PATH.'includes/init.php');
@@ -233,26 +233,26 @@ add_action('enqueue_block_editor_assets', 'oer_curriculum_enqueue_inquiry_set_bl
 function oer_curriculum_enqueue_inquiry_set_block(){
     global $post;
     wp_enqueue_script(
-        'inquiry-set-thumbnail-block-js',
+        'curriculum-thumbnail-block-js',
         OER_LESSON_PLAN_URL . "/js/backend/oer-curriculum-thumbnail-block.build.js",
         array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-components', 'wp-editor', 'wp-api')
     );
     wp_localize_script(
-        'inquiry-set-thumbnail-block-js',
+        'curriculum-thumbnail-block-js',
         'wp_nn_theme',
         array(
             "theme_path" => get_template_directory_uri()
         )
     );
     wp_enqueue_style(
-        'inquiry-set-thumbnail-block-css',
+        'curriculum-thumbnail-block-css',
         OER_LESSON_PLAN_URL . "/css/backend/oer-curriculum-thumbnail-block.css",
         array('wp-edit-blocks')
     );
     /* Register Thumbnail Block */
-    register_block_type('wp-curriculum/inquiry-set-thumbnail-block', array(
-        'editor_script' => 'inquiry-set-thumbnail-block-js',
-        'editor_style' => 'inquiry-set-thumbnail-block-css'
+    register_block_type('wp-curriculum/curriculum-thumbnail-block', array(
+        'editor_script' => 'curriculum-thumbnail-block-js',
+        'editor_style' => 'curriculum-thumbnail-block-css'
     ));
 }
 

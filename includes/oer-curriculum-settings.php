@@ -113,7 +113,7 @@ function oer_curriculum_show_metadata_settings() {
 		}
 	}
 	
-	// Add Options for related inquiry sets 1-3
+	// Add Options for related Curriculum 1-3
 	for($i=1;$i<=3;$i++){
 		$metadata[] = $inquirysets[] = 'oer_curriculum_related_curriculum_'.$i;
 	}

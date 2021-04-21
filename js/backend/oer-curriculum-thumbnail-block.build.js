@@ -156,29 +156,29 @@ var oerCurriculumSets = function (_Component) {
         key: 'render',
         value: function render() {
 
-            var options = [{ value: 0, label: __('Select an inquiry set') }];
-            var output = __('Loading Inquiry Sets');
+            var options = [{ value: 0, label: __('Select Curriculum') }];
+            var output = __('Loading Curriculum');
 
             if (this.state.posts.length > 0) {
-                var loading = __('We have %d inquiry sets. Choose one.');
+                var loading = __('We have %d curriculum. Choose one.');
                 output = loading.replace('%d', this.state.posts.length);
                 this.state.posts.forEach(function (post) {
                     options.push({ value: post.id, label: post.title.rendered });
                 });
             } else {
-                output = __('No inquiry set found. Please create some first.');
+                output = __('No curriculum found. Please create some first.');
             }
 
             return [!!this.props.isSelected && wp.element.createElement(
                 InspectorControls,
                 { key: 'inspectorset' },
-                wp.element.createElement(SelectControl, { onChange: this.onChangeSelectInquirySet, value: this.props.attributes.selectedInquirySet, label: __('Inquiry Set:'), options: options })
+                wp.element.createElement(SelectControl, { onChange: this.onChangeSelectInquirySet, value: this.props.attributes.selectedInquirySet, label: __('Curriculum:'), options: options })
             ), wp.element.createElement(
                 'a',
-                { href: this.props.attributes.link, className: 'oer-curriculum-tc-related-inquiry-block-link', rel: 'noopener noreferrer' },
+                { href: this.props.attributes.link, className: 'oer-curriculum-related-block-link', rel: 'noopener noreferrer' },
                 wp.element.createElement(
                     'div',
-                    { className: 'oer-curriculum-tc-related-inquiry-blocks-padding' },
+                    { className: 'oer-curriculum-related-blocks-padding' },
                     wp.element.createElement(
                         'div',
                         { className: 'media-image' },
@@ -194,7 +194,7 @@ var oerCurriculumSets = function (_Component) {
                     ),
                     wp.element.createElement(
                         'div',
-                        { className: 'oer-curriculum-tc-related-inquiry-grades' },
+                        { className: 'oer-curriculum-related-grades' },
                         wp.element.createElement(
                             'span',
                             null,
@@ -204,7 +204,7 @@ var oerCurriculumSets = function (_Component) {
                     wp.element.createElement('div', { className: 'custom-bg-dark custom-bg-dark-inquiry-sets' }),
                     wp.element.createElement(
                         'div',
-                        { className: 'oer-curriculum-tc-related-inquiry-set-description' },
+                        { className: 'oer-curriculum-related-set-description' },
                         wp.element.createElement(
                             'h4',
                             null,
@@ -219,8 +219,8 @@ var oerCurriculumSets = function (_Component) {
     return oerCurriculumSets;
 }(Component);
 
-wp.blocks.registerBlockType('wp-curriculum/inquiry-set-thumbnail-block', {
-    title: 'Inquiry Set Thumbnail Block',
+wp.blocks.registerBlockType('wp-curriculum/curriculum-thumbnail-block', {
+    title: 'Curriculum Thumbnail Block',
     category: 'common',
     icon: 'welcome-learn-more',
     attributes: {
@@ -240,10 +240,10 @@ wp.blocks.registerBlockType('wp-curriculum/inquiry-set-thumbnail-block', {
 
         return wp.element.createElement(
             'a',
-            { href: attributes.link, className: 'oer-curriculum-tc-related-inquiry-block-link', rel: 'noopener noreferrer' },
+            { href: attributes.link, className: 'oer-curriculum-related-block-link', rel: 'noopener noreferrer' },
             wp.element.createElement(
                 'div',
-                { className: 'oer-curriculum-tc-related-inquiry-blocks-padding' },
+                { className: 'oer-curriculum-related-blocks-padding' },
                 wp.element.createElement(
                     'div',
                     { className: 'media-image' },
@@ -259,7 +259,7 @@ wp.blocks.registerBlockType('wp-curriculum/inquiry-set-thumbnail-block', {
                 ),
                 wp.element.createElement(
                     'div',
-                    { className: 'oer-curriculum-tc-related-inquiry-grades' },
+                    { className: 'oer-curriculum-related-grades' },
                     wp.element.createElement(
                         'span',
                         null,
@@ -269,7 +269,7 @@ wp.blocks.registerBlockType('wp-curriculum/inquiry-set-thumbnail-block', {
                 wp.element.createElement('div', { className: 'custom-bg-dark custom-bg-dark-inquiry-sets' }),
                 wp.element.createElement(
                     'div',
-                    { className: 'oer-curriculum-tc-related-inquiry-set-description' },
+                    { className: 'oer-curriculum-related-set-description' },
                     wp.element.createElement(
                         'h4',
                         null,
