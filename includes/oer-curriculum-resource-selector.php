@@ -1,10 +1,10 @@
 <div class="oer-curriculum-resource-selector-overlay animated" style="visibility:hidden;">
-	<div class="oer-curriculum-resource-selector-table">
-		<div class="oer-curriculum-resource-selector-cell">
-			<div class="oer-curriculum-resource-selector-content">	
-        	<h1>Resources</h1>
-        	<div class="oer-curriculum-resource-selector-search">
-          	<input class="oer-curriculum-resource-selector-criteria" placeholder="Search page here." name="oer-curriculum-resource-selector-criteria" type="text" />
+    <div class="oer-curriculum-resource-selector-table">
+        <div class="oer-curriculum-resource-selector-cell">
+            <div class="oer-curriculum-resource-selector-content">    
+            <h1>Resources</h1>
+            <div class="oer-curriculum-resource-selector-search">
+              <input class="oer-curriculum-resource-selector-criteria" placeholder="Search page here." name="oer-curriculum-resource-selector-criteria" type="text" />
             <button class="search_std_btn" data-postid="24652"><span class="dashicons dashicons-search"></span></button>
           </div>
           <div class="oer-curriculum-resource-selector-search-result">
@@ -31,7 +31,7 @@
                       <li>
                       <label class="oer-curriculum-resource-selector-tag-p" data-postid="<?php echo $post->ID; ?>" data-search-term="<?php echo strtolower($post->post_title); ?>">
                       <input name="oer-curriculum-resource-selector-rad" title="<?php echo $post->post_title; ?>" type="radio" value="<?php echo $post->post_title; ?>" checked />
-          			         <?php echo  $post->post_title; ?>
+                               <?php echo  $post->post_title; ?>
                          <span class="relatedResourceSelectorImage dashicons dashicons-yes"></span>
                       </label>
                       </li>
@@ -42,15 +42,15 @@
             </ul>
           </div>
           <div class="oer-curriculum-resource-selector-nav-wrapper">
-          	<!--<input type="hidden" name="oer-curriculum-resource-selector-prev-selected" value='<?php echo $post->post_parent; ?>'/> -->
-          	<a href="#" class="oer-curriculum-resource-selector-select">Select</a>
+              <!--<input type="hidden" name="oer-curriculum-resource-selector-prev-selected" value='<?php echo $post->post_parent; ?>'/> -->
+              <a href="#" class="oer-curriculum-resource-selector-select">Select</a>
           </div>
           <div class="oer-curriculum-resource-selector-search-close">
-          	<span class="fa fa-times"></span>
+              <span class="fa fa-times"></span>
           </div> 
-			</div>	
-		</div>
-	</div>
+            </div>    
+        </div>
+    </div>
 </div>
 
 <?php
@@ -80,7 +80,7 @@ function loadchild(){
 
             echo '<label class="oer-curriculum-resource-selector-tag-p ' . $_state . '" data-search-term="' . strtolower($_ptitle) . '">';
             echo '<input name="oer-curriculum-resource-selector-rad" title="' . $_ptitle . '" type="radio" value="'.$resource->ID.'"' . $_state . '/>' . $_ptitle;
-			      echo '<span class="fa fa-check"></span>';
+                  echo '<span class="fa fa-check"></span>';
             echo '</label>';
             echo '</li>';
         
@@ -96,8 +96,8 @@ function loadchild(){
 
 function oer_curriculum_resource_selector_script_enqueue(){
   die(get_template_directory_uri());
-	wp_enqueue_style('oer-curriculum-resource-selector-style.css', get_template_directory_uri() . 'css/backend/oer-curriculum-resource-selector-style.css', array() , null, 'all');
-	wp_enqueue_script('oer-curriculum-resource-selector-script.js', get_template_directory_uri() . 'js/backend/oer-curriculum-resource-selector.js' , array('jquery') , null, true);
+    wp_enqueue_style('oer-curriculum-resource-selector-style.css', get_template_directory_uri() . 'css/backend/oer-curriculum-resource-selector-style.css', array() , null, 'all');
+    wp_enqueue_script('oer-curriculum-resource-selector-script.js', get_template_directory_uri() . 'js/backend/oer-curriculum-resource-selector.js' , array('jquery') , null, true);
 }
 add_action('admin_enqueue_scripts', 'oer_curriculum_resource_selector_script_enqueue');
 
@@ -110,28 +110,28 @@ add_action('add_meta_boxes', 'wp_nn_parentpage_add_metabox');
 
 function wp_nn_parentpage_meta_box_content($post_id){
 ?>
-	<p class="post-attributes-label-wrapper"><label class="post-attributes-label" for="parent_id">Parent</label></p>
-	<div class="wp-nn-parentpage-display-wrapper">
-    	<div class="wp-nn-parentpage-display-block">
+    <p class="post-attributes-label-wrapper"><label class="post-attributes-label" for="parent_id">Parent</label></p>
+    <div class="wp-nn-parentpage-display-wrapper">
+        <div class="wp-nn-parentpage-display-block">
         <?php $_curval = $post_id->post_parent; ?>
         <?php $_display = '(no parent)'; ?>
-        <?php if ($post_id->post_parent > 0){	
-			$_ptitle = get_the_title($post_id->post_parent);
+        <?php if ($post_id->post_parent > 0){    
+            $_ptitle = get_the_title($post_id->post_parent);
             if ($_ptitle == '') $_ptitle = "#" . $post_id->post_parent . ' (no title)';
-			$_display = $_ptitle;
-		}
-		?>
+            $_display = $_ptitle;
+        }
+        ?>
         <input name="wp-nn-parentpage-display" type="text" id="wp-nn-parentpage-display" value="<?php echo $_display ?>" readonly="readonly" />
-    	<input name="parent_id" id="parent_id" type="hidden" value="<?php echo $_curval ?>" class="tagsdiv" />
+        <input name="parent_id" id="parent_id" type="hidden" value="<?php echo $_curval ?>" class="tagsdiv" />
         <input type="button" class="button  wp-nn-parentpage-display-change" value="Change">
         </div>
     </div>
 
-	<?php $current_template = get_post_meta($post_id->ID, '_wp_page_template', true); ?>
+    <?php $current_template = get_post_meta($post_id->ID, '_wp_page_template', true); ?>
     <p class="post-attributes-label-wrapper"><label class="post-attributes-label" for="parent_id">Template</label></p>
-	<select name="page_template" id="page_template">
-		<option value="default">Default Template</option>
-		<?php
+    <select name="page_template" id="page_template">
+        <option value="default">Default Template</option>
+        <?php
         $templates = wp_get_theme()->get_page_templates();
         foreach ($templates as $template_name => $template_filename)
         {
@@ -140,7 +140,7 @@ function wp_nn_parentpage_meta_box_content($post_id){
             ?><option value="<?php echo $template_name ?>" <?php echo $_chk ?>><?php echo $template_filename; ?></option>';<?php
         }
         ?>
-	</select>
+    </select>
 
     <p class="post-attributes-label-wrapper"><label class="post-attributes-label" for="menu_order">Order</label></p>
     <input name="menu_order" type="text" size="4" id="menu_order" value="<?php echo $post_id->menu_order ?>">
@@ -169,14 +169,14 @@ function loadchild($parentid, $_level, $_curval, $_mypage)
             <li>
             <label class="wp-nn-tag-p <?php echo $_state ?>" data-search-term="(no parent)">
             <input name="wp-nn-parentpage-rad" title="(no parent)" type="radio" value="0" checked />(no parent)
-			<span class="fa fa-check"></span>
+            <span class="fa fa-check"></span>
             </label>
             </li> <?php
         }
     }else{
         echo '<ul class="children level-' . $_level . '-children" style="padding-left:10px">';
     }
-	
+    
     foreach ($pages as $page)
     {
         if ($page->ID != $_mypage)
@@ -189,7 +189,7 @@ function loadchild($parentid, $_level, $_curval, $_mypage)
 
             echo '<label class="wp-nn-tag-p ' . $_state . '" data-search-term="' . strtolower($_ptitle) . '">';
             echo '<input name="wp-nn-parentpage-rad" title="' . $_ptitle . '" type="radio" value="'.$page->ID.'"' . $_state . '/>' . $_ptitle;
-			echo '<span class="fa fa-check"></span>';
+            echo '<span class="fa fa-check"></span>';
             echo '</label>';
             loadchild($page->ID, (int)$_level + 1, $_curval, $_mypage);
             echo '</li>';

@@ -525,7 +525,7 @@ if (! function_exists('is_oer_plugin_installed')){
         $activeOER = false;
         $active_plugins_basenames = get_option( 'active_plugins' );
         foreach ( $active_plugins_basenames as $plugin_basename ) {
-		if ( false !== strpos( $plugin_basename, '/open-educational-resources.php' ) ) {
+        if ( false !== strpos( $plugin_basename, '/open-educational-resources.php' ) ) {
                 $activeOER = true;
             }
         }
@@ -538,7 +538,7 @@ if (! function_exists('is_standards_plugin_installed')){
         $activeWAS = false;
         $active_plugins_basenames = get_option( 'active_plugins' );
         foreach ( $active_plugins_basenames as $plugin_basename ) {
-		if ( false !== strpos( $plugin_basename, '/wp-academic-standards.php' ) ) {
+        if ( false !== strpos( $plugin_basename, '/wp-academic-standards.php' ) ) {
                 $activeWAS = true;
             }
         }
@@ -555,7 +555,7 @@ if (! function_exists('oer_curriculum_display_loader')){
 }
 // Get Meta Label
 if (!function_exists('oer_curriculum_get_meta_label')){
-	function oer_curriculum_get_meta_label($key){
+    function oer_curriculum_get_meta_label($key){
             $label = "";
             switch ($key){
             case "oer_curriculum_authors":
@@ -618,30 +618,30 @@ if (!function_exists('oer_curriculum_get_meta_label')){
             case "oer_curriculum_additional_sections":
                 $label = __("Additional Sections", OER_LESSON_PLAN_SLUG);
                 break;
-	    }
-	    return $label;
-	}
+        }
+        return $label;
+    }
 }
 // Get All Post Meta
 if (!function_exists('oer_curriculum_get_all_meta')){
-	function oer_curriculum_get_all_meta($type){
-		global $wpdb;
-		$result = $wpdb->get_results($wpdb->prepare(
-		"SELECT post_id, meta_key, meta_value FROM ".$wpdb->prefix."posts,".$wpdb->prefix."postmeta WHERE post_type=%s
-			AND ".$wpdb->prefix."posts.ID=".$wpdb->prefix."postmeta.post_id", $type
-		), ARRAY_A);
-		return $result;
-	}
+    function oer_curriculum_get_all_meta($type){
+        global $wpdb;
+        $result = $wpdb->get_results($wpdb->prepare(
+        "SELECT post_id, meta_key, meta_value FROM ".$wpdb->prefix."posts,".$wpdb->prefix."postmeta WHERE post_type=%s
+            AND ".$wpdb->prefix."posts.ID=".$wpdb->prefix."postmeta.post_id", $type
+        ), ARRAY_A);
+        return $result;
+    }
 }
 // Save Metadata options
 if (!function_exists('oer_curriculum_save_metadata_options')){
-	function oer_curriculum_save_metadata_options($post_data){
-		foreach($post_data as $key=>$value){
-			if (strpos($key,"oer_")!==false || strpos($key,"oer_curriculum_oer_")!==false){
-				update_option($key, $value, true);
-			}
-		}
-	}
+    function oer_curriculum_save_metadata_options($post_data){
+        foreach($post_data as $key=>$value){
+            if (strpos($key,"oer_")!==false || strpos($key,"oer_curriculum_oer_")!==false){
+                update_option($key, $value, true);
+            }
+        }
+    }
 }
 
 // Get Field Label

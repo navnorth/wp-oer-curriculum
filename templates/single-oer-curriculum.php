@@ -515,9 +515,9 @@
                           $title = $resource->post_title;
                           $_hasimage = has_post_thumbnail($resource);
                           if($_hasimage) $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($resource), 'resource-thumbnail' );
-                          $oer_authorname = get_post_meta($resource->ID, "oer_authorname", true);	
-                          $oer_authorurl = get_post_meta($resource->ID, "oer_authorurl", true);	
-                          $oer_authorname2 = get_post_meta($resource->ID, "oer_authorname2", true);	
+                          $oer_authorname = get_post_meta($resource->ID, "oer_authorname", true);    
+                          $oer_authorurl = get_post_meta($resource->ID, "oer_authorurl", true);    
+                          $oer_authorname2 = get_post_meta($resource->ID, "oer_authorname2", true);    
                           $oer_authorurl2 = get_post_meta($resource->ID, "oer_authorurl2", true);
                       }
                           $resource_img = (isset($primary_resources['image'][$resourceKey]) && !empty($primary_resources['image'][$resourceKey])  ? $primary_resources['image'][$resourceKey]: $resource_img);
@@ -553,8 +553,8 @@
                               <div class="image-thumbnail">
                                   <?php $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($title)."-".$resource_id)."/idx/".$_idx++; ?>
                                   <a href="<?php echo $ps_url;  ?>">
-                                      <?php if($resource_img==''): $_avtr = getResourceIcon($type,$url); ?>	
-                                        <div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div>	
+                                      <?php if($resource_img==''): $_avtr = getResourceIcon($type,$url); ?>    
+                                        <div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div>    
                                       <?php endif; ?>
                                       <span class="resource-overlay"></span>
                                       <?php if (!empty($type)): ?>
@@ -571,13 +571,13 @@
                                   
                               </div>
                               <div class="oer-curriculum-resource-info">
-                                <div class="oer-curriculum-resource-title"><?php echo $title; ?></div>	
-                                <div class="oer-curriculum-resource-author">	
-                                  <?php if( $oer_authorname != ''):?>	
-                                    <div class="oer-curriculum-resource-author_block"><a href="<?php echo $oer_authorurl; ?>" target="_new"><?php echo $oer_authorname; ?></a></div>	
-                                  <?php endif; ?>	
-                                  <?php /* if( $oer_authorname2 != ''):?>	
-                                    <div class="oer-curriculum-resource-author_block"><a href=""><?php echo $oer_authorname2; ?></a></div>	
+                                <div class="oer-curriculum-resource-title"><?php echo $title; ?></div>    
+                                <div class="oer-curriculum-resource-author">    
+                                  <?php if( $oer_authorname != ''):?>    
+                                    <div class="oer-curriculum-resource-author_block"><a href="<?php echo $oer_authorurl; ?>" target="_new"><?php echo $oer_authorname; ?></a></div>    
+                                  <?php endif; ?>    
+                                  <?php /* if( $oer_authorname2 != ''):?>    
+                                    <div class="oer-curriculum-resource-author_block"><a href=""><?php echo $oer_authorname2; ?></a></div>    
                                   <?php endif;*/ ?>
                                 </div>
                                 <div class="oer-curriculum-resource-excerpt"><?php echo oer_get_related_resource_content(strip_tags($description), 50); ?></div>
@@ -734,7 +734,7 @@
       </div>
   </div>
   <?php
-  	// Display Activity Objects
-   	endwhile; 
+      // Display Activity Objects
+       endwhile; 
   endif; 
   get_footer();

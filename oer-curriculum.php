@@ -87,10 +87,10 @@ $oer_curriculum_deleted_fields = array(
 $oer_convert_info = true;
 $root_slug = oer_curriculum_retrieve_rootslug();
 /**
- * Parent plugin (WP OER) required to activate WP OER Curriculum
+ * Parent plugin (WP OER) required to activate OER Curriculum
  * Check if WP OER plugin already installed or not
  * If WP OER not installed then show the error message
- * And stop the installation process of WP OER Curriculum plugin
+ * And stop the installation process of OER Curriculum plugin
  */
 register_activation_hook( __FILE__, 'check_parent_plugin' );
 function check_parent_plugin()
@@ -129,7 +129,7 @@ function my_plugin_activation_notice()
     )
     {?>
         <div class="notice notice-success is-dismissible" id="oer-curriculum-dismissible">
-            <p>Thank you for installing <strong>WP OER Curriculum</strong> plugin.</p>
+            <p>Thank you for installing the <strong>OER Curriculum</strong> plugin.</p>
         </div>
     <?php }
 
@@ -157,21 +157,21 @@ add_action( 'init', 'oer_curriculum_add_rewrites', 10, 0 );
 function oer_curriculum_add_rewrites()
 {
   global $root_slug;
-	global $wp_rewrite;
+    global $wp_rewrite;
     add_rewrite_tag( '%curriculum%', '([^/]*)' );
-	add_rewrite_tag( '%source%', '([^&]+)' );
+    add_rewrite_tag( '%source%', '([^&]+)' );
     add_rewrite_tag( '%topic%', '([^&]+)' );
     add_rewrite_tag( '%module%', '([^&]+)' );
     add_rewrite_tag( '%idx%', '([^&]+)' );
-	add_rewrite_rule( '^'.$root_slug.'/([^/]*)/source/([^&]+)/idx/([^&]+)/?$', 'index.php?post_type=oer-curriculum&curriculum=$matches[1]&source=$matches[2]&idx=$matches[3]', 'top' );
+    add_rewrite_rule( '^'.$root_slug.'/([^/]*)/source/([^&]+)/idx/([^&]+)/?$', 'index.php?post_type=oer-curriculum&curriculum=$matches[1]&source=$matches[2]&idx=$matches[3]', 'top' );
     add_rewrite_rule( '^'.$root_slug.'/topic/([^&]+)/?$', 'index.php?post_type=oer-curriculum&topic=$matches[1]', 'top' );
     add_rewrite_rule( '^'.$root_slug.'/([^/]*)/module/([^&]+)/?$', 'index.php?post_type=oer-curriculum&curriculum=$matches[1]&module=$matches[2]', 'top' );
     add_rewrite_endpoint( 'curriculum', EP_PERMALINK | EP_PAGES );
-	add_rewrite_endpoint( 'source', EP_PERMALINK | EP_PAGES );
+    add_rewrite_endpoint( 'source', EP_PERMALINK | EP_PAGES );
     add_rewrite_endpoint( 'topic', EP_PERMALINK | EP_PAGES );
     add_rewrite_endpoint( 'module', EP_PERMALINK | EP_PAGES );
 
-	$flush_rewrite = get_option('oer_curriculum_rewrite_rules');
+    $flush_rewrite = get_option('oer_curriculum_rewrite_rules');
     if (empty($flush_rewrite)){
         add_option('oer_curriculum_rewrite_rules', false);
     }
@@ -183,15 +183,15 @@ function oer_curriculum_add_rewrites()
 
 add_filter( 'query_vars', 'oer_curriculum_add_query_vars' );
 function oer_curriculum_add_query_vars( $vars ){
-	$vars[] = "source";
+    $vars[] = "source";
     $vars[] = "topic";
     $vars[] = "module";
-	return $vars;
+    return $vars;
 }
 
 add_action( 'template_include' , 'oer_curriculum_assign_standard_template' );
 function oer_curriculum_assign_standard_template($template) {
-	global $wp_query;
+    global $wp_query;
   global $root_slug;
     $url_path = trim(parse_url(add_query_arg(array()), PHP_URL_PATH), '/');
 
@@ -258,23 +258,23 @@ function oer_curriculum_enqueue_inquiry_set_block(){
 
 add_action( 'rest_api_init', 'oer_curriculum_add_meta_to_api');
 function oer_curriculum_add_meta_to_api() {
-	// Register Grade Levels to REST API
-	register_rest_field( 'oer-curriculum',
-			    'oer_curriculum_grades',
-			    array(
-				'get_callback' => 'oer_curriculum_rest_get_meta_field',
-				'update_callback' => null,
-				'schema' => null
-				  ) );
+    // Register Grade Levels to REST API
+    register_rest_field( 'oer-curriculum',
+                'oer_curriculum_grades',
+                array(
+                'get_callback' => 'oer_curriculum_rest_get_meta_field',
+                'update_callback' => null,
+                'schema' => null
+                  ) );
 
-	// Register Featured Image to REST API
-	register_rest_field( 'oer-curriculum',
-			'featured_image_url',
-			array(
-			    'get_callback'    => 'oer_curriculum_get_rest_featured_image',
-			    'update_callback' => null,
-			    'schema'          => null,
-			) );
+    // Register Featured Image to REST API
+    register_rest_field( 'oer-curriculum',
+            'featured_image_url',
+            array(
+                'get_callback'    => 'oer_curriculum_get_rest_featured_image',
+                'update_callback' => null,
+                'schema'          => null,
+            ) );
 
 }
 
@@ -293,11 +293,11 @@ function oer_curriculum_retrieve_rootslug(){
 }
 
 function oer_curriculum_rest_get_meta_field($inquiryset, $field, $request){
-	if ($field=="oer_curriculum_grades") {
-		$grades = get_post_meta($inquiryset['id'], $field, true);
+    if ($field=="oer_curriculum_grades") {
+        $grades = get_post_meta($inquiryset['id'], $field, true);
                 if (is_array($grades))
                     $grades = $grades[0];
-		$grade_level = "";
+        $grade_level = "";
 
                 if ($grades == "pre-k")
                     $grade_level = "Pre-Kindergarten";
@@ -307,16 +307,16 @@ function oer_curriculum_rest_get_meta_field($inquiryset, $field, $request){
                     $grade_level = "Grade ".$grades;
 
                 return $grade_level;
-	} else
-		return get_post_meta($inquiryset['id'], $field, true);
+    } else
+        return get_post_meta($inquiryset['id'], $field, true);
 }
 
 function oer_curriculum_get_rest_featured_image($inquiryset, $field, $request) {
-	if( $inquiryset['featured_media'] ){
-		$img = wp_get_attachment_image_src( $inquiryset['featured_media'], 'app-thumb' );
-		return $img[0];
-	}
-	return false;
+    if( $inquiryset['featured_media'] ){
+        $img = wp_get_attachment_image_src( $inquiryset['featured_media'], 'app-thumb' );
+        return $img[0];
+    }
+    return false;
 }
 
 add_action( 'wp_enqueue_scripts', 'load_dashicons_front_end' );

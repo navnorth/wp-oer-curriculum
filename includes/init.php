@@ -231,7 +231,7 @@ function oer_curriculum_get_assets() {
         wp_register_script('oer-curriculum-script', OER_LESSON_PLAN_URL . 'js/backend/oer-curriculum.js');
         wp_localize_script('oer-curriculum-script','lpScript', array("image_placeholder_url" => OER_LESSON_PLAN_URL.'images/oer-curriculum-person-placeholder.png'));
         wp_enqueue_script('oer-curriculum-script');
-      	wp_enqueue_script('oer-curriculum-resource-selector-script', OER_LESSON_PLAN_URL . 'js/backend/oer-curriculum-resource-selector.js' , array('jquery') , null, true);
+          wp_enqueue_script('oer-curriculum-resource-selector-script', OER_LESSON_PLAN_URL . 'js/backend/oer-curriculum-resource-selector.js' , array('jquery') , null, true);
     }
 }
 
