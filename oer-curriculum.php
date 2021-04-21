@@ -1,14 +1,14 @@
 <?php
 /*
- Plugin Name:        WP OER Curriculum
+ Plugin Name:        OER Curriculum
  Plugin URI:         https://www.wp-oer.com/curriculum
- Description:        Manage and display collections of Open Educational Resources in lesson plans or curriculums with alignment to Common Core State Standards. 
+ Description:        Manage and display collections of Open Educational Resources in lesson plans or curriculums with alignment to Common Core State Standards.
  Version:            0.5.0
  Requires at least:  4.4
  Requires PHP:       7.4
  Author:             Navigation North
  Author URI:         https://www.navigationnorth.com
- Text Domain:        wp-curriculum
+ Text Domain:        oer-curriculum
  License:            GPL3
  License URI:        https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -37,8 +37,8 @@ define( 'OER_LESSON_PLAN_PATH', plugin_dir_path(__FILE__) );
 define( 'OER_LESSON_PLAN_SLUG','oer-curriculum' );
 define( 'OER_LESSON_PLAN_FILE',__FILE__);
 // Plugin Name and Version
-define( 'OER_LESSON_PLAN_PLUGIN_NAME', 'WP OER Curriculum Plugin' );
-define( 'OER_LESSON_PLAN_ADMIN_PLUGIN_NAME', 'WP OER Curriculum Plugin');
+define( 'OER_LESSON_PLAN_PLUGIN_NAME', 'OER Curriculum Plugin' );
+define( 'OER_LESSON_PLAN_ADMIN_PLUGIN_NAME', 'OER Curriculum Plugin');
 define( 'OER_LESSON_PLAN_VERSION', '0.5.0' );
 
 include_once(OER_LESSON_PLAN_PATH.'includes/oer-curriculum-functions.php');
@@ -95,7 +95,7 @@ $root_slug = oer_curriculum_retrieve_rootslug();
 register_activation_hook( __FILE__, 'check_parent_plugin' );
 function check_parent_plugin()
 {
-    // Require parent plugin  
+    // Require parent plugin
     if( !current_user_can( 'activate_plugins' )){
         wp_die('Sorry, but you don\'t have enough permission to install this plugin. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
     }else{
@@ -156,7 +156,7 @@ add_filter( 'single_template', 'get_single_oer_curriculum_template' );
 add_action( 'init', 'oer_curriculum_add_rewrites', 10, 0 );
 function oer_curriculum_add_rewrites()
 {
-  global $root_slug; 
+  global $root_slug;
 	global $wp_rewrite;
     add_rewrite_tag( '%curriculum%', '([^/]*)' );
 	add_rewrite_tag( '%source%', '([^&]+)' );
@@ -196,7 +196,7 @@ function oer_curriculum_assign_standard_template($template) {
     $url_path = trim(parse_url(add_query_arg(array()), PHP_URL_PATH), '/');
 
     status_header(200);
-    
+
     if ( strpos( $url_path, $root_slug ) !== false && get_query_var($root_slug) && get_query_var('source')) {
         $wp_query->is_404 = false;
         $template = locate_template('templates/primary-source.php', true);
@@ -250,7 +250,7 @@ function oer_curriculum_enqueue_inquiry_set_block(){
         array('wp-edit-blocks')
     );
     /* Register Thumbnail Block */
-    register_block_type('wp-curriculum/curriculum-thumbnail-block', array(
+    register_block_type('oer-curriculum/curriculum-thumbnail-block', array(
         'editor_script' => 'curriculum-thumbnail-block-js',
         'editor_style' => 'curriculum-thumbnail-block-css'
     ));
@@ -285,7 +285,7 @@ function oer_curriculum_retrieve_rootslug(){
   }
   if(get_option('oer_curriculum_general_setting')){
     $_genset = json_decode(get_option('oer_curriculum_general_setting'));
-    $_root_slug = ($_genset->rootslug_enabled > 0 && trim($_genset->rootslug)!= '')? $_genset->rootslug: 'curriculum'; 
+    $_root_slug = ($_genset->rootslug_enabled > 0 && trim($_genset->rootslug)!= '')? $_genset->rootslug: 'curriculum';
   }else{
     $_root_slug = 'curriculum';
   }

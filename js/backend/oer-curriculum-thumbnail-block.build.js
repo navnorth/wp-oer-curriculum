@@ -219,7 +219,7 @@ var oerCurriculumSets = function (_Component) {
     return oerCurriculumSets;
 }(Component);
 
-wp.blocks.registerBlockType('wp-curriculum/curriculum-thumbnail-block', {
+wp.blocks.registerBlockType('oer-curriculum/curriculum-thumbnail-block', {
     title: 'Curriculum Thumbnail Block',
     category: 'common',
     icon: 'welcome-learn-more',

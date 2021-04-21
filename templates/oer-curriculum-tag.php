@@ -41,11 +41,11 @@ $inquiry_sets = get_posts( $args );
                     $thumbnail_url = get_the_post_thumbnail_url($inquiry_set->ID);
                     if (!$thumbnail_url)
                         $thumbnail_url = $default_thumbnail_url;
-                        
+
                     $grade_level = oer_curriculum_grade_level($inquiry_set->ID);
             ?>
             <div class="col-md-4 col-sm-6 padding-0">
-            <a href="<?php echo $link; ?>" class="wp-block-wp-curriculum-curriculum-thumbnail-block oer-curriculum-related-block-link">
+            <a href="<?php echo $link; ?>" class="wp-block-oer-curriculum-thumbnail-block oer-curriculum-related-block-link">
                 <div class="oer-curriculum-related-blocks-padding">
                     <div class="media-image">
                         <div class="image-thumbnail">

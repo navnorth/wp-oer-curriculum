@@ -18,7 +18,7 @@ let prevelem = "li";
 const globalSettingOptions = [1, 2, 3, 4, 5];
 const globalSettingMargin = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
 const globalSettingAlign = ["middle", "left", "right"];
-registerBlockType("wp-curriculum/block-curriculum-featured-block", {
+registerBlockType("oer-curriculum/block-curriculum-featured-block", {
   title: __("Curriculum Featured Block"),
   icon: "welcome-learn-more",
   category: "common",
@@ -119,7 +119,7 @@ registerBlockType("wp-curriculum/block-curriculum-featured-block", {
     const blocks = wp.data.select("core/block-editor").getBlocks(); //console.log('******************');
 
     blocks.map((val, index) => {
-      if (val.name == "wp-curriculum/block-curriculum-featured-block") {
+      if (val.name == "oer-curriculum/block-curriculum-featured-block") {
         var uniq = "cfb" + new Date().getTime();
         var cid = val.clientId;
         /*
