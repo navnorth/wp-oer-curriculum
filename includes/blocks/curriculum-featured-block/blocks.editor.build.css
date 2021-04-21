@@ -1,19 +1,9 @@
-/**
- * #.# Common SCSS
- *
- * Can include things like variables and mixins
- * that are used across the project.
-*/
-/**
- * #.# Editor Styles
- *
- * CSS for just Backend enqueued after style.scss
- * which makes it higher in priority.
- */
-.wp-block-cgb-block-curriculum-featured-block {
-  background: #bada55;
-  border: 0.2rem solid #292929;
-  color: #292929;
+.wp-block-cgb-block-curriculum-featured-block  {
+  background: $green;
+  border: 0.2rem solid $black;
+  color: $black;
   margin: 0 auto;
   max-width: 740px;
-  padding: 2rem; }
+  padding: 2rem;
+}
+ul.featuredwpr_bxslider li {margin-top:20px !important;}

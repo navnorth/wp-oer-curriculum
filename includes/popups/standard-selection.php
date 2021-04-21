@@ -7,8 +7,8 @@
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="lpOerStandardModalLabel">Add Standard</h4>
             </div>
-            <div id="oer-lp-standards-list" class="modal-body">
-                <div class="lp-standard-search-bar">
+            <div id="oer-curriculum-standards-list" class="modal-body">
+                <div class="oer-curriculum-standard-search-bar">
                     <div class="form-group">
                         <div class="input-group">
                             <input type="text"
@@ -22,11 +22,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="oer-lp-standard-search-result hide" id="oer-lp-standard-search-result"></div>
-                <div class="oer-lp-standard-default-result">
+                <div class="oer-curriculum-standard-search-result hide" id="oer-curriculum-standard-search-result"></div>
+                <div class="oer-curriculum-standard-default-result">
                     <?php
                     if (function_exists('was_selectable_admin_standards')){
-                        was_selectable_admin_standards($inquiryset_post->ID, 'oer_lp_standards');
+                        was_selectable_admin_standards($inquiryset_post->ID, 'oer_curriculum_standards');
                     }?>
                 </div>
             </div>
