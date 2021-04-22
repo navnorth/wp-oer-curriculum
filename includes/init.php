@@ -599,7 +599,6 @@ function oer_curriculum_add_more_pr_callback() {
                                 </span>
                                 <span class="btn btn-danger btn-sm oer-curriculum-remove-source"
                                       title="Delete"
-                                      disabled="disabled"
                                 ><i class="fa fa-trash"></i> </span>
                             </h3>
                         </div>

@@ -118,8 +118,8 @@ var oerCurriculumSets = function (_Component) {
             var post = this.state.posts.find(function (item) {
                 return item.id == parseInt(value);
             });
-            var image_url = wp_nn_theme.theme_path + '/images/default-image.png';
-
+            var image_url = oer_curriculum_thumbnail_block_localized.theme_path + '/images/default-image.png';
+console.log(image_url);
             this.setState({ selectedInquirySet: parseInt(value), post: post });
 
             if (post.featured_image_url) {
@@ -228,7 +228,7 @@ wp.blocks.registerBlockType('oer-curriculum/curriculum-thumbnail-block', {
         title: { type: 'string' },
         link: { type: 'string' },
         grade: { type: 'string' },
-        featuredImage: { type: 'string', default: wp_nn_theme.theme_path + '/images/default-image.png' }
+        featuredImage: { type: 'string', default: oer_curriculum_thumbnail_block_localized.theme_path + '/images/default-image.png' }
     },
 
     edit: oerCurriculumSets,

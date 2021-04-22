@@ -15,6 +15,7 @@ body.single-oer-curriculum {
     right: 0;
     background: #283d47 !important;
     padding: 10px 0;
+    border-radius: 3px;
 }
 .tc-oer-curriculum-controls a {
     display: inline;
@@ -800,6 +801,7 @@ h4.tc-oer-curriculum-field-heading span.oer_curriculum_related_fields, h4.tc-rel
   font-size:14px;
   line-height: 100%;
   padding:10px 15px;
+  border-radius: 3px;
 }
 .tc-oer-curriculum-objectives, .tc-oer-curriculum-standards, .tc-related-curriculum-section {margin-bottom: 0px;}
 a.tc_oer_curriculum_collapse_button h4 {line-height: 1.8em;}
@@ -1284,10 +1286,12 @@ div#tcHiddenFields {float: left;}
 .oer-curriculum-excerpt-collapsible-pseudo,
 .oer-curriculum-excerpt-collapsible-pseudo-less,
 .oer-curriculum-excerpt-collapsible-pseudo-more {display:none;}
-.oer-curriculum-excerpt-collapsible p,
-.oer-curriculum-excerpt-collapsible-pseudo p,
-.oer-curriculum-excerpt-collapsible-pseudo-less p,
-.oer-curriculum-excerpt-collapsible-pseudo-more p {display: inline !important;}
+.oer-curriculum-excerpt-collapsible p, .oer-curriculum-excerpt-collapsible-pseudo p, .oer-curriculum-excerpt-collapsible-pseudo-less p, .oer-curriculum-excerpt-collapsible-pseudo-more p,
+.oer-curriculum-excerpt-collapsible ul, .oer-curriculum-excerpt-collapsible-pseudo ul, .oer-curriculum-excerpt-collapsible-pseudo-less ul, .oer-curriculum-excerpt-collapsible-pseudo-more ul {
+  display: block !important; 
+  margin:0px 0px 10px 0px;
+  font-family: inherit !important
+}
 a.oer-curriculum-morelink {display: inline-block !important;background: transparent !important;}
 .oer-curriculum-excerpt-collapsible,
 .oer-curriculum-collapsible-excerpt {
@@ -1300,7 +1304,7 @@ a.oer-curriculum-morelink {display: inline-block !important;background: transpar
 /* Curriculum Description Excerpt Transition Start */
 
 img.attachment-inquiry-set-featured {
-    border: 1px solid #dedede;
+    border: 1px solid #e2e2e2;
     border-radius: 6px;
     overflow: hidden;
     margin-bottom: 10px;

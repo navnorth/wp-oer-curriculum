@@ -239,7 +239,7 @@ function oer_curriculum_enqueue_inquiry_set_block(){
     );
     wp_localize_script(
         'curriculum-thumbnail-block-js',
-        'wp_nn_theme',
+        'oer_curriculum_thumbnail_block_localized',
         array(
             "theme_path" => get_template_directory_uri()
         )

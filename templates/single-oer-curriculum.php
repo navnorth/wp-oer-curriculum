@@ -463,7 +463,7 @@
                       <?php if ($oer_curriculum_download_copy_document): ?>
                       <div class="tc-oer-curriculum-controls">
                           <div class="sharethis-inline-share-buttons"></div>
-                          <a href="<?php echo $oer_curriculum_download_copy_document; ?>" target="_blank"><i class="fa fa-download"></i></a>
+                          <a href="<?php echo $oer_curriculum_download_copy_document; ?>" target="_blank" title="Downloadable Copy"><i class="fa fa-download"></i></a>
                       </div>
                       <?php endif; ?>
                   <?php } ?>
