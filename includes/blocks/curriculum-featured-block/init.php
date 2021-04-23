@@ -106,7 +106,7 @@ function curriculum_featured_block_cgb_block_assets() { // phpcs:ignore
      * @since 1.16.0
      */
     register_block_type(
-        'cgb/block-curriculum-featured-block', array(
+        'oer-curriculum/block-curriculum-featured-block', array(
             // Enqueue blocks.style.build.css on both frontend & backend.
             'style'         => 'curriculum_featured_block-cgb-style-css',
             // Enqueue blocks.build.js in the editor only.
