@@ -559,64 +559,64 @@ if (!function_exists('oer_curriculum_get_meta_label')){
             $label = "";
             switch ($key){
             case "oer_curriculum_authors":
-                $label = __("Author", OER_LESSON_PLAN_SLUG);
+                $label = __("Author", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_primary_resources":
-                $label = __("Primary Resources", OER_LESSON_PLAN_SLUG);
+                $label = __("Primary Resources", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_iq":
-                $label = __("Investigative Question", OER_LESSON_PLAN_SLUG);
+                $label = __("Investigative Question", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_objective":
-                $label = __("Related Instructional Objectives (SWBAT...)", OER_LESSON_PLAN_SLUG);
+                $label = __("Related Instructional Objectives (SWBAT...)", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_custom_editor_historical_background":
-                $label = __("Historical Background", OER_LESSON_PLAN_SLUG);
+                $label = __("Historical Background", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_download_copy":
-                $label = __("Download Copy", OER_LESSON_PLAN_SLUG);
+                $label = __("Download Copy", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_download_copy_document":
-                $label = __("Download Copy Document", OER_LESSON_PLAN_SLUG);
+                $label = __("Download Copy Document", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_curriculum":
-                $label = __("Related Curriculum", OER_LESSON_PLAN_SLUG);
+                $label = __("Related Curriculum", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_curriculum_1":
-                $label = __("Related Curriculum 1", OER_LESSON_PLAN_SLUG);
+                $label = __("Related Curriculum 1", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_curriculum_2":
-                $label = __("Related Curriculum 2", OER_LESSON_PLAN_SLUG);
+                $label = __("Related Curriculum 2", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_curriculum_3":
-                $label = __("Related Curriculum 3", OER_LESSON_PLAN_SLUG);
+                $label = __("Related Curriculum 3", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_required_materials":
-                $label = __("Required Equipment Materials", OER_LESSON_PLAN_SLUG);
+                $label = __("Required Equipment Materials", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_grades":
-                $label = __("Grade Level", OER_LESSON_PLAN_SLUG);
+                $label = __("Grade Level", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_oer_materials":
-                $label = __("Materials", OER_LESSON_PLAN_SLUG);
+                $label = __("Materials", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_type":
-                $label = __("Type", OER_LESSON_PLAN_SLUG);
+                $label = __("Type", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_type_other":
-                $label = __("Other Type", OER_LESSON_PLAN_SLUG);
+                $label = __("Other Type", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_age_levels":
-                $label = __("Appropriate Age Levels", OER_LESSON_PLAN_SLUG);
+                $label = __("Appropriate Age Levels", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_suggested_instructional_time":
-                $label = __("Suggested Instructional Time", OER_LESSON_PLAN_SLUG);
+                $label = __("Suggested Instructional Time", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_standards":
-                $label = __("Standards", OER_LESSON_PLAN_SLUG);
+                $label = __("Standards", OER_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_additional_sections":
-                $label = __("Additional Sections", OER_LESSON_PLAN_SLUG);
+                $label = __("Additional Sections", OER_CURRICULUM_SLUG);
                 break;
         }
         return $label;
@@ -626,19 +626,23 @@ if (!function_exists('oer_curriculum_get_meta_label')){
 if (!function_exists('oer_curriculum_get_all_meta')){
     function oer_curriculum_get_all_meta($type){
         global $wpdb;
-        $result = $wpdb->get_results($wpdb->prepare(
-        "SELECT post_id, meta_key, meta_value FROM ".$wpdb->prefix."posts,".$wpdb->prefix."postmeta WHERE post_type=%s
-            AND ".$wpdb->prefix."posts.ID=".$wpdb->prefix."postmeta.post_id", $type
-        ), ARRAY_A);
-        return $result;
+        $tablename = $wpdb->prefix."options";
+        $sql = $wpdb->prepare("SELECT option_id, option_name, option_value FROM {$tablename} WHERE option_name LIKE %s",'%_curmetset_%');
+        $result = $wpdb->get_results( $sql , ARRAY_A );
+        return $result;      
     }
 }
 // Save Metadata options
 if (!function_exists('oer_curriculum_save_metadata_options')){
     function oer_curriculum_save_metadata_options($post_data){
-        foreach($post_data as $key=>$value){
-            if (strpos($key,"oer_")!==false || strpos($key,"oer_curriculum_oer_")!==false){
-                update_option($key, $value, true);
+        foreach($post_data as $key=>$value){  
+            if (strpos($key,"oer_curriculum_")!==false && strpos($key,"_curmetset_label")!==false){
+                $savevalue = (empty($value))?' ':trim($value,' ');
+                update_option($key, sanitize_text_field($savevalue), true);
+                //Do enabled option
+                $enb_key = str_replace("_label","_enable",$key);
+                $enb_val = (isset($post_data[$enb_key]))? 'checked': 'unchecked';
+                update_option($enb_key, sanitize_text_field($enb_val), true);
             }
         }
     }
@@ -647,6 +651,7 @@ if (!function_exists('oer_curriculum_save_metadata_options')){
 // Get Field Label
 if (! function_exists('oer_curriculum_get_field_label')){
     function oer_curriculum_get_field_label($field){
+        $field = $field.'_curmetset';
         $label = null;
         
         if (get_option($field.'_label'))
@@ -670,7 +675,10 @@ if (! function_exists('oer_curriculum_get_curriculum_type')){
             "Comprehensive Unit",
             "Other"
         );
-        
+        $type_other_enabled = (get_option('oer_curriculum_type_other_curmetset_enable')=='checked')?true:false;
+        if(!$type_other_enabled){
+            unset($types[array_search("Other", $types)]);
+        }
         foreach ($types as $type){
             $html .= '<option value="'.$type.'" '.selected($type,$value,false).'>'.$type.'</option>';
         }
@@ -736,4 +744,101 @@ if (!function_exists('oer_curriculum_modules')){
         }
         return $modules;
     }
+}
+
+// Add fields label/enable options
+if (!function_exists('oer_curriculum_add_options')){
+    function oer_curriculum_add_options($key,$typ,$val) {
+        update_option($key.'_curmetset_'.$typ,$val);
+    }
+}
+
+// create textlog file
+function oercurr_log($metaname){
+  $myfile = fopen(ABSPATH."newfile.txt", "w") or die("Unable to open file!");
+  if(is_array($_POST[$metaname])){
+    foreach($_POST[$metaname] as $key=>$value){
+          fwrite($myfile,"ARRAY:\r\n");
+          fwrite($myfile, $metaname."[".$key."] ->".$_POST[$metaname][$key]."\r\n");      
+    }
+  }else{
+    fwrite($myfile,"NON-ARRAY:\r\n");
+    fwrite($myfile, $metaname."->".$_POST[$metaname]."\r\n");  
+  }
+  fclose($myfile);
+}
+
+function oercurr_allowed_html() {
+
+	$allowed_tags = array(
+		'a' => array(
+			'class' => array(),
+			'href'  => array(),
+			'rel'   => array(),
+			'title' => array(),
+		),
+		'abbr' => array(
+			'title' => array(),
+		),
+		'b' => array(),
+		'blockquote' => array(
+			'cite'  => array(),
+		),
+		'cite' => array(
+			'title' => array(),
+		),
+		'code' => array(),
+		'del' => array(
+			'datetime' => array(),
+			'title' => array(),
+		),
+		'dd' => array(),
+		'div' => array(
+			'class' => array(),
+			'title' => array(),
+			'style' => array(),
+		),
+		'dl' => array(),
+		'dt' => array(),
+		'em' => array(),
+		'h1' => array(),
+		'h2' => array(),
+		'h3' => array(),
+		'h4' => array(),
+		'h5' => array(),
+		'h6' => array(),
+		'i' => array(),
+		'img' => array(
+			'alt'    => array(),
+			'class'  => array(),
+			'height' => array(),
+			'src'    => array(),
+			'width'  => array(),
+		),
+		'li' => array(
+			'class' => array(),
+		),
+		'ol' => array(
+			'class' => array(),
+		),
+		'p' => array(
+			'class' => array(),
+		),
+		'q' => array(
+			'cite' => array(),
+			'title' => array(),
+		),
+		'span' => array(
+			'class' => array(),
+			'title' => array(),
+			'style' => array(),
+		),
+		'strike' => array(),
+		'strong' => array(),
+		'ul' => array(
+			'class' => array(),
+		),
+	);
+	
+	return $allowed_tags;
 }

@@ -39,7 +39,7 @@ body.single-oer-curriculum {
     font-size: 18px !important;
 }
 .tc-oer-curriculum-details {padding: 5px 0 25px; float: left; width: 100%;}
-.single-oer-curriculum .row { margin-right:0; margin-left:0; width:100%; display:block; float:none;}
+.single-oer-curriculum .row { margin-right:0; margin-left:0; width:100%; display:block; float:left;}
 .tc-oer-curriculum-details-header .tc-oer-curriculum-title,
 .tc-oer-curriculum-details-header-fixed .tc-oer-curriculum-title {
     color: #333;
@@ -1237,6 +1237,9 @@ div#tcHiddenFields {float: left;}
     line-height: 1.5em;
     font-weight: 600;
 }
+.oer-curriculum-primary-sources-row div.col {
+    float:left;
+}
 .oer-curriculum-resource-author {
     float: left;
     background: #ffffff;
@@ -1309,3 +1312,8 @@ img.attachment-inquiry-set-featured {
     overflow: hidden;
     margin-bottom: 10px;
 }
+
+.oer-curriculum-resource-container {
+  margin:0px auto;
+}
+

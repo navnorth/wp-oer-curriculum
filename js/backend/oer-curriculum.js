@@ -82,7 +82,7 @@ jQuery(document).ready(function ($) {
         // Delete module
         deleteModule: function () {
             $(document).on('click', '.oer-curriculum-remove-module',function(e) {
-                var moduleId = $(this).closest('.panel-default').attr('id');
+                var moduleId = $(this).closest('.card-default').attr('id');
                 e.preventDefault();
                 $('#oer-curriculum-confirm').modal({
                     backdrop: 'static',
@@ -286,8 +286,8 @@ jQuery(document).ready(function ($) {
                 var textAreaId = $(this).find('textarea').attr('id');
 
                 if (typeof textAreaId !== 'undefined') {
-                    tinymce.execCommand( 'mceRemoveEditor', false, textAreaId );
-                    tinymce.execCommand( 'mceAddEditor', false, textAreaId );
+                    //tinymce.execCommand( 'mceRemoveEditor', false, textAreaId );
+                    //tinymce.execCommand( 'mceAddEditor', false, textAreaId );
                 }
             });
 
@@ -389,23 +389,22 @@ jQuery(document).ready(function ($) {
         // Delete author
         deleteAuthor: function () {
             $(document).on('click', '.oer-curriculum-remove-author',function(e) {
-                console.log("Clocked");
-                var author = $(this).closest('.panel-default');
+                var author = $(this).closest('.card-default');
                 var elementId = author.attr('id');
                 e.preventDefault();
                 $('#oer-curriculum-delete-author').modal({
                     backdrop: 'static',
                     keyboard: false
                 })
+                $('#oer-curriculum-delete-author').modal({"show" : true})
                     .on('click', '#oer-curriculum-author-delete-confirm', function(e) {
                         author.remove();
                         $('a[href="#' + elementId +'"]').parent('li').remove();
                         $('#oer-curriculum-delete-author').modal('hide');
 
                         // Disable delete button for author
-                        if($('.oer-curriculum-author-element-wrapper').length === 1) {
-                            $('.oer-curriculum-remove-author').attr('disabled', 'disabled');
-                        }
+                        
+                        oercurr_RefreshSectionDeleteButtons(jQuery(".oer-curriculum-author-element-wrapper").find('.oer-curriculum-remove-author'));
                     });
             });
         },
@@ -553,9 +552,9 @@ jQuery(document).ready(function ($) {
                             icon = '<i class="fa fa-file-powerpoint"></i>';
                         }
 
-                        materialHTML += '<div class="panel panel-default oer-curriculum-material-element-wrapper">' +
-                                            '<div class="panel-heading">' +
-                                                '<h3 class="panel-title oer-curriculum-module-title">' +
+                        materialHTML += '<div class="card col-12 card-default oer-curriculum-material-element-wrapper">' +
+                                            '<div class="card-header">' +
+                                                '<h3 class="card-title oer-curriculum-module-title">' +
                                                     '<span class="oer-curriculum-sortable-handle">' +
                                                         '<i class="fa fa-arrow-down material-reorder-down" aria-hidden="true"></i>' +
                                                         '<i class="fa fa-arrow-up material-reorder-up" aria-hidden="true"></i>' +
@@ -563,7 +562,7 @@ jQuery(document).ready(function ($) {
                                                     '<span class="btn btn-danger btn-sm oer-curriculum-remove-material" title="Delete"><i class="fa fa-trash"></i></span>' +
                                                 '</h3>' +
                                             '</div>' +
-                                            '<div class="panel-body">' +
+                                            '<div class="card-body">' +
                                                 '<div class="form-group">' +
                                                     '<div class="input-group">' +
                                                         '<input type="text" class="form-control" name="' + oer_curriculum_oer_materials_input + '[url][]" placeholder="URL" value="' + attachment.url + '">' +
@@ -672,7 +671,7 @@ jQuery(document).ready(function ($) {
         // Delete Material module
         lpDeleteMaterials: function () {
             $(document).on('click', '.oer-curriculum-remove-material',function(e) {
-                var material = $(this).closest('.panel-default');
+                var material = $(this).closest('.card-default');
                 var elementId = material.attr('id');
                 e.preventDefault();
                 $('#oer-curriculum-delete-confirm-popup').modal({
@@ -833,7 +832,7 @@ jQuery(document).ready(function ($) {
         // Delete source
         deletePrimarySource: function () {
             $(document).on('click', '.oer-curriculum-remove-source',function(e) {
-                var source = $(this).closest('.panel-default');
+                var source = $(this).closest('.card-default');
                 var elementId = source.attr('id');
                 e.preventDefault();
                 $('#oer-curriculum-delete-source').modal({
@@ -947,33 +946,38 @@ jQuery(document).ready(function ($) {
                     tinymce.execCommand( 'mceRemoveEditor', false, editor_prefix + id );
                     tinymce.execCommand( 'mceAddEditor', false, editor_prefix + id );
                     quicktags({ id: editor_prefix + id });
-                    
+                    $('#oer-curriculum-required-materials .oer-curriculum-remove-section').removeAttr('disabled');
                     OerCurriculum.toggleUpDownButton();
                 });
             });
         },
         
-        // Add Text Feature
+        // Add Additional Section
         lpAddTextFeature: function(){
             $(document).on("click", "#addTxtBtn", function(e){
-                e.preventDefault();
-                var dis = $(this).closest('.button-row.form-group');
-                
-                var total_text_features = parseInt($('#oer-curriculum-additional-sections .oer-curriculum-section-element-wrapper').length, 10);
-                var id = total_text_features + 1;
-                console.log(id);
-                $.post(ajaxurl,
-                       {
-                        action:'oer_curriculum_add_text_feature_callback',
-                        row_id: total_text_features
-                       }).done(function (response) {
-                    dis.before(response);
-                    tinymce.execCommand( 'mceRemoveEditor', false, 'oer-curriculum-additional-section-' + id );
-                    tinymce.execCommand( 'mceAddEditor', false, 'oer-curriculum-additional-section-' + id );
-                    quicktags({ id: 'oer-curriculum-additional-section-' + id });
-                    
-                    OerCurriculum.toggleUpDownButton();
-                });
+              e.preventDefault();
+              var dis = $(this).closest('.button-row.form-group');
+              
+              var total_text_features = parseInt($('#oer-curriculum-additional-sections .oer-curriculum-section-element-wrapper').length, 10);
+              var id = total_text_features + 1;
+              const editor_prefix = 'oer-curriculum-additional-section-';
+              $.post(ajaxurl,
+                     {
+                      action:'oer_curriculum_add_text_feature_callback',
+                      row_id: total_text_features,
+                      editor_id: editor_prefix
+                     }).done(function (response) {
+                  if($('#oer-curriculum-additional-sections div.oer-curriculum-section-element-wrapper').length) {
+                      $(response).insertAfter('#oer-curriculum-additional-sections div.oer-curriculum-section-element-wrapper:last').tinymce_textareas();
+                  } else {
+                      $('.oer-curriculum-section-element-panel').html(response).tinymce_textareas();
+                  }
+                  tinymce.execCommand( 'mceRemoveEditor', false, editor_prefix + id );
+                  tinymce.execCommand( 'mceAddEditor', false, editor_prefix + id );
+                  quicktags({ id: editor_prefix + id });
+                  $('#oer-curriculum-additional-sections .oer-curriculum-remove-section').removeAttr('disabled');
+                  OerCurriculum.toggleUpDownButton();
+              });
             });
         },
         
@@ -994,7 +998,7 @@ jQuery(document).ready(function ($) {
         // Delete Section
         deleteSection: function () {
             $(document).on('click', '.oer-curriculum-remove-section',function(e) {
-                var section = $(this).closest('.panel-default');
+                var section = $(this).closest('.card-default');
                 var elementId = section.attr('id');
                 e.preventDefault();
                 $('#oer-curriculum-delete-confirm-popup').modal({
@@ -1010,6 +1014,11 @@ jQuery(document).ready(function ($) {
                         if($('.oer-curriculum-section-element-wrapper').length === 1) {
                             $('.oer-curriculum-remove-section').attr('disabled', 'disabled');
                         }
+                        
+                        oercurr_RefreshSectionDeleteButtons(jQuery("#oer-curriculum-required-materials").find('.oer-curriculum-remove-section'));
+                        oercurr_RefreshSectionDeleteButtons(jQuery("#oer-curriculum-additional-sections").find('.oer-curriculum-remove-section'));
+                        
+                        
                     });
             });
         },
@@ -1131,4 +1140,38 @@ function lpInitialSettings(form) {
         jQuery('.loader').show();
     } ,1000);
     return true;
+}
+
+//Enable Fields Checkbox status change
+jQuery(document).on('change','.oer-curriculum-enabled-checkbox',function(e){
+   if(jQuery(this).is(':checked')){
+     jQuery(this).val('1');
+   }else{
+     jQuery(this).val('0');
+   }
+});
+
+//Refresh delete section mediaButtons
+jQuery(window).load(function() {
+  oercurr_RefreshSectionDeleteButtons(jQuery("#oer-curriculum-required-materials").find('.oer-curriculum-remove-section'));
+  oercurr_RefreshSectionDeleteButtons(jQuery("#oer-curriculum-additional-sections").find('.oer-curriculum-remove-section'));
+});
+
+function oercurr_RefreshSectionDeleteButtons(obj){
+  var cnt = 0;
+  if(obj.length > 1){
+    jQuery(obj).removeAttr('disabled');
+  }else{
+    jQuery(obj).attr('disabled','disabled');
+  }
+  /*
+  obj.each(function (index,elm) {
+      if(cnt > 0){
+        jQuery(elm).removeAttr('disabled');
+      }else{
+        jQuery(elm).attr('disabled','disabled');
+      }
+      cnt++;
+  });
+  */
 }

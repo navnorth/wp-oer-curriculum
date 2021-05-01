@@ -27,9 +27,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @uses {wp-editor} for WP editor styles.
  * @since 1.0.0
  */
-
 define( 'OER_CUR_FEAT_BLK_PLUGIN_DIR_PATH', plugin_dir_path( __DIR__ ) );
-define( 'OER_CUR_FEAT_BLK_PLUGIN_DIR_URL', get_site_url()."/wp-content/plugins/curriculum-featured-block" );
+define( 'OER_CUR_FEAT_BLK_PLUGIN_DIR_URL', OER_LESSON_PLAN_URL."/includes/blocks/curriculum-featured-block" );
 define( 'OER_CUR_FEAT_BLK_BASE_URL', get_home_url() );
 define( 'OER_CUR_FEAT_BLK_CURRICULUM_PLUGIN_URL', OER_LESSON_PLAN_URL );
 define( 'OER_CUR_FEAT_BLK_BX_RESET_BLOCKED', false );
@@ -42,37 +41,26 @@ function curriculum_featured_block_cgb_block_assets() { // phpcs:ignore
     wp_register_style(
         'curriculum_featured_block-cgb-style-css', // Handle.
         plugins_url( '/curriculum-featured-block/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
-        is_admin() ? array( 'wp-editor' ) : null, // Dependency to include the CSS after it.
-        null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
+        is_admin() ? array( 'wp-editor' ) : null, 
+        null
     );
 
     // Register block editor script for backend.
     wp_register_script(
         'curriculum_featured_block-cgb-block-js', // Handle.
-        plugins_url( '/curriculum-featured-block/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
-        array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
-        null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
-        true // Enqueue the script in the footer.
+        plugins_url( '/curriculum-featured-block/blocks.build.js', dirname( __FILE__ ) ),
+        array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), 
+        null, 
+        true
     );
 
     // Register block editor styles for backend.
     wp_register_style(
         'curriculum_featured_block-cgb-block-editor-css', // Handle.
-        plugins_url( '/curriculum-featured-block/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
-        array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-        null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
+        plugins_url( '/curriculum-featured-block/blocks.editor.build.css', dirname( __FILE__ ) ),
+        array( 'wp-edit-blocks' ),
+        null
     );
-
-
-    /*
-    wp_register_script(
-        'dist-jquery.bxslider.js', // Handle.
-        OER_URL.'js/jquery.bxslider.js', // front.build.js: We register the block here. Built with Webpack.
-        array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'jquery' ), // Dependencies, defined above.
-        null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/front.build.js' ), // Version: filemtime — Gets file modification time.
-        true // Enqueue the script in the footer.
-    );
-    */
 
 
     // WP Localized globals. Use dynamic PHP stuff in JavaScript via `cgbGlobal` object.
@@ -122,7 +110,6 @@ function curriculum_featured_block_cgb_block_assets() { // phpcs:ignore
 add_action( 'init', 'curriculum_featured_block_cgb_block_assets' );
 
 function curriculum_featured_block_additional_script_front( $hook ) {
-    //wp_enqueue_style('curriculum-feat-block-resource-category-style-css', OER_URL.'css/resource-category-style.css');
     wp_enqueue_style('curriculum-feat-block-jquery-bxslider-css', OER_LESSON_PLAN_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.css');
     wp_enqueue_script('curriculum-feat-block-jquery-bxslider-js', OER_LESSON_PLAN_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.js',array('jquery'), '1.0' );
 }
@@ -132,7 +119,6 @@ function curriculum_featured_block_additional_script( $hook ) {
     //wp_enqueue_style('curriculum-feat-block-resource-category-style-css', OER_URL.'css/resource-category-style.css');
     wp_enqueue_style('curriculum-feat-block-jquery-bxslider-css', OER_LESSON_PLAN_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.css');
     wp_enqueue_script('curriculum-feat-block-jquery-bxslider-js', OER_LESSON_PLAN_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.js',array('jquery'), '1.0' );
-    //wp_enqueue_script('curriculum-feat-block-jquery-ui-min-js', plugins_url( 'dist/jquery-ui.min.js', dirname( __FILE__ ) ) ,array('jquery'), '1.0' );
 }
 add_action( 'admin_enqueue_scripts', 'curriculum_featured_block_additional_script' );
 

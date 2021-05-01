@@ -1,6 +1,6 @@
 <!-- Modal -->
 <?php global $inquiryset_post, $post;?>
-<div class="modal fade" id="lpOerStandardModal" tabindex="-1" role="dialog" aria-labelledby="lpOerStandardModalLabel" aria-hidden="true">
+<div class="oer-curriculum-popups modal fade" id="lpOerStandardModal" tabindex="-1" role="dialog" aria-labelledby="lpOerStandardModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">

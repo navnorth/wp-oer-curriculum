@@ -1,0 +1,157 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OER Curriculum\n"
+"POT-Creation-Date: 2021-04-23 19:21+0800\n"
+"PO-Revision-Date: 2021-04-23 19:53+0800\n"
+"Last-Translator: \n"
+"Language-Team: Navigation North\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en_US\n"
+"X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;_n_noop;_nx_noop;"
+"translate_nooped_plural;number_format_i18n;date_i18n;esc_html__;esc_html__;"
+"esc_html_x;esc_attr__;esc_attr_e;esc_attr_x\n"
+
+#:includes/oer-curriculum-metafields:248
+msgid "Details"
+msgstr "Kabalu"
+
+#:includes/oer-curriculum-metafields:287
+msgid "Introduction"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:337
+msgid "Author"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:481
+msgid "Resource"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:591
+msgid "Textbox"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:970
+msgid "Required Materials"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:996
+msgid "Section"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:1033
+msgid "Add Section"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:1124
+msgid "Lesson Times"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:1231
+msgid "Standards and Objectives"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:1242
+msgid "Standards"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:1322
+msgid "Activities in this Lesson"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:1416
+msgid "Summative Assessment"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:1425
+msgid "Assessment Type(s):"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:1462
+msgid "Other"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:1577
+msgid "Text List"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:1615
+msgid "Materials"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:1691
+msgid "Vocabulary List"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:2253
+msgid "You have not selected any academic standards"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:2466
+msgid "Teacher Background"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:2502
+msgid "Historical Background"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:2538
+msgid "Student Background"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:2605
+msgid "Authors"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:2684
+msgid "Primary Resources"
+msgstr ""
+
+#:includes/oer-curriculum-metafields:2835
+msgid "Investigative Question"
+msgstr ""
+
+#:includes/oer-curriculum-settings.php:15
+msgid "Settings - WP Curriculum"
+msgstr ""
+
+#:includes/oer-curriculum-settings.php:23
+msgid "General"
+msgstr ""
+
+#:includes/oer-curriculum-settings.php:24
+msgid "Metadata"
+msgstr ""
+
+#:includes/oer-curriculum-settings.php:42
+msgid "More Information"
+msgstr ""
+
+#:includes/oer-curriculum-settings.php:139
+msgid "Use the options below to update metadata field options."
+msgstr ""
+
+#:templates/oer-curriculum-tag.php:32
+msgid "Inquiry Sets"
+msgstr ""
+
+#:templates/oer-curriculum-tag.php:179
+msgid "View Item"
+msgstr ""
+
+#:templates/single-oer-curriculum.php:243
+msgid "Subjects"
+msgstr ""
+
+#:templates/single-oer-curriculum.php:497
+msgid "SEE MORE +"
+msgstr ""
+
+#:templates/single-oer-curriculum.php:618
+msgid "Text"
+msgstr ""

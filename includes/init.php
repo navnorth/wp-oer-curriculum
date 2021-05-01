@@ -42,37 +42,89 @@ function oer_curriculum_creation() {
     );
 
     register_post_type('oer-curriculum', $args);
+    
+    if(!get_option('oer_curriculum_type_curmetset_label')){oer_curriculum_add_options('oer_curriculum_type','label','Type');}
+    if(!get_option('oer_curriculum_type_other_curmetset_label')){oer_curriculum_add_options('oer_curriculum_type_other','label','Other Type');}
+    if(!get_option('oer_curriculum_authors_curmetset_label')){oer_curriculum_add_options('oer_curriculum_authors','label','Author');}
+    if(!get_option('oer_curriculum_primary_resources_curmetset_label')){oer_curriculum_add_options('oer_curriculum_primary_resources','label','Primary Resources');}
+    if(!get_option('oer_curriculum_iq_curmetset_label')){oer_curriculum_add_options('oer_curriculum_iq','label','Investigative Question');}
+    if(!get_option('oer_curriculum_required_materials_curmetset_label')){oer_curriculum_add_options('oer_curriculum_required_materials','label','Required Equipment Materials');}
+    if(!get_option('oer_curriculum_additional_sections_curmetset_label')){oer_curriculum_add_options('oer_curriculum_additional_sections','label','Additional Sections');}
+    if(!get_option('oer_curriculum_grades_curmetset_label')){oer_curriculum_add_options('oer_curriculum_grades','label','Grade Level');}
+    if(!get_option('oer_curriculum_age_levels_curmetset_label')){oer_curriculum_add_options('oer_curriculum_age_levels','label','Appropriate Age Levels');}
+    if(!get_option('oer_curriculum_suggested_instructional_time_curmetset_label')){oer_curriculum_add_options('oer_curriculum_suggested_instructional_time','label','Suggested Instructional Time');}
+    if(!get_option('oer_curriculum_standards_curmetset_label')){oer_curriculum_add_options('oer_curriculum_standards','label','Standards');}
+    if(!get_option('oer_curriculum_related_objective_curmetset_label')){oer_curriculum_add_options('oer_curriculum_related_objective','label','Related Instructional Objectives (SWBAT...)');}
+    //if(!get_option('oer_curriculum_order_curmetset_label')){oer_curriculum_add_options('oer_curriculum_order','label','Order');}
+    if(!get_option('oer_curriculum_download_copy_curmetset_label')){oer_curriculum_add_options('oer_curriculum_download_copy','label','Download Copy');}
+    //if(!get_option('oer_curriculum_download_copy_document_curmetset_label')){oer_curriculum_add_options('oer_curriculum_download_copy_document','label','Download Copy Document');}
+    if(!get_option('oer_curriculum_oer_materials_curmetset_label')){oer_curriculum_add_options('oer_curriculum_oer_materials','label','Additional Materials');}
+    if(!get_option('oer_curriculum_related_curriculum_curmetset_label')){oer_curriculum_add_options('oer_curriculum_related_curriculum','label','Related Curriculum');}
+    if(!get_option('oer_curriculum_related_curriculum_1_curmetset_label')){oer_curriculum_add_options('oer_curriculum_related_curriculum_1','label','Related Curriculum 1');}
+    if(!get_option('oer_curriculum_related_curriculum_2_curmetset_label')){oer_curriculum_add_options('oer_curriculum_related_curriculum_2','label','Related Curriculum 2');}
+    if(!get_option('oer_curriculum_related_curriculum_3_curmetset_label')){oer_curriculum_add_options('oer_curriculum_related_curriculum_3','label','Related Curriculum 3');}
+
+
+    if(!get_option('oer_curriculum_type_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_type','enable','checked');}
+    if(!get_option('oer_curriculum_type_other_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_type_other','enable','checked');}
+    if(!get_option('oer_curriculum_authors_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_authors','enable','checked');}
+    if(!get_option('oer_curriculum_primary_resources_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_primary_resources','enable','checked');}
+    if(!get_option('oer_curriculum_iq_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_iq','enable','checked');}
+    if(!get_option('oer_curriculum_required_materials_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_required_materials','enable','checked');}
+    if(!get_option('oer_curriculum_additional_sections_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_additional_sections','enable','checked');}
+    if(!get_option('oer_curriculum_grades_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_grades','enable','checked');}
+    if(!get_option('oer_curriculum_age_levels_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_age_levels','enable','checked');}
+    if(!get_option('oer_curriculum_suggested_instructional_time_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_suggested_instructional_time','enable','checked');}
+    if(!get_option('oer_curriculum_standards_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_standards','enable','checked');}
+    if(!get_option('oer_curriculum_related_objective_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_related_objective','enable','checked');}
+    //if(!get_option('oer_curriculum_order_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_order','enable','checked');}
+    if(!get_option('oer_curriculum_download_copy_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_download_copy','enable','checked');}
+    //if(!get_option('oer_curriculum_download_copy_document_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_download_copy_document','enable','checked');}
+    if(!get_option('oer_curriculum_oer_materials_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_oer_materials','enable','checked');}
+    if(!get_option('oer_curriculum_related_curriculum_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_related_curriculum','enable','checked');}
+    if(!get_option('oer_curriculum_related_curriculum_1_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_related_curriculum_1','enable','checked');}
+    if(!get_option('oer_curriculum_related_curriculum_2_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_related_curriculum_2','enable','checked');}
+    if(!get_option('oer_curriculum_related_curriculum_3_curmetset_enable')){oer_curriculum_add_options('oer_curriculum_related_curriculum_3','enable','checked');}
+    
 }
 
 function oer_curriculum_custom_meta_boxes() {
     // Grade Levels
-    add_meta_box( 'oer_curriculum_meta_grades', 'Grade Level', 'oer_curriculum_grade_level_cb', 'oer-curriculum', 'side', 'high' );
-    // Appropriate Age Levels
-    $age_levels_set = (get_option('oer_curriculum_age_levels_label'))?true:false;
-    $age_levels_enabled = (get_option('oer_curriculum_age_levels_enabled'))?true:false;
-    if (($age_levels_set && $age_levels_enabled) || !$age_levels_set) {
-        $label = oer_curriculum_get_field_label('oer_curriculum_age_levels');
-        add_meta_box( 'oer_curriculum_meta_age_levels', $label , 'oer_curriculum_age_levels_cb', 'oer-curriculum', 'side', 'high' );
+    $grade_levels_set = (trim(get_option('oer_curriculum_grades_curmetset_label'),' ') != '')?true:false;
+    $grade_levels_enabled = (get_option('oer_curriculum_grades_curmetset_enable')=='checked')?true:false;
+    if ($grade_levels_enabled) {
+      add_meta_box( 'oer_curriculum_meta_grades', get_option('oer_curriculum_grades_curmetset_label'), 'oer_curriculum_grade_level_cb', 'oer-curriculum', 'side', 'high' );
     }
     
+    // Appropriate Age Levels
+    $age_levels_set = (trim(get_option('oer_curriculum_age_levels_curmetset_label'),' ') != '')?true:false;
+    $age_levels_enabled = (get_option('oer_curriculum_age_levels_curmetset_enable')=='checked')?true:false;
+    if ($age_levels_enabled) {
+        $label = get_option('oer_curriculum_age_levels_curmetset_label');
+        add_meta_box( 'oer_curriculum_meta_age_levels', $label , 'oer_curriculum_age_levels_cb', 'oer-curriculum', 'side', 'high' );
+    }
+
     //Suggested Instructional Time
-    $suggested_time_set = (get_option('oer_curriculum_suggested_instructional_time_label'))?true:false;
-    $suggested_time_enabled = (get_option('oer_curriculum_suggested_instructional_time_enabled'))?true:false;
+    $suggested_time_set = (trim(get_option('oer_curriculum_suggested_instructional_time_curmetset_label'),' ') != '')?true:false;
+    $suggested_time_enabled = (get_option('oer_curriculum_suggested_instructional_time_curmetset_enable')=='checked')?true:false;
     if (($suggested_time_set && $suggested_time_enabled) || !$suggested_time_set) {
-        $label = oer_curriculum_get_field_label('oer_curriculum_suggested_instructional_time');
+        $label = get_option('oer_curriculum_suggested_instructional_time_curmetset_label');
         add_meta_box( 'oer_curriculum_meta_suggested_time', $label, 'oer_curriculum_suggested_time_cb', 'oer-curriculum', 'side', 'high' );
     }
     add_meta_box('oer_curriculum_meta_boxid', 'Lesson Meta Fields', 'oer_curriculum_meta_callback', 'oer-curriculum', 'advanced');
 
     // Add a download copy option
-    add_meta_box( 'oer_curriculum_meta_download_copy', 'Downloadable Copy', 'oer_curriculum_download_copy_cb', 'oer-curriculum', 'side', 'high' );
-    
+    $download_copy_set = (trim(get_option('oer_curriculum_download_copy_curmetset_label'),' ') != '')?true:false;
+    $download_copy_enabled = (get_option('oer_curriculum_download_copy_curmetset_enable')=='checked')?true:false;
+    if($download_copy_enabled){
+        $label = get_option('oer_curriculum_download_copy_curmetset_label');
+      add_meta_box( 'oer_curriculum_meta_download_copy', $label , 'oer_curriculum_download_copy_cb', 'oer-curriculum', 'side', 'high' );
+    }
     // Add Related Curriculum metabox
-    $related_inquiry_set = (get_option('oer_curriculum_related_curriculum_label'))?true:false;
-    $related_inquiry_set_enabled = (get_option('oer_curriculum_related_curriculum_enabled'))?true:false;
-    $related_curriculum_enabled = false;
-    if (($related_inquiry_set && $related_inquiry_set_enabled) || !$related_inquiry_set) {
-        if (!$related_inquiry_set){
+    $related_curriculum_set = (trim(get_option('oer_curriculum_related_curriculum_curmetset_label'),' ') != '')?true:false;
+    $related_curriculum_enabled = (get_option('oer_curriculum_related_curriculum_curmetset_enable') == 'checked')?true:false;
+    if (($related_curriculum_set && $related_curriculum_enabled) || !$related_curriculum_set) {
+        if (!$related_curriculum_set){
             $related_curriculum_enabled = true;
         } else {
             for ($i=1;$i<=3;$i++){
@@ -205,6 +257,8 @@ function oer_curriculum_download_copy_cb() {
     echo $checkbox;
 }
 
+
+
 /**
  * Enqueue the assets into the admin
  * Scripts and styles
@@ -212,6 +266,7 @@ function oer_curriculum_download_copy_cb() {
 add_action('admin_enqueue_scripts', 'oer_curriculum_get_assets');
 
 function oer_curriculum_get_assets() {
+    
     global $post;
     wp_enqueue_editor();
     if (
@@ -219,13 +274,14 @@ function oer_curriculum_get_assets() {
         (isset($post->post_type) && $post->post_type == 'oer-curriculum')
     ) {
         wp_enqueue_style('oer-curriculum-load-fa', OER_LESSON_PLAN_URL . 'lib/fontawesome/css/all.min.css');
-        wp_enqueue_style('oer-curriculum-bootstrap', OER_LESSON_PLAN_URL . 'lib/bootstrap-3.3.7/css/bootstrap.min.css');
+        wp_enqueue_style('oer-curriculum-bootstrap', OER_LESSON_PLAN_URL . 'lib/bootstrap/css/bootstrap.min.css');
         wp_enqueue_style('oer-curriculum-admin-style', OER_LESSON_PLAN_URL . 'css/backend/oer-curriculum-style.css');
         wp_enqueue_style('oer-curriculum-resource-selector-style', OER_LESSON_PLAN_URL . 'css/backend/oer-curriculum-resource-selector-style.css', array() , null, 'all');
         
+        
         //Enqueue script
         if (!wp_script_is('admin-oer-curriculum-bootstrap', 'enqueued')) {
-            wp_enqueue_script('admin-oer-curriculum-bootstrap', OER_LESSON_PLAN_URL . 'lib/bootstrap-3.3.7/js/bootstrap.min.js',array('jquery') , null, true);
+            wp_enqueue_script('admin-oer-curriculum-bootstrap', OER_LESSON_PLAN_URL . 'lib/bootstrap/js/bootstrap.min.js',array('jquery') , null, true);
         }
         
         wp_register_script('oer-curriculum-script', OER_LESSON_PLAN_URL . 'js/backend/oer-curriculum.js');
@@ -233,6 +289,23 @@ function oer_curriculum_get_assets() {
         wp_enqueue_script('oer-curriculum-script');
           wp_enqueue_script('oer-curriculum-resource-selector-script', OER_LESSON_PLAN_URL . 'js/backend/oer-curriculum-resource-selector.js' , array('jquery') , null, true);
     }
+    
+}
+
+function oercurriculum_dequeue_scripts(){
+  global $post;
+  if (
+      (isset($_GET['post_type']) && $_GET['post_type'] == 'oer-curriculum') ||
+      (isset($post->post_type) && $post->post_type == 'oer-curriculum')
+  ) {
+    wp_dequeue_style( 'bootstrap-style' );
+    wp_deregister_style( 'bootstrap-style' );
+  }
+  
+}
+global $pagenow;
+if ($pagenow=="post.php" || $pagenow=="edit.php" || $pagenow=="post-new.php"){
+	add_action('admin_enqueue_scripts', 'oercurriculum_dequeue_scripts',999);
 }
 
 /**
@@ -248,7 +321,7 @@ if (!function_exists('oer_curriculum_enqueue_scripts_and_styles')) {
         ) {
             //Enqueue script
             if (!wp_script_is('bootstrap-js', 'enqueued')) {
-                wp_enqueue_script('bootstrap-js', OER_LESSON_PLAN_URL . 'lib/bootstrap-3.3.7/js/bootstrap.min.js',array('jquery') , null, true);
+                wp_enqueue_script('bootstrap-js', OER_LESSON_PLAN_URL . 'lib/bootstrap/js/bootstrap.min.js',array('jquery') , null, true);
             }
 
             if (!wp_style_is('oer-curriculum-load-fa', 'enqueued') && 
@@ -256,6 +329,7 @@ if (!function_exists('oer_curriculum_enqueue_scripts_and_styles')) {
                 !wp_style_is('fontawesome', 'enqueued')) {
                 wp_enqueue_style('oer-curriculum-load-fa', OER_LESSON_PLAN_URL . 'lib/fontawesome/css/all.min.css');
             }
+            wp_enqueue_style('oer-curriculum-bootstrap', OER_LESSON_PLAN_URL . 'lib/bootstrap/css/bootstrap.min.css');
             wp_enqueue_style('oer-curriculum-style', OER_LESSON_PLAN_URL . 'css/frontend/oer-curriculum-style.css');
             wp_enqueue_script('oer-curriculum-script', OER_LESSON_PLAN_URL . 'js/frontend/oer-curriculum-script.js', array('jquery'));
             wp_localize_script( 'oer-curriculum-script', 'oer_curriculum_ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
@@ -269,64 +343,163 @@ if (!function_exists('oer_curriculum_enqueue_scripts_and_styles')) {
  */
 add_action('save_post', 'oer_curriculum_save_custom_fields');
 function oer_curriculum_save_custom_fields() {
-    global $post, $wpdb, $_oer_prefix;
-    
+    global $post, $wpdb, $_oer_prefix; $allowedposttags;
+    $_oercurr_allowed_html = oercurr_allowed_html();
     //Check first if $post is not empty
     if ($post) {
         if ($post->post_type == 'oer-curriculum') {
             //Save/update Type
             if (isset($_POST['oer_curriculum_type'])) {
-                update_post_meta($post->ID, 'oer_curriculum_type', $_POST['oer_curriculum_type']);
+                update_post_meta($post->ID, 'oer_curriculum_type', sanitize_text_field($_POST['oer_curriculum_type']));
             }
             
             //Save/update Other Type
             if (isset($_POST['oer_curriculum_type_other'])) {
-                update_post_meta($post->ID, 'oer_curriculum_type_other', $_POST['oer_curriculum_type_other']);
+                update_post_meta($post->ID, 'oer_curriculum_type_other', sanitize_text_field($_POST['oer_curriculum_type_other']));
             }
             
             //Save/update introduction
             if (isset($_POST['oer_curriculum_introduction'])) {
-                update_post_meta($post->ID, 'oer_curriculum_introduction', $_POST['oer_curriculum_introduction']);
+                update_post_meta($post->ID, 'oer_curriculum_introduction', sanitize_text_field($_POST['oer_curriculum_introduction']));
             }
 
             // Save authors data
-            if (isset($_POST['oer_curriculum_authors'])) {
+            
+            if (isset($_POST['oer_curriculum_authors'])) {    
+                $_POST['oer_curriculum_authors']['name'][0] = sanitize_text_field($_POST['oer_curriculum_authors']['name'][0]);
+                $_POST['oer_curriculum_authors']['role'][0] = sanitize_text_field($_POST['oer_curriculum_authors']['role'][0]);
+                $_POST['oer_curriculum_authors']['author_url'][0] = esc_url_raw($_POST['oer_curriculum_authors']['author_url'][0]);
+                $_POST['oer_curriculum_authors']['institution'][0] = sanitize_text_field($_POST['oer_curriculum_authors']['institution'][0]);
+                $_POST['oer_curriculum_authors']['institution_url'][0] = esc_url_raw($_POST['oer_curriculum_authors']['institution_url'][0]);
+                $_POST['oer_curriculum_authors']['author_pic'][0] = esc_url_raw($_POST['oer_curriculum_authors']['author_pic'][0]);
                 update_post_meta($post->ID, 'oer_curriculum_authors', $_POST['oer_curriculum_authors']);
             }
+            
+            // Save Standards
+            if (isset($_POST['oer_curriculum_standards'])) {
+                update_post_meta($post->ID, 'oer_curriculum_standards', sanitize_text_field($_POST['oer_curriculum_standards']));
+            }
+            
+            // Save / update Standard and Objectives
+            if (isset($_POST['oer_curriculum_related_objective'])) {
+                foreach($_POST['oer_curriculum_related_objective'] as $key=>$value){
+                  $_POST['oer_curriculum_related_objective'][$key] = sanitize_text_field($_POST['oer_curriculum_related_objective'][$key]);
+                }
+                update_post_meta($post->ID, 'oer_curriculum_related_objective', $_POST['oer_curriculum_related_objective']);
+            }
+            
+            // Save Investigative Question
+            if (isset($_POST['oer_curriculum_iq'])) {
+                $_POST['oer_curriculum_iq']['question'] = sanitize_text_field($_POST['oer_curriculum_iq']['question']);
+                $_POST['oer_curriculum_iq']['excerpt'] = wp_kses(stripslashes_deep($_POST['oer_curriculum_iq']['excerpt']),$_oercurr_allowed_html);        
+                update_post_meta($post->ID, 'oer_curriculum_iq', $_POST['oer_curriculum_iq']);
+            }
 
+            // Save Required Equipment Materials
+            if (isset($_POST['oer_curriculum_required_materials'])) {
+                foreach($_POST['oer_curriculum_required_materials'] as $key=>$value){
+                  foreach($_POST['oer_curriculum_required_materials'][$key] as $subkey=>$subvalue){
+                    if($key == 'editor'){
+                      $_POST['oer_curriculum_required_materials'][$key][$subkey] = wp_kses(stripslashes_deep($_POST['oer_curriculum_required_materials'][$key][$subkey]),$_oercurr_allowed_html);
+                    }else{
+                      $_POST['oer_curriculum_required_materials'][$key][$subkey] = sanitize_text_field($_POST['oer_curriculum_required_materials'][$key][$subkey]);
+                    }
+                  }
+                }
+                update_post_meta($post->ID, 'oer_curriculum_required_materials', $_POST['oer_curriculum_required_materials']);
+            }
+            
+            // Save Additional Sections
+            if (isset($_POST['oer_curriculum_additional_sections'])) {                
+                foreach($_POST['oer_curriculum_additional_sections'] as $key=>$value){
+                    foreach($_POST['oer_curriculum_additional_sections'][$key] as $subkey=>$subvalue){
+                        if($key == 'label'){$_POST['oer_curriculum_additional_sections'][$key][$subkey] = sanitize_text_field($_POST['oer_curriculum_additional_sections'][$key][$subkey]);}
+                        if($key == 'editor'){$_POST['oer_curriculum_additional_sections'][$key][$subkey] = wp_kses(stripslashes_deep($_POST['oer_curriculum_additional_sections'][$key][$subkey]),$_oercurr_allowed_html);}
+                    }  
+                }
+                update_post_meta($post->ID, 'oer_curriculum_additional_sections', $_POST['oer_curriculum_additional_sections']);
+            }
+            
             // Save primary resource
             if (isset($_POST['oer_curriculum_primary_resources'])) {
+                foreach($_POST['oer_curriculum_primary_resources'] as $key=>$value){
+                    foreach($_POST['oer_curriculum_primary_resources'][$key] as $subkey=>$subvalue){
+                      if($key == 'image'){$_POST['oer_curriculum_primary_resources'][$key][$subkey] = esc_url_raw($_POST['oer_curriculum_primary_resources'][$key][$subkey]);}
+                      if($key == 'resource'){$_POST['oer_curriculum_primary_resources'][$key][$subkey] = sanitize_text_field($_POST['oer_curriculum_primary_resources'][$key][$subkey]);}
+                      if($key == 'field_type'){$_POST['oer_curriculum_primary_resources'][$key][$subkey] = sanitize_text_field($_POST['oer_curriculum_primary_resources'][$key][$subkey]);}
+                      if($key == 'sensitive_material_value'){$_POST['oer_curriculum_primary_resources'][$key][$subkey] = sanitize_text_field($_POST['oer_curriculum_primary_resources'][$key][$subkey]);} 
+                      if($key == 'title'){$_POST['oer_curriculum_primary_resources'][$key][$subkey] = sanitize_text_field($_POST['oer_curriculum_primary_resources'][$key][$subkey]);}
+                      if($key == 'description'){$_POST['oer_curriculum_primary_resources'][$key][$subkey] = wp_kses(stripslashes_deep($_POST['oer_curriculum_primary_resources'][$key][$subkey]),$_oercurr_allowed_html);}
+                    }
+                }
                 update_post_meta($post->ID, 'oer_curriculum_primary_resources', $_POST['oer_curriculum_primary_resources']);
             } else {
                 if (get_post_meta($post->ID, 'oer_curriculum_primary_resources'))
                     delete_post_meta($post->ID, 'oer_curriculum_primary_resources');
             }
-            
+              
             // Save materials
             if (isset($_POST['oer_curriculum_oer_materials'])) {
-                update_post_meta($post->ID, 'oer_curriculum_oer_materials', $_POST['oer_curriculum_oer_materials']);
+              foreach($_POST['oer_curriculum_oer_materials'] as $key=>$value){
+                  foreach($_POST['oer_curriculum_oer_materials'][$key] as $subkey=>$subvalue){
+                    if($key == 'url'){$_POST['oer_curriculum_oer_materials'][$key][$subkey] = esc_url_raw($_POST['oer_curriculum_oer_materials'][$key][$subkey]);}
+                    if($key == 'title'){$_POST['oer_curriculum_oer_materials'][$key][$subkey] = sanitize_text_field($_POST['oer_curriculum_oer_materials'][$key][$subkey]);}
+                    if($key == 'description'){$_POST['oer_curriculum_oer_materials'][$key][$subkey] = wp_kses(stripslashes_deep($_POST['oer_curriculum_oer_materials'][$key][$subkey]),$_oercurr_allowed_html);}
+                  }
+              }              
+              update_post_meta($post->ID, 'oer_curriculum_oer_materials', $_POST['oer_curriculum_oer_materials']);
+            }
+            
+            if (isset($_POST['oer_curriculum_grades'])) {
+                foreach($_POST['oer_curriculum_grades'] as $key=>$value){
+                  if($key == 'title'){$_POST['oer_curriculum_grades'][$key] = sanitize_text_field($_POST['oer_curriculum_grades'][$key]);}
+                }
+                update_post_meta($post->ID, 'oer_curriculum_grades', $_POST['oer_curriculum_grades']);
+            }else{
+                update_post_meta($post->ID, 'oer_curriculum_grades', false);
+            }
+            
+            // Update Appropriate Age Levels
+            if (isset($_POST['oer_curriculum_age_levels'])) {
+                update_post_meta($post->ID, 'oer_curriculum_age_levels', sanitize_text_field($_POST['oer_curriculum_age_levels']));
+            }
+            
+            // Update Suggested Instructional Time
+            if (isset($_POST['oer_curriculum_suggested_instructional_time'])) {
+                update_post_meta($post->ID, 'oer_curriculum_suggested_instructional_time', sanitize_text_field($_POST['oer_curriculum_suggested_instructional_time']));
+            }
+            
+            // Save custom editor fields
+            if (isset($_POST['oer_curriculum_custom_editor'])) {
+                update_post_meta($post->ID, 'oer_curriculum_custom_editor', $_POST['oer_curriculum_custom_editor']);
             }
 
-            // Save Investigative Question
-            if (isset($_POST['oer_curriculum_iq'])) {
-                update_post_meta($post->ID, 'oer_curriculum_iq', $_POST['oer_curriculum_iq']);
+            // Save custom modules
+            if (isset($_POST['oer_curriculum_order'])) {
+                oercurr_log('oer_curriculum_order');
+                foreach ($_POST['oer_curriculum_order'] as $moduleKey => $order) {
+                    if (isset($_POST[$moduleKey])) {
+                        update_post_meta($post->ID, $moduleKey, $_POST[$moduleKey]);
+                        // Check for vocabulary and save the vocabulary details
+                        /*
+                        if (strpos($moduleKey, 'oer_curriculum_vocabulary_list_title_') !== false) {
+                            $listOrder = end(explode('_', $moduleKey));
+                            if (isset($_POST['oer_curriculum_vocabulary_details_' . $listOrder])) {
+                                update_post_meta($post->ID, 'oer_curriculum_vocabulary_details_' . $listOrder, $_POST['oer_curriculum_vocabulary_details_' . $listOrder]);
+                            }
+                        }
+                        */
+                    }
+                }
             }
             
-            // Save Required Equipment Materials
-            if (isset($_POST['oer_curriculum_required_materials'])) {
-                update_post_meta($post->ID, 'oer_curriculum_required_materials', $_POST['oer_curriculum_required_materials']);
-            }
             
              // Save Required Equipment Materials Label
+            /*
             if (isset($_POST['oer_curriculum_required_materials_label'])) {
                 update_post_meta($post->ID, 'oer_curriculum_required_materials_label', $_POST['oer_curriculum_required_materials_label']);
             }
-            
-            // Save Additional Sections
-            if (isset($_POST['oer_curriculum_additional_sections'])) {
-                update_post_meta($post->ID, 'oer_curriculum_additional_sections', $_POST['oer_curriculum_additional_sections']);
-            }
-            
+
              // Save Additional Sections Label
             if (isset($_POST['oer_curriculum_additional_sections_label'])) {
                 update_post_meta($post->ID, 'oer_curriculum_additional_sections_label', $_POST['oer_curriculum_additional_sections_label']);
@@ -345,46 +518,22 @@ function oer_curriculum_save_custom_fields() {
                 update_post_meta($post->ID, 'oer_curriculum_times_type', $_POST['oer_curriculum_times_type']);
             }
 
-            if (isset($_POST['oer_curriculum_grades'])) {
-                update_post_meta($post->ID, 'oer_curriculum_grades', $_POST['oer_curriculum_grades']);
-            }else{
-                update_post_meta($post->ID, 'oer_curriculum_grades', false);
-            }
-            
-            // Update Appropriate Age Levels
-            if (isset($_POST['oer_curriculum_age_levels'])) {
-                update_post_meta($post->ID, 'oer_curriculum_age_levels', $_POST['oer_curriculum_age_levels']);
-            }
-            
-            // Update Suggested Instructional Time
-            if (isset($_POST['oer_curriculum_suggested_instructional_time'])) {
-                update_post_meta($post->ID, 'oer_curriculum_suggested_instructional_time', $_POST['oer_curriculum_suggested_instructional_time']);
-            }
-
-            // Save Standards
-            if (isset($_POST['oer_curriculum_standards'])) {
-                update_post_meta($post->ID, 'oer_curriculum_standards', $_POST['oer_curriculum_standards']);
-            }
-            // Save / update Standard and Objectives
-            if (isset($_POST['oer_curriculum_related_objective'])) {
-                update_post_meta($post->ID, 'oer_curriculum_related_objective', $_POST['oer_curriculum_related_objective']);
-            }
-
             // Save / update activity in this lesson
+            
             if (isset($_POST['oer_curriculum_activity_title'])) {
                 update_post_meta($post->ID, 'oer_curriculum_activity_title', $_POST['oer_curriculum_activity_title']);
             }
-
+              
             // Save activity types
             if (isset($_POST['oer_curriculum_activity_type'])) {
                 update_post_meta($post->ID, 'oer_curriculum_activity_type', $_POST['oer_curriculum_activity_type']);
             }
-
+            
             // Save activity details
             if (isset($_POST['oer_curriculum_activity_detail'])) {
                 update_post_meta($post->ID, 'oer_curriculum_activity_detail', $_POST['oer_curriculum_activity_detail']);
             }
-
+            
             // Save / update assessment
             if (isset($_POST['oer_curriculum_assessment_type'])) {
                 update_post_meta($post->ID, 'oer_curriculum_assessment_type', $_POST['oer_curriculum_assessment_type']);
@@ -399,27 +548,7 @@ function oer_curriculum_save_custom_fields() {
             if (isset($_POST['oer_curriculum_assessment'])) {
                 update_post_meta($post->ID, 'oer_curriculum_assessment', $_POST['oer_curriculum_assessment']);
             }
-
-            // Save custom editor fields
-            if (isset($_POST['oer_curriculum_custom_editor'])) {
-                update_post_meta($post->ID, 'oer_curriculum_custom_editor', $_POST['oer_curriculum_custom_editor']);
-            }
-
-            // Save custom modules
-            if (isset($_POST['oer_curriculum_order'])) {
-                foreach ($_POST['oer_curriculum_order'] as $moduleKey => $order) {
-                    if (isset($_POST[$moduleKey])) {
-                        update_post_meta($post->ID, $moduleKey, $_POST[$moduleKey]);
-                        // Check for vocabulary and save the vocabulary details
-                        if (strpos($moduleKey, 'oer_curriculum_vocabulary_list_title_') !== false) {
-                            $listOrder = end(explode('_', $moduleKey));
-                            if (isset($_POST['oer_curriculum_vocabulary_details_' . $listOrder])) {
-                                update_post_meta($post->ID, 'oer_curriculum_vocabulary_details_' . $listOrder, $_POST['oer_curriculum_vocabulary_details_' . $listOrder]);
-                            }
-                        }
-                    }
-                }
-            }
+            */
             
             // Save Additional Text Features
             if (isset($_POST['oer_curriculum_text_feature'])){
@@ -427,25 +556,30 @@ function oer_curriculum_save_custom_fields() {
             }
 
             // Save elements Order
+            /*
             if (isset($_POST['oer_curriculum_order'])) {
                 update_post_meta($post->ID, 'oer_curriculum_order', $_POST['oer_curriculum_order']);
             }
-
+            */
+            
             //Save download file options
             if (isset($_POST['oer_curriculum_download_copy'])) {
                 $oer_curriculum_download_copy = sanitize_text_field($_POST['oer_curriculum_download_copy']);
             } else {
                 $oer_curriculum_download_copy = 'no';
             }
-            update_post_meta($post->ID, 'oer_curriculum_download_copy', $oer_curriculum_download_copy);
+            update_post_meta($post->ID, 'oer_curriculum_download_copy', sanitize_text_field($oer_curriculum_download_copy));
 
             // Save download copy document
             if (isset($_POST['oer_curriculum_download_copy_document'])) {
-                update_post_meta($post->ID, 'oer_curriculum_download_copy_document', sanitize_text_field($_POST['oer_curriculum_download_copy_document']));
+                update_post_meta($post->ID, 'oer_curriculum_download_copy_document', esc_url_raw($_POST['oer_curriculum_download_copy_document']));
             }
 
             // Save related curriculum
             if (isset($_POST['oer_curriculum_related_curriculum'])) {
+                foreach ($_POST['oer_curriculum_related_curriculum'] as $key => $value) {
+                  $_POST['oer_curriculum_related_curriculum'][$key] = sanitize_text_field($_POST['oer_curriculum_related_curriculum'][$key]);
+                }
                 update_post_meta($post->ID, 'oer_curriculum_related_curriculum', $_POST['oer_curriculum_related_curriculum']);
             }
         }
@@ -461,12 +595,12 @@ add_action('wp_ajax_nopriv_oer_curriculum_add_more_activity_callback', 'oer_curr
 
 function oer_curriculum_add_more_activity_callback() {
     $totalElements = isset($_REQUEST['row_id']) ? $_REQUEST['row_id'] : '15';
-    $content = '<div class="panel panel-default oer-curriculum-ac-item" id="oer-curriculum-ac-item-' . $totalElements . '">
+    $content = '<div class="card col card-default oer-curriculum-ac-item" id="oer-curriculum-ac-item-' . $totalElements . '">
                     <span class="oer-curriculum-inner-sortable-handle">
                         <i class="fa fa-arrow-down activity-reorder-down hide" aria-hidden="true"></i>
                         <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
                     </span>
-                    <div class="panel-body">
+                    <div class="card-body">
                         <div class="row">
                             <div class="form-group col-md-8">
                                 <label>Activity Title</label>
@@ -529,9 +663,9 @@ function oer_curriculum_add_more_pr_callback() {
     $prType = isset($_REQUEST['type']) ? $_REQUEST['type'] : 'resource';
     //RESOURCE FIELD TYPE
     if($prType == 'resource'){
-      $content = '<div class="panel panel-default oer-curriculum-primary-resource-element-wrapper" id="oer-curriculum-primary-resource-element-wrapper-' . $totalElements . '">
-                      <div class="panel-heading">
-                          <h3 class="panel-title oer-curriculum-module-title">
+      $content = '<div class="card col card-default oer-curriculum-primary-resource-element-wrapper" id="oer-curriculum-primary-resource-element-wrapper-' . $totalElements . '">
+                      <div class="card-header">
+                          <h3 class="card-title oer-curriculum-module-title">
                               Resource
                               <span class="oer-curriculum-sortable-handle">
                                   <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
@@ -542,7 +676,7 @@ function oer_curriculum_add_more_pr_callback() {
                               ><i class="fa fa-trash"></i> </span>
                           </h3>
                       </div>
-                      <div class="panel-body">
+                      <div class="card-body">
                         <div class="row">
                             <div class="col-md-7">
                                 <label>Thumbnail Image</label>
@@ -589,9 +723,9 @@ function oer_curriculum_add_more_pr_callback() {
                           </div>';
       //TEXTBOX FIELD TYPE 
       }else{                   
-        $content = '<div class="panel panel-default oer-curriculum-primary-resource-element-wrapper" id="oer-curriculum-primary-resource-element-wrapper-' . $totalElements . '">
-                        <div class="panel-heading">
-                            <h3 class="panel-title oer-curriculum-module-title">
+        $content = '<div class="card col card-default oer-curriculum-primary-resource-element-wrapper" id="oer-curriculum-primary-resource-element-wrapper-' . $totalElements . '">
+                        <div class="card-header">
+                            <h3 class="card-title oer-curriculum-module-title">
                                 Texbox
                                 <span class="oer-curriculum-sortable-handle">
                                     <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
@@ -602,7 +736,7 @@ function oer_curriculum_add_more_pr_callback() {
                                 ><i class="fa fa-trash"></i> </span>
                             </h3>
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-7">
@@ -746,10 +880,10 @@ function oer_curriculum_get_resource_info_callback() {
  */
 function create_dynamic_editor($id) {
 
-    $content = '<div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-custom-editor-group-' . $id . '">
+    $content = '<div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-custom-editor-group-' . $id . '">
                     <input type="hidden" name="oer_curriculum_order[oer_curriculum_custom_editor_' . $id . ']" class="element-order" value="' . $id . '">
-                    <div class="panel-heading">
-                        <h3 class="panel-title oer-curriculum-module-title">
+                    <div class="card-header">
+                        <h3 class="card-title oer-curriculum-module-title">
                             Text Editor
                             <span class="oer-curriculum-sortable-handle">
                                 <i class="fa fa-arrow-down reorder-down hide" aria-hidden="true"></i>
@@ -758,7 +892,7 @@ function create_dynamic_editor($id) {
                             <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body">
                         <div class="form-group">
                             <label>Title</label>
                             <input type="text" name="oer_curriculum_custom_editor_'. $id.'[title]" maxlength="512" class="form-control" placeholder="Text Module Title" />
@@ -788,10 +922,10 @@ function create_dynamic_editor($id) {
  * @return string
  */
 function create_dynamic_text_list($id) {
-    $content = '<div class="panel panel-default oer-curriculum-element-wrapper" id="oer-curriculum-text-list-group' . $id . '">
+    $content = '<div class="card col card-default oer-curriculum-element-wrapper" id="oer-curriculum-text-list-group' . $id . '">
                     <input type="hidden" name="oer_curriculum_order[oer_curriculum_custom_text_list_' . $id . ']" class="element-order" value="' . $id . '">
-                    <div class="panel-heading">
-                        <h3 class="panel-title oer-curriculum-module-title">
+                    <div class="card-header">
+                        <h3 class="card-title oer-curriculum-module-title">
                             Text List
                             <span class="oer-curriculum-sortable-handle">
                                 <i class="fa fa-arrow-down reorder-down hide" aria-hidden="true"></i>
@@ -800,7 +934,7 @@ function create_dynamic_text_list($id) {
                             <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body">
                         <div class="row">
                             <div class="oer-curriculum-text-list-row" id="oer-curriculum-text-list-row' . $id . '">
                                 <div class="col-md-9">
@@ -831,10 +965,10 @@ function create_dynamic_text_list($id) {
  * @return string
  */
 function create_dynamic_vocabulary_list($id) {
-    $content = '<div class="panel panel-default oer-curriculum-element-wrapper" id="oer-curriculum-vocabulary-list-group' . $id . '">
+    $content = '<div class="card col card-default oer-curriculum-element-wrapper" id="oer-curriculum-vocabulary-list-group' . $id . '">
                     <input type="hidden" name="oer_curriculum_order[oer_curriculum_vocabulary_list_title_' . $id . ']" class="element-order" value="' . $id . '">
-                    <div class="panel-heading">
-                        <h3 class="panel-title oer-curriculum-module-title">
+                    <div class="card-header">
+                        <h3 class="card-title oer-curriculum-module-title">
                             Vocabulary List
                             <span class="oer-curriculum-sortable-handle">
                                 <i class="fa fa-arrow-down reorder-down hide" aria-hidden="true"></i>
@@ -843,7 +977,7 @@ function create_dynamic_vocabulary_list($id) {
                             <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body">
                         <div class="form-group">
                             <input type="text"
                                    class="form-control"
@@ -866,10 +1000,10 @@ if (! function_exists('create_dynamic_materials_module')) {
      * @return string
      */
     function create_dynamic_materials_module($id) {
-        $content = '<div class="panel panel-default oer-curriculum-element-wrapper" id="oer-curriculum-materials-'.$id.'">
+        $content = '<div class="card col card-default oer-curriculum-element-wrapper" id="oer-curriculum-materials-'.$id.'">
                         <input type="hidden" name="oer_curriculum_order[oer_curriculum_oer_materials_list_'.$id.']" class="element-order" value="'.$id.'">
-                        <div class="panel-heading">
-                            <h3 class="panel-title oer-curriculum-module-title">
+                        <div class="card-header">
+                            <h3 class="card-title oer-curriculum-module-title">
                                 Materials
                                 <span class="oer-curriculum-sortable-handle">
                                     <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
@@ -878,7 +1012,7 @@ if (! function_exists('create_dynamic_materials_module')) {
                                 <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i></span>
                             </h3>
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="panel-group oer-curriculum-materials-container" id="oer-curriculum-materials-container">
                             </div>
                             <button type="button" data-type="custom" data-name="oer_curriculum_oer_materials_list_'.$id.'" class="btn btn-default oer-curriculum-add-materials"><i class="fa fa-plus"></i> Add Materials</button>
@@ -1007,23 +1141,23 @@ function oer_curriculum_add_text_feature_callback() {
         $label_id = "oer_curriculum_additional_sections[label][]";
         $editor_id = "oer_curriculum_additional_sections[editor][]";
     }
-    $content = '<div class="panel panel-default oer-curriculum-section-element-wrapper" id="oer_curriculum_section_element_wrapper-'.$element_id.'">';
-    $content .= '   <div class="panel-heading">';
-    $content .= '       <h3 class="panel-title oer-curriculum-module-title">';
-    $content .=             __("Section", OER_LESSON_PLAN_SLUG);
+    $content = '<div class="card col card-default oer-curriculum-section-element-wrapper" id="oer_curriculum_section_element_wrapper-'.$element_id.'">';
+    $content .= '   <div class="card-header">';
+    $content .= '       <h3 class="card-title oer-curriculum-module-title">';
+    $content .=             __("Section", OER_CURRICULUM_SLUG);
     $content .= '           <span class="oer-curriculum-sortable-handle">';
     $content .= '               <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>';
     $content .= '               <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>';
     $content .= '           </span>';
-    $content .= '           <span class="btn btn-danger btn-sm oer-curriculum-remove-section" title="Delete"><i class="fa fa-trash"></i> </span>';
+    $content .= '           <button type="button" class="btn btn-danger btn-sm oer-curriculum-remove-section" title="Delete"><i class="fa fa-trash"></i> </button>';
     $content .= '       </h3>';
     $content .= '   </div>';
-    $content .= '   <div class="panel-body">';
+    $content .= '   <div class="card-body">';
     $content .= '       <div class="form-group">';
     $content .= '           <input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" placeholder="Text Title">';
     $content .= '       </div>';
     $content .= '       <div class="form-group">';
-    $content .= '           <div class="text-editor-group">';
+    //$content .= '           <div class="text-editor-group">';
                             ob_start(); // Start output buffer
                             wp_editor('',
                                 $ed_id . $element_id,
@@ -1036,7 +1170,7 @@ function oer_curriculum_add_text_feature_callback() {
                                 )
                             );
     $content .=             ob_get_clean();
-    $content .= '           </div>';
+    //$content .= '           </div>';
     $content .= '       </div>';
     $content .= '   </div>';
     $content .= '</div>';

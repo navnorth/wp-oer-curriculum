@@ -88,32 +88,53 @@ ul.oer-standard-list li a {cursor: pointer;}
 .full-width { width:100%; }
 .oer-curriculum-download-copy-icon {
     display: inline-block;
-    margin-left: 3px;
+    text-align: center;
+    margin: 0px;
     border: 1px solid #8c8f94 !important;
     border-left: 0px !important;
-    width: 40px;
-    border-radius: 0px !important;
+    width: 13%;
     cursor: pointer;
-    margin: 15px auto;
+    -webkit-border-top-right-radius: 4px;
+    -webkit-border-bottom-right-radius: 4px;
+    -moz-border-radius-topright: 4px;
+    -moz-border-radius-bottomright: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.input-group-addon.oer-curriculum-download-copy-icon:hover {
+    background-color: #e9e9e9;
 }
 .oer-curriculum-select-label {
     padding: 7px 0px;
     display: inline-block;
     border: 1px solid #8c8f94;
-    border-right: 0px;
-    width: 100%;
+    border-right: 0px !important;
+    width: 86%;
     text-indent: 8px;
     font-size: 14px;
     color: #656970;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-bottomleft: 4px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 .oer-curriculum-hidden { display:none; }
 .oer-curriculum-remove-download-copy { cursor:pointer; }
 .oer-curriculum-selected-section {
     border-left: 1px solid #8c8f94;
-    border-right: 0px solid #8c8f94;
+    border-right: 1px solid #8c8f94;
     border-top: 1px solid #8c8f94;
     border-bottom: 1px solid #8c8f94;
     padding: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.oer-curriculum-download-copy-icon .fa {
+    font-size: 16px;
+    line-height: 30px;
 }
 .oer-curriculum-selected-section a { word-break:break-all; }
 .oer-curriculum-plugin-body {
@@ -172,3 +193,76 @@ ul.oer-standard-list li a {cursor: pointer;}
 .text-editor-group { margin:10px 0; }
 .panel-group .panel .panel-body div {box-sizing: border-box !important;}
 .oer_curriculum_primary_resources_thumbnail_button { margin:10px 0; }
+.oer-curriculum-related-objective-row {
+    float: left;
+    width: 100%;
+}
+
+/* BOOTSTRAP 4 ADJUSTMENTS */
+.oer_curriculum_meta_wrapper .card-default {padding: 0px; margin:0px;}
+.oer_curriculum_meta_wrapper .card-group {padding: 0px; margin:0px 0px 10px 0px;}
+.oer_curriculum_meta_wrapper .card-header h3 {font-size: 1.25em;margin: 0px;}
+.oer_curriculum_meta_wrapper .btn-light {border-color:#8c8c8c !important;}
+.card.card-default {
+  width: 100% !important;
+  float: left;
+  min-width: 100%;
+  margin-bottom: 5px;
+  border: 1px solid #dddddd !important;
+  -webkit-border-radius: 5px !important;
+  -moz-border-radius: 5px !important;
+  border-radius: 5px !important;
+}
+.oer-curriculum-popups .modal-header h3 {margin: 20px 0px 0px 0px;width: 100%;}
+.oer-curriculum-popups button.close {position: absolute;right: 10px;top: 10px;}
+.oer-curriculum-material-icon {
+    font-size: 1.25em;
+    font-weight: 400;
+    line-height: 2em;
+    color: #555;
+    text-align: center;
+    cursor: pointer;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.collapse.in {display: block !important;}
+/*
+ul.oer-standard-list >div {padding-left: 20px;}
+ul.oer-standard-list >div li.oer_sbstndard >div {padding-left: 35px;}*/
+li.oer_sbstndard {
+    position: relative;
+    display: block;
+    float: left;
+    width: 100%;
+}
+.oer_sbstndard input[type="checkbox"] {
+    position: absolute;
+    top: 7px;
+}
+
+ul.oer-standard-list div {
+    padding-left: 20px;
+    float: left;
+    width: 100%;
+}
+.oer_stndrd_desc {
+    padding-left: 0px !important;
+}
+li.oer_sbstndard div ul li input[type="checkbox"] {
+    position: absolute;
+    left: 0px;
+    top: 8px;
+}
+li.oer_sbstndard div ul li {
+    float: left;
+    display: block;
+    position: relative;
+    padding-left: 20px;
+    width: 100%;
+}

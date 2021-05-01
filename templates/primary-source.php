@@ -46,7 +46,7 @@ $featured_image_url = get_the_post_thumbnail_url($resource->ID, "full");
 $resource_url = get_post_meta($resource->ID, "oer_resourceurl", true);
 $oer_resource_url = get_the_permalink($resource->ID);
 $youtube = oer_is_youtube_url($resource_url);
-$isPDF = is_pdf_resource($resource_url);
+$isPDF = oer_is_pdf_resource($resource_url);
 
 // Get Curriculum Meta for Primary Sources
 $post_meta_data = get_post_meta($curriculum_id);
@@ -76,7 +76,6 @@ if (!empty($primary_resources) && oer_curriculum_scan_array($primary_resources))
                 }
                 $new_title = (isset($primary_resources['title'][$resourceKey]) ? $primary_resources['title'][$resourceKey]: "");
                 $new_description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: "");
-                $new_description = str_replace ( "../wp-content" , get_bloginfo( 'url' ).'/wp-content', $new_description);
                 break;
             }
             $index++;
@@ -177,7 +176,7 @@ $type = (isset($type[0]))?$type[0]:'textbox';
         <div class="oer-curriculum-center">
             <?php if (isset($resource_url)) { ?>
             <div class="ps-meta-group ps-resource-url">
-                <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OER_LESSON_PLAN_SLUG); ?></a>
+                <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OER_CURRICULUM_SLUG); ?></a>
             </div>
             <?php } ?>
         </div>
@@ -197,7 +196,7 @@ $type = (isset($type[0]))?$type[0]:'textbox';
             <div class="oer-curriculum-center">
                 <?php if (isset($resource_url)) { ?>
                 <div class="ps-meta-group ps-resource-url">
-                    <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OER_LESSON_PLAN_SLUG); ?></a>
+                    <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OER_CURRICULUM_SLUG); ?></a>
                 </div>
                 <?php } ?>
             </div>

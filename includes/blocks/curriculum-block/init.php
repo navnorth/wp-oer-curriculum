@@ -267,9 +267,9 @@ add_action( 'init', 'curriculum_block_cgb_block_assets' );
 
 function ajxRebuildPostsBlock(){
     $_arr = array();
-    $_arr['selectedCategory'] = $_POST['sel'];
-    $_arr['postsPerPage']     = $_POST['per'];
-    $_arr['sortBy']           = $_POST['srt'];    
+    $_arr['selectedCategory'] = sanitize_text_field($_POST['sel']);
+    $_arr['postsPerPage']     = sanitize_text_field($_POST['per']);
+    $_arr['sortBy']           = sanitize_text_field($_POST['srt']);   
     echo render_posts_block($_arr, true);
     //echo json_encode($_arr);
     die();

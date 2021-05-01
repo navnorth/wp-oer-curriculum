@@ -1,5 +1,5 @@
 <!--Dynamic module modal-->
-<div class="modal fade" id="oer-curriculum-dynamic-module-modal" tabindex="-1" role="dialog" aria-labelledby="lpDynamicModalLabel">
+<div class="oer-curriculum-popups modal fade" id="oer-curriculum-dynamic-module-modal" tabindex="-1" role="dialog" aria-labelledby="lpDynamicModalLabel">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">

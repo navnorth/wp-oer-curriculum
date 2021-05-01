@@ -28,25 +28,28 @@ foreach ($elements_orders as $orderKey => $orderValue) {
 $default = false;
 
 // Check Metadata settings for label and if enabled
-$author_set = (get_option('oer_curriculum_authors_label'))?true:false;
-$author_enabled = (get_option('oer_curriculum_authors_enabled'))?true:false;
-$primary_resources_set = (get_option('oer_curriculum_primary_resources_label'))?true:false;
-$primary_resources_enabled = (get_option('oer_curriculum_primary_resources_enabled'))?true:false;
-$materials_set = (get_option('oer_curriculum_oer_materials_label'))?true:false;
-$materials_enabled = (get_option('oer_curriculum_oer_materials_enabled'))?true:false;
-$iq_set = (get_option('oer_curriculum_iq_label'))?true:false;
-$iq_enabled = (get_option('oer_curriculum_iq_enabled'))?true:false;
-$req_materials_set = (get_option('oer_curriculum_required_materials_label'))?true:false;
-$req_materials_enabled = (get_option('oer_curriculum_required_materials_enabled'))?true:false;
-$additional_sections_set = (get_option('oer_curriculum_additional_sections_label'))?true:false;
-$additional_sections_enabled = (get_option('oer_curriculum_additional_sections_enabled'))?true:false;
-$history_bg_set = (get_option('oer_curriculum_custom_editor_historical_background_label'))?true:false;
-$history_bg_enabled = (get_option('oer_curriculum_custom_editor_historical_background_enabled'))?true:false;
-$type_set = (get_option('oer_curriculum_type_label'))?true:false;
-$type_enabled = (get_option('oer_curriculum_type_enabled'))?true:false;
-$standards_set = (get_option('oer_curriculum_standards_label'))?true:false;
-$standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false;
-
+$type_other_set = (trim(get_option('oer_curriculum_type_other_curmetset_label'),' ') != '')?true:false;
+$type_other_enabled = (get_option('oer_curriculum_type_other_curmetset_enable')=='checked')?true:false;
+$author_set = (trim(get_option('oer_curriculum_authors_curmetset_label'),' ') != '')?true:false;
+$author_enabled = (get_option('oer_curriculum_authors_curmetset_enable')=='checked')?true:false;
+$primary_resources_set = (trim(get_option('oer_curriculum_primary_resources_curmetset_label'),' ') != '')?true:false;
+$primary_resources_enabled = (get_option('oer_curriculum_primary_resources_curmetset_enable')=='checked')?true:false;
+$materials_set = (trim(get_option('oer_curriculum_oer_materials_curmetset_label'),' ') != '')?true:false;
+$materials_enabled = (get_option('oer_curriculum_oer_materials_curmetset_enable')=='checked')?true:false;
+$iq_set = (trim(get_option('oer_curriculum_iq_curmetset_label'),' ') != '')?true:false;
+$iq_enabled = (get_option('oer_curriculum_iq_curmetset_enable')=='checked')?true:false;
+$req_materials_set = (trim(get_option('oer_curriculum_required_materials_curmetset_label'),' ') != '')?true:false;
+$req_materials_enabled = (get_option('oer_curriculum_required_materials_curmetset_enable')=='checked')?true:false;
+$additional_sections_set = (trim(get_option('oer_curriculum_additional_sections_curmetset_label'),' ') != '')?true:false;
+$additional_sections_enabled = (get_option('oer_curriculum_additional_sections_curmetset_enable')=='checked')?true:false;
+$history_bg_set = (trim(get_option('oer_curriculum_custom_editor_historical_background_curmetset_label'),' ') != '')?true:false;
+$history_bg_enabled = (get_option('oer_curriculum_custom_editor_historical_background_curmetset_enable')=='checked')?true:false;
+$type_set = (trim(get_option('oer_curriculum_type_curmetset_label'),' ') != '')?true:false;
+$type_enabled = (get_option('oer_curriculum_type_curmetset_enable')=='checked')?true:false;
+$standards_set = (trim(get_option('oer_curriculum_standards_curmetset_label'),' ') != '')?true:false;
+$standards_enabled = (get_option('oer_curriculum_standards_curmetset_enable')=='checked')?true:false;
+$objectives_set = (get_option('oer_curriculum_related_objective_curmetset_label'))?true:false;
+$objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_enable') == 'checked')?true:false;
 ?>
 <div class="oer_curriculum_meta_wrapper">
     <div class="row">
@@ -243,19 +246,19 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
         </div>
         <div class="col-md-8" id="oer-curriculum-sortable">
             <!-- Details Module -->
-            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-details-group" id="oer-curriculum-details-group">
-                <div class="panel-heading">
-                    <h3 class="panel-title oer-curriculum-module-title">
-                        <?php _e("Details", OER_LESSON_PLAN_SLUG); ?>
+            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-details-group" id="oer-curriculum-details-group">
+                <div class="card-header">
+                    <h3 class="card-title oer-curriculum-module-title">
+                        <?php _e("Details", OER_CURRICULUM_SLUG); ?>
                     </h3>
                 </div>
-                <div class="panel-body">
+                <div class="card-body">
                     <?php
                     $oer_curriculum_type = isset($post_meta_data['oer_curriculum_type'][0]) ? $post_meta_data['oer_curriculum_type'][0] : "";
                     $oer_curriculum_type_other = isset($post_meta_data['oer_curriculum_type_other'][0]) ? $post_meta_data['oer_curriculum_type_other'][0] : "";
                     $xclass = " hidden";
-                    if (($type_set && $type_enabled) || !$type_set) {
-                        if ($oer_curriculum_type=="Other")
+                    if ($type_enabled) {
+                        if ($oer_curriculum_type=="Other" && $type_other_enabled)
                             $xclass = "";
                         
                     ?>
@@ -281,11 +284,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
             <?php if (!empty($elements_orders)) {
                 foreach ($elements_orders as $elementKey => $value) {
                     if($elementKey == 'oer_curriculum_introduction_order') {?>
-                        <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-introduction-group">
+                        <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-introduction-group">
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_introduction_order]" class="element-order" value="<?php echo $value;?>">
-                            <div class="panel-heading">
-                                <h3 class="panel-title oer-curriculum-module-title">
-                                    <?php _e("Introduction", OER_LESSON_PLAN_SLUG); ?>
+                            <div class="card-header">
+                                <h3 class="card-title oer-curriculum-module-title">
+                                    <?php _e("Introduction", OER_CURRICULUM_SLUG); ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -293,7 +296,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <?php
                                 $oer_curriculum_introduction = isset($post_meta_data['oer_curriculum_introduction'][0]) ? $post_meta_data['oer_curriculum_introduction'][0] : "";
                                 wp_editor( $oer_curriculum_introduction,
@@ -315,10 +318,10 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         <?php
                         $authors = (isset($post_meta_data['oer_curriculum_authors'][0]) ? unserialize($post_meta_data['oer_curriculum_authors'][0]) : array());
                         if(!empty($authors)) { ?>
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-authors-group" id="oer-curriculum-authors">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-authors-group" id="oer-curriculum-authors">
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_authors_order]" class="element-order" value="<?php echo $value;?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
                                         <?php echo oer_curriculum_get_field_label('oer_curriculum_authors'); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
@@ -327,25 +330,26 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
-                                    <div class="panel-group">
+                                <div class="card-body">
+                                    <div class="card-group">
                                         <?php
                                         if (isset($authors['name']) && !empty($authors['name'])) {
                                             foreach ( $authors['name']as $authorKey => $authorName) { ?>
-                                                <div class="panel panel-default oer-curriculum-author-element-wrapper" id="author-<?php echo $authorKey;?>">
-                                                    <div class="panel-heading">
-                                                        <h3 class="panel-title oer-curriculum-module-title">
-                                                            <?php _e("Author", OER_LESSON_PLAN_SLUG); ?>
+                                                <div class="card col card-default oer-curriculum-author-element-wrapper" id="author-<?php echo $authorKey;?>">
+                                                    <div class="card-header">
+                                                        <h3 class="card-title oer-curriculum-module-title">
+                                                            <?php _e("Author", OER_CURRICULUM_SLUG); ?>
                                                             <span class="oer-curriculum-sortable-handle">
                                                                 <i class="fa fa-arrow-down author-reorder-down" aria-hidden="true"></i>
                                                                 <i class="fa fa-arrow-up author-reorder-up" aria-hidden="true"></i>
                                                             </span>
-                                                            <span class="btn btn-danger btn-sm oer-curriculum-remove-author"
-                                                                  title="Delete"
-                                                            ><i class="fa fa-trash"></i> </span>
+                                                            <button type="button" class="btn btn-danger btn-sm oer-curriculum-remove-author"
+                                                                  title="Delete" 
+                                                                  disabled="disabled"
+                                                            ><i class="fa fa-trash"></i> </button>
                                                         </h3>
                                                     </div>
-                                                    <div class="panel-body">
+                                                    <div class="card-body">
                                                         <div class="row oer-curriculum-authors-element-row">
                                                             <div class="col-md-3">
                                                                 <div class="form-group">
@@ -424,7 +428,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <div class="col-md-12">
                                             <button type="button"
                                                     id="oer-curriculum-add-more-author"
-                                                    class="btn btn-default oer-curriculum-add-more-author"
+                                                    class="btn btn-light oer-curriculum-add-more-author"
                                             ><i class="fa fa-plus"></i> Add More</button>
                                         </div>
                                     </div>
@@ -437,10 +441,10 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             if (($primary_resources_set && $primary_resources_enabled) || !$primary_resources_set) { 
                         ?>
                         <!-- Primary Sources -->
-                        <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-primary-resources" id="oer-curriculum-primary-resources">
+                        <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-primary-resources" id="oer-curriculum-primary-resources">
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_primary_resources]" class="element-order" value="<?php echo $value;?>">
-                            <div class="panel-heading">
-                                <h3 class="panel-title oer-curriculum-module-title">
+                            <div class="card-header">
+                                <h3 class="card-title oer-curriculum-module-title">
                                     <?php echo oer_curriculum_get_field_label('oer_curriculum_primary_resources'); ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
@@ -449,8 +453,8 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
-                            <div class="panel-body">
-                                <div class="panel-group oer-curriculum-primary-resource-element-panel">
+                            <div class="card-body">
+                                <div class="card-group oer-curriculum-primary-resource-element-panel">
                                     <?php
                                     $posts = get_posts([
                                         'post_type' => 'resource',
@@ -475,11 +479,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                             ?>
                                           
                                           <!-- RESOURCE FIELD TYPE --> 
-                                          <div class="panel panel-default oer-curriculum-primary-resource-element-wrapper">
+                                          <div class="card col card-default oer-curriculum-primary-resource-element-wrapper">
                                           <?php if($resource_field_type == 'resource'){ ?>
-                                                <div class="panel-heading">
-                                                    <h3 class="panel-title oer-curriculum-module-title">
-                                                        <?php _e("Resource", OER_LESSON_PLAN_SLUG); ?>
+                                                <div class="card-header">
+                                                    <h3 class="card-title oer-curriculum-module-title">
+                                                        <?php _e("Resource", OER_CURRICULUM_SLUG); ?>
                                                         <span class="oer-curriculum-sortable-handle">
                                                             <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
                                                             <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
@@ -490,7 +494,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                                         ><i class="fa fa-trash"></i> </span>
                                                     </h3>
                                                 </div>
-                                                <div class="panel-body">
+                                                <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-md-7">
                                                             <label>Thumbnail Image</label>
@@ -587,9 +591,9 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                                     </div>
                                           <!-- TEXTBOX FIELD TYPE -->
                                           <?php }else{ ?>
-                                                <div class="panel-heading">
-                                                    <h3 class="panel-title oer-curriculum-module-title">
-                                                        <?php _e("Textbox", OER_LESSON_PLAN_SLUG); ?>
+                                                <div class="card-header">
+                                                    <h3 class="card-title oer-curriculum-module-title">
+                                                        <?php _e("Textbox", OER_CURRICULUM_SLUG); ?>
                                                         <span class="oer-curriculum-sortable-handle">
                                                             <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
                                                             <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
@@ -600,7 +604,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                                         ><i class="fa fa-trash"></i> </span>
                                                     </h3>
                                                 </div>
-                                                <div class="panel-body">
+                                                <div class="card-body">
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-md-7">
@@ -715,10 +719,10 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                             </div>
                                         <?php }
                                     } else {?>
-                                        <div class="panel panel-default oer-curriculum-primary-source-element-wrapper">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title oer-curriculum-module-title">
-                                                    <?php _e("Resource", OER_LESSON_PLAN_SLUG); ?>
+                                        <div class="card col card-default oer-curriculum-primary-source-element-wrapper">
+                                            <div class="card-header">
+                                                <h3 class="card-title oer-curriculum-module-title">
+                                                    <?php _e("Resource", OER_CURRICULUM_SLUG); ?>
                                                     <span class="oer-curriculum-sortable-handle">
                                                     <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
                                                     <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
@@ -729,7 +733,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                                     ><i class="fa fa-trash"></i> </span>
                                                 </h3>
                                             </div>
-                                            <div class="panel-body">
+                                            <div class="card-body">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                     <?php
@@ -820,13 +824,13 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <div class="col-md-12">
                                         <button type="button"
                                                 id="oer-curriculum-add-more-resource"
-                                                class="btn btn-default oer-curriculum-add-more-resource" 
+                                                class="btn btn-light oer-curriculum-add-more-resource" 
                                                 typ="resource"
                                         ><i class="fa fa-plus"></i> Add a Resource</button>
                                         &nbsp;&nbsp;
                                         <button type="button"
                                                 id="oer-curriculum-add-more-textbox"
-                                                class="btn btn-default oer-curriculum-add-more-resource" 
+                                                class="btn btn-light oer-curriculum-add-more-resource" 
                                                 typ="textbox"
                                         ><i class="fa fa-plus"></i> Add Textbox</button>
                                     </div>
@@ -838,11 +842,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                     } elseif ($elementKey == 'oer_curriculum_oer_materials') {
                         if (($materials_set && $materials_enabled) || !$materials_set) { 
                         ?>
-                        <div class="panel panel-default oer-curriculum-element-wrapper" id="oer-curriculum-materials">
+                        <div class="card col card-default oer-curriculum-element-wrapper" id="oer-curriculum-materials">
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_oer_materials]" class="element-order" value="3">
-                            <div class="panel-heading">
-                                <h3 class="panel-title oer-curriculum-module-title">
-                                    <?php echo oer_curriculum_get_field_label('oer_curriculum_oer_materials'); ?>
+                            <div class="card-header">
+                                <h3 class="card-title oer-curriculum-module-title">
+                                    <?php echo get_option('oer_curriculum_oer_materials_curmetset_label') ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -850,8 +854,8 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i></span>
                                 </h3>
                             </div>
-                            <div class="panel-body">
-                                <div class="panel-group oer-curriculum-materials-container" id="oer-curriculum-materials-container">
+                            <div class="card-body">
+                                <div class="card-group oer-curriculum-materials-container" id="oer-curriculum-materials-container">
                                     <?php
                                     $materials = (isset($post_meta_data['oer_curriculum_oer_materials'][0]) ? unserialize($post_meta_data['oer_curriculum_oer_materials'][0]) : array());
                                     if (!empty($materials['url'])) {
@@ -859,9 +863,9 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                             <?php
                                             $file_response = get_file_type_from_url($material);
                                             ?>
-                                            <div class="panel panel-default oer-curriculum-material-element-wrapper">
-                                                <div class="panel-heading">
-                                                    <h3 class="panel-title oer-curriculum-module-title">
+                                            <div class="card col card-default oer-curriculum-material-element-wrapper">
+                                                <div class="card-header">
+                                                    <h3 class="card-title oer-curriculum-module-title">
                                                         <span class="oer-curriculum-sortable-handle">
                                                             <i class="fa fa-arrow-down material-reorder-down" aria-hidden="true"></i>
                                                             <i class="fa fa-arrow-up material-reorder-up" aria-hidden="true"></i>
@@ -869,7 +873,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-material" title="Delete"><i class="fa fa-trash"></i></span>
                                                     </h3>
                                                     </div>
-                                                <div class="panel-body">
+                                                <div class="card-body">
                                                     <div class="form-group">
                                                         <div class="input-group">
                                                             <input type="text"
@@ -905,7 +909,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                 </div>
                                 <button type="button"
                                         id="oer-curriculum-add-materials"
-                                        class="btn btn-default oer-curriculum-add-materials"
+                                        class="btn btn-light oer-curriculum-add-materials"
                                 ><i class="fa fa-plus"></i> Add Materials</button>
                             </div>
                         </div>
@@ -917,10 +921,10 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         <?php
                         $oer_curriculum_iq  = isset($post_meta_data['oer_curriculum_iq'][0]) ? unserialize($post_meta_data['oer_curriculum_iq'][0]) : array();
                         ?>
-                        <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-iq" id="oer-curriculum-iq">
+                        <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-iq" id="oer-curriculum-iq">
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_iq]" class="element-order" value="<?php echo $value;?>">
-                            <div class="panel-heading">
-                                <h3 class="panel-title oer-curriculum-module-title">
+                            <div class="card-header">
+                                <h3 class="card-title oer-curriculum-module-title">
                                     <?php echo oer_curriculum_get_field_label('oer_curriculum_iq'); ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
@@ -929,7 +933,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <div class="form-group">
                                     <label>Investigative Question</label>
                                     <input type="text"
@@ -964,11 +968,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         $oer_curriculum_required_materials  = isset($post_meta_data['oer_curriculum_required_materials'][0]) ? $post_meta_data['oer_curriculum_required_materials'][0] : array();
                         $oer_curriculum_required_materials_label = isset($post_meta_data['oer_curriculum_required_materials_label'][0]) ? $post_meta_data['oer_curriculum_required_materials_label'][0] : "";
                         ?>
-                        <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-required-materials" id="oer-curriculum-required-materials">
+                        <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-required-materials" id="oer-curriculum-required-materials">
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_required_materials]" class="element-order" value="<?php echo $value;?>">
-                            <div class="panel-heading">
-                                <h3 class="panel-title oer-curriculum-module-title">
-                                <?php _e("Required Materials", OER_LESSON_PLAN_SLUG); ?>
+                            <div class="card-header">
+                                <h3 class="card-title oer-curriculum-module-title">
+                                <?php echo trim(get_option('oer_curriculum_required_materials_curmetset_label'),' ') ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -976,7 +980,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <?php
                                 $text_features = isset($post_meta_data['oer_curriculum_required_materials'][0]) ? unserialize($post_meta_data['oer_curriculum_required_materials'][0]) : array();
                                 if (is_array($text_features) && !empty($text_features)){
@@ -991,21 +995,21 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     }
                                     for ($i=0;$i<$cnt;$i++){
                                 ?>
-                                <div class="panel panel-default oer-curriculum-section-element-wrapper">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title oer-curriculum-module-title">
-                                            <?php _e("Section", OER_LESSON_PLAN_SLUG); ?>
+                                <div class="card col card-default oer-curriculum-section-element-wrapper">
+                                    <div class="card-header">
+                                        <h3 class="card-title oer-curriculum-module-title">
+                                            <?php _e("Section", OER_CURRICULUM_SLUG); ?>
                                             <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>
                                         </span>
-                                            <span class="btn btn-danger btn-sm oer-curriculum-remove-section"
+                                            <button type="button" class="btn btn-danger btn-sm oer-curriculum-remove-section"
                                                   title="Delete"
-                                            ><i class="fa fa-trash"></i> </span>
+                                            ><i class="fa fa-trash"></i> </button>
                                         </h3>
                                     </div>
-                                    <div class="panel-body">
-                                        <div class="text-editor-group">
+                                    <div class="card-body">
+                                        
                                        <?php
                                             echo '<div class="form-group">';
                                             echo '<input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" value="'.$text_features['label'][$i].'">';
@@ -1023,7 +1027,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                             );
                                             echo '</div>';
                                         ?>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <?php
@@ -1031,7 +1035,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                 }
                                 ?>
                                 <div class="button-row form-group">
-                                    <button id="addMatlBtn" class="btn btn-primary"><?php _e("Add Section", OER_LESSON_PLAN_SLUG); ?></button>
+                                    <button id="addMatlBtn" class="btn btn-primary"><?php _e("Add Section", OER_CURRICULUM_SLUG); ?></button>
                                 </div>
                             </div>
                         </div>
@@ -1044,10 +1048,10 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         $oer_curriculum_additional_sections  = isset($post_meta_data['oer_curriculum_additional_sections'][0]) ? $post_meta_data['oer_curriculum_additional_sections'][0] : array();
                         $oer_curriculum_additional_sections_label = isset($post_meta_data['oer_curriculum_additional_sections_label'][0]) ? $post_meta_data['oer_curriculum_additional_sections_label'][0] : "";
                         ?>
-                        <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-required-materials" id="oer-curriculum-additional-sections">
+                        <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-required-materials" id="oer-curriculum-additional-sections">
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_additional_sections]" class="element-order" value="<?php echo $value;?>">
-                            <div class="panel-heading">
-                                <h3 class="panel-title oer-curriculum-module-title">
+                            <div class="card-header">
+                                <h3 class="card-title oer-curriculum-module-title">
                                 <?php echo oer_curriculum_get_field_label('oer_curriculum_additional_sections'); ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
@@ -1056,7 +1060,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <?php
                                 $text_features = isset($post_meta_data['oer_curriculum_additional_sections'][0]) ? unserialize($post_meta_data['oer_curriculum_additional_sections'][0]) : array();
                                 if (is_array($text_features)){
@@ -1071,28 +1075,28 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     }
                                     for ($i=0;$i<$cnt;$i++){
                                 ?>
-                                <div class="panel panel-default oer-curriculum-section-element-wrapper">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title oer-curriculum-module-title">
-                                            <?php _e("Section", OER_LESSON_PLAN_SLUG); ?>
+                                <div class="card col card-default oer-curriculum-section-element-wrapper">
+                                    <div class="card-header">
+                                        <h3 class="card-title oer-curriculum-module-title">
+                                            <?php _e("Section", OER_CURRICULUM_SLUG); ?>
                                             <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>
                                         </span>
-                                            <span class="btn btn-danger btn-sm oer-curriculum-remove-section"
-                                                  title="Delete"
-                                            ><i class="fa fa-trash"></i> </span>
+                                            <button type="button" class="btn btn-danger btn-sm oer-curriculum-remove-section"
+                                                  title="Delete" 
+                                            ><i class="fa fa-trash"></i> </button>
                                         </h3>
                                     </div>
-                                    <div class="panel-body">
-                                        <div class="text-editor-group">
+                                    <div class="card-body">
+                                        
                                        <?php
                                             echo '<div class="form-group">';
                                             echo '<input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" value="'.$text_features['label'][$i].'">';
                                             echo '</div>';
                                             echo '<div class="form-group">';
                                             wp_editor( (isset($text_features['editor'][$i]) ? $text_features['editor'][$i] : ""),
-                                                'oer-curriculum-additional-sections-editor-' . $i,
+                                                'oer-curriculum-additional-sections-editor-' . ($i + 1),
                                                 $settings = array(
                                                     'textarea_name' => $editor_id,
                                                     'media_buttons' => true,
@@ -1103,7 +1107,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                             );
                                             echo '</div>';
                                         ?>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <?php
@@ -1111,18 +1115,18 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                 }
                                 ?>
                                 <div class="button-row form-group">
-                                    <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Section", OER_LESSON_PLAN_SLUG); ?></button>
+                                    <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Section", OER_CURRICULUM_SLUG); ?></button>
                                 </div>
                             </div>
                         </div>
                     <?php }
                     } elseif ($elementKey == 'oer_curriculum_lesson_times_order') {?>
                         <!--For Lesson Times-->
-                        <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-times-group" id="oer-curriculum-times-group">
+                        <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-times-group" id="oer-curriculum-times-group">
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_lesson_times_order]" class="element-order" value="<?php echo $value;?>">
-                            <div class="panel-heading">
-                                <h3 class="panel-title oer-curriculum-module-title">
-                                    <?php _e("Lesson Times", OER_LESSON_PLAN_SLUG); ?>
+                            <div class="card-header">
+                                <h3 class="card-title oer-curriculum-module-title">
+                                    <?php _e("Lesson Times", OER_CURRICULUM_SLUG); ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1130,7 +1134,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <?php
                                 $oer_curriculum_times_label  = isset($post_meta_data['oer_curriculum_times_label'][0]) ? unserialize($post_meta_data['oer_curriculum_times_label'][0]) : array();
                                 $oer_curriculum_times_number = isset($post_meta_data['oer_curriculum_times_number'][0]) ? unserialize($post_meta_data['oer_curriculum_times_number'][0]) : array();
@@ -1217,7 +1221,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                 <div class="row">
                                     <div class="col-md-12">
                                         <button type="button"
-                                                class="btn btn-default oer-curriculum-add-time-element"
+                                                class="btn btn-light oer-curriculum-add-time-element"
                                         ><i class="fa fa-plus"></i> Add Time Element</button>
                                     </div>
                                 </div>
@@ -1225,11 +1229,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         </div>
                     <?php } elseif ($elementKey == 'oer_curriculum_standard_order') { ?>
                         <!--For Standards and Objectives -->
-                        <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-standards-group" id="oer-curriculum-standards-group">
+                        <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-standards-group" id="oer-curriculum-standards-group">
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_standard_order]" class="element-order" value="<?php echo $value;?>">
-                            <div class="panel-heading">
-                                <h3 class="panel-title oer-curriculum-module-title">
-                                    <?php _e("Standards and Objectives", OER_LESSON_PLAN_SLUG); ?>
+                            <div class="card-header">
+                                <h3 class="card-title oer-curriculum-module-title">
+                                    <?php _e("Standards and Objectives", OER_CURRICULUM_SLUG); ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1237,10 +1241,10 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <?php if (is_standards_plugin_installed()) {
                                     if (($standards_set && $standards_enabled) || !$standards_set) { ?>
-                                <h4 class="page-title-inner"><?php _e("Standards", OER_LESSON_PLAN_SLUG); ?></h4>
+                                <h4 class="page-title-inner"><?php _e("Standards", OER_CURRICULUM_SLUG); ?></h4>
 
                                 <div id="selected-standard-wrapper">
                                     <?php
@@ -1250,7 +1254,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                 </div>
                                 <input type="hidden" name="oer_curriculum_standards" value="<?php echo $standards;?>">
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-12 pb-4">
                                         <button type="button"
                                                 id="oer-curriculum-select-standard"
                                                 class="btn btn-primary"
@@ -1259,16 +1263,18 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                 </div>
                                 <?php }
                                 } ?>
+                                
+                                <?php if (($objectives_set && $objectives_enabled) || !$objectives_set) { ?>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h4>Related Instructional Objectives (<span title="Students will be able to...">SWBAT...</span>)</h4>
+                                        <h4><?php echo get_option('oer_curriculum_related_objective_curmetset_label') ?></h4>
                                     </div>
 
                                     <?php
                                     $oer_curriculum_related_objective  = isset($post_meta_data['oer_curriculum_related_objective'][0]) ? unserialize($post_meta_data['oer_curriculum_related_objective'][0]) : array();
                                     if(!empty($oer_curriculum_related_objective)) {
                                         foreach ( $oer_curriculum_related_objective as $key => $item) { ?>
-                                            <div class="oer-curriculum-related-objective-row" id="oer-curriculum-related-objective-row">
+                                            <div class="row col-12 oer-curriculum-related-objective-row" id="oer-curriculum-related-objective-row">
                                                 <div class="col-md-9">
                                                     <div class="form-group">
                                                         <input type="text"
@@ -1287,7 +1293,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                             </div>
                                         <?php } ?>
                                     <?php } else { ?>
-                                        <div class="oer-curriculum-related-objective-row" id="oer-curriculum-related-objective-row">
+                                        <div class="row col-12 oer-curriculum-related-objective-row" id="oer-curriculum-related-objective-row">
                                             <div class="col-md-9">
                                                 <div class="form-group">
                                                     <input type="text"
@@ -1303,24 +1309,25 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                                 ><i class="fa fa-trash"></i> </button>
                                             </div>
                                         </div>
-                                    <?php } ?>
+                                    <?php } ?>    
                                 </div><!-- /.row -->
                                 <div class="row">
                                     <div class="col-md-12">
                                         <button type="button"
-                                                class="btn btn-default oer-curriculum-add-related-objective"
+                                                class="btn btn-light oer-curriculum-add-related-objective"
                                         ><i class="fa fa-plus"></i> Add Objective</button>
                                     </div>
                                 </div>
+                                <?php } ?>
                             </div>
                         </div>
                     <?php } elseif ($elementKey == 'oer_curriculum_activities_order') {?>
                         <!--Activities in this lesson-->
-                        <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-activities-group" id="oer-curriculum-activities-group">
+                        <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-activities-group" id="oer-curriculum-activities-group">
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_activities_order]" class="element-order" value="<?php echo $value;?>">
-                            <div class="panel-heading">
-                                <h3 class="panel-title oer-curriculum-module-title">
-                                    <?php _e("Activities in this Lesson", OER_LESSON_PLAN_SLUG); ?>
+                            <div class="card-header">
+                                <h3 class="card-title oer-curriculum-module-title">
+                                    <?php _e("Activities in this Lesson", OER_CURRICULUM_SLUG); ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1328,19 +1335,19 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
-                            <div class="panel-body">
-                                <div class="panel-group" id="oer-curriculum-ac-inner-panel">
+                            <div class="card-body">
+                                <div class="card-group" id="oer-curriculum-ac-inner-panel">
                                     <?php
                                     if(!empty($oer_curriculum_activity_title)) {
                                         foreach ($oer_curriculum_activity_title as $key => $item) { ?>
-                                            <div class="panel panel-default oer-curriculum-ac-item" id="oer-curriculum-ac-item-<?php echo $key;?>">
+                                            <div class="card col card-default oer-curriculum-ac-item" id="oer-curriculum-ac-item-<?php echo $key;?>">
                                                 <!--<input type="hidden" name="oer_curriculum_activity_order[oer_curriculum_activities_order]" class="element-activity-order" value="">-->
                                                 <!--<span class="oer-curriculum-inner-sortable-handle">
                                                     <i class="fa fa-arrow-down activity-reorder-down" aria-hidden="true"></i>
                                                     <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
                                                 </span>-->
-                                                <div class="panel-heading">
-                                                    <h3 class="panel-title oer-curriculum-module-title">
+                                                <div class="card-header">
+                                                    <h3 class="card-title oer-curriculum-module-title">
                                                         <span class="oer-curriculum-sortable-handle">
                                                             <i class="fa fa-arrow-down activity-reorder-down" aria-hidden="true"></i>
                                                             <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
@@ -1348,7 +1355,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                                     </h3>
                                                 </div>
-                                                <div class="panel-body">
+                                                <div class="card-body">
                                                     <div class="form-group">
                                                         <label>Activity Title</label>
                                                         <input type="text"
@@ -1401,7 +1408,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                 <div class="row">
                                     <div class="col-md-12">
                                         <button type="button"
-                                                class="btn btn-default oer-curriculum-add-ac-item"
+                                                class="btn btn-light oer-curriculum-add-ac-item"
                                                 data-url="<?php echo admin_url('admin-index.php')?>"
                                         ><i class="fa fa-plus"></i> Add Activity</button>
                                     </div>
@@ -1410,11 +1417,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         </div>
                     <?php } elseif ($elementKey == 'oer_curriculum_summative_order') {?>
                         <!--Summative Assessment-->
-                        <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-summative-group" id="oer-curriculum-summative-group">
+                        <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-summative-group" id="oer-curriculum-summative-group">
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_summative_order]" class="element-order" value="<?php echo $value;?>">
-                            <div class="panel-heading">
-                                <h3 class="panel-title oer-curriculum-module-title">
-                                    <?php _e("Summative Assessment", OER_LESSON_PLAN_SLUG); ?>
+                            <div class="card-header">
+                                <h3 class="card-title oer-curriculum-module-title">
+                                    <?php _e("Summative Assessment", OER_CURRICULUM_SLUG); ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1422,8 +1429,8 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
-                            <div class="panel-body">
-                                <h4><?php _e("Assessment Type(s):", OER_LESSON_PLAN_SLUG); ?></h4>
+                            <div class="card-body">
+                                <h4><?php _e("Assessment Type(s):", OER_CURRICULUM_SLUG); ?></h4>
                                 <div class="row">
                                     <?php
                                     $oer_curriculum_assessment_type = (isset($post_meta_data['oer_curriculum_assessment_type'][0]) ? unserialize($post_meta_data['oer_curriculum_assessment_type'][0]) : array());
@@ -1460,7 +1467,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     $oer_curriculum_other_assessment_type = (isset($post_meta_data['oer_curriculum_other_assessment_type'][0]) ? $post_meta_data['oer_curriculum_other_assessment_type'][0] : '');
                                     ?>
                                     <div class="form-group col-md-8">
-                                        <label><?php _e("Other", OER_LESSON_PLAN_SLUG); ?></label>
+                                        <label><?php _e("Other", OER_CURRICULUM_SLUG); ?></label>
                                         <input type="text"
                                                name="oer_curriculum_other_assessment_type"
                                                class="form-control"
@@ -1493,10 +1500,10 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             $group_id = 'oer-curriculum-custom-editor-group-student-background';
                         $oer_curriculum_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                         ?>
-                        <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="<?php echo $group_id; ?>">
+                        <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="<?php echo $group_id; ?>">
                             <input type="hidden" name="oer_curriculum_order[<?php echo $elementKey;?>]" class="element-order" value="<?php echo $value;?>" value="1">
-                            <div class="panel-heading">
-                                <h3 class="panel-title oer-curriculum-module-title">
+                            <div class="card-header">
+                                <h3 class="card-title oer-curriculum-module-title">
                                     <?php echo $oer_curriculum_custom_editor['title']; ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
@@ -1505,7 +1512,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                  <div class="form-group">
                                     <label>Title</label>
                                     <input type="text" name="<?php echo $elementKey; ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" value="<?php echo $oer_curriculum_custom_editor['title']; ?>" />
@@ -1531,10 +1538,10 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         if ($elementKey!=="oer_curriculum_custom_editor_teacher_background" && $elementKey!=="oer_curriculum_custom_editor_student_background") {
                         $oer_curriculum_custom_editor = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : "");
                         ?>
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-custom-editor-group-<?php echo $key; ?>">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-custom-editor-group-<?php echo $key; ?>">
                                 <input type="hidden" name="oer_curriculum_order[<?php echo $elementKey;?>]" class="element-order" value="<?php echo $value;?>" value="1">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
                                         <?php echo $oer_curriculum_custom_editor['title']; ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
@@ -1543,7 +1550,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
+                                <div class="card-body">
                                      <div class="form-group">
                                         <label>Title</label>
                                         <input type="text" name="oer_curriculum_custom_editor_<?php echo $value; ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" value="<?php echo $oer_curriculum_custom_editor['title']; ?>" />
@@ -1571,11 +1578,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         //echo "<pre>"; echo $elementKey; print_r($post_meta_data[$elementKey]);
                         if (!empty($oer_curriculum_custom_text_list)) {
                             foreach ($oer_curriculum_custom_text_list as $key => $list) { ?>
-                                <div class="panel panel-default oer-curriculum-element-wrapper" id="oer-curriculum-text-list-group-<?php echo $key;?>">
+                                <div class="card col card-default oer-curriculum-element-wrapper" id="oer-curriculum-text-list-group-<?php echo $key;?>">
                                     <input type="hidden" name="oer_curriculum_order[<?php echo $elementKey;?>]" class="element-order" value="<?php echo $value;?>">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title oer-curriculum-module-title">
-                                            <?php _e("Text List", OER_LESSON_PLAN_SLUG); ?>
+                                    <div class="card-header">
+                                        <h3 class="card-title oer-curriculum-module-title">
+                                            <?php _e("Text List", OER_CURRICULUM_SLUG); ?>
                                             <span class="oer-curriculum-sortable-handle">
                                                 <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                                 <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1583,7 +1590,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                             <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                         </h3>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="oer-curriculum-text-list-row" id="oer-curriculum-text-list-row<?php echo $key;?>">
                                                 <div class="col-md-9">
@@ -1609,11 +1616,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         }
                         ?>
                     <?php } elseif (isset($post_meta_data[$elementKey]) && strpos($elementKey, 'oer_curriculum_oer_materials_list_') !== false) {?>
-                        <div class="panel panel-default oer-curriculum-element-wrapper" id="oer-curriculum-materials-<?php echo $value;?>">
+                        <div class="card col card-default oer-curriculum-element-wrapper" id="oer-curriculum-materials-<?php echo $value;?>">
                             <input type="hidden" name="<?php echo $elementKey?>" class="element-order" value="<?php echo $value?>">
-                            <div class="panel-heading">
-                                <h3 class="panel-title oer-curriculum-module-title">
-                                    <?php _e("Materials", OER_LESSON_PLAN_SLUG); ?>
+                            <div class="card-header">
+                                <h3 class="card-title oer-curriculum-module-title">
+                                    <?php _e("Materials", OER_CURRICULUM_SLUG); ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1621,8 +1628,8 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i></span>
                                 </h3>
                             </div>
-                            <div class="panel-body">
-                                <div class="panel-group oer-curriculum-materials-container" id="oer-curriculum-materials-container-<?php echo $value;?>">
+                            <div class="card-body">
+                                <div class="card-group oer-curriculum-materials-container" id="oer-curriculum-materials-container-<?php echo $value;?>">
                                     <?php
                                     $materials = (isset($post_meta_data[$elementKey][0]) ? unserialize($post_meta_data[$elementKey][0]) : array());
                                     if (!empty($materials['url'])) {
@@ -1630,9 +1637,9 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                             <?php
                                             $file_response = get_file_type_from_url($material);
                                             ?>
-                                            <div class="panel panel-default oer-curriculum-material-element-wrapper">
-                                                <div class="panel-heading">
-                                                    <h3 class="panel-title oer-curriculum-module-title">
+                                            <div class="card col-12 card-default oer-curriculum-material-element-wrapper">
+                                                <div class="card-header">
+                                                    <h3 class="card-title oer-curriculum-module-title">
                                                         <span class="oer-curriculum-sortable-handle">
                                                             <i class="fa fa-arrow-down material-reorder-down" aria-hidden="true"></i>
                                                             <i class="fa fa-arrow-up material-reorder-up" aria-hidden="true"></i>
@@ -1640,7 +1647,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-material" title="Delete"><i class="fa fa-trash"></i></span>
                                                     </h3>
                                                 </div>
-                                                <div class="panel-body">
+                                                <div class="card-body">
                                                     <div class="form-group">
                                                         <div class="input-group">
                                                             <input type="text"
@@ -1674,7 +1681,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                 </div>
                                 <button type="button"
                                         id="oer-curriculum-add-materials"
-                                        class="btn btn-default oer-curriculum-add-materials"
+                                        class="btn btn-light oer-curriculum-add-materials"
                                 ><i class="fa fa-plus"></i> Add Materials</button>
                             </div>
                         </div>
@@ -1685,11 +1692,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         $listOrder = end($oer_keys);
                         $oer_curriculum_vocabulary_details = (isset($post_meta_data['oer_curriculum_vocabulary_details_'.$listOrder][0]) ? $post_meta_data['oer_curriculum_vocabulary_details_'.$listOrder][0] : "");
                         ?>
-                            <div class="panel panel-default oer-curriculum-element-wrapper" id="oer-curriculum-vocabulary-list-group-<?php echo $key;?>">
+                            <div class="card col card-default oer-curriculum-element-wrapper" id="oer-curriculum-vocabulary-list-group-<?php echo $key;?>">
                                 <input type="hidden" name="oer_curriculum_order[<?php echo $elementKey?>]" class="element-order" value="<?php echo $value;?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
-                                        <?php _e("Vocabulary List", OER_LESSON_PLAN_SLUG); ?>
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
+                                        <?php _e("Vocabulary List", OER_CURRICULUM_SLUG); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1697,7 +1704,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
+                                <div class="card-body">
                                     <div class="form-group">
                                         <input type="text"
                                                class="form-control"
@@ -1722,11 +1729,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         if ($module=="oer_curriculum_introduction_order") {
                             ?>
                             <!-- Introduction Module -->
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-introduction-group">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-introduction-group">
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_introduction_order]" class="element-order" value="<?php echo $index; ?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
-                                        <?php _e("Introduction", OER_LESSON_PLAN_SLUG); ?>
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
+                                        <?php _e("Introduction", OER_CURRICULUM_SLUG); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1734,7 +1741,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
+                                <div class="card-body">
                                     <?php
                                     $oer_curriculum_introduction = isset($post_meta_data['oer_curriculum_introduction'][0]) ? $post_meta_data['oer_curriculum_introduction'][0] : "";
                                     wp_editor( $oer_curriculum_introduction,
@@ -1755,10 +1762,10 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             if (($author_set && $author_enabled) || !$author_set) { 
                             ?>
                             <!--Authors-->
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-authors-group" id="oer-curriculum-authors">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-authors-group" id="oer-curriculum-authors">
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_authors_order]" class="element-order" value="<?php echo $index; ?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
                                         <?php echo oer_curriculum_get_field_label('oer_curriculum_authors'); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
@@ -1767,23 +1774,23 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
-                                    <div class="panel-group">
-                                        <div class="panel panel-default oer-curriculum-author-element-wrapper">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title oer-curriculum-module-title">
-                                                    <?php _e("Author", OER_LESSON_PLAN_SLUG); ?>
+                                <div class="card-body">
+                                    <div class="card-group">
+                                        <div class="card col card-default oer-curriculum-author-element-wrapper">
+                                            <div class="card-header">
+                                                <h3 class="card-title oer-curriculum-module-title">
+                                                    <?php _e("Author", OER_CURRICULUM_SLUG); ?>
                                                     <span class="oer-curriculum-sortable-handle">
                                                         <i class="fa fa-arrow-down author-reorder-down" aria-hidden="true"></i>
                                                         <i class="fa fa-arrow-up author-reorder-up" aria-hidden="true"></i>
                                                     </span>
-                                                    <span class="btn btn-danger btn-sm oer-curriculum-remove-author"
+                                                    <button type="button" class="btn btn-danger btn-sm oer-curriculum-remove-author"
                                                           title="Delete"
                                                           disabled="disabled"
-                                                    ><i class="fa fa-trash"></i> </span>
+                                                    ><i class="fa fa-trash"></i> </button>
                                                 </h3>
                                             </div>
-                                            <div class="panel-body">
+                                            <div class="card-body">
                                                 <div class="row oer-curriculum-authors-element-row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
@@ -1826,7 +1833,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <div class="col-md-12">
                                             <button type="button"
                                                     id="oer-curriculum-add-more-author"
-                                                    class="btn btn-default oer-curriculum-add-more-author"
+                                                    class="btn btn-light oer-curriculum-add-more-author"
                                             ><i class="fa fa-plus"></i> Add More</button>
                                         </div>
                                     </div>
@@ -1838,10 +1845,10 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                 if (($primary_resources_set && $primary_resources_enabled) || !$primary_resources_set) { 
                             ?>
                             <!-- Primary Sources -->
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-primary-resources" id="oer-curriculum-primary-resources">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-primary-resources" id="oer-curriculum-primary-resources">
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_primary_resources]" class="element-order" value="<?php echo $index; ?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
                                         <?php echo oer_curriculum_get_field_label('oer_curriculum_primary_resources'); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
@@ -1850,12 +1857,12 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
-                                    <div class="panel-group oer-curriculum-primary-resource-element-panel">
-                                        <div class="panel panel-default oer-curriculum-primary-resource-element-wrapper">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title oer-curriculum-module-title">
-                                                    <?php _e("Resource", OER_LESSON_PLAN_SLUG); ?>
+                                <div class="card-body">
+                                    <div class="card-group oer-curriculum-primary-resource-element-panel">
+                                        <div class="card col card-default oer-curriculum-primary-resource-element-wrapper">
+                                            <div class="card-header">
+                                                <h3 class="card-title oer-curriculum-module-title">
+                                                    <?php _e("Resource", OER_CURRICULUM_SLUG); ?>
                                                     <span class="oer-curriculum-sortable-handle">
                                                     <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
                                                     <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
@@ -1866,7 +1873,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                                     ><i class="fa fa-trash"></i> </span>
                                                 </h3>
                                             </div>
-                                            <div class="panel-body">
+                                            <div class="card-body">
                                                 <div class="row">
                                                 <div class="col-md-12">
                                                     <label>Thumbnail Image</label>
@@ -1982,13 +1989,13 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <div class="col-md-12">
                                             <button type="button"
                                                     id="oer-curriculum-add-more-resource"
-                                                    class="btn btn-default oer-curriculum-add-more-resource" 
+                                                    class="btn btn-light oer-curriculum-add-more-resource" 
                                                     typ="resource"
                                             ><i class="fa fa-plus"></i> Add a Resource</button>
                                             &nbsp;&nbsp;
                                             <button type="button"
                                                     id="oer-curriculum-add-more-textbox"
-                                                    class="btn btn-default oer-curriculum-add-more-resource" 
+                                                    class="btn btn-light oer-curriculum-add-more-resource" 
                                                     typ="textbox"
                                             ><i class="fa fa-plus"></i> Add Textbox</button>
                                         </div>
@@ -2001,10 +2008,10 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             if (($materials_set && $materials_enabled) || !$materials_set) { 
                             ?>
                             <!--Materials module-->
-                            <div class="panel panel-default oer-curriculum-element-wrapper" id="oer-curriculum-materials">
+                            <div class="card col card-default oer-curriculum-element-wrapper" id="oer-curriculum-materials">
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_oer_materials]" class="element-order" value="<?php echo $index; ?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
                                         <?php echo oer_curriculum_get_field_label('oer_curriculum_oer_materials'); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
@@ -2013,12 +2020,12 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i></span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
-                                    <div class="panel-group oer-curriculum-materials-container" id="oer-curriculum-materials-container">
+                                <div class="card-body">
+                                    <div class="card-group oer-curriculum-materials-container" id="oer-curriculum-materials-container">
                                     </div>
                                     <button type="button"
                                             id="oer-curriculum-add-materials"
-                                            class="btn btn-default oer-curriculum-add-materials"
+                                            class="btn btn-light oer-curriculum-add-materials"
                                     ><i class="fa fa-plus"></i> Add Materials</button>
                                 </div>
                             </div>
@@ -2027,10 +2034,10 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             if (($iq_set && $iq_enabled) || !$iq_set) {    
                             ?>
                             <!--Investigative Question Module-->
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-iq" id="oer-curriculum-iq">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-iq" id="oer-curriculum-iq">
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_iq]" class="element-order" value="<?php echo $index; ?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
                                         <?php echo oer_curriculum_get_field_label('oer_curriculum_iq'); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
@@ -2039,7 +2046,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
+                                <div class="card-body">
                                     <div class="form-group">
                                         <label>Investigative Question</label>
                                         <input type="text"
@@ -2069,10 +2076,10 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {    
                             ?>
                             <!--Required Equipment Materials Module-->
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-required-materials" id="oer-curriculum-required-materials">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-required-materials" id="oer-curriculum-required-materials">
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_required_materials]" class="element-order" value="<?php echo $index; ?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">                                        
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">                                        
                                         <?php echo oer_curriculum_get_field_label('oer_curriculum_required_materials'); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
@@ -2081,22 +2088,21 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
-                                    <div class="panel panel-default oer-curriculum-section-element-wrapper">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title oer-curriculum-module-title">
-                                                <?php _e("Section", OER_LESSON_PLAN_SLUG); ?>
+                                <div class="card-body">
+                                    <div class="card col card-default oer-curriculum-section-element-wrapper">
+                                        <div class="card-header">
+                                            <h3 class="card-title oer-curriculum-module-title">
+                                                <?php _e("Section", OER_CURRICULUM_SLUG); ?>
                                                 <span class="oer-curriculum-sortable-handle">
                                                 <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>
                                                 <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>
                                             </span>
-                                                <span class="btn btn-danger btn-sm oer-curriculum-remove-section"
+                                                <button type="button" class="btn btn-danger btn-sm oer-curriculum-remove-section"
                                                       title="Delete"
-                                                      disabled="disabled"
-                                                ><i class="fa fa-trash"></i> </span>
+                                                ><i class="fa fa-trash"></i> </button>
                                             </h3>
                                         </div>
-                                        <div class="panel-body">
+                                        <div class="card-body">
                                             <div class="form-group">
                                                <input type="text" class="form-control" name="oer_curriculum_required_materials[label][]" placeholder="Label" id="oer_curriculum_additional_sections_label" value="">
                                            </div>
@@ -2115,7 +2121,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         </div>
                                     </div>
                                     <div class="button-row form-group">
-                                        <button id="addMatlBtn" class="btn btn-primary"><?php _e("Add Section", OER_LESSON_PLAN_SLUG); ?></button>
+                                        <button id="addMatlBtn" class="btn btn-primary"><?php _e("Add Section", OER_CURRICULUM_SLUG); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -2124,10 +2130,10 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             if (($additional_sections_set && $additional_sections_enabled) || !$additional_sections_set) {    
                             ?>
                             <!--Additional Sections Module-->
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-required-materials" id="oer-curriculum-additional-sections">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-required-materials" id="oer-curriculum-additional-sections">
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_additional_sections]" class="element-order" value="<?php echo $index; ?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">                                        
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">                                        
                                         <?php echo oer_curriculum_get_field_label('oer_curriculum_additional_sections'); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
@@ -2136,22 +2142,21 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
-                                    <div class="panel panel-default oer-curriculum-section-element-wrapper">
-                                        <div class="panel-heading">
-                                            <h3 class="panel-title oer-curriculum-module-title">
-                                                <?php _e("Section", OER_LESSON_PLAN_SLUG); ?>
+                                <div class="card-body">
+                                    <div class="card col card-default oer-curriculum-section-element-wrapper">
+                                        <div class="card-header">
+                                            <h3 class="card-title oer-curriculum-module-title">
+                                                <?php _e("Section", OER_CURRICULUM_SLUG); ?>
                                                 <span class="oer-curriculum-sortable-handle">
                                                 <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>
                                                 <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>
                                             </span>
-                                                <span class="btn btn-danger btn-sm oer-curriculum-remove-section"
+                                                <button type="button" class="btn btn-danger btn-sm oer-curriculum-remove-section"
                                                       title="Delete"
-                                                      disabled="disabled"
-                                                ><i class="fa fa-trash"></i> </span>
+                                                ><i class="fa fa-trash"></i> </button>
                                             </h3>
                                         </div>
-                                        <div class="panel-body">
+                                        <div class="card-body">
                                             <div class="form-group">
                                                <input type="text" class="form-control" name="oer_curriculum_additional_sections[label][]" placeholder="Additional Section" id="oer_curriculum_additional_sections_label" value="">
                                            </div>
@@ -2170,7 +2175,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         </div>
                                     </div>
                                     <div class="button-row form-group">
-                                        <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Section", OER_LESSON_PLAN_SLUG); ?></button>
+                                        <button id="addTxtBtn" class="btn btn-primary"><?php _e("Add Section", OER_CURRICULUM_SLUG); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -2178,11 +2183,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         } elseif ($module=="oer_curriculum_lesson_times_order"){
                             ?>
                             <!--For Lesson Times-->
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-times-group" id="oer-curriculum-times-group">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-times-group" id="oer-curriculum-times-group">
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_lesson_times_order]" class="element-order" value="<?php echo $index; ?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
-                                        <?php _e("Lesson Times", OER_LESSON_PLAN_SLUG); ?>
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
+                                        <?php _e("Lesson Times", OER_CURRICULUM_SLUG); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2190,7 +2195,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
+                                <div class="card-body">
                                     <div class="row oer-curriculum-time-element-row">
                                         <div class="col-md-5">
                                             <div class="form-group">
@@ -2224,7 +2229,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <div class="row">
                                         <div class="col-md-12">
                                             <button type="button"
-                                                    class="btn btn-default oer-curriculum-add-time-element"
+                                                    class="btn btn-light oer-curriculum-add-time-element"
                                             ><i class="fa fa-plus"></i> Add Time Element</button>
                                         </div>
                                     </div>
@@ -2234,11 +2239,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         } elseif ($module=="oer_curriculum_standard_order"){
                             ?>
                             <!--For Standards and Objectives -->
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-standards-group" id="oer-curriculum-standards-group">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-standards-group" id="oer-curriculum-standards-group">
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_standard_order]" class="element-order" value="<?php echo $index; ?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
-                                        <?php _e("Standards and Objectives", OER_LESSON_PLAN_SLUG); ?>
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
+                                        <?php _e("Standards and Objectives", OER_CURRICULUM_SLUG); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2246,12 +2251,12 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
+                                <div class="card-body">
                                     <?php if (is_standards_plugin_installed()) {
                                         if (($standards_set && $standards_enabled) || !$standards_set) { ?>
-                                    <h4 class="page-title-inner"><?php _e("Standards", OER_LESSON_PLAN_SLUG); ?></h4>
+                                    <h4 class="page-title-inner"><?php _e("Standards", OER_CURRICULUM_SLUG); ?></h4>
                                     <div id="selected-standard-wrapper">
-                                        <p><?php _e("You have not selected any academic standards", OER_LESSON_PLAN_SLUG); ?></p>
+                                        <p><?php _e("You have not selected any academic standards", OER_CURRICULUM_SLUG); ?></p>
                                     </div>
                                     <input type="hidden" name="oer_curriculum_standards">
                                     <div class="row">
@@ -2268,7 +2273,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <div class="col-md-12">
                                             <h4>Related Instructional Objectives (<span title="Students will be able to...">SWBAT...</span>)</h4>
                                         </div>
-                                        <div class="oer-curriculum-related-objective-row" id="oer-curriculum-related-objective-row">
+                                        <div class="row col-12 oer-curriculum-related-objective-row" id="oer-curriculum-related-objective-row">
                                             <div class="col-md-9">
                                                 <div class="form-group">
                                                     <input type="text"
@@ -2288,7 +2293,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <div class="row">
                                         <div class="col-md-12">
                                             <button type="button"
-                                                    class="btn btn-default oer-curriculum-add-related-objective"
+                                                    class="btn btn-light oer-curriculum-add-related-objective"
                                             ><i class="fa fa-plus"></i> Add Objective</button>
                                         </div>
                                     </div>
@@ -2298,11 +2303,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         } elseif ($module=="oer_curriculum_activities_order"){
                             ?>
                             <!--Activities in this lesson-->
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-activities-group" id="oer-curriculum-activities-group">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-activities-group" id="oer-curriculum-activities-group">
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_activities_order]" class="element-order" value="<?php echo $index; ?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
-                                        <?php _e("Activities in this Lesson", OER_LESSON_PLAN_SLUG); ?>
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
+                                        <?php _e("Activities in this Lesson", OER_CURRICULUM_SLUG); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2310,13 +2315,13 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
-                                    <div class="panel-group" id="oer-curriculum-ac-inner-panel">
+                                <div class="card-body">
+                                    <div class="card-group" id="oer-curriculum-ac-inner-panel">
                                         <?php
                                         for ($i = 0; $i < 5; $i++) { ?>
-                                            <div class="panel panel-default oer-curriculum-ac-item" id="oer-curriculum-ac-item-<?php echo $i;?>">
-                                                <div class="panel-heading">
-                                                    <h3 class="panel-title oer-curriculum-module-title">
+                                            <div class="card col card-default oer-curriculum-ac-item" id="oer-curriculum-ac-item-<?php echo $i;?>">
+                                                <div class="card-header">
+                                                    <h3 class="card-title oer-curriculum-module-title">
                                                         <span class="oer-curriculum-sortable-handle">
                                                             <i class="fa fa-arrow-down activity-reorder-down" aria-hidden="true"></i>
                                                             <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
@@ -2325,7 +2330,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                                     </h3>
                                                 </div>
             
-                                                <div class="panel-body">
+                                                <div class="card-body">
                                                     <div class="form-group">
                                                         <label>Activity Title</label>
                                                         <input type="text" name="oer_curriculum_activity_title[]" class="form-control" placeholder="Activity Title">
@@ -2371,7 +2376,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <div class="row">
                                         <div class="col-md-12">
                                             <button type="button"
-                                                    class="btn btn-default oer-curriculum-add-ac-item"
+                                                    class="btn btn-light oer-curriculum-add-ac-item"
                                                     data-url="<?php echo admin_url('admin-index.php')?>"
                                             ><i class="fa fa-plus"></i> Add Activity</button>
                                         </div>
@@ -2382,11 +2387,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         } elseif ($module=="oer_curriculum_summative_order"){
                             ?>
                             <!--Summative Assessment-->
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-summative-group" id="oer-curriculum-summative-group">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-summative-group" id="oer-curriculum-summative-group">
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_summative_order]" class="element-order" value="<?php echo $index; ?>">
-                            <div class="panel-heading">
-                                <h3 class="panel-title oer-curriculum-module-title">
-                                    <?php _e("Summative Assessment", OER_LESSON_PLAN_SLUG); ?>
+                            <div class="card-header">
+                                <h3 class="card-title oer-curriculum-module-title">
+                                    <?php _e("Summative Assessment", OER_CURRICULUM_SLUG); ?>
                                     <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2394,8 +2399,8 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                 </h3>
                             </div>
-                            <div class="panel-body">
-                                <h4><?php _e("Assessment Type(s):", OER_LESSON_PLAN_SLUG); ?></h4>
+                            <div class="card-body">
+                                <h4><?php _e("Assessment Type(s):", OER_CURRICULUM_SLUG); ?></h4>
                                 <div class="row">
                                     <?php
                                     $oer_curriculum_assessment_type = (isset($post_meta_data['oer_curriculum_assessment_type'][0]) ? unserialize($post_meta_data['oer_curriculum_assessment_type'][0]) : array());
@@ -2432,7 +2437,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                     $oer_curriculum_other_assessment_type = (isset($post_meta_data['oer_curriculum_other_assessment_type'][0]) ? $post_meta_data['oer_curriculum_other_assessment_type'][0] : '');
                                     ?>
                                     <div class="form-group col-md-8">
-                                        <label><?php _e("Other", OER_LESSON_PLAN_SLUG); ?></label>
+                                        <label><?php _e("Other", OER_CURRICULUM_SLUG); ?></label>
                                         <input type="text"
                                                name="oer_curriculum_other_assessment_type"
                                                class="form-control"
@@ -2460,11 +2465,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         <?php
                         } elseif($module=="oer_curriculum_custom_editor_teacher_background"){
                             ?>
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-custom-editor-group-teacher-background">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-custom-editor-group-teacher-background">
                                 <input type="hidden" name="oer_curriculum_order[<?php echo $module; ?>]" class="element-order" value="<?php echo $index;?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
-                                        <?php _e("Teacher Background", OER_LESSON_PLAN_SLUG); ?>
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
+                                        <?php _e("Teacher Background", OER_CURRICULUM_SLUG); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2472,7 +2477,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
+                                <div class="card-body">
                                      <div class="form-group">
                                         <label>Title</label>
                                         <input type="text" name="<?php echo $module; ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" />
@@ -2496,11 +2501,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             <?php
                         } elseif($module=="oer_curriculum_custom_editor_historical_background"){
                             ?>
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-custom-editor-group-historical-background">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-custom-editor-group-historical-background">
                                 <input type="hidden" name="oer_curriculum_order[<?php echo $module; ?>]" class="element-order" value="<?php echo $index;?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
-                                        <?php _e("Historical Background", OER_LESSON_PLAN_SLUG); ?>
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
+                                        <?php _e("Historical Background", OER_CURRICULUM_SLUG); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2508,7 +2513,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
+                                <div class="card-body">
                                      <div class="form-group">
                                         <label>Title</label>
                                         <input type="text" name="<?php echo $module; ?>[title]" maxlength="512" class="form-control" placeholder="" />
@@ -2532,11 +2537,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             <?php
                          } elseif($module=="oer_curriculum_custom_editor_student_background"){
                             ?>
-                            <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-custom-editor-group-student-background">
+                            <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-custom-editor-group-student-background">
                                 <input type="hidden" name="oer_curriculum_order[<?php echo $module; ?>]" class="element-order" value="<?php echo $index;?>">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
-                                        <?php _e("Student Background", OER_LESSON_PLAN_SLUG); ?>
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
+                                        <?php _e("Student Background", OER_CURRICULUM_SLUG); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2544,7 +2549,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
+                                <div class="card-body">
                                      <div class="form-group">
                                         <label>Title</label>
                                         <input type="text" name="<?php echo $module; ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" />
@@ -2570,11 +2575,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                     }
                 } else {
                 ?>
-                <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-introduction-group">
+                <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-introduction-group" id="oer-curriculum-introduction-group">
                     <input type="hidden" name="oer_curriculum_order[oer_curriculum_introduction_order]" class="element-order" value="1">
-                    <div class="panel-heading">
-                        <h3 class="panel-title oer-curriculum-module-title">
-                            <?php _e("Introduction", OER_LESSON_PLAN_SLUG); ?>
+                    <div class="card-header">
+                        <h3 class="card-title oer-curriculum-module-title">
+                            <?php _e("Introduction", OER_CURRICULUM_SLUG); ?>
                             <span class="oer-curriculum-sortable-handle">
                                 <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                 <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2582,7 +2587,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body">
                         <?php
                         $oer_curriculum_introduction = isset($post_meta_data['oer_curriculum_introduction'][0]) ? $post_meta_data['oer_curriculum_introduction'][0] : "";
                         wp_editor( $oer_curriculum_introduction,
@@ -2599,11 +2604,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                     </div>
                 </div>
                 <!--Authors-->
-                <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-authors-group" id="oer-curriculum-authors">
+                <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-authors-group" id="oer-curriculum-authors">
                     <input type="hidden" name="oer_curriculum_order[oer_curriculum_authors_order]" class="element-order" value="2">
-                    <div class="panel-heading">
-                        <h3 class="panel-title oer-curriculum-module-title">
-                            <?php _e("Authors", OER_LESSON_PLAN_SLUG); ?>
+                    <div class="card-header">
+                        <h3 class="card-title oer-curriculum-module-title">
+                            <?php _e("Authors", OER_CURRICULUM_SLUG); ?>
                             <span class="oer-curriculum-sortable-handle">
                                 <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                 <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2611,23 +2616,23 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="panel-group">
-                            <div class="panel panel-default oer-curriculum-author-element-wrapper">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
-                                        <?php _e("Author", OER_LESSON_PLAN_SLUG); ?>
+                    <div class="card-body">
+                        <div class="card-group">
+                            <div class="card col card-default oer-curriculum-author-element-wrapper">
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
+                                        <?php _e("Author", OER_CURRICULUM_SLUG); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                             <i class="fa fa-arrow-down author-reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up author-reorder-up" aria-hidden="true"></i>
                                         </span>
-                                        <span class="btn btn-danger btn-sm oer-curriculum-remove-author"
+                                        <button type="button" class="btn btn-danger btn-sm oer-curriculum-remove-author"
                                               title="Delete"
                                               disabled="disabled"
-                                        ><i class="fa fa-trash"></i> </span>
+                                        ><i class="fa fa-trash"></i> </button>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
+                                <div class="card-body">
                                     <div class="row oer-curriculum-authors-element-row">
                                         <div class="col-md-3">
                                             <div class="form-group">
@@ -2670,7 +2675,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             <div class="col-md-12">
                                 <button type="button"
                                         id="oer-curriculum-add-more-author"
-                                        class="btn btn-default oer-curriculum-add-more-author"
+                                        class="btn btn-light oer-curriculum-add-more-author"
                                 ><i class="fa fa-plus"></i> Add More</button>
                             </div>
                         </div>
@@ -2678,11 +2683,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                 </div>
                 <?php if (is_oer_plugin_installed()){ ?>
                 <!-- Primary Sources -->
-                <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-primary-resources" id="oer-curriculum-primary-resources">
+                <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-primary-resources" id="oer-curriculum-primary-resources">
                     <input type="hidden" name="oer_curriculum_order[oer_curriculum_primary_resources]" class="element-order" value="3">
-                    <div class="panel-heading">
-                        <h3 class="panel-title oer-curriculum-module-title">
-                            <?php _e("Primary Resources", OER_LESSON_PLAN_SLUG); ?>
+                    <div class="card-header">
+                        <h3 class="card-title oer-curriculum-module-title">
+                            <?php _e("Primary Resources", OER_CURRICULUM_SLUG); ?>
                             <span class="oer-curriculum-sortable-handle">
                                 <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                 <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2690,12 +2695,12 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="panel-group oer-curriculum-primary-resource-element-panel">
-                            <div class="panel panel-default oer-curriculum-primary-resource-element-wrapper">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title oer-curriculum-module-title">
-                                        <?php _e("Resource", OER_LESSON_PLAN_SLUG); ?>
+                    <div class="card-body">
+                        <div class="card-group oer-curriculum-primary-resource-element-panel">
+                            <div class="card col card-default oer-curriculum-primary-resource-element-wrapper">
+                                <div class="card-header">
+                                    <h3 class="card-title oer-curriculum-module-title">
+                                        <?php _e("Resource", OER_CURRICULUM_SLUG); ?>
                                         <span class="oer-curriculum-sortable-handle">
                                         <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
@@ -2706,7 +2711,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         ><i class="fa fa-trash"></i> </span>
                                     </h3>
                                 </div>
-                                <div class="panel-body">
+                                <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -2799,7 +2804,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             <div class="col-md-12">
                                 <button type="button"
                                         id="oer-curriculum-add-more-resource"
-                                        class="btn btn-default oer-curriculum-add-more-resource"
+                                        class="btn btn-light oer-curriculum-add-more-resource"
                                 ><i class="fa fa-plus"></i> Add More</button>
                             </div>
                         </div>
@@ -2807,11 +2812,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                 </div>
                 <?php } ?>
                 <!--Materials module-->
-                <div class="panel panel-default oer-curriculum-element-wrapper" id="oer-curriculum-materials">
+                <div class="card col card-default oer-curriculum-element-wrapper" id="oer-curriculum-materials">
                     <input type="hidden" name="oer_curriculum_order[oer_curriculum_oer_materials]" class="element-order" value="4">
-                    <div class="panel-heading">
-                        <h3 class="panel-title oer-curriculum-module-title">
-                            <?php _e("Materials", OER_LESSON_PLAN_SLUG); ?>
+                    <div class="card-header">
+                        <h3 class="card-title oer-curriculum-module-title">
+                            <?php _e("Materials", OER_CURRICULUM_SLUG); ?>
                             <span class="oer-curriculum-sortable-handle">
                                 <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                 <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2819,21 +2824,21 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i></span>
                         </h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="panel-group oer-curriculum-materials-container" id="oer-curriculum-materials-container">
+                    <div class="card-body">
+                        <div class="card-group oer-curriculum-materials-container" id="oer-curriculum-materials-container">
                         </div>
                         <button type="button"
                                 id="oer-curriculum-add-materials"
-                                class="btn btn-default oer-curriculum-add-materials"
+                                class="btn btn-light oer-curriculum-add-materials"
                         ><i class="fa fa-plus"></i> Add Materials</button>
                     </div>
                 </div>
                 <!--Investigative Question Module-->
-                <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-iq" id="oer-curriculum-iq">
+                <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-iq" id="oer-curriculum-iq">
                     <input type="hidden" name="oer_curriculum_order[oer_curriculum_iq]" class="element-order" value="4">
-                    <div class="panel-heading">
-                        <h3 class="panel-title oer-curriculum-module-title">
-                            <?php _e("Investigative Question", OER_LESSON_PLAN_SLUG); ?>
+                    <div class="card-header">
+                        <h3 class="card-title oer-curriculum-module-title">
+                            <?php _e("Investigative Question", OER_CURRICULUM_SLUG); ?>
                             <span class="oer-curriculum-sortable-handle">
                                 <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                 <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2841,7 +2846,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body">
                         <div class="form-group">
                             <label>Investigative Question</label>
                             <input type="text"
@@ -2867,11 +2872,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                     </div>
                 </div>
                 <!--For Lesson Times-->
-                <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-times-group" id="oer-curriculum-times-group">
+                <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-times-group" id="oer-curriculum-times-group">
                     <input type="hidden" name="oer_curriculum_order[oer_curriculum_lesson_times_order]" class="element-order" value="5">
-                    <div class="panel-heading">
-                        <h3 class="panel-title oer-curriculum-module-title">
-                            <?php _e("Lesson Times", OER_LESSON_PLAN_SLUG); ?>
+                    <div class="card-header">
+                        <h3 class="card-title oer-curriculum-module-title">
+                            <?php _e("Lesson Times", OER_CURRICULUM_SLUG); ?>
                             <span class="oer-curriculum-sortable-handle">
                                 <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                 <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2879,7 +2884,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body">
                         <div class="row oer-curriculum-time-element-row">
                             <div class="col-md-5">
                                 <div class="form-group">
@@ -2913,18 +2918,18 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         <div class="row">
                             <div class="col-md-12">
                                 <button type="button"
-                                        class="btn btn-default oer-curriculum-add-time-element"
+                                        class="btn btn-light oer-curriculum-add-time-element"
                                 ><i class="fa fa-plus"></i> Add Time Element</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!--For Standards and Objectives -->
-                <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-standards-group" id="oer-curriculum-standards-group">
+                <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-standards-group" id="oer-curriculum-standards-group">
                     <input type="hidden" name="oer_curriculum_order[oer_curriculum_standard_order]" class="element-order" value="6">
-                    <div class="panel-heading">
-                        <h3 class="panel-title oer-curriculum-module-title">
-                            <?php _e("Standards and Objectives", OER_LESSON_PLAN_SLUG); ?>
+                    <div class="card-header">
+                        <h3 class="card-title oer-curriculum-module-title">
+                            <?php _e("Standards and Objectives", OER_CURRICULUM_SLUG); ?>
                             <span class="oer-curriculum-sortable-handle">
                                 <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                 <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2932,11 +2937,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body">
                         <?php if (is_standards_plugin_installed()) { ?>
-                        <h4 class="page-title-inner"><?php _e("Standards", OER_LESSON_PLAN_SLUG); ?></h4>
+                        <h4 class="page-title-inner"><?php _e("Standards", OER_CURRICULUM_SLUG); ?></h4>
                         <div id="selected-standard-wrapper">
-                            <p><?php _e("You have not selected any academic standards", OER_LESSON_PLAN_SLUG); ?></p>
+                            <p><?php _e("You have not selected any academic standards", OER_CURRICULUM_SLUG); ?></p>
                         </div>
                         <input type="hidden" name="oer_curriculum_standards" value="">
                         <div class="row">
@@ -2952,7 +2957,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             <div class="col-md-12">
                                 <h4>Related Instructional Objectives (<span title="Students will be able to...">SWBAT...</span>)</h4>
                             </div>
-                            <div class="oer-curriculum-related-objective-row" id="oer-curriculum-related-objective-row">
+                            <div class="row col-12 oer-curriculum-related-objective-row" id="oer-curriculum-related-objective-row">
                                 <div class="col-md-9">
                                     <div class="form-group">
                                         <input type="text"
@@ -2972,18 +2977,18 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         <div class="row">
                             <div class="col-md-12">
                                 <button type="button"
-                                        class="btn btn-default oer-curriculum-add-related-objective"
+                                        class="btn btn-light oer-curriculum-add-related-objective"
                                 ><i class="fa fa-plus"></i> Add Objective</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!--Activities in this lesson-->
-                <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-activities-group" id="oer-curriculum-activities-group">
+                <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-activities-group" id="oer-curriculum-activities-group">
                     <input type="hidden" name="oer_curriculum_order[oer_curriculum_activities_order]" class="element-order" value="7">
-                    <div class="panel-heading">
-                        <h3 class="panel-title oer-curriculum-module-title">
-                            <?php _e("Activities in this Lesson", OER_LESSON_PLAN_SLUG); ?>
+                    <div class="card-header">
+                        <h3 class="card-title oer-curriculum-module-title">
+                            <?php _e("Activities in this Lesson", OER_CURRICULUM_SLUG); ?>
                             <span class="oer-curriculum-sortable-handle">
                                 <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                 <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2991,13 +2996,13 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                             <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                         </h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="panel-group" id="oer-curriculum-ac-inner-panel">
+                    <div class="card-body">
+                        <div class="card-group" id="oer-curriculum-ac-inner-panel">
                             <?php
                             for ($i = 0; $i < 5; $i++) { ?>
-                                <div class="panel panel-default oer-curriculum-ac-item" id="oer-curriculum-ac-item-<?php echo $i;?>">
-                                    <div class="panel-heading">
-                                        <h3 class="panel-title oer-curriculum-module-title">
+                                <div class="card col card-default oer-curriculum-ac-item" id="oer-curriculum-ac-item-<?php echo $i;?>">
+                                    <div class="card-header">
+                                        <h3 class="card-title oer-curriculum-module-title">
                                             <span class="oer-curriculum-sortable-handle">
                                                 <i class="fa fa-arrow-down activity-reorder-down" aria-hidden="true"></i>
                                                 <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
@@ -3006,7 +3011,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                                         </h3>
                                     </div>
 
-                                    <div class="panel-body">
+                                    <div class="card-body">
                                         <div class="form-group">
                                             <label>Activity Title</label>
                                             <input type="text" name="oer_curriculum_activity_title[]" class="form-control" placeholder="Activity Title">
@@ -3052,7 +3057,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         <div class="row">
                             <div class="col-md-12">
                                 <button type="button"
-                                        class="btn btn-default oer-curriculum-add-ac-item"
+                                        class="btn btn-light oer-curriculum-add-ac-item"
                                         data-url="<?php echo admin_url('admin-index.php')?>"
                                 ><i class="fa fa-plus"></i> Add Activity</button>
                             </div>
@@ -3060,11 +3065,11 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                     </div>
                 </div>
                 <!--Summative Assessment-->
-                <div class="panel panel-default oer-curriculum-element-wrapper oer-curriculum-summative-group" id="oer-curriculum-summative-group">
+                <div class="card col card-default oer-curriculum-element-wrapper oer-curriculum-summative-group" id="oer-curriculum-summative-group">
                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_summative_order]" class="element-order" value="8">
-                <div class="panel-heading">
-                    <h3 class="panel-title oer-curriculum-module-title">
-                        <?php _e("Summative Assessment", OER_LESSON_PLAN_SLUG); ?>
+                <div class="card-header">
+                    <h3 class="card-title oer-curriculum-module-title">
+                        <?php _e("Summative Assessment", OER_CURRICULUM_SLUG); ?>
                         <span class="oer-curriculum-sortable-handle">
                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -3072,8 +3077,8 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         <span class="btn btn-danger btn-sm oer-curriculum-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
                     </h3>
                 </div>
-                <div class="panel-body">
-                    <h4><?php _e("Assessment Type(s):", OER_LESSON_PLAN_SLUG); ?></h4>
+                <div class="card-body">
+                    <h4><?php _e("Assessment Type(s):", OER_CURRICULUM_SLUG); ?></h4>
                     <div class="row">
                         <?php
                         $oer_curriculum_assessment_type = (isset($post_meta_data['oer_curriculum_assessment_type'][0]) ? unserialize($post_meta_data['oer_curriculum_assessment_type'][0]) : array());
@@ -3110,7 +3115,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                         $oer_curriculum_other_assessment_type = (isset($post_meta_data['oer_curriculum_other_assessment_type'][0]) ? $post_meta_data['oer_curriculum_other_assessment_type'][0] : '');
                         ?>
                         <div class="form-group col-md-8">
-                            <label><?php _e("Other", OER_LESSON_PLAN_SLUG); ?></label>
+                            <label><?php _e("Other", OER_CURRICULUM_SLUG); ?></label>
                             <input type="text"
                                    name="oer_curriculum_other_assessment_type"
                                    class="form-control"
@@ -3144,7 +3149,7 @@ $standards_enabled = (get_option('oer_curriculum_standards_enabled'))?true:false
                 <div class="col-md-12">
                     <button type="button"
                             id="oer-curriculum-create-dynamic-module"
-                            class="btn btn-default oer-curriculum-create-dynamic-module"
+                            class="btn btn-light oer-curriculum-create-dynamic-module"
                     ><i class="fa fa-plus"></i> Add Module</button>
                 </div>
             </div>
