@@ -29,13 +29,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
  
 
-function wp_curriculum_enqueue_script_function(){
+function oercur_cb_enqueue_script_function(){
     wp_enqueue_script( 'curriculum_block-front-js', plugins_url( '/curriculum-block/front.build.js', dirname( __FILE__ ) ), array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),'1.0.1' , true );
     wp_localize_script( 'curriculum_block-front-js', 'curriculum_block_ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 }
-add_action( 'wp_enqueue_scripts', 'wp_curriculum_enqueue_script_function' );
+add_action( 'wp_enqueue_scripts', 'oercur_cb_enqueue_script_function' );
 
-function curriculum_block_cgb_block_assets() { // phpcs:ignore
+function oercurr_cb_block_assets() { // phpcs:ignore
     
     // Register block editor script for backend.
     /*
@@ -107,12 +107,12 @@ function curriculum_block_cgb_block_assets() { // phpcs:ignore
             'editor_script' => 'curriculum_block-cgb-block-js',
             // Enqueue blocks.editor.build.css in the editor only.
             'editor_style'  => 'curriculum_block-cgb-block-editor-css',
-            'render_callback' => 'render_posts_block'
+            'render_callback' => 'oercurr_cb_render_posts_block'
         )
     );
 }
 
-function render_posts_block($attributes, $ajx=false){
+function oercurr_cb_render_posts_block($attributes, $ajx=false){
     
         
         //echo $attributes['blockid'].'<br>';
@@ -151,17 +151,17 @@ function render_posts_block($attributes, $ajx=false){
     $_content = '';
 
     foreach($posts as $post){
-        $_content .= '<div class="oer-curriculum-blk-row">';
+        $_content .= '<div class="oercurr-blk-row">';
             $featured_img_url = get_the_post_thumbnail_url($post->ID,'medium'); 
-            $_content .= '<a href="'.get_post_permalink($post->ID).'" class="oer-curriculum-blk-left"><img src="'.$featured_img_url.'" alt="" /></a>';
-            $_content .= '<div class="oer-curriculum-blk-right">';
+            $_content .= '<a href="'.get_post_permalink($post->ID).'" class="oercurr-blk-left"><img src="'.$featured_img_url.'" alt="" /></a>';
+            $_content .= '<div class="oercurr-blk-right">';
                 $_content .= '<div class="ttl"><a href="'.get_post_permalink($post->ID).'">'.$post->post_title.'</a></div>';
-                $_content .= '<div class="oer-curriculum-postmeta">';
+                $_content .= '<div class="oercurr-postmeta">';
                     if(count($post->oer_curriculum_grades)>1){
-                        $_content .= '<span class="oer-curriculum-postmeta-grades"><strong>Grades:</strong> '. $post->oer_curriculum_grades[0].'-'.$post->oer_curriculum_grades[count($post->oer_curriculum_grades)-1].'</span>';
+                        $_content .= '<span class="oercurr-postmeta-grades"><strong>Grades:</strong> '. $post->oer_curriculum_grades[0].'-'.$post->oer_curriculum_grades[count($post->oer_curriculum_grades)-1].'</span>';
                     }else{
                         if($post->oer_curriculum_grades[0] != ''){
-                                $_content .= '<span class="oer-curriculum-postmeta-grades"><strong>Grade:</strong> '. $post->oer_curriculum_grades[0].'</span>';
+                                $_content .= '<span class="oercurr-postmeta-grades"><strong>Grade:</strong> '. $post->oer_curriculum_grades[0].'</span>';
                         }
                     }
                 $_content .= '</div>';                    
@@ -169,7 +169,7 @@ function render_posts_block($attributes, $ajx=false){
                     $_content .= '<div class="desc">'.substr(wp_strip_all_tags($post->post_content),0,180).' ...</div>';
                 }            
                 $_arr_tag = get_the_tags($post->ID);
-                $_content .= '<div class="oer-curriculum-tags tagcloud">';
+                $_content .= '<div class="oercurr-tags tagcloud">';
                 if(!empty($_arr_tag)){
                     foreach($_arr_tag as $key => $tag) {
                         $_content .= '<span><a href="'.get_home_url().'/tag/'.$tag->slug.'" alt="" class="button">'.$tag->name.'</a></span>';
@@ -184,7 +184,7 @@ function render_posts_block($attributes, $ajx=false){
     
 
 
-    $_wrapper .= '<div class="oer-curriculum-blk-main" blockid="'.$bid.'">';
+    $_wrapper .= '<div class="oercurr-blk-main" blockid="'.$bid.'">';
         $_wrapper .= '<script>';
             //$_wrapper .= 'jQuery( document ).ready(function() {';
                 $_wrapper .= 'localStorage.setItem("selectedCategory-'.$bid.'", "'.$attributes['selectedCategory'].'");';
@@ -192,14 +192,14 @@ function render_posts_block($attributes, $ajx=false){
                 $_wrapper .= 'localStorage.setItem("sortBy-'.$bid.'", "'.$attributes['sortBy'].'");';
             //$_wrapper .= '});';
         $_wrapper .= '</script>';
-        $_wrapper .= '<div class="oer-curriculum-blk-topbar">';    
-            $_wrapper .= '<div class="oer-curriculum-blk-topbar-left">';
+        $_wrapper .= '<div class="oercurr-blk-topbar">';    
+            $_wrapper .= '<div class="oercurr-blk-topbar-left">';
                 $_wrapper .= '<span>Browse All '.$_count.' Curriculums</span>';
             $_wrapper .= '</div>';
-            $_wrapper .= '<div class="oer-curriculum-blk-topbar-right">';    
-                    $_wrapper .= '<div class="oer-curriculum-blk-topbar-display-box">';
-                        $_wrapper .= '<div class="oer-curriculum-blk-topbar-display-text"><span>Show '.$attributes['postsPerPage'].'</span><a href="#"><i class="fa fa-th-list" aria-hidden="true"></i></a></div>';
-                        $_wrapper .= '<ul class="oer-curriculum-blk-topbar-display-option oer-curriculum-blk-topbar-option" style="display:none;">';    
+            $_wrapper .= '<div class="oercurr-blk-topbar-right">';    
+                    $_wrapper .= '<div class="oercurr-blk-topbar-display-box">';
+                        $_wrapper .= '<div class="oercurr-blk-topbar-display-text"><span>Show '.$attributes['postsPerPage'].'</span><a href="#"><i class="fa fa-th-list" aria-hidden="true"></i></a></div>';
+                        $_wrapper .= '<ul class="oercurr-blk-topbar-display-option oercurr-blk-topbar-option" style="display:none;">';    
                                     for ($i=5; $i <=30; $i+=5){ 
                                          if($i == $attributes['postsPerPage']){
                                              $_wrapper .= '<li class="selected"><a href="#" ret="'.$i.'">'.$i.'</a></li>';
@@ -209,9 +209,9 @@ function render_posts_block($attributes, $ajx=false){
                                     }
                         $_wrapper .= '</ul>';
                     $_wrapper .= '</div>';                    
-                    $_wrapper .= '<div class="oer-curriculum-blk-topbar-sort-box">';
-                        $_wrapper .= '<div class="oer-curriculum-blk-topbar-sort-text"><span>Sort by: '.$attributes['sortBy'].'</span><a href="#"><i class="fa fa-sort" aria-hidden="true"></i></a></div>';
-                        $_wrapper .= '<ul class="oer-curriculum-blk-topbar-sort-option oer-curriculum-blk-topbar-option" style="display:none;">';
+                    $_wrapper .= '<div class="oercurr-blk-topbar-sort-box">';
+                        $_wrapper .= '<div class="oercurr-blk-topbar-sort-text"><span>Sort by: '.$attributes['sortBy'].'</span><a href="#"><i class="fa fa-sort" aria-hidden="true"></i></a></div>';
+                        $_wrapper .= '<ul class="oercurr-blk-topbar-sort-option oercurr-blk-topbar-option" style="display:none;">';
                                     $_sel = ($attributes['sortBy'] == 'date')? 'class="selected"':'';
                                     $_wrapper .= '<li '.$_sel.'><a href="#" ret="date">Date Added</a></li>';
                                     $_sel = ($attributes['sortBy'] == 'modified')? 'class="selected"':'';
@@ -223,8 +223,8 @@ function render_posts_block($attributes, $ajx=false){
             $_wrapper .= '</div>';
         $_wrapper .= '</div>';
     
-        $_wrapper .= '<div id="lp_cur_blk_content_wrapper"  class="oer-curriculum-blk-wrapper">';
-            $_wrapper .= '<div id="oer-curriculum-blk-content_drop">';
+        $_wrapper .= '<div id="lp_cur_blk_content_wrapper"  class="oercurr-blk-wrapper">';
+            $_wrapper .= '<div id="oercurr-blk-content_drop">';
                 if(!count($posts) > 0){
                     $_wrapper = 'No Curriculum Found.';
                 }else{
@@ -261,21 +261,21 @@ function render_posts_block($attributes, $ajx=false){
 }
 
 // Hook: Block assets.
-add_action( 'init', 'curriculum_block_cgb_block_assets' );
+add_action( 'init', 'oercurr_cb_block_assets' );
 
 
 
-function ajxRebuildPostsBlock(){
+function oercurr_cb_rebuild_post_block(){
     $_arr = array();
     $_arr['selectedCategory'] = sanitize_text_field($_POST['sel']);
     $_arr['postsPerPage']     = sanitize_text_field($_POST['per']);
     $_arr['sortBy']           = sanitize_text_field($_POST['srt']);   
-    echo render_posts_block($_arr, true);
+    echo oercurr_cb_render_posts_block($_arr, true);
     //echo json_encode($_arr);
     die();
 }
-add_action( 'wp_ajax_ajxRebuildPostsBlock', 'ajxRebuildPostsBlock' );
-add_action('wp_ajax_nopriv_ajxRebuildPostsBlock', 'ajxRebuildPostsBlock');
+add_action( 'wp_ajax_oercurr_cb_rebuild_post_block', 'oercurr_cb_rebuild_post_block' );
+add_action('wp_ajax_nopriv_oercurr_cb_rebuild_post_block', 'oercurr_cb_rebuild_post_block');
 
 
 
@@ -285,24 +285,24 @@ add_action( 'rest_api_init', function () {
     //Path to meta query route
     register_rest_route( 'curriculum/v2', 'taxquery', array(
             'methods' => 'GET', 
-            'callback' => 'curriculum_tax_query',
+            'callback' => 'oercurr_cb_tax_query',
                         'permission_callback' => '__return_true'
     ) );
         
         register_rest_route( 'curriculum/v2', 'catquery', array(
             'methods' => 'GET', 
-            'callback' => 'curriculum_cat_query',
+            'callback' => 'oercurr_cb_cat_query',
                         'permission_callback' => '__return_true'
     ) );
         
         register_rest_route( 'curriculum/v2', 'tagsquery', array(
             'methods' => 'GET', 
-            'callback' => 'curriculum_tags_query',
+            'callback' => 'oercurr_cb_tags_query',
                         'permission_callback' => '__return_true'
     ) );
 });
 
-function curriculum_tax_query(){
+function oercurr_cb_tax_query(){
     
     $_postperpage = $_GET['perpage'];
     $_taxterms = $_GET['terms'];
@@ -370,7 +370,7 @@ function curriculum_tax_query(){
 }
 
 
-function curriculum_cat_query(){
+function oercurr_cb_cat_query(){
     $_arr = array();
     $term_query = new WP_Term_Query( 
         array(
@@ -447,7 +447,7 @@ function curriculum_cat_query(){
 }
 
 
-function curriculum_tags_query(){
+function oercurr_cb_tags_query(){
     $_arr = array();
     $tags_query = new WP_Term_Query( array('taxonomy' => 'post_tag','number' => 0, 'hide_empty' => false) );    
     if ( ! empty( $tags_query->terms ) ) {

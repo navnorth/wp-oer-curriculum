@@ -4,8 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 global $wpdb;
 
 // Display selected dropdown
-if( ! function_exists('oer_curriculum_show_selected')) {
-    function oer_curriculum_show_selected($key, $value, $type = 'selectbox') {
+if( ! function_exists('oercurr_show_selected')) {
+    function oercurr_show_selected($key, $value, $type = 'selectbox') {
         // Check if value is not an array
         if(!is_array($value)) {
             $value =  explode(',', $value);
@@ -22,31 +22,31 @@ if( ! function_exists('oer_curriculum_show_selected')) {
     }
 }
 
-if(!function_exists('prepare_subject_areas')) {
-    function prepare_subject_areas($terms) {
+if(!function_exists('oercurr_prepare_subject_areas')) {
+    function oercurr_prepare_subject_areas($terms) {
         foreach ($terms as $key => $term) {
             //echo "<pre>"; echo $key;print_r($term);
         }
     }
 }
 
-if (! function_exists('addSchemeToUrl')) {
-    function addSchemeToUrl($url) {
+if (! function_exists('oercurr_addSchemeToUrl')) {
+    function oercurr_addSchemeToUrl($url) {
         if (strpos($url, '://') === false) {
             return 'http://' . $url;
         }
     }
 }
 
-if (! function_exists('oer_curriculum_display_standards')) {
+if (! function_exists('oercurr_display_standards')) {
     /**
      * Get the list of standards and display it
      */
-    function oer_curriculum_display_standards() {
+    function oercurr_display_standards() {
         global $wpdb;
         $results = $wpdb->get_results("SELECT * from " . $wpdb->prefix. "oer_core_standards",ARRAY_A);
         if ($results) { ?>
-            <ul class="oer-curriculum-standards-wrapper">
+            <ul class="oercurr-standards-wrapper">
                 <?php
                 foreach ($results as $result) {
                 $coreStandardId = "core_standards-" . $result['id'];
@@ -55,7 +55,7 @@ if (! function_exists('oer_curriculum_display_standards')) {
                         <a data-toggle="collapse"
                            data-target="#<?php echo $coreStandardId;?>"
                         ><?php echo $result['standard_name']?></a>
-                        <?php oer_curriculum_children_standards($coreStandardId);?>
+                        <?php oercurr_children_standards($coreStandardId);?>
                     </li>
                 <?php }?>
             </ul>
@@ -63,22 +63,22 @@ if (! function_exists('oer_curriculum_display_standards')) {
     }
 }
 
-if (! function_exists('oer_curriculum_children_standards')) {
+if (! function_exists('oercurr_children_standards')) {
     /**
      * Get the list all children standards
      * @param $coreStandardId
      */
-    function oer_curriculum_children_standards($coreStandardId) {
+    function oercurr_children_standards($coreStandardId) {
         global $wpdb;
         $results = $wpdb->get_results( $wpdb->prepare( "SELECT * from " . $wpdb->prefix. "oer_sub_standards where parent_id = %s" , $coreStandardId ) ,ARRAY_A);
         if ($results) {?>
-            <div class="collapse oer-curriculum-standard-child-element" id="<?php echo $coreStandardId?>">
+            <div class="collapse oercurr-standard-child-element" id="<?php echo $coreStandardId?>">
                 <ul>
                     <?php
                     foreach ($results as $result) {
                         $subStandard = "sub_standards-" . $result['id'];
-                        $isNotationsAvailable = is_child_notations_available($subStandard);
-                        $isChildStandardAvailable = is_child_standards_available($subStandard);
+                        $isNotationsAvailable = oercurr_is_child_notations_available($subStandard);
+                        $isChildStandardAvailable = oercurr_is_child_standards_available($subStandard);
                         ?>
                         <li>
                             <!--Check if child standards available then get all the children standards-->
@@ -86,7 +86,7 @@ if (! function_exists('oer_curriculum_children_standards')) {
                                 <a data-toggle="collapse"
                                    data-target="#<?php echo $subStandard;?>"
                                 ><?php echo $result['standard_title']?></a>
-                                <?php oer_curriculum_children_standards($subStandard);?>
+                                <?php oercurr_children_standards($subStandard);?>
                             <?php }?>
 
                             <!--Check if notations available for standard then display -->
@@ -94,7 +94,7 @@ if (! function_exists('oer_curriculum_children_standards')) {
                                 <a data-toggle="collapse"
                                    data-target="#<?php echo $subStandard;?>"
                                 ><?php echo $result['standard_title']?></a>
-                                <?php oer_curriculum_get_standard_notations($subStandard);?>
+                                <?php oercurr_get_standard_notations($subStandard);?>
                             <?php }?>
                         </li>
 
@@ -105,18 +105,18 @@ if (! function_exists('oer_curriculum_children_standards')) {
     }
 }
 
-if (! function_exists('oer_curriculum_get_standard_notations')) {
+if (! function_exists('oercurr_get_standard_notations')) {
     /**
      * Get the standard notations with standard id
      * Display notations recursively
      * @param $parentId
      */
-    function oer_curriculum_get_standard_notations($parentId) {
+    function oercurr_get_standard_notations($parentId) {
         global $wpdb;
         global $post;
         $results = $wpdb->get_results( $wpdb->prepare( "SELECT * from " . $wpdb->prefix. "oer_standard_notation where parent_id = %s" , $parentId ) , ARRAY_A);
         if ($results) {?>
-            <div class="collapse oer-curriculum-standard-child-element" id="<?php echo $parentId;?>">
+            <div class="collapse oercurr-standard-child-element" id="<?php echo $parentId;?>">
                 <ul class="oer_curriculum_notations">
                     <?php
                     // Check if data already saved for current editing post
@@ -127,25 +127,25 @@ if (! function_exists('oer_curriculum_get_standard_notations')) {
                     }
                     foreach ($results as $result) {
                     $notationId = "standard_notation-" . $result['id'];
-                    $isChildrenAvailable = is_child_notations_available($notationId);
+                    $isChildrenAvailable = oercurr_is_child_notations_available($notationId);
                     ?>
                         <li>
                             <?php
                             if(empty($isChildrenAvailable)) {?>
                                 <input type="checkbox"
                                        name="oer_curriculum_oer_notations[]"
-                                       class="oer-curriculum-sck"
-                                       id="oer-curriculum-standard-check-<?php echo $notationId;?>"
+                                       class="oercurr-sck"
+                                       id="oercurr-standard-check-<?php echo $notationId;?>"
                                        value="<?php echo $notationId;?>"
                                        <?php echo (in_array($notationId, $post_standards_array) ? 'checked="checked"' : "")?>
                                 >
-                                <label for="oer-curriculum-standard-check-<?php echo $notationId;?>" class="oer-curriculum-scl"><?php echo $result['standard_notation'];?></label>
-                                <div class="oer-curriculum-notation-description"><?php echo $result['description'];?></div>
+                                <label for="oercurr-standard-check-<?php echo $notationId;?>" class="oercurr-scl"><?php echo $result['standard_notation'];?></label>
+                                <div class="oercurr-notation-description"><?php echo $result['description'];?></div>
                             <?php } else {?>
                                 <a data-toggle="collapse" data-target="#<?php echo $notationId;?>" ><?php echo $result['standard_notation']?></a>
                                 <div><?php echo $result['description'];?></div>
                             <?php }?>
-                            <?php oer_curriculum_get_standard_notations($notationId);?>
+                            <?php oercurr_get_standard_notations($notationId);?>
                         </li>
                     <?php }?>
                 </ul>
@@ -154,27 +154,27 @@ if (! function_exists('oer_curriculum_get_standard_notations')) {
     }
 }
 
-if (! function_exists('is_child_standards_available')) {
+if (! function_exists('oercurr_is_child_standards_available')) {
     /**
      * Check if child standard available or not
      * If child is not available then no need to display that standards
      * @param $standardId
      * @return array|object|null
      */
-    function is_child_standards_available($standardId) {
+    function oercurr_is_child_standards_available($standardId) {
         global $wpdb;
         $results = $wpdb->get_results( $wpdb->prepare( "SELECT * from " . $wpdb->prefix. "oer_sub_standards where parent_id = %s" , $standardId ) , ARRAY_A);
         return $results;
     }
 }
 
-if (!function_exists('is_child_notations_available')) {
+if (!function_exists('oercurr_is_child_notations_available')) {
     /**
      * Check if children standard notations available of a notation
      * @param $notationId
      * @return array|object|null
      */
-    function is_child_notations_available($notationId)
+    function oercurr_is_child_notations_available($notationId)
     {
         global $wpdb;
         $results = $wpdb->get_results( $wpdb->prepare( "SELECT * from " . $wpdb->prefix. "oer_standard_notation where parent_id = %s" , $notationId ) , ARRAY_A);
@@ -182,14 +182,14 @@ if (!function_exists('is_child_notations_available')) {
     }
 }
 
-if (! function_exists('get_standard_notations_from_ids')) {
+if (! function_exists('oercurr_get_standard_notations_from_ids')) {
 
     /**
      * Get all standards notations with ids
      * @param $ids
      * @param bool $admin
      */
-    function get_standard_notations_from_ids($ids, $admin = false) {
+    function oercurr_get_standard_notations_from_ids($ids, $admin = false) {
         global $wpdb;
         
         $stds = null;
@@ -282,14 +282,14 @@ if (! function_exists('get_standard_notations_from_ids')) {
     }
 }
 
-if (! function_exists('get_file_type_from_url')) {
+if (! function_exists('oercurr_get_file_type_from_url')) {
     /**
      * Check the file type form the url
      * @param $url
      * @param string $class
      * @return array|bool
      */
-    function get_file_type_from_url($url, $class = 'fa-1x') {
+    function oercurr_get_file_type_from_url($url, $class = 'fa-1x') {
         if(empty($url)) {
             return false;
         }
@@ -323,7 +323,7 @@ if (! function_exists('get_file_type_from_url')) {
     }
 }
 
-if (! function_exists('oer_curriculum_scan_array')) {
+if (! function_exists('oercurr_scan_array')) {
     /**
      * multi array scan
      *
@@ -331,7 +331,7 @@ if (! function_exists('oer_curriculum_scan_array')) {
      *
      * @return bool
      */
-    function oer_curriculum_scan_array($array = array()){
+    function oercurr_scan_array($array = array()){
         if (empty($array)) return false;
 
         foreach ($array as $sarray) {
@@ -344,8 +344,8 @@ if (! function_exists('oer_curriculum_scan_array')) {
     }
 }
 
-if (! function_exists('oer_curriculum_primary_resource_dropdown')){
-    function oer_curriculum_primary_resource_dropdown(){
+if (! function_exists('oercurr_primary_resource_dropdown')){
+    function oercurr_primary_resource_dropdown(){
         $resource_options = "";
         $posts = get_posts([
             'post_type' => 'resource',
@@ -366,15 +366,15 @@ if (! function_exists('oer_curriculum_primary_resource_dropdown')){
     }
 }
 
-if (! function_exists('oer_curriculum_get_resource_details')){
-    function oer_curriculum_get_resource_details($source_title){
+if (! function_exists('oercurr_get_resource_details')){
+    function oercurr_get_resource_details($source_title){
         $resource = get_page_by_title($source_title,OBJECT,"resource");
         return $resource;
     }
 }
 
-if (! function_exists('oer_curriculum_related')){
-    function oer_curriculum_related($id=null){
+if (! function_exists('oercurr_related_curriculum')){
+    function oercurr_related_curriculum($id=null){
         $args = [
             'post_type' => 'oer-curriculum',
             'post_status' => 'publish',
@@ -389,37 +389,37 @@ if (! function_exists('oer_curriculum_related')){
     }
 }
 
-if (! function_exists('oer_curriculum_get_inquiry_set_details')){
-    function oer_curriculum_get_inquiry_set_details($id){
+if (! function_exists('oercurr_get_inquiry_set_details')){
+    function oercurr_get_inquiry_set_details($id){
         return get_post($id);
     }
 }
 
-if (! function_exists('oer_curriculum_get_inquiry_set_metadata')){
-    function oer_curriculum_get_inquiry_set_metadata($id){
+if (! function_exists('oercurr_get_inquiry_set_metadata')){
+    function oercurr_get_inquiry_set_metadata($id){
         return get_post_meta($id);
     }
 }
 
-if (! function_exists('oer_curriculum_title_from_slug')){
-    function oer_curriculum_title_from_slug($slug){
+if (! function_exists('oercurr_title_from_slug')){
+    function oercurr_title_from_slug($slug){
         return str_replace("-"," ",$slug);
     }
 }
 
-if (! function_exists('oer_curriculum_grade_level')){
-    function oer_curriculum_grade_level($inquiry_set_id){
+if (! function_exists('oercurr_grade_level')){
+    function oercurr_grade_level($inquiry_set_id){
         $grades = get_post_meta($inquiry_set_id, "oer_curriculum_grades", true);
         if(empty($grades)){
           $_tmp = '';
         }else{
-          $_tmp = oer_curriculum_grade_levels($grades);
+          $_tmp = oercurr_grade_levels($grades);
         }  
         return $_tmp;
     }
 }
 
-function oer_curriculum_sort_grade_level($a, $b) {
+function oercurr_sort_grade_level($a, $b) {
     if ( $a == $b )
         return 0;
 
@@ -439,7 +439,7 @@ function oer_curriculum_sort_grade_level($a, $b) {
 
 }
 
-function oer_curriculum_grade_levels($grade_levels){
+function oercurr_grade_levels($grade_levels){
     $default_arr = [
                     "pre-k",
                     "k",
@@ -460,7 +460,7 @@ function oer_curriculum_grade_levels($grade_levels){
     $elmnt = 0;
     $def_index = 0;
     
-    usort($grade_levels, "oer_curriculum_sort_grade_level");
+    usort($grade_levels, "oercurr_sort_grade_level");
 
     for($x=0; $x < count($grade_levels); $x++)
     {
@@ -533,8 +533,8 @@ if (! function_exists('is_oer_plugin_installed')){
     }
 }
 
-if (! function_exists('is_standards_plugin_installed')){
-    function is_standards_plugin_installed(){
+if (! function_exists('oercull_is_standards_plugin_installed')){
+    function oercull_is_standards_plugin_installed(){
         $activeWAS = false;
         $active_plugins_basenames = get_option( 'active_plugins' );
         foreach ( $active_plugins_basenames as $plugin_basename ) {
@@ -546,16 +546,16 @@ if (! function_exists('is_standards_plugin_installed')){
     }
 }
 /** Display loader image **/
-if (! function_exists('oer_curriculum_display_loader')){
-    function oer_curriculum_display_loader(){
+if (! function_exists('oercurr_display_loader')){
+    function oercurr_display_loader(){
     ?>
-    <div class="oer-curriculum-loader"><div class="loader-img"><div><img src="<?php echo OER_LESSON_PLAN_URL; ?>images/load.gif" align="center" valign="middle" /></div></div></div>
+    <div class="oercurr-loader"><div class="loader-img"><div><img src="<?php echo OERCURR_CURRICULUM_URL; ?>images/load.gif" align="center" valign="middle" /></div></div></div>
     <?php
     }
 }
 // Get Meta Label
-if (!function_exists('oer_curriculum_get_meta_label')){
-    function oer_curriculum_get_meta_label($key){
+if (!function_exists('oercurr_get_meta_label')){
+    function oercurr_get_meta_label($key){
             $label = "";
             switch ($key){
             case "oer_curriculum_authors":
@@ -623,8 +623,8 @@ if (!function_exists('oer_curriculum_get_meta_label')){
     }
 }
 // Get All Post Meta
-if (!function_exists('oer_curriculum_get_all_meta')){
-    function oer_curriculum_get_all_meta($type){
+if (!function_exists('oercurr_get_all_meta')){
+    function oercurr_get_all_meta($type){
         global $wpdb;
         $tablename = $wpdb->prefix."options";
         $sql = $wpdb->prepare("SELECT option_id, option_name, option_value FROM {$tablename} WHERE option_name LIKE %s",'%_curmetset_%');
@@ -633,8 +633,8 @@ if (!function_exists('oer_curriculum_get_all_meta')){
     }
 }
 // Save Metadata options
-if (!function_exists('oer_curriculum_save_metadata_options')){
-    function oer_curriculum_save_metadata_options($post_data){
+if (!function_exists('oercurr_save_metadata_options')){
+    function oercurr_save_metadata_options($post_data){
         foreach($post_data as $key=>$value){  
             if (strpos($key,"oer_curriculum_")!==false && strpos($key,"_curmetset_label")!==false){
                 $savevalue = (empty($value))?' ':trim($value,' ');
@@ -649,23 +649,23 @@ if (!function_exists('oer_curriculum_save_metadata_options')){
 }
 
 // Get Field Label
-if (! function_exists('oer_curriculum_get_field_label')){
-    function oer_curriculum_get_field_label($field){
+if (! function_exists('oercurr_get_field_label')){
+    function oercurr_get_field_label($field){
         $field = $field.'_curmetset';
         $label = null;
         
         if (get_option($field.'_label'))
             $label = get_option($field.'_label');
         else
-            $label = oer_curriculum_get_meta_label($field);
+            $label = oercurr_get_meta_label($field);
          
         return $label;
     }
 }
 
 // Get Curriculum Type
-if (! function_exists('oer_curriculum_get_curriculum_type')){
-    function oer_curriculum_get_curriculum_type($value = ""){
+if (! function_exists('oercurr_get_curriculum_type')){
+    function oercurr_get_curriculum_type($value = ""){
         $html = '<option value="">Select Type</option>';
         $types = array(
             "Brief Activity",
@@ -687,8 +687,8 @@ if (! function_exists('oer_curriculum_get_curriculum_type')){
 }
 
 // Limit Content Display
-if (!function_exists('oer_curriculum_content')){
-    function oer_curriculum_content($limit) {
+if (!function_exists('oercurr_limit_content')){
+    function oercurr_limit_content($limit) {
         global $post; 
         $content = get_the_content($post->ID);
         if (strlen($content)>=$limit) {
@@ -699,14 +699,14 @@ if (!function_exists('oer_curriculum_content')){
         $content = preg_replace('/<!--.*?-->/ms', '', $content);
         //$content = apply_filters('the_content', $content); 
         $content = str_replace(']]>', ']]>', $content);
-        $content .= '... <a href="javascript:void(0);" class="oer-curriculum-read-more">(read more)</a>';
+        $content .= '... <a href="javascript:void(0);" class="oercurr-read-more">(read more)</a>';
         return $content;
     }
 }
 
 // Get Modules
-if (!function_exists('oer_curriculum_modules')){
-    function oer_curriculum_modules($curriculum_id) {
+if (!function_exists('oercurr_get_modules')){
+    function oercurr_get_modules($curriculum_id) {
         $modules = null;
         $post_meta_data = get_post_meta($curriculum_id);
         $elements_orders = isset($post_meta_data['oer_curriculum_order'][0]) ? unserialize($post_meta_data['oer_curriculum_order'][0]) : array();
@@ -747,8 +747,8 @@ if (!function_exists('oer_curriculum_modules')){
 }
 
 // Add fields label/enable options
-if (!function_exists('oer_curriculum_add_options')){
-    function oer_curriculum_add_options($key,$typ,$val) {
+if (!function_exists('oercurr_add_setting_options')){
+    function oercurr_add_setting_options($key,$typ,$val) {
         update_option($key.'_curmetset_'.$typ,$val);
     }
 }

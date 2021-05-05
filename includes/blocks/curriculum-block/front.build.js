@@ -4,12 +4,12 @@ jQuery( document ).ready(function() {
   
 
     // DISPLAY BOX
-    jQuery(document).on('click','.oer-curriculum-blk-topbar-display-text>a',function(e){
+    jQuery(document).on('click','.oercurr-blk-topbar-display-text>a',function(e){
       e.preventDefault ? e.preventDefault() : e.returnValue = false;
       var target = jQuery(this).parent().siblings('ul');
       lpCurTogleOptions(target); 
     })  
-    jQuery(document).on('keydown','.oer-curriculum-blk-topbar-display-text>a',function(e){
+    jQuery(document).on('keydown','.oercurr-blk-topbar-display-text>a',function(e){
     var keycode = (e.keyCode ? e.keyCode : e.which);
     if(keycode != '9') {// other than tab
       e.preventDefault ? e.preventDefault() : e.returnValue = false;
@@ -21,12 +21,12 @@ jQuery( document ).ready(function() {
     
         
     // SORT BOX
-    jQuery(document).on('click','.oer-curriculum-blk-topbar-sort-text>a',function(e){
+    jQuery(document).on('click','.oercurr-blk-topbar-sort-text>a',function(e){
       e.preventDefault ? e.preventDefault() : e.returnValue = false;
       var target = jQuery(this).parent().siblings('ul');
       lpCurTogleOptions(target); 
     })
-    jQuery(document).on('keydown','.oer-curriculum-blk-topbar-sort-text>a',function(e){
+    jQuery(document).on('keydown','.oercurr-blk-topbar-sort-text>a',function(e){
       var keycode = (e.keyCode ? e.keyCode : e.which);
       if(keycode != '9') {// other than tab
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
@@ -38,18 +38,18 @@ jQuery( document ).ready(function() {
    
     
     // SUB MENU EVENTS
-    jQuery(document).on('click','.oer-curriculum-blk-topbar-display-option li a',function(e){
+    jQuery(document).on('click','.oercurr-blk-topbar-display-option li a',function(e){
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
-        var bid = jQuery(this).parents('.oer-curriculum-blk-main').attr('blockid');
+        var bid = jQuery(this).parents('.oercurr-blk-main').attr('blockid');
         var val = jQuery(this).attr('ret');      
         lpCurSaveToLocalAttribute("postsPerPage-"+bid, val);
         var target = jQuery(this).parent();
         resetSelection(target);
     });  
-    jQuery(document).on('keydown','.oer-curriculum-blk-topbar-display-option li a',function(e){
+    jQuery(document).on('keydown','.oercurr-blk-topbar-display-option li a',function(e){
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
         var keycode = (e.keyCode ? e.keyCode : e.which);
-        var bid = jQuery(this).parents('.oer-curriculum-blk-main').attr('blockid');
+        var bid = jQuery(this).parents('.oercurr-blk-main').attr('blockid');
         var val = jQuery(this).attr('ret');
         var target = jQuery(this).parent();
         lpCurSaveToLocalAttribute("postsPerPage-"+bid, val, keycode, target);
@@ -57,18 +57,18 @@ jQuery( document ).ready(function() {
     
     
     
-    jQuery(document).on('click','.oer-curriculum-blk-topbar-sort-option li a',function(e){
+    jQuery(document).on('click','.oercurr-blk-topbar-sort-option li a',function(e){
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
         var val = jQuery(this).attr('ret');
-        var bid = jQuery(this).parents('.oer-curriculum-blk-main').attr('blockid');
+        var bid = jQuery(this).parents('.oercurr-blk-main').attr('blockid');
         lpCurSaveToLocalAttribute("sortBy-"+bid, val);
         var target = jQuery(this).parent();
         resetSelection(target);
     });
-    jQuery(document).on('keydown','.oer-curriculum-blk-topbar-sort-option li a',function(e){
+    jQuery(document).on('keydown','.oercurr-blk-topbar-sort-option li a',function(e){
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
         var keycode = (e.keyCode ? e.keyCode : e.which);
-        var bid = jQuery(this).parents('.oer-curriculum-blk-main').attr('blockid');
+        var bid = jQuery(this).parents('.oercurr-blk-main').attr('blockid');
         var val = jQuery(this).attr('ret');
         var target = jQuery(this).parent();
         lpCurSaveToLocalAttribute("sortBy-"+bid, val, keycode, target);
@@ -83,8 +83,7 @@ function resetSelection(target){
   target.addClass('selected');
   target.parent('ul').hide(300);
   target.parent('ul').siblings('div').find('a').focus();
-  console.log('reset selection');
-  var instanceparent = target.parents('.oer-curriculum-blk-main');
+  var instanceparent = target.parents('.oercurr-blk-main');
   updatepostdisplay(instanceparent);
 }
 
@@ -92,10 +91,9 @@ function resetSelection(target){
 function updatepostdisplay(instanceparent){
     
     var bid = instanceparent.attr('blockid');
-    console.log(bid);
     instanceparent.find('.lp_cur_blk_content_preloader_table').show(300);
     var dta = {
-  		'action' 	 : 'ajxRebuildPostsBlock',
+  		'action' 	 : 'oercurr_cb_rebuild_post_block',
   		'sel'      : localStorage.getItem('selectedCategory-'+bid),
   		'per'      : localStorage.getItem('postsPerPage-'+bid),
   		'srt'      : localStorage.getItem('sortBy-'+bid),
@@ -112,10 +110,10 @@ function updatepostdisplay(instanceparent){
         response = JSON.parse(response);
         var instance = jQuery('[blockid="'+bid+'"]');
           if(typeof cgbGlobal == 'undefined'){ 
-            instanceparent.find('#oer-curriculum-blk-content_drop').html(response['data']);
-            instanceparent.find('.oer-curriculum-blk-topbar-display-text span').text('show : '+localStorage.getItem('postsPerPage-'+bid));
-            instanceparent.find('.oer-curriculum-blk-topbar-sort-text span').text('Sort by: '+localStorage.getItem('sortBy-'+bid));
-            instanceparent.find('.oer-curriculum-blk-topbar-left span').text('Browse All '+response['cnt']+' Curriculums');
+            instanceparent.find('#oercurr-blk-content_drop').html(response['data']);
+            instanceparent.find('.oercurr-blk-topbar-display-text span').text('show : '+localStorage.getItem('postsPerPage-'+bid));
+            instanceparent.find('.oercurr-blk-topbar-sort-text span').text('Sort by: '+localStorage.getItem('sortBy-'+bid));
+            instanceparent.find('.oercurr-blk-topbar-left span').text('Browse All '+response['cnt']+' Curriculums');
           }
       
           setTimeout(function(){
@@ -162,7 +160,6 @@ function lpCurSaveToLocalAttribute(key, val, kcode=null, target=null){
 }
 
 function lpCurTogleOptions(target, kcode = 13){
-  console.log(kcode);
   if(kcode == '32' || kcode == '13'){ // space and enter
     lpCurShowHide(target) 
   }else if(kcode == '38'){ // up
@@ -176,7 +173,7 @@ function lpCurShowHide(target){
   if(target.is(':visible')){
     target.hide(300);
   }else{
-    jQuery('.oer-curriculum-blk-topbar-option').hide(300);
+    jQuery('.oercurr-blk-topbar-option').hide(300);
     target.show(300);  
   } 
 }

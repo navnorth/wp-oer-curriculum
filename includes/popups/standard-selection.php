@@ -1,14 +1,14 @@
 <!-- Modal -->
 <?php global $inquiryset_post, $post;?>
-<div class="oer-curriculum-popups modal fade" id="lpOerStandardModal" tabindex="-1" role="dialog" aria-labelledby="lpOerStandardModalLabel" aria-hidden="true">
+<div class="oercurr-popups modal fade" id="lpOerStandardModal" tabindex="-1" role="dialog" aria-labelledby="lpOerStandardModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                 <h4 class="modal-title" id="lpOerStandardModalLabel">Add Standard</h4>
             </div>
-            <div id="oer-curriculum-standards-list" class="modal-body">
-                <div class="oer-curriculum-standard-search-bar">
+            <div id="oercurr-standards-list" class="modal-body">
+                <div class="oercurr-standard-search-bar">
                     <div class="form-group">
                         <div class="input-group">
                             <input type="text"
@@ -22,8 +22,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="oer-curriculum-standard-search-result hide" id="oer-curriculum-standard-search-result"></div>
-                <div class="oer-curriculum-standard-default-result">
+                <div class="oercurr-standard-search-result hide" id="oercurr-standard-search-result"></div>
+                <div class="oercurr-standard-default-result">
                     <?php
                     if (function_exists('was_selectable_admin_standards')){
                         was_selectable_admin_standards($inquiryset_post->ID, 'oer_curriculum_standards');

@@ -1,5 +1,5 @@
 <!--Dynamic module modal-->
-<div class="oer-curriculum-popups modal fade" id="oer-curriculum-dynamic-module-modal" tabindex="-1" role="dialog" aria-labelledby="lpDynamicModalLabel">
+<div class="oercurr-popups modal fade" id="oercurr-dynamic-module-modal" tabindex="-1" role="dialog" aria-labelledby="lpDynamicModalLabel">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -19,7 +19,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="oer-curriculum-create-module-btn">Create</button>
+                <button type="button" class="btn btn-primary" id="oercurr-create-module-btn">Create</button>
             </div>
         </div>
     </div>

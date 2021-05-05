@@ -63,7 +63,7 @@ if (!empty($elements_orders)) {
                 $html = "";
                 $i = 0;
                 foreach($module['url'] as $url){
-                    $img = get_file_type_from_url($url, "fa-4x");
+                    $img = oercurr_get_file_type_from_url($url, "fa-4x");
                     $html .= "<div class='row clear input-group'>";
                     if ($img['title']=="Image")
                         $html .= "<div class='col-md-4'><img src='".$url."'></div>";
@@ -94,11 +94,11 @@ $index = 0;
 $prev_url = null;
 $next_url = null;
 $cnt = count($primary_resources['resource']);
-if (!empty($primary_resources) && oer_curriculum_scan_array($primary_resources)) {
+if (!empty($primary_resources) && oercurr_scan_array($primary_resources)) {
     if (!empty(array_filter($primary_resources['resource']))) {
         if ($current_index==0) {
             if (isset($primary_resources['resource'][$cnt-1])){
-                $prev_resource = oer_curriculum_get_resource_details($primary_resources['resource'][$cnt-1]);
+                $prev_resource = oercurr_get_resource_details($primary_resources['resource'][$cnt-1]);
                 $prev_url = $back_url."/source/".sanitize_title($prev_resource->post_title)."-".$prev_resource->ID;
             }
         } else {
@@ -114,7 +114,7 @@ if (isset($modules[$current_index+1])){
     $next_url = $back_url."/module/".sanitize_title($next_resource['title']);
 }
 ?>
-<div class="oer-curriculum-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
+<div class="oercurr-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
 <div class="row ps-details-row">
     <?php
     $resource_meta = null;
@@ -129,12 +129,12 @@ if (isset($modules[$current_index+1])){
         </div>
     </div>
 </div>
-<div class="ps-related-sources oer-curriculum-primary-sources-row">
-    <div class="oer-curriculum-ps-nav-left-block <?php echo $oer_curriculum_prev_class; ?> col-md-6 col-sm-12">
+<div class="ps-related-sources oercurr-primary-sources-row">
+    <div class="oercurr-ps-nav-left-block <?php echo $oer_curriculum_prev_class; ?> col-md-6 col-sm-12">
         <?php if (!empty($prev_resource)):
         $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($prev_resource), 'resource-thumbnail' );
         ?>
-        <a class="oer-curriculum-ps-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>">
+        <a class="oercurr-ps-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>">
             <span class="col-md-3">&nbsp;</span>
             <span class="nav-media-icon"><i class="fas fa-arrow-left fa-2x"></i></span>
             <span class="nav-media-image col-md-8">
@@ -150,7 +150,7 @@ if (isset($modules[$current_index+1])){
                     <div class="resource-thumbnail" style="background: rgba(204,97,12,.1); background-size:cover; display:flex; align-items:center; justify-content: center;"><i class="fa fa-file-text-o fa-4x"></i></div>
                     <?php endif; ?>
                 </span>
-                <span class="nav-oer-curriculum-resource-title col-md-8">
+                <span class="oercurr-nav-resource-title col-md-8">
                     <?php
                     if (is_object($prev_resource))
                         echo $prev_resource->post_title;
@@ -162,11 +162,11 @@ if (isset($modules[$current_index+1])){
         </a>
         <?php endif; ?>
     </div>
-    <div class="oer-curriculum-ps-nav-right-block <?php echo $oer_curriculum_next_class; ?> col-md-6 col-sm-12">
+    <div class="oercurr-ps-nav-right-block <?php echo $oer_curriculum_next_class; ?> col-md-6 col-sm-12">
         <?php if (!empty($next_resource)):
         $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($next_resource), 'resource-thumbnail' );
         ?>
-        <a class="oer-curriculum-ps-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>">
+        <a class="oercurr-ps-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>">
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if (!empty($resource_img)):
@@ -177,7 +177,7 @@ if (isset($modules[$current_index+1])){
                     <div class="resource-thumbnail" style="background: rgba(204,97,12,.1); background-size:cover; display:flex; align-items:center; justify-content: center;"><i class="fa fa-file-text-o fa-4x"></i></div>
                     <?php endif; ?>
                 </span>
-                <span class="nav-oer-curriculum-resource-title col-md-8">
+                <span class="oercurr-nav-resource-title col-md-8">
                     <?php
                     if (is_object($next_resource))
                         echo $next_resource->post_title;
@@ -192,9 +192,9 @@ if (isset($modules[$current_index+1])){
         <?php endif; ?>
     </div>
 </div>
-<div class="oer-curriculum-ajax-loader" role="status">
-    <div class="oer-curriculum-ajax-loader-img">
-        <img src="<?php echo OER_LESSON_PLAN_URL."/images/load.gif"; ?>" />
+<div class="oercurr-ajax-loader" role="status">
+    <div class="oercurr-ajax-loader-img">
+        <img src="<?php echo OERCURR_CURRICULUM_URL."/images/load.gif"; ?>" />
     </div>
 </div>
 <?php

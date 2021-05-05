@@ -22,16 +22,16 @@ global $message, $type;
      
     <h2 class="nav-tab-wrapper">
                 <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php _e("General", OER_CURRICULUM_SLUG); ?></a>
-        <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=metadata" class="nav-tab <?php echo $active_tab == 'metadata' ? 'nav-tab-active' : ''; ?>"><?php _e("Metadata", OER_CURRICULUM_SLUG); ?></a>
+        <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=metadata" class="nav-tab <?php echo $active_tab == 'metadata' ? 'nav-tab-active' : ''; ?>"><?php _e("Metadata Fields", OER_CURRICULUM_SLUG); ?></a>
         </h2>
     
     <?php
     switch ($active_tab) {
         case "metadata":
-            oer_curriculum_show_metadata_settings();
+            oercurr_show_metadata_settings();
             break;
         case "general":
-            oer_curriculum_show_general_settings();
+            oercurr_show_general_settings();
             break;
         default:
             break;
@@ -46,15 +46,15 @@ global $message, $type;
 <?php
 
 
-function oer_curriculum_show_general_settings(){    
+function oercurr_show_general_settings(){    
     if (!is_admin()) exit;
-    oer_curriculum_save_general_setting(); ?>
-    <div class="oer-curriculum-plugin-body">
-        <div class="oer-curriculum-plugin-row">
+    oercurr_save_general_setting(); ?>
+    <div class="oercurr-plugin-body">
+        <div class="oercurr-plugin-row">
             <div class="oer-row-left">Use the options below to update general plugin options.</div>
             <div class="oer-row-right"></div>
         </div>
-        <div class="oer-curriculum-plugin-row">
+        <div class="oercurr-plugin-row">
             <form method="post" enctype="multipart/form-data">
                 <table class="table">
                     <thead>
@@ -83,7 +83,7 @@ function oer_curriculum_show_general_settings(){
     <?php
 }
 
-function oer_curriculum_save_general_setting(){
+function oercurr_save_general_setting(){
     $_forbidkey = array("oer_curriculum_general_setting_submit");
     global $pagenow;
     if ( 'edit.php' !== $pagenow || !current_user_can('edit_others_posts')) return $query;
@@ -101,9 +101,9 @@ function oer_curriculum_save_general_setting(){
 
 
 
-function oer_curriculum_show_metadata_settings() {
+function oercurr_show_metadata_settings() {
     global $oer_curriculum_deleted_fields;
-    $metas = oer_curriculum_get_all_meta("oer-curriculum");
+    $metas = oercurr_get_all_meta("oer-curriculum");
     $inquirysets = null;
     $labeldata = null;
     $metadata = null;
@@ -146,19 +146,18 @@ function oer_curriculum_show_metadata_settings() {
         }
         */
         //print_r($_POST);
-        echo '<br><br>';
-        oer_curriculum_save_metadata_options($_POST);
+        oercurr_save_metadata_options($_POST);
     }
 ?>
-<div class="oer-curriculum-plugin-body">
-    <div class="oer-curriculum-plugin-row">
+<div class="oercurr-plugin-body">
+    <div class="oercurr-plugin-row">
         <div class="oer-row-left">
             <?php _e("Use the options below to update metadata field options.", OER_SLUG); ?>
         </div>
         <div class="oer-row-right">
         </div>
     </div>
-    <div class="oer-curriculum-plugin-row">
+    <div class="oercurr-plugin-row">
         <form method="post" class="oer_settings_form" onsubmit="return lpInitialSettings(this);">
             <table class="table">
                 <thead>
@@ -178,7 +177,6 @@ function oer_curriculum_show_metadata_settings() {
                                 $option_set = true;
                             }else{
                                 $label = get_option($key);
-                                //$label = oer_curriculum_get_meta_label($key);
                             }
                             
                             $enb_key = str_replace("_label","_enable",$key);
@@ -194,9 +192,9 @@ function oer_curriculum_show_metadata_settings() {
                         if (!in_array($key,$oer_curriculum_deleted_fields)){ 
                         ?>
                         <tr>
-                            <td><?php echo $key; ?></td>
+                            <td><?php echo str_replace("_curmetset","",$key); ?></td>
                             <td><input type="text" name="<?php echo $key; ?>" value="<?php echo $label; ?>" /></td>
-                            <td><input type="checkbox" class="oer-curriculum-enabled-checkbox" name="<?php echo $enb_key; ?>" value="<?php echo $enb_val; ?>" <?php echo $enabled; ?>/></td>
+                            <td><input type="checkbox" class="oercurr-enabled-checkbox" name="<?php echo $enb_key; ?>" value="<?php echo $enb_val; ?>" <?php echo $enabled; ?>/></td>
                         </tr>
                         <?php
                         }
@@ -209,4 +207,4 @@ function oer_curriculum_show_metadata_settings() {
 </div>
 <?php
 }
-oer_curriculum_display_loader();
+oercurr_display_loader();

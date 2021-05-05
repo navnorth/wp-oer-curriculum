@@ -67,7 +67,7 @@ $next_title = "";
 $next_image = "";
 $prev_resource = "";
 $next_resource = "";
-if (!empty($primary_resources) && oer_curriculum_scan_array($primary_resources)) {
+if (!empty($primary_resources) && oercurr_scan_array($primary_resources)) {
     if (!empty(array_filter($primary_resources['resource']))) {
         foreach ($primary_resources['resource'] as $resourceKey => $source) {            
             if ($psindex == $resourceKey){                
@@ -81,7 +81,7 @@ if (!empty($primary_resources) && oer_curriculum_scan_array($primary_resources))
             $index++;
         }
         if (isset($primary_resources['resource'][$index-1])){
-            $prev_resource = oer_curriculum_get_resource_details($primary_resources['resource'][$index-1]);
+            $prev_resource = oercurr_get_resource_details($primary_resources['resource'][$index-1]);
             $prev_title = (isset($primary_resources['title'][$index-1]) ? $primary_resources['title'][$index-1]: "");
             $prev_image = (isset($primary_resources['image'][$index-1]) ? $primary_resources['image'][$index-1]: "");
             if (is_object($prev_resource))
@@ -90,7 +90,7 @@ if (!empty($primary_resources) && oer_curriculum_scan_array($primary_resources))
                 $prev_url = $back_source_url."/source/".sanitize_title($prev_title)."-0/idx/".($index-1);
         }
         if (isset($primary_resources['resource'][$index+1])){
-            $next_resource = oer_curriculum_get_resource_details($primary_resources['resource'][$index+1]);
+            $next_resource = oercurr_get_resource_details($primary_resources['resource'][$index+1]);
             $next_title = (isset($primary_resources['title'][$index+1]) ? $primary_resources['title'][$index+1]: "");
             $next_image = (isset($primary_resources['image'][$index+1]) ? $primary_resources['image'][$index+1]: "");
             if (is_object($next_resource))
@@ -130,7 +130,7 @@ $type = (isset($type[0]))?$type[0]:'textbox';
   $ret .= '</div>'; 
   echo $ret; 
 ?> 
-<div class="oer-curriculum-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
+<div class="oercurr-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
 <div class="row ps-details-row">
     <?php if (!empty($featured_image_url) || $youtube || $isPDF) {
         $right_class = "col-md-8";
@@ -170,10 +170,10 @@ $type = (isset($type[0]))?$type[0]:'textbox';
            <?php } ?>
         </div>
         <?php if ($type=="website"): ?>
-        <span class="ps-expand"><a href="<?php echo $resource_url; ?>" class="oer-curriculum-expand-img" target="_blank"><i class="fas fa-external-link-alt"></i></a></span>
+        <span class="ps-expand"><a href="<?php echo $resource_url; ?>" class="oercurr-expand-img" target="_blank"><i class="fas fa-external-link-alt"></i></a></span>
         <?php endif; ?>
         <?php endif; ?>
-        <div class="oer-curriculum-center">
+        <div class="oercurr-center">
             <?php if (isset($resource_url)) { ?>
             <div class="ps-meta-group ps-resource-url">
                 <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OER_CURRICULUM_SLUG); ?></a>
@@ -190,10 +190,10 @@ $type = (isset($type[0]))?$type[0]:'textbox';
         <div class="ps-media-image col-md-4 col-sm-12" data-curid="<?php echo $index; ?>">
             <div class="oer-sngl-rsrc-img">
                  <?php if (empty($feature_image_url)): ?>
-                 <a class="oer-featureimg" href="<?php echo $resource_url; ?>" target="_blank"><span class="dashicons <?php if (function_exists('getResourceIcon')) echo getResourceIcon($media_type,$resource_url); ?> nofeat"></span></a>
+                 <a class="oer-featureimg" href="<?php echo $resource_url; ?>" target="_blank"><span class="dashicons <?php if (function_exists('oer_getResourceIcon')) echo oer_getResourceIcon($media_type,$resource_url); ?> nofeat"></span></a>
                 <?php endif; ?>
             </div>
-            <div class="oer-curriculum-center">
+            <div class="oercurr-center">
                 <?php if (isset($resource_url)) { ?>
                 <div class="ps-meta-group ps-resource-url">
                     <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OER_CURRICULUM_SLUG); ?></a>
@@ -226,14 +226,14 @@ $type = (isset($type[0]))?$type[0]:'textbox';
         </div>
     </div>
 </div>
-<div class="ps-related-sources oer-curriculum-primary-sources-row">
-    <div class="oer-curriculum-ps-nav-left-block <?php echo $oer_curriculum_prev_class; ?> col-md-6 col-sm-12">
+<div class="ps-related-sources oercurr-primary-sources-row">
+    <div class="oercurr-ps-nav-left-block <?php echo $oer_curriculum_prev_class; ?> col-md-6 col-sm-12">
         <?php
         $resource_img = (empty($prev_resource))? $prev_image: wp_get_attachment_image_url( get_post_thumbnail_id($prev_resource), 'resource-thumbnail' );
         if (!empty($prev_image))
             $resource_img = $prev_image;
         ?>
-        <a class="oer-curriculum-ps-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>">
+        <a class="oercurr-ps-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>">
             <span class="col-md-3">&nbsp;</span>
             <span class="nav-media-icon"><i class="fas fa-arrow-left fa-2x"></i></span>
             <span class="nav-media-image col-md-8">
@@ -247,13 +247,13 @@ $type = (isset($type[0]))?$type[0]:'textbox';
                       }else{
                         $prev_resource_url = get_post_meta($prev_resource->ID, "oer_resourceurl", true);
                         $prev_resource_type = get_post_meta($prev_resource->ID,"oer_mediatype")[0];
-                        $prev_resource_icon = getResourceIcon($prev_resource_type,$prev_resource_url);
+                        $prev_resource_icon = oer_getResourceIcon($prev_resource_type,$prev_resource_url);
                       }
                     ?>
                     <div class="navigation-avatar"><span class="dashicons <?php echo $prev_resource_icon; ?>"></span></div>
                     <?php endif; ?>
                 </span>
-                <span class="nav-oer-curriculum-resource-title wow1 col-md-8">
+                <span class="oercurr-nav-resource-title wow1 col-md-8">
                     <?php
                     if (!empty($prev_title))
                         echo $prev_title;
@@ -264,13 +264,13 @@ $type = (isset($type[0]))?$type[0]:'textbox';
             </span>
         </a>
     </div>
-    <div class="oer-curriculum-ps-nav-right-block <?php echo $oer_curriculum_next_class; ?> col-md-6 col-sm-12">
+    <div class="oercurr-ps-nav-right-block <?php echo $oer_curriculum_next_class; ?> col-md-6 col-sm-12">
         <?php
         $resource_img = (empty($next_resource))? $next_image: wp_get_attachment_image_url( get_post_thumbnail_id($next_resource), 'resource-thumbnail' );
         if (!empty($next_image))
             $resource_img = $next_image;
         ?>
-        <a class="oer-curriculum-ps-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>">
+        <a class="oercurr-ps-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>">
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if (!empty($resource_img)): ?>
@@ -281,13 +281,13 @@ $type = (isset($type[0]))?$type[0]:'textbox';
                         }else{
                           $next_resource_url = get_post_meta($next_resource->ID, "oer_resourceurl", true);
                           $next_resource_type = get_post_meta($next_resource->ID,"oer_mediatype")[0];
-                          $next_resource_icon = getResourceIcon($next_resource_type,$next_resource_url);
+                          $next_resource_icon = oer_getResourceIcon($next_resource_type,$next_resource_url);
                         }
                         ?>
                         <div class="navigation-avatar"><span class="dashicons <?php echo $next_resource_icon; ?>"></span></div>
                     <?php endif; ?>
                 </span>
-                <span class="nav-oer-curriculum-resource-title wow2 col-md-8">
+                <span class="oercurr-nav-resource-title wow2 col-md-8">
                     <?php             
                         if (!empty($next_title))
                             echo $next_title;
@@ -302,9 +302,9 @@ $type = (isset($type[0]))?$type[0]:'textbox';
         </a>
     </div>
 </div>
-<div class="oer-curriculum-ajax-loader" role="status">
-    <div class="oer-curriculum-ajax-loader-img">
-        <img src="<?php echo OER_LESSON_PLAN_URL."/images/load.gif"; ?>" />
+<div class="oercurr-ajax-loader" role="status">
+    <div class="oercurr-ajax-loader-img">
+        <img src="<?php echo OERCURR_CURRICULUM_URL."/images/load.gif"; ?>" />
     </div>
 </div>
 <?php

@@ -11,11 +11,11 @@ $inquiry = ((is_array($inquiry)&& count($inquiry)>0)?$inquiry[0]:array());
 <div class="oer_curriculum_meta_wrapper">
     <div class="row">
         <div class="col-md-12">
-            <div class="card col-12 card-default oer-curriculum-related-inquiry-wrapper oer-related-inquiry-sets" id="oer-related-inquiry-sets-group">
+            <div class="card col-12 card-default oercurr-related-inquiry-wrapper oer-related-inquiry-sets" id="oer-related-inquiry-sets-group">
                 <div class="card-body">
                     <?php
                     for ($i=1;$i<=3;$i++){
-                        $inquirysets = oer_curriculum_related($inquiryset_post->ID);
+                        $inquirysets = oercurr_related_curriculum($inquiryset_post->ID);
                         $related_curriculum_set = (trim(get_option('oer_curriculum_related_curriculum_'.$i.'_curmetset_label'),' ') != '')?true:false;
                         $related_curriculum_set_enabled = (get_option('oer_curriculum_related_curriculum_'.$i.'_curmetset_enable') == 'checked')?true:false;
                         if (($related_curriculum_set && $related_curriculum_set_enabled) || !$related_curriculum_set) {

@@ -2320,7 +2320,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
           "div",
           {
             class:
-              "oer-curriculum-ftrdttl curriculum-feat-title_" +
+              "oercurr-ftrdttl curriculum-feat-title_" +
               attributes.blockid
           },
           attributes.blocktitle

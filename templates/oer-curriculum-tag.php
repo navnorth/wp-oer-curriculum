@@ -10,7 +10,7 @@ add_filter('body_class', function($classes){
 get_header();
 
 $front_page_id = get_option( 'page_on_front' );
-$tag_name = ucwords(oer_curriculum_title_from_slug($tag));
+$tag_name = ucwords(oercurr_title_from_slug($tag));
 $args = array(
     "showposts" => -1,
     "post_type" => "oer-curriculum",
@@ -42,11 +42,11 @@ $inquiry_sets = get_posts( $args );
                     if (!$thumbnail_url)
                         $thumbnail_url = $default_thumbnail_url;
 
-                    $grade_level = oer_curriculum_grade_level($inquiry_set->ID);
+                    $grade_level = oercurr_grade_level($inquiry_set->ID);
             ?>
             <div class="col-md-4 col-sm-6 padding-0">
-            <a href="<?php echo $link; ?>" class="wp-block-oer-curriculum-thumbnail-block oer-curriculum-related-block-link">
-                <div class="oer-curriculum-related-blocks-padding">
+            <a href="<?php echo $link; ?>" class="oercurr-thumbnail-block oercurr-related-block-link">
+                <div class="oercurr-related-blocks-padding">
                     <div class="media-image">
                         <div class="image-thumbnail">
                             <div class="image-section">
@@ -54,10 +54,10 @@ $inquiry_sets = get_posts( $args );
                             </div>
                         </div>
                     </div>
-                    <div class="oer-curriculum-related-grades">
+                    <div class="oercurr-related-grades">
                         <span><?php echo $grade_level; ?></span>
                     </div>
-                    <div class="oer-curriculum-related-set-description">
+                    <div class="oercurr-related-set-description">
                         <h4><?php echo $inquiry_set->post_title; ?></h4>
                     </div>
                 </div>

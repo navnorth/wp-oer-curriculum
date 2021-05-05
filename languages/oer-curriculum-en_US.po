@@ -16,131 +16,131 @@ msgstr ""
 "translate_nooped_plural;number_format_i18n;date_i18n;esc_html__;esc_html__;"
 "esc_html_x;esc_attr__;esc_attr_e;esc_attr_x\n"
 
-#:includes/oer-curriculum-metafields:248
+#:includes/oercurr-metafields:248
 msgid "Details"
 msgstr "Kabalu"
 
-#:includes/oer-curriculum-metafields:287
+#:includes/oercurr-metafields:287
 msgid "Introduction"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:337
+#:includes/oercurr-metafields:337
 msgid "Author"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:481
+#:includes/oercurr-metafields:481
 msgid "Resource"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:591
+#:includes/oercurr-metafields:591
 msgid "Textbox"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:970
+#:includes/oercurr-metafields:970
 msgid "Required Materials"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:996
+#:includes/oercurr-metafields:996
 msgid "Section"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:1033
+#:includes/oercurr-metafields:1033
 msgid "Add Section"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:1124
+#:includes/oercurr-metafields:1124
 msgid "Lesson Times"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:1231
+#:includes/oercurr-metafields:1231
 msgid "Standards and Objectives"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:1242
+#:includes/oercurr-metafields:1242
 msgid "Standards"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:1322
+#:includes/oercurr-metafields:1322
 msgid "Activities in this Lesson"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:1416
+#:includes/oercurr-metafields:1416
 msgid "Summative Assessment"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:1425
+#:includes/oercurr-metafields:1425
 msgid "Assessment Type(s):"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:1462
+#:includes/oercurr-metafields:1462
 msgid "Other"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:1577
+#:includes/oercurr-metafields:1577
 msgid "Text List"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:1615
+#:includes/oercurr-metafields:1615
 msgid "Materials"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:1691
+#:includes/oercurr-metafields:1691
 msgid "Vocabulary List"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:2253
+#:includes/oercurr-metafields:2253
 msgid "You have not selected any academic standards"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:2466
+#:includes/oercurr-metafields:2466
 msgid "Teacher Background"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:2502
+#:includes/oercurr-metafields:2502
 msgid "Historical Background"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:2538
+#:includes/oercurr-metafields:2538
 msgid "Student Background"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:2605
+#:includes/oercurr-metafields:2605
 msgid "Authors"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:2684
+#:includes/oercurr-metafields:2684
 msgid "Primary Resources"
 msgstr ""
 
-#:includes/oer-curriculum-metafields:2835
+#:includes/oercurr-metafields:2835
 msgid "Investigative Question"
 msgstr ""
 
-#:includes/oer-curriculum-settings.php:15
+#:includes/oercurr-settings.php:15
 msgid "Settings - WP Curriculum"
 msgstr ""
 
-#:includes/oer-curriculum-settings.php:23
+#:includes/oercurr-settings.php:23
 msgid "General"
 msgstr ""
 
-#:includes/oer-curriculum-settings.php:24
+#:includes/oercurr-settings.php:24
 msgid "Metadata"
 msgstr ""
 
-#:includes/oer-curriculum-settings.php:42
+#:includes/oercurr-settings.php:42
 msgid "More Information"
 msgstr ""
 
-#:includes/oer-curriculum-settings.php:139
+#:includes/oercurr-settings.php:139
 msgid "Use the options below to update metadata field options."
 msgstr ""
 
-#:templates/oer-curriculum-tag.php:32
+#:templates/oercurr-tag.php:32
 msgid "Inquiry Sets"
 msgstr ""
 
-#:templates/oer-curriculum-tag.php:179
+#:templates/oercurr-tag.php:179
 msgid "View Item"
 msgstr ""
 

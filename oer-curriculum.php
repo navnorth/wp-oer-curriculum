@@ -32,8 +32,8 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 //defining the url,path and slug for the plugin
-define( 'OER_LESSON_PLAN_URL', plugin_dir_url(__FILE__) );
-define( 'OER_LESSON_PLAN_PATH', plugin_dir_path(__FILE__) );
+define( 'OERCURR_CURRICULUM_URL', plugin_dir_url(__FILE__) );
+define( 'OERCURR_CURRICULUM_PATH', plugin_dir_path(__FILE__) );
 define( 'OER_CURRICULUM_SLUG','oer-curriculum' );
 define( 'OER_LESSON_PLAN_FILE',__FILE__);
 // Plugin Name and Version
@@ -41,11 +41,11 @@ define( 'OER_LESSON_PLAN_PLUGIN_NAME', 'OER Curriculum Plugin' );
 define( 'OER_LESSON_PLAN_ADMIN_PLUGIN_NAME', 'OER Curriculum Plugin');
 define( 'OER_LESSON_PLAN_VERSION', '0.5.0' );
 
-include_once(OER_LESSON_PLAN_PATH.'includes/oer-curriculum-functions.php');
-include_once(OER_LESSON_PLAN_PATH.'includes/init.php');
+include_once(OERCURR_CURRICULUM_PATH.'includes/oer-curriculum-functions.php');
+include_once(OERCURR_CURRICULUM_PATH.'includes/init.php');
 
-require_once(OER_LESSON_PLAN_PATH.'includes/blocks/curriculum-block/init.php');
-require_once(OER_LESSON_PLAN_PATH.'includes/blocks/curriculum-featured-block/init.php');
+require_once(OERCURR_CURRICULUM_PATH.'includes/blocks/curriculum-block/init.php');
+require_once(OERCURR_CURRICULUM_PATH.'includes/blocks/curriculum-featured-block/init.php');
 
 global $oer_curriculum_default_structure;
 global $oer_convert_info;
@@ -234,7 +234,7 @@ function oercurr_enqueue_inquiry_set_block(){
     global $post;
     wp_enqueue_script(
         'curriculum-thumbnail-block-js',
-        OER_LESSON_PLAN_URL . "/js/backend/oer-curriculum-thumbnail-block.build.js",
+        OERCURR_CURRICULUM_URL . "/js/backend/oer-curriculum-thumbnail-block.build.js",
         array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-components', 'wp-editor', 'wp-api')
     );
     wp_localize_script(
@@ -246,7 +246,7 @@ function oercurr_enqueue_inquiry_set_block(){
     );
     wp_enqueue_style(
         'curriculum-thumbnail-block-css',
-        OER_LESSON_PLAN_URL . "/css/backend/oer-curriculum-thumbnail-block.css",
+        OERCURR_CURRICULUM_URL . "/css/backend/oer-curriculum-thumbnail-block.css",
         array('wp-edit-blocks')
     );
     /* Register Thumbnail Block */
