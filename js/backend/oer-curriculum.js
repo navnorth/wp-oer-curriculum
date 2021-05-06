@@ -488,7 +488,7 @@ jQuery(document).ready(function ($) {
                 standardsIds = standardsArr.join();
                 jQuery("input[name='oer_curriculum_standards']").val(standardsIds);
                 // Unchecked the checkbox from popup
-                jQuery('#lpOerStandardModal input[value='+pillId+']').attr('checked', false);
+                jQuery('#lpOerStandardModal input[value="'+pillId+'"]').prop('checked', false);
             });
         },
         
