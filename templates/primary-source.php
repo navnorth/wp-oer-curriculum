@@ -176,7 +176,7 @@ $type = (isset($type[0]))?$type[0]:'textbox';
         <div class="oercurr-center">
             <?php if (isset($resource_url)) { ?>
             <div class="ps-meta-group ps-resource-url">
-                <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OER_CURRICULUM_SLUG); ?></a>
+                <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OERCURR_CURRICULUM_SLUG); ?></a>
             </div>
             <?php } ?>
         </div>
@@ -196,7 +196,7 @@ $type = (isset($type[0]))?$type[0]:'textbox';
             <div class="oercurr-center">
                 <?php if (isset($resource_url)) { ?>
                 <div class="ps-meta-group ps-resource-url">
-                    <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OER_CURRICULUM_SLUG); ?></a>
+                    <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OERCURR_CURRICULUM_SLUG); ?></a>
                 </div>
                 <?php } ?>
             </div>

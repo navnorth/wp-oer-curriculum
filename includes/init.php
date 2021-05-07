@@ -287,8 +287,10 @@ function oercurr_enqueue_admin_assets() {
         wp_register_script('oercurr-script', OERCURR_CURRICULUM_URL . 'js/backend/oer-curriculum.js');
         wp_localize_script('oercurr-script','lpScript', array("image_placeholder_url" => OERCURR_CURRICULUM_URL.'images/oer-curriculum-person-placeholder.png'));
         wp_enqueue_script('oercurr-script');
-          wp_enqueue_script('oercurr-resource-selector-script', OERCURR_CURRICULUM_URL . 'js/backend/oer-curriculum-resource-selector.js' , array('jquery') , null, true);
-    }
+        wp_enqueue_script('oercurr-resource-selector-script', OERCURR_CURRICULUM_URL . 'js/backend/oer-curriculum-resource-selector.js' , array('jquery') , null, true);      
+        wp_enqueue_script('oercurr-cfb-admin-jqueryui-core', admin_url( 'wp-includes/js/jquery/ui/core.min.js' ) ,array('jquery') , null, true);
+        wp_enqueue_script('oercurr-cfb-admin-jqueryui-sortable', admin_url( 'wp-includes/js/jquery/ui/sortable.min.js' ) ,array('jquery, oercurr-cfb-admin-jqueryui-core') , null, true);
+  }
     
 }
 
@@ -335,6 +337,7 @@ if (!function_exists('oercurr_enqueue_frontend_scripts_and_styles')) {
             wp_localize_script( 'oercurr-script', 'oer_curriculum_ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
         }
         wp_enqueue_script( 'jquery-ui-dialog' );
+        wp_enqueue_style('oercurr-load-fa', OERCURR_CURRICULUM_URL . 'lib/fontawesome/css/all.min.css');
     }
 }
 
@@ -1144,7 +1147,7 @@ function oercurr_add_text_feature_callback() {
     $content = '<div class="card col card-default oercurr-section-element-wrapper" id="oer_curriculum_section_element_wrapper-'.$element_id.'">';
     $content .= '   <div class="card-header">';
     $content .= '       <h3 class="card-title oercurr-module-title">';
-    $content .=             __("Section", OER_CURRICULUM_SLUG);
+    $content .=             __("Section", OERCURR_CURRICULUM_SLUG);
     $content .= '           <span class="oercurr-sortable-handle">';
     $content .= '               <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>';
     $content .= '               <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>';
@@ -1205,10 +1208,10 @@ function oercurr_add_modals_to_footer(){
 add_action( 'admin_footer', 'oercurr_add_modals_to_footer', 10 );
 
 
-function add_oer_curriculum_settings(){
+function oercurr_add_curriculum_settings(){
     add_submenu_page('edit.php?post_type=oer-curriculum','Settings','Settings','add_users','oer_curriculum_settings','oercurr_settings_callback_func');
 }
-add_action( 'admin_menu', 'add_oer_curriculum_settings' );
+add_action( 'admin_menu', 'oercurr_add_curriculum_settings' );
 
 function oercurr_settings_callback_func(){
     include_once( OERCURR_CURRICULUM_PATH."includes/oer-curriculum-settings.php" );

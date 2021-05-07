@@ -520,8 +520,8 @@ function oercurr_grade_levels($grade_levels){
     }
 }
 
-if (! function_exists('is_oer_plugin_installed')){
-    function is_oer_plugin_installed(){
+if (! function_exists('oercurr_is_oer_plugin_installed')){
+    function oercurr_is_oer_plugin_installed(){
         $activeOER = false;
         $active_plugins_basenames = get_option( 'active_plugins' );
         foreach ( $active_plugins_basenames as $plugin_basename ) {
@@ -533,8 +533,8 @@ if (! function_exists('is_oer_plugin_installed')){
     }
 }
 
-if (! function_exists('oercull_is_standards_plugin_installed')){
-    function oercull_is_standards_plugin_installed(){
+if (! function_exists('oercurr_is_standards_plugin_installed')){
+    function oercurr_is_standards_plugin_installed(){
         $activeWAS = false;
         $active_plugins_basenames = get_option( 'active_plugins' );
         foreach ( $active_plugins_basenames as $plugin_basename ) {
@@ -559,64 +559,64 @@ if (!function_exists('oercurr_get_meta_label')){
             $label = "";
             switch ($key){
             case "oer_curriculum_authors":
-                $label = __("Author", OER_CURRICULUM_SLUG);
+                $label = __("Author", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_primary_resources":
-                $label = __("Primary Resources", OER_CURRICULUM_SLUG);
+                $label = __("Primary Resources", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_iq":
-                $label = __("Investigative Question", OER_CURRICULUM_SLUG);
+                $label = __("Investigative Question", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_objective":
-                $label = __("Related Instructional Objectives (SWBAT...)", OER_CURRICULUM_SLUG);
+                $label = __("Related Instructional Objectives (SWBAT...)", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_custom_editor_historical_background":
-                $label = __("Historical Background", OER_CURRICULUM_SLUG);
+                $label = __("Historical Background", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_download_copy":
-                $label = __("Download Copy", OER_CURRICULUM_SLUG);
+                $label = __("Download Copy", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_download_copy_document":
-                $label = __("Download Copy Document", OER_CURRICULUM_SLUG);
+                $label = __("Download Copy Document", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_curriculum":
-                $label = __("Related Curriculum", OER_CURRICULUM_SLUG);
+                $label = __("Related Curriculum", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_curriculum_1":
-                $label = __("Related Curriculum 1", OER_CURRICULUM_SLUG);
+                $label = __("Related Curriculum 1", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_curriculum_2":
-                $label = __("Related Curriculum 2", OER_CURRICULUM_SLUG);
+                $label = __("Related Curriculum 2", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_curriculum_3":
-                $label = __("Related Curriculum 3", OER_CURRICULUM_SLUG);
+                $label = __("Related Curriculum 3", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_required_materials":
-                $label = __("Required Equipment Materials", OER_CURRICULUM_SLUG);
+                $label = __("Required Equipment Materials", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_grades":
-                $label = __("Grade Level", OER_CURRICULUM_SLUG);
+                $label = __("Grade Level", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_oer_materials":
-                $label = __("Materials", OER_CURRICULUM_SLUG);
+                $label = __("Materials", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_type":
-                $label = __("Type", OER_CURRICULUM_SLUG);
+                $label = __("Type", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_type_other":
-                $label = __("Other Type", OER_CURRICULUM_SLUG);
+                $label = __("Other Type", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_age_levels":
-                $label = __("Appropriate Age Levels", OER_CURRICULUM_SLUG);
+                $label = __("Appropriate Age Levels", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_suggested_instructional_time":
-                $label = __("Suggested Instructional Time", OER_CURRICULUM_SLUG);
+                $label = __("Suggested Instructional Time", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_standards":
-                $label = __("Standards", OER_CURRICULUM_SLUG);
+                $label = __("Standards", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_additional_sections":
-                $label = __("Additional Sections", OER_CURRICULUM_SLUG);
+                $label = __("Additional Sections", OERCURR_CURRICULUM_SLUG);
                 break;
         }
         return $label;

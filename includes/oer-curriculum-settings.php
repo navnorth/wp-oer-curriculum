@@ -13,7 +13,7 @@ global $message, $type;
 <div class="wrap">
     
     <!--<div id="icon-themes" class="oer-logo"><img src="<?php echo OER_URL ?>images/wp-oer-admin-logo.png" /></div>-->
-    <h2><?php _e("Settings - WP Curriculum", OER_CURRICULUM_SLUG); ?></h2>
+    <h2><?php _e("Settings - WP Curriculum", OERCURR_CURRICULUM_SLUG); ?></h2>
     <?php settings_errors(); ?>
      
     <?php
@@ -21,8 +21,8 @@ global $message, $type;
     ?>
      
     <h2 class="nav-tab-wrapper">
-                <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php _e("General", OER_CURRICULUM_SLUG); ?></a>
-        <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=metadata" class="nav-tab <?php echo $active_tab == 'metadata' ? 'nav-tab-active' : ''; ?>"><?php _e("Metadata Fields", OER_CURRICULUM_SLUG); ?></a>
+                <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php _e("General", OERCURR_CURRICULUM_SLUG); ?></a>
+        <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=metadata" class="nav-tab <?php echo $active_tab == 'metadata' ? 'nav-tab-active' : ''; ?>"><?php _e("Metadata Fields", OERCURR_CURRICULUM_SLUG); ?></a>
         </h2>
     
     <?php
@@ -39,8 +39,8 @@ global $message, $type;
     ?>
 </div><!-- /.wrap -->
 <div class="oer-plugin-footer">
-    <div class="oer-plugin-info"><?php echo OER_LESSON_PLAN_PLUGIN_NAME . " " . OER_LESSON_PLAN_VERSION .""; ?></div>
-    <div class="oer-plugin-link"><a href='https://www.wp-oer.com/' target='_blank'><?php _e("More Information", OER_CURRICULUM_SLUG); ?></a></div>
+    <div class="oer-plugin-info"><?php echo OERCURR_CURRICULUM_PLUGIN_NAME . " " . OERCURR_CURRICULUM_VERSION .""; ?></div>
+    <div class="oer-plugin-link"><a href='https://www.wp-oer.com/' target='_blank'><?php _e("More Information", OERCURR_CURRICULUM_SLUG); ?></a></div>
     <div class="clear"></div>
 </div>
 <?php

@@ -34,12 +34,12 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 //defining the url,path and slug for the plugin
 define( 'OERCURR_CURRICULUM_URL', plugin_dir_url(__FILE__) );
 define( 'OERCURR_CURRICULUM_PATH', plugin_dir_path(__FILE__) );
-define( 'OER_CURRICULUM_SLUG','oer-curriculum' );
-define( 'OER_LESSON_PLAN_FILE',__FILE__);
+define( 'OERCURR_CURRICULUM_SLUG','oer-curriculum' );
+define( 'OERCURR_CURRICULUM_FILE',__FILE__);
 // Plugin Name and Version
-define( 'OER_LESSON_PLAN_PLUGIN_NAME', 'OER Curriculum Plugin' );
-define( 'OER_LESSON_PLAN_ADMIN_PLUGIN_NAME', 'OER Curriculum Plugin');
-define( 'OER_LESSON_PLAN_VERSION', '0.5.0' );
+define( 'OERCURR_CURRICULUM_PLUGIN_NAME', 'OER Curriculum Plugin' );
+define( 'OERCURR_CURRICULUM_ADMIN_PLUGIN_NAME', 'OER Curriculum Plugin');
+define( 'OERCURR_CURRICULUM_VERSION', '0.5.0' );
 
 include_once(OERCURR_CURRICULUM_PATH.'includes/oer-curriculum-functions.php');
 include_once(OERCURR_CURRICULUM_PATH.'includes/init.php');

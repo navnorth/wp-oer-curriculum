@@ -266,7 +266,7 @@
                       <div class="oercurr-tc-subject-areas">
                          <a href="#collapse_oer_curriculum_subjects" class="tc_oer_curriculum_collapse_button collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
                            <h4 class="oercurr-tc-field-heading clearfix">
-                                <span class="oer_curriculum_related_fields"><?php _e("Subjects",OER_CURRICULUM_SLUG); ?></span><span class="oer_curriculum_acicon"></span>
+                                <span class="oer_curriculum_related_fields"><?php _e("Subjects",OERCURR_CURRICULUM_SLUG); ?></span><span class="oer_curriculum_acicon"></span>
                             </h4>
                          </a>
                          <div class="oercurr-tc-subject-details clearfix collapse" id="collapse_oer_curriculum_subjects">
@@ -526,7 +526,7 @@
           </div>
       </div>
       <div class="row see-more-row">
-          <p class="center"><span><a id="see-more-link" class="see-more-link" role="button" data-toggle="collapse" href="#tcHiddenFields" aria-expanded="false" aria-controls="tcHiddenFields"><?php _e("SEE MORE +",OER_CURRICULUM_SLUG); ?></a></span></p>
+          <p class="center"><span><a id="see-more-link" class="see-more-link" role="button" data-toggle="collapse" href="#tcHiddenFields" aria-expanded="false" aria-controls="tcHiddenFields"><?php _e("SEE MORE +",OERCURR_CURRICULUM_SLUG); ?></a></span></p>
       </div>
       <?php if($primary_resources_enabled){ ?>
       <div class="row oercurr-primary-sources-row">
@@ -648,7 +648,7 @@
                                           <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                           <span class="resource-overlay"></span>
                                           <?php if (!empty($type)): ?>
-                                          <span class="oercurr-source-type"><?php _e("Text", OER_CURRICULUM_SLUG); ?></span>
+                                          <span class="oercurr-source-type"><?php _e("Text", OERCURR_CURRICULUM_SLUG); ?></span>
                                           <?php endif; ?>
                                           <div class="resource-thumbnail text-thumbnail"></div>
                                       </a>
@@ -674,7 +674,7 @@
                                           <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                           <span class="resource-overlay"></span>
                                           <?php if (!empty($type)): ?>
-                                          <span class="oercurr-source-type"><?php _e("Text", OER_CURRICULUM_SLUG); ?></span>
+                                          <span class="oercurr-source-type"><?php _e("Text", OERCURR_CURRICULUM_SLUG); ?></span>
                                           <?php endif; ?>
                                           <div class="resource-thumbnail text-thumbnail"></div>
                                       </a>
@@ -697,14 +697,14 @@
                                       <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                       <span class="resource-overlay"></span>
                                       <?php if (!empty($type)): ?>
-                                      <span class="oercurr-source-type"><?php _e("Text", OER_CURRICULUM_SLUG); ?></span>
+                                      <span class="oercurr-source-type"><?php _e("Text", OERCURR_CURRICULUM_SLUG); ?></span>
                                       <?php endif; ?>
                                       <div class="resource-thumbnail text-thumbnail"></div>
                                   </a>
                               </div>
                               <div class="oercurr-resource-info">
                                 <div class="oercurr-resource-title">
-                                    <?php _e("Text List", OER_CURRICULUM_SLUG); ?>
+                                    <?php _e("Text List", OERCURR_CURRICULUM_SLUG); ?>
                                 </div>
                               </div>
                           </div>
@@ -723,7 +723,7 @@
                                           <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                           <span class="resource-overlay"></span>
                                           <?php if (!empty($type)): ?>
-                                          <span class="oercurr-source-type"><?php _e("Text", OER_CURRICULUM_SLUG); ?></span>
+                                          <span class="oercurr-source-type"><?php _e("Text", OERCURR_CURRICULUM_SLUG); ?></span>
                                           <?php endif; ?>
                                           <div class="resource-thumbnail text-thumbnail"></div>
                                       </a>
@@ -745,14 +745,14 @@
                                       <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                       <span class="resource-overlay"></span>
                                       <?php if (!empty($type)): ?>
-                                      <span class="oercurr-source-type"><?php _e("Text", OER_CURRICULUM_SLUG); ?></span>
+                                      <span class="oercurr-source-type"><?php _e("Text", OERCURR_CURRICULUM_SLUG); ?></span>
                                       <?php endif; ?>
                                       <div class="resource-thumbnail text-thumbnail"></div>
                                   </a>
                               </div>
                               <div class="oercurr-resource-info">
                                 <div class="oercurr-resource-title">
-                                    <?php _e("Materials", OER_CURRICULUM_SLUG); ?>
+                                    <?php _e("Materials", OERCURR_CURRICULUM_SLUG); ?>
                                 </div>
                               </div>
                           </div>
