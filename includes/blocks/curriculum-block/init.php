@@ -58,7 +58,7 @@ function oercurr_cb_block_assets() { // phpcs:ignore
 
     // Register block editor script for backend.
     wp_register_script(
-        'curriculum_block-cgb-block-js', // Handle.
+        'oercurr_cb_block-cgb-js', // Handle.
         plugins_url( '/curriculum-block/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
         array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
         null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
@@ -75,15 +75,16 @@ function oercurr_cb_block_assets() { // phpcs:ignore
     
     
     
-    // WP Localized globals. Use dynamic PHP stuff in JavaScript via `cgbGlobal` object.
+    // WP Localized globals. Use dynamic PHP stuff in JavaScript via `oercurr_cb_cgb_Global` object.
     wp_localize_script(
-        'curriculum_block-cgb-block-js',
-        'cgbGlobal', // Array containing dynamic data for a JS Global.
+        'oercurr_cb_block-cgb-js',
+        'oercurr_cb_cgb_Global', // Array containing dynamic data for a JS Global.
         [
             'pluginDirPath' => plugin_dir_path( __DIR__ ),
             'pluginDirUrl'  => plugin_dir_url( __DIR__ ),
             'base_url' => get_home_url(),
-            // Add more data here that you want to access from `cgbGlobal` object.
+            'preview_url' => OERCURR_CURRICULUM_URL.'includes/blocks/curriculum-block/blockpreview.jpg',
+            // Add more data here that you want to access from `oercurr_cb_cgb_Global` object.
         ]
     );
 
@@ -104,9 +105,23 @@ function oercurr_cb_block_assets() { // phpcs:ignore
             // Enqueue blocks.style.build.css on both frontend & backend.
             'style'         => 'curriculum_block-cgb-style-css',
             // Enqueue blocks.build.js in the editor only.
-            'editor_script' => 'curriculum_block-cgb-block-js',
+            'editor_script' => 'oercurr_cb_block-cgb-js',
             // Enqueue blocks.editor.build.css in the editor only.
             'editor_style'  => 'curriculum_block-cgb-block-editor-css',
+            'attributes'      => array(
+        			'custom'      => array(
+        				'type'    => 'string',
+        				'default' => '',
+        			),
+        			'width'       => array(
+        				'type'    => 'string',
+        				'default' => '',
+        			),
+        			'preview'     => array(
+        				'type'    => 'boolean',
+        				'default' => false,
+        			),
+        		),
             'render_callback' => 'oercurr_cb_render_posts_block'
         )
     );
