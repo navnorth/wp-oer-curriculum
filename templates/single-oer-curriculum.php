@@ -179,7 +179,7 @@
                                       $inquiry = oercurr_get_inquiry_set_details($inquiry_set);
                                       $inquiry_link = get_permalink($inquiry_set);
                                       if($related_curriculum_set_enabled){
-                                        echo '<li><a href="'.$inquiry_link.'">'.$inquiry->post_title.'</a></li>';
+                                        echo '<li><a href="'.esc_url($inquiry_link).'">'.$inquiry->post_title.'</a></li>';
                                       }
                                   }
                               } ?>
@@ -277,7 +277,7 @@
                                   $moreCnt = $cnt - 2;
                                   foreach($post_terms as $term){
                                       $subject_parent = get_term_parents_list($term->term_id,'resource-subject-area', array('separator' => ' <i class="fas fa-angle-double-right"></i> ', 'inclusive' => false));
-                                      $subject = $subject_parent . '<a href="'.get_term_link($term->term_id).'">'.$term->name.'</a>';
+                                      $subject = $subject_parent . '<a href="'.esc_url(get_term_link($term->term_id)).'">'.$term->name.'</a>';
                                       if ($i>2)
                                           echo '<li class="collapse oercurr-subject-hidden">'.$subject.'</li>';
                                       else
@@ -415,10 +415,10 @@
                                     ?>
                                     <li>
                                     <div class="form-field">
-                                      <span class="oercurr-tc-label"><a href="<?php echo $addtl_materials['url'][$i]; ?>"><?php echo $addtl_materials['title'][$i]; ?></a></span>
+                                      <span class="oercurr-tc-label"><a href="<?php echo esc_url($addtl_materials['url'][$i]); ?>"><?php echo $addtl_materials['title'][$i]; ?></a></span>
                                     </div>
                                     <div>
-                                      <span class="oercurr-tc-value"><p><?php echo $addtl_materials['description'][$i]; ?></p></span>
+                                      <span class="oercurr-tc-value"><p><?php echo esc_url($addtl_materials['description'][$i]); ?></p></span>
                                     </div>
                                     </li>
                                     <?php
@@ -480,7 +480,7 @@
                               if ($aIndex>0)
                                   echo ", ";
                               if (isset($author_url))
-                                  echo "<span class='oercurr-tc-author'><a href='".$author_url."'>".$authors['name'][$aIndex]."</a></span>";
+                                  echo "<span class='oercurr-tc-author'><a href='".esc_url($author_url)."'>".$authors['name'][$aIndex]."</a></span>";
                               else
                                   echo "<span class='oercurr-tc-author'>".$authors['name'][$aIndex]."</span>";
                                   
@@ -494,7 +494,7 @@
                   <?php if ($oer_curriculum_download_copy_document && $download_copy_enabled): ?>
                   <div class="oercurr-tc-controls">
                       <div class="sharethis-inline-share-buttons"></div>
-                      <a href="<?php echo $oer_curriculum_download_copy_document; ?>" target="_blank" title="Downloadable Copy"><i class="fa fa-download"></i></a>
+                      <a href="<?php echo esc_url($oer_curriculum_download_copy_document); ?>" target="_blank" title="Downloadable Copy"><i class="fa fa-download"></i></a>
                   </div>
                   <?php endif; ?>
                     
@@ -584,7 +584,7 @@
                           <div class="media-image">
                               <div class="image-thumbnail">
                                   <?php $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/source/".sanitize_title($title)."-".$resource_id)."/idx/".$_idx++; ?>
-                                  <a href="<?php echo $ps_url;  ?>">
+                                  <a href="<?php echo esc_url($ps_url);  ?>">
                                       <?php if($resource_img==''): $_avtr = oer_getResourceIcon($type,$url); ?>    
                                         <div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div>    
                                       <?php endif; ?>
@@ -606,10 +606,10 @@
                                 <div class="oercurr-resource-title"><?php echo $title; ?></div>    
                                 <div class="oercurr-resource-author">    
                                   <?php if( $oer_authorname != ''):?>    
-                                    <div class="oercurr-resource-author_block"><a href="<?php echo $oer_authorurl; ?>" target="_new"><?php echo $oer_authorname; ?></a></div>    
+                                    <div class="oercurr-resource-author_block"><a href="<?php echo esc_url($oer_authorurl); ?>" target="_new"><?php echo $oer_authorname; ?></a></div>    
                                   <?php endif; ?>    
                                   <?php /* if( $oer_authorname2 != ''):?>    
-                                    <div class="oercurr-resource-author_block"><a href=""><?php echo $oer_authorname2; ?></a></div>    
+                                    <div class="oercurr-resource-author_block"><a href=""><?php echo esc_url($oer_authorname2); ?></a></div>    
                                   <?php endif;*/ ?>
                                 </div>
                                 <div class="oercurr-resource-excerpt"><?php echo oer_get_related_resource_content(strip_tags($description), 50); ?></div>
@@ -644,7 +644,7 @@
                               <div class="media-image">
                                   <div class="image-thumbnail">
                                       <?php  $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_curriculum_custom_editor['title'])); ?>
-                                      <a href="<?php echo $ps_url;  ?>">
+                                      <a href="<?php echo esc_url($ps_url);  ?>">
                                           <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                           <span class="resource-overlay"></span>
                                           <?php if (!empty($type)): ?>
@@ -670,7 +670,7 @@
                               <div class="media-image">
                                   <div class="image-thumbnail">
                                       <?php  $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_curriculum_custom_editor['title'])); ?>
-                                      <a href="<?php echo $ps_url;  ?>">
+                                      <a href="<?php echo esc_url($ps_url);  ?>">
                                           <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                           <span class="resource-overlay"></span>
                                           <?php if (!empty($type)): ?>
@@ -693,7 +693,7 @@
                           <div class="media-image">
                               <div class="image-thumbnail">
                                   <?php  $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title("Text List")); ?>
-                                  <a href="<?php echo $ps_url;  ?>">
+                                  <a href="<?php echo esc_url($ps_url);  ?>">
                                       <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                       <span class="resource-overlay"></span>
                                       <?php if (!empty($type)): ?>
@@ -719,7 +719,7 @@
                               <div class="media-image">
                                   <div class="image-thumbnail">
                                       <?php  $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_curriculum_vocabulary_list_title)); ?>
-                                      <a href="<?php echo $ps_url;  ?>">
+                                      <a href="<?php echo esc_url($ps_url);  ?>">
                                           <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                           <span class="resource-overlay"></span>
                                           <?php if (!empty($type)): ?>
@@ -741,7 +741,7 @@
                           <div class="media-image">
                               <div class="image-thumbnail">
                                   <?php  $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($oer_curriculum_vocabulary_list_title)); ?>
-                                  <a href="<?php echo $ps_url;  ?>">
+                                  <a href="<?php echo esc_url($ps_url);  ?>">
                                       <div class="resource-avatar"><span class="dashicons dashicons-media-text"></span></div>
                                       <span class="resource-overlay"></span>
                                       <?php if (!empty($type)): ?>

@@ -155,14 +155,14 @@ function oercurr_cfb_render_featured_block($attributes, $ajx=false){
 
                                     $_ret .= '<li>';
                                         $_ret .= '<div class="frtdsnglwpr">';
-                                            $_ret .= '<a href="'.$_cfb_link.'">';
+                                            $_ret .= '<a href="'.esc_url($_cfb_link).'">';
                                                 $_ret .= '<div class="img">';
 
-                                                        $_ret .= '<img src="'.$_cfb_image.'" alt="'.$_cfb_title.'" />';
+                                                        $_ret .= '<img src="'.esc_url($_cfb_image).'" alt="'.$_cfb_title.'" />';
 
                                                 $_ret .= '</div>';
                                             $_ret .= '</a>';
-                                            $_ret .= '<div class="ttl"><a href="'.$_cfb_link.'">'.$_cfb_title.'</a></div>';
+                                            $_ret .= '<div class="ttl"><a href="'.esc_url($_cfb_link).'">'.$_cfb_title.'</a></div>';
                                             $_ret .= '<div class="desc">'.$_cfb_desc.'</div>';
                                         $_ret .= '</div>';
                                     $_ret .= '</li>';

@@ -168,9 +168,9 @@ function oercurr_cb_render_posts_block($attributes, $ajx=false){
     foreach($posts as $post){
         $_content .= '<div class="oercurr-blk-row">';
             $featured_img_url = get_the_post_thumbnail_url($post->ID,'medium'); 
-            $_content .= '<a href="'.get_post_permalink($post->ID).'" class="oercurr-blk-left"><img src="'.$featured_img_url.'" alt="" /></a>';
+            $_content .= '<a href="'.esc_url(get_post_permalink($post->ID)).'" class="oercurr-blk-left"><img src="'.esc_url($featured_img_url).'" alt="" /></a>';
             $_content .= '<div class="oercurr-blk-right">';
-                $_content .= '<div class="ttl"><a href="'.get_post_permalink($post->ID).'">'.$post->post_title.'</a></div>';
+                $_content .= '<div class="ttl"><a href="'.esc_url(get_post_permalink($post->ID)).'">'.$post->post_title.'</a></div>';
                 $_content .= '<div class="oercurr-postmeta">';
                     if(count($post->oer_curriculum_grades)>1){
                         $_content .= '<span class="oercurr-postmeta-grades"><strong>Grades:</strong> '. $post->oer_curriculum_grades[0].'-'.$post->oer_curriculum_grades[count($post->oer_curriculum_grades)-1].'</span>';
@@ -187,7 +187,7 @@ function oercurr_cb_render_posts_block($attributes, $ajx=false){
                 $_content .= '<div class="oercurr-tags tagcloud">';
                 if(!empty($_arr_tag)){
                     foreach($_arr_tag as $key => $tag) {
-                        $_content .= '<span><a href="'.get_home_url().'/tag/'.$tag->slug.'" alt="" class="button">'.$tag->name.'</a></span>';
+                        $_content .= '<span><a href="'.esc_url(get_home_url().'/tag/'.$tag->slug).'" alt="" class="button">'.$tag->name.'</a></span>';
                     }
                 }
                 $_content .= '</div">';                    

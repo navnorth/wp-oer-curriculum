@@ -549,7 +549,7 @@ if (! function_exists('oercurr_is_standards_plugin_installed')){
 if (! function_exists('oercurr_display_loader')){
     function oercurr_display_loader(){
     ?>
-    <div class="oercurr-loader"><div class="loader-img"><div><img src="<?php echo OERCURR_CURRICULUM_URL; ?>images/load.gif" align="center" valign="middle" /></div></div></div>
+    <div class="oercurr-loader"><div class="loader-img"><div><img src="<?php echo esc_url(OERCURR_CURRICULUM_URL); ?>images/load.gif" align="center" valign="middle" /></div></div></div>
     <?php
     }
 }

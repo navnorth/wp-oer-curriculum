@@ -122,7 +122,7 @@ $type = (isset($type[0]))?$type[0]:'textbox';
   //Breadcrumb trail 
   $sup = (!empty($new_title))? $new_title : $resource->post_title; 
   $ret = '<div class="wp_oer_breadcrumb">'; 
-  $ret .= '<a href="'.get_site_url().'">Home</a>'; 
+  $ret .= '<a href="'.esc_url(get_site_url()).'">Home</a>'; 
   $cur = (strlen($curriculum_details->post_title) > 30)? substr($curriculum_details->post_title, 0, 30).'...' : $curriculum_details->post_title; 
   $ret .= ' / <a href="'.site_url($root_slug."/".$curriculum).'">'.$cur.'</a>'; 
   $res = (strlen($sup) > 30)? substr($sup, 0, 30).'...' : $sup; 
@@ -130,7 +130,7 @@ $type = (isset($type[0]))?$type[0]:'textbox';
   $ret .= '</div>'; 
   echo $ret; 
 ?> 
-<div class="oercurr-nav-block"><a class="back-button" href="<?php echo $back_url; ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
+<div class="oercurr-nav-block"><a class="back-button" href="<?php echo esc_url($back_url); ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
 <div class="row ps-details-row">
     <?php if (!empty($featured_image_url) || $youtube || $isPDF) {
         $right_class = "col-md-8";
@@ -164,19 +164,19 @@ $type = (isset($type[0]))?$type[0]:'textbox';
         <?php else: ?>
         <div class="ps-image-block">
            <?php if (isset($resource_url)) { ?>
-           <a href="<?php echo $resource_url; ?>" target="_blank"><img src="<?php echo $featured_image_url; ?>" alt="<?php echo $resource->post_title; ?>" /></a>
+           <a href="<?php echo esc_url($resource_url); ?>" target="_blank"><img src="<?php echo esc_url($featured_image_url); ?>" alt="<?php echo $resource->post_title; ?>" /></a>
            <?php }  else { ?>
-           <img src="<?php echo $featured_image_url; ?>" alt="<?php echo $resource->post_title; ?>" />
+           <img src="<?php echo esc_url($featured_image_url); ?>" alt="<?php echo $resource->post_title; ?>" />
            <?php } ?>
         </div>
         <?php if ($type=="website"): ?>
-        <span class="ps-expand"><a href="<?php echo $resource_url; ?>" class="oercurr-expand-img" target="_blank"><i class="fas fa-external-link-alt"></i></a></span>
+        <span class="ps-expand"><a href="<?php echo esc_url($resource_url); ?>" class="oercurr-expand-img" target="_blank"><i class="fas fa-external-link-alt"></i></a></span>
         <?php endif; ?>
         <?php endif; ?>
         <div class="oercurr-center">
             <?php if (isset($resource_url)) { ?>
             <div class="ps-meta-group ps-resource-url">
-                <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OERCURR_CURRICULUM_SLUG); ?></a>
+                <a href="<?php echo esc_url($resource_url); ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OERCURR_CURRICULUM_SLUG); ?></a>
             </div>
             <?php } ?>
         </div>
@@ -190,13 +190,13 @@ $type = (isset($type[0]))?$type[0]:'textbox';
         <div class="ps-media-image col-md-4 col-sm-12" data-curid="<?php echo $index; ?>">
             <div class="oer-sngl-rsrc-img">
                  <?php if (empty($feature_image_url)): ?>
-                 <a class="oer-featureimg" href="<?php echo $resource_url; ?>" target="_blank"><span class="dashicons <?php if (function_exists('oer_getResourceIcon')) echo oer_getResourceIcon($media_type,$resource_url); ?> nofeat"></span></a>
+                 <a class="oer-featureimg" href="<?php echo esc_url($resource_url); ?>" target="_blank"><span class="dashicons <?php if (function_exists('oer_getResourceIcon')) echo oer_getResourceIcon($media_type,$resource_url); ?> nofeat"></span></a>
                 <?php endif; ?>
             </div>
             <div class="oercurr-center">
                 <?php if (isset($resource_url)) { ?>
                 <div class="ps-meta-group ps-resource-url">
-                    <a href="<?php echo $resource_url; ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OERCURR_CURRICULUM_SLUG); ?></a>
+                    <a href="<?php echo esc_url($resource_url); ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OERCURR_CURRICULUM_SLUG); ?></a>
                 </div>
                 <?php } ?>
             </div>
@@ -233,7 +233,7 @@ $type = (isset($type[0]))?$type[0]:'textbox';
         if (!empty($prev_image))
             $resource_img = $prev_image;
         ?>
-        <a class="oercurr-ps-nav-left" href="<?php echo $prev_url; ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>">
+        <a class="oercurr-ps-nav-left" href="<?php echo esc_url($prev_url); ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>">
             <span class="col-md-3">&nbsp;</span>
             <span class="nav-media-icon"><i class="fas fa-arrow-left fa-2x"></i></span>
             <span class="nav-media-image col-md-8">
@@ -270,7 +270,7 @@ $type = (isset($type[0]))?$type[0]:'textbox';
         if (!empty($next_image))
             $resource_img = $next_image;
         ?>
-        <a class="oercurr-ps-nav-right" href="<?php echo $next_url; ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>">
+        <a class="oercurr-ps-nav-right" href="<?php echo esc_url($next_url); ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>">
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if (!empty($resource_img)): ?>
@@ -304,7 +304,7 @@ $type = (isset($type[0]))?$type[0]:'textbox';
 </div>
 <div class="oercurr-ajax-loader" role="status">
     <div class="oercurr-ajax-loader-img">
-        <img src="<?php echo OERCURR_CURRICULUM_URL."/images/load.gif"; ?>" />
+        <img src="<?php echo esc_url(OERCURR_CURRICULUM_URL."/images/load.gif"); ?>" />
     </div>
 </div>
 <?php

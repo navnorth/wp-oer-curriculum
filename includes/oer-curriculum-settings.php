@@ -12,7 +12,7 @@ global $message, $type;
 ?>
 <div class="wrap">
     
-    <!--<div id="icon-themes" class="oer-logo"><img src="<?php echo OER_URL ?>images/wp-oer-admin-logo.png" /></div>-->
+    <!--<div id="icon-themes" class="oer-logo"><img src="<?php echo esc_url(OER_URL) ?>images/wp-oer-admin-logo.png" /></div>-->
     <h2><?php _e("Settings - WP Curriculum", OERCURR_CURRICULUM_SLUG); ?></h2>
     <?php settings_errors(); ?>
      

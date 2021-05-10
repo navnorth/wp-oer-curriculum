@@ -45,12 +45,12 @@ $inquiry_sets = get_posts( $args );
                     $grade_level = oercurr_grade_level($inquiry_set->ID);
             ?>
             <div class="col-md-4 col-sm-6 padding-0">
-            <a href="<?php echo $link; ?>" class="oercurr-thumbnail-block oercurr-related-block-link">
+            <a href="<?php echo esc_url($link); ?>" class="oercurr-thumbnail-block oercurr-related-block-link">
                 <div class="oercurr-related-blocks-padding">
                     <div class="media-image">
                         <div class="image-thumbnail">
                             <div class="image-section">
-                                <img src="<?php echo $thumbnail_url; ?>" alt="" class="img-thumbnail-square img-responsive img-loaded">
+                                <img src="<?php echo esc_url($thumbnail_url); ?>" alt="" class="img-thumbnail-square img-responsive img-loaded">
                             </div>
                         </div>
                     </div>

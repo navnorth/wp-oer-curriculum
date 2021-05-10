@@ -412,7 +412,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                     $image = OERCURR_CURRICULUM_URL . "images/oer-curriculum-person-placeholder.png";
                                                                 }
                                                                 ?>
-                                                                <img src="<?php echo $image;?>"
+                                                                <img src="<?php echo esc_url($image);?>"
                                                                     class="img-circle oercurr-oer-person-placeholder"
                                                                     width="50px"
                                                                     height="50px"/>
@@ -500,7 +500,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                             <label>Thumbnail Image</label>
                                                             <div class="oer_primary_resource_thumbnail_holder">
                                                                 <?php if (!empty($custom_thumbnail)): ?>
-                                                                <img src="<?php echo $custom_thumbnail; ?>" class="resource-thumbnail" width="200">
+                                                                <img src="<?php echo esc_url($custom_thumbnail); ?>" class="resource-thumbnail" width="200">
                                                                 <span class="btn btn-danger btn-sm oercurr-remove-source-featured-image" title="Remove Thumbnail"><i class="fas fa-minus-circle"></i></span>
                                                                 <?php endif; ?>
                                                             </div>
@@ -532,10 +532,10 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                             $resource_img='';
                                                                             if (!empty($rsrcThumbID)){
                                                                                 $resource_img = wp_get_attachment_image_url(get_post_thumbnail_id($rsrc), 'resource-thumbnail' );
-                                                                                ?><a href="<?php echo $url; ?>" target="_blank"><img src="<?php echo $resource_img ?>"/></a><br><?php echo htmlspecialchars($resource);
+                                                                                ?><a href="<?php echo esc_url($url); ?>" target="_blank"><img src="<?php echo esc_url($resource_img) ?>"/></a><br><?php echo htmlspecialchars($resource);
                                                                             }else{
                                                                               $_avtr = oer_getResourceIcon($type,$url);
-                                                                              ?><a href="<?php echo $url; ?>" target="_blank"><div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div></a><?php
+                                                                              ?><a href="<?php echo esc_url($url); ?>" target="_blank"><div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div></a><?php
                                                                             }
                                                                         }else{
                                                                           ?><p>You have not selected a resources</p><?php
@@ -611,7 +611,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                 <label>Thumbnail Image</label>
                                                                 <div class="oer_primary_resource_thumbnail_holder">
                                                                     <?php if (!empty($custom_thumbnail)): ?>
-                                                                    <img src="<?php echo $custom_thumbnail; ?>" class="resource-thumbnail" width="200">
+                                                                    <img src="<?php echo esc_url($custom_thumbnail); ?>" class="resource-thumbnail" width="200">
                                                                     <span class="btn btn-danger btn-sm oercurr-remove-source-featured-image" title="Remove Thumbnail"><i class="fas fa-minus-circle"></i></span>
                                                                     <?php endif; ?>
                                                                 </div>
@@ -1819,7 +1819,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                     </div>
                                                     <div class="col-md-3">
                                                         <input type="hidden" name="oer_curriculum_authors[author_pic][]">
-                                                        <img src="<?php echo OERCURR_CURRICULUM_URL;?>images/oer-curriculum-person-placeholder.png"
+                                                        <img src="<?php echo esc_url(OERCURR_CURRICULUM_URL);?>images/oer-curriculum-person-placeholder.png"
                                                             class="img-circle oercurr-oer-person-placeholder"
                                                             width="50px"
                                                             height="50px"/>
@@ -2661,7 +2661,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                         </div>
                                         <div class="col-md-3">
                                             <input type="hidden" name="oer_curriculum_authors[author_pic][]">
-                                            <img src="<?php echo OERCURR_CURRICULUM_URL;?>images/oer-curriculum-person-placeholder.png"
+                                            <img src="<?php echo esc_url(OERCURR_CURRICULUM_URL);?>images/oer-curriculum-person-placeholder.png"
                                                  class="img-circle oercurr-oer-person-placeholder"
                                                  width="50px"
                                                  height="50px"/>

@@ -247,7 +247,7 @@ function oercurr_download_copy_callback() {
     $checkbox .= '<div class="input-group full-width">';
     $checkbox .= '<input type="hidden" class="form-control" name="oer_curriculum_download_copy_document" placeholder="Select Document" value="'.$oer_curriculum_download_copy_document.'">';
     if (!empty($oer_curriculum_download_copy_document)){
-        $checkbox .= '<div class="oercurr-selected-section"><a href="'.$oer_curriculum_download_copy_document.'" target="_blank">'.$oer_curriculum_download_copy_document.'</a> <span class="oercurr-remove-download-copy" title="Remove copy"><i class="fas fa-trash-alt"></i></span></div>';
+        $checkbox .= '<div class="oercurr-selected-section"><a href="'.esc_url($oer_curriculum_download_copy_document).'" target="_blank">'.$oer_curriculum_download_copy_document.'</a> <span class="oercurr-remove-download-copy" title="Remove copy"><i class="fas fa-trash-alt"></i></span></div>';
         $checkbox .= '<span class="oercurr-select-label oercurr-hidden">Select Document</span> <div class="input-group-addon oercurr-download-copy-icon oercurr-hidden" title="Select Material">'.$icon.'</div>';   
     } else {
         $checkbox .= '<div class="oercurr-selected-section oercurr-hidden"><a href="" target="_blank"></a> <span class="oercurr-remove-download-copy"><i class="fas fa-trash-alt"></i></span></div>';
