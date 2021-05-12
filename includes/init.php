@@ -288,7 +288,7 @@ function oercurr_enqueue_admin_assets() {
         wp_localize_script('oercurr-script','lpScript', array("image_placeholder_url" => OERCURR_CURRICULUM_URL.'images/oer-curriculum-person-placeholder.png'));
         wp_enqueue_script('oercurr-script');
         wp_enqueue_script('oercurr-resource-selector-script', OERCURR_CURRICULUM_URL . 'js/backend/oer-curriculum-resource-selector.js' , array('jquery') , null, true);      
-        wp_enqueue_script('oercurr-cfb-admin-jqueryui-core', admin_url( 'wp-includes/js/jquery/ui/core.min.js' ) ,array('jquery') , null, true);
+        //wp_enqueue_script('oercurr-cfb-admin-jqueryui-core', admin_url( 'wp-includes/js/jquery/ui/core.min.js' ) ,array('jquery') , null, true);
         wp_enqueue_script('oercurr-cfb-admin-jqueryui-sortable', admin_url( 'wp-includes/js/jquery/ui/sortable.min.js' ) ,array('jquery, oercurr-cfb-admin-jqueryui-core') , null, true);
   }
     
@@ -303,7 +303,6 @@ function oercurr_dequeue_oer_scripts(){
     wp_dequeue_style( 'bootstrap-style' );
     wp_deregister_style( 'bootstrap-style' );
   }
-  
 }
 global $pagenow;
 if ($pagenow=="post.php" || $pagenow=="edit.php" || $pagenow=="post-new.php"){
@@ -1160,7 +1159,7 @@ function oercurr_add_text_feature_callback() {
     $content .= '           <input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" placeholder="Text Title">';
     $content .= '       </div>';
     $content .= '       <div class="form-group">';
-    //$content .= '           <div class="text-editor-group">';
+    $content .= '           <div class="text-editor-group">';
                             ob_start(); // Start output buffer
                             wp_editor('',
                                 $ed_id . $element_id,
@@ -1173,7 +1172,7 @@ function oercurr_add_text_feature_callback() {
                                 )
                             );
     $content .=             ob_get_clean();
-    //$content .= '           </div>';
+    $content .= '           </div>';
     $content .= '       </div>';
     $content .= '   </div>';
     $content .= '</div>';
@@ -1216,3 +1215,5 @@ add_action( 'admin_menu', 'oercurr_add_curriculum_settings' );
 function oercurr_settings_callback_func(){
     include_once( OERCURR_CURRICULUM_PATH."includes/oer-curriculum-settings.php" );
 }
+
+add_filter( 'wp_default_editor', function(){return "html";} );

@@ -2259,7 +2259,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                         <p><?php _e("You have not selected any academic standards", OERCURR_CURRICULUM_SLUG); ?></p>
                                     </div>
                                     <input type="hidden" name="oer_curriculum_standards">
-                                    <div class="row">
+                                    <div class="row pb-3">
                                         <div class="col-md-12">
                                             <button type="button"
                                                     id="oercurr-select-standard"
