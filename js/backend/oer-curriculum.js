@@ -283,19 +283,22 @@ jQuery(document).ready(function ($) {
                 var newvalue = $(this).find('.element-order').val(count);
                 // reassign all of the numbers once it's loaded.
 
-                /*
+                
                 var textAreaId = $(this).find('textarea').attr('id');
 
                 if (typeof textAreaId !== 'undefined') {
                     //tinymce.execCommand( 'mceRemoveEditor', false, textAreaId );
                     //tinymce.execCommand( 'mceAddEditor', false, textAreaId );
                 }
-                */
+                
                 
                 $(this).find('textarea').each(function (i,obj) {
                   var txelmid = $(obj).attr('id');
-                  tinymce.execCommand( 'mceRemoveEditor', false, txelmid );
-                  tinymce.execCommand( 'mceAddEditor', false, txelmid );
+                  if (typeof txelmid !== 'undefined') {
+                    console.log(txelmid);
+                    tinymce.execCommand( 'mceRemoveEditor', false, txelmid );
+                    tinymce.execCommand( 'mceAddEditor', false, txelmid );
+                  }
                 });
                 
             });
