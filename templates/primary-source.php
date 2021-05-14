@@ -25,12 +25,22 @@ $next_url = "";
 
 // Back Button URL
 $curriculum = get_query_var('curriculum');
-$curriculum_details = get_page_by_path($curriculum, OBJECT, "oer-curriculum");
-$curriculum_id = $curriculum_details->ID;
-if ($curriculum)
-    $back_source_url = site_url($root_slug."/".$curriculum);
-    //Permalink Structure Consideration
-    $back_url = site_url($root_slug."/".$curriculum);
+
+if(is_numeric($curriculum)){ //Draft Preview
+  $curriculum_details = get_post($curriculum);
+  $curriculum_id = $curriculum_details->ID;
+  if ($curriculum)
+      $back_source_url = site_url($root_slug."/".$curriculum);
+      //Permalink Structure Consideration
+      $back_url = site_url("/?post_type=oer-curriculum&p=".$curriculum."&preview=true");
+}else{ //Published
+  $curriculum_details = get_page_by_path($curriculum, OBJECT, "oer-curriculum");
+  $curriculum_id = $curriculum_details->ID;  
+  if ($curriculum)
+      $back_source_url = site_url($root_slug."/".$curriculum);
+      //Permalink Structure Consideration
+      $back_url = site_url($root_slug."/".$curriculum);
+}
 
 // Get Resource ID
 $psource = get_query_var('source');
@@ -124,7 +134,7 @@ $type = (isset($type[0]))?$type[0]:'textbox';
   $ret = '<div class="wp_oer_breadcrumb">'; 
   $ret .= '<a href="'.esc_url(get_site_url()).'">Home</a>'; 
   $cur = (strlen($curriculum_details->post_title) > 30)? substr($curriculum_details->post_title, 0, 30).'...' : $curriculum_details->post_title; 
-  $ret .= ' / <a href="'.site_url($root_slug."/".$curriculum).'">'.$cur.'</a>'; 
+  $ret .= ' / <a href="'.$back_url.'">'.$cur.'</a>'; 
   $res = (strlen($sup) > 30)? substr($sup, 0, 30).'...' : $sup; 
   $ret .= ' / '.$res; 
   $ret .= '</div>'; 
