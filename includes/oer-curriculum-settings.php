@@ -8,23 +8,23 @@ global $message, $type;
             wp_die( "You don't have permission to access this page!" );
         }
     }
-    
+
 ?>
 <div class="wrap">
-    
+
     <!--<div id="icon-themes" class="oer-logo"><img src="<?php echo esc_url(OER_URL) ?>images/wp-oer-admin-logo.png" /></div>-->
-    <h2><?php _e("Settings - WP Curriculum", OERCURR_CURRICULUM_SLUG); ?></h2>
+    <h2><?php _e("Settings - OER Curriculum", OERCURR_CURRICULUM_SLUG); ?></h2>
     <?php settings_errors(); ?>
-     
+
     <?php
     $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'metadata';
     ?>
-     
+
     <h2 class="nav-tab-wrapper">
                 <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php _e("General", OERCURR_CURRICULUM_SLUG); ?></a>
         <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=metadata" class="nav-tab <?php echo $active_tab == 'metadata' ? 'nav-tab-active' : ''; ?>"><?php _e("Metadata Fields", OERCURR_CURRICULUM_SLUG); ?></a>
         </h2>
-    
+
     <?php
     switch ($active_tab) {
         case "metadata":
@@ -46,7 +46,7 @@ global $message, $type;
 <?php
 
 
-function oercurr_show_general_settings(){    
+function oercurr_show_general_settings(){
     if (!is_admin()) exit;
     oercurr_save_general_setting(); ?>
     <div class="oercurr-plugin-body">
@@ -66,7 +66,7 @@ function oercurr_show_general_settings(){
                     </thead>
                     <tbody>
                             <?php    $_genset = json_decode(get_option('oer_curriculum_general_setting')); ?>
-                            <tr>    
+                            <tr>
                                     <td>Curriculum Root Slug</td>
                                     <td><input type="text" name="oer_curriculum_general_setting[rootslug]" value="<? echo (isset($_genset->rootslug))? $_genset->rootslug: 'curriculum'; ?>"></td>
                                     <td>
@@ -87,8 +87,8 @@ function oercurr_save_general_setting(){
     $_forbidkey = array("oer_curriculum_general_setting_submit");
     global $pagenow;
     if ( 'edit.php' !== $pagenow || !current_user_can('edit_others_posts')) return $query;
-    if (!isset( $_POST['oer_curriculum_general_setting'] )) return;                                            
-    $_arr = array();            
+    if (!isset( $_POST['oer_curriculum_general_setting'] )) return;
+    $_arr = array();
     foreach ($_POST['oer_curriculum_general_setting'] as $key => $genset){
         if(!in_array($genset)) $_arr[$key] = $genset;
     }
@@ -107,31 +107,31 @@ function oercurr_show_metadata_settings() {
     $inquirysets = null;
     $labeldata = null;
     $metadata = null;
-    
+
     foreach($metas as $met){
         if (strpos($met['option_name'],"_curmetset_label")!==false){
             $labeldata[] = $met['option_name'];
         }
         $metadata[] = $met['option_name'];
     }
-    
+
     // Add Options for related Curriculum 1-3
     /*
     for($i=1;$i<=3;$i++){
         $metadata[] = $inquirysets[] = 'oer_curriculum_related_curriculum_'.$i;
     }
     */
-    
+
     $meta = array_unique($metadata);
     $label = array_unique($labeldata);
-    
+
     /*
     print_r( $meta );
     echo( '<br><br>' );
     print_r( $label );
     echo( '<br><br>' );
     */
-    
+
     // Save Option
     if ($_POST){
         // Remove meta key enabled option
@@ -178,18 +178,18 @@ function oercurr_show_metadata_settings() {
                             }else{
                                 $label = get_option($key);
                             }
-                            
+
                             $enb_key = str_replace("_label","_enable",$key);
                             $enabled = get_option($enb_key);
-                            $enb_val = ($enabled=='checked')?'1':'0';    
+                            $enb_val = ($enabled=='checked')?'1':'0';
                             /*
                             if (get_option($key))
                                 $enabled = (get_option($key."_curmetset_enabled")=="1")?true:false;
                             elseif ($option_set==false)
                                 $enabled = "1";
                             */
-                            
-                        if (!in_array($key,$oer_curriculum_deleted_fields)){ 
+
+                        if (!in_array($key,$oer_curriculum_deleted_fields)){
                         ?>
                         <tr>
                             <td><?php echo str_replace("_curmetset","",$key); ?></td>

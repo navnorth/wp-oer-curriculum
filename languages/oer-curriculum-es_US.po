@@ -91,7 +91,7 @@ msgstr ""
 msgid "Investigative Question"
 msgstr ""
 
-msgid "Settings - WP Curriculum"
+msgid "Settings - OER Curriculum"
 msgstr ""
 
 msgid "General"

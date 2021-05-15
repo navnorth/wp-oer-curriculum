@@ -117,7 +117,7 @@ msgid "Investigative Question"
 msgstr ""
 
 #:includes/oercurr-settings.php:15
-msgid "Settings - WP Curriculum"
+msgid "Settings - OER Curriculum"
 msgstr ""
 
 #:includes/oercurr-settings.php:23
