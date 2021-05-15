@@ -1,12 +1,12 @@
 jQuery(window).load(function() {
     // When the user scrolls down 50px from the top of the document, fixed the header to the top
     $=jQuery;
-    if(jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').length){
+    if(jQuery('.single-oer-curriculum .container .oercurr-featured-section').length){
       var headerHeight = jQuery('#side-header.fusion-mobile-menu-design-classic').outerHeight();
-      var rightWidth = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').width();
-      var leftedge = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().left;    
-      var oerCurriculumTop = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().top;
-      jQuery('.tc-oer-curriculum-details-header-fixed').css({
+      var rightWidth = jQuery('.single-oer-curriculum .container .oercurr-featured-section').width();
+      var leftedge = jQuery('.single-oer-curriculum .container .oercurr-featured-section').offset().left;    
+      var oerCurriculumTop = jQuery('.single-oer-curriculum .container .oercurr-featured-section').offset().top;
+      jQuery('.oercurr-tc-details-header-fixed').css({
           "width": rightWidth + "px",
           "minWidth": rightWidth + "px",
           "left": leftedge + "px"
@@ -24,13 +24,13 @@ jQuery(window).load(function() {
     
     }
     
-    $('.oer-curriculum-nav-right-ajax').on("click", function(){
+    $('.oercurr-nav-right-ajax').on("click", function(){
         var id = $(this).attr('data-id');
         var cnt = $(this).attr('data-count');
         var next = $(this);
         $.post(oer_curriculum_ajax_object.ajaxurl,
             {
-            action:'oer_curriculum_get_source_callback',
+            action:'oercurr_get_source_callback',
             curriculum_id: next.attr('data-curriculum'),
             next_source: next.attr('data-nextsource'),
             index: next.attr('data-id')
@@ -50,8 +50,8 @@ jQuery(window).load(function() {
                 }
                 prevId = id-1;
                 if (prevId>=0) {
-                    $('.oer-curriculum-nav-left').parent().removeClass('ps-nav-hidden');
-                    $('.oer-curriculum-nav-left').attr('data-id',prevId);
+                    $('.oercurr-nav-left').parent().removeClass('ps-nav-hidden');
+                    $('.oercurr-nav-left').attr('data-id',prevId);
                 }
                 /** Update Resource Details **/
                 $('.ps-info-title').text(response.resource.post_title);
@@ -71,7 +71,7 @@ jQuery(window).load(function() {
     });
     
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        $('.oer-curriculum-nav-right,.oer-curriculum-nav-left').attr('data-activetab', e.target.id);
+        $('.oercurr-nav-right,.oercurr-nav-left').attr('data-activetab', e.target.id);
         var activeContent = $(e.target).attr('href');
         if ($(activeContent).find('.tc-tab-content').height()<340){
             $(activeContent).find('.tc-read-more').addClass('tc-btn-hide');
@@ -86,36 +86,36 @@ jQuery(window).load(function() {
         $('#see-more-link').text("SEE MORE +");
     });
     
-    $(document).on("show.bs.collapse", '.oer-curriculum-subject-hidden.collapse', function (){
+    $(document).on("show.bs.collapse", '.oercurr-subject-hidden.collapse', function (){
         var more_count = $('.see-more-subjects').attr('data-count');
         $('.see-more-subjects').text("SEE " + more_count + " LESS -");
     });
     
-    $(document).on("hide.bs.collapse", '.oer-curriculum-subject-hidden.collapse', function (){
+    $(document).on("hide.bs.collapse", '.oercurr-subject-hidden.collapse', function (){
         var more_count = $('.see-more-subjects').attr('data-count');
         $('.see-more-subjects').text("SEE " + more_count + " MORE +");
     });
     
-    $(document).on("show.bs.collapse", '.tc-oer-curriculum-details-standard.collapse', function (){
-        $(this).parent().find('.oer-curriculum-standard-toggle i').removeClass('fa-caret-right').addClass('fa-caret-down');
+    $(document).on("show.bs.collapse", '.oercurr-tc-details-standard.collapse', function (){
+        $(this).parent().find('.oercurr-standard-toggle i').removeClass('fa-caret-right').addClass('fa-caret-down');
     });
     
-    $(document).on("hide.bs.collapse", '.tc-oer-curriculum-details-standard.collapse', function (){
-        $(this).parent().find('.oer-curriculum-standard-toggle i').removeClass('fa-caret-down').addClass('fa-caret-right');
+    $(document).on("hide.bs.collapse", '.oercurr-tc-details-standard.collapse', function (){
+        $(this).parent().find('.oercurr-standard-toggle i').removeClass('fa-caret-down').addClass('fa-caret-right');
     });
     
-    $(document).on("click", '.oer-curriculum-read-more', function (){
-        $('.oer-curriculum-excerpt').hide();
-        $('.oer-curriculum-full-content').show();
+    $(document).on("click", '.oercurr-read-more', function (){
+        $('.oercurr-excerpt').hide();
+        $('.oercurr-full-content').show();
     });
     
-     $(document).on("click", '.oer-curriculum-read-less', function (){
-        $('.oer-curriculum-excerpt').show();
-        $('.oer-curriculum-full-content').hide();
+     $(document).on("click", '.oercurr-read-less', function (){
+        $('.oercurr-excerpt').show();
+        $('.oercurr-full-content').hide();
     });
     
     
-    $('.oer-curriculum-nav-right,.oer-curriculum-nav-left').on("click", function(e){
+    $('.oercurr-nav-right,.oercurr-nav-left').on("click", function(e){
         e.preventDefault();
         var nav = $(this);
         var url = nav.attr('href');
@@ -134,8 +134,8 @@ jQuery(window).load(function() {
         $('.ps-info-tabs a[href="' + tab_content + '"]').removeClass*('show');
     });
     
-    if ($('.oer-curriculum-nav-right,.oer-curriculum-nav-left').is(":visible")) {
-         $('.oer-curriculum-nav-right,.oer-curriculum-nav-left').attr('data-activetab', $('.ps-info-tabs li a.nav-link.active').attr('id'));
+    if ($('.oercurr-nav-right,.oercurr-nav-left').is(":visible")) {
+         $('.oercurr-nav-right,.oercurr-nav-left').attr('data-activetab', $('.ps-info-tabs li a.nav-link.active').attr('id'));
     }
 
     
@@ -165,9 +165,9 @@ function oer_resize_header(){
       var adminbarheight = 0;
     }
   }
-  var rightWidth = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').width();
-  var leftedge = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().left;
-  jQuery('.tc-oer-curriculum-details-header-fixed').css({
+  var rightWidth = jQuery('.single-oer-curriculum .container .oercurr-featured-section').width();
+  var leftedge = jQuery('.single-oer-curriculum .container .oercurr-featured-section').offset().left;
+  jQuery('.oercurr-tc-details-header-fixed').css({
       "width": rightWidth + "px",
       "minWidth": rightWidth + "px",
       "left": leftedge + "px",
@@ -177,20 +177,20 @@ function oer_resize_header(){
 
 /* Float Header on scroll */
 function oer_header_fixed(isonload){
-  rightWidth = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').width();
-  leftedge = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().left;    
-  oerCurriculumTop = jQuery('.single-oer-curriculum .container .oer-curriculum-featured-section').offset().top;
+  rightWidth = jQuery('.single-oer-curriculum .container .oercurr-featured-section').width();
+  leftedge = jQuery('.single-oer-curriculum .container .oercurr-featured-section').offset().left;    
+  oerCurriculumTop = jQuery('.single-oer-curriculum .container .oercurr-featured-section').offset().top;
       
   if (document.body.scrollTop > oerCurriculumTop || document.documentElement.scrollTop > oerCurriculumTop) {
     if (jQuery(window).width()<=600){
-      jQuery('.tc-oer-curriculum-details-header-fixed').css({
+      jQuery('.oercurr-tc-details-header-fixed').css({
         "top":'0px',
         "width": rightWidth + "px",
         "minWidth": rightWidth + "px",
         "left": leftedge + "px"
       });
     }else{
-      jQuery('.tc-oer-curriculum-details-header-fixed').css({
+      jQuery('.oercurr-tc-details-header-fixed').css({
           "width": rightWidth + "px",
           "minWidth": rightWidth + "px",
           "left": leftedge + "px"
@@ -199,14 +199,14 @@ function oer_header_fixed(isonload){
       var adminbarheight = (jQuery('#wpadminbar').length>0)? jQuery('#wpadminbar').height(): 0;
       if(isonload){
         setTimeout(function(){
-          jQuery('.tc-oer-curriculum-details-header-fixed').css({"top":adminbarheight+'px'});
+          jQuery('.oercurr-tc-details-header-fixed').css({"top":adminbarheight+'px'});
         }, 500);
       }else{
-        jQuery('.tc-oer-curriculum-details-header-fixed').css({"top":adminbarheight+'px'});
+        jQuery('.oercurr-tc-details-header-fixed').css({"top":adminbarheight+'px'});
       }
     }
   } else {
-    jQuery('.tc-oer-curriculum-details-header-fixed').css({"top": ""});  
+    jQuery('.oercurr-tc-details-header-fixed').css({"top": ""});  
   }
 }
 
@@ -231,44 +231,44 @@ jQuery(document).ready(function() {
   // Configure/customize these variables.
   var showChar = 360;  // How many characters are shown by default
   var ellipsestext = " ..."; var moretext = "(read more)"; var lesstext = "(read less)";
-  jQuery('.oer-curriculum-excerpt-collapsible').each(function(e) {
-    var content = jQuery(this).siblings('.oer-curriculum-excerpt-collapsible-pseudo').html();
+  jQuery('.oercurr-excerpt-collapsible').each(function(e) {
+    var content = jQuery(this).siblings('.oercurr-excerpt-collapsible-pseudo').html();
     if(content.length > showChar) {
-      var ls = content.substr(0, showChar)+'<span class="oer-curriculum-moreellipses">'+ellipsestext+'</span>&nbsp;<a href="" class="oer-curriculum-morelink">' + moretext + '</a>';
-      var mr = content+'&nbsp;<a href="" class="oer-curriculum-morelink less">' + lesstext + '</a>';
+      var ls = content.substr(0, showChar)+'<span class="oercurr-moreellipses">'+ellipsestext+'</span>&nbsp;<a href="" class="oercurr-morelink">' + moretext + '</a>';
+      var mr = content+'&nbsp;<a href="" class="oercurr-morelink less">' + lesstext + '</a>';
       jQuery(this).html(ls);
-      jQuery(this).parent('.tc-oer-curriculum-details-description').append('<div class="oer-curriculum-excerpt-collapsible-pseudo-less">'+ls+'</div>');  
-      jQuery(this).parent('.tc-oer-curriculum-details-description').append('<div class="oer-curriculum-excerpt-collapsible-pseudo-more">'+mr+'</div>');  
+      jQuery(this).parent('.oercurr-tc-details-description').append('<div class="oercurr-excerpt-collapsible-pseudo-less">'+ls+'</div>');  
+      jQuery(this).parent('.oercurr-tc-details-description').append('<div class="oercurr-excerpt-collapsible-pseudo-more">'+mr+'</div>');  
       jQuery(this).height(jQuery(this).height());
     }
   });
   
   var retract_instance = [];
-  jQuery(document).on("click",".oer-curriculum-morelink",function(e){
+  jQuery(document).on("click",".oercurr-morelink",function(e){
       e.preventDefault ? e.preventDefault() : e.returnValue = false;
       let obj = jQuery(e.target); let cnt = 0;
-      let target_ref = obj.closest('.oer-curriculum-excerpt-collapsible');
-      var ctnt = obj.closest('.tc-oer-curriculum-details-description').find('.oer-curriculum-excerpt-collapsible-pseudo').html();
+      let target_ref = obj.closest('.oercurr-excerpt-collapsible');
+      var ctnt = obj.closest('.oercurr-tc-details-description').find('.oercurr-excerpt-collapsible-pseudo').html();
     
       if(obj.hasClass("less")) {
-          var pseudo_excerpt_height = target_ref.siblings('.oer-curriculum-excerpt-collapsible-pseudo-less').height();
-          var cless = target_ref.siblings('.oer-curriculum-excerpt-collapsible-pseudo-less').html(); 
+          var pseudo_excerpt_height = target_ref.siblings('.oercurr-excerpt-collapsible-pseudo-less').height();
+          var cless = target_ref.siblings('.oercurr-excerpt-collapsible-pseudo-less').html(); 
           target_ref.height(pseudo_excerpt_height);      
           retract_instance[cnt] = setTimeout(function(){
-            target_ref.find('.oer-curriculum-morecontent').find('span').toggle();
-            target_ref.find('.oer-curriculum-moreellipses').toggle();
+            target_ref.find('.oercurr-morecontent').find('span').toggle();
+            target_ref.find('.oercurr-moreellipses').toggle();
             obj.removeClass("less");
             target_ref.addClass('less');
             obj.html(moretext);
             target_ref.html(cless);
           }, 200);
       } else {      
-          var pseudo_excerpt_height = target_ref.siblings('.oer-curriculum-excerpt-collapsible-pseudo-more').height();
-          var cmore = target_ref.siblings('.oer-curriculum-excerpt-collapsible-pseudo-more').html();
+          var pseudo_excerpt_height = target_ref.siblings('.oercurr-excerpt-collapsible-pseudo-more').height();
+          var cmore = target_ref.siblings('.oercurr-excerpt-collapsible-pseudo-more').html();
           target_ref.html(cmore);
           target_ref.height(pseudo_excerpt_height);            
-          target_ref.find('.oer-curriculum-morecontent').find('span').toggle();
-          target_ref.find('.oer-curriculum-moreellipses').toggle();
+          target_ref.find('.oercurr-morecontent').find('span').toggle();
+          target_ref.find('.oercurr-moreellipses').toggle();
           obj.addClass("less");
           target_ref.removeClass('less');
           obj.html(lesstext);
@@ -278,9 +278,9 @@ jQuery(document).ready(function() {
   });
   
   jQuery(window).resize(function(){
-    jQuery('.oer-curriculum-excerpt-collapsible').each(function() {
+    jQuery('.oercurr-excerpt-collapsible').each(function() {
       var ctyp = (jQuery(this).hasClass('less'))? 'less':'more';
-      var pseudo_excerpt_height = jQuery(this).siblings('.oer-curriculum-excerpt-collapsible-pseudo-'+ctyp).height();
+      var pseudo_excerpt_height = jQuery(this).siblings('.oercurr-excerpt-collapsible-pseudo-'+ctyp).height();
       jQuery(this).height(pseudo_excerpt_height);
     });
   });

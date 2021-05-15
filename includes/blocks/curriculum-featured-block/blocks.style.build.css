@@ -1,4 +1,10 @@
-wp-block-cgb-block-curriculum-featured-block  {
+/**
+ * #.# Styles
+ *
+ * CSS for both Frontend+Backend.
+ */
+
+.wp-block-cgb-block-curriculum-featured-block  {
   background: $red;
   border: 0.2rem solid $black;
   color: $black;
@@ -9,22 +15,22 @@ wp-block-cgb-block-curriculum-featured-block  {
 
 
 
-.oer_curriculum_inspector_wrapper {
+.oercurr_cfb_inspector_wrapper {
   margin-bottom:10px;
 }
-.oer_curriculum_inspector_feat_modal_wrapper_close {
+.oercurr_cfb_inspector_feat_modal_wrapper_close {
   position: absolute;
   right: 0px;
   top: 45px;
 }
-.oer_curriculum_inspector_feat_modal_wrapper_close span.dashicons {
+.oercurr_cfb_inspector_feat_modal_wrapper_close span.dashicons {
   font-size: 38px;
   color: #fff;
   height: 38px;
   width: 38px;
   cursor: pointer;
 }
-.oer_curriculum_inspector_feat_modal_content label {
+.oercurr_cfb_inspector_feat_modal_content label {
   display: block;
   width: 100%;
   padding-left: 25px;
@@ -38,8 +44,8 @@ input.ls_inspector_feat_modal_checkbox {
     top: 1px;
     left: 0px;
 }
-.oer_curriculum_inspector_feat_addResources,
-.oer_curriculum_inspector_feat_addCurriculum {
+.oercurr_cfb_inspector_feat_addResources,
+.oercurr_cfb_inspector_feat_addCurriculum {
   padding: 0px 8px !important;
   margin-right: 5px !important;
 }
@@ -54,8 +60,8 @@ label.ls_inspector_feat_modal_label img.show { display:block !important; }
 
 
 /* RESOURCE MODAL LIST */
-.oer_curriculum_inspector_feat_modal_curriculum_wrapper,
-.oer_curriculum_inspector_feat_modal_resource_wrapper {
+.oercurr_cfb_inspector_feat_modal_curriculum_wrapper,
+.oercurr_cfb_inspector_feat_modal_resource_wrapper {
   display:none;
   position: fixed;
   top: 0px;
@@ -67,12 +73,12 @@ label.ls_inspector_feat_modal_label img.show { display:block !important; }
   background-color: rgba(0,0,0,0.5);
   z-index: 9999;
 }
-.oer_curriculum_inspector_feat_modal_content_main {
+.oercurr_cfb_inspector_feat_modal_content_main {
     padding: 0px 20px;
     height: 100%;
     width: 100%;
 }
-.oer_curriculum_inspector_feat_modal_content {
+.oercurr_cfb_inspector_feat_modal_content {
     position: absolute;
     top: 0px;
     right: 0px;
@@ -81,14 +87,14 @@ label.ls_inspector_feat_modal_label img.show { display:block !important; }
     overflow-y: auto;
     overflow-x: hidden;
 }
-.oer_curriculum_inspector_feat_modal_content_subcontainer {
+.oercurr_cfb_inspector_feat_modal_content_subcontainer {
     border-left: 20px solid #fff;
     border-right: 10px solid #fff;
     border-top: 90px solid #fff;
     border-bottom: 70px solid #fff;
     position:relative !important;
 }
-div#oer_curriculum_inspector_feat_modal_pick_blocker {
+div#oercurr_cfb_inspector_feat_modal_pick_blocker {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -97,27 +103,27 @@ div#oer_curriculum_inspector_feat_modal_pick_blocker {
     min-width: 100%;
     min-height: 100%;
 }
-div#oer_curriculum_inspector_feat_modal_pick_blocker{display:none;}
-div#oer_curriculum_inspector_feat_modal_pick_blocker.show{display:block !important;}
+div#oercurr_cfb_inspector_feat_modal_pick_blocker{display:none;}
+div#oercurr_cfb_inspector_feat_modal_pick_blocker.show{display:block !important;}
 .ls_inspector_feat_modal_checkbox.locked {
     opacity: .4 !important;
 }
-.oer_curriculum_inspector_feat_modal_center {
+.oercurr_cfb_inspector_feat_modal_center {
   width: 100%;
   max-width: 768px;
   margin: 0px auto;
   height: 100%;
 }
-.oer_curriculum_inspector_feat_modal_table {
+.oercurr_cfb_inspector_feat_modal_table {
   display: table;
   width: 100%;
   height: 100%;
 }
-.oer_curriculum_inspector_feat_modal_cell {
+.oercurr_cfb_inspector_feat_modal_cell {
   display: table-cell;
   vertical-align: middle;
 }
-.oer_curriculum_inspector_feat_modal {
+.oercurr_cfb_inspector_feat_modal {
   position:relative;
   max-height: 430px;
   min-height: 430px;
@@ -134,10 +140,10 @@ div#oer_curriculum_inspector_feat_modal_pick_blocker.show{display:block !importa
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
-option.oer_curriculum_inspector_feat_subject_select_bold {
+option.oercurr_cfb_inspector_feat_subject_select_bold {
     font-weight: 700;
 }
-.oer_curriculum_inspector_feat_search_wrapper {
+.oercurr_cfb_inspector_feat_search_wrapper {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -146,7 +152,7 @@ option.oer_curriculum_inspector_feat_subject_select_bold {
     z-index: 1;
     background-color: #fff;
 }
-.oer_curriculum_inspector_feat_search_header {
+.oercurr_cfb_inspector_feat_search_header {
     width: 100%;
     font-size: 18px;
     line-height: 18px;
@@ -156,7 +162,7 @@ option.oer_curriculum_inspector_feat_subject_select_bold {
     color: #0071a1;
     height: 20px;
 }
-.oer_curriculum_inspector_feat_search_footer {
+.oercurr_cfb_inspector_feat_search_footer {
     position: absolute;
     left: 0px;
     right: 15px;
@@ -167,36 +173,36 @@ option.oer_curriculum_inspector_feat_subject_select_bold {
 }
 
 
-.oer_curriculum_inspector_feat_search_wrapper input[type="button"] {
+.oercurr_cfb_inspector_feat_search_wrapper input[type="button"] {
     height: 30px;
     margin-right: 1%;
     width: 19%;
 }
-.oer_curriculum_inspector_feat_search_wrapper input[type="text"] {
+.oercurr_cfb_inspector_feat_search_wrapper input[type="text"] {
     height: 30px;
     width: 80%;
 }
-.oer_curriculum_inspector_feat_search_wrapper select {
+.oercurr_cfb_inspector_feat_search_wrapper select {
     height: 30px;
     width: 80%;
     max-width: 80% !important;
 }
 
 @media screen and (max-width: 783px) {
-  .oer_curriculum_inspector_feat_search_wrapper input[type="button"] {
+  .oercurr_cfb_inspector_feat_search_wrapper input[type="button"] {
       height: 40px !important;
       width: 39% !important;
   }
-  .oer_curriculum_inspector_feat_search_wrapper input[type="text"] {
+  .oercurr_cfb_inspector_feat_search_wrapper input[type="text"] {
       height: 40px !important;
       width: 60% !important;
   }
-  .oer_curriculum_inspector_feat_search_wrapper select {
+  .oercurr_cfb_inspector_feat_search_wrapper select {
       height: 40px;
       width: 60% !important;
       max-width: 60% !important;
   }
-  .oer_curriculum_inspector_feat_modal_content_subcontainer {
+  .oercurr_cfb_inspector_feat_modal_content_subcontainer {
     border-top: 94px solid #fff !important;
   }
 }
@@ -208,34 +214,36 @@ option.oer_curriculum_inspector_feat_subject_select_bold {
     top: 0px;
     width: auto;
 }
-.oer_curriculum_right_featuredwpr { float: none !important; }
-.oer_curriculum_right_featuredwpr .bx-wrapper { float: none !important; padding:25px 0px 0px 0px !important;}
-.oer_curriculum_right_featuredwpr .bx-wrapper .bx-controls-direction a {
+.oercurr_cfb_right_featuredwpr { float: none !important; }
+.oercurr_cfb_right_featuredwpr .bx-wrapper { float: none !important; padding:25px 0px 0px 0px !important;}
+.oercurr_cfb_right_featuredwpr .bx-wrapper .bx-controls-direction a {
   top: -16px;
   width: 24px;
   height: 24px;
   z-index: 2;
   background-position: 0px !important;
 }
-.oer_curriculum_right_featuredwpr .bx-wrapper .bx-next,
-.oer_curriculum_right_featuredwpr .bx-wrapper .bx-next:focus {
-  background: #ccc url(images/bxnext.png) no-repeat scroll 0 0;
+.oercurr_cfb_right_featuredwpr .bx-wrapper .bx-next {
+  background: #ccc url(images/bxnext.png) no-repeat scroll 0 0 !important;
   left: auto;
   right: 5px;
 }
-.oer_curriculum_right_featuredwpr .bx-wrapper .bx-prev {
-  background: #ccc url(images/bxprev.png) no-repeat scroll 0 0;
+.oercurr_cfb_right_featuredwpr .bx-wrapper .bx-prev {
+  background: #ccc url(images/bxprev.png) no-repeat scroll 0 0 !important;
   left: auto;
   right: 34px;
 }
-.oer_curriculum_right_featuredwpr .bx-viewport {
+.oercurr_cfb_right_featuredwpr .bx-wrapper .bx-controls-direction a:focus{
+  outline: none !important;
+  border: 1px solid #9e9e9e !important;
+}
+.oercurr_cfb_right_featuredwpr .bx-viewport {
   height: auto !important;
   -moz-box-shadow: unset !important;
   -webkit-box-shadow: unset !important;
   box-shadow: unset !important;
   border:0px solid #d2d2d2 !important;
   left:0px !important;
-  /*padding:15px !important;*/
   background-color: transparent !important;
 }
 .editor-styles-wrapper ul, .editor-styles-wrapper ol {
@@ -243,7 +251,7 @@ option.oer_curriculum_inspector_feat_subject_select_bold {
     margin-left: 0 !important;
 }
 
-.oer-curriculum-ftrdttl {float:none !important;}
+.oercurr-cfb-ftrdttl {float:none !important;}
 ul.featuredwpr_bxslider_front {
     margin: 0px !important;
 }
@@ -263,7 +271,7 @@ ul.featuredwpr_bxslider_front li .frtdsnglwpr .ttl a {
 .frtdsnglwpr a div.img {
     overflow: hidden;
 }
-.oer_curriculum_right_featuredwpr .bx-wrapper .oer-curriculum-ftrdttl {
+.oercurr_cfb_right_featuredwpr .bx-wrapper .oercurr-cfb-ftrdttl {
     position: absolute;
     top: -12px;
     font-size: 24px;
@@ -272,10 +280,10 @@ ul.featuredwpr_bxslider_front li .frtdsnglwpr .ttl a {
     border-bottom: 1px solid #d2d2d2 !important;
     height: 36px;
 }
-.oer_curriculum_right_featuredwpr .bx-wrapper .bx-controls-direction a {
+.oercurr_cfb_right_featuredwpr .bx-wrapper .bx-controls-direction a {
     top: 4px !important;
 }
-.oer_curriculum_right_featuredwpr {
+.oercurr_cfb_right_featuredwpr {
     padding: 25px 15px 25px 15px !important;
     border: 1px solid #d2d2d2;
 }
@@ -288,24 +296,24 @@ ul.featuredwpr_bxslider_front li .frtdsnglwpr .ttl a {
 
 
 /* INSPECTOR */
-.oer_curriculum_inspector_feat_addbutton_wrapper {
+.oercurr_cfb_inspector_feat_addbutton_wrapper {
     margin-bottom: 9px;
 }
-.oer_curriculum_inspector_feat_hlite_node.cur:before {
+.oercurr_cfb_inspector_feat_hlite_node.cur:before {
     content: "\f118";
     font-family: dashicons;
     position: absolute;
     top: 3px;
     left:0px;
 }
-.oer_curriculum_inspector_feat_hlite_node.res:before {
+.oercurr_cfb_inspector_feat_hlite_node.res:before {
     content: "\f11f";
     font-family: dashicons;
     position: absolute;
     top: 4px;
     left:0px;
 }
-.oer_curriculum_inspector_feat_hlite_featured {
+.oercurr_cfb_inspector_feat_hlite_featured {
   width: 100%;
   min-height: 100px;
   overflow-y: auto;
@@ -317,13 +325,13 @@ ul.featuredwpr_bxslider_front li .frtdsnglwpr .ttl a {
   max-height: 420px !important;
 }
 
-.oer_curriculum_inspector_feat_hlite_node-state-highlight{
+.oercurr_cfb_inspector_feat_hlite_node-state-highlight{
   height:36px;
   background-color:#ffffff;
   list-style: none;
   border: 1px dashed #bfbfbf;
 }
-.oer_curriculum_inspector_feat_hlite_node {
+.oercurr_cfb_inspector_feat_hlite_node {
   position: relative;
   list-style: none;
   padding: 3px 30px 3px 17px;
@@ -334,7 +342,7 @@ ul.featuredwpr_bxslider_front li .frtdsnglwpr .ttl a {
   background-color: #ffffff;
   /* border-bottom: 1px solid #f1f1f1; */
 }
-.oer_curriculum_inspector_feat_hlite_node span.dashicons {
+.oercurr_cfb_inspector_feat_hlite_node span.dashicons {
   position: absolute;
   right: 0px;
   font-size: 20px;
@@ -342,26 +350,26 @@ ul.featuredwpr_bxslider_front li .frtdsnglwpr .ttl a {
   color: #ff4545;
   cursor: pointer;
 }
-.button.oer_curriculum_inspector_feat_hlite_reposition_trigger,
-.button.oer_curriculum_inspector_feat_hlite_remove_trigger {
+.button.oercurr_cfb_inspector_feat_hlite_reposition_trigger,
+.button.oercurr_cfb_inspector_feat_hlite_remove_trigger {
   padding: 0px !important;
   border: 0px !important;
   height:0px !important;
   width:0px !important;
   float:left !important;
 }
-table.oer_curriculum_inspector_feat_slider_setting {
+table.oercurr_cfb_inspector_feat_slider_setting {
     width: 100%;
 }
-table.oer_curriculum_inspector_feat_slider_setting input, 
-table.oer_curriculum_inspector_feat_slider_setting select {
+table.oercurr_cfb_inspector_feat_slider_setting input, 
+table.oercurr_cfb_inspector_feat_slider_setting select {
     width: 65px !important;
 }
-table.oer_curriculum_inspector_feat_slider_setting tr td {
+table.oercurr_cfb_inspector_feat_slider_setting tr td {
     padding: 2px 5px;
 }
 
-input.oer_curriculum_inspector_feat_quickswitchbutton {
+input.oercurr_cfb_inspector_feat_quickswitchbutton {
     float: right;
     margin-bottom: 10px !important;
     margin-right: 10px !important;
@@ -377,7 +385,7 @@ input.oer_curriculum_inspector_feat_quickswitchbutton {
   padding-left: 0px !important;
 padding-right: 0px !important;
 }
-.oer_curriculum_inspector_wrapper label.components-base-control__label em {
+.oercurr_cfb_inspector_wrapper label.components-base-control__label em {
     font-size: 11px !important;
     font-weight: 100;
     line-height: 15px !important;

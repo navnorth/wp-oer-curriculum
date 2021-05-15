@@ -3,22 +3,22 @@ jQuery.noConflict();
 jQuery( document ).ready(function() {
     var tmp_this;
 	  //SELECT THE CHECKED ITEM IN THE LIST
-    jQuery(document).on('click','.oer-curriculum-resource-selector-select',function(e){
+    jQuery(document).on('click','.oercurr-resource-selector-select',function(e){
   		e.preventDefault ? e.preventDefault() : e.returnValue = false;
       var tmp_parent = tmp_this.closest('.oer_curriculum_primary_resources_image'); 
       tmp_this.siblings('.oer_curriculum_primary_resources_image').children('.oer_curriculum_primary_resources_image_display').html('');
       tmp_this.siblings('.oer_curriculum_primary_resources_display').html('');
       tmp_parent.find('.oer_curriculum_primary_resources_image_preloader').show();
-  		var selone = jQuery('input[name="oer-curriculum-resource-selector-rad"]:checked');
+  		var selone = jQuery('input[name="oercurr-resource-selector-rad"]:checked');
   		var resid = selone.parent().attr('data-postid');
   		var resname = selone.attr('title');
-  		jQuery('.oer-curriculum-resource-selector-overlay').css('visibility', 'hidden').removeClass('fadeIn').addClass('fadeOut');
+  		jQuery('.oercurr-resource-selector-overlay').css('visibility', 'hidden').removeClass('fadeIn').addClass('fadeOut');
       
       if(resname > ''){  
         jQuery.ajax({
   				type:'POST',
   				url: ajaxurl,
-  				data: {'action':'oer_curriculum_get_resource_info_callback','resid': resid},
+  				data: {'action':'oercurr_get_resource_info_callback','resid': resid},
   				success:function(response){
 
             response = JSON.parse(response);
@@ -103,40 +103,40 @@ jQuery( document ).ready(function() {
   	});  
 	
   //SHOW MODAL RESOURCE LIST
-	jQuery(document).on('click','.oer-curriculum-resource-selector-button',function(e){
+	jQuery(document).on('click','.oercurr-resource-selector-button',function(e){
 		e.preventDefault ? e.preventDefault() : e.returnValue = false;
     tmp_this = jQuery(this);
-		jQuery('.oer-curriculum-resource-selector-tag-p').removeClass('checked');
+		jQuery('.oercurr-resource-selector-tag-p').removeClass('checked');
     var prv = jQuery(this).siblings('input[name="oer_curriculum_primary_resources[resource][]"]').val();
-    var rad = jQuery('input[name="oer-curriculum-resource-selector-rad"][value="'+prv+'"]');
+    var rad = jQuery('input[name="oercurr-resource-selector-rad"][value="'+prv+'"]');
 		rad.attr('checked', true);
 		rad.parent().addClass('checked');
-		jQuery('.oer-curriculum-resource-selector-overlay').removeClass('fadeOut').addClass('fadeIn').css('visibility', 'visible');
-		jQuery('input[name="oer-curriculum-resource-selector-criteria"]').val('');
+		jQuery('.oercurr-resource-selector-overlay').removeClass('fadeOut').addClass('fadeIn').css('visibility', 'visible');
+		jQuery('input[name="oercurr-resource-selector-criteria"]').val('');
 		jQuery('#oer_curriculum_resource_selector-dynahide').remove();
-    jQuery('.oer-curriculum-resource-selector-criteria').focus();
+    jQuery('.oercurr-resource-selector-criteria').focus();
 	});
 	
   //PUT A CHECK ON AN ITEM IN THE LIST
-	jQuery(document).on('change','input[name="oer-curriculum-resource-selector-rad"]', function(){
-		jQuery('.oer-curriculum-resource-selector-tag-p').removeClass('checked');
+	jQuery(document).on('change','input[name="oercurr-resource-selector-rad"]', function(){
+		jQuery('.oercurr-resource-selector-tag-p').removeClass('checked');
 		jQuery(this).parent().addClass('checked');
 	});
 	
   //CLOSE THE MODAL RESOURCE LIST
-	jQuery(document).on('click','.oer-curriculum-resource-selector-search-close', function(e){
+	jQuery(document).on('click','.oercurr-resource-selector-search-close', function(e){
 		e.preventDefault ? e.preventDefault() : e.returnValue = false;
-		jQuery('.oer-curriculum-resource-selector-overlay').removeClass('fadeIn').addClass('fadeOut');
-		setTimeout(function(){ jQuery('.oer-curriculum-resource-selector-overlay').css('visibility', 'hidden') }, 500);
+		jQuery('.oercurr-resource-selector-overlay').removeClass('fadeIn').addClass('fadeOut');
+		setTimeout(function(){ jQuery('.oercurr-resource-selector-overlay').css('visibility', 'hidden') }, 500);
 	});
 	
   //INPUT SEARCH CRITERIA
-	jQuery(document).on('input','input[name="oer-curriculum-resource-selector-criteria"]', function(e) {
+	jQuery(document).on('input','input[name="oercurr-resource-selector-criteria"]', function(e) {
 		var searchTerm = jQuery.trim(this.value).toLowerCase();
 		jQuery('#oer_curriculum_resource_selector-dynahide').remove();
 		if(searchTerm > ''){
 		  jQuery('#oer_curriculum_resource_selector-dynahide').remove();
-		  css = '.oer-curriculum-resource-selector-search-result .oer-curriculum-resource-selector-tag-p:not([data-search-term*="'+searchTerm+'"]){display:none;}'
+		  css = '.oercurr-resource-selector-search-result .oercurr-resource-selector-tag-p:not([data-search-term*="'+searchTerm+'"]){display:none;}'
 		  style = jQuery('<style type="text/css" id="oer_curriculum_resource_selector-dynahide">').text(css)
 		  jQuery('head').append(style);
 		}

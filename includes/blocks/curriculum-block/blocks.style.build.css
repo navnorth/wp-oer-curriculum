@@ -7,7 +7,7 @@
 	padding: 2rem
 }
 
-.oer-curriculum-blk-main {
+.oercurr-blk-main {
 	width: 100%;
 	float: none;
 	padding: 0px 15px 15px 15px;
@@ -15,106 +15,112 @@
 	margin: 20px 0px 20px 0px
 }
 
-.oer-curriculum-blk-topbar {
+.oercurr-blk-topbar {
 	padding: 5px 0px
 }
 
-.oer-curriculum-blk-wrapper {
+.oercurr-blk-wrapper {
 	float: none !important
 }
 
-div.oer-curriculum-blk-wrapper {
+div.oercurr-blk-wrapper {
 	border-top: 1px solid #c8c8c8;
 	padding-top: 15px
 }
 
-.oer-curriculum-blk-wrapper,
-.oer-curriculum-blk-wrapper div,
-.oer-curriculum-blk-wrapper a,
-.oer-curriculum-blk-wrapper img,
-.oer-curriculum-blk-wrapper ul,
-.oer-curriculum-blk-wrapper span {
+.oercurr-blk-wrapper,
+.oercurr-blk-wrapper div,
+.oercurr-blk-wrapper a,
+.oercurr-blk-wrapper img,
+.oercurr-blk-wrapper ul,
+.oercurr-blk-wrapper span {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box
 }
 
-.oer-curriculum-blk-wrapper {
+.oercurr-blk-wrapper {
 	height: 100% !important;
 	max-height: 768px !important;
 	position: relative;
 	overflow-y: auto !important
 }
 
-.oer-curriculum-blk-row {
+.oercurr-blk-row {
 	width: 100%;
 	padding: 20px 0px;
 	border-bottom: 1px solid #c8c8c8
 }
 
-.oer-curriculum-blk-row:last-of-type {
+.oercurr-blk-row:last-of-type {
 	border-bottom: 0px !important
 }
 
-.oer-curriculum-blk-row:last-of-type {
+.oercurr-blk-row:last-of-type {
 	padding-bottom: 0px !important
 }
 
-.oer-curriculum-blk-row:first-of-type {
+.oercurr-blk-row:first-of-type {
 	padding-top: 0px !important
 }
 
-.oer-curriculum-blk-row:first-of-type {
+.oercurr-blk-row:first-of-type {
 	border-top: 0px !important
 }
 
-a.oer-curriculum-blk-left {
+a.oercurr-blk-left {
 	display: inline-block;
 	width: 18%;
 	margin-left: .2%;
 	vertical-align: top
 }
 
-.oer-curriculum-blk-row img {
+.oercurr-blk-row img {
 	display: block !important;
 	width: 100% !important;
 	max-width: 100% !important;
 	height: auto !important;
 	padding-right: 0px;
-	padding-bottom: 0px
+	padding-bottom: 0px;
+	margin: 0px 0px 10px 0px !important
 }
 
-.oer-curriculum-blk-right {
+.oercurr-blk-right {
 	display: inline-block;
 	width: 81.7%;
 	vertical-align: top;
 	padding: 0px 10px
 }
 
-.oer-curriculum-blk-right .desc {
+.oercurr-blk-right .ttl {
+	margin: 0px 0px 5px 0px !important;
+	display: block
+}
+
+.oercurr-blk-right .desc {
 	padding-bottom: 10px
 }
 
 @media screen and (max-width: 1200px) {
-	a.oer-curriculum-blk-left {
+	a.oercurr-blk-left {
 		width: 30%
 	}
-	.oer-curriculum-blk-right {
+	.oercurr-blk-right {
 		width: 70%
 	}
 }
 
 @media screen and (max-width: 768px) {
-	a.oer-curriculum-blk-left {
+	a.oercurr-blk-left {
 		width: 40%
 	}
-	.oer-curriculum-blk-right {
+	.oercurr-blk-right {
 		width: 60%
 	}
-	.oer-curriculum-blk-topbar-left {
+	.oercurr-blk-topbar-left {
 		display: block !important;
 		max-width: 100% !important
 	}
-	.oer-curriculum-blk-topbar-right {
+	.oercurr-blk-topbar-right {
 		display: block !important;
 		max-width: 100% !important;
 		text-align: left !important
@@ -122,28 +128,28 @@ a.oer-curriculum-blk-left {
 }
 
 @media screen and (max-width: 580px) {
-	a.oer-curriculum-blk-left {
+	a.oercurr-blk-left {
 		width: 100%
 	}
-	a.oer-curriculum-blk-left>img {
+	a.oercurr-blk-left>img {
 		padding-right: s0px !important;
 		padding-bottom: 10px !important
 	}
-	.oer-curriculum-blk-right {
+	.oercurr-blk-right {
 		width: 100%
 	}
-	.oer-curriculum-blk-wrapper {
+	.oercurr-blk-wrapper {
 		max-height: none !important;
 		overflow-y: visible !important
 	}
-	.oer-curriculum-blk-topbar-left {
+	.oercurr-blk-topbar-left {
 		line-height: 24px !important;
 		font-size: 18px !important;
 		font-weight: 700 !important
 	}
 }
 
-.oer-curriculum-blk-topbar-left {
+.oercurr-blk-topbar-left {
 	text-align: left;
 	width: 100%;
 	max-width: 50%;
@@ -152,7 +158,7 @@ a.oer-curriculum-blk-left {
 	vertical-align: bottom
 }
 
-.oer-curriculum-blk-topbar-right {
+.oercurr-blk-topbar-right {
 	text-align: right;
 	width: 100%;
 	max-width: 50%;
@@ -160,8 +166,8 @@ a.oer-curriculum-blk-left {
 	vertical-align: bottom
 }
 
-.oer-curriculum-blk-topbar-display-box,
-.oer-curriculum-blk-topbar-sort-box {
+.oercurr-blk-topbar-display-box,
+.oercurr-blk-topbar-sort-box {
 	display: inline-block;
 	position: relative;
 	max-height: 50px !important;
@@ -172,53 +178,64 @@ a.oer-curriculum-blk-left {
 	width: auto
 }
 
-.oer-curriculum-blk-topbar-display-box:first-of-type {
+.oercurr-blk-topbar-display-box:first-of-type {
 	padding: 0px 15px 0px 0px
 }
 
-.oer-curriculum-blk-topbar-display-text span,
-.oer-curriculum-blk-topbar-sort-text span {
+.oercurr-blk-topbar-display-text span,
+.oercurr-blk-topbar-sort-text span {
 	margin: 0px 10px 10px 0px
 }
 
-.oer-curriculum-blk-topbar-display-text a,
-.oer-curriculum-blk-topbar-sort-text a {
+.oercurr-blk-topbar-display-text a,
+.oercurr-blk-topbar-sort-text a {
 	height: 50px;
 	display: inline-block;
 	vertical-align: top;
 	ine-height: 54px
 }
 
-.oer-curriculum-blk-topbar-display-text a .fa,
-.oer-curriculum-blk-topbar-sort-text a .fa {
+.oercurr-blk-topbar-display-text a .fa,
+.oercurr-blk-topbar-sort-text a .fa {
 	font-size: 24px;
 	height: 100%;
 	line-height: 50px;
 	margin: 0px 5px
 }
 
-.oer-curriculum-blk-topbar-display-text a .fa:before,
-.oer-curriculum-blk-topbar-sort-text a .fa:before {
-	line-height: 35px
+.oercurr-blk-topbar-display-text a .fa:before,
+.oercurr-blk-topbar-sort-text a .fa:before {
+	line-height: 35px;
+	-webkit-transition: unset !important;
+	-o-transition: unset !important;
+	transition: unset !important
 }
 
-ul.oer-curriculum-blk-topbar-option {
+ul.oercurr-blk-topbar-option {
 	display: none;
 	position: absolute;
 	margin: 0px !important;
 	min-width: 100%;
 	padding: 0px !important;
-	border: 1px solid #cdcdcd
+	border: 1px solid #cdcdcd;
+	background-color: #ffffff !important;
+	-webkit-transition: unset !important;
+	-o-transition: unset !important;
+	transition: unset !important
 }
 
-ul.oer-curriculum-blk-topbar-display-option li,
-ul.oer-curriculum-blk-topbar-sort-option li {
+ul.oercurr-blk-topbar-option li:before {
+	content: unset !important
+}
+
+ul.oercurr-blk-topbar-display-option li,
+ul.oercurr-blk-topbar-sort-option li {
 	list-style: none;
-  margin:0px;
+	margin: 5px 0px
 }
 
-ul.oer-curriculum-blk-topbar-display-option li a,
-ul.oer-curriculum-blk-topbar-sort-option li a {
+ul.oercurr-blk-topbar-display-option li a,
+ul.oercurr-blk-topbar-sort-option li a {
 	display: block;
 	text-align: right;
 	padding: 5px 10px;
@@ -228,39 +245,35 @@ ul.oer-curriculum-blk-topbar-sort-option li a {
 	background-color: #fff
 }
 
-ul.oer-curriculum-blk-topbar-display-option li a:focus,
-ul.oer-curriculum-blk-topbar-sort-option li a:focus {
+ul.oercurr-blk-topbar-display-option li a:focus,
+ul.oercurr-blk-topbar-sort-option li a:focus {
 	background-color: #e9e9e9 !important
 }
 
-ul.oer-curriculum-blk-topbar-display-option li.selected a,
-ul.oer-curriculum-blk-topbar-sort-option li.selected a {
+ul.oercurr-blk-topbar-display-option li.selected a,
+ul.oercurr-blk-topbar-sort-option li.selected a {
 	background-color: #e9e9e9 !important
 }
-ul.oer-curriculum-blk-topbar-sort-option li:before,
-ul.oer-curriculum-blk-topbar-display-option li:before {
-    content: '' !important;
-}
 
-.oer-curriculum-postmeta {
+.oercurr-postmeta {
 	padding-bottom: 6px
 }
 
-.oer-curriculum-tags .tagcloud {
+.tagcloud {
 	margin: 0 0 10px !important
 }
 
-.oer-curriculum-tags.tagcloud span a {
+.oercurr-tags.tagcloud span a {
 	margin: 0px 1px;
-	display:block;
+	display: block !important
 }
 
-.oer-curriculum-tags.tagcloud span a:focus {
+.oercurr-tags.tagcloud span a:focus {
 	-webkit-box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.1) !important;
 	box-shadow: inset 2px 2px 0 rgba(0, 0, 0, 0.1) !important
 }
 
-.oer-curriculum-tags.tagcloud span {
+.oercurr-tags.tagcloud span {
 	display: inline-block;
 	margin-bottom: 2px
 }

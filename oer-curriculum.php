@@ -32,20 +32,20 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 //defining the url,path and slug for the plugin
-define( 'OER_LESSON_PLAN_URL', plugin_dir_url(__FILE__) );
-define( 'OER_LESSON_PLAN_PATH', plugin_dir_path(__FILE__) );
-define( 'OER_LESSON_PLAN_SLUG','oer-curriculum' );
-define( 'OER_LESSON_PLAN_FILE',__FILE__);
+define( 'OERCURR_CURRICULUM_URL', plugin_dir_url(__FILE__) );
+define( 'OERCURR_CURRICULUM_PATH', plugin_dir_path(__FILE__) );
+define( 'OERCURR_CURRICULUM_SLUG','oer-curriculum' );
+define( 'OERCURR_CURRICULUM_FILE',__FILE__);
 // Plugin Name and Version
-define( 'OER_LESSON_PLAN_PLUGIN_NAME', 'OER Curriculum Plugin' );
-define( 'OER_LESSON_PLAN_ADMIN_PLUGIN_NAME', 'OER Curriculum Plugin');
-define( 'OER_LESSON_PLAN_VERSION', '0.5.0' );
+define( 'OERCURR_CURRICULUM_PLUGIN_NAME', 'OER Curriculum Plugin' );
+define( 'OERCURR_CURRICULUM_ADMIN_PLUGIN_NAME', 'OER Curriculum Plugin');
+define( 'OERCURR_CURRICULUM_VERSION', '0.5.0' );
 
-include_once(OER_LESSON_PLAN_PATH.'includes/oer-curriculum-functions.php');
-include_once(OER_LESSON_PLAN_PATH.'includes/init.php');
+include_once(OERCURR_CURRICULUM_PATH.'includes/oer-curriculum-functions.php');
+include_once(OERCURR_CURRICULUM_PATH.'includes/init.php');
 
-require_once(OER_LESSON_PLAN_PATH.'includes/blocks/curriculum-block/init.php');
-require_once(OER_LESSON_PLAN_PATH.'includes/blocks/curriculum-featured-block/init.php');
+require_once(OERCURR_CURRICULUM_PATH.'includes/blocks/curriculum-block/init.php');
+require_once(OERCURR_CURRICULUM_PATH.'includes/blocks/curriculum-featured-block/init.php');
 
 global $oer_curriculum_default_structure;
 global $oer_convert_info;
@@ -85,15 +85,15 @@ $oer_curriculum_deleted_fields = array(
 );
 
 $oer_convert_info = true;
-$root_slug = oer_curriculum_retrieve_rootslug();
+$root_slug = oercurr_retrieve_rootslug();
 /**
  * Parent plugin (WP OER) required to activate OER Curriculum
  * Check if WP OER plugin already installed or not
  * If WP OER not installed then show the error message
  * And stop the installation process of OER Curriculum plugin
  */
-register_activation_hook( __FILE__, 'check_parent_plugin' );
-function check_parent_plugin()
+register_activation_hook( __FILE__, 'oercurr_check_parent_plugin' );
+function oercurr_check_parent_plugin()
 {
     // Require parent plugin
     if( !current_user_can( 'activate_plugins' )){
@@ -109,18 +109,18 @@ function check_parent_plugin()
  * Runs only when the plugin is activated.
  * @since 0.1.0
  */
-function oer_curriculum_plugin_activate()
+function oercurr_plugin_activate()
 {
     //Activation code
 }
-register_activation_hook( __FILE__, 'oer_curriculum_plugin_activate' );
+register_activation_hook( __FILE__, 'oercurr_plugin_activate' );
 
 /**
  * Admin Notice on Activation.
  * @since 0.1.0
  */
-add_action( 'admin_notices', 'my_plugin_activation_notice');
-function my_plugin_activation_notice()
+add_action( 'admin_notices', 'oercurr_plugin_activation_notice');
+function oercurr_plugin_activation_notice()
 {
     global $post;
     if(
@@ -141,7 +141,7 @@ function my_plugin_activation_notice()
  * @param $single_template
  * @return string
  */
-function get_single_oer_curriculum_template($single_template)
+function oercurr_get_single_template($single_template)
 {
     global $post;
 
@@ -150,11 +150,11 @@ function get_single_oer_curriculum_template($single_template)
     }
     return $single_template;
 }
-add_filter( 'single_template', 'get_single_oer_curriculum_template' );
+add_filter( 'single_template', 'oercurr_get_single_template' );
 
 // Add rewrite rule for substandards
-add_action( 'init', 'oer_curriculum_add_rewrites', 10, 0 );
-function oer_curriculum_add_rewrites()
+add_action( 'init', 'oercurr_add_rewrites', 10, 0 );
+function oercurr_add_rewrites()
 {
   global $root_slug;
     global $wp_rewrite;
@@ -181,16 +181,16 @@ function oer_curriculum_add_rewrites()
     update_option('oer_curriculum_rewrite_rules', true);
 }
 
-add_filter( 'query_vars', 'oer_curriculum_add_query_vars' );
-function oer_curriculum_add_query_vars( $vars ){
+add_filter( 'query_vars', 'oercurr_add_query_vars' );
+function oercurr_add_query_vars( $vars ){
     $vars[] = "source";
     $vars[] = "topic";
     $vars[] = "module";
     return $vars;
 }
 
-add_action( 'template_include' , 'oer_curriculum_assign_standard_template' );
-function oer_curriculum_assign_standard_template($template) {
+add_action( 'template_include' , 'oercurr_assign_standard_template' );
+function oercurr_assign_standard_template($template) {
     global $wp_query;
   global $root_slug;
     $url_path = trim(parse_url(add_query_arg(array()), PHP_URL_PATH), '/');
@@ -219,8 +219,8 @@ function oer_curriculum_assign_standard_template($template) {
     return $template;
 }
 
-add_action( 'init', 'oer_curriculum_add_inquiry_set_rest_args', 30 );
-function oer_curriculum_add_inquiry_set_rest_args() {
+add_action( 'init', 'oercurr_add_inquiry_set_rest_args', 30 );
+function oercurr_add_inquiry_set_rest_args() {
     global $wp_post_types;
 
     $wp_post_types['oer-curriculum']->show_in_rest = true;
@@ -229,24 +229,24 @@ function oer_curriculum_add_inquiry_set_rest_args() {
 }
 
 /* Enqueue script and css for Gutenberg Inquiry Set Thumbnail block */
-add_action('enqueue_block_editor_assets', 'oer_curriculum_enqueue_inquiry_set_block');
-function oer_curriculum_enqueue_inquiry_set_block(){
+add_action('enqueue_block_editor_assets', 'oercurr_enqueue_inquiry_set_block');
+function oercurr_enqueue_inquiry_set_block(){
     global $post;
     wp_enqueue_script(
         'curriculum-thumbnail-block-js',
-        OER_LESSON_PLAN_URL . "/js/backend/oer-curriculum-thumbnail-block.build.js",
+        OERCURR_CURRICULUM_URL . "/js/backend/oer-curriculum-thumbnail-block.build.js",
         array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-components', 'wp-editor', 'wp-api')
     );
     wp_localize_script(
         'curriculum-thumbnail-block-js',
-        'wp_nn_theme',
+        'oer_curriculum_thumbnail_block_localized',
         array(
             "theme_path" => get_template_directory_uri()
         )
     );
     wp_enqueue_style(
         'curriculum-thumbnail-block-css',
-        OER_LESSON_PLAN_URL . "/css/backend/oer-curriculum-thumbnail-block.css",
+        OERCURR_CURRICULUM_URL . "/css/backend/oer-curriculum-thumbnail-block.css",
         array('wp-edit-blocks')
     );
     /* Register Thumbnail Block */
@@ -256,13 +256,13 @@ function oer_curriculum_enqueue_inquiry_set_block(){
     ));
 }
 
-add_action( 'rest_api_init', 'oer_curriculum_add_meta_to_api');
-function oer_curriculum_add_meta_to_api() {
+add_action( 'rest_api_init', 'oercurr_add_meta_to_api');
+function oercurr_add_meta_to_api() {
     // Register Grade Levels to REST API
     register_rest_field( 'oer-curriculum',
                 'oer_curriculum_grades',
                 array(
-                'get_callback' => 'oer_curriculum_rest_get_meta_field',
+                'get_callback' => 'oercurr_rest_get_meta_field',
                 'update_callback' => null,
                 'schema' => null
                   ) );
@@ -271,14 +271,14 @@ function oer_curriculum_add_meta_to_api() {
     register_rest_field( 'oer-curriculum',
             'featured_image_url',
             array(
-                'get_callback'    => 'oer_curriculum_get_rest_featured_image',
+                'get_callback'    => 'oercurr_get_rest_featured_image',
                 'update_callback' => null,
                 'schema'          => null,
             ) );
 
 }
 
-function oer_curriculum_retrieve_rootslug(){
+function oercurr_retrieve_rootslug(){
   $_segments = explode("/",get_option( 'permalink_structure' )); $_pref = '';
   foreach ($_segments as $_segment){
     if(trim($_segment," ") !== '' && substr_count($_segment,'%') == 0){$_pref .= $_segment.'/';}
@@ -292,7 +292,7 @@ function oer_curriculum_retrieve_rootslug(){
   return $_pref.$_root_slug;
 }
 
-function oer_curriculum_rest_get_meta_field($inquiryset, $field, $request){
+function oercurr_rest_get_meta_field($inquiryset, $field, $request){
     if ($field=="oer_curriculum_grades") {
         $grades = get_post_meta($inquiryset['id'], $field, true);
                 if (is_array($grades))
@@ -311,7 +311,7 @@ function oer_curriculum_rest_get_meta_field($inquiryset, $field, $request){
         return get_post_meta($inquiryset['id'], $field, true);
 }
 
-function oer_curriculum_get_rest_featured_image($inquiryset, $field, $request) {
+function oercurr_get_rest_featured_image($inquiryset, $field, $request) {
     if( $inquiryset['featured_media'] ){
         $img = wp_get_attachment_image_src( $inquiryset['featured_media'], 'app-thumb' );
         return $img[0];
@@ -319,7 +319,14 @@ function oer_curriculum_get_rest_featured_image($inquiryset, $field, $request) {
     return false;
 }
 
-add_action( 'wp_enqueue_scripts', 'load_dashicons_front_end' );
-function load_dashicons_front_end() {
+add_action( 'wp_enqueue_scripts', 'oercurr_load_dashicons_front_end' );
+function oercurr_load_dashicons_front_end() {
   wp_enqueue_style( 'dashicons' );
+}
+
+
+//Load the text domain
+add_action('plugins_loaded', 'oercurr_load_textdomain');
+function oercurr_load_textdomain() {
+	load_plugin_textdomain( 'oer-curriculum', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
 }

@@ -55,7 +55,7 @@ input[name="wp-nn-parentpage-rad"] {
 /****************/
 /*  CUSTOM.CSS  */
 /****************/
-.oer-curriculum-resource-selector-overlay {
+.oercurr-resource-selector-overlay {
     z-index: 9999;
     position: fixed;
     top: 0px;
@@ -69,7 +69,7 @@ input[name="wp-nn-parentpage-rad"] {
 	box-sizing: border-box;
 }
 
-.oer-curriculum-resource-selector-table{
+.oercurr-resource-selector-table{
     display: table;
     margin: 0px auto;
     width: 100%;
@@ -78,15 +78,15 @@ input[name="wp-nn-parentpage-rad"] {
 	box-sizing: border-box;
 }
 
-.oer-curriculum-resource-selector-cell {
+.oercurr-resource-selector-cell {
     display: table-cell;
     vertical-align: middle;
     box-sizing: border-box;
 	padding: 20px;
 }
 
-.oer-curriculum-resource-selector-cell div{ box-sizing: border-box; }
-.oer-curriculum-resource-selector-content {
+.oercurr-resource-selector-cell div{ box-sizing: border-box; }
+.oercurr-resource-selector-content {
 	position:relative;
     float: left;
     width: 100%;
@@ -110,11 +110,11 @@ input[name="wp-nn-parentpage-rad"] {
 	-moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
 }
 
-.oer-curriculum-resource-selector-content h1 {
+.oercurr-resource-selector-content h1 {
     margin-top: 5px !important;
 }
 
-.oer-curriculum-resource-selector-search-close {
+.oercurr-resource-selector-search-close {
     position: absolute;
     display: block;
     padding: 16px;
@@ -122,7 +122,7 @@ input[name="wp-nn-parentpage-rad"] {
     top: 0px;
 	cursor: pointer;
 }
-.oer-curriculum-resource-selector-search-close span.fa-times {
+.oercurr-resource-selector-search-close span.fa-times {
 	position: absolute;
     top: 6px;
     right: 6px;
@@ -130,11 +130,11 @@ input[name="wp-nn-parentpage-rad"] {
     color: #727272;
     z-index: 99;
 }
-.oer-curriculum-resource-selector-search-close span.fa-times:hover {
+.oercurr-resource-selector-search-close span.fa-times:hover {
 	color: #222222;
 }
 
-.oer-curriculum-resource-selector-search-result {
+.oercurr-resource-selector-search-result {
     float: left;
     width: 100%;
     max-height: 308px;
@@ -145,17 +145,17 @@ input[name="wp-nn-parentpage-rad"] {
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
-.oer-curriculum-resource-selector-content>ul {
+.oercurr-resource-selector-content>ul {
     display: block;
     float: left;
     width: 100%;
     margin: 20px 0px;
 }
 
-.oer-curriculum-resource-selector-search-result>ul {
+.oercurr-resource-selector-search-result>ul {
     margin: 0px !important;
 }
-.oer-curriculum-resource-selector-search-result ul li {
+.oercurr-resource-selector-search-result ul li {
     margin-bottom: 0px !important;
 }
 label.wp-nn-tag-p {
@@ -167,7 +167,7 @@ label.wp-nn-tag-p {
 	box-sizing: border-box;
 }
 
-.oer-curriculum-resource-selector-search input[name="oer-curriculum-resource-selector-criteria"] {
+.oercurr-resource-selector-search input[name="oercurr-resource-selector-criteria"] {
 	position: relative;
   width: 100%;
   padding: 3px 10px;
@@ -176,8 +176,8 @@ label.wp-nn-tag-p {
   border-radius: 5px;
 }
 
-.oer-curriculum-resource-selector-search { position: relative; margin-bottom: 10px;}
-.oer-curriculum-resource-selector-search .fa-search {
+.oercurr-resource-selector-search { position: relative; margin-bottom: 10px;}
+.oercurr-resource-selector-search .fa-search {
     position: absolute;
     top: 9px;
     left: 7px;
@@ -186,7 +186,7 @@ label.wp-nn-tag-p {
     z-index: 99;
 }
 
-.oer-curriculum-resource-selector-nav-wrapper {
+.oercurr-resource-selector-nav-wrapper {
 	position: absolute;
     display: block;
     padding: 10px 16px;
@@ -196,7 +196,7 @@ label.wp-nn-tag-p {
     background-color: rgba(0,0,0,.5);
 }
 
-a.oer-curriculum-resource-selector-select {
+a.oercurr-resource-selector-select {
     display: block;
     float: left;
     border: 1px solid #e4e4e4;
@@ -208,7 +208,7 @@ a.oer-curriculum-resource-selector-select {
     border-radius: 5px;
 }
 
-a.oer-curriculum-resource-selector-select {
+a.oercurr-resource-selector-select {
     display: block;
     float: left;
     border: 1px solid #ccc;
@@ -221,29 +221,29 @@ a.oer-curriculum-resource-selector-select {
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
-a.oer-curriculum-resource-selector-select:hover {
+a.oercurr-resource-selector-select:hover {
 	background: #fafafa;
     border-color: #999;
     color: #23282d;
 }
-input#oer-curriculum-resource-selector-display {
+input#oercurr-resource-selector-display {
     float: left;
     height: 28px;
     margin: 0 4px 0 0;
 	background-color: #fff;
 }
 @media screen and (max-width: 782px){
-	input#oer-curriculum-resource-selector-display {
+	input#oercurr-resource-selector-display {
 		height: auto;
 		width:100%;
 		margin-bottom:15px;
 	}
 }
 
-input[name="oer-curriculum-resource-selector-rad"] {
+input[name="oercurr-resource-selector-rad"] {
     display: none;
 }
-label.oer-curriculum-resource-selector-tag-p span.dashicons {
+label.oercurr-resource-selector-tag-p span.dashicons {
   position: absolute;
   left: 5px;
   top: 4px;
@@ -251,7 +251,7 @@ label.oer-curriculum-resource-selector-tag-p span.dashicons {
   color: #ffffff;
   text-indent: 0px;
 }
-label.oer-curriculum-resource-selector-tag-p.checked {
+label.oercurr-resource-selector-tag-p.checked {
     color: #ffffff;
     text-indent: 10px;
     text-shadow: 1px 1px 3px #000000;
@@ -261,7 +261,7 @@ label.oer-curriculum-resource-selector-tag-p.checked {
     background: linear-gradient(to right, rgba(0,133,186,1) 0%,rgba(255,255,255,0) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0085ba', endColorstr='#00ffffff',GradientType=1 );
 }
-.oer-curriculum-resource-selector-tag-p{
+.oercurr-resource-selector-tag-p{
   color: #222222;
   position:relative;
   text-indent: 0px;
@@ -306,7 +306,7 @@ label.oer-curriculum-resource-selector-tag-p.checked {
 }
 .oer_curriculum_primary_resources_image_display {float: left;width: 100%;padding-bottom: 10px;}
 .oer_curriculum_primary_resources_image_display>a img { max-width: 100% !important; border: 1px solid #868686;}
-.wp-editor-container>textarea {width: 100%;}
+.wp-editor-container>textarea {width: 100%; max-width:100%;}
 
 /***************/
 /*  PRELOADER  */
