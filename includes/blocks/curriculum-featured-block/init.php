@@ -27,9 +27,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @uses {wp-editor} for WP editor styles.
  * @since 1.0.0
  */
+define( 'OERCURR_CFB_CURRICULUM_URL', plugin_dir_url(__FILE__) );
 define( 'OERCURR_CFB_BLK_PLUGIN_DIR_PATH', plugin_dir_path( __DIR__ ) );
+
 define( 'OERCURR_CFB_BLK_PLUGIN_DIR_URL', OERCURR_CURRICULUM_URL."/includes/blocks/curriculum-featured-block" );
 define( 'OERCURR_CFB_BLK_BASE_URL', get_home_url() );
+
 define( 'OERCURR_CFB_BLK_CURRICULUM_PLUGIN_URL', OERCURR_CURRICULUM_URL );
 define( 'OERCURR_CFB_BLK_BX_RESET_BLOCKED', false );
 define( 'OERCURR_CFB_BLK_SLIDE_DESC_LEN', 150 );
@@ -95,7 +98,7 @@ function oercurr_cfb_block_assets() { // phpcs:ignore
      * @since 1.16.0
      */
     register_block_type(
-        'oer-curriculum/block-curriculum-featured-block', array(
+        'cgb/block-curriculum-featured-block', array(
             // Enqueue blocks.style.build.css on both frontend & backend.
             'style'         => 'curriculum_featured_block-cgb-style-css',
             // Enqueue blocks.build.js in the editor only.
@@ -150,7 +153,7 @@ function oercurr_cfb_render_featured_block($attributes, $ajx=false){
                             $_cfb_desc = html_entity_decode(strip_tags($_post->post_content));
                             $_cfb_desc = (strlen($_cfb_desc) > $_sliddesclength)? substr($_cfb_desc,0,$_sliddesclength).'...': $_cfb_desc;
                             $_tmp_image = get_the_post_thumbnail_url($_post->ID,'medium');
-                            $_cfb_image = (!$_tmp_image)? OERCURR_CURRICULUM_URL.'assets/images/default-img.jpg': $_tmp_image;
+                            $_cfb_image = (!$_tmp_image)? OERCURR_CURRICULUM_URL.'images/default-img.jpg': $_tmp_image;
 
 
                                     $_ret .= '<li>';
