@@ -17,7 +17,7 @@ global $message, $type;
     <?php settings_errors(); ?>
 
     <?php
-    $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'metadata';
+    $active_tab = isset( $_GET[ 'tab' ] ) ? sanitize_text_field($_GET[ 'tab' ]) : 'metadata';
     ?>
 
     <h2 class="nav-tab-wrapper">

@@ -753,21 +753,6 @@ if (!function_exists('oercurr_add_setting_options')){
     }
 }
 
-// create textlog file
-function oercurr_log($metaname){
-  $myfile = fopen(ABSPATH."newfile.txt", "w") or die("Unable to open file!");
-  if(is_array($_POST[$metaname])){
-    foreach($_POST[$metaname] as $key=>$value){
-          fwrite($myfile,"ARRAY:\r\n");
-          fwrite($myfile, $metaname."[".$key."] ->".$_POST[$metaname][$key]."\r\n");      
-    }
-  }else{
-    fwrite($myfile,"NON-ARRAY:\r\n");
-    fwrite($myfile, $metaname."->".$_POST[$metaname]."\r\n");  
-  }
-  fclose($myfile);
-}
-
 function oercurr_allowed_html() {
 
 	$allowed_tags = array(

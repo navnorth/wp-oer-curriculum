@@ -319,10 +319,10 @@ add_action( 'rest_api_init', function () {
 
 function oercurr_cb_tax_query(){
     
-    $_postperpage = $_GET['perpage'];
-    $_taxterms = $_GET['terms'];
-    $_ordertby = $_GET['orderby'];
-    $_ord = $_GET['order'];
+    $_postperpage = sanitize_text_field($_GET['perpage']);
+    $_taxterms = sanitize_text_field($_GET['terms']);
+    $_ordertby = sanitize_text_field($_GET['orderby']);
+    $_ord = sanitize_text_field($_GET['order']);
 
     $args = array(
         'posts_per_page' => $_postperpage,
