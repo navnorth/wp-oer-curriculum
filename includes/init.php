@@ -1101,7 +1101,7 @@ function oercurr_get_source_callback(){
         $source = sanitize_text_field($_POST['next_source']);
     
     if (isset($_POST['curriculum']))
-        $curriculum_id = $_POST['curriculum'];
+        $curriculum_id = sanitize_text_field($_POST['curriculum']);
     
     if (isset($_POST['index']))
         $source_id = sanitize_text_field($_POST['index']);
