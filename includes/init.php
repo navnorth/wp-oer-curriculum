@@ -870,7 +870,7 @@ function oercurr_get_resource_info_callback() {
   
   $_arr = array();
   if(!empty($_POST['resid'])){
-      $_resid = $_POST['resid'];
+      $_resid = sanitize_text_field($_POST['resid']);
       $_resource= get_post($_resid);
       $_arr['p_title'] = $_resource->post_title;
       $_arr['p_url'] = get_permalink($_resource->ID);
@@ -1062,10 +1062,10 @@ function oercurr_searched_standards_callback() {
     $meta_key = "oer_curriculum_standards";
 
     if (isset($_POST['post_id'])){
-        $post_id = $_POST['post_id'];
+        $post_id = sanitize_text_field($_POST['post_id']);
     }
     if (isset($_POST['keyword'])){
-        $keyword = $_POST['keyword'];
+        $keyword = sanitize_text_field($_POST['keyword']);
     }
 
     if (!$post_id){
@@ -1098,13 +1098,13 @@ function oercurr_get_source_callback(){
     $subjects = null;
     
     if (isset($_POST['next_source']))
-        $source = $_POST['next_source'];
+        $source = sanitize_text_field($_POST['next_source']);
     
     if (isset($_POST['curriculum']))
         $curriculum_id = $_POST['curriculum'];
     
     if (isset($_POST['index']))
-        $source_id = $_POST['index'];
+        $source_id = sanitize_text_field($_POST['index']);
     
     // Get Resource Details
     $resource = get_page_by_title($source,OBJECT,"resource");
