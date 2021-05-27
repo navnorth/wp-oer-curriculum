@@ -9,6 +9,7 @@
  Author:             Navigation North
  Author URI:         https://www.navigationnorth.com
  Text Domain:        oer-curriculum
+ Domain Path:        /languages/
  License:            GPL3
  License URI:        https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -328,5 +329,5 @@ function oercurr_load_dashicons_front_end() {
 //Load the text domain
 add_action('plugins_loaded', 'oercurr_load_textdomain');
 function oercurr_load_textdomain() {
-	load_plugin_textdomain( 'oer-curriculum', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
+	load_plugin_textdomain( OERCURR_CURRICULUM_SLUG, false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
 }

@@ -17,7 +17,7 @@ global $message, $type;
     <?php settings_errors(); ?>
 
     <?php
-    $active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'metadata';
+    $active_tab = isset( $_GET[ 'tab' ] ) ? sanitize_text_field($_GET[ 'tab' ]) : 'metadata';
     ?>
 
     <h2 class="nav-tab-wrapper">
@@ -68,10 +68,10 @@ function oercurr_show_general_settings(){
                             <?php    $_genset = json_decode(get_option('oer_curriculum_general_setting')); ?>
                             <tr>
                                     <td>Curriculum Root Slug</td>
-                                    <td><input type="text" name="oer_curriculum_general_setting[rootslug]" value="<? echo (isset($_genset->rootslug))? $_genset->rootslug: 'curriculum'; ?>"></td>
+                                    <td><input type="text" name="oer_curriculum_general_setting[rootslug]" value="<?php echo (isset($_genset->rootslug))? $_genset->rootslug: 'curriculum'; ?>"></td>
                                     <td>
                                         <input type="hidden" name="oer_curriculum_general_setting[rootslug_enabled]" value="0">
-                                        <input type="checkbox" name="oer_curriculum_general_setting[rootslug_enabled]" value="1" <? echo (isset($_genset->rootslug_enabled) && $_genset->rootslug_enabled > 0)? 'checked': ''; ?> />
+                                        <input type="checkbox" name="oer_curriculum_general_setting[rootslug_enabled]" value="1" <?php echo (isset($_genset->rootslug_enabled) && $_genset->rootslug_enabled > 0)? 'checked': ''; ?> />
                                     </td>
                             </tr>
                     </tbody>

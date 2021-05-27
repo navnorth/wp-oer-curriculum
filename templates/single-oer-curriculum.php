@@ -584,7 +584,7 @@
                           <div class="media-image">
                               <div class="image-thumbnail">
                                   <?php 
-                                  $_tmp_pstnm = ( is_preview() )? $_GET['p'] :sanitize_title($post->post_name);
+                                  $_tmp_pstnm = ( is_preview() && isset($_GET['p']) )? sanitize_text_field($_GET['p']) :sanitize_title($post->post_name);
                                   ?>
                                   <?php $ps_url = site_url($root_slug."/".$_tmp_pstnm."/source/".sanitize_title($title)."-".$resource_id)."/idx/".$_idx++; ?>
                                   <a href="<?php echo esc_url($ps_url);  ?>">

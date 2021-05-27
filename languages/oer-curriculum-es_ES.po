@@ -2,63 +2,62 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OER Curriculum\n"
 "POT-Creation-Date: 2021-04-23 19:37+0800\n"
-"PO-Revision-Date: 2021-04-24 14:53+0800\n"
+"PO-Revision-Date: 2021-05-17 14:01+0800\n"
 "Last-Translator: \n"
 "Language-Team: Navigation North\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 2.4.3\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: es\n"
+"Language: es_ES\n"
 "X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;_n_noop;_nx_noop;translate_nooped_plural;number_format_i18n;date_i18n;esc_html__;esc_html__;esc_html_x;esc_attr__;esc_attr_e;esc_attr_x\n"
 
 msgid "Details"
 msgstr "Detalles"
 
 msgid "Introduction"
-msgstr ""
+msgstr "Introducción"
 
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 msgid "Resource"
-msgstr ""
+msgstr "Recurso"
 
 msgid "Textbox"
-msgstr ""
+msgstr "Caja de texto"
 
-#, fuzzy
 msgid "Required Materials"
 msgstr "Materiales"
 
 msgid "Section"
-msgstr ""
+msgstr "Sección"
 
 msgid "Add Section"
-msgstr ""
+msgstr "Agregar sección"
 
 msgid "Lesson Times"
-msgstr ""
+msgstr "Horarios de las lecciones"
 
 msgid "Standards and Objectives"
-msgstr ""
+msgstr "Estándares y objetivos"
 
 msgid "Standards"
-msgstr ""
+msgstr "Estándares"
 
 msgid "Activities in this Lesson"
-msgstr ""
+msgstr "Actividades de esta lección"
 
 msgid "Summative Assessment"
-msgstr ""
+msgstr "Evaluación sumativa"
 
 msgid "Assessment Type(s):"
-msgstr ""
+msgstr "Tipo (s) de evaluación"
 
 msgid "Other"
-msgstr ""
+msgstr "Otro"
 
 msgid "Text List"
 msgstr "Lista de texto"
@@ -71,53 +70,53 @@ msgid "Vocabulary List"
 msgstr "Lista de texto"
 
 msgid "You have not selected any academic standards"
-msgstr ""
+msgstr "No ha seleccionado ningún estándar académico"
 
 msgid "Teacher Background"
-msgstr ""
+msgstr "Antecedentes del profesor"
 
 msgid "Historical Background"
-msgstr ""
+msgstr "Antecedentes históricos"
 
 msgid "Student Background"
-msgstr ""
+msgstr "Antecedentes del estudiante"
 
 msgid "Authors"
-msgstr ""
+msgstr "Autoras"
 
 msgid "Primary Resources"
-msgstr ""
+msgstr "Pregunta de investigación"
 
 msgid "Investigative Question"
-msgstr ""
+msgstr "Pregunta de investigación"
 
 msgid "Settings - OER Curriculum"
-msgstr ""
+msgstr "Configuración - OER Currículo"
 
 msgid "General"
-msgstr ""
+msgstr "General"
 
 msgid "Metadata"
-msgstr ""
+msgstr "Metadatos"
 
 msgid "More Information"
-msgstr ""
+msgstr "Más información"
 
 msgid "Use the options below to update metadata field options."
-msgstr ""
+msgstr "Utilice las siguientes opciones para actualizar las opciones del campo de metadatos."
 
 msgid "Inquiry Sets"
-msgstr ""
+msgstr "Conjuntos de consulta"
 
 msgid "View Item"
-msgstr ""
+msgstr "Ver ítem"
 
 msgid "Subjects"
-msgstr ""
+msgstr "Sujetos"
 
 msgid "SEE MORE +"
-msgstr ""
+msgstr "VER MÁS +"
 
 #, fuzzy
 msgid "Text"
-msgstr "Lista de texto"
+msgstr "Texto"
