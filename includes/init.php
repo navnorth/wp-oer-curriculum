@@ -660,6 +660,7 @@ function oercurr_add_more_activity_callback() {
             'textarea_rows' => 10,
             'drag_drop_upload' => true,
             'teeny' => true,
+            'relative_urls' => false,
         )
     );
     $content .= ob_get_clean();
@@ -795,7 +796,8 @@ function oercurr_add_more_prime_resource_callback() {
                               //        'drag_drop_upload' => true,
                               //        'teeny' => true,
                               //        'quicktags' => true,
-                              //        'tinymce' => true
+                              //        'tinymce' => true,
+                              //        'relative_urls' => false,
                               //    )
                               //);
                           $content .= ob_get_clean();
@@ -815,6 +817,7 @@ function oercurr_add_more_prime_resource_callback() {
                                       'textarea_rows' => 6,
                                       'drag_drop_upload' => true,
                                       'teeny' => true,
+                                      'relative_urls' => false,
                                   )
                               );
                               $content .= ob_get_clean();
@@ -926,6 +929,7 @@ function oercurr_create_dynamic_editor($id) {
                                 'textarea_rows' => 10,
                                 'drag_drop_upload' => true,
                                 'teeny' => true,
+                                'relative_urls' => false,
                             )
                         );
     $content .= ob_get_clean();
@@ -1186,6 +1190,7 @@ function oercurr_add_text_feature_callback() {
                                     'textarea_rows' => 10,
                                     'drag_drop_upload' => true,
                                     'teeny' => true,
+                                    'relative_urls' => false,
                                 )
                             );
     $content .=             ob_get_clean();
