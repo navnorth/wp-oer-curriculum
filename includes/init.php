@@ -491,24 +491,25 @@ function oercurr_save_custom_fields() {
             }
 
             // Save custom modules
+            /*
             if (isset($_POST['oer_curriculum_order'])) {
                 foreach ($_POST['oer_curriculum_order'] as $moduleKey => $order) {
                     if (isset($_POST[$moduleKey])) {
                         $_sanitized_curriclum_order = $_POST[$moduleKey];
                         update_post_meta($post->ID, $moduleKey, $_sanitized_curriclum_order);
                         // Check for vocabulary and save the vocabulary details
-                        /*
-                        if (strpos($moduleKey, 'oer_curriculum_vocabulary_list_title_') !== false) {
-                            $listOrder = end(explode('_', $moduleKey));
-                            if (isset($_POST['oer_curriculum_vocabulary_details_' . $listOrder])) {
-                                update_post_meta($post->ID, 'oer_curriculum_vocabulary_details_' . $listOrder, $_POST['oer_curriculum_vocabulary_details_' . $listOrder]);
-                            }
-                        }
-                        */
+                        
+                        //if (strpos($moduleKey, 'oer_curriculum_vocabulary_list_title_') !== false) {
+                            //$listOrder = end(explode('_', $moduleKey));
+                            //if (isset($_POST['oer_curriculum_vocabulary_details_' . $listOrder])) {
+                                //update_post_meta($post->ID, 'oer_curriculum_vocabulary_details_' . $listOrder, $_POST['oer_curriculum_vocabulary_details_' . $listOrder]);
+                            //}
+                        //}
+                        
                     }
                 }
             }
-            
+            */
             
              // Save Required Equipment Materials Label
             /*

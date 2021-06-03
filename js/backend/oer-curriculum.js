@@ -295,9 +295,8 @@ jQuery(document).ready(function ($) {
                 $(this).find('textarea').each(function (i,obj) {
                   var txelmid = $(obj).attr('id');
                   if (typeof txelmid !== 'undefined') {
-                    console.log(txelmid);
-                    tinymce.execCommand( 'mceRemoveEditor', false, txelmid );
-                    tinymce.execCommand( 'mceAddEditor', false, txelmid );
+                    //tinymce.execCommand( 'mceRemoveEditor', false, txelmid );
+                    //tinymce.execCommand( 'mceAddEditor', false, txelmid );
                   }
                 });
                 

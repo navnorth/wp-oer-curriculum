@@ -1264,6 +1264,10 @@ div#tcHiddenFields {float: left;}
     font-size: .9em;
 }
 
+.oercurr-tc-details .tc-hidden-fields .form-field {
+    clear: left;
+}
+
 .oercurr-tc-details .tc-hidden-fields .form-field ul {
     padding: 0px;
     margin: 0px;
