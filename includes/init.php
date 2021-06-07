@@ -491,24 +491,25 @@ function oercurr_save_custom_fields() {
             }
 
             // Save custom modules
+            /*
             if (isset($_POST['oer_curriculum_order'])) {
                 foreach ($_POST['oer_curriculum_order'] as $moduleKey => $order) {
                     if (isset($_POST[$moduleKey])) {
                         $_sanitized_curriclum_order = $_POST[$moduleKey];
                         update_post_meta($post->ID, $moduleKey, $_sanitized_curriclum_order);
                         // Check for vocabulary and save the vocabulary details
-                        /*
-                        if (strpos($moduleKey, 'oer_curriculum_vocabulary_list_title_') !== false) {
-                            $listOrder = end(explode('_', $moduleKey));
-                            if (isset($_POST['oer_curriculum_vocabulary_details_' . $listOrder])) {
-                                update_post_meta($post->ID, 'oer_curriculum_vocabulary_details_' . $listOrder, $_POST['oer_curriculum_vocabulary_details_' . $listOrder]);
-                            }
-                        }
-                        */
+                        
+                        //if (strpos($moduleKey, 'oer_curriculum_vocabulary_list_title_') !== false) {
+                            //$listOrder = end(explode('_', $moduleKey));
+                            //if (isset($_POST['oer_curriculum_vocabulary_details_' . $listOrder])) {
+                                //update_post_meta($post->ID, 'oer_curriculum_vocabulary_details_' . $listOrder, $_POST['oer_curriculum_vocabulary_details_' . $listOrder]);
+                            //}
+                        //}
+                        
                     }
                 }
             }
-            
+            */
             
              // Save Required Equipment Materials Label
             /*
@@ -660,6 +661,7 @@ function oercurr_add_more_activity_callback() {
             'textarea_rows' => 10,
             'drag_drop_upload' => true,
             'teeny' => true,
+            'relative_urls' => false,
         )
     );
     $content .= ob_get_clean();
@@ -795,7 +797,8 @@ function oercurr_add_more_prime_resource_callback() {
                               //        'drag_drop_upload' => true,
                               //        'teeny' => true,
                               //        'quicktags' => true,
-                              //        'tinymce' => true
+                              //        'tinymce' => true,
+                              //        'relative_urls' => false,
                               //    )
                               //);
                           $content .= ob_get_clean();
@@ -815,6 +818,7 @@ function oercurr_add_more_prime_resource_callback() {
                                       'textarea_rows' => 6,
                                       'drag_drop_upload' => true,
                                       'teeny' => true,
+                                      'relative_urls' => false,
                                   )
                               );
                               $content .= ob_get_clean();
@@ -926,6 +930,7 @@ function oercurr_create_dynamic_editor($id) {
                                 'textarea_rows' => 10,
                                 'drag_drop_upload' => true,
                                 'teeny' => true,
+                                'relative_urls' => false,
                             )
                         );
     $content .= ob_get_clean();
@@ -1186,6 +1191,7 @@ function oercurr_add_text_feature_callback() {
                                     'textarea_rows' => 10,
                                     'drag_drop_upload' => true,
                                     'teeny' => true,
+                                    'relative_urls' => false,
                                 )
                             );
     $content .=             ob_get_clean();

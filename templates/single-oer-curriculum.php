@@ -418,7 +418,7 @@
                                       <span class="oercurr-tc-label"><a href="<?php echo esc_url($addtl_materials['url'][$i]); ?>"><?php echo $addtl_materials['title'][$i]; ?></a></span>
                                     </div>
                                     <div>
-                                      <span class="oercurr-tc-value"><p><?php echo esc_url($addtl_materials['description'][$i]); ?></p></span>
+                                      <span class="oercurr-tc-value"><p><?php echo sanitize_text_field($addtl_materials['description'][$i]); ?></p></span>
                                     </div>
                                     </li>
                                     <?php

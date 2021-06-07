@@ -307,6 +307,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                         'textarea_rows' => 10,
                                         'drag_drop_upload' => true,
                                         'teeny' => true,
+                                        'relative_urls' => false,
                                     )
                                 );
                                 ?>
@@ -658,6 +659,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                 'textarea_rows' => 6,
                                                                 'drag_drop_upload' => true,
                                                                 'teeny' => true,
+                                                                'relative_urls' => false,
                                                                 
                                                             )
                                                         ); ?>
@@ -681,6 +683,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                'textarea_rows' => 6,
                                                                'drag_drop_upload' => true,
                                                                'teeny' => true,
+                                                               'relative_urls' => false,
                                                            )
                                                        ); ?>
                                                         <?php endif; ?>
@@ -697,7 +700,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                 'media_buttons' => true,
                                                                 'textarea_rows' => 6,
                                                                 'drag_drop_upload' => true,
-                                                                'teeny' => true,
+                                                                'teeny' => true, 
+                                                                'relative_urls' => false,
                                                             )
                                                         ); ?>
                                                         <?php else: ?>
@@ -709,7 +713,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                 'media_buttons' => true,
                                                                 'textarea_rows' => 6,
                                                                 'drag_drop_upload' => true,
-                                                                'teeny' => true,
+                                                                'teeny' => true, 
+                                                                'relative_urls' => false,
                                                             )
                                                         ); ?>
                                                         <?php endif; ?>
@@ -784,7 +789,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                             'media_buttons' => true,
                                                             'textarea_rows' => 6,
                                                             'drag_drop_upload' => true,
-                                                            'teeny' => true,
+                                                            'teeny' => true, 
+                                                            'relative_urls' => false,
                                                         )
                                                     ); ?>
                                                 </div>
@@ -798,7 +804,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                             'media_buttons' => true,
                                                             'textarea_rows' => 6,
                                                             'drag_drop_upload' => true,
-                                                            'teeny' => true,
+                                                            'teeny' => true, 
+                                                            'relative_urls' => false,
                                                         )
                                                     ); ?>
                                                 </div>
@@ -811,7 +818,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                             'media_buttons' => true,
                                                             'textarea_rows' => 6,
                                                             'drag_drop_upload' => true,
-                                                            'teeny' => true,
+                                                            'teeny' => true, 
+                                                            'relative_urls' => false,
                                                         )
                                                     ); ?>
                                                 </div>
@@ -953,7 +961,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'media_buttons' => true,
                                             'textarea_rows' => 6,
                                             'drag_drop_upload' => true,
-                                            'teeny' => true,
+                                            'teeny' => true, 
+                                            'relative_urls' => false,
                                         )
                                     ); ?>
                                 </div>
@@ -1022,7 +1031,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                     'media_buttons' => true,
                                                     'textarea_rows' => 10,
                                                     'drag_drop_upload' => true,
-                                                    'teeny' => true,
+                                                    'teeny' => true, 
+                                                    'relative_urls' => false,
                                                 )
                                             );
                                             echo '</div>';
@@ -1102,7 +1112,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                     'media_buttons' => true,
                                                     'textarea_rows' => 10,
                                                     'drag_drop_upload' => true,
-                                                    'teeny' => true,
+                                                    'teeny' => true, 
+                                                    'relative_urls' => false,
                                                 )
                                             );
                                             echo '</div>';
@@ -1396,7 +1407,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                 'media_buttons' => true,
                                                                 'textarea_rows' => 10,
                                                                 'drag_drop_upload' => true,
-                                                                'teeny' => true,
+                                                                'teeny' => true, 
+                                                                'relative_urls' => false,
                                                             )
                                                         ); ?>
                                                     </div>
@@ -1486,7 +1498,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'media_buttons' => true,
                                             'textarea_rows' => 10,
                                             'drag_drop_upload' => true,
-                                            'teeny' => true,
+                                            'teeny' => true, 
+                                            'relative_urls' => false,
                                         )
                                     ); ?>
                                 </div>
@@ -1526,7 +1539,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                         'media_buttons' => true,
                                         'textarea_rows' => 10,
                                         'drag_drop_upload' => true,
-                                        'teeny' => true,
+                                        'teeny' => true, 
+                                        'relative_urls' => false,
                                     )
                                 );
                                 ?>
@@ -1564,7 +1578,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'media_buttons' => true,
                                             'textarea_rows' => 10,
                                             'drag_drop_upload' => true,
-                                            'teeny' => true,
+                                            'teeny' => true, 
+                                            'relative_urls' => false,
                                         )
                                     );
                                     ?>
@@ -1751,7 +1766,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'media_buttons' => true,
                                             'textarea_rows' => 10,
                                             'drag_drop_upload' => true,
-                                            'teeny' => true,
+                                            'teeny' => true, 
+                                            'relative_urls' => false,
                                         )
                                     );
                                     ?>
@@ -1950,7 +1966,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                             'media_buttons' => true,
                                                             'textarea_rows' => 6,
                                                             'drag_drop_upload' => true,
-                                                            'teeny' => true,
+                                                            'teeny' => true, 
+                                                            'relative_urls' => false,
                                                         )
                                                     ); ?>
                                                 </div>
@@ -1964,7 +1981,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                             'media_buttons' => true,
                                                             'textarea_rows' => 6,
                                                             'drag_drop_upload' => true,
-                                                            'teeny' => true,
+                                                            'teeny' => true, 
+                                                            'relative_urls' => false,
                                                         )
                                                     ); ?>
                                                 </div>
@@ -1977,7 +1995,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                             'media_buttons' => true,
                                                             'textarea_rows' => 6,
                                                             'drag_drop_upload' => true,
-                                                            'teeny' => true,
+                                                            'teeny' => true, 
+                                                            'relative_urls' => false,
                                                         )
                                                     ); ?>
                                                 </div>
@@ -2065,7 +2084,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                 'media_buttons' => true,
                                                 'textarea_rows' => 6,
                                                 'drag_drop_upload' => true,
-                                                'teeny' => true,
+                                                'teeny' => true, 
+                                                'relative_urls' => false,
                                             )
                                         ); ?>
                                     </div>
@@ -2114,7 +2134,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                        'media_buttons' => true,
                                                        'textarea_rows' => 10,
                                                        'drag_drop_upload' => true,
-                                                       'teeny' => true,
+                                                       'teeny' => true, 
+                                                       'relative_urls' => false,
                                                    )
                                                ); ?>
                                            </div>
@@ -2168,7 +2189,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                        'media_buttons' => true,
                                                        'textarea_rows' => 6,
                                                        'drag_drop_upload' => true,
-                                                       'teeny' => true,
+                                                       'teeny' => true, 
+                                                       'relative_urls' => false,
                                                    )
                                                ); ?>
                                            </div>
@@ -2364,7 +2386,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                 'media_buttons' => true,
                                                                 'textarea_rows' => 10,
                                                                 'drag_drop_upload' => true,
-                                                                'teeny' => true,
+                                                                'teeny' => true, 
+                                                                'relative_urls' => false,
                                                             )
                                                         ); ?>
                                                     </div>
@@ -2456,7 +2479,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'media_buttons' => true,
                                             'textarea_rows' => 10,
                                             'drag_drop_upload' => true,
-                                            'teeny' => true,
+                                            'teeny' => true, 
+                                            'relative_urls' => false,
                                         )
                                     ); ?>
                                 </div>
@@ -2491,7 +2515,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'media_buttons' => true,
                                             'textarea_rows' => 10,
                                             'drag_drop_upload' => true,
-                                            'teeny' => true,
+                                            'teeny' => true, 
+                                            'relative_urls' => false,
                                         )
                                     );
                                     ?>
@@ -2527,7 +2552,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'media_buttons' => true,
                                             'textarea_rows' => 10,
                                             'drag_drop_upload' => true,
-                                            'teeny' => true,
+                                            'teeny' => true, 
+                                            'relative_urls' => false,
                                         )
                                     );
                                     ?>
@@ -2563,7 +2589,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'media_buttons' => true,
                                             'textarea_rows' => 10,
                                             'drag_drop_upload' => true,
-                                            'teeny' => true,
+                                            'teeny' => true, 
+                                            'relative_urls' => false,
                                         )
                                     );
                                     ?>
@@ -2597,7 +2624,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 'media_buttons' => true,
                                 'textarea_rows' => 10,
                                 'drag_drop_upload' => true,
-                                'teeny' => true,
+                                'teeny' => true, 
+                                'relative_urls' => false,
                             )
                         );
                         ?>
@@ -2765,7 +2793,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                 'media_buttons' => true,
                                                 'textarea_rows' => 6,
                                                 'drag_drop_upload' => true,
-                                                'teeny' => true,
+                                                'teeny' => true, 
+                                                'relative_urls' => false,
                                             )
                                         ); ?>
                                     </div>
@@ -2779,7 +2808,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                 'media_buttons' => true,
                                                 'textarea_rows' => 6,
                                                 'drag_drop_upload' => true,
-                                                'teeny' => true,
+                                                'teeny' => true, 
+                                                'relative_urls' => false,
                                             )
                                         ); ?>
                                     </div>
@@ -2792,7 +2822,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                 'media_buttons' => true,
                                                 'textarea_rows' => 6,
                                                 'drag_drop_upload' => true,
-                                                'teeny' => true,
+                                                'teeny' => true, 
+                                                'relative_urls' => false,
                                             )
                                         ); ?>
                                     </div>
@@ -2865,7 +2896,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                     'media_buttons' => true,
                                     'textarea_rows' => 6,
                                     'drag_drop_upload' => true,
-                                    'teeny' => true,
+                                    'teeny' => true, 
+                                    'relative_urls' => false,
                                 )
                             ); ?>
                         </div>
@@ -3045,7 +3077,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                     'media_buttons' => true,
                                                     'textarea_rows' => 10,
                                                     'drag_drop_upload' => true,
-                                                    'teeny' => true,
+                                                    'teeny' => true, 
+                                                    'relative_urls' => false,
                                                 )
                                             ); ?>
                                         </div>
@@ -3134,7 +3167,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 'media_buttons' => true,
                                 'textarea_rows' => 10,
                                 'drag_drop_upload' => true,
-                                'teeny' => true,
+                                'teeny' => true, 
+                                'relative_urls' => false,
                             )
                         ); ?>
                     </div>

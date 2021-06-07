@@ -19,7 +19,6 @@ jQuery(document).ready(function ($) {
 
     $('.sortable').on("sortstop", function (event, ui) {
         $(".sortable .order").each(function (index) {
-            //console.log(index + 1);
             var count = index + 1;
             console.log("reorder" + count);
 
