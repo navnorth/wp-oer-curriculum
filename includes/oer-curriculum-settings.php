@@ -12,7 +12,6 @@ global $message, $type;
 ?>
 <div class="wrap">
 
-    <!--<div id="icon-themes" class="oer-logo"><img src="<?php echo esc_url(OER_URL) ?>images/wp-oer-admin-logo.png" /></div>-->
     <h2><?php _e("Settings - OER Curriculum", OERCURR_CURRICULUM_SLUG); ?></h2>
     <?php settings_errors(); ?>
 
@@ -68,7 +67,7 @@ function oercurr_show_general_settings(){
                             <?php    $_genset = json_decode(get_option('oer_curriculum_general_setting')); ?>
                             <tr>
                                     <td>Curriculum Root Slug</td>
-                                    <td><input type="text" name="oer_curriculum_general_setting[rootslug]" value="<?php echo (isset($_genset->rootslug))? $_genset->rootslug: 'curriculum'; ?>"></td>
+                                    <td><input type="text" name="oer_curriculum_general_setting[rootslug]" value="<?php echo (isset($_genset->rootslug))? esc_attr($_genset->rootslug) : 'curriculum'; ?>"></td>
                                     <td>
                                         <input type="hidden" name="oer_curriculum_general_setting[rootslug_enabled]" value="0">
                                         <input type="checkbox" name="oer_curriculum_general_setting[rootslug_enabled]" value="1" <?php echo (isset($_genset->rootslug_enabled) && $_genset->rootslug_enabled > 0)? 'checked': ''; ?> />
@@ -115,37 +114,11 @@ function oercurr_show_metadata_settings() {
         $metadata[] = $met['option_name'];
     }
 
-    // Add Options for related Curriculum 1-3
-    /*
-    for($i=1;$i<=3;$i++){
-        $metadata[] = $inquirysets[] = 'oer_curriculum_related_curriculum_'.$i;
-    }
-    */
-
     $meta = array_unique($metadata);
     $label = array_unique($labeldata);
 
-    /*
-    print_r( $meta );
-    echo( '<br><br>' );
-    print_r( $label );
-    echo( '<br><br>' );
-    */
-
     // Save Option
     if ($_POST){
-        // Remove meta key enabled option
-        /*
-        foreach($metas as $met){
-            if (strpos($met['meta_key'],"oer_")!==false || strpos($met['meta_key'],"oer_curriculum_oer_")!==false){
-                delete_option($met['meta_key']."_enabled");
-            }
-        }
-        foreach($inquirysets as $inquiryset){
-            delete_option($inquiryset."_enabled");
-        }
-        */
-        //print_r($_POST);
         oercurr_save_metadata_options($_POST);
     }
 ?>
@@ -182,19 +155,13 @@ function oercurr_show_metadata_settings() {
                             $enb_key = str_replace("_label","_enable",$key);
                             $enabled = get_option($enb_key);
                             $enb_val = ($enabled=='checked')?'1':'0';
-                            /*
-                            if (get_option($key))
-                                $enabled = (get_option($key."_curmetset_enabled")=="1")?true:false;
-                            elseif ($option_set==false)
-                                $enabled = "1";
-                            */
 
                         if (!in_array($key,$oer_curriculum_deleted_fields)){
                         ?>
                         <tr>
                             <td><?php echo str_replace("_curmetset","",$key); ?></td>
-                            <td><input type="text" name="<?php echo $key; ?>" value="<?php echo $label; ?>" /></td>
-                            <td><input type="checkbox" class="oercurr-enabled-checkbox" name="<?php echo $enb_key; ?>" value="<?php echo $enb_val; ?>" <?php echo $enabled; ?>/></td>
+                            <td><input type="text" name="<?php echo esc_attr($key); ?>" value="<?php echo esc_attr($label); ?>" /></td>
+                            <td><input type="checkbox" class="oercurr-enabled-checkbox" name="<?php echo esc_attr($enb_key); ?>" value="<?php echo esc_attr($enb_val); ?>" <?php echo esc_attr($enabled); ?>/></td>
                         </tr>
                         <?php
                         }

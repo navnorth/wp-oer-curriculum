@@ -127,21 +127,17 @@ function oercurr_cfb_additional_script( $hook ) {
 add_action( 'admin_enqueue_scripts', 'oercurr_cfb_additional_script' );
 
 function oercurr_cfb_render_featured_block($attributes, $ajx=false){
-    //print_r($attributes); echo '<br><br>';
-    //print_r($attributes['selectedfeatured']); echo '<br><br>';
-    //print_r($attributes['blockid']); echo '<br><br>';
-    //if(!is_null($attributes['selectedfeatured'])){
     $_ret = '';
     if(isset($attributes['selectedfeatured'])){
         if(!empty($attributes['selectedfeatured'])){
             $feats = explode(",",$attributes['selectedfeatured']);
-            $blkid = $attributes['blockid'];
-            $_sliddesclength = (!isset($attributes['slidedesclength']))? OERCURR_CFB_BLK_SLIDE_DESC_LEN : $attributes['slidedesclength'];
-            $_slideimageheight = (!isset($attributes['slideimageheight']))? OERCURR_CFB_BLK_SLIDE_IMG_HEIGHT: $attributes['slideimageheight'];
+            $blkid_sanitized = sanitize_text_field($attributes['blockid']);
+            $_sliddesclength = (!isset($attributes['slidedesclength']))? OERCURR_CFB_BLK_SLIDE_DESC_LEN : sanitize_text_field($attributes['slidedesclength']);
+            $_slideimageheight = (!isset($attributes['slideimageheight']))? OERCURR_CFB_BLK_SLIDE_IMG_HEIGHT: sanitize_text_field($attributes['slideimageheight']);
             $_ret .= '<div class="oercurr_cfb_right_featuredwpr">';
-                $_title = (isset($attributes['blocktitle']))? $attributes['blocktitle']: 'Featured';
-                $_ret .= '<div class="oercurr-ftrdttl curriculum-feat-title_'.$attributes['blockid'].'">'.$_title.'</div>';
-                $_ret .= '<ul class="featuredwpr_bxslider_front featuredwpr_bxslider_front_'.$attributes['blockid'].'" blk="'.$attributes['blockid'].'" style="visibility:hidden;">';
+                $_title = (isset($attributes['blocktitle']))? sanitize_text_field($attributes['blocktitle']): 'Featured';
+                $_ret .= '<div class="oercurr-ftrdttl curriculum-feat-title_'.sanitize_text_field($attributes['blockid']).'">'.esc_html($_title).'</div>';
+                $_ret .= '<ul class="featuredwpr_bxslider_front featuredwpr_bxslider_front_'.sanitize_text_field($attributes['blockid']).'" blk="'.sanitize_text_field($attributes['blockid']).'" style="visibility:hidden;">';
 
                         foreach($feats as $val){
                             $feat = explode("|",$val);
@@ -161,12 +157,12 @@ function oercurr_cfb_render_featured_block($attributes, $ajx=false){
                                             $_ret .= '<a href="'.esc_url($_cfb_link).'">';
                                                 $_ret .= '<div class="img">';
 
-                                                        $_ret .= '<img src="'.esc_url($_cfb_image).'" alt="'.$_cfb_title.'" />';
+                                                        $_ret .= '<img src="'.esc_url($_cfb_image).'" alt="'.esc_attr($_cfb_title).'" />';
 
                                                 $_ret .= '</div>';
                                             $_ret .= '</a>';
-                                            $_ret .= '<div class="ttl"><a href="'.esc_url($_cfb_link).'">'.$_cfb_title.'</a></div>';
-                                            $_ret .= '<div class="desc">'.$_cfb_desc.'</div>';
+                                            $_ret .= '<div class="ttl"><a href="'.esc_url($_cfb_link).'">'.esc_html($_cfb_title).'</a></div>';
+                                            $_ret .= '<div class="desc">'.esc_html($_cfb_desc).'</div>';
                                         $_ret .= '</div>';
                                     $_ret .= '</li>';
                         }
@@ -178,57 +174,41 @@ function oercurr_cfb_render_featured_block($attributes, $ajx=false){
             $_ret .= '<script>';
                 $_ret .= 'jQuery(document).ready(function(){';
 
-                    $_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").bxSlider({';
+                    $_ret .= 'jQuery(".featuredwpr_bxslider_front_'.sanitize_text_field($attributes['blockid']).'").bxSlider({';
 
-                            //print_r($attributes);
-                            /*
-                            echo $blkid.'<br>';
-                            echo $attributes['minslides'].'<br>';
-                            echo $attributes['maxslides'].'<br>';
-                            echo $attributes['moveslides'].'<br>';
-                            echo $attributes['slidewidth'].'<br>';
-                            echo $attributes['slidemargin'].'<br>';
-                            */
+                            $_ret .= (!isset($attributes['minslides']))? 'minSlides: 1,' : 'minSlides: '.sanitize_text_field($attributes['minslides']).',';
+                            $_ret .= (!isset($attributes['maxslides']))? 'maxSlides: 3,': 'maxSlides: '.sanitize_text_field($attributes['maxslides']).',';
+                            $_ret .= (!isset($attributes['moveslides']))? 'moveSlides: 1,': 'moveSlides: '.sanitize_text_field($attributes['moveslides']).',';
+                            $_ret .= (!isset($attributes['slidewidth']))? 'slideWidth: 375,': 'slideWidth: '.sanitize_text_field($attributes['slidewidth']).',';
+                            $_ret .= (!isset($attributes['slidemargin']))? 'slideMargin: 20,': 'slideMargin: '.sanitize_text_field($attributes['slidemargin']).',';
 
-                            $_ret .= (!isset($attributes['minslides']))? 'minSlides: 1,' : 'minSlides: '.$attributes['minslides'].',';
-                            $_ret .= (!isset($attributes['maxslides']))? 'maxSlides: 3,': 'maxSlides: '.$attributes['maxslides'].',';
-                            $_ret .= (!isset($attributes['moveslides']))? 'moveSlides: 1,': 'moveSlides: '.$attributes['moveslides'].',';
-                            $_ret .= (!isset($attributes['slidewidth']))? 'slideWidth: 375,': 'slideWidth: '.$attributes['slidewidth'].',';
-                            $_ret .= (!isset($attributes['slidemargin']))? 'slideMargin: 20,': 'slideMargin: '.$attributes['slidemargin'].',';
-                            //$_ret .= 'adaptiveHeight: true,';
-                            //$_ret .= 'minSlides: '.$attributes['minslides'].',';
-                            //$_ret .= 'maxSlides: '.$attributes['maxslides'].',';
-                            //$_ret .= 'moveSlides: '.$attributes['moveslides'].',';
-                            //$_ret .= 'slideWidth: '.$attributes['slidewidth'].',';
-                            //$_ret .= 'slideMargin: '.$attributes['slidemargin'].',';
                             $_ret .= 'pager: false,';
                             $_ret .= 'onSliderLoad: function(currentIndex) {';
-                                    $_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").css({"visibility":"visible","height":"auto"});';
+                                    $_ret .= 'jQuery(".featuredwpr_bxslider_front_'.sanitize_text_field($attributes['blockid']) .'").css({"visibility":"visible","height":"auto"});';
 
                                     if(isset($attributes['slidealign'])){
                                         if($attributes['slidealign'] == 'left'){
-                                            $_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport").parent(".bx-wrapper").css({"margin-left":"0px"});';
+                                            $_ret .= 'jQuery(".featuredwpr_bxslider_front_'.sanitize_text_field($attributes['blockid']) .'").parent(".bx-viewport").parent(".bx-wrapper").css({"margin-left":"0px"});';
                                         }elseif($attributes['slidealign'] == 'right'){
-                                            $_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport").parent(".bx-wrapper").css({"margin-right":"0px"});';
+                                            $_ret .= 'jQuery(".featuredwpr_bxslider_front_'.sanitize_text_field($attributes['blockid']) .'").parent(".bx-viewport").parent(".bx-wrapper").css({"margin-right":"0px"});';
                                         }
                                     }else{
-                                        $_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport").parent(".bx-wrapper").css({"margin-left":"0px"});';
+                                        $_ret .= 'jQuery(".featuredwpr_bxslider_front_'.sanitize_text_field($attributes['blockid']) .'").parent(".bx-viewport").parent(".bx-wrapper").css({"margin-left":"0px"});';
                                     }
 
-                                    $_ret .= 'let dtc = jQuery(".curriculum-feat-title_'.$attributes['blockid'].'").detach();';
-                                    $_ret .= 'jQuery(dtc).insertBefore(jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").parent(".bx-viewport"));';
+                                    $_ret .= 'let dtc = jQuery(".curriculum-feat-title_'.sanitize_text_field($attributes['blockid']) .'").detach();';
+                                    $_ret .= 'jQuery(dtc).insertBefore(jQuery(".featuredwpr_bxslider_front_'.sanitize_text_field($attributes['blockid']) .'").parent(".bx-viewport"));';
 
-                                    $_ret .= 'let imgwidth = localStorage.getItem("lpInspectorFeatSliderSetting-'.$attributes['blockid'].'-slideimageheight");';
-                                    $_ret .= 'jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].' li div.frtdsnglwpr a div.img img").css({"height":"100%", "max-height": "'.$_slideimageheight.'px", "max-width":"100%" });';
+                                    $_ret .= 'let imgwidth = localStorage.getItem("lpInspectorFeatSliderSetting-'.sanitize_text_field($attributes['blockid']) .'-slideimageheight");';
+                                    $_ret .= 'jQuery(".featuredwpr_bxslider_front_'.sanitize_text_field($attributes['blockid']) .' li div.frtdsnglwpr a div.img img").css({"height":"100%", "max-height": "'.$_slideimageheight.'px", "max-width":"100%" });';
 
-                                    $_ret .= 'let sldcnt = jQuery(".featuredwpr_bxslider_front_'.$attributes['blockid'].'").find("li").length;';
-                                    $_sngsldmgn = (!isset($attributes['slidemargin']))? 20 : $attributes['slidemargin'];
-                                    $_sngsldwdt = (!isset($attributes['slidewidth']))? (375 + $_sngsldmgn) : ($attributes['slidewidth'] + $_sngsldmgn);
+                                    $_ret .= 'let sldcnt = jQuery(".featuredwpr_bxslider_front_'.sanitize_text_field($attributes['blockid']) .'").find("li").length;';
+                                    $_sngsldmgn = (!isset($attributes['slidemargin']))? 20 : sanitize_text_field($attributes['slidemargin']);
+                                    $_sngsldwdt = (!isset($attributes['slidewidth']))? (375 + $_sngsldmgn) : (sanitize_text_field($attributes['slidewidth']) + $_sngsldmgn);
                                     $_ret .= 'let whlsldwdt = sldcnt * '.$_sngsldwdt.';';
-                                    $_ret .= 'console.log(whlsldwdt);';
-                                    //$_ret .= 'jQuery(".featuredwpr_bxslider_front").css({"width":whlsldwdt+"px"})';
 
                             $_ret .= '}';
+                            
                     $_ret .= '});';
 
                 $_ret .= '});';
@@ -408,7 +388,7 @@ function oercurr_cfb_dataquery(){
         foreach($posts as $post){
             $_reslist[$i]['id'] = $post->ID;
             $_reslist[$i]['title'] = $post->post_title;
-            $_sliddesclength = (!isset($attributes['slidedesclength']))? OERCURR_CFB_BLK_SLIDE_DESC_LEN : $attributes['slidedesclength'];
+            $_sliddesclength = (!isset($attributes['slidedesclength']))? OERCURR_CFB_BLK_SLIDE_DESC_LEN : sanitize_text_field($attributes['slidedesclength']);
             $_reslist[$i]['content'] = html_entity_decode(strip_tags($post->post_content));
             $_reslist[$i]['link'] = get_post_permalink($post->ID);
                 $_tmp_image = get_the_post_thumbnail_url($post->ID,'medium');

@@ -19,7 +19,7 @@
   $output = "<style>"."\n";
   $output .= $_css_oer."\n";
   $output .="</style>"."\n";
-  echo $output;
+  echo esc_html($output);
   }
 
   global $post;
@@ -91,17 +91,17 @@
           
           <div class="row oercurr-tc-details-content">
               <div class="row oercurr-tc-details-header-fixed">
-                  <h1 class="oercurr-tc-title"><?php echo the_title(); ?></h1>
+                  <h1 class="oercurr-tc-title"><?php echo esc_html(the_title()); ?></h1>
               </div>
               <div class="col-md-8 col-sm-12 col-xs-12 curriculum-detail padding-left-0">
                 <div class="row oercurr-tc-details-header">
-                    <h1 class="oercurr-tc-title"><?php echo the_title(); ?></h1>
+                    <h1 class="oercurr-tc-title"><?php echo esc_html(the_title()); ?></h1>
                 </div>
               </div>
               <div class="col-md-4 col-sm-12 featured-image padding-right-0">
                 <?php
                 if (function_exists('oer_breadcrumb_display'))
-                    echo oer_breadcrumb_display();
+                    echo wp_kses_post(oer_breadcrumb_display());
                 ?>
               </div>
             
@@ -129,25 +129,15 @@
                             }
                           }
                           $oer_curriculum_type = $_tclptype;
-                          echo $oer_curriculum_type;
+                          echo esc_html($oer_curriculum_type);
 
                           ?>
                       </div>
                       <?php } ?>
-                      <?php /* ?>
-                      <div class="oercurr-tc-details-description">
-                          <?php if (strlen($post->post_content)>360) : ?>
-                          <div class="oercurr-excerpt"><?php echo oercurr_limit_content(360); ?></div>
-                          <div class="oercurr-full-content"><?php echo the_content(); ?> <a href="javascript:void(0);" class="oercurr-read-less">(read less)</a></div>
-                          <?php else : ?>
-                          <div class="oercurr-content"><?php echo the_content(); ?></div>
-                          <?php endif; ?>
-                      </div>
-                      <?php */ ?>
                       
                       <div class="oercurr-tc-details-description collapsible">
                           <div class="oercurr-excerpt-collapsible less"></div>
-                          <div class="oercurr-excerpt-collapsible-pseudo"><?php echo the_content(); ?></div>
+                          <div class="oercurr-excerpt-collapsible-pseudo"><?php echo wp_kses_post(the_content()); ?></div>
                       </div>
                       <?php
                       $related_curriculum_collection = (isset($post_meta_data['oer_curriculum_related_curriculum'][0]) ? unserialize($post_meta_data['oer_curriculum_related_curriculum'][0]) : array());
@@ -164,7 +154,7 @@
                       <div class="tc-related-curriculum-section">
                           <a href="#collapse_oer_curriculum_related_curriculum" data-toggle="collapse" class="tc_oer_curriculum_collapse_button collapsed" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <h4 class="tc-related-curriculum-section-heading clearfix">
-                                <span class="oer_curriculum_related_fields"><?php echo oercurr_get_field_label('oer_curriculum_related_curriculum'); ?></span><span class="oer_curriculum_acicon"></span>
+                                <span class="oer_curriculum_related_fields"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_related_curriculum')); ?></span><span class="oer_curriculum_acicon"></span>
                             </h4>
                           </a>
                           <div class="tc-related-curriculum-details clearfix collapse" id="collapse_oer_curriculum_related_curriculum">
@@ -174,12 +164,12 @@
                               foreach($related_curriculum_collection as $inquiry_set) {
                                   if ($inquiry_set!=="0") {
                                     $_cnt++;
-                                    $related_curriculum_set = (trim(get_option('oer_curriculum_related_curriculum_'.$_cnt.'_curmetset_label'),' ') != '')?true:false;
-                                    $related_curriculum_set_enabled = (get_option('oer_curriculum_related_curriculum_'.$_cnt.'_curmetset_enable') == 'checked')?true:false;
+                                    $related_curriculum_set = (trim(get_option('oer_curriculum_related_curriculum_'.esc_html($_cnt).'_curmetset_label'),' ') != '')?true:false;
+                                    $related_curriculum_set_enabled = (get_option('oer_curriculum_related_curriculum_'.esc_html($_cnt).'_curmetset_enable') == 'checked')?true:false;
                                       $inquiry = oercurr_get_inquiry_set_details($inquiry_set);
                                       $inquiry_link = get_permalink($inquiry_set);
                                       if($related_curriculum_set_enabled){
-                                        echo '<li><a href="'.esc_url($inquiry_link).'">'.$inquiry->post_title.'</a></li>';
+                                        echo '<li><a href="'.esc_url($inquiry_link).'">'.esc_html($inquiry->post_title).'</a></li>';
                                       }
                                   }
                               } ?>
@@ -194,7 +184,7 @@
                       <div class="oercurr-tc-standards">
                           <a href="#collapse_oer_curriculum_standards" data-toggle="collapse" class="tc_oer_curriculum_collapse_button collapsed" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <h4 class="oercurr-tc-field-heading clearfix">
-                                <span class="oer_curriculum_related_fields"><?php echo oercurr_get_field_label('oer_curriculum_standards'); ?></span><span class="oer_curriculum_acicon"></span>
+                                <span class="oer_curriculum_related_fields"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_standards')); ?></span><span class="oer_curriculum_acicon"></span>
                             </h4>
                           </a>
                           <div class="oercurr-tc-standards-details clearfix collapse" id="collapse_oer_curriculum_standards">
@@ -229,9 +219,9 @@
                                       foreach($stds as $std){
                                           if (isset($std['core_standard_id'])) {
                                               echo "<li>";
-                                                  echo '<a class="oercurr-standard-toggle" data-toggle="collapse" href="#core-standard-'.$std['core_standard_id'].'">'.$std['core_standard_name'].' <i class="fas fa-caret-right"></i></a>';
+                                                  echo '<a class="oercurr-standard-toggle" data-toggle="collapse" href="#core-standard-'.esc_attr($std['core_standard_id']).'">'.esc_html($std['core_standard_name']).' <i class="fas fa-caret-right"></i></a>';
                                               ?>
-                                              <div class="collapse oercurr-tc-details-standard" id="core-standard-<?php echo $std['core_standard_id']; ?>">
+                                              <div class="collapse oercurr-tc-details-standard" id="core-standard-<?php echo esc_attr($std['core_standard_id']); ?>">
                                               <?php
                                               if (is_array($std['notation'])) {
                                                   echo "<ul class='oercurr-tc-notation-list'>";
@@ -240,9 +230,9 @@
                                                           $standard_details = was_standard_details($notation);
                                                       if (!empty($standard_details)){
                                                           if (isset($standard_details->description))
-                                                              echo "<li>".stripslashes($standard_details->description)."</li>";
+                                                              echo "<li>".esc_html(stripslashes($standard_details->description))."</li>";
                                                           else
-                                                              echo "<li>".stripslashes($standard_details->standard_title)."</li>";
+                                                              echo "<li>".esc_html(stripslashes($standard_details->standard_title))."</li>";
                                                       }
                                                   }
                                                   echo "</ul>";
@@ -260,7 +250,7 @@
                            }
                       } ?>
                       <?php
-                          $post_terms = get_the_terms( $post->ID, 'resource-subject-area' );
+                          $post_terms = get_the_terms( esc_html($post->ID), 'resource-subject-area' );
                           if (!empty($post_terms)) {
                       ?>
                       <div class="oercurr-tc-subject-areas">
@@ -277,13 +267,13 @@
                                   $moreCnt = $cnt - 2;
                                   foreach($post_terms as $term){
                                       $subject_parent = get_term_parents_list($term->term_id,'resource-subject-area', array('separator' => ' <i class="fas fa-angle-double-right"></i> ', 'inclusive' => false));
-                                      $subject = $subject_parent . '<a href="'.esc_url(get_term_link($term->term_id)).'">'.$term->name.'</a>';
+                                      $subject = $subject_parent . '<a href="'.esc_url(get_term_link($term->term_id)).'">'.esc_html($term->name).'</a>';
                                       if ($i>2)
-                                          echo '<li class="collapse oercurr-subject-hidden">'.$subject.'</li>';
+                                          echo '<li class="collapse oercurr-subject-hidden">'.wp_kses_post($subject).'</li>';
                                       else
-                                          echo '<li>'.$subject.'</li>';
+                                          echo '<li>'.wp_kses_post($subject).'</li>';
                                       if (($i==2) && ($cnt>2))
-                                          echo '<li><a class="see-more-subjects" data-toggle="collapse" data-count="'.$moreCnt.'" href=".oercurr-subject-hidden">SEE '.$moreCnt.' MORE +</a></li>';
+                                          echo '<li><a class="see-more-subjects" data-toggle="collapse" data-count="'.esc_attr($moreCnt).'" href=".oercurr-subject-hidden">SEE '.esc_attr($moreCnt).' MORE +</a></li>';
                                       $i++;
                                   }
                                   ?>
@@ -305,10 +295,10 @@
                         if ($_tmp_html > ''): ?>
                         <div class="oercurr-tc-objectives">
                           <a href="#collapse_oer_curriculum_objectives" class="tc_oer_curriculum_collapse_button collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            <h4 class="oercurr-tc-field-heading clearfix"><span class="oer_curriculum_related_fields"><?php echo oercurr_get_field_label('oer_curriculum_related_objective'); ?></span><span class="oer_curriculum_acicon"></span></h4>
+                            <h4 class="oercurr-tc-field-heading clearfix"><span class="oer_curriculum_related_fields"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_related_objective')); ?></span><span class="oer_curriculum_acicon"></span></h4>
                           </a>                
                           <div class="oercurr-tc-objectives-details clearfix collapse" id="collapse_oer_curriculum_objectives">
-                              <ul class="oercurr-tc-objectives-list"><?php echo $_tmp_html; ?></ul>
+                              <ul class="oercurr-tc-objectives-list"><?php echo wp_kses_post($_tmp_html); ?></ul>
                           </div>
                         </div>
                         <?php endif; ?>
@@ -321,7 +311,7 @@
                           if (!empty($oer_curriculum_grade)){
                               ?>
                               <div class="form-field">
-                                  <span class="oercurr-tc-label">Grade Level:</span> <span class="oercurr-tc-value"><?php echo $oer_curriculum_grade; ?></span>
+                                  <span class="oercurr-tc-label">Grade Level:</span> <span class="oercurr-tc-value"><?php echo esc_html($oer_curriculum_grade); ?></span>
                               </div>
                               <?php
                           }
@@ -333,8 +323,8 @@
                               if (!empty($iq_data)){
                               ?>
                               <div class="form-field">
-                                  <div><span class="oercurr-tc-label"><?php echo $iq_data['question']; ?></span></div>
-                                  <div><span class="oercurr-tc-value"><?php echo $iq_data['excerpt']; ?></span></div>
+                                  <div><span class="oercurr-tc-label"><?php echo wp_kses_post($iq_data['question']); ?></span></div>
+                                  <div><span class="oercurr-tc-value"><?php echo wp_kses_post($iq_data['excerpt']); ?></span></div>
                               </div>
                               <?php
                               }
@@ -347,7 +337,7 @@
                               if (!empty($age_levels)){
                               ?>
                               <div class="form-field">
-                                  <span class="oercurr-tc-label"><?php echo $age_label; ?>:</span> <span class="oercurr-tc-value"><?php echo $age_levels; ?></span>
+                                  <span class="oercurr-tc-label"><?php echo esc_html($age_label); ?>:</span> <span class="oercurr-tc-value"><?php echo esc_html($age_levels); ?></span>
                               </div>
                               <?php
                               }
@@ -360,7 +350,7 @@
                               if (!empty($suggested_time)){
                               ?>
                               <div class="form-field">
-                                  <span class="oercurr-tc-label"><?php echo $suggested_label; ?>:</span> <span class="oercurr-tc-value"><?php echo $suggested_time; ?></span>
+                                  <span class="oercurr-tc-label"><?php echo esc_html($suggested_label); ?>:</span> <span class="oercurr-tc-value"><?php echo esc_html($suggested_time); ?></span>
                               </div>
                               <?php
                               }
@@ -382,7 +372,7 @@
                                   if (!empty($req_materials['label'][$i]) || !empty($req_materials['editor'][$i])) {
                                   ?>
                                   <div class="form-field">
-                                      <span class="oercurr-tc-label-heading"><?php echo $req_materials['label'][$i]; ?>:</span> <span class="oercurr-tc-value"><?php echo $req_materials['editor'][$i]; ?></span>
+                                      <span class="oercurr-tc-label-heading"><?php echo esc_html($req_materials['label'][$i]); ?>:</span> <span class="oercurr-tc-value"><?php echo wp_kses_post($req_materials['editor'][$i]); ?></span>
                                   </div>
                                   <?php
                                   }
@@ -398,7 +388,7 @@
                               if (!empty($addtl_materials)){
                               ?>
                               <div class="form-field">
-                                  <span class="oercurr-tc-label"><?php echo $addtl_materials_label; ?>:</span>
+                                  <span class="oercurr-tc-label"><?php echo esc_html($addtl_materials_label); ?>:</span>
                                   <?php 
                                   $cnt = 0;
                                   if (isset($addtl_materials['title']))
@@ -415,10 +405,10 @@
                                     ?>
                                     <li>
                                     <div class="form-field">
-                                      <span class="oercurr-tc-label"><a href="<?php echo esc_url($addtl_materials['url'][$i]); ?>"><?php echo $addtl_materials['title'][$i]; ?></a></span>
+                                      <span class="oercurr-tc-label"><a href="<?php echo esc_url($addtl_materials['url'][$i]); ?>"><?php echo esc_html($addtl_materials['title'][$i]); ?></a></span>
                                     </div>
                                     <div>
-                                      <span class="oercurr-tc-value"><p><?php echo sanitize_text_field($addtl_materials['description'][$i]); ?></p></span>
+                                      <span class="oercurr-tc-value"><p><?php echo wp_kses_post($addtl_materials['description'][$i]); ?></p></span>
                                     </div>
                                     </li>
                                     <?php
@@ -445,7 +435,7 @@
                                       if (!empty($additional_sections['label'][$i]) || !empty($additional_sections['editor'][$i])) {
                                         ?>
                                       <div class="form-field">
-                                          <span class="oercurr-tc-label-heading"><?php echo $additional_sections['label'][$i]; ?>:</span> <span class="oercurr-tc-value"><?php echo $additional_sections['editor'][$i]; ?></span>
+                                          <span class="oercurr-tc-label-heading"><?php echo esc_html($additional_sections['label'][$i]); ?>:</span> <span class="oercurr-tc-value"><?php echo wp_kses_post($additional_sections['editor'][$i]); ?></span>
                                       </div>
                                         <?php
                                       }
@@ -459,7 +449,7 @@
               <div class="col-xl-4 col-lg-5 col-md-5 col-sm-12 featured-image padding-right-0">
                   <?php the_post_thumbnail('inquiry-set-featured'); ?>
                   <?php $_feat_info_padding = ($oer_curriculum_download_copy_document && $download_copy_enabled)? 'padded-right' : ''; ?>
-                  <div class="oercurr-tc-authors-list <?php echo $_feat_info_padding ?>">
+                  <div class="oercurr-tc-authors-list <?php echo esc_html($_feat_info_padding) ?>">
                   <?php if (($author_set && $author_enabled) || !$author_set) { ?>
                       <?php
                       $author_display = false;
@@ -471,7 +461,7 @@
                       }
                       if ($author_display){
                           ?>
-                           <span class="oercurr-author-label"><?php echo oercurr_get_field_label('oer_curriculum_authors'); ?></span>
+                           <span class="oercurr-author-label"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_authors')); ?></span>
                           <?php 
                           $aIndex = 0;
                           
@@ -480,9 +470,9 @@
                               if ($aIndex>0)
                                   echo ", ";
                               if (isset($author_url))
-                                  echo "<span class='oercurr-tc-author'><a href='".esc_url($author_url)."'>".$authors['name'][$aIndex]."</a></span>";
+                                  echo "<span class='oercurr-tc-author'><a href='".esc_url($author_url)."'>".esc_html($authors['name'][$aIndex])."</a></span>";
                               else
-                                  echo "<span class='oercurr-tc-author'>".$authors['name'][$aIndex]."</span>";
+                                  echo "<span class='oercurr-tc-author'>".esc_html($authors['name'][$aIndex])."</span>";
                                   
                               $aIndex++;
                           }
@@ -502,7 +492,6 @@
                   <?php if ($oer_sensitive) : ?>
                   <div class="tc-sensitive-material-section">
                       <p><i class="fa fa-exclamation-triangle"></i><span class="sensitive-material-text">Potentially Sensitive Material</span></p>
-                      <!--<button class="question-popup-button"><i class="fal fa-question-circle"></i></button>-->
                   </div>
                   <?php endif;
                   
@@ -510,12 +499,12 @@
                   if(!empty($keywords))
                   {
                   ?>
-                  <div class="oercurr-tc-keywords <?php echo $_feat_info_padding ?>">
+                  <div class="oercurr-tc-keywords <?php echo esc_attr($_feat_info_padding) ?>">
                       <div class="oer_curriculum_keywords_container tagcloud">
                       <?php
                           foreach($keywords as $keyword)
                           {
-                                  echo "<span><a href='".esc_url(get_tag_link($keyword->term_id))."' class='button'>".ucwords($keyword->name)."</a></span>";
+                                  echo "<span><a href='".esc_url(get_tag_link($keyword->term_id))."' class='button'>".esc_html(ucwords($keyword->name))."</a></span>";
                           }
                       ?>
                       </div>
@@ -574,11 +563,8 @@
                               $description = $resource->post_content;
                             }
                           }
-                          //$description = ($_resource_field_type != 'textbox' && trim($primary_resources['description'][$resourceKey],' ')!='' ) ? $primary_resources['description'][$resourceKey]: $resource->post_content;
                           if ($sensitiveMaterialValue!=="") $sensitiveMaterial = $sensitiveMaterialValue;  
-                          
-                          
-                        //  echo print_r($primary_resources);
+
                   ?>
                       <div class="col col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 padding-0">
                           <div class="media-image">
@@ -589,13 +575,13 @@
                                   <?php $ps_url = site_url($root_slug."/".$_tmp_pstnm."/source/".sanitize_title($title)."-".$resource_id)."/idx/".$_idx++; ?>
                                   <a href="<?php echo esc_url($ps_url);  ?>">
                                       <?php if($resource_img==''): $_avtr = oer_getResourceIcon($type,$url); ?>    
-                                        <div class="resource-avatar"><span class="dashicons <?php echo $_avtr; ?>"></span></div>    
+                                        <div class="resource-avatar"><span class="dashicons <?php echo esc_html($_avtr); ?>"></span></div>    
                                       <?php endif; ?>
                                       <span class="resource-overlay"></span>
                                       <?php if (!empty($type)): ?>
-                                      <span class="oercurr-source-type"><?php echo ucwords($type); ?></span>
+                                      <span class="oercurr-source-type"><?php echo esc_html(ucwords($type)); ?></span>
                                       <?php endif; ?>
-                                      <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;">
+                                      <div class="resource-thumbnail" style="background: url('<?php echo esc_url($resource_img) ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;">
                                       </div>
                                       <?php if ($sensitiveMaterial!=="" && $sensitiveMaterial!=="no"): ?>
                                       <div class="sensitive-source">
@@ -606,16 +592,13 @@
                                   
                               </div>
                               <div class="oercurr-resource-info">
-                                <div class="oercurr-resource-title"><?php echo $title; ?></div>    
+                                <div class="oercurr-resource-title"><?php echo esc_html($title); ?></div>    
                                 <div class="oercurr-resource-author">    
                                   <?php if( $oer_authorname != ''):?>    
-                                    <div class="oercurr-resource-author_block"><a href="<?php echo esc_url($oer_authorurl); ?>" target="_new"><?php echo $oer_authorname; ?></a></div>    
-                                  <?php endif; ?>    
-                                  <?php /* if( $oer_authorname2 != ''):?>    
-                                    <div class="oercurr-resource-author_block"><a href=""><?php echo esc_url($oer_authorname2); ?></a></div>    
-                                  <?php endif;*/ ?>
+                                    <div class="oercurr-resource-author_block"><a href="<?php echo esc_url($oer_authorurl); ?>" target="_new"><?php echo esc_html($oer_authorname); ?></a></div>    
+                                  <?php endif; ?>
                                 </div>
-                                <div class="oercurr-resource-excerpt"><?php echo oer_get_related_resource_content(strip_tags($description), 50); ?></div>
+                                <div class="oercurr-resource-excerpt"><?php echo wp_kses_post(oer_get_related_resource_content(strip_tags($description), 50)); ?></div>
                               </div>
                           </div>
                       </div>
@@ -658,7 +641,7 @@
                                   </div>
                                   <div class="oercurr-resource-info">
                                     <div class="oercurr-resource-title">
-                                        <?php echo $oer_curriculum_custom_editor['title']; ?>
+                                        <?php echo esc_html($oer_curriculum_custom_editor['title']); ?>
                                     </div>
                                   </div>
                               </div>
@@ -684,7 +667,7 @@
                                   </div>
                                   <div class="oercurr-resource-info">
                                     <div class="oercurr-resource-title">
-                                        <?php echo $oer_curriculum_custom_editor['title']; ?>
+                                        <?php echo esc_html($oer_curriculum_custom_editor['title']); ?>
                                     </div>
                                   </div>
                               </div>
@@ -733,7 +716,7 @@
                                   </div>
                                   <div class="oercurr-resource-info">
                                     <div class="oercurr-resource-title">
-                                        <?php echo $oer_curriculum_vocabulary_list_title; ?>
+                                        <?php echo esc_html($oer_curriculum_vocabulary_list_title); ?>
                                     </div>
                                   </div>
                               </div>

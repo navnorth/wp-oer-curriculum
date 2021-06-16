@@ -22,13 +22,13 @@ $inquiry = ((is_array($inquiry)&& count($inquiry)>0)?$inquiry[0]:array());
                             $label = get_option('oer_curriculum_related_curriculum_'.$i.'_curmetset_label');
                             ?>
                             <div class="form-group">
-                                <label for="relatedInquirySet<?php echo $i; ?>"><?php echo $label; ?></label>
-                                <select name="oer_curriculum_related_curriculum[]" id="relatedInquirySet<?php echo $i; ?>" class="form-control">
+                                <label for="relatedInquirySet<?php echo esc_html($i); ?>"><?php echo esc_html($label); ?></label>
+                                <select name="oer_curriculum_related_curriculum[]" id="relatedInquirySet<?php echo esc_html($i); ?>" class="form-control">
                                     <option value="0">-- Select Curriculum --</option>
                                     <?php if (count($inquirysets)>0) {
                                         foreach($inquirysets as $inquiryset) {
                                     ?>
-                                        <option value="<?php echo $inquiryset->ID;?>" <?php if (!empty($inquiry)) selected($inquiry[$i-1],$inquiryset->ID, true); ?>><?php echo $inquiryset->post_title;?></option>        
+                                        <option value="<?php echo esc_attr($inquiryset->ID);?>" <?php if (!empty($inquiry)) selected($inquiry[$i-1],$inquiryset->ID, true); ?>><?php echo esc_html($inquiryset->post_title);?></option>        
                                     <?php
                                         }
                                     } ?>

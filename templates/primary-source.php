@@ -12,7 +12,7 @@ if ($_css_oer) {
 $output = "<style>"."\n";
 $output .= $_css_oer."\n";
 $output .="</style>"."\n";
-echo $output;
+echo esc_html($output);
 }
 
 $back_url = "";
@@ -134,13 +134,13 @@ $type = (isset($type[0]))?$type[0]:'textbox';
   $ret = '<div class="wp_oer_breadcrumb">'; 
   $ret .= '<a href="'.esc_url(get_site_url()).'">Home</a>'; 
   $cur = (strlen($curriculum_details->post_title) > 30)? substr($curriculum_details->post_title, 0, 30).'...' : $curriculum_details->post_title; 
-  $ret .= ' / <a href="'.$back_url.'">'.$cur.'</a>'; 
+  $ret .= ' / <a href="'.esc_url($back_url).'">'.$cur.'</a>'; 
   $res = (strlen($sup) > 30)? substr($sup, 0, 30).'...' : $sup; 
   $ret .= ' / '.$res; 
   $ret .= '</div>'; 
   echo $ret; 
 ?> 
-<div class="oercurr-nav-block"><a class="back-button" href="<?php echo esc_url($back_url); ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
+<div class="oercurr-nav-block"><a class="back-button" href="<?php echo esc_url($back_url); ?>"><i class="fas fa-arrow-left"></i><?php echo esc_html($curriculum_details->post_title); ?></a></div>
 <div class="row ps-details-row">
     <?php if (!empty($featured_image_url) || $youtube || $isPDF) {
         $right_class = "col-md-8";
@@ -151,14 +151,14 @@ $type = (isset($type[0]))?$type[0]:'textbox';
             $left_class = "col-md-7";
         }
     ?>
-    <div class="ps-media-image <?php echo $left_class; ?> col-sm-12" data-curid="<?php echo $index; ?>">
+    <div class="ps-media-image <?php echo esc_attr($left_class); ?> col-sm-12" data-curid="<?php echo esc_attr($index); ?>">
         <?php if ($youtube): ?>
         <div class="ps-youtube-video">
             <?php
                 echo '<div class="youtubeVideoWrapper">';
                 if (function_exists('oer_generate_youtube_embed_code'))
                     $embed = oer_generate_youtube_embed_code($resource_url);
-                echo $embed;
+                echo esc_url($embed);
                 echo '</div>';
             ?>
         </div>
@@ -174,9 +174,9 @@ $type = (isset($type[0]))?$type[0]:'textbox';
         <?php else: ?>
         <div class="ps-image-block">
            <?php if (isset($resource_url)) { ?>
-           <a href="<?php echo esc_url($resource_url); ?>" target="_blank"><img src="<?php echo esc_url($featured_image_url); ?>" alt="<?php echo $resource->post_title; ?>" /></a>
+           <a href="<?php echo esc_url($resource_url); ?>" target="_blank"><img src="<?php echo esc_url($featured_image_url); ?>" alt="<?php echo esc_attr($resource->post_title); ?>" /></a>
            <?php }  else { ?>
-           <img src="<?php echo esc_url($featured_image_url); ?>" alt="<?php echo $resource->post_title; ?>" />
+           <img src="<?php echo esc_url($featured_image_url); ?>" alt="<?php echo esc_attr($resource->post_title); ?>" />
            <?php } ?>
         </div>
         <?php if ($type=="website"): ?>
@@ -197,10 +197,10 @@ $type = (isset($type[0]))?$type[0]:'textbox';
         if (!empty($resource_url)){
             $right_class = "col-md-8";
         ?>
-        <div class="ps-media-image col-md-4 col-sm-12" data-curid="<?php echo $index; ?>">
+        <div class="ps-media-image col-md-4 col-sm-12" data-curid="<?php echo esc_attr($index); ?>">
             <div class="oer-sngl-rsrc-img">
                  <?php if (empty($feature_image_url)): ?>
-                 <a class="oer-featureimg" href="<?php echo esc_url($resource_url); ?>" target="_blank"><span class="dashicons <?php if (function_exists('oer_getResourceIcon')) echo oer_getResourceIcon($media_type,$resource_url); ?> nofeat"></span></a>
+                 <a class="oer-featureimg" href="<?php echo esc_url($resource_url); ?>" target="_blank"><span class="dashicons <?php if (function_exists('oer_getResourceIcon')) echo esc_attr(oer_getResourceIcon($media_type,$resource_url)); ?> nofeat"></span></a>
                 <?php endif; ?>
             </div>
             <div class="oercurr-center">
@@ -217,39 +217,39 @@ $type = (isset($type[0]))?$type[0]:'textbox';
     $resource_meta = null;
     $subject_areas = null;
     ?>
-    <div class="ps-details <?php echo $right_class; ?> col-sm-12">
+    <div class="ps-details <?php echo esc_attr($right_class); ?> col-sm-12">
         <div class="ps-info">
             <h1 class="ps-info-title"><?php
             if (!empty($new_title))
-                echo $new_title;
+                echo esc_attr($new_title);
             else
-                echo $resource->post_title;
+                echo esc_attr($resource->post_title);
             ?></h1>
             <div class="ps-info-description">
                 <?php
                 if (empty($new_description))
-                    echo $resource->post_content;
+                    echo wp_kses_post($resource->post_content);
                 else
-                    echo $new_description;
+                    echo wp_kses_post($new_description);
                 ?>
             </div>
         </div>
     </div>
 </div>
 <div class="ps-related-sources oercurr-primary-sources-row">
-    <div class="oercurr-ps-nav-left-block <?php echo $oer_curriculum_prev_class; ?> col-md-6 col-sm-12">
+    <div class="oercurr-ps-nav-left-block <?php echo esc_attr($oer_curriculum_prev_class); ?> col-md-6 col-sm-12">
         <?php
         $resource_img = (empty($prev_resource))? $prev_image: wp_get_attachment_image_url( get_post_thumbnail_id($prev_resource), 'resource-thumbnail' );
         if (!empty($prev_image))
             $resource_img = $prev_image;
         ?>
-        <a class="oercurr-ps-nav-left" href="<?php echo esc_url($prev_url); ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>">
+        <a class="oercurr-ps-nav-left" href="<?php echo esc_url($prev_url); ?>" data-activetab="" data-id="<?php echo esc_attr($index-1); ?>" data-count="<?php echo esc_attr(count($primary_resources['resource'])); ?>" data-curriculum="<?php echo esc_attr($curriculum_id); ?>" data-prevsource="<?php echo esc_attr($primary_resources['resource'][$index-1]); ?>">
             <span class="col-md-3">&nbsp;</span>
             <span class="nav-media-icon"><i class="fas fa-arrow-left fa-2x"></i></span>
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if (!empty($resource_img)): ?>
-                      <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
+                      <div class="resource-thumbnail" style="background: url('<?php echo esc_url($resource_img) ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
                     <?php else: ?>
                     <?php
                       if($prev_resource == null){
@@ -260,31 +260,31 @@ $type = (isset($type[0]))?$type[0]:'textbox';
                         $prev_resource_icon = oer_getResourceIcon($prev_resource_type,$prev_resource_url);
                       }
                     ?>
-                    <div class="navigation-avatar"><span class="dashicons <?php echo $prev_resource_icon; ?>"></span></div>
+                    <div class="navigation-avatar"><span class="dashicons <?php echo esc_attr($prev_resource_icon); ?>"></span></div>
                     <?php endif; ?>
                 </span>
                 <span class="oercurr-nav-resource-title wow1 col-md-8">
                     <?php
                     if (!empty($prev_title))
-                        echo $prev_title;
+                        echo esc_html($prev_title);
                     else
-                        echo $prev_resource->post_title;
+                        echo esc_html($prev_resource->post_title);
                     ?>
                 </span>
             </span>
         </a>
     </div>
-    <div class="oercurr-ps-nav-right-block <?php echo $oer_curriculum_next_class; ?> col-md-6 col-sm-12">
+    <div class="oercurr-ps-nav-right-block <?php echo esc_attr($oer_curriculum_next_class); ?> col-md-6 col-sm-12">
         <?php
         $resource_img = (empty($next_resource))? $next_image: wp_get_attachment_image_url( get_post_thumbnail_id($next_resource), 'resource-thumbnail' );
         if (!empty($next_image))
             $resource_img = $next_image;
         ?>
-        <a class="oercurr-ps-nav-right" href="<?php echo esc_url($next_url); ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>">
+        <a class="oercurr-ps-nav-right" href="<?php echo esc_url($next_url); ?>" data-activetab="" data-id="<?php echo esc_attr($index+1); ?>" data-count="<?php echo esc_attr(count($primary_resources['resource'])); ?>" data-curriculum="<?php echo esc_attr($curriculum_id); ?>" data-nextsource="<?php echo esc_attr($primary_resources['resource'][$index+1]); ?>">
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if (!empty($resource_img)): ?>
-                        <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
+                        <div class="resource-thumbnail" style="background: url('<?php echo esc_url($resource_img) ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
                     <?php else:
                         if($next_resource == null){
                           $next_resource_icon = 'dashicons-media-text';
@@ -294,15 +294,15 @@ $type = (isset($type[0]))?$type[0]:'textbox';
                           $next_resource_icon = oer_getResourceIcon($next_resource_type,$next_resource_url);
                         }
                         ?>
-                        <div class="navigation-avatar"><span class="dashicons <?php echo $next_resource_icon; ?>"></span></div>
+                        <div class="navigation-avatar"><span class="dashicons <?php echo esc_url($next_resource_icon); ?>"></span></div>
                     <?php endif; ?>
                 </span>
                 <span class="oercurr-nav-resource-title wow2 col-md-8">
                     <?php             
                         if (!empty($next_title))
-                            echo $next_title;
+                            echo esc_html($next_title);
                         else
-                            echo $next_resource->post_title;
+                            echo esc_html($next_resource->post_title);
 
                     ?>
                 </span>

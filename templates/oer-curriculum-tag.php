@@ -30,7 +30,7 @@ $inquiry_sets = get_posts( $args );
 
 <div id="main">
     <div class="inquiry-set-header-wrapper">
-        <h4 class="inquiry-sets-by-tag-header"><?php _e("Inquiry Sets", OERCURR_CURRICULUM_SLUG); ?>: <span id="tag-name"><?php echo $tag_name; ?></span></h4>
+        <h4 class="inquiry-sets-by-tag-header"><?php _e("Inquiry Sets", OERCURR_CURRICULUM_SLUG); ?>: <span id="tag-name"><?php echo esc_html($tag_name); ?></span></h4>
     </div>
     <div id="tc-topics">
         <div class="tc-topic-wrapper">
@@ -55,10 +55,10 @@ $inquiry_sets = get_posts( $args );
                         </div>
                     </div>
                     <div class="oercurr-related-grades">
-                        <span><?php echo $grade_level; ?></span>
+                        <span><?php echo esc_html($grade_levels); ?></span>
                     </div>
                     <div class="oercurr-related-set-description">
-                        <h4><?php echo $inquiry_set->post_title; ?></h4>
+                        <h4><?php echo esc_html($inquiry_set->post_title); ?></h4>
                     </div>
                 </div>
             </a>

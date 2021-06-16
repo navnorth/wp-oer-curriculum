@@ -108,6 +108,7 @@ function updatepostdisplay(instanceparent){
   		success:function(response){
   			//console.log(response);
         response = JSON.parse(response);
+        console.log(bid);
         var instance = jQuery('[blockid="'+bid+'"]');
           if(typeof cgbGlobal == 'undefined'){ 
             instanceparent.find('#oercurr-blk-content_drop').html(response['data']);
