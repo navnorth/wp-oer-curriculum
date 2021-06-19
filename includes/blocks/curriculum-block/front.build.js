@@ -106,9 +106,7 @@ function updatepostdisplay(instanceparent){
   		url: curriculum_block_ajax_object.ajaxurl,
   		data: dta,
   		success:function(response){
-  			//console.log(response);
         response = JSON.parse(response);
-        console.log(bid);
         var instance = jQuery('[blockid="'+bid+'"]');
           if(typeof cgbGlobal == 'undefined'){ 
             instanceparent.find('#oercurr-blk-content_drop').html(response['data']);
