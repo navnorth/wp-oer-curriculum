@@ -12,7 +12,7 @@ global $message, $type;
 ?>
 <div class="wrap">
 
-    <h2><?php _e("Settings - OER Curriculum", OERCURR_CURRICULUM_SLUG); ?></h2>
+    <h2><?php esc_html_e("Settings - OER Curriculum", OERCURR_CURRICULUM_SLUG); ?></h2>
     <?php settings_errors(); ?>
 
     <?php
@@ -20,8 +20,8 @@ global $message, $type;
     ?>
 
     <h2 class="nav-tab-wrapper">
-                <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php _e("General", OERCURR_CURRICULUM_SLUG); ?></a>
-        <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=metadata" class="nav-tab <?php echo $active_tab == 'metadata' ? 'nav-tab-active' : ''; ?>"><?php _e("Metadata Fields", OERCURR_CURRICULUM_SLUG); ?></a>
+                <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e("General", OERCURR_CURRICULUM_SLUG); ?></a>
+        <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=metadata" class="nav-tab <?php echo $active_tab == 'metadata' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e("Metadata Fields", OERCURR_CURRICULUM_SLUG); ?></a>
         </h2>
 
     <?php
@@ -38,8 +38,8 @@ global $message, $type;
     ?>
 </div><!-- /.wrap -->
 <div class="oer-plugin-footer">
-    <div class="oer-plugin-info"><?php echo OERCURR_CURRICULUM_PLUGIN_NAME . " " . OERCURR_CURRICULUM_VERSION .""; ?></div>
-    <div class="oer-plugin-link"><a href='https://www.wp-oer.com/' target='_blank'><?php _e("More Information", OERCURR_CURRICULUM_SLUG); ?></a></div>
+    <div class="oer-plugin-info"><?php echo esc_html(OERCURR_CURRICULUM_PLUGIN_NAME . " " . OERCURR_CURRICULUM_VERSION .""); ?></div>
+    <div class="oer-plugin-link"><a href='https://www.wp-oer.com/' target='_blank'><?php esc_html_e("More Information", OERCURR_CURRICULUM_SLUG); ?></a></div>
     <div class="clear"></div>
 </div>
 <?php
@@ -125,7 +125,7 @@ function oercurr_show_metadata_settings() {
 <div class="oercurr-plugin-body">
     <div class="oercurr-plugin-row">
         <div class="oer-row-left">
-            <?php _e("Use the options below to update metadata field options.", OER_SLUG); ?>
+            <?php esc_html_e("Use the options below to update metadata field options.", OER_SLUG); ?>
         </div>
         <div class="oer-row-right">
         </div>
@@ -159,7 +159,7 @@ function oercurr_show_metadata_settings() {
                         if (!in_array($key,$oer_curriculum_deleted_fields)){
                         ?>
                         <tr>
-                            <td><?php echo str_replace("_curmetset","",$key); ?></td>
+                            <td><?php echo esc_html(str_replace("_curmetset","",$key)); ?></td>
                             <td><input type="text" name="<?php echo esc_attr($key); ?>" value="<?php echo esc_attr($label); ?>" /></td>
                             <td><input type="checkbox" class="oercurr-enabled-checkbox" name="<?php echo esc_attr($enb_key); ?>" value="<?php echo esc_attr($enb_val); ?>" <?php echo esc_attr($enabled); ?>/></td>
                         </tr>

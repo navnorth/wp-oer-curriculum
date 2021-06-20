@@ -134,7 +134,7 @@ if (isset($modules[$current_index+1])){
         <?php if (!empty($prev_resource)):
         $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($prev_resource), 'resource-thumbnail' );
         ?>
-        <a class="oercurr-ps-nav-left" href="<?php echo esc_url($prev_url); ?>" data-activetab="" data-id="<?php echo esc_html($index)-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>">
+        <a class="oercurr-ps-nav-left" href="<?php echo esc_url($prev_url); ?>" data-activetab="" data-id="<?php echo esc_html($index)-1; ?>" data-count="<?php echo esc_attr(count($primary_resources['resource'])); ?>" data-curriculum="<?php echo esc_attr($curriculum_id); ?>" data-prevsource="<?php echo esc_attr($primary_resources['resource'][$index-1]); ?>">
             <span class="col-md-3">&nbsp;</span>
             <span class="nav-media-icon"><i class="fas fa-arrow-left fa-2x"></i></span>
             <span class="nav-media-image col-md-8">

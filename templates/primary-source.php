@@ -129,6 +129,7 @@ $type = get_post_meta($resource->ID,"oer_mediatype");
 $type = (isset($type[0]))?$type[0]:'textbox';
 ?>
 <?php 
+  $_oercurr_allowed_html = oercurr_allowed_html();
   //Breadcrumb trail 
   $sup = (!empty($new_title))? $new_title : $resource->post_title; 
   $ret = '<div class="wp_oer_breadcrumb">'; 
@@ -138,7 +139,7 @@ $type = (isset($type[0]))?$type[0]:'textbox';
   $res = (strlen($sup) > 30)? substr($sup, 0, 30).'...' : $sup; 
   $ret .= ' / '.$res; 
   $ret .= '</div>'; 
-  echo $ret; 
+  echo wp_kses($ret,$_oercurr_allowed_html); 
 ?> 
 <div class="oercurr-nav-block"><a class="back-button" href="<?php echo esc_url($back_url); ?>"><i class="fas fa-arrow-left"></i><?php echo esc_html($curriculum_details->post_title); ?></a></div>
 <div class="row ps-details-row">
@@ -186,7 +187,7 @@ $type = (isset($type[0]))?$type[0]:'textbox';
         <div class="oercurr-center">
             <?php if (isset($resource_url)) { ?>
             <div class="ps-meta-group ps-resource-url">
-                <a href="<?php echo esc_url($resource_url); ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OERCURR_CURRICULUM_SLUG); ?></a>
+                <a href="<?php echo esc_url($resource_url); ?>" class="tc-view-button" target="_blank"><?php esc_html_e("View Item", OERCURR_CURRICULUM_SLUG); ?></a>
             </div>
             <?php } ?>
         </div>
@@ -206,7 +207,7 @@ $type = (isset($type[0]))?$type[0]:'textbox';
             <div class="oercurr-center">
                 <?php if (isset($resource_url)) { ?>
                 <div class="ps-meta-group ps-resource-url">
-                    <a href="<?php echo esc_url($resource_url); ?>" class="tc-view-button" target="_blank"><?php _e("View Item", OERCURR_CURRICULUM_SLUG); ?></a>
+                    <a href="<?php echo esc_url($resource_url); ?>" class="tc-view-button" target="_blank"><?php esc_html_e("View Item", OERCURR_CURRICULUM_SLUG); ?></a>
                 </div>
                 <?php } ?>
             </div>

@@ -11,15 +11,15 @@ add_action('init', 'oercurr_create_menu_item');
 function oercurr_create_menu_item() {
     global $_use_gutenberg;
     $labels = array(
-        'name'          => _x('Curriculum', 'post type general name'),
-        'singular_name' => _x('Curriculum', 'post type singular name'),
-        'add_new'       => _x('Add New Curriculum', 'book'),
-        'add_new_item'  => __('Add New Curriculum'),
-        'edit_item'     => __('Edit Curriculum'),
-        'new_item'      => __('Create Curriculum'),
-        'all_items'     => __('All Curriculum'),
-        'view_item'     => __('View Curriculum'),
-        'search_items'  => __('Search'),
+        'name'          => esc_html_x('Curriculum', 'post type general name'),
+        'singular_name' => esc_html_x('Curriculum', 'post type singular name'),
+        'add_new'       => esc_html_x('Add New Curriculum', 'book'),
+        'add_new_item'  => esc_html__('Add New Curriculum'),
+        'edit_item'     => esc_html__('Edit Curriculum'),
+        'new_item'      => esc_html__('Create Curriculum'),
+        'all_items'     => esc_html__('All Curriculum'),
+        'view_item'     => esc_html__('View Curriculum'),
+        'search_items'  => esc_html__('Search'),
         'menu_name'     => 'Curriculum'
     );
 
@@ -759,16 +759,17 @@ add_action('wp_ajax_nopriv_oercurr_create_module_callback', 'oercurr_create_modu
 function oercurr_create_module_callback() {
     $module_type = isset($_REQUEST['module_type']) ? sanitize_text_field($_REQUEST['module_type']) : 'editor';
     $element_id = isset($_REQUEST['row_id']) ? sanitize_text_field($_REQUEST['row_id']) : '15';
+    $_oercurr_allowed_html = oercurr_allowed_html();
 
     if ($module_type == 'editor') {
-        echo oercurr_create_dynamic_editor($element_id);
+        echo wp_kses(oercurr_create_dynamic_editor($element_id), $_oercurr_allowed_html);
         exit();
     } elseif ($module_type == 'list') {
-        echo oercurr_create_dynamic_text_list($element_id);
+        echo wp_kses(oercurr_create_dynamic_text_list($element_id), $_oercurr_allowed_html);
     } elseif ($module_type == 'vocabulary') {
-        echo oercurr_create_dynamic_vocabulary_list($element_id);
+        echo wp_kses(oercurr_create_dynamic_vocabulary_list($element_id), $_oercurr_allowed_html);
     } elseif ($module_type == 'materials') {
-        echo oercurr_create_dynamic_materials_module($element_id);
+        echo wp_kses(oercurr_create_dynamic_materials_module($element_id), $_oercurr_allowed_html);
     }
     exit();
 }
@@ -1091,7 +1092,7 @@ function oercurr_add_text_feature_callback() {
     <div class="card col card-default oercurr-section-element-wrapper" id="oer_curriculum_section_element_wrapper-<?php echo esc_attr($element_id) ?>">
        <div class="card-header">
            <h3 class="card-title oercurr-module-title">
-               <?php _e("Section", OERCURR_CURRICULUM_SLUG); ?>
+               <?php esc_html_e("Section", OERCURR_CURRICULUM_SLUG); ?>
                <span class="oercurr-sortable-handle">
                    <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>
                    <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>
