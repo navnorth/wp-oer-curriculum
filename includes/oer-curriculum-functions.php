@@ -672,7 +672,7 @@ if (! function_exists('oercurr_get_curriculum_type')){
             unset($types[array_search("Other", $types)]);
         }
         foreach ($types as $type){
-            $html .= '<option value="'.$type.'" '.selected($type,$value,false).'>'.$type.'</option>';
+            $html .= '<option value="'.esc_attr($type).'" '.esc_attr(selected($type,$value,false)).'>'.esc_html($type).'</option>';
         }
         return $html;
     }

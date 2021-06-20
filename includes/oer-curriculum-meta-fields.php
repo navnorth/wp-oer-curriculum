@@ -264,7 +264,27 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                     <div class="form-group">
                         <label for="oer_curriculum_type"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_type')); ?></label>
                         <select name="oer_curriculum_type" id="oer_curriculum_type" class="form-control">
-                            <?php echo wp_kses(oercurr_get_curriculum_type($oer_curriculum_type), $_oercurr_allowed_html); ?>
+
+                            <option value="">Select Type</option>
+                            <?php
+                            $types = array(
+                                "Brief Activity",
+                                "Full Lesson",
+                                "Short Project",
+                                "Extended Project",
+                                "Comprehensive Unit",
+                                "Other"
+                            );
+                            $type_other_enabled = (get_option('oer_curriculum_type_other_curmetset_enable')=='checked')?true:false;
+                            if(!$type_other_enabled){
+                                unset($types[array_search("Other", $types)]);
+                            }
+                            foreach ($types as $type){ ?>
+                                <option value="<?php echo esc_attr($type) ?>" <?php echo esc_attr(selected($type,$oer_curriculum_type,false)) ?> ><?php echo esc_html($type) ?></option>
+                            <?php
+                            }
+                            ?>
+  
                         </select>
                     </div>
                     <div class="form-group other-type-group<?php echo esc_attr($xclass); ?>">
