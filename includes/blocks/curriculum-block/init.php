@@ -238,12 +238,14 @@ function get_curriculum_block_content($posts, $attributes){
               <div class="ttl"><a href="<?php echo esc_url(get_post_permalink($post->ID)) ?>"><?php echo esc_html($post->post_title) ?></a></div>
               <div class="oercurr-postmeta">
                   <?php
-                  if(count($post->oer_curriculum_grades)>1){ ?>
-                      <span class="oercurr-postmeta-grades"><strong>Grades:</strong> <?php echo esc_html($post->oer_curriculum_grades[0]) ?> - <?php echo esc_html($post->oer_curriculum_grades[count($post->oer_curriculum_grades)-1]) ?></span>
-                  <?php }else{
-                      if($post->oer_curriculum_grades[0] != ''){  ?>
-                              <span class="oercurr-postmeta-grades"><strong>Grade:</strong> <?php echo esc_html($post->oer_curriculum_grades[0]) ?></span>
-                      <?php }
+                  if(is_array($post->oer_curriculum_grades)){
+                    if(count($post->oer_curriculum_grades)>1){ ?>
+                        <span class="oercurr-postmeta-grades"><strong>Grades:</strong> <?php echo esc_html($post->oer_curriculum_grades[0]) ?> - <?php echo esc_html($post->oer_curriculum_grades[count($post->oer_curriculum_grades)-1]) ?></span>
+                    <?php }else{
+                        if($post->oer_curriculum_grades[0] != ''){  ?>
+                                <span class="oercurr-postmeta-grades"><strong>Grade:</strong> <?php echo esc_html($post->oer_curriculum_grades[0]) ?></span>
+                        <?php }
+                    }
                   }
                   ?>
               </div>
