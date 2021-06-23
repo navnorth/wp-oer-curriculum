@@ -290,7 +290,11 @@ function oercurr_enqueue_admin_assets() {
             wp_enqueue_script('oercurr-admin-bootstrap', OERCURR_CURRICULUM_URL . 'lib/bootstrap/js/bootstrap.min.js',array('jquery') , null, true);
         }
 
-        wp_register_script('oercurr-script', OERCURR_CURRICULUM_URL . 'js/backend/oer-curriculum.js');
+        if ( ! did_action( 'wp_enqueue_media' ) ) {
+  	        wp_enqueue_media();
+  	    }
+        wp_enqueue_script( 'media-upload' );
+        wp_register_script('oercurr-script', OERCURR_CURRICULUM_URL . 'js/backend/oer-curriculum.js', array( 'jquery','media-upload' ));
         wp_localize_script('oercurr-script','lpScript', array("image_placeholder_url" => OERCURR_CURRICULUM_URL.'images/oer-curriculum-person-placeholder.png'));
         wp_enqueue_script('oercurr-script');
         wp_enqueue_script('oercurr-resource-selector-script', OERCURR_CURRICULUM_URL . 'js/backend/oer-curriculum-resource-selector.js' , array('jquery') , null, true);
@@ -322,9 +326,11 @@ add_action('wp_enqueue_scripts', 'oercurr_enqueue_frontend_scripts_and_styles');
 if (!function_exists('oercurr_enqueue_frontend_scripts_and_styles')) {
     function oercurr_enqueue_frontend_scripts_and_styles() {
         global $post;
+        global $root_slug;
         if (
             (isset($_GET['post_type']) && $_GET['post_type'] == 'oer-curriculum') ||
-            (isset($post->post_type) && $post->post_type == 'oer-curriculum')
+            (isset($post->post_type) && $post->post_type == 'oer-curriculum') ||
+            (get_query_var($root_slug) !== '' && get_query_var('source') !== '')
         ) {
             //Enqueue script
             if (!wp_script_is('bootstrap-js', 'enqueued')) {
