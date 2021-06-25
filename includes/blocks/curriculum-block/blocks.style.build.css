@@ -155,7 +155,8 @@ a.oercurr-blk-left {
 	max-width: 50%;
 	display: inline-block;
 	font-size: 24px;
-	vertical-align: bottom
+	vertical-align: top;
+  line-height: 50px;
 }
 
 .oercurr-blk-topbar-right {

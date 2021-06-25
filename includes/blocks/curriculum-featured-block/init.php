@@ -206,7 +206,9 @@ function oercurr_cfb_render_featured_block($attributes, $ajx=false){
                                     $_sngsldmgn = (!isset($attributes['slidemargin']))? 20 : sanitize_text_field($attributes['slidemargin']);
                                     $_sngsldwdt = (!isset($attributes['slidewidth']))? (375 + $_sngsldmgn) : (sanitize_text_field($attributes['slidewidth']) + $_sngsldmgn);
                                     $_ret .= 'let whlsldwdt = sldcnt * '.$_sngsldwdt.';';
-
+                                    $_ret .= 'jQuery(".featuredwpr_bxslider_front_'.sanitize_text_field($attributes['blockid']) .'").css("width",whlsldwdt);';
+                                    
+                                    
                             $_ret .= '}';
                             
                     $_ret .= '});';
