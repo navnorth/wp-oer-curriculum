@@ -108,4 +108,16 @@ jQuery(window).load(function() {
       setTimeout(function(){ 
         jQuery('[data-toggle="collapse"]').removeAttr('data-parent');
       }, 1000);
+
+      jQuery(document).on('click','.tc_oer_curriculum_collapse_button', function(e) {
+        var triggerbutton = jQuery(this); // The clicked button
+        let triggerhref = triggerbutton.attr('href');
+        jQuery(triggerhref).on('shown.bs.collapse', function () {
+           triggerbutton.removeClass('collapsed');
+        });
+        jQuery(triggerhref).on('hidden.bs.collapse', function () {
+           triggerbutton.addClass('collapsed');
+        });
+      });
+
 });
