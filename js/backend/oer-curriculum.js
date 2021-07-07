@@ -1037,7 +1037,7 @@ jQuery(document).ready(function ($) {
         // Initialize WP Editor
         initializeEditor: function(id) {
             wp.editor.remove(id);
-            wp.editor.initialize(
+            wp.oldEditor.initialize(
                 id,
                 {
                     tinymce: {

@@ -659,8 +659,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                         <?php $_val = wp_kses_post($resource_description); ?>
                                                         <textarea rows="10" name="oer_curriculum_primary_resources[description][]" id="oercurr-resource-student-<?php echo $resourceKey ?>"><?php echo $_val ?></textarea>
                                                         <script>
-                                                        jQuery(document).ready(function(){
-                                                          wp.editor.initialize('oercurr-resource-student-<?php echo esc_html($resourceKey) ?>', {
+                                                        jQuery(window).load(function(){
+                                                          wp.oldEditor.initialize('oercurr-resource-student-<?php echo esc_html($resourceKey) ?>', {
                                                             tinymce: {
                                                                plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
                                                                toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
@@ -898,8 +898,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                     <?php $_val = (isset($oer_curriculum_iq['excerpt']) ? wp_kses_post($oer_curriculum_iq['excerpt']) : ""); ?>
                                     <textarea rows="10" name="oer_curriculum_iq[excerpt]" id="oer_curriculum_iq_excerpt"><?php echo $_val ?></textarea>
                                     <script>
-                                    jQuery(document).ready(function(){
-                                      wp.editor.initialize('oer_curriculum_iq_excerpt', {
+                                    jQuery(window).load(function(){
+                                      wp.oldEditor.initialize('oer_curriculum_iq_excerpt', {
                                         tinymce: {
                                            plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
                                            toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
@@ -986,8 +986,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                           <?php $_val = (isset($text_features['editor'][$i]) ? wp_kses_post($text_features['editor'][$i]) : ""); ?>
                                           <textarea rows="10" name="<?php echo $editor_id ?>" id="oercurr-required-materials-section-<?php echo ($i + 1) ?>"><?php echo $_val ?></textarea>
                                           <script>
-                                          jQuery(document).ready(function(){
-                                            wp.editor.initialize('oercurr-required-materials-section-<?php echo (esc_html($i) + 1) ?>', {
+                                          jQuery(window).load(function(){
+                                            wp.oldEditor.initialize('oercurr-required-materials-section-<?php echo (esc_html($i) + 1) ?>', {
                                               tinymce: {
                                                  plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
                                                  toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
@@ -1092,8 +1092,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                         <?php $_val = (isset($text_features['editor'][$i]) ? wp_kses_post($text_features['editor'][$i]) : ""); ?>
                                         <textarea rows="10" name="<?php echo $editor_id ?>" id="oercurr-additional-sections-editor-<?php echo ($i + 1) ?>"><?php echo $_val ?></textarea>
                                         <script>
-                                        jQuery(document).ready(function(){
-                                          wp.editor.initialize('oercurr-additional-sections-editor-<?php echo (esc_html($i) + 1) ?>', {
+                                        jQuery(window).load(function(){
+                                          wp.oldEditor.initialize('oercurr-additional-sections-editor-<?php echo (esc_html($i) + 1) ?>', {
                                             tinymce: {
                                                plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
                                                toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
@@ -1955,8 +1955,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                     
                                                     <textarea rows="10" name="oer_curriculum_primary_resources[description][]" id="oercurr-resource-student-1"></textarea>
                                                     <script>
-                                                    jQuery(document).ready(function(){
-                                                      wp.editor.initialize("oercurr-resource-student-1", {
+                                                    jQuery(window).load(function(){
+                                                      wp.oldEditor.initialize("oercurr-resource-student-1", {
                                                         tinymce: {
                                                             plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
                                                             toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
@@ -2063,8 +2063,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                       
                                         <textarea rows="10" name="oer_curriculum_iq[excerpt]" id="oer_curriculum_iq_excerpt"></textarea>
                                         <script>
-                                        jQuery(document).ready(function(){
-                                          wp.editor.initialize("oer_curriculum_iq_excerpt", {
+                                        jQuery(window).load(function(){
+                                          wp.oldEditor.initialize("oer_curriculum_iq_excerpt", {
                                             tinymce: {
                                                 plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
                                                 toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
@@ -2134,8 +2134,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                  <?php wp_enqueue_editor(); wp_enqueue_media(); ?>
                                                  <textarea rows="10" name="oer_curriculum_required_materials[editor][]" id="oercurr-required-material-section-1"></textarea>
                                                  <script>
-                                                 jQuery(document).ready(function(){
-                                                   wp.editor.initialize("oercurr-required-material-section-1", {
+                                                 jQuery(window).load(function(){
+                                                   wp.oldEditor.initialize("oercurr-required-material-section-1", {
                                                       tinymce: true,
                                                       quicktags: true,
                                                       mediaButtons: true,
@@ -2207,8 +2207,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                  <?php wp_enqueue_editor(); wp_enqueue_media(); ?>
                                                  <textarea rows="10" name="oer_curriculum_additional_sections[editor][]" id="oercurr-additional-section-1"></textarea>
                                                  <script>
-                                                 jQuery(document).ready(function(){
-                                                   wp.editor.initialize("oercurr-additional-section-1", {
+                                                 jQuery(window).load(function(){
+                                                   wp.oldEditor.initialize("oercurr-additional-section-1", {
                                                       tinymce: true,
                                                       quicktags: true,
                                                       mediaButtons: true,
