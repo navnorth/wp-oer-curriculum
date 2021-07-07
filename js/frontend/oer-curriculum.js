@@ -105,4 +105,7 @@ jQuery(window).load(function() {
           maxOerResourceBlockHeight = (obj.offsetHeight > maxOerResourceBlockHeight)? obj.offsetHeight: maxOerResourceBlockHeight;
       });
       jQuery('.oercurr-primary-sources-row').find('.media-image').height(maxOerResourceBlockHeight);
+      setTimeout(function(){ 
+        jQuery('[data-toggle="collapse"]').removeAttr('data-parent');
+      }, 1000);
 });
