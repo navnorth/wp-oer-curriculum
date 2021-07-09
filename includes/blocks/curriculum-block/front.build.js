@@ -106,7 +106,6 @@ function updatepostdisplay(instanceparent){
   		url: curriculum_block_ajax_object.ajaxurl,
   		data: dta,
   		success:function(response){
-  			//console.log(response);
         response = JSON.parse(response);
         var instance = jQuery('[blockid="'+bid+'"]');
           if(typeof cgbGlobal == 'undefined'){ 

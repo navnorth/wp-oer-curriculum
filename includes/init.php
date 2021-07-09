@@ -11,15 +11,15 @@ add_action('init', 'oercurr_create_menu_item');
 function oercurr_create_menu_item() {
     global $_use_gutenberg;
     $labels = array(
-        'name'          => _x('Curriculum', 'post type general name'),
-        'singular_name' => _x('Curriculum', 'post type singular name'),
-        'add_new'       => _x('Add New Curriculum', 'book'),
-        'add_new_item'  => __('Add New Curriculum'),
-        'edit_item'     => __('Edit Curriculum'),
-        'new_item'      => __('Create Curriculum'),
-        'all_items'     => __('All Curriculum'),
-        'view_item'     => __('View Curriculum'),
-        'search_items'  => __('Search'),
+        'name'          => esc_html_x('Curriculum', 'post type general name'),
+        'singular_name' => esc_html_x('Curriculum', 'post type singular name'),
+        'add_new'       => esc_html_x('Add New Curriculum', 'book'),
+        'add_new_item'  => esc_html__('Add New Curriculum'),
+        'edit_item'     => esc_html__('Edit Curriculum'),
+        'new_item'      => esc_html__('Create Curriculum'),
+        'all_items'     => esc_html__('All Curriculum'),
+        'view_item'     => esc_html__('View Curriculum'),
+        'search_items'  => esc_html__('Search'),
         'menu_name'     => 'Curriculum'
     );
 
@@ -161,7 +161,7 @@ function oercurr_age_levels_callback(){
 
     echo '<div class="form-group oer_curriculum_age_levels">';
     echo '<div class="input-group full-width">';
-    echo '<input type="text" class="form-control" name="oer_curriculum_age_levels" placeholder="Age Levels" value="'. $oer_curriculum_age_levels .'">';
+    echo '<input type="text" class="form-control" name="oer_curriculum_age_levels" placeholder="Age Levels" value="'. esc_attr($oer_curriculum_age_levels) .'">';
     echo '</div>';
     echo '</div>';
 }
@@ -175,7 +175,7 @@ function oercurr_suggested_time_callback(){
 
     echo '<div class="form-group oer_curriculum_age_levels">';
     echo '<div class="input-group full-width">';
-    echo '<input type="text" class="form-control" name="oer_curriculum_suggested_instructional_time" placeholder="Suggested Time" value="'. $oer_curriculum_suggested_time .'">';
+    echo '<input type="text" class="form-control" name="oer_curriculum_suggested_instructional_time" placeholder="Suggested Time" value="'. esc_attr($oer_curriculum_suggested_time) .'">';
     echo '</div>';
     echo '</div>';
 }
@@ -204,26 +204,29 @@ function oercurr_grade_level_callback() {
     );
     $oer_curriculum_grades = (isset($post_meta_data['oer_curriculum_grades'][0]) ? unserialize($post_meta_data['oer_curriculum_grades'][0]) : array());
     $index = 0;
-    echo '<div class="row oer_curriculum_grades">';
+    ?><div class="row oer_curriculum_grades"><?php
     foreach ($oer_curriculum_grade_options as $key => $oer_curriculum_grade_option) {
         $index++;
-        $checkbox = "";
         if ($index % 7 == 1){
-            if ($index<7)
-                $checkbox .= '<div class="col-md-7 span2">';
-            else
-                $checkbox .= '<div class="col-md-5 span2">';
+            if ($index<7){
+                ?><div class="col-md-7 span2"><?php
+            }else{
+                ?><div class="col-md-5 span2"><?php
+            } 
         }
-        $checkbox .= '<div class="form-checkbox">';
-        $checkbox .= '<input type="checkbox" name="oer_curriculum_grades[]" value="'.$key.'" id="oer_curriculum_grade_'.$key.'" '.oercurr_show_selected($key, $oer_curriculum_grades, 'checkbox').'>';
-        $checkbox .= '<label class="oer_curriculum_radio_label" for="oer_curriculum_grade_'.$key.'">'.$oer_curriculum_grade_option.'</label>';
-        $checkbox .= '</div>';
-        if ($index % 7 == 0 )
-            $checkbox .= '</div>';
-        echo $checkbox;
+        ?>
+        <div class="form-checkbox">
+        <input type="checkbox" name="oer_curriculum_grades[]" value="<?php echo esc_attr($key) ?>" id="oer_curriculum_grade_<?php echo esc_attr($key) ?>" <?php echo esc_html(oercurr_show_selected($key, $oer_curriculum_grades, 'checkbox')) ?> >
+        <label class="oer_curriculum_radio_label" for="oer_curriculum_grade_'.esc_attr($key).'"><?php echo esc_html($oer_curriculum_grade_option) ?></label>
+        </div>
+        <?php
+        if ($index % 7 == 0 ){
+            ?></div><?php
+        }
     }
-    echo '</div>';
+    ?></div><?php
 }
+
 
 /**
  * Add a checkbox option to the sidebar
@@ -241,20 +244,23 @@ function oercurr_download_copy_callback() {
         $icon = oercurr_get_file_type_from_url($oer_curriculum_download_copy_document);
         $icon = $icon['icon'];
     } else {
-        $icon = '<i class="fa fa-upload"></i>';
+        ?><i class="fa fa-upload"></i><?php
     }
-    $checkbox = '<div class="form-group">';
-    $checkbox .= '<div class="input-group full-width">';
-    $checkbox .= '<input type="hidden" class="form-control" name="oer_curriculum_download_copy_document" placeholder="Select Document" value="'.$oer_curriculum_download_copy_document.'">';
+    ?><div class="form-group"><?php
+    ?><div class="input-group full-width"><?php
+    ?><input type="hidden" class="form-control" name="oer_curriculum_download_copy_document" placeholder="Select Document" value="<?php echo esc_url($oer_curriculum_download_copy_document) ?>"><?php
     if (!empty($oer_curriculum_download_copy_document)){
-        $checkbox .= '<div class="oercurr-selected-section"><a href="'.esc_url($oer_curriculum_download_copy_document).'" target="_blank">'.$oer_curriculum_download_copy_document.'</a> <span class="oercurr-remove-download-copy" title="Remove copy"><i class="fas fa-trash-alt"></i></span></div>';
-        $checkbox .= '<span class="oercurr-select-label oercurr-hidden">Select Document</span> <div class="input-group-addon oercurr-download-copy-icon oercurr-hidden" title="Select Material">'.$icon.'</div>';
+      ?>
+        <div class="oercurr-selected-section"><a href="<?php echo esc_url($oer_curriculum_download_copy_document) ?>" target="_blank"><?php echo esc_url($oer_curriculum_download_copy_document) ?></a> <span class="oercurr-remove-download-copy" title="Remove copy"><i class="fas fa-trash-alt"></i></span></div>
+        <span class="oercurr-select-label oercurr-hidden">Select Document</span> <div class="input-group-addon oercurr-download-copy-icon oercurr-hidden" title="Select Material"><?php echo esc_html($icon) ?></div>
+      <?php
     } else {
-        $checkbox .= '<div class="oercurr-selected-section oercurr-hidden"><a href="" target="_blank"></a> <span class="oercurr-remove-download-copy"><i class="fas fa-trash-alt"></i></span></div>';
-        $checkbox .= '<span class="oercurr-select-label">Select Document</span> <div class="input-group-addon oercurr-download-copy-icon" title="Select Material">'.$icon.'</div>';
+      ?>
+        <div class="oercurr-selected-section oercurr-hidden"><a href="" target="_blank"></a> <span class="oercurr-remove-download-copy"><i class="fas fa-trash-alt"></i></span></div>
+        <span class="oercurr-select-label">Select Document</span> <div class="input-group-addon oercurr-download-copy-icon" title="Select Material"><?php echo esc_html($icon) ?></div>
+      <?php
     }
-    $checkbox .= '</div></div>';
-    echo $checkbox;
+    ?></div></div><?php
 }
 
 
@@ -284,7 +290,11 @@ function oercurr_enqueue_admin_assets() {
             wp_enqueue_script('oercurr-admin-bootstrap', OERCURR_CURRICULUM_URL . 'lib/bootstrap/js/bootstrap.min.js',array('jquery') , null, true);
         }
 
-        wp_register_script('oercurr-script', OERCURR_CURRICULUM_URL . 'js/backend/oer-curriculum.js');
+        if ( ! did_action( 'wp_enqueue_media' ) ) {
+  	        wp_enqueue_media();
+  	    }
+        wp_enqueue_script( 'media-upload' );
+        wp_register_script('oercurr-script', OERCURR_CURRICULUM_URL . 'js/backend/oer-curriculum.js', array( 'jquery','media-upload' ));
         wp_localize_script('oercurr-script','lpScript', array("image_placeholder_url" => OERCURR_CURRICULUM_URL.'images/oer-curriculum-person-placeholder.png'));
         wp_enqueue_script('oercurr-script');
         wp_enqueue_script('oercurr-resource-selector-script', OERCURR_CURRICULUM_URL . 'js/backend/oer-curriculum-resource-selector.js' , array('jquery') , null, true);
@@ -316,9 +326,11 @@ add_action('wp_enqueue_scripts', 'oercurr_enqueue_frontend_scripts_and_styles');
 if (!function_exists('oercurr_enqueue_frontend_scripts_and_styles')) {
     function oercurr_enqueue_frontend_scripts_and_styles() {
         global $post;
+        global $root_slug;
         if (
             (isset($_GET['post_type']) && $_GET['post_type'] == 'oer-curriculum') ||
-            (isset($post->post_type) && $post->post_type == 'oer-curriculum')
+            (isset($post->post_type) && $post->post_type == 'oer-curriculum') ||
+            (get_query_var($root_slug) !== '' && get_query_var('source') !== '')
         ) {
             //Enqueue script
             if (!wp_script_is('bootstrap-js', 'enqueued')) {
@@ -539,61 +551,64 @@ add_action('wp_ajax_nopriv_oercurr_add_more_activity_callback', 'oercurr_add_mor
 
 function oercurr_add_more_activity_callback() {
     $totalElements = isset($_REQUEST['row_id']) ? sanitize_text_field($_REQUEST['row_id']) : '15';
-    $content = '<div class="card col card-default oercurr-ac-item" id="oercurr-ac-item-' . $totalElements . '">
-                    <span class="oercurr-inner-sortable-handle">
-                        <i class="fa fa-arrow-down activity-reorder-down hide" aria-hidden="true"></i>
-                        <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
-                    </span>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="form-group col-md-8">
-                                <label>Activity Title</label>
-                                <input type="text" name="oer_curriculum_activity_title[]" class="form-control" placeholder="Activity Title">
-                            </div>
-                            <div class="col-md-2 oercurr-ac-delete-container">
-                                <span class="btn btn-danger btn-sm oercurr-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-8">
-                                <label for="activity-title">Activity Title</label>
-                                <select name="oer_curriculum_activity_type[]" class="form-control">
-                                    <option value=""> - Activity Type -</option>
-                                    <option value="hooks_set">Hooks / Set</option>
-                                    <option value="lecture">Lecture</option>
-                                    <option value="demonstration">Demo / Modeling</option>
-                                    <option value="independent_practice">Independent Practice</option>
-                                    <option value="guided_practice">Guided Practice</option>
-                                    <option value="check_understanding">Check Understanding</option>
-                                    <option value="lab_shop">Lab / Shop</option>
-                                    <option value="group_work">Group Work</option>
-                                    <option value="projects">Projects</option>
-                                    <option value="assessment">Formative Assessment</option>
-                                    <option value="closure">Closure</option>
-                                    <option value="research">Research / Annotate</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">';
-    ob_start(); // Start output buffer
-    wp_editor('',
-        'oercurr-activity-detail-' . $totalElements,
-        $settings = array(
-            'textarea_name' => 'oer_curriculum_activity_detail[]',
-            'media_buttons' => true,
-            'textarea_rows' => 10,
-            'drag_drop_upload' => true,
-            'teeny' => true,
-            'relative_urls' => false,
-        )
-    );
-    $content .= ob_get_clean();
-    $content .= '</div>
-                    </div>
-                </div>';
+    ?>
+    <div class="card col card-default oercurr-ac-item" id="oercurr-ac-item-<?php echo esc_attr($totalElements) ?>">
+        <span class="oercurr-inner-sortable-handle">
+            <i class="fa fa-arrow-down activity-reorder-down hide" aria-hidden="true"></i>
+            <i class="fa fa-arrow-up activity-reorder-up" aria-hidden="true"></i>
+        </span>
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label>Activity Title</label>
+                    <input type="text" name="oer_curriculum_activity_title[]" class="form-control" placeholder="Activity Title">
+                </div>
+                <div class="col-md-2 oercurr-ac-delete-container">
+                    <span class="btn btn-danger btn-sm oercurr-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label for="activity-title">Activity Title</label>
+                    <select name="oer_curriculum_activity_type[]" class="form-control">
+                        <option value=""> - Activity Type -</option>
+                        <option value="hooks_set">Hooks / Set</option>
+                        <option value="lecture">Lecture</option>
+                        <option value="demonstration">Demo / Modeling</option>
+                        <option value="independent_practice">Independent Practice</option>
+                        <option value="guided_practice">Guided Practice</option>
+                        <option value="check_understanding">Check Understanding</option>
+                        <option value="lab_shop">Lab / Shop</option>
+                        <option value="group_work">Group Work</option>
+                        <option value="projects">Projects</option>
+                        <option value="assessment">Formative Assessment</option>
+                        <option value="closure">Closure</option>
+                        <option value="research">Research / Annotate</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">';
+            <?php
+            ob_start(); // Start output buffer
+            wp_editor('',
+                'oercurr-activity-detail-' . esc_attr($totalElements),
+                $settings = array(
+                    'textarea_name' => 'oer_curriculum_activity_detail[]',
+                    'media_buttons' => true,
+                    'textarea_rows' => 10,
+                    'drag_drop_upload' => true,
+                    'teeny' => true,
+                    'relative_urls' => false,
+                )
+            );
+            echo ob_get_clean();
+            ?>
+            </div>
+        </div>
+    </div>';
 
-    echo $content;
+    <?php
     exit();
 }
 
@@ -607,135 +622,119 @@ function oercurr_add_more_prime_resource_callback() {
     $totalElements = isset($_REQUEST['row_id']) ? sanitize_text_field($_REQUEST['row_id']) : '25';
     $prType = isset($_REQUEST['type']) ? sanitize_text_field($_REQUEST['type']) : 'resource';
     //RESOURCE FIELD TYPE
+    
     if($prType == 'resource'){
-      $content = '<div class="card col card-default oercurr-primary-resource-element-wrapper" id="oercurr-primary-resource-element-wrapper-' . $totalElements . '">
-                      <div class="card-header">
-                          <h3 class="card-title oercurr-module-title">
-                              Resource
-                              <span class="oercurr-sortable-handle">
-                                  <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
-                                  <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
-                              </span>
-                              <span class="btn btn-danger btn-sm oercurr-remove-source"
-                                    title="Delete"
-                              ><i class="fa fa-trash"></i> </span>
-                          </h3>
-                      </div>
-                      <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <label>Thumbnail Image</label>
-                                <div class="oer_primary_resource_thumbnail_holder"></div>
-                                <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
-                                <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
+      ?>
+      <div class="card col card-default oercurr-primary-resource-element-wrapper" id="oercurr-primary-resource-element-wrapper-<?php echo esc_attr($totalElements) ?>">
+          <div class="card-header">
+              <h3 class="card-title oercurr-module-title">
+                  Resource
+                  <span class="oercurr-sortable-handle">
+                      <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
+                      <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
+                  </span>
+                  <span class="btn btn-danger btn-sm oercurr-remove-source"
+                        title="Delete"
+                  ><i class="fa fa-trash"></i> </span>
+              </h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+                <div class="col-md-7">
+                    <label>Thumbnail Image</label>
+                    <div class="oer_primary_resource_thumbnail_holder"></div>
+                    <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                    <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
+                </div>
+            </div>
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <div class="oer_curriculum_primary_resources_image_wrappper">
+                            <label>Resource</label>
+                            <div class="oer_curriculum_primary_resources_image">
+                              <div class="oer_curriculum_primary_resources_image_preloader" style="display:none;">
+                                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                              </div>
+                              <div class="oer_curriculum_primary_resources_image_display">
+                                <div class="oer_curriculum_primary_resources_display"><p>You have not selected a resource</p></div>
+                                <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="">
+                                <input type="button" class="button oercurr-resource-selector-button" value="Select Resource">
+                              </div>
                             </div>
-                        </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-5">
+                      <div class="checkbox pull-right">
+                          <label>
+                              <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="<?php echo esc_attr($prType) ?> ">
+                              <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
+                              <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
+                              Sensitive Material
+                          </label>
+                      </div>
+                  </div>
+              </div>
+      <?php        
+      //TEXTBOX FIELD TYPE
+      }else{
+      ?>
+              <div class="card col card-default oercurr-primary-resource-element-wrapper" id="oercurr-primary-resource-element-wrapper-<?php echo esc_attr($totalElements) ?>">
+                  <div class="card-header">
+                      <h3 class="card-title oercurr-module-title">
+                          Texbox
+                          <span class="oercurr-sortable-handle">
+                              <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
+                              <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
+                          </span>
+                          <span class="btn btn-danger btn-sm oercurr-remove-source"
+                                title="Delete"
+                          ><i class="fa fa-trash"></i> </span>
+                      </h3>
+                  </div>
+                  <div class="card-body">
+                      <div class="form-group">
                           <div class="row">
-                              <div class="col-md-6">
-                                  <div class="form-group">
-                                      <div class="oer_curriculum_primary_resources_image_wrappper">
-                                        <label>Resource</label>
-                                        <div class="oer_curriculum_primary_resources_image">
-                                          <div class="oer_curriculum_primary_resources_image_preloader" style="display:none;">
-                                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
-                                          </div>
-                                          <div class="oer_curriculum_primary_resources_image_display">
-                                            <div class="oer_curriculum_primary_resources_display"><p>You have not selected a resource</p></div>
-                                            <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="">
-                                            <input type="button" class="button oercurr-resource-selector-button" value="Select Resource">
-                                          </div>
-                                        </div>
-                                      </div>';
-
-                                      /*
-                                      <select name="oer_curriculum_primary_resources[resource][]" class="form-control">';
-                                          $content .= oercurr_primary_resource_dropdown();
-                                      </select>
-                                      */
-
-                     $content .= '</div>
+                              <div class="col-md-7">
+                                  <label>Thumbnail Image</label>
+                                  <div class="oer_primary_resource_thumbnail_holder"></div>
+                                  <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                  <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
                               </div>
                               <div class="col-md-5">
                                   <div class="checkbox pull-right">
                                       <label>
-                                          <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="' . $prType .'">
+                                          <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="">
+                                          <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="<?php echo esc_attr($prType) ?>">
                                           <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
                                           <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
                                           Sensitive Material
                                       </label>
                                   </div>
                               </div>
-                          </div>';
-      //TEXTBOX FIELD TYPE
-      }else{
-        $content = '<div class="card col card-default oercurr-primary-resource-element-wrapper" id="oercurr-primary-resource-element-wrapper-' . $totalElements . '">
-                        <div class="card-header">
-                            <h3 class="card-title oercurr-module-title">
-                                Texbox
-                                <span class="oercurr-sortable-handle">
-                                    <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
-                                    <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
-                                </span>
-                                <span class="btn btn-danger btn-sm oercurr-remove-source"
-                                      title="Delete"
-                                ><i class="fa fa-trash"></i> </span>
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-7">
-                                        <label>Thumbnail Image</label>
-                                        <div class="oer_primary_resource_thumbnail_holder"></div>
-                                        <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
-                                        <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="checkbox pull-right">
-                                            <label>
-                                                <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="">
-                                                <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="'.$prType.'">
-                                                <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
-                                                <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
-                                                Sensitive Material
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>';
+                          </div>
+                      </div>
+                      
+      <?php
       }
-            $content .= '<div class="form-group">
-                              <label>Title</label>
-                              <input type="text"
-                              class="form-control"
-                              name="oer_curriculum_primary_resources[title][]"
-                              placeholder="Resource Title"
-                              value="">';
-                              ob_start(); // Start output buffer
-                              //wp_editor('',
-                              //    'oercurr-resource-teacher-' . $totalElements,
-                              //    $settings = array(
-                              //        'textarea_name' => 'oer_curriculum_primary_resources[teacher_info][]',
-                              //        'media_buttons' => true,
-                              //        'textarea_rows' => 6,
-                              //        'drag_drop_upload' => true,
-                              //        'teeny' => true,
-                              //        'quicktags' => true,
-                              //        'tinymce' => true,
-                              //        'relative_urls' => false,
-                              //    )
-                              //);
-                          $content .= ob_get_clean();
-                          $content .= '</div>';
-                          $content .= '<div class="form-group">
-                              <label>Description</label>';
+      ?>
+      
+                      <div class="form-group">
+                          <label>Title</label>
+                          <input type="text"
+                          class="form-control"
+                          name="oer_curriculum_primary_resources[title][]"
+                          placeholder="Resource Title"
+                          value="">
+                      </div>
+                      <div class="form-group">
+                          <label>Description</label>
 
-                              //$content .= '<textarea name="oer_curriculum_primary_resources[description][]" id="oercurr-resource-student-'.$totalElements.'" cols="40"></textarea>';
-
-
+                              <?php
                               ob_start(); // Start output buffer
                               wp_editor('',
-                                  'oercurr-resource-student-' . $totalElements,
+                                  'oercurr-resource-student-' . esc_attr($totalElements),
                                   $settings = array(
                                       'textarea_name' => 'oer_curriculum_primary_resources[description][]',
                                       'media_buttons' => true,
@@ -745,15 +744,15 @@ function oercurr_add_more_prime_resource_callback() {
                                       'relative_urls' => false,
                                   )
                               );
-                              $content .= ob_get_clean();
+                              echo ob_get_clean();
+                              ?>
 
-
-                          $content .= '</div>
                       </div>
-                  </div>';
+                  </div>
+              </div>
+    <?php
 
-
-    echo $content;
+    
     exit();
 }
 
@@ -766,22 +765,17 @@ add_action('wp_ajax_nopriv_oercurr_create_module_callback', 'oercurr_create_modu
 function oercurr_create_module_callback() {
     $module_type = isset($_REQUEST['module_type']) ? sanitize_text_field($_REQUEST['module_type']) : 'editor';
     $element_id = isset($_REQUEST['row_id']) ? sanitize_text_field($_REQUEST['row_id']) : '15';
+    $_oercurr_allowed_html = oercurr_allowed_html();
 
     if ($module_type == 'editor') {
-        echo oercurr_create_dynamic_editor($element_id);
+        echo wp_kses(oercurr_create_dynamic_editor($element_id), $_oercurr_allowed_html);
         exit();
-        /* echo json_encode(
-             array(
-                 'status' => 'ok',
-                 'result' => oercurr_create_dynamic_editor($element_id)
-             )
-         );*/
     } elseif ($module_type == 'list') {
-        echo oercurr_create_dynamic_text_list($element_id);
+        echo wp_kses(oercurr_create_dynamic_text_list($element_id), $_oercurr_allowed_html);
     } elseif ($module_type == 'vocabulary') {
-        echo oercurr_create_dynamic_vocabulary_list($element_id);
+        echo wp_kses(oercurr_create_dynamic_vocabulary_list($element_id), $_oercurr_allowed_html);
     } elseif ($module_type == 'materials') {
-        echo oercurr_create_dynamic_materials_module($element_id);
+        echo wp_kses(oercurr_create_dynamic_materials_module($element_id), $_oercurr_allowed_html);
     }
     exit();
 }
@@ -826,42 +820,44 @@ function oercurr_get_resource_info_callback() {
  * @return string
  */
 function oercurr_create_dynamic_editor($id) {
-
-    $content = '<div class="card col card-default oercurr-element-wrapper oercurr-introduction-group" id="oercurr-custom-editor-group-' . $id . '">
-                    <input type="hidden" name="oer_curriculum_order[oer_curriculum_custom_editor_' . $id . ']" class="element-order" value="' . $id . '">
-                    <div class="card-header">
-                        <h3 class="card-title oercurr-module-title">
-                            Text Editor
-                            <span class="oercurr-sortable-handle">
-                                <i class="fa fa-arrow-down reorder-down hide" aria-hidden="true"></i>
-                                <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
-                            </span>
-                            <span class="btn btn-danger btn-sm oercurr-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label>Title</label>
-                            <input type="text" name="oer_curriculum_custom_editor_'. $id.'[title]" maxlength="512" class="form-control" placeholder="Text Module Title" />
-                        </div>
-                        <div class="form-group">';
-                        ob_start(); // Start output buffer
-                        wp_editor('',
-                            'oercurr-custom-editor-' . $id,
-                            $settings = array(
-                                'textarea_name' => 'oer_curriculum_custom_editor_' . $id . '[description]',
-                                'media_buttons' => true,
-                                'textarea_rows' => 10,
-                                'drag_drop_upload' => true,
-                                'teeny' => true,
-                                'relative_urls' => false,
-                            )
-                        );
-    $content .= ob_get_clean();
-    $content .= '</div></div>
-                </div>';
-
-    return $content;
+ob_start(); // Start output buffer
+    ?>
+    <div class="card col card-default oercurr-element-wrapper oercurr-introduction-group" id="oercurr-custom-editor-group-<?php echo esc_attr($id) ?>">
+        <input type="hidden" name="oer_curriculum_order[oer_curriculum_custom_editor_<?php echo esc_attr($id) ?>]" class="element-order" value="<?php echo esc_attr($id) ?>">
+        <div class="card-header">
+            <h3 class="card-title oercurr-module-title">
+                Text Editor
+                <span class="oercurr-sortable-handle">
+                    <i class="fa fa-arrow-down reorder-down hide" aria-hidden="true"></i>
+                    <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                </span>
+                <span class="btn btn-danger btn-sm oercurr-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" name="oer_curriculum_custom_editor_<?php echo esc_attr($id) ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" />
+            </div>
+            <div class="form-group">
+            <?php  
+            wp_editor('',
+                'oercurr-custom-editor-' . esc_attr($id),
+                $settings = array(
+                    'textarea_name' => 'oer_curriculum_custom_editor_' . esc_attr($id) . '[description]',
+                    'media_buttons' => true,
+                    'textarea_rows' => 10,
+                    'drag_drop_upload' => true,
+                    'teeny' => true,
+                    'relative_urls' => false,
+                )
+            );
+            ?>
+            </div>
+        </div>
+    </div>
+    <?php
+    return ob_get_clean();
 }
 
 /**
@@ -870,41 +866,44 @@ function oercurr_create_dynamic_editor($id) {
  * @return string
  */
 function oercurr_create_dynamic_text_list($id) {
-    $content = '<div class="card col card-default oercurr-element-wrapper" id="oercurr-text-list-group' . $id . '">
-                    <input type="hidden" name="oer_curriculum_order[oer_curriculum_custom_text_list_' . $id . ']" class="element-order" value="' . $id . '">
-                    <div class="card-header">
-                        <h3 class="card-title oercurr-module-title">
-                            Text List
-                            <span class="oercurr-sortable-handle">
-                                <i class="fa fa-arrow-down reorder-down hide" aria-hidden="true"></i>
-                                <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
-                            </span>
-                            <span class="btn btn-danger btn-sm oercurr-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="oercurr-text-list-row" id="oercurr-text-list-row' . $id . '">
-                                <div class="col-md-9">
-                                    <div class="form-group">
-                                        <input type="text"
-                                               class="form-control"
-                                               name="oer_curriculum_custom_text_list_' . $id . '[]"
-                                        >
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-                                    <button type="button"
-                                            class="btn btn-danger oercurr-remove-text-list"
-                                            disabled="disabled"
-                                    ><i class="fa fa-trash"></i> </button>
-                                </div>
+    ob_start(); // Start output buffer
+    ?>
+        <div class="card col card-default oercurr-element-wrapper" id="oercurr-text-list-group<?php echo esc_attr($id) ?>">
+            <input type="hidden" name="oer_curriculum_order[oer_curriculum_custom_text_list_<?php echo esc_attr($id) ?>]" class="element-order" value="<?php echo esc_attr($id) ?>">
+            <div class="card-header">
+                <h3 class="card-title oercurr-module-title">
+                    Text List
+                    <span class="oercurr-sortable-handle">
+                        <i class="fa fa-arrow-down reorder-down hide" aria-hidden="true"></i>
+                        <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                    </span>
+                    <span class="btn btn-danger btn-sm oercurr-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="oercurr-text-list-row" id="oercurr-text-list-row<?php echo esc_attr($id) ?>">
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <input type="text"
+                                       class="form-control"
+                                       name="oer_curriculum_custom_text_list_<?php echo esc_attr($id) ?>[]"
+                                >
                             </div>
                         </div>
+                        <div class="col-md-1">
+                            <button type="button"
+                                    class="btn btn-danger oercurr-remove-text-list"
+                                    disabled="disabled"
+                            ><i class="fa fa-trash"></i> </button>
+                        </div>
                     </div>
-                </div>';
+                </div>
+            </div>
+        </div>
 
-    return $content;
+    <?php
+    return ob_get_clean();
 }
 
 /**
@@ -913,32 +912,34 @@ function oercurr_create_dynamic_text_list($id) {
  * @return string
  */
 function oercurr_create_dynamic_vocabulary_list($id) {
-    $content = '<div class="card col card-default oercurr-element-wrapper" id="oercurr-vocabulary-list-group' . $id . '">
-                    <input type="hidden" name="oer_curriculum_order[oer_curriculum_vocabulary_list_title_' . $id . ']" class="element-order" value="' . $id . '">
-                    <div class="card-header">
-                        <h3 class="card-title oercurr-module-title">
-                            Vocabulary List
-                            <span class="oercurr-sortable-handle">
-                                <i class="fa fa-arrow-down reorder-down hide" aria-hidden="true"></i>
-                                <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
-                            </span>
-                            <span class="btn btn-danger btn-sm oercurr-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <input type="text"
-                                   class="form-control"
-                                   name="oer_curriculum_vocabulary_list_title_' . $id . '"
-                            >
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" name="oer_curriculum_vocabulary_details_' . $id . '" rows="6"></textarea>
-                        </div>
-                    </div>
-                </div>';
-
-    return $content;
+    ob_start(); // Start output buffer
+    ?>
+        <div class="card col card-default oercurr-element-wrapper" id="oercurr-vocabulary-list-group<?php echo esc_attr($id) ?>">
+            <input type="hidden" name="oer_curriculum_order[oer_curriculum_vocabulary_list_title_<?php echo esc_attr($id) ?>]" class="element-order" value="<?php echo esc_attr($id) ?>">
+            <div class="card-header">
+                <h3 class="card-title oercurr-module-title">
+                    Vocabulary List
+                    <span class="oercurr-sortable-handle">
+                        <i class="fa fa-arrow-down reorder-down hide" aria-hidden="true"></i>
+                        <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                    </span>
+                    <span class="btn btn-danger btn-sm oercurr-remove-module" title="Delete"><i class="fa fa-trash"></i> </span>
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           name="oer_curriculum_vocabulary_list_title_<?php echo esc_attr($id) ?>"
+                    >
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" name="oer_curriculum_vocabulary_details_<?php echo esc_attr($id) ?>" rows="6"></textarea>
+                </div>
+            </div>
+        </div>
+    <?php
+    return ob_get_clean();
 }
 
 if (! function_exists('oercurr_create_dynamic_materials_module')) {
@@ -948,25 +949,28 @@ if (! function_exists('oercurr_create_dynamic_materials_module')) {
      * @return string
      */
     function oercurr_create_dynamic_materials_module($id) {
-        $content = '<div class="card col card-default oercurr-element-wrapper" id="oercurr-materials-'.$id.'">
-                        <input type="hidden" name="oer_curriculum_order[oer_curriculum_oer_materials_list_'.$id.']" class="element-order" value="'.$id.'">
-                        <div class="card-header">
-                            <h3 class="card-title oercurr-module-title">
-                                Materials
-                                <span class="oercurr-sortable-handle">
-                                    <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
-                                    <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
-                                </span>
-                                <span class="btn btn-danger btn-sm oercurr-remove-module" title="Delete"><i class="fa fa-trash"></i></span>
-                            </h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="panel-group oercurr-materials-container" id="oercurr-materials-container">
-                            </div>
-                            <button type="button" data-type="custom" data-name="oer_curriculum_oer_materials_list_'.$id.'" class="btn btn-default oercurr-add-materials"><i class="fa fa-plus"></i> Add Materials</button>
-                        </div>
-                    </div>';
-        return $content;
+        ob_start(); // Start output buffer
+        ?>
+            <div class="card col card-default oercurr-element-wrapper" id="oercurr-materials-<?php echo esc_attr($id) ?>">
+                <input type="hidden" name="oer_curriculum_order[oer_curriculum_oer_materials_list_<?php echo esc_attr($id) ?>]" class="element-order" value="<?php echo esc_attr($id) ?>">
+                <div class="card-header">
+                    <h3 class="card-title oercurr-module-title">
+                        Materials
+                        <span class="oercurr-sortable-handle">
+                            <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
+                            <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
+                        </span>
+                        <span class="btn btn-danger btn-sm oercurr-remove-module" title="Delete"><i class="fa fa-trash"></i></span>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="panel-group oercurr-materials-container" id="oercurr-materials-container">
+                    </div>
+                    <button type="button" data-type="custom" data-name="oer_curriculum_oer_materials_list_<?php echo esc_attr($id) ?>" class="btn btn-default oercurr-add-materials"><i class="fa fa-plus"></i> Add Materials</button>
+                </div>
+            </div>
+        <?php
+        return ob_get_clean();
     }
 }
 /**
@@ -1089,28 +1093,31 @@ function oercurr_add_text_feature_callback() {
         $label_id = "oer_curriculum_additional_sections[label][]";
         $editor_id = "oer_curriculum_additional_sections[editor][]";
     }
-    $content = '<div class="card col card-default oercurr-section-element-wrapper" id="oer_curriculum_section_element_wrapper-'.$element_id.'">';
-    $content .= '   <div class="card-header">';
-    $content .= '       <h3 class="card-title oercurr-module-title">';
-    $content .=             __("Section", OERCURR_CURRICULUM_SLUG);
-    $content .= '           <span class="oercurr-sortable-handle">';
-    $content .= '               <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>';
-    $content .= '               <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>';
-    $content .= '           </span>';
-    $content .= '           <button type="button" class="btn btn-danger btn-sm oercurr-remove-section" title="Delete"><i class="fa fa-trash"></i> </button>';
-    $content .= '       </h3>';
-    $content .= '   </div>';
-    $content .= '   <div class="card-body">';
-    $content .= '       <div class="form-group">';
-    $content .= '           <input type="text" class="form-control" name="'.$label_id.'" id="'.$label_id.'" placeholder="Text Title">';
-    $content .= '       </div>';
-    $content .= '       <div class="form-group">';
-    $content .= '           <div class="text-editor-group">';
+    ob_start(); // Start output buffer
+    ?>
+    <div class="card col card-default oercurr-section-element-wrapper" id="oer_curriculum_section_element_wrapper-<?php echo esc_attr($element_id) ?>">
+       <div class="card-header">
+           <h3 class="card-title oercurr-module-title">
+               <?php esc_html_e("Section", OERCURR_CURRICULUM_SLUG); ?>
+               <span class="oercurr-sortable-handle">
+                   <i class="fa fa-arrow-down section-reorder-down" aria-hidden="true"></i>
+                   <i class="fa fa-arrow-up section-reorder-up" aria-hidden="true"></i>
+               </span>
+               <button type="button" class="btn btn-danger btn-sm oercurr-remove-section" title="Delete"><i class="fa fa-trash"></i> </button>
+           </h3>
+       </div>
+       <div class="card-body">
+           <div class="form-group">
+               <input type="text" class="form-control" name="<?php echo esc_attr($label_id) ?>" id="<?php echo esc_attr($label_id) ?>" placeholder="Text Title">
+           </div>
+           <div class="form-group">
+               <div class="text-editor-group">
+                            <?php
                             ob_start(); // Start output buffer
                             wp_editor('',
-                                $ed_id . $element_id,
+                                esc_attr($ed_id) . esc_attr($element_id),
                                 $settings = array(
-                                    'textarea_name' => $editor_id,
+                                    'textarea_name' => esc_attr($editor_id),
                                     'media_buttons' => true,
                                     'textarea_rows' => 10,
                                     'drag_drop_upload' => true,
@@ -1118,12 +1125,13 @@ function oercurr_add_text_feature_callback() {
                                     'relative_urls' => false,
                                 )
                             );
-    $content .=             ob_get_clean();
-    $content .= '           </div>';
-    $content .= '       </div>';
-    $content .= '   </div>';
-    $content .= '</div>';
-    echo $content;
+                            echo ob_get_clean();
+                            ?>
+               </div>
+           </div>
+       </div>
+    </div>
+    <?php
     exit();
 }
 
@@ -1163,4 +1171,4 @@ function oercurr_settings_callback_func(){
     include_once( OERCURR_CURRICULUM_PATH."includes/oer-curriculum-settings.php" );
 }
 
-add_filter( 'wp_default_editor', function(){return "html";} );
+add_filter( 'wp_default_editor', function(){return "tinymce";} );

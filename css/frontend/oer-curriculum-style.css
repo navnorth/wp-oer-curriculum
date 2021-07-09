@@ -1321,3 +1321,6 @@ img.attachment-inquiry-set-featured {
   margin:0px auto;
 }
 
+.collapse.show{
+  display:block !important;
+}

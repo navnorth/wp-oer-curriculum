@@ -29,9 +29,9 @@
                   foreach ($posts as $post) {
                       ?>
                       <li>
-                      <label class="oercurr-resource-selector-tag-p" data-postid="<?php echo $post->ID; ?>" data-search-term="<?php echo strtolower($post->post_title); ?>">
-                      <input name="oercurr-resource-selector-rad" title="<?php echo $post->post_title; ?>" type="radio" value="<?php echo $post->post_title; ?>" checked />
-                               <?php echo  $post->post_title; ?>
+                      <label class="oercurr-resource-selector-tag-p" data-postid="<?php echo esc_attr($post->ID); ?>" data-search-term="<?php echo strtolower(esc_html($post->post_title)); ?>">
+                      <input name="oercurr-resource-selector-rad" title="<?php echo esc_attr($post->post_title); ?>" type="radio" value="<?php echo esc_attr($post->post_title); ?>" checked />
+                               <?php echo  esc_html($post->post_title); ?>
                          <span class="relatedResourceSelectorImage dashicons dashicons-yes"></span>
                       </label>
                       </li>
@@ -42,7 +42,6 @@
             </ul>
           </div>
           <div class="oercurr-resource-selector-nav-wrapper">
-              <!--<input type="hidden" name="oercurr-resource-selector-prev-selected" value='<?php echo $post->post_parent; ?>'/> -->
               <a href="#" class="oercurr-resource-selector-select">Select</a>
           </div>
           <div class="oercurr-resource-selector-search-close">

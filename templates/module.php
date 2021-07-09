@@ -114,7 +114,7 @@ if (isset($modules[$current_index+1])){
     $next_url = $back_url."/module/".sanitize_title($next_resource['title']);
 }
 ?>
-<div class="oercurr-nav-block"><a class="back-button" href="<?php echo esc_url($back_url); ?>"><i class="fas fa-arrow-left"></i><?php echo $curriculum_details->post_title; ?></a></div>
+<div class="oercurr-nav-block"><a class="back-button" href="<?php echo esc_url($back_url); ?>"><i class="fas fa-arrow-left"></i><?php echo esc_html($curriculum_details->post_title); ?></a></div>
 <div class="row ps-details-row">
     <?php
     $resource_meta = null;
@@ -122,19 +122,19 @@ if (isset($modules[$current_index+1])){
     ?>
     <div class="ps-details col-md-12 col-sm-12">
         <div class="ps-info">
-            <h1 class="ps-info-title"><?php echo $module_title; ?></h1>
+            <h1 class="ps-info-title"><?php echo esc_html($module_title); ?></h1>
             <div class="ps-info-description">
-                <?php echo $module_content; ?>
+                <?php echo esc_html($module_content); ?>
             </div>
         </div>
     </div>
 </div>
 <div class="ps-related-sources oercurr-primary-sources-row">
-    <div class="oercurr-ps-nav-left-block <?php echo $oer_curriculum_prev_class; ?> col-md-6 col-sm-12">
+    <div class="oercurr-ps-nav-left-block <?php echo esc_attr($oer_curriculum_prev_class); ?> col-md-6 col-sm-12">
         <?php if (!empty($prev_resource)):
         $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($prev_resource), 'resource-thumbnail' );
         ?>
-        <a class="oercurr-ps-nav-left" href="<?php echo esc_url($prev_url); ?>" data-activetab="" data-id="<?php echo $index-1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-prevsource="<?php echo $primary_resources['resource'][$index-1]; ?>">
+        <a class="oercurr-ps-nav-left" href="<?php echo esc_url($prev_url); ?>" data-activetab="" data-id="<?php echo esc_html($index)-1; ?>" data-count="<?php echo esc_attr(count($primary_resources['resource'])); ?>" data-curriculum="<?php echo esc_attr($curriculum_id); ?>" data-prevsource="<?php echo esc_attr($primary_resources['resource'][$index-1]); ?>">
             <span class="col-md-3">&nbsp;</span>
             <span class="nav-media-icon"><i class="fas fa-arrow-left fa-2x"></i></span>
             <span class="nav-media-image col-md-8">
@@ -145,7 +145,7 @@ if (isset($modules[$current_index+1])){
                     else
                         $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($prev_resource['title']));
                     ?>
-                    <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
+                    <div class="resource-thumbnail" style="background: url('<?php echo esc_url($resource_img) ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
                     <?php else: ?>
                     <div class="resource-thumbnail" style="background: rgba(204,97,12,.1); background-size:cover; display:flex; align-items:center; justify-content: center;"><i class="fa fa-file-text-o fa-4x"></i></div>
                     <?php endif; ?>
@@ -153,26 +153,26 @@ if (isset($modules[$current_index+1])){
                 <span class="oercurr-nav-resource-title col-md-8">
                     <?php
                     if (is_object($prev_resource))
-                        echo $prev_resource->post_title;
+                        echo esc_html($prev_resource->post_title);
                     else
-                        echo $prev_resource['title'];
+                        echo esc_html($prev_resource['title']);
                     ?>
                 </span>
             </span>
         </a>
         <?php endif; ?>
     </div>
-    <div class="oercurr-ps-nav-right-block <?php echo $oer_curriculum_next_class; ?> col-md-6 col-sm-12">
+    <div class="oercurr-ps-nav-right-block <?php echo esc_attr($oer_curriculum_next_class); ?> col-md-6 col-sm-12">
         <?php if (!empty($next_resource)):
         $resource_img = wp_get_attachment_image_url( get_post_thumbnail_id($next_resource), 'resource-thumbnail' );
         ?>
-        <a class="oercurr-ps-nav-right" href="<?php echo esc_url($next_url); ?>" data-activetab="" data-id="<?php echo $index+1; ?>" data-count="<?php echo count($primary_resources['resource']); ?>" data-curriculum="<?php echo $curriculum_id; ?>" data-nextsource="<?php echo $primary_resources['resource'][$index+1]; ?>">
+        <a class="oercurr-ps-nav-right" href="<?php echo esc_url($next_url); ?>" data-activetab="" data-id="<?php echo esc_attr($index)+1; ?>" data-count="<?php echo esc_attr(count($primary_resources['resource'])); ?>" data-curriculum="<?php echo esc_attr($curriculum_id); ?>" data-nextsource="<?php echo esc_attr($primary_resources['resource'][$index+1]); ?>">
             <span class="nav-media-image col-md-8">
                 <span class="nav-image-thumbnail col-md-4">
                     <?php if (!empty($resource_img)):
                     $ps_url = site_url($root_slug."/".sanitize_title($post->post_name)."/module/".sanitize_title($next_resource['title']));
                     ?>
-                    <div class="resource-thumbnail" style="background: url('<?php echo $resource_img ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
+                    <div class="resource-thumbnail" style="background: url('<?php echo esc_html($resource_img) ?>') no-repeat center rgba(204,97,12,.1); background-size:cover;"></div>
                     <?php else: ?>
                     <div class="resource-thumbnail" style="background: rgba(204,97,12,.1); background-size:cover; display:flex; align-items:center; justify-content: center;"><i class="fa fa-file-text-o fa-4x"></i></div>
                     <?php endif; ?>
@@ -180,9 +180,9 @@ if (isset($modules[$current_index+1])){
                 <span class="oercurr-nav-resource-title col-md-8">
                     <?php
                     if (is_object($next_resource))
-                        echo $next_resource->post_title;
+                        echo esc_html($next_resource->post_title);
                     else
-                        echo $next_resource['title'];
+                        echo esc_html($next_resource['title']);
                     ?>
                 </span>
             </span>

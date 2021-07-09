@@ -22,14 +22,6 @@ if( ! function_exists('oercurr_show_selected')) {
     }
 }
 
-if(!function_exists('oercurr_prepare_subject_areas')) {
-    function oercurr_prepare_subject_areas($terms) {
-        foreach ($terms as $key => $term) {
-            //echo "<pre>"; echo $key;print_r($term);
-        }
-    }
-}
-
 if (! function_exists('oercurr_addSchemeToUrl')) {
     function oercurr_addSchemeToUrl($url) {
         if (strpos($url, '://') === false) {
@@ -53,9 +45,9 @@ if (! function_exists('oercurr_display_standards')) {
                 ?>
                     <li>
                         <a data-toggle="collapse"
-                           data-target="#<?php echo $coreStandardId;?>"
-                        ><?php echo $result['standard_name']?></a>
-                        <?php oercurr_children_standards($coreStandardId);?>
+                           data-target="#<?php echo esc_attr($coreStandardId); ?>"
+                        ><?php echo esc_html($result['standard_name']); ?></a>
+                        <?php esc_html(oercurr_children_standards($coreStandardId)); ?>
                     </li>
                 <?php }?>
             </ul>
@@ -72,7 +64,7 @@ if (! function_exists('oercurr_children_standards')) {
         global $wpdb;
         $results = $wpdb->get_results( $wpdb->prepare( "SELECT * from " . $wpdb->prefix. "oer_sub_standards where parent_id = %s" , $coreStandardId ) ,ARRAY_A);
         if ($results) {?>
-            <div class="collapse oercurr-standard-child-element" id="<?php echo $coreStandardId?>">
+            <div class="collapse oercurr-standard-child-element" id="<?php echo esc_attr($coreStandardId); ?>">
                 <ul>
                     <?php
                     foreach ($results as $result) {
@@ -84,17 +76,17 @@ if (! function_exists('oercurr_children_standards')) {
                             <!--Check if child standards available then get all the children standards-->
                             <?php if (!empty($isChildStandardAvailable)) {?>
                                 <a data-toggle="collapse"
-                                   data-target="#<?php echo $subStandard;?>"
-                                ><?php echo $result['standard_title']?></a>
-                                <?php oercurr_children_standards($subStandard);?>
+                                   data-target="#<?php echo esc_attr($subStandard); ?>"
+                                ><?php echo esc_html($result['standard_title']); ?></a>
+                                <?php esc_html(oercurr_children_standards($subStandard)); ?>
                             <?php }?>
 
                             <!--Check if notations available for standard then display -->
                             <?php if (!empty($isNotationsAvailable)) {?>
                                 <a data-toggle="collapse"
-                                   data-target="#<?php echo $subStandard;?>"
-                                ><?php echo $result['standard_title']?></a>
-                                <?php oercurr_get_standard_notations($subStandard);?>
+                                   data-target="#<?php echo esc_attr($subStandard); ?>"
+                                ><?php echo esc_html($result['standard_title']); ?></a>
+                                <?php esc_html(oercurr_get_standard_notations($subStandard)); ?>
                             <?php }?>
                         </li>
 
@@ -116,7 +108,7 @@ if (! function_exists('oercurr_get_standard_notations')) {
         global $post;
         $results = $wpdb->get_results( $wpdb->prepare( "SELECT * from " . $wpdb->prefix. "oer_standard_notation where parent_id = %s" , $parentId ) , ARRAY_A);
         if ($results) {?>
-            <div class="collapse oercurr-standard-child-element" id="<?php echo $parentId;?>">
+            <div class="collapse oercurr-standard-child-element" id="<?php echo esc_attr($parentId); ?>">
                 <ul class="oer_curriculum_notations">
                     <?php
                     // Check if data already saved for current editing post
@@ -135,17 +127,17 @@ if (! function_exists('oercurr_get_standard_notations')) {
                                 <input type="checkbox"
                                        name="oer_curriculum_oer_notations[]"
                                        class="oercurr-sck"
-                                       id="oercurr-standard-check-<?php echo $notationId;?>"
-                                       value="<?php echo $notationId;?>"
+                                       id="oercurr-standard-check-<?php echo esc_attr($notationId); ?>"
+                                       value="<?php echo esc_attr($notationId); ?>"
                                        <?php echo (in_array($notationId, $post_standards_array) ? 'checked="checked"' : "")?>
                                 >
-                                <label for="oercurr-standard-check-<?php echo $notationId;?>" class="oercurr-scl"><?php echo $result['standard_notation'];?></label>
-                                <div class="oercurr-notation-description"><?php echo $result['description'];?></div>
+                                <label for="oercurr-standard-check-<?php echo esc_attr($notationId); ?>" class="oercurr-scl"><?php echo esc_html($result['standard_notation']); ?></label>
+                                <div class="oercurr-notation-description"><?php echo esc_html($result['description']); ?></div>
                             <?php } else {?>
-                                <a data-toggle="collapse" data-target="#<?php echo $notationId;?>" ><?php echo $result['standard_notation']?></a>
-                                <div><?php echo $result['description'];?></div>
+                                <a data-toggle="collapse" data-target="#<?php echo esc_attr($notationId); ?>" ><?php echo esc_html($result['standard_notation']); ?></a>
+                                <div><?php echo esc_html($result['description']); ?></div>
                             <?php }?>
-                            <?php oercurr_get_standard_notations($notationId);?>
+                            <?php esc_html(oercurr_get_standard_notations($notationId)); ?>
                         </li>
                     <?php }?>
                 </ul>
@@ -232,11 +224,11 @@ if (! function_exists('oercurr_get_standard_notations_from_ids')) {
             if (!empty($results)) {
                 foreach ($results as $result) {?>
                     <span class="selected-standard-pill">
-                        <?php echo $result['description'];?>
+                        <?php echo esc_html($result['description']); ?>
                         <?php if ($admin) {?>
                             <a href="javascript:void(0)"
                                class="remove-ss-pill"
-                               data-id="standard_notation-<?php echo $result['id']?>"
+                               data-id="standard_notation-<?php echo esc_attr($result['id']); ?>"
                             ><i class="fa fa-times"></i></a>
                         <?php }?>
                     </span>
@@ -261,11 +253,11 @@ if (! function_exists('oercurr_get_standard_notations_from_ids')) {
             if (!empty($results)) {
                 foreach ($results as $result) {?>
                     <span class="selected-standard-pill">
-                        <?php echo $result['standard_title'];?>
+                        <?php echo esc_html($result['standard_title']); ?>
                         <?php if ($admin) {?>
                             <a href="javascript:void(0)"
                                class="remove-ss-pill"
-                               data-id="sub_standards-<?php echo $result['id']?>"
+                               data-id="sub_standards-<?php echo esc_attr($result['id']); ?>"
                             ><i class="fa fa-times"></i></a>
                         <?php }?>
                     </span>
@@ -299,25 +291,25 @@ if (! function_exists('oercurr_get_file_type_from_url')) {
         $file_type = strtolower(end($oer_urls));
         if(in_array($file_type, ['jpg', 'jpeg', 'gif', 'png'])) {
             $response['title'] = 'Image';
-            $response['icon'] = '<i class="fa fa-file-image '.$class.'"></i>';
+            $response['icon'] = '<i class="fa fa-file-image '.esc_attr($class).'"></i>';
         } elseif($file_type == 'pdf') {
             $response['title'] = 'PDF';
-            $response['icon'] = '<i class="fa fa-file-pdf '.$class.'"></i>';
+            $response['icon'] = '<i class="fa fa-file-pdf '.esc_attr($class).'"></i>';
         } elseif(in_array($file_type, ['txt'])) {
             $response['title'] = 'Plain Text';
-            $response['icon'] = '<i class="fa fa-file-alt '.$class.'"></i>';
+            $response['icon'] = '<i class="fa fa-file-alt '.esc_attr($class).'"></i>';
         } elseif(in_array($file_type, ['7z', 'zip', 'rar'])) {
             $response['title'] = 'Archive';
-            $response['icon'] = '<i class="fa fa-file-archive '.$class.'"></i>';
+            $response['icon'] = '<i class="fa fa-file-archive '.esc_attr($class).'"></i>';
         } elseif(in_array($file_type, ['docx', 'doc'])) {
             $response['title'] = 'Microsoft Document';
-            $response['icon'] = '<i class="fa fa-file-word '.$class.'"></i>';
+            $response['icon'] = '<i class="fa fa-file-word '.esc_attr($class).'"></i>';
         } elseif(in_array($file_type, ['xls'])) {
             $response['title'] = 'Microsoft Excel';
-            $response['icon'] = '<i class="fa fa-file-excel '.$class.'"></i>';
+            $response['icon'] = '<i class="fa fa-file-excel '.esc_attr($class).'"></i>';
         } elseif(in_array($file_type, ['ppt'])) {
             $response['title'] = 'Microsoft Powerpoint';
-            $response['icon'] = '<i class="fa fa-file-powerpoint '.$class.'"></i>';
+            $response['icon'] = '<i class="fa fa-file-powerpoint '.esc_attr($class).'"></i>';
         }
         return $response;
     }
@@ -359,7 +351,7 @@ if (! function_exists('oercurr_primary_resource_dropdown')){
         
         if (count($posts)) {
             foreach ($posts as $post) {
-                $resource_options .= '<option value="' . $post->post_title . '" ' . (($resource == $post->post_title) ? 'selected="selected"' : "") . '>' . $post->post_title . '</option>';
+                $resource_options .= '<option value="' . esc_attr($post->post_title) . '" ' . (($resource == $post->post_title) ? 'selected="selected"' : "") . '>' . esc_html($post->post_title) . '</option>';
             }
         }
         return $resource_options;
@@ -559,64 +551,64 @@ if (!function_exists('oercurr_get_meta_label')){
             $label = "";
             switch ($key){
             case "oer_curriculum_authors":
-                $label = __("Author", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Author", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_primary_resources":
-                $label = __("Primary Resources", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Primary Resources", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_iq":
-                $label = __("Investigative Question", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Investigative Question", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_objective":
-                $label = __("Related Instructional Objectives (SWBAT...)", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Related Instructional Objectives (SWBAT...)", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_custom_editor_historical_background":
-                $label = __("Historical Background", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Historical Background", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_download_copy":
-                $label = __("Download Copy", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Download Copy", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_download_copy_document":
-                $label = __("Download Copy Document", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Download Copy Document", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_curriculum":
-                $label = __("Related Curriculum", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Related Curriculum", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_curriculum_1":
-                $label = __("Related Curriculum 1", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Related Curriculum 1", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_curriculum_2":
-                $label = __("Related Curriculum 2", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Related Curriculum 2", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_related_curriculum_3":
-                $label = __("Related Curriculum 3", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Related Curriculum 3", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_required_materials":
-                $label = __("Required Equipment Materials", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Required Equipment Materials", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_grades":
-                $label = __("Grade Level", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Grade Level", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_oer_materials":
-                $label = __("Materials", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Materials", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_type":
-                $label = __("Type", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Type", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_type_other":
-                $label = __("Other Type", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Other Type", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_age_levels":
-                $label = __("Appropriate Age Levels", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Appropriate Age Levels", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_suggested_instructional_time":
-                $label = __("Suggested Instructional Time", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Suggested Instructional Time", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_standards":
-                $label = __("Standards", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Standards", OERCURR_CURRICULUM_SLUG);
                 break;
             case "oer_curriculum_additional_sections":
-                $label = __("Additional Sections", OERCURR_CURRICULUM_SLUG);
+                $label = esc_html__("Additional Sections", OERCURR_CURRICULUM_SLUG);
                 break;
         }
         return $label;
@@ -680,7 +672,7 @@ if (! function_exists('oercurr_get_curriculum_type')){
             unset($types[array_search("Other", $types)]);
         }
         foreach ($types as $type){
-            $html .= '<option value="'.$type.'" '.selected($type,$value,false).'>'.$type.'</option>';
+            $html .= '<option value="'.esc_attr($type).'" '.esc_attr(selected($type,$value,false)).'>'.esc_html($type).'</option>';
         }
         return $html;
     }
@@ -751,6 +743,27 @@ if (!function_exists('oercurr_add_setting_options')){
     function oercurr_add_setting_options($key,$typ,$val) {
         update_option($key.'_curmetset_'.$typ,$val);
     }
+}
+
+function oercurr_grades_allowed_html(){
+  $allowed_tags = array(
+    'div' => array(
+			'class' => array(),
+			'title' => array(),
+			'style' => array(),
+		),
+    'input' => array(
+      'type' => array(),
+      'name' => array(),
+      'value' => array(),
+      'id' => array(),
+      'checked' => array(),
+    ),
+    'label' => array(
+      'class' => array(),
+      'for' => array(),
+    ),
+  );
 }
 
 function oercurr_allowed_html() {

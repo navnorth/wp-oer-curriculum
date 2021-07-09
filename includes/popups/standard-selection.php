@@ -16,7 +16,7 @@
                                    class="form-control"
                                    id="oerLpSearchStandardInput"
                                    placeholder="Search Standards"
-                                   data-post="<?php echo $post->ID;?>"
+                                   data-post="<?php echo esc_attr($post->ID);?>"
                             >
                             <div class="input-group-addon"><i class="fa fa-search"></i> </div>
                         </div>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="lpSelectStandardSaveBtn" class="btn btn-default btn-sm" data-dismiss="modal">Select</button>
+                <button type="button" id="lpSelectStandardSaveBtn" class="button btn-default btn-sm" data-dismiss="modal">Select</button>
             </div>
         </div>
     </div>
