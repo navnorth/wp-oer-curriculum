@@ -235,29 +235,21 @@ function oercurr_grade_level_callback() {
 function oercurr_download_copy_callback() {
     global $post;
     $post_meta_data = get_post_meta($post->ID );
-    $icon = null;
 
     // Upload document
     $oer_curriculum_download_copy_document = (isset($post_meta_data['oer_curriculum_download_copy_document'][0]) ? $post_meta_data['oer_curriculum_download_copy_document'][0] : '');
-    // Icon
-    if (!empty($oer_curriculum_download_copy_document)) {
-        $icon = oercurr_get_file_type_from_url($oer_curriculum_download_copy_document);
-        $icon = $icon['icon'];
-    } else {
-        ?><i class="fa fa-upload"></i><?php
-    }
     ?><div class="form-group"><?php
     ?><div class="input-group full-width"><?php
     ?><input type="hidden" class="form-control" name="oer_curriculum_download_copy_document" placeholder="Select Document" value="<?php echo esc_url($oer_curriculum_download_copy_document) ?>"><?php
     if (!empty($oer_curriculum_download_copy_document)){
       ?>
         <div class="oercurr-selected-section"><a href="<?php echo esc_url($oer_curriculum_download_copy_document) ?>" target="_blank"><?php echo esc_url($oer_curriculum_download_copy_document) ?></a> <span class="oercurr-remove-download-copy" title="Remove copy"><i class="fas fa-trash-alt"></i></span></div>
-        <span class="oercurr-select-label oercurr-hidden">Select Document</span> <div class="input-group-addon oercurr-download-copy-icon oercurr-hidden" title="Select Material"><?php echo esc_html($icon) ?></div>
+        <span class="oercurr-select-label oercurr-hidden">Select Document</span> <div class="input-group-addon oercurr-download-copy-icon oercurr-hidden" title="Select Material"><i class="fa fa-upload"></i></div>
       <?php
     } else {
       ?>
         <div class="oercurr-selected-section oercurr-hidden"><a href="" target="_blank"></a> <span class="oercurr-remove-download-copy"><i class="fas fa-trash-alt"></i></span></div>
-        <span class="oercurr-select-label">Select Document</span> <div class="input-group-addon oercurr-download-copy-icon" title="Select Material"><?php echo esc_html($icon) ?></div>
+        <span class="oercurr-select-label">Select Document</span> <div class="input-group-addon oercurr-download-copy-icon" title="Select Material"><i class="fa fa-upload"></i></div>
       <?php
     }
     ?></div></div><?php
