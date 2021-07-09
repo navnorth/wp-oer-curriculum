@@ -1163,4 +1163,4 @@ function oercurr_settings_callback_func(){
     include_once( OERCURR_CURRICULUM_PATH."includes/oer-curriculum-settings.php" );
 }
 
-add_filter( 'wp_default_editor', function(){return "tinymce";} );
+add_filter( 'wp_default_editor', function(){return "html";} );

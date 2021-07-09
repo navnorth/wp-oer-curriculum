@@ -295,10 +295,11 @@ jQuery(document).ready(function ($) {
                 $(this).find('textarea').each(function (i,obj) {
                   var txelmid = $(obj).attr('id');
                   if (typeof txelmid !== 'undefined') {
-                    //tinymce.execCommand( 'mceRemoveEditor', false, txelmid );
-                    //tinymce.execCommand( 'mceAddEditor', false, txelmid );
+                    tinymce.execCommand( 'mceRemoveEditor', false, txelmid );
+                    tinymce.execCommand( 'mceAddEditor', false, txelmid );
                   }
                 });
+                
                 
             });
 
@@ -1167,6 +1168,10 @@ jQuery(window).load(function() {
   oercurr_RefreshSectionDeleteButtons(jQuery("#oercurr-required-materials").find('.oercurr-remove-section'));
   oercurr_RefreshSectionDeleteButtons(jQuery("#oercurr-additional-sections").find('.oercurr-remove-section'));
   oercurr_RefreshSectionDeleteButtons(jQuery("#oercurr-authors").find('.oercurr-remove-author'));
+  setTimeout(function() {
+      jQuery('.switch-tmce').trigger('click');
+  } ,1000);
+  
 });
 
 function oercurr_RefreshSectionDeleteButtons(obj){
