@@ -2179,7 +2179,12 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                  <script>
                                                  jQuery(window).load(function(){
                                                    wp.oldEditor.initialize("oercurr-required-material-section-1", {
-                                                      tinymce: true,
+                                                      tinymce: {
+                                                        plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
+                                                        toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
+                                                        //toolbar2: 'spellchecker,wp_adv,listbuttons,styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
+                                                        textareaRows : 10
+                                                      },
                                                       quicktags: true,
                                                       mediaButtons: true,
                                                       teeny: true,
@@ -2253,7 +2258,12 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                  <script>
                                                  jQuery(window).load(function(){
                                                    wp.oldEditor.initialize("oercurr-additional-section-1", {
-                                                      tinymce: true,
+                                                      tinymce: {
+                                                        plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
+                                                        toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
+                                                        //toolbar2: 'spellchecker,wp_adv,listbuttons,styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
+                                                        textareaRows : 10
+                                                      },
                                                       quicktags: true,
                                                       mediaButtons: true,
                                                       teeny: true,
