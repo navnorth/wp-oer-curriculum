@@ -761,6 +761,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                             'drag_drop_upload' => true,
                                                             'teeny' => true, 
                                                             'relative_urls' => false,
+                                                            'wpautop' => false
                                                         )
                                                     ); ?>
                                                 </div>
@@ -2018,6 +2019,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                             'drag_drop_upload' => true,
                                                             'teeny' => true, 
                                                             'relative_urls' => false,
+                                                            'wpautop' => false
                                                         )
                                                     ); ?>
                                                     
@@ -2129,6 +2131,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                 'drag_drop_upload' => true,
                                                 'teeny' => true, 
                                                 'relative_urls' => false,
+                                                'wpautop' => false
                                             )
                                         ); ?>
                 
@@ -2140,6 +2143,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {    
                             ?>
                             <!--Required Equipment Materials Module-->
+                            <?php ob_start(); // Start output buffer ?>
                             <div class="card col card-default oercurr-element-wrapper oercurr-required-materials" id="oercurr-required-materials">
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_required_materials]" class="element-order" value="<?php echo esc_attr($index); ?>">
                                 <div class="card-header">
@@ -2179,7 +2183,12 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                  <script>
                                                  jQuery(window).load(function(){
                                                    wp.oldEditor.initialize("oercurr-required-material-section-1", {
-                                                      tinymce: true,
+                                                      tinymce: {
+                                                        plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
+                                                        toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
+                                                        //toolbar2: 'spellchecker,wp_adv,listbuttons,styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
+                                                        textareaRows : 10
+                                                      },
                                                       quicktags: true,
                                                       mediaButtons: true,
                                                       teeny: true,
@@ -2189,18 +2198,22 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                  </script>
                                                  */ ?>
                                                  
+
                                                <?php
                                                wp_editor( '',
                                                    'oercurr-required-material-section-1',
                                                    $settings = array(
                                                        'textarea_name' => 'oer_curriculum_required_materials[editor][]',
                                                        'media_buttons' => true,
-                                                       'textarea_rows' => 10,
+                                                       'textarea_rows' => 6,
                                                        'drag_drop_upload' => true,
                                                        'teeny' => true, 
                                                        'relative_urls' => false,
+                                                       'wpautop' => false
                                                    )
-                                               ); ?>
+                                               ); 
+                                               ?>
+                                               
                                                </div>
                                            </div>
                                         </div>
@@ -2253,7 +2266,12 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                  <script>
                                                  jQuery(window).load(function(){
                                                    wp.oldEditor.initialize("oercurr-additional-section-1", {
-                                                      tinymce: true,
+                                                      tinymce: {
+                                                        plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
+                                                        toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
+                                                        //toolbar2: 'spellchecker,wp_adv,listbuttons,styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
+                                                        textareaRows : 10
+                                                      },
                                                       quicktags: true,
                                                       mediaButtons: true,
                                                       teeny: true,
@@ -2272,6 +2290,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                          'drag_drop_upload' => true,
                                                          'teeny' => true, 
                                                          'relative_urls' => false,
+                                                         'wpautop' => false
                                                      )
                                                  ); ?>
                                                  
@@ -2471,6 +2490,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                 'drag_drop_upload' => true,
                                                                 'teeny' => true, 
                                                                 'relative_urls' => false,
+                                                                'wpautop' => false
                                                             )
                                                         ); ?>
                                                     </div>
@@ -2600,6 +2620,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'drag_drop_upload' => true,
                                             'teeny' => true, 
                                             'relative_urls' => false,
+                                            'wpautop' => false
                                         )
                                     );
                                     ?>
@@ -2637,6 +2658,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'drag_drop_upload' => true,
                                             'teeny' => true, 
                                             'relative_urls' => false,
+                                            'wpautop' => false
                                         )
                                     );
                                     ?>
@@ -2674,6 +2696,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'drag_drop_upload' => true,
                                             'teeny' => true, 
                                             'relative_urls' => false,
+                                            'wpautop' => false
                                         )
                                     );
                                     ?>
@@ -2878,6 +2901,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                 'drag_drop_upload' => true,
                                                 'teeny' => true, 
                                                 'relative_urls' => false,
+                                                'wpautop' => false
                                             )
                                         ); ?>
                                     </div>
@@ -2952,6 +2976,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                     'drag_drop_upload' => true,
                                     'teeny' => true, 
                                     'relative_urls' => false,
+                                    'wpautop' => false
                                 )
                             ); ?>
                         </div>
@@ -3133,6 +3158,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                     'drag_drop_upload' => true,
                                                     'teeny' => true, 
                                                     'relative_urls' => false,
+                                                    'wpautop' => false
                                                 )
                                             ); ?>
                                         </div>

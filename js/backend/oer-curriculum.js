@@ -1105,7 +1105,14 @@ jQuery(document).ready(function ($) {
                 btn.remove();
                 metabox.find('button.oer_curriculum_primary_resources_thumbnail_button').text("Set Thumbnail");
             });
+        },
+        
+        switchToVisualWorkaround: function(){
+          setTimeout(function() {
+              jQuery('.switch-tmce').trigger('click');
+          } ,1000);
         }
+        
     };
     
     // Initialize all function on ready state
@@ -1142,6 +1149,7 @@ jQuery(document).ready(function ($) {
     OerCurriculum.lpTinyMCESave();
     OerCurriculum.addFeaturedImageOnResourceTextBox();
     OerCurriculum.removeFeaturedImageInResourceSelection();
+    OerCurriculum.switchToVisualWorkaround();
 });
 
 //Process Initial Setup
