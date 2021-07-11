@@ -245,7 +245,7 @@ li.oer_sbstndard div ul li {
     padding-left: 20px;
     width: 100%;
 }
-.interface-interface-skeleton__sidebar {overflow: unset !important;}
+/*.interface-interface-skeleton__sidebar {overflow: unset !important;}*/
 .oercurr-standard-search-bar .form-group .input-group {
     position: relative;
     overflow: hidden;

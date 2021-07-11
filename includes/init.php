@@ -204,14 +204,14 @@ function oercurr_grade_level_callback() {
     );
     $oer_curriculum_grades = (isset($post_meta_data['oer_curriculum_grades'][0]) ? unserialize($post_meta_data['oer_curriculum_grades'][0]) : array());
     $index = 0;
-    ?><div class="row oer_curriculum_grades"><?php
+    ?><div class="oer_curriculum_grades pt-3"><?php
     foreach ($oer_curriculum_grade_options as $key => $oer_curriculum_grade_option) {
         $index++;
         if ($index % 7 == 1){
             if ($index<7){
-                ?><div class="col-md-7 span2"><?php
+                ?><div class="px-0 col-md-7 span2"><?php
             }else{
-                ?><div class="col-md-5 span2"><?php
+                ?><div class="px-0 col-md-5 span2"><?php
             } 
         }
         ?>
