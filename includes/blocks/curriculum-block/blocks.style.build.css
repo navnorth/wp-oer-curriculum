@@ -39,8 +39,6 @@ div.oercurr-blk-wrapper {
 }
 
 .oercurr-blk-wrapper {
-	height: 100% !important;
-	max-height: 768px !important;
 	position: relative;
 	overflow-y: auto !important
 }
