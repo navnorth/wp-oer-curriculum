@@ -239,45 +239,53 @@ wp.blocks.registerBlockType('oer-curriculum/curriculum-thumbnail-block', {
 
 
         return wp.element.createElement(
-            'a',
-            { href: attributes.link, className: 'oercurr-related-block-link', rel: 'noopener noreferrer' },
+            'div',
+            { className: 'oercurr_related_block_link_wrapper' },
             wp.element.createElement(
-                'div',
-                { className: 'oercurr-related-blocks-padding' },
+                'a',
+                { href: attributes.link, className: 'oercurr-related-block-link', rel: 'noopener noreferrer' },
                 wp.element.createElement(
                     'div',
-                    { className: 'media-image' },
+                    { className: 'oercurr-related-blocks-padding' },
                     wp.element.createElement(
                         'div',
-                        { className: 'image-thumbnail' },
+                        { className: 'media-image' },
                         wp.element.createElement(
                             'div',
-                            { className: 'image-section' },
-                            wp.element.createElement('img', { src: attributes.featuredImage, alt: '', className: 'img-thumbnail-square img-responsive img-loaded' })
+                            { className: 'image-thumbnail' },
+                            wp.element.createElement(
+                                'div',
+                                { className: 'image-section' },
+                                wp.element.createElement('img', { src: attributes.featuredImage, alt: '', className: 'img-thumbnail-square img-responsive img-loaded' })
+                            )
                         )
-                    )
-                ),
-                wp.element.createElement(
-                    'div',
-                    { className: 'oercurr-related-grades' },
+                    ),
                     wp.element.createElement(
-                        'span',
-                        null,
-                        attributes.grade
-                    )
-                ),
-                wp.element.createElement('div', { className: 'custom-bg-dark custom-bg-dark-inquiry-sets' }),
-                wp.element.createElement(
-                    'div',
-                    { className: 'oercurr-related-set-description' },
+                        'div',
+                        { className: 'oercurr-related-grades' },
+                        wp.element.createElement(
+                            'span',
+                            null,
+                            attributes.grade
+                        )
+                    ),
+                    wp.element.createElement('div', { className: 'custom-bg-dark custom-bg-dark-inquiry-sets' }),
                     wp.element.createElement(
-                        'h4',
-                        null,
-                        attributes.title
+                        'div',
+                        { className: 'oercurr-related-set-description' },
+                        wp.element.createElement(
+                            'h4',
+                            null,
+                            attributes.title
+                        )
                     )
                 )
             )
         );
+        
+        
+        
+        
     }
 });
 
