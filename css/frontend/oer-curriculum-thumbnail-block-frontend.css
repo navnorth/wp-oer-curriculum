@@ -1,0 +1,21 @@
+.oercurr-related-blocks-padding { position:relative; }
+.oercurr-related-grades {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 10px;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.80);
+    line-height: 1.8em;
+}
+.custom-bg-dark-inquiry-sets { height: 15px; }
+.oercurr-related-set-description {
+    padding: 16px;
+    font-weight: 500;
+}
+.oercurr-related-set-description h4 {
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+.oercurr-related-set-description h4 a { color:#ffffff !important; white-space:nowrap; }

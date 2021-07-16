@@ -5,7 +5,8 @@
     left: 0;
     padding: 5px 10px;
     color: #ffffff;
-    background: rgba(173, 33, 82, 0.85);
+    background: rgba(0, 0, 0, 0.80);
+    line-height: 1.8em;
 }
 .custom-bg-dark-inquiry-sets { height: 15px; }
 .oercurr-related-set-description {
