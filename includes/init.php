@@ -375,13 +375,18 @@ function oercurr_save_custom_fields() {
             // Save authors data
             if (isset($_POST['oer_curriculum_authors'])) {
                 $un_sanitized_authors = $_POST['oer_curriculum_authors'];
-                $_sanitized_authors = array();
-                $_sanitized_authors['name'][0] = sanitize_text_field($un_sanitized_authors['name'][0]);
-                $_sanitized_authors['role'][0] = sanitize_text_field($un_sanitized_authors['role'][0]);
-                $_sanitized_authors['author_url'][0] = esc_url_raw($un_sanitized_authors['author_url'][0]);
-                $_sanitized_authors['institution'][0] = sanitize_text_field($un_sanitized_authors['institution'][0]);
-                $_sanitized_authors['institution_url'][0] = esc_url_raw($un_sanitized_authors['institution_url'][0]);
-                $_sanitized_authors['author_pic'][0] = esc_url_raw($un_sanitized_authors['author_pic'][0]);
+                $_sanitized_authors = array();                              
+                foreach($un_sanitized_authors as $key=>$value){
+                  foreach($value as $subkey=>$subvalue){
+                    $_sanitized_authors['name'][$subkey] = sanitize_text_field($un_sanitized_authors['name'][$subkey]);
+                    $_sanitized_authors['role'][$subkey] = sanitize_text_field($un_sanitized_authors['role'][$subkey]);
+                    $_sanitized_authors['author_url'][$subkey] = esc_url_raw($un_sanitized_authors['author_url'][$subkey]);
+                    $_sanitized_authors['institution'][$subkey] = sanitize_text_field($un_sanitized_authors['institution'][$subkey]);
+                    $_sanitized_authors['institution_url'][$subkey] = esc_url_raw($un_sanitized_authors['institution_url'][$subkey]);
+                    $_sanitized_authors['author_pic'][$subkey] = esc_url_raw($un_sanitized_authors['author_pic'][$subkey]);
+                    update_post_meta($post->ID, 'oer_curriculum_authors', $_sanitized_authors);
+                  }
+                }
                 update_post_meta($post->ID, 'oer_curriculum_authors', $_sanitized_authors);
             }
 
