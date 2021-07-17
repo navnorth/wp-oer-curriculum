@@ -1273,7 +1273,8 @@ div#tcHiddenFields {float: left;}
     clear: left;
 }
 
-.oercurr-tc-details .tc-hidden-fields .form-field ul {
+.oercurr-tc-details .tc-hidden-fields .form-field ul,
+.oercurr-tc-details .tc-hidden-fields .form-field ol {
     padding: 0px;
     margin: 0px;
     margin-bottom:10px;
