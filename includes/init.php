@@ -635,9 +635,9 @@ function oercurr_add_more_prime_resource_callback() {
           <div class="card-body">
             <div class="row">
                 <div class="col-md-7">
-                    <label>Thumbnail Image</label>
+                    <label><?php esc_html_e("Thumbnail Image",OERCURR_CURRICULUM_SLUG) ?></label>
                     <div class="oer_primary_resource_thumbnail_holder"></div>
-                    <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                    <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image"><?php esc_html_e("Set Thumbnail",OERCURR_CURRICULUM_SLUG) ?></button>
                     <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
                 </div>
             </div>
@@ -665,7 +665,7 @@ function oercurr_add_more_prime_resource_callback() {
                               <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="<?php echo esc_attr($prType) ?> ">
                               <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
                               <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
-                              Sensitive Material
+                              <?php esc_html_e("Sensitive Material",OERCURR_CURRICULUM_SLUG) ?>
                           </label>
                       </div>
                   </div>
@@ -691,9 +691,9 @@ function oercurr_add_more_prime_resource_callback() {
                       <div class="form-group">
                           <div class="row">
                               <div class="col-md-7">
-                                  <label>Thumbnail Image</label>
+                                  <label><?php esc_html_e("Thumbnail Image",OERCURR_CURRICULUM_SLUG) ?></label>
                                   <div class="oer_primary_resource_thumbnail_holder"></div>
-                                  <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                  <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image"><?php esc_html_e("Set Thumbnail",OERCURR_CURRICULUM_SLUG) ?></button>
                                   <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
                               </div>
                               <div class="col-md-5">
@@ -703,7 +703,7 @@ function oercurr_add_more_prime_resource_callback() {
                                           <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="<?php echo esc_attr($prType) ?>">
                                           <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
                                           <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
-                                          Sensitive Material
+                                          <?php esc_html_e("Sensitive Material",OERCURR_CURRICULUM_SLUG) ?>
                                       </label>
                                   </div>
                               </div>

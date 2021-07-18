@@ -449,7 +449,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             <button type="button"
                                                     id="oercurr-add-more-author"
                                                     class="btn btn-light oercurr-add-more-author"
-                                            ><i class="fa fa-plus"></i> Add More</button>
+                                            ><i class="fa fa-plus"></i> <?php esc_html_e("Add More",OERCURR_CURRICULUM_SLUG) ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -517,14 +517,14 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                 <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-md-7">
-                                                            <label>Thumbnail Image</label>
+                                                            <label><?php esc_html_e("Thumbnail Image",OERCURR_CURRICULUM_SLUG) ?></label>
                                                             <div class="oer_primary_resource_thumbnail_holder">
                                                                 <?php if (!empty($custom_thumbnail)): ?>
                                                                 <img src="<?php echo esc_url($custom_thumbnail); ?>" class="resource-thumbnail" width="200">
                                                                 <span class="btn btn-danger btn-sm oercurr-remove-source-featured-image" title="Remove Thumbnail"><i class="fas fa-minus-circle"></i></span>
                                                                 <?php endif; ?>
                                                             </div>
-                                                            <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                                            <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image"><?php esc_html_e("Set Thumbnail",OERCURR_CURRICULUM_SLUG) ?></button>
                                                             <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="<?php echo esc_attr($custom_thumbnail); ?>" />
                                                         </div>
                                                     </div>
@@ -588,7 +588,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                            value="yes"
                                                                            <?php checked($sensitiveMaterial, 'yes'); ?>
                                                                     >
-                                                                    Sensitive Material
+                                                                    <?php esc_html_e("Sensitive Material",OERCURR_CURRICULUM_SLUG) ?>
                                                                 </label>
                                                             </div>
                                                         </div>
@@ -612,7 +612,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-md-7">
-                                                                <label>Thumbnail Image</label>
+                                                                <label><?php esc_html_e("Thumbnail Image",OERCURR_CURRICULUM_SLUG) ?></label>
                                                                 <div class="oer_primary_resource_thumbnail_holder">
                                                                     <?php if (!empty($custom_thumbnail)): ?>
                                                                     <img src="<?php echo esc_url($custom_thumbnail); ?>" class="resource-thumbnail" width="200">
@@ -636,7 +636,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                                value="yes"
                                                                                <?php checked($sensitiveMaterial, 'yes'); ?>
                                                                         >
-                                                                        Sensitive Material
+                                                                        <?php esc_html_e("Sensitive Material",OERCURR_CURRICULUM_SLUG) ?>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -716,7 +716,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                             <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="resource">
                                                             <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
                                                             <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
-                                                            Sensitive Material
+                                                            <?php esc_html_e("Sensitive Material",OERCURR_CURRICULUM_SLUG) ?>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -901,7 +901,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                     >
                                 </div>
                                 <div class="form-group">
-                                    <label>Framework Excerpt</label>
+                                    <label><?php esc_html_e("Framework Excerpt",OERCURR_CURRICULUM_SLUG) ?></label>
                                     <?php wp_editor( (isset($oer_curriculum_iq['excerpt']) ? wp_kses_post($oer_curriculum_iq['excerpt']) : ""),
                                         'oer_curriculum_iq_excerpt',
                                         $settings = array(
@@ -1274,7 +1274,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                     <div class="col-md-12">
                                         <button type="button"
                                                 class="btn btn-light oercurr-add-related-objective"
-                                        ><i class="fa fa-plus"></i> Add Objective</button>
+                                        ><i class="fa fa-plus"></i> <?php esc_html_e("Add Objective",OERCURR_CURRICULUM_SLUG) ?></button>
                                     </div>
                                 </div>
                                 <?php } ?>
@@ -1792,7 +1792,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             <button type="button"
                                                     id="oercurr-add-more-author"
                                                     class="btn btn-light oercurr-add-more-author"
-                                            ><i class="fa fa-plus"></i> Add More</button>
+                                            ><i class="fa fa-plus"></i> <?php esc_html_e("Add More",OERCURR_CURRICULUM_SLUG) ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -1834,7 +1834,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             <div class="card-body">
                                                 <div class="row">
                                                 <div class="col-md-12">
-                                                    <label>Thumbnail Image</label>
+                                                    <label><?php esc_html_e("Thumbnail Image",OERCURR_CURRICULUM_SLUG) ?></label>
                                                     <div class="oer_primary_resource_thumbnail_holder"></div>
                                                     <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
                                                     <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
@@ -1873,7 +1873,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                 <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="resource">
                                                                 <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
                                                                 <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
-                                                                Sensitive Material
+                                                                <?php esc_html_e("Sensitive Material",OERCURR_CURRICULUM_SLUG) ?>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -1976,7 +1976,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                         >
                                     </div>
                                     <div class="form-group">
-                                        <label>Framework Excerpt</label>
+                                        <label><?php esc_html_e("Framework Excerpt",OERCURR_CURRICULUM_SLUG) ?></label>
                                         <?php wp_editor( '',
                                             'oer_curriculum_iq_excerpt',
                                             $settings = array(
@@ -2216,7 +2216,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                         <div class="col-md-12">
                                             <button type="button"
                                                     class="btn btn-light oercurr-add-related-objective"
-                                            ><i class="fa fa-plus"></i> Add Objective</button>
+                                            ><i class="fa fa-plus"></i> <?php esc_html_e("Add Objective",OERCURR_CURRICULUM_SLUG) ?></button>
                                         </div>
                                     </div>
                                 </div>
@@ -2604,7 +2604,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 <button type="button"
                                         id="oercurr-add-more-author"
                                         class="btn btn-light oercurr-add-more-author"
-                                ><i class="fa fa-plus"></i> Add More</button>
+                                ><i class="fa fa-plus"></i> <?php esc_html_e("Add More",OERCURR_CURRICULUM_SLUG) ?></button>
                             </div>
                         </div>
                     </div>
@@ -2671,7 +2671,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                     <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="resource">
                                                     <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
                                                     <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
-                                                    Sensitive Material
+                                                    <?php esc_html_e("Sensitive Material",OERCURR_CURRICULUM_SLUG) ?>
                                                 </label>
                                             </div>
                                         </div>
@@ -2736,7 +2736,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 <button type="button"
                                         id="oercurr-add-more-resource"
                                         class="btn btn-light oercurr-add-more-resource"
-                                ><i class="fa fa-plus"></i> Add More</button>
+                                ><i class="fa fa-plus"></i> <?php esc_html_e("Add More",OERCURR_CURRICULUM_SLUG) ?></button>
                             </div>
                         </div>
                     </div>
@@ -2788,7 +2788,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             >
                         </div>
                         <div class="form-group">
-                            <label>Framework Excerpt</label>
+                            <label><?php esc_html_e("Framework Excerpt",OERCURR_CURRICULUM_SLUG) ?></label>
                             <?php wp_editor( '',
                                 'oer_curriculum_iq_excerpt',
                                 $settings = array(
@@ -2910,7 +2910,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             <div class="col-md-12">
                                 <button type="button"
                                         class="btn btn-light oercurr-add-related-objective"
-                                ><i class="fa fa-plus"></i> Add Objective</button>
+                                ><i class="fa fa-plus"></i> <?php esc_html_e("Add Objective",OERCURR_CURRICULUM_SLUG) ?></button>
                             </div>
                         </div>
                     </div>

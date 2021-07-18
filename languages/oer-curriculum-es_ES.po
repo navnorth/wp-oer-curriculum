@@ -53,7 +53,7 @@ msgstr "Actividades de esta lección"
 msgid "Summative Assessment"
 msgstr "Evaluación sumativa"
 
-msgid "Assessment Type(s):"
+msgid "Assessment Type(s)"
 msgstr "Tipo (s) de evaluación"
 
 msgid "Other"
@@ -67,7 +67,7 @@ msgstr "Materiales"
 
 #, fuzzy
 msgid "Vocabulary List"
-msgstr "Lista de texto"
+msgstr "Lista de vocabulario"
 
 msgid "You have not selected any academic standards"
 msgstr "No ha seleccionado ningún estándar académico"
@@ -117,6 +117,26 @@ msgstr "Sujetos"
 msgid "SEE MORE +"
 msgstr "VER MÁS +"
 
-#, fuzzy
 msgid "Text"
 msgstr "Texto"
+
+msgid "Add More"
+msgstr "Añadir más"
+
+msgid "Add Objective"
+msgstr "Agregar objetivo"
+
+msgid "Framework Excerpt"
+msgstr "Extracto del marco"
+
+msgid "Thumbnail Image"
+msgstr "Imagen en miniatura"
+
+msgid "Set Thumbnail"
+msgstr "Establecer miniatura"
+
+msgid "Sensitive Material"
+msgstr "Material sensible"
+
+msgid "Potentially Sensitive Material"
+msgstr "Material potencialmente sensible"
