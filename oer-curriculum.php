@@ -230,7 +230,7 @@ function oercurr_add_inquiry_set_rest_args() {
 }
 
 /* Enqueue script and css for Gutenberg Inquiry Set Thumbnail block */
-add_action('enqueue_block_editor_assets', 'oercurr_enqueue_inquiry_set_block');
+add_action('init', 'oercurr_enqueue_inquiry_set_block');
 function oercurr_enqueue_inquiry_set_block(){
     global $post;
     wp_enqueue_script(
@@ -246,14 +246,24 @@ function oercurr_enqueue_inquiry_set_block(){
         )
     );
     wp_enqueue_style(
-        'curriculum-thumbnail-block-css',
-        OERCURR_CURRICULUM_URL . "/css/backend/oer-curriculum-thumbnail-block.css",
+        'curriculum-thumbnail-block-css-backend',
+        OERCURR_CURRICULUM_URL . "/css/backend/oer-curriculum-thumbnail-block-editor.css",
         array('wp-edit-blocks')
     );
+
+    wp_register_style(
+  		'curriculum-thumbnail-block-css-frontend',
+  		OERCURR_CURRICULUM_URL . "/css/frontend/oer-curriculum-thumbnail-block-frontend.css",
+  		is_admin() ? array( 'wp-editor' ) : null, // Dependency to include the CSS after it.
+  		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
+  	);
+    
+    
     /* Register Thumbnail Block */
     register_block_type('oer-curriculum/curriculum-thumbnail-block', array(
         'editor_script' => 'curriculum-thumbnail-block-js',
-        'editor_style' => 'curriculum-thumbnail-block-css'
+        'editor_style'  => 'curriculum-thumbnail-block-css-backend',
+        'style'         => 'curriculum-thumbnail-block-css-frontend'
     ));
 }
 

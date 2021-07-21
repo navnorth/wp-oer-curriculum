@@ -293,9 +293,8 @@ ul.featuredwpr_bxslider_front li .frtdsnglwpr .ttl a {
     z-index: 10 !important;
 }
 .components-panel__header.edit-post-sidebar__panel-tabs {
-    /*z-index: -2 !important;*/
+    /*z-index: -2;*/
 }
-
 
 /* INSPECTOR */
 .oercurr_cfb_inspector_feat_addbutton_wrapper {

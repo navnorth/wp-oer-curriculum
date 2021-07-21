@@ -828,6 +828,11 @@ a.tc_oer_curriculum_collapse_button.collapsed>h4 span.oer_curriculum_acicon:afte
     content: "\f132";
 }
 div#tcHiddenFields {float: left;}
+.oercurr-tc-details .tc-hidden-fields .form-field ol li {
+    list-style: decimal;
+    list-style-position: inside;
+}
+
 @media (max-width: 1023px){
   .wp_oer_breadcrumb {
       padding: 12px 0px !important;
@@ -1268,7 +1273,8 @@ div#tcHiddenFields {float: left;}
     clear: left;
 }
 
-.oercurr-tc-details .tc-hidden-fields .form-field ul {
+.oercurr-tc-details .tc-hidden-fields .form-field ul,
+.oercurr-tc-details .tc-hidden-fields .form-field ol {
     padding: 0px;
     margin: 0px;
     margin-bottom:10px;

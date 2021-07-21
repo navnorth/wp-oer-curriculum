@@ -379,7 +379,29 @@
                                 }
                               }
                           }
-
+                          
+                          // Additional Section
+                          if (($additional_sections_set && $additional_sections_enabled) || !$additional_sections_set) {
+                            $additional_sections = isset($post_meta_data['oer_curriculum_additional_sections'][0]) ? unserialize($post_meta_data['oer_curriculum_additional_sections'][0]) : array();
+                             if (is_array($additional_sections)){
+                                $cnt = 0;
+                                if (isset($additional_sections['label']))
+                                    $cnt = count($additional_sections['label']);
+                                if (isset($additional_sections['editor'])){
+                                    $cnt = (count($additional_sections['editor'])>$cnt) ? count($additional_sections['editor']) : $cnt;
+                                }
+                                for ($i=0;$i<$cnt;$i++){
+                                    if (!empty($additional_sections['label'][$i]) || !empty($additional_sections['editor'][$i])) {
+                                      ?>
+                                    <div class="form-field">
+                                        <span class="oercurr-tc-label-heading"><?php echo esc_html($additional_sections['label'][$i]); ?>:</span> <span class="oercurr-tc-value"><?php echo wp_kses_post($additional_sections['editor'][$i]); ?></span>
+                                    </div>
+                                      <?php
+                                    }
+                                }
+                             }
+                          }
+                          
                           // Additional Materials Display
                           if (($addtl_materials_set && $addtl_materials_enabled) || !$addtl_materials_set) {
                               //$addtl_materials_label = (isset($post_meta_data['oer_curriculum_oer_materials_label'][0]) ? $post_meta_data['oer_curriculum_oer_materials_label'][0] : "Additional Materials");
@@ -420,28 +442,6 @@
                               <?php
                               }
                           }
-                          
-                          // Additional Section
-                          if (($additional_sections_set && $additional_sections_enabled) || !$additional_sections_set) {
-                              $additional_sections = isset($post_meta_data['oer_curriculum_additional_sections'][0]) ? unserialize($post_meta_data['oer_curriculum_additional_sections'][0]) : array();
-                               if (is_array($additional_sections)){
-                                  $cnt = 0;
-                                  if (isset($additional_sections['label']))
-                                      $cnt = count($additional_sections['label']);
-                                  if (isset($additional_sections['editor'])){
-                                      $cnt = (count($additional_sections['editor'])>$cnt) ? count($additional_sections['editor']) : $cnt;
-                                  }
-                                  for ($i=0;$i<$cnt;$i++){
-                                      if (!empty($additional_sections['label'][$i]) || !empty($additional_sections['editor'][$i])) {
-                                        ?>
-                                      <div class="form-field">
-                                          <span class="oercurr-tc-label-heading"><?php echo esc_html($additional_sections['label'][$i]); ?>:</span> <span class="oercurr-tc-value"><?php echo wp_kses_post($additional_sections['editor'][$i]); ?></span>
-                                      </div>
-                                        <?php
-                                      }
-                                  }
-                               }
-                            }
                           ?>
                       </div>
                   </div>
