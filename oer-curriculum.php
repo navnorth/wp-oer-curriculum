@@ -5,7 +5,7 @@
  Description:        Manage and display collections of Open Educational Resources in lesson plans or curriculums with alignment to Common Core State Standards.
  Version:            0.5.0
  Requires at least:  4.4
- Requires PHP:       7.4
+ Requires PHP:       7.0
  Author:             Navigation North
  Author URI:         https://www.navigationnorth.com
  Text Domain:        oer-curriculum
@@ -257,8 +257,8 @@ function oercurr_enqueue_inquiry_set_block(){
   		is_admin() ? array( 'wp-editor' ) : null, // Dependency to include the CSS after it.
   		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
   	);
-    
-    
+
+
     /* Register Thumbnail Block */
     register_block_type('oer-curriculum/curriculum-thumbnail-block', array(
         'editor_script' => 'curriculum-thumbnail-block-js',
