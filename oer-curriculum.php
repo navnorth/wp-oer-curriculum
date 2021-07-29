@@ -341,3 +341,33 @@ add_action('plugins_loaded', 'oercurr_load_textdomain');
 function oercurr_load_textdomain() {
 	load_plugin_textdomain( OERCURR_CURRICULUM_SLUG, false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
 }
+
+
+// Limit blocks in 'oer-curriculum'' post type
+function wpse_allowed_block_types($allowed_block_types, $post) {
+    if($post->post_type == 'oer-curriculum') {
+        return array(
+          'core/paragraph',
+          'core/image',
+          'core/heading',
+          'core/list',
+          'core/quote',
+          'core/table',
+          'core/verse',
+          'core/preformatted',
+          'core/pullquote',
+          'core/buttons',
+          'core/text-columns',
+          'core/media-text',
+          'core/more',
+          'core/nextpage',
+          'core/separator',
+          'core/spacer',
+          'core/shortcode'
+        );
+    }
+    else {
+        return $allowed_block_types;
+    }
+}
+add_filter('allowed_block_types', 'wpse_allowed_block_types', 10, 2);
