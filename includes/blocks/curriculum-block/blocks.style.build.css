@@ -100,20 +100,25 @@ a.oercurr-blk-left {
 
 @media screen and (max-width: 1200px) {
 	a.oercurr-blk-left {
-		width: 30%
+		width: auto;
 	}
 	.oercurr-blk-right {
-		width: 70%
+		width: 100%
+	}
+	.oercurr-blk-right {
+			padding:0px;
 	}
 }
 
 @media screen and (max-width: 768px) {
+	/*
 	a.oercurr-blk-left {
-		width: 40%
+		width: auto%
 	}
 	.oercurr-blk-right {
 		width: 60%
 	}
+	*/
 	.oercurr-blk-topbar-left {
 		display: block !important;
 		max-width: 100% !important

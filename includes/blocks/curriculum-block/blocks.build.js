@@ -13,8 +13,6 @@ const {
 } = wp.components;
 const { withSelect } = wp.data;
 let selcat = [];
-let selper = 5;
-let selsrt = "modified";
 const parentcatlist = []; //register custom Rest Endpoint as Entity
 
 var dispatch = wp.data.dispatch;
@@ -48,7 +46,10 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
       type: "string"
     },
     curriculums: {
-      type: "object"
+      type: "array"
+    },
+    curriculumlength: {
+      type: "integer"
     },
     categories: {
       type: "object"
@@ -56,11 +57,27 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
     selectedCategory: {
       type: "string"
     },
-    postsPerPage: {
-      type: "string"
+    displayOption: {
+      type: "array",
+      default: [2, 5, 10, 15, 20, 25, 30]
     },
-    sortBy: {
-      type: "string"
+    selper: {
+      type: "string",
+      default: "5"
+    },
+    selsrt: {
+      type: "string",
+      default: "modified"
+    },
+    sortOption: {
+      type: "object",
+      default: [
+        {
+          date: "Date Added",
+          modified: "Date Updated",
+          title: "Title a-z"
+        }
+      ]
     }
   },
 
@@ -86,7 +103,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
         var uniq = "cb" + new Date().getTime();
         var cid = val.clientId;
         var attr = wp.data.select("core/block-editor").getBlockAttributes(cid);
-
+        /*
         if (!attr.blockid) {
           wp.data.dispatch("core/block-editor").updateBlockAttributes(cid, {
             blockid: uniq,
@@ -94,16 +111,9 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
             sortBy: "modified"
           });
         }
+        */
       }
     }); // RETURN MESSAGE WHILE CATEGORIES AND CURRICULUMS ARE NOT YET FULLY LOADED
-
-    if (!attributes.blockid && !attributes.postsPerPage && !attributes.sortBy) {
-      let prevhtm = /*#__PURE__*/ React.createElement("img", {
-        src: prvhtm,
-        width: "100%"
-      });
-      return prevhtm;
-    } //UPDATE LOCAL VARIABLES
 
     let selcat = [];
 
@@ -118,22 +128,6 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
       tmp.map((cat) => {
         selcat.push(parseInt(cat));
       });
-    }
-
-    if (!attributes.postsPerPage) {
-      setAttributes({
-        postsPerPage: selper
-      });
-    } else {
-      selper = attributes.postsPerPage;
-    }
-
-    if (!attributes.sortBy) {
-      setAttributes({
-        sortBy: selsrt
-      }); // non-existent, set fto default
-    } else {
-      selsrt = attributes.sortBy; // existing get data
     }
     /* SET CATEGORIES ATTRIBUTES */
 
@@ -162,10 +156,8 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
 
     if (!attributes.curriculums) {
       let ord = "";
-      selper = attributes.postsPerPage;
-      selsrt = attributes.sortBy;
 
-      if (selsrt == "title") {
+      if (attributes.selsrt == "title") {
         ord = "asc";
       } else {
         ord = "desc";
@@ -175,16 +167,19 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
         wp.apiFetch({
           url:
             "/wp-json/curriculum/v2/taxquery?perpage=" +
-            selper +
+            attributes.selper +
             "&terms=" +
             selcat +
             "&orderby=" +
-            selsrt +
+            attributes.selsrt +
             "&order=" +
             ord
         }).then((curriculums) => {
           setAttributes({
             curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
           });
         });
       } else {
@@ -193,6 +188,9 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
         }).then((curriculums) => {
           setAttributes({
             curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
           });
         });
       }
@@ -239,8 +237,6 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
       }
     });
 
-    function updateCurriculum() {}
-
     function onChangeCheckboxField(newValue, index) {
       if (newValue.target.checked) {
         selcat.push(newValue.target.getAttribute("data"));
@@ -257,30 +253,29 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
       setAttributes({
         selectedCategory: selcat.toString()
       });
-      selper = attributes.postsPerPage;
-      selsrt = attributes.sortBy;
-      let ord = "";
-
-      if (selsrt == "title") {
-        ord = "asc";
-      } else {
-        ord = "desc";
-      }
+      localStorage.setItem(
+        "selectedCategory-" + attributes.blockid,
+        selcat.toString()
+      );
+      let ord = attributes.selsrt == "title" ? "asc" : "desc";
 
       if (selcat != "") {
         wp.apiFetch({
           url:
             "/wp-json/curriculum/v2/taxquery?perpage=" +
-            selper +
+            attributes.selper +
             "&terms=" +
             selcat +
             "&orderby=" +
-            selsrt +
+            attributes.selsrt +
             "&order=" +
             ord
         }).then((curriculums) => {
           setAttributes({
             curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
           });
         });
       } else {
@@ -289,6 +284,9 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
         }).then((curriculums) => {
           setAttributes({
             curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
           });
         });
       }
@@ -296,31 +294,32 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
 
     function updatePostsPerPage(e) {
       setAttributes({
-        postsPerPage: e.target.value
+        selper: e.target.value
       });
-      selper = e.target.value;
-      let ord = "";
-
-      if (selsrt == "title") {
-        ord = "asc";
-      } else {
-        ord = "desc";
-      }
+      localStorage.setItem(
+        "postsPerPage-" + attributes.blockid,
+        e.target.value
+      );
+      var tmp_selper = e.target.value;
+      let ord = attributes.selsrt == "title" ? "asc" : "desc";
 
       if (selcat != "") {
         wp.apiFetch({
           url:
             "/wp-json/curriculum/v2/taxquery?perpage=" +
-            selper +
+            tmp_selper +
             "&terms=" +
             selcat +
             "&orderby=" +
-            selsrt +
+            attributes.selsrt +
             "&order=" +
             ord
         }).then((curriculums) => {
           setAttributes({
             curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
           });
         });
       } else {
@@ -329,38 +328,40 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
         }).then((curriculums) => {
           setAttributes({
             curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
           });
         });
       }
     }
 
     function updateSortby(e) {
+      /*setAttributes({sortBy: e.target.value});*/
+      var tmp_selsrt = e.target.value;
       setAttributes({
-        sortBy: e.target.value
+        selsrt: e.target.value
       });
-      selsrt = e.target.value;
-      let ord = "";
-
-      if (selsrt == "title") {
-        ord = "asc";
-      } else {
-        ord = "desc";
-      }
+      localStorage.setItem("sortBy-" + attributes.selsrt, e.target.value);
+      let ord = tmp_selsrt == "title" ? "asc" : "desc";
 
       if (selcat != "") {
         wp.apiFetch({
           url:
             "/wp-json/curriculum/v2/taxquery?perpage=" +
-            selper +
+            attributes.selper +
             "&terms=" +
             selcat +
             "&orderby=" +
-            selsrt +
+            tmp_selsrt +
             "&order=" +
             ord
         }).then((curriculums) => {
           setAttributes({
             curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
           });
         });
       } else {
@@ -370,20 +371,29 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
           setAttributes({
             curriculums: curriculums
           });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
+          });
         });
       }
     }
-
+    /*
     const displayOption = [5, 10, 15, 20, 25, 30];
     const sortOption = {
       date: "Date Added",
       modified: "Date Updated",
       title: "Title a-z"
     };
+    */
+
+    /*
     const recnt =
       typeof attributes.curriculums.length == "undefined"
         ? 0
         : attributes.curriculums.length;
+    */
+
+    console.log("AFTER:" + attributes.selsrt);
     return /*#__PURE__*/ React.createElement(
       "div",
       null,
@@ -542,10 +552,10 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
               {
                 id: "oer_curriculum_inspector_postperpage_select",
                 onChange: updatePostsPerPage,
-                value: selper
+                value: attributes.selper
               },
-              displayOption.map((incr, index) => {
-                if (selper == incr) {
+              attributes.displayOption.map((incr, index) => {
+                if (attributes.selper == incr) {
                   return /*#__PURE__*/ React.createElement(
                     "option",
                     {
@@ -585,17 +595,17 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
               {
                 id: "oer_curriculum_inspector_sortby_select",
                 onChange: updateSortby,
-                value: selsrt
+                value: attributes.selsrt
               },
-              Object.keys(sortOption).map((key) => {
-                if (selsrt == key) {
+              Object.keys(attributes.sortOption[0]).map((key) => {
+                if (attributes.selsrt == key) {
                   return /*#__PURE__*/ React.createElement(
                     "option",
                     {
                       value: key,
                       checked: true
                     },
-                    sortOption[key]
+                    attributes.sortOption[0][key]
                   );
                 } else {
                   return /*#__PURE__*/ React.createElement(
@@ -603,7 +613,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                     {
                       value: key
                     },
-                    sortOption[key]
+                    attributes.sortOption[0][key]
                   );
                 }
               })
@@ -614,7 +624,8 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
       /*#__PURE__*/ React.createElement(
         "div",
         {
-          class: "oercurr-blk-main editor"
+          class: "oercurr-blk-main editor",
+          blockid: attributes.blockid
         },
         /*#__PURE__*/ React.createElement(
           "div",
@@ -630,7 +641,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
               "span",
               null,
               "Browse All ",
-              recnt,
+              attributes.curriculumlength,
               " Curriculums"
             )
           ),
@@ -653,7 +664,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                   "span",
                   null,
                   "Show ",
-                  selper
+                  attributes.selper
                 ),
                 /*#__PURE__*/ React.createElement(
                   "a",
@@ -672,8 +683,8 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                   class:
                     "oercurr-blk-topbar-display-option oercurr-blk-topbar-option"
                 },
-                displayOption.map((incr, index) => {
-                  if (selper == incr) {
+                attributes.displayOption.map((incr, index) => {
+                  if (attributes.selper == incr) {
                     return /*#__PURE__*/ React.createElement(
                       "li",
                       {
@@ -719,7 +730,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                   "span",
                   null,
                   "Sort by: ",
-                  sortOption[selsrt]
+                  attributes.sortOption[0][attributes.selsrt]
                 ),
                 /*#__PURE__*/ React.createElement(
                   "a",
@@ -738,8 +749,8 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                   class:
                     "oercurr-blk-topbar-sort-option oercurr-blk-topbar-option"
                 },
-                Object.keys(sortOption).map((key) => {
-                  if (selsrt == key) {
+                Object.keys(attributes.sortOption[0]).map((key) => {
+                  if (attributes.selsrt == key) {
                     return /*#__PURE__*/ React.createElement(
                       "li",
                       {
@@ -751,7 +762,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                           href: "#",
                           ret: key
                         },
-                        sortOption[key]
+                        attributes.sortOption[0][key]
                       )
                     );
                   } else {
@@ -764,7 +775,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                           href: "#",
                           ret: key
                         },
-                        sortOption[key]
+                        attributes.sortOption[0][key]
                       )
                     );
                   }
@@ -825,7 +836,8 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                     {
                       href: post.link,
                       class: "oercurr-blk-left",
-                      target: "_new"
+                      target: "_new",
+                      rel: "noopener"
                     },
                     /*#__PURE__*/ React.createElement("img", {
                       src: post.featured_image_url,
@@ -912,7 +924,292 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
     );
   },
   save: (props) => {
-    return null;
+    const attributes = props.attributes;
+    const setAttributes = props.setAttributes;
+    return /*#__PURE__*/ React.createElement(
+      "div",
+      {
+        class: "oercurr-blk-main editor",
+        blockid: attributes.blockid
+      },
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          class: "oercurr-blk-topbar"
+        },
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class: "oercurr-blk-topbar-left"
+          },
+          /*#__PURE__*/ React.createElement(
+            "span",
+            {
+              class: "oercurr-blk-topbar-left-count"
+            },
+            "Browse All ",
+            attributes.curriculumlength,
+            " Curriculums"
+          )
+        ),
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class: "oercurr-blk-topbar-right"
+          },
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oercurr-blk-topbar-display-box"
+            },
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "oercurr-blk-topbar-display-text"
+              },
+              /*#__PURE__*/ React.createElement(
+                "span",
+                null,
+                "Show ",
+                attributes.selper
+              ),
+              /*#__PURE__*/ React.createElement(
+                "a",
+                {
+                  href: "#"
+                },
+                /*#__PURE__*/ React.createElement("i", {
+                  class: "fa fa-th-list",
+                  "aria-hidden": "true"
+                })
+              )
+            ),
+            /*#__PURE__*/ React.createElement(
+              "ul",
+              {
+                class:
+                  "oercurr-blk-topbar-display-option oercurr-blk-topbar-option"
+              },
+              attributes.displayOption.map((incr, index) => {
+                if (attributes.selper == incr) {
+                  return /*#__PURE__*/ React.createElement(
+                    "li",
+                    {
+                      class: "selected"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "a",
+                      {
+                        href: "#",
+                        ret: incr
+                      },
+                      incr
+                    )
+                  );
+                } else {
+                  return /*#__PURE__*/ React.createElement(
+                    "li",
+                    null,
+                    /*#__PURE__*/ React.createElement(
+                      "a",
+                      {
+                        href: "#",
+                        ret: incr
+                      },
+                      incr
+                    )
+                  );
+                }
+              })
+            )
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oercurr-blk-topbar-sort-box"
+            },
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "oercurr-blk-topbar-sort-text"
+              },
+              /*#__PURE__*/ React.createElement(
+                "span",
+                null,
+                "Sort by: ",
+                attributes.sortOption[0][attributes.selsrt]
+              ),
+              /*#__PURE__*/ React.createElement(
+                "a",
+                {
+                  href: "#"
+                },
+                /*#__PURE__*/ React.createElement("i", {
+                  class: "fa fa-sort",
+                  "aria-hidden": "true"
+                })
+              )
+            ),
+            /*#__PURE__*/ React.createElement(
+              "ul",
+              {
+                class:
+                  "oercurr-blk-topbar-sort-option oercurr-blk-topbar-option"
+              },
+              Object.keys(attributes.sortOption[0]).map((key) => {
+                if (attributes.selsrt == key) {
+                  return /*#__PURE__*/ React.createElement(
+                    "li",
+                    {
+                      class: "selected"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "a",
+                      {
+                        href: "#",
+                        ret: key
+                      },
+                      attributes.sortOption[0][key]
+                    )
+                  );
+                } else {
+                  return /*#__PURE__*/ React.createElement(
+                    "li",
+                    null,
+                    /*#__PURE__*/ React.createElement(
+                      "a",
+                      {
+                        href: "#",
+                        ret: key
+                      },
+                      attributes.sortOption[0][key]
+                    )
+                  );
+                }
+              })
+            )
+          )
+        ),
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            id: "oer_curriculum_cur_blk_content_wrapper",
+            class: "oercurr-blk-wrapper"
+          },
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              id: "oercurr-blk-content_drop"
+            },
+            attributes.curriculums.map((post, index) => {
+              let ctnt = post.content.replace(/<[^>]+>/g, "");
+
+              if (ctnt.length <= 180) {
+                ctnt = ctnt + "....";
+              } else {
+                ctnt = ctnt.substr(1, 180) + "...";
+              }
+
+              let grd = 0;
+              let grdtxt = "";
+
+              if (post.oer_curriculum_grades != "") {
+                if (post.oer_curriculum_grades.length > 1) {
+                  grdtxt = "Grades: ";
+                  grd =
+                    post.oer_curriculum_grades[0] +
+                    "-" +
+                    post.oer_curriculum_grades[
+                      post.oer_curriculum_grades.length - 1
+                    ];
+                } else {
+                  grdtxt = "Grade: ";
+                  grd = post.oer_curriculum_grades;
+                }
+              } else {
+                grdtxt = "";
+                grd = "";
+              }
+
+              return /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "oercurr-blk-row"
+                },
+                /*#__PURE__*/ React.createElement(
+                  "a",
+                  {
+                    href: post.link,
+                    class: "oercurr-blk-left",
+                    target: "_new",
+                    rel: "noopener"
+                  },
+                  /*#__PURE__*/ React.createElement("img", {
+                    src: post.featured_image_url,
+                    alt: ""
+                  })
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class: "oercurr-blk-right"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "ttl"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "a",
+                      {
+                        href: post.link,
+                        target: "_new",
+                        rel: "noopener"
+                      },
+                      post.title
+                    )
+                  ),
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "desc"
+                    },
+                    ctnt
+                  ),
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "oercurr-tags tagcloud"
+                    },
+                    post.tagsv2.map((posttags, index) => {
+                      let tgar = posttags.split("|");
+                      return /*#__PURE__*/ React.createElement(
+                        "span",
+                        null,
+                        /*#__PURE__*/ React.createElement(
+                          "a",
+                          {
+                            href:
+                              oercurr_cb_cgb_Global["base_url"] +
+                              "/tag/" +
+                              tgar[1],
+                            alt: "",
+                            class: "button",
+                            target: "_new",
+                            rel: "noopener"
+                          },
+                          tgar[0]
+                        )
+                      );
+                    })
+                  )
+                )
+              );
+            })
+          )
+        )
+      )
+    );
   },
   example: {}
 });
