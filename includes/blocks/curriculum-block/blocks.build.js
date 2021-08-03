@@ -393,7 +393,6 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
         : attributes.curriculums.length;
     */
 
-    console.log("AFTER:" + attributes.selsrt);
     return /*#__PURE__*/ React.createElement(
       "div",
       null,

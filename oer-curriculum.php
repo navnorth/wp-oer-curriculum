@@ -46,7 +46,7 @@ include_once(OERCURR_CURRICULUM_PATH.'includes/oer-curriculum-functions.php');
 include_once(OERCURR_CURRICULUM_PATH.'includes/init.php');
 
 require_once(OERCURR_CURRICULUM_PATH.'includes/blocks/curriculum-block/init.php');
-require_once(OERCURR_CURRICULUM_PATH.'includes/blocks/curriculum-featured-block/init.php');
+//require_once(OERCURR_CURRICULUM_PATH.'includes/blocks/curriculum-featured-block/init.php');
 
 global $oer_curriculum_default_structure;
 global $oer_convert_info;
