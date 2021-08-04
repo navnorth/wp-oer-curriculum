@@ -27,7 +27,7 @@ dispatch("core").addEntities([
 ]);
 registerBlockType("oer-curriculum/block-curriculum-block", {
   // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-  title: __("Curriculum Block"),
+  title: __("Curriculum List"),
   // Block title.
   icon: "welcome-learn-more",
   // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
@@ -37,9 +37,9 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
   category: "oer-block-category",
   // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
   keywords: [
-    __("curriculum-block"),
-    __("CGB Example"),
-    __("create-guten-block")
+    __("curriculum-list"),
+    __("curriculum"),
+    __("list")
   ],
   attributes: {
     blockid: {
