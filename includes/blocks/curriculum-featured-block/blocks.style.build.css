@@ -217,7 +217,8 @@ option.oercurr_cfb_inspector_feat_subject_select_bold {
     width: auto;
 }
 .oercurr_cfb_right_featuredwpr { float: none !important; }
-.oercurr_cfb_right_featuredwpr .bx-wrapper { float: none !important; padding:25px 0px 0px 0px !important;}
+.oercurr_cfb_right_featuredwpr .bx-wrapper { float: none !important; padding:0px !important;}
+.oercurr_cfb_right_featuredwpr .bx-wrapper.mobile { max-width:100% !important;}
 .oercurr_cfb_right_featuredwpr .bx-wrapper .bx-controls-direction a {
   top: -16px;
   width: 24px;
@@ -254,20 +255,20 @@ option.oercurr_cfb_inspector_feat_subject_select_bold {
 }
 
 .oercurr-cfb-ftrdttl {float:none !important;}
-ul.featuredwpr_bxslider_front {
+ul.featuredwpr_bxslider {
+    visibility:hidden;
     margin: 0px !important;
 }
-ul.featuredwpr_bxslider_front li {margin-top:20px !important;}
-.featuredwpr_bxslider_front li:before{
+ul.featuredwpr_bxslider li {margin-top:20px !important; margin-left:0px !important;}
+.featuredwpr_bxslider li:before{
   content: unset !important;
 }
-.featuredwpr_bxslider_front li div.frtdsnglwpr a div.img img,
+.featuredwpr_bxslider li div.frtdsnglwpr a div.img img,
 .featuredwpr_bxslider li div.frtdsnglwpr a div.img img {
     margin: 0px !important;
     margin-bottom: 10px !important;
-    max-height: 190px;
 }
-ul.featuredwpr_bxslider_front li .frtdsnglwpr .ttl a {
+ul.featuredwpr_bxslider li .frtdsnglwpr .ttl a {
     display: block;
 }
 .frtdsnglwpr a div.img {
@@ -282,19 +283,28 @@ ul.featuredwpr_bxslider_front li .frtdsnglwpr .ttl a {
     border-bottom: 1px solid #d2d2d2 !important;
     height: 36px;
 }
-.oercurr_cfb_right_featuredwpr .bx-wrapper .bx-controls-direction a {
-    top: 4px !important;
+
+.oercurr-cfb-ftrdttl {
+    font-size: 24px;
+    line-height: 1.2em;
+    width: 100%;
+    border-bottom: 1px solid #d2d2d2 !important;
+    height: 36px;
 }
+
+
 .oercurr_cfb_right_featuredwpr {
     padding: 25px 15px 25px 15px !important;
     border: 1px solid #d2d2d2;
+    margin: 20px 0px 0px 0px;
 }
 #adminmenuwrap {
     z-index: 10 !important;
 }
 .components-panel__header.edit-post-sidebar__panel-tabs {
-    /*z-index: -2;*/
+    /*z-index: -2 !important;*/
 }
+
 
 /* INSPECTOR */
 .oercurr_cfb_inspector_feat_addbutton_wrapper {
@@ -424,3 +434,6 @@ padding-right: 0px !important;
 .tooltipped:hover .tooltiptext {
   visibility: visible;
 }
+
+
+.oercurr-cfb-attrhide {display:none !important;}
