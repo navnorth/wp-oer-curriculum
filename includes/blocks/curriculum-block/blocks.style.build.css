@@ -43,6 +43,23 @@ div.oercurr-blk-wrapper {
 	overflow-y: auto !important
 }
 
+#oercurr-blk-content_placeholder {
+ text-align: center;
+ padding: 40px 0px;
+}
+
+.button.oer_curriculum_inspector_sbjt_addSubjects.prvw {
+ font-size: 14px;
+ padding: 10px 30px;
+ line-height: 24px;
+}
+
+.button.oer_curriculum_inspector_sbjt_addSubjects.prvw span:before {
+	 display: inline-block;
+	 line-height: 28px;
+	 font-size: 24px;
+}
+
 .oercurr-blk-row {
 	width: 100%;
 	padding: 20px 0px;
