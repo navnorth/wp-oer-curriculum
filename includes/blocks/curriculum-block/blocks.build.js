@@ -1,3 +1,10 @@
+/**
+ * BLOCK: curriculum-block
+ *
+ * Registering a basic block with Gutenberg.
+ * Simple block, renders and saves the same content without any interactivity.
+ */
+//  Import CSS.
 const { __ } = wp.i18n; // Import __() from wp.i18n
 
 const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
@@ -27,7 +34,7 @@ dispatch("core").addEntities([
 ]);
 registerBlockType("oer-curriculum/block-curriculum-block", {
   // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-  title: __("Curriculum Block"),
+  title: __("Curriculum List"),
   // Block title.
   icon: "welcome-learn-more",
   // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
@@ -207,6 +214,14 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
       "click",
       ".oer_curriculum_inspector_sbjt_addSubjects",
       function (e) {
+        if (
+          jQuery(".interface-complementary-area.edit-post-sidebar").length == 0
+        ) {
+          jQuery(
+            ".edit-post-header__settings .interface-pinned-items button"
+          ).trigger("click");
+        }
+
         jQuery(".oer_curriculum_inspector_sbjt_modal_resource_wrapper").show(
           300
         );
@@ -246,6 +261,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
         }
       }
 
+      console.log("###4");
       setAttributes({
         selectedCategory: selcat.toString()
       });
@@ -275,6 +291,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
           });
         });
       } else {
+        console.log("###7");
         wp.apiFetch({
           url: "/wp-json/curriculum/v2/taxquery?terms=0"
         }).then((curriculums) => {
@@ -375,6 +392,104 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
     }
 
 
+    let SubjectPicker = /*#__PURE__*/ React.createElement(
+      "div",
+      {
+        class: "oer_curriculum_inspector_wrapper"
+      },
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          class: "oer_curriculum_inspector_sbjt_modal_resource_wrapper"
+        },
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class: "oer_curriculum_inspector_sbjt_modal_content_main"
+          },
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oer_curriculum_inspector_sbjt_modal_wrapper_close"
+            },
+            /*#__PURE__*/ React.createElement("span", {
+              class: "dashicons dashicons-no"
+            })
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oer_curriculum_inspector_sbjt_modal_center"
+            },
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "oer_curriculum_inspector_sbjt_modal_table"
+              },
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "oer_curriculum_inspector_sbjt_modal_cell"
+                },
+                /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class: "oer_curriculum_inspector_sbjt_modal"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "oer_curriculum_inspector_sbjt_search_header"
+                    },
+                    "Subjects"
+                  ),
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "oer_curriculum_inspector_sbjt_search_wrapper"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "div",
+                      {
+                        class: "oer_curriculum_inspector_subject"
+                      },
+                      attributes.categories.map((cat, index) => {
+                        return /*#__PURE__*/ React.createElement(
+                          "label",
+                          {
+                            class:
+                              "components-base-control__label ls_inspector_subject_label " +
+                              cat.level
+                          },
+                          /*#__PURE__*/ React.createElement("input", {
+                            checked:
+                              typeof selcat != "undefined" &&
+                              selcat.indexOf(cat.term_id) != -1
+                                ? "checked"
+                                : "",
+                            id: "inspector-checkbox-control-" + index,
+                            class: "ls_inspector_subject_checkbox " + cat.level,
+                            type: "checkbox",
+                            data: cat.term_id,
+                            parent: cat.parent,
+                            onClick: onChangeCheckboxField
+                          }),
+                          cat.name + " (" + cat.cnt + ")"
+                        );
+                      })
+                    )
+                  ),
+                  /*#__PURE__*/ React.createElement("div", {
+                    class: "oer_curriculum_inspector_sbjt_search_footer"
+                  })
+                )
+              )
+            )
+          )
+        )
+      )
+    ); // Inspector Controls
+
     let InspectorControlVar = /*#__PURE__*/ React.createElement(
       InspectorControls,
       null,
@@ -384,104 +499,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
           title: __("Curriculum Block settings"),
           initialOpen: true
         },
-        /*#__PURE__*/ React.createElement(
-          "div",
-          {
-            class: "oer_curriculum_inspector_wrapper"
-          },
-          /*#__PURE__*/ React.createElement(
-            "div",
-            {
-              class: "oer_curriculum_inspector_sbjt_modal_resource_wrapper"
-            },
-            /*#__PURE__*/ React.createElement(
-              "div",
-              {
-                class: "oer_curriculum_inspector_sbjt_modal_content_main"
-              },
-              /*#__PURE__*/ React.createElement(
-                "div",
-                {
-                  class: "oer_curriculum_inspector_sbjt_modal_wrapper_close"
-                },
-                /*#__PURE__*/ React.createElement("span", {
-                  class: "dashicons dashicons-no"
-                })
-              ),
-              /*#__PURE__*/ React.createElement(
-                "div",
-                {
-                  class: "oer_curriculum_inspector_sbjt_modal_center"
-                },
-                /*#__PURE__*/ React.createElement(
-                  "div",
-                  {
-                    class: "oer_curriculum_inspector_sbjt_modal_table"
-                  },
-                  /*#__PURE__*/ React.createElement(
-                    "div",
-                    {
-                      class: "oer_curriculum_inspector_sbjt_modal_cell"
-                    },
-                    /*#__PURE__*/ React.createElement(
-                      "div",
-                      {
-                        class: "oer_curriculum_inspector_sbjt_modal"
-                      },
-                      /*#__PURE__*/ React.createElement(
-                        "div",
-                        {
-                          class: "oer_curriculum_inspector_sbjt_search_header"
-                        },
-                        "Subjects"
-                      ),
-                      /*#__PURE__*/ React.createElement(
-                        "div",
-                        {
-                          class: "oer_curriculum_inspector_sbjt_search_wrapper"
-                        },
-                        /*#__PURE__*/ React.createElement(
-                          "div",
-                          {
-                            class: "oer_curriculum_inspector_subject"
-                          },
-                          attributes.categories.map((cat, index) => {
-                            return /*#__PURE__*/ React.createElement(
-                              "label",
-                              {
-                                class:
-                                  "components-base-control__label ls_inspector_subject_label " +
-                                  cat.level
-                              },
-                              /*#__PURE__*/ React.createElement("input", {
-                                checked:
-                                  typeof selcat != "undefined" &&
-                                  selcat.indexOf(cat.term_id) != -1
-                                    ? "checked"
-                                    : "",
-                                id: "inspector-checkbox-control-" + index,
-                                class:
-                                  "ls_inspector_subject_checkbox " + cat.level,
-                                type: "checkbox",
-                                data: cat.term_id,
-                                parent: cat.parent,
-                                onClick: onChangeCheckboxField
-                              }),
-                              cat.name + " (" + cat.cnt + ")"
-                            );
-                          })
-                        )
-                      ),
-                      /*#__PURE__*/ React.createElement("div", {
-                        class: "oer_curriculum_inspector_sbjt_search_footer"
-                      })
-                    )
-                  )
-                )
-              )
-            )
-          )
-        ),
+        SubjectPicker,
         /*#__PURE__*/ React.createElement(
           "div",
           {
