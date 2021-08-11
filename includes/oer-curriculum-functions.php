@@ -315,6 +315,49 @@ if (! function_exists('oercurr_get_file_type_from_url')) {
     }
 }
 
+
+if (! function_exists('oercurr_get_file_type_from_url_text_only')) {
+    /**
+     * Check the file type form the url
+     * @param $url
+     * @param string $class
+     * @return array|bool
+     */
+    function oercurr_get_file_type_from_url_text_only($url, $class = 'fa-1x') {
+        if(empty($url)) {
+            return false;
+        }
+
+        $response = array();
+        $oer_urls = explode('.', $url);
+        $file_type = strtolower(end($oer_urls));
+        if(in_array($file_type, ['jpg', 'jpeg', 'gif', 'png'])) {
+            $response['title'] = 'Image';
+            $response['icon'] = 'fa fa-file-image '.esc_attr($class);
+        } elseif($file_type == 'pdf') {
+            $response['title'] = 'PDF';
+            $response['icon'] = 'fa fa-file-pdf '.esc_attr($class);
+        } elseif(in_array($file_type, ['txt'])) {
+            $response['title'] = 'Plain Text';
+            $response['icon'] = 'fa fa-file-alt '.esc_attr($class);
+        } elseif(in_array($file_type, ['7z', 'zip', 'rar'])) {
+            $response['title'] = 'Archive';
+            $response['icon'] = 'fa fa-file-archive '.esc_attr($class);
+        } elseif(in_array($file_type, ['docx', 'doc'])) {
+            $response['title'] = 'Microsoft Document';
+            $response['icon'] = 'fa fa-file-word '.esc_attr($class);
+        } elseif(in_array($file_type, ['xls'])) {
+            $response['title'] = 'Microsoft Excel';
+            $response['icon'] = 'fa fa-file-excel '.esc_attr($class);
+        } elseif(in_array($file_type, ['ppt'])) {
+            $response['title'] = 'Microsoft Powerpoint';
+            $response['icon'] = 'fa fa-file-powerpoint '.esc_attr($class);
+        }
+        return $response;
+    }
+}
+
+
 if (! function_exists('oercurr_scan_array')) {
     /**
      * multi array scan

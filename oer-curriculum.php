@@ -5,7 +5,7 @@
  Description:        Manage and display collections of Open Educational Resources in lesson plans or curriculums with alignment to Common Core State Standards.
  Version:            0.5.0
  Requires at least:  4.4
- Requires PHP:       7.4
+ Requires PHP:       7.0
  Author:             Navigation North
  Author URI:         https://www.navigationnorth.com
  Text Domain:        oer-curriculum
@@ -230,7 +230,7 @@ function oercurr_add_inquiry_set_rest_args() {
 }
 
 /* Enqueue script and css for Gutenberg Inquiry Set Thumbnail block */
-add_action('enqueue_block_editor_assets', 'oercurr_enqueue_inquiry_set_block');
+add_action('init', 'oercurr_enqueue_inquiry_set_block');
 function oercurr_enqueue_inquiry_set_block(){
     global $post;
     wp_enqueue_script(
@@ -246,14 +246,24 @@ function oercurr_enqueue_inquiry_set_block(){
         )
     );
     wp_enqueue_style(
-        'curriculum-thumbnail-block-css',
-        OERCURR_CURRICULUM_URL . "/css/backend/oer-curriculum-thumbnail-block.css",
+        'curriculum-thumbnail-block-css-backend',
+        OERCURR_CURRICULUM_URL . "/css/backend/oer-curriculum-thumbnail-block-editor.css",
         array('wp-edit-blocks')
     );
+
+    wp_register_style(
+  		'curriculum-thumbnail-block-css-frontend',
+  		OERCURR_CURRICULUM_URL . "/css/frontend/oer-curriculum-thumbnail-block-frontend.css",
+  		is_admin() ? array( 'wp-editor' ) : null, // Dependency to include the CSS after it.
+  		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
+  	);
+
+
     /* Register Thumbnail Block */
     register_block_type('oer-curriculum/curriculum-thumbnail-block', array(
         'editor_script' => 'curriculum-thumbnail-block-js',
-        'editor_style' => 'curriculum-thumbnail-block-css'
+        'editor_style'  => 'curriculum-thumbnail-block-css-backend',
+        'style'         => 'curriculum-thumbnail-block-css-frontend'
     ));
 }
 
@@ -331,3 +341,33 @@ add_action('plugins_loaded', 'oercurr_load_textdomain');
 function oercurr_load_textdomain() {
 	load_plugin_textdomain( OERCURR_CURRICULUM_SLUG, false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
 }
+
+
+// Limit blocks in 'oer-curriculum'' post type
+function wpse_allowed_block_types($allowed_block_types, $post) {
+    if(get_post_type() == 'oer-curriculum' && (isset($_GET['action']) && $_GET['action'] == 'edit')) {
+        return array(
+          'core/paragraph',
+          'core/image',
+          'core/heading',
+          'core/list',
+          'core/quote',
+          'core/table',
+          'core/verse',
+          'core/preformatted',
+          'core/pullquote',
+          'core/buttons',
+          'core/text-columns',
+          'core/media-text',
+          'core/more',
+          'core/nextpage',
+          'core/separator',
+          'core/spacer',
+          'core/shortcode'
+        );
+    }
+    else {
+        return $allowed_block_types;
+    }
+}
+add_filter('allowed_block_types_all', 'wpse_allowed_block_types', 10, 2);

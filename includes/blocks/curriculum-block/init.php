@@ -88,7 +88,7 @@ function oercurr_cb_block_assets() { // phpcs:ignore
      * @since 1.16.0
      */
     register_block_type(
-        'cgb/block-curriculum-block', array(
+        'oer-curriculum/block-curriculum-block', array(
             // Enqueue front.script.build.js on both frontend & backend.
             'script'        => 'curriculum_block-front-js',
             // Enqueue blocks.style.build.css on both frontend & backend.
@@ -111,12 +111,12 @@ function oercurr_cb_block_assets() { // phpcs:ignore
         				'default' => false,
         			),
         		),
-            'render_callback' => 'oercurr_cb_render_posts_block'
+            //'render_callback' => 'oercurr_cb_render_posts_block'
         )
     );
 }
 
-function oercurr_cb_render_posts_block($attributes, $ajx=false){
+function oercurr_cb_render_posts_block($attributes){
     
     $bid = $attributes['blockid'];
     $ord = ($attributes['sortBy'] == 'title')? 'ASC': 'DESC';    
@@ -142,82 +142,10 @@ function oercurr_cb_render_posts_block($attributes, $ajx=false){
     $_wrapper = '';
     $_content = get_curriculum_block_content($posts,$attributes);
     
-    ob_start();
-    ?>
-    <div class="oercurr-blk-main" blockid="<?php echo esc_html($bid) ?>">
-        <script>
-                localStorage.setItem("selectedCategory-<?php echo esc_html($bid) ?>", "<?php echo esc_html($attributes['selectedCategory']) ?>");
-                localStorage.setItem("postsPerPage-<?php echo esc_html($bid) ?>", "<?php echo esc_html($attributes['postsPerPage']) ?>");
-                localStorage.setItem("sortBy-<?php echo esc_html($bid) ?>", "<?php echo esc_html($attributes['sortBy']) ?>");
-        </script>
-        <div class="oercurr-blk-topbar">   
-            <div class="oercurr-blk-topbar-left">
-                <span>Browse All <?php echo esc_html($_count) ?> Curriculums</span>
-            </div><div class="oercurr-blk-topbar-right">
-                    <div class="oercurr-blk-topbar-display-box">
-                        <div class="oercurr-blk-topbar-display-text"><span>Show <?php echo esc_html($attributes['postsPerPage']) ?></span><a href="#"><i class="fa fa-th-list" aria-hidden="true"></i></a></div>
-                        <ul class="oercurr-blk-topbar-display-option oercurr-blk-topbar-option" style="display:none;">
-                          <?php
-                              for ($i=5; $i <=30; $i+=5){ 
-                                   if($i == $attributes['postsPerPage']){ ?>
-                                       <li class="selected"><a href="#" ret="<?php echo esc_html($i) ?>"><?php echo esc_html($i) ?></a></li>
-                                   <?php }else{ ?>
-                                       <li><a href="#" ret="<?php echo esc_html($i) ?>"><?php echo esc_html($i) ?></a></li>
-                                   <?php }
-                              }
-                          ?>
-                        </ul>
-                    </div>                
-                    <div class="oercurr-blk-topbar-sort-box">
-                        <div class="oercurr-blk-topbar-sort-text"><span>Sort by: <?php echo esc_html($attributes['sortBy'])?></span><a href="#"><i class="fa fa-sort" aria-hidden="true"></i></a></div>
-                        <ul class="oercurr-blk-topbar-sort-option oercurr-blk-topbar-option" style="display:none;">
-                                    <?php $_sel = ($attributes['sortBy'] == 'date')? 'class="selected"':''; ?>
-                                    <li <?php echo esc_html($_sel) ?>><a href="#" ret="date">Date Added</a></li>
-                                    <?php $_sel = ($attributes['sortBy'] == 'modified')? 'class="selected"':''; ?>
-                                    <li '.esc_html($_sel).'><a href="#" ret="modified">Date Updated</a></li>
-                                    <?php $_sel = ($attributes['sortBy'] == 'title')? 'class="selected"':''; ?>
-                                    <li '.esc_html($_sel).'><a href="#" ret="title">Title a-z</a></li>
-                        </ul>
-                    </div>                   
-            </div>
-        </div>
-    
-        <div id="lp_cur_blk_content_wrapper"  class="oercurr-blk-wrapper">
-            <div id="oercurr-blk-content_drop">
-              <?php
-                if(!count($posts) > 0){
-                    $_wrapper = 'No Curriculum Found.';
-                }else{
-                    echo wp_kses_post($_content);
-                }
-              ?>
-            </div>
-            
-            <?php // Preloader Start  ?>
-            <div class="lp_cur_blk_content_preloader_table" style="display:none;">
-                <div class="lp_cur_blk_content_preloader_cell">
-                    <div class="lds-dual-ring"></div>
-                </div>
-                <div class="lp_cur_blk_content_preloader_overlay"></div>
-            </div>  
-            <?php // Preloader End  ?>
-            
-        </div>
-        
-    </div>
-    
-    <?php
-    
-    $_non_ajx_ret = ob_get_clean();
-    if(!$ajx){
-        $_ret = $_non_ajx_ret;
-    }else{
-        $_arr['cnt'] = esc_html($_count);
-        $_arr['data'] = wp_kses_post($_content);
-        $_ret = json_encode($_arr);
-    }
-    
-    
+    $_arr['cnt'] = esc_html($_count);
+    $_arr['data'] = wp_kses_post($_content);
+    $_ret = json_encode($_arr);
+
     return $_ret;
     
 }
@@ -238,12 +166,14 @@ function get_curriculum_block_content($posts, $attributes){
               <div class="ttl"><a href="<?php echo esc_url(get_post_permalink($post->ID)) ?>"><?php echo esc_html($post->post_title) ?></a></div>
               <div class="oercurr-postmeta">
                   <?php
-                  if(count($post->oer_curriculum_grades)>1){ ?>
-                      <span class="oercurr-postmeta-grades"><strong>Grades:</strong> <?php echo esc_html($post->oer_curriculum_grades[0]) ?> - <?php echo esc_html($post->oer_curriculum_grades[count($post->oer_curriculum_grades)-1]) ?></span>
-                  <?php }else{
-                      if($post->oer_curriculum_grades[0] != ''){  ?>
-                              <span class="oercurr-postmeta-grades"><strong>Grade:</strong> <?php echo esc_html($post->oer_curriculum_grades[0]) ?></span>
-                      <?php }
+                  if(is_array($post->oer_curriculum_grades)){
+                    if(count($post->oer_curriculum_grades)>1){ ?>
+                        <span class="oercurr-postmeta-grades"><strong>Grades:</strong> <?php echo esc_html($post->oer_curriculum_grades[0]) ?> - <?php echo esc_html($post->oer_curriculum_grades[count($post->oer_curriculum_grades)-1]) ?></span>
+                    <?php }else{
+                        if($post->oer_curriculum_grades[0] != ''){  ?>
+                                <span class="oercurr-postmeta-grades"><strong>Grade:</strong> <?php echo esc_html($post->oer_curriculum_grades[0]) ?></span>
+                        <?php }
+                    }
                   }
                   ?>
               </div>
@@ -281,7 +211,7 @@ function oercurr_cb_rebuild_post_block(){
     $_arr['selectedCategory'] = sanitize_text_field($_POST['sel']);
     $_arr['postsPerPage']     = sanitize_text_field($_POST['per']);
     $_arr['sortBy']           = sanitize_text_field($_POST['srt']);   
-    echo oercurr_cb_render_posts_block($_arr, true);
+    echo oercurr_cb_render_posts_block($_arr);
     die();
 }
 add_action( 'wp_ajax_oercurr_cb_rebuild_post_block', 'oercurr_cb_rebuild_post_block' );

@@ -295,10 +295,11 @@ jQuery(document).ready(function ($) {
                 $(this).find('textarea').each(function (i,obj) {
                   var txelmid = $(obj).attr('id');
                   if (typeof txelmid !== 'undefined') {
-                    //tinymce.execCommand( 'mceRemoveEditor', false, txelmid );
-                    //tinymce.execCommand( 'mceAddEditor', false, txelmid );
+                    tinymce.execCommand( 'mceRemoveEditor', false, txelmid );
+                    tinymce.execCommand( 'mceAddEditor', false, txelmid );
                   }
                 });
+                
                 
             });
 
@@ -1037,7 +1038,7 @@ jQuery(document).ready(function ($) {
         // Initialize WP Editor
         initializeEditor: function(id) {
             wp.editor.remove(id);
-            wp.editor.initialize(
+            wp.oldEditor.initialize(
                 id,
                 {
                     tinymce: {
@@ -1104,7 +1105,14 @@ jQuery(document).ready(function ($) {
                 btn.remove();
                 metabox.find('button.oer_curriculum_primary_resources_thumbnail_button').text("Set Thumbnail");
             });
+        },
+        
+        switchToVisualWorkaround: function(){
+          setTimeout(function() {
+              jQuery('.switch-tmce').trigger('click');
+          } ,1000);
         }
+        
     };
     
     // Initialize all function on ready state
@@ -1141,6 +1149,7 @@ jQuery(document).ready(function ($) {
     OerCurriculum.lpTinyMCESave();
     OerCurriculum.addFeaturedImageOnResourceTextBox();
     OerCurriculum.removeFeaturedImageInResourceSelection();
+    OerCurriculum.switchToVisualWorkaround();
 });
 
 //Process Initial Setup
@@ -1167,6 +1176,10 @@ jQuery(window).load(function() {
   oercurr_RefreshSectionDeleteButtons(jQuery("#oercurr-required-materials").find('.oercurr-remove-section'));
   oercurr_RefreshSectionDeleteButtons(jQuery("#oercurr-additional-sections").find('.oercurr-remove-section'));
   oercurr_RefreshSectionDeleteButtons(jQuery("#oercurr-authors").find('.oercurr-remove-author'));
+  setTimeout(function() {
+      jQuery('.switch-tmce').trigger('click');
+  } ,1000);
+  
 });
 
 function oercurr_RefreshSectionDeleteButtons(obj){
@@ -1176,4 +1189,58 @@ function oercurr_RefreshSectionDeleteButtons(obj){
   }else{
     jQuery(obj).attr('disabled','disabled');
   }
+}
+
+/* Set Subject Area Main Icon */
+jQuery(document).on('click','#main_icon_button',function() {
+  invoker = jQuery(this).attr('id');
+  formfield = jQuery('#mainIcon').attr('name');
+  showMediaUpload(invoker, formfield);
+});
+
+/* Set Subject Area Hover Icon */
+jQuery(document).on('click','#hover_icon_button',function() {
+  invoker = jQuery(this).attr('id');
+  formfield = jQuery('#hoverIcon').attr('name');
+  showMediaUpload(invoker, formfield);
+});
+
+/** Remove Main Icon **/
+jQuery(document).on('click','#remove_main_icon_button',function() {
+  jQuery('#mainIcon').val('');
+  jQuery('.main_icon_button_img').remove();
+  jQuery(this).addClass('hidden');
+});
+
+/** Remove Hover Icon **/
+jQuery(document).on('click','#remove_hover_icon_button',function() {
+  jQuery('#hoverIcon').val('');
+  jQuery('.hover_icon_button_img').remove();
+  jQuery(this).addClass('hidden');
+});
+
+function showMediaUpload(invoker, formfield){
+	var button = jQuery(this),
+	custom_uploader = wp.media({
+	    title: 'Insert image',
+	    library : {
+	        type : 'image'
+	    },
+	    button: {
+	        text: 'Use this image' // button label text
+	    },
+	    multiple: false // multiple image selection set to false
+	}).on('select', function() { // it also has "open" and "close" events 
+	    var attachment = custom_uploader.state().get('selection').first().toJSON();
+	    let html = '<img class="true_pre_image" src="' + attachment.url + '" style="max-width:95%;display:block;" />';
+	    
+	    imgurl = attachment.url;
+		jQuery("#"+formfield).val(imgurl);
+		if (jQuery("."+invoker+"_img").length>0) {
+			jQuery("."+invoker+"_img").remove();
+		}
+		jQuery("#"+invoker).before('<div class="' + invoker + '_img">'+html+'</div>');
+		jQuery("#remove_"+invoker).removeClass("hidden");
+	})
+	.open();
 }

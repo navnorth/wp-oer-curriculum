@@ -655,6 +655,28 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                     <div class="form-group">
                                                         <?php $resource_description = (isset($primary_resources['description'][$resourceKey]) ? $primary_resources['description'][$resourceKey]: ""); ?>
                                                         <label>Description</label>
+                                                        
+                                                        <?php /*
+                                                        <?php $_val = wp_kses_post($resource_description); ?>
+                                                        <textarea rows="10" name="oer_curriculum_primary_resources[description][]" id="oercurr-resource-student-<?php echo $resourceKey ?>"><?php echo $_val ?></textarea>
+                                                        <script>
+                                                        jQuery(window).load(function(){
+                                                          wp.oldEditor.initialize('oercurr-resource-student-<?php echo esc_html($resourceKey) ?>', {
+                                                            tinymce: {
+                                                               plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
+                                                               toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
+                                                               //toolbar2: 'spellchecker,wp_adv,listbuttons,styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
+                                                               textareaRows : 10
+                                                             },
+                                                             quicktags: true,
+                                                             mediaButtons: true,
+                                                             teeny: true,
+                                                             relativeUrls: false
+                                                           });
+                                                        });
+                                                        </script>
+                                                        */ ?>
+  
                                                         <?php wp_editor( wp_kses_post($resource_description),
                                                             'oercurr-resource-student-' . $resourceKey,
                                                             $settings = array(
@@ -739,39 +761,11 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                             'drag_drop_upload' => true,
                                                             'teeny' => true, 
                                                             'relative_urls' => false,
+                                                            'wpautop' => false
                                                         )
                                                     ); ?>
                                                 </div>
-                                                <!--
-                                                <div class="form-group">
-                                                    <label>Teacher Information</label>
-                                                    <?php wp_editor( '',
-                                                        'oercurr-resource-teacher-1',
-                                                        $settings = array(
-                                                            'textarea_name' => 'oer_curriculum_primary_resources[teacher_info][]',
-                                                            'media_buttons' => true,
-                                                            'textarea_rows' => 6,
-                                                            'drag_drop_upload' => true,
-                                                            'teeny' => true, 
-                                                            'relative_urls' => false,
-                                                        )
-                                                    ); ?>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Student Information</label>
-                                                    <?php wp_editor( '',
-                                                        'oercurr-resource-student-1',
-                                                        $settings = array(
-                                                            'textarea_name' => 'oer_curriculum_primary_resources[student_info][]',
-                                                            'media_buttons' => true,
-                                                            'textarea_rows' => 6,
-                                                            'drag_drop_upload' => true,
-                                                            'teeny' => true, 
-                                                            'relative_urls' => false,
-                                                        )
-                                                    ); ?>
-                                                </div>
-                                                -->
+                                                
                                             </div>
                                         </div>
                                     <?php }?>
@@ -913,6 +907,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'relative_urls' => false,
                                         )
                                     ); ?>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -967,7 +962,48 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                     </div>
                                     <div class="card-body">
                                         
-                                       <?php
+                                        <div class="form-group">
+                                        <input type="text" class="form-control" name="<?php echo esc_attr($label_id) ?>" id="<?php echo esc_attr($label_id) ?>" value="<?php echo esc_attr($text_features['label'][$i]) ?>">
+                                        </div>
+                                        <div class="form-group">                    
+                                          <?php /*
+                                          <?php $_val = (isset($text_features['editor'][$i]) ? wp_kses_post($text_features['editor'][$i]) : ""); ?>
+                                          <textarea rows="10" name="<?php echo $editor_id ?>" id="oercurr-required-materials-section-<?php echo ($i + 1) ?>"><?php echo $_val ?></textarea>
+                                          <script>
+                                          jQuery(window).load(function(){
+                                            wp.oldEditor.initialize('oercurr-required-materials-section-<?php echo (esc_html($i) + 1) ?>', {
+                                              tinymce: {
+                                                 plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
+                                                 toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
+                                                 //toolbar2: 'spellchecker,wp_adv,listbuttons,styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
+                                                 textareaRows : 10
+                                               },
+                                               quicktags: true,
+                                               mediaButtons: true,
+                                               teeny: true,
+                                               relativeUrls: false
+                                             });
+                                          });
+                                          </script>
+                                          */ ?>
+                                          
+                                          <?php 
+                                          wp_editor( (isset($text_features['editor'][$i]) ? wp_kses_post($text_features['editor'][$i]) : ""),
+                                              'oercurr-required-materials-section-' . ($i + 1),
+                                              $settings = array(
+                                                  'textarea_name' => $editor_id,
+                                                  'media_buttons' => true,
+                                                  'textarea_rows' => 10,
+                                                  'drag_drop_upload' => true,
+                                                  'teeny' => true, 
+                                                  'relative_urls' => false,
+                                              )
+                                          );
+                                          ?>
+                                          
+                                        </div>
+                                        
+                                       <?php /*
                                             echo '<div class="form-group">';
                                             echo '<input type="text" class="form-control" name="'.esc_attr($label_id).'" id="'.esc_attr($label_id).'" value="'.esc_attr($text_features['label'][$i]).'">';
                                             echo '</div>';
@@ -984,7 +1020,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                 )
                                             );
                                             echo '</div>';
-                                        ?>
+                                        */ ?>
                                         
                                     </div>
                                 </div>
@@ -1048,7 +1084,51 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                     </div>
                                     <div class="card-body">
                                         
+                                        
+                                      <div class="form-group">
+                                      <input type="text" class="form-control" name="<?php echo esc_attr($label_id) ?>" id="<?php echo esc_attr($label_id) ?>" value="<?php echo esc_attr($text_features['label'][$i]) ?>">
+                                      </div>
+                                      <div class="form-group">                    
+                                        <?php /*
+                                        <?php $_val = (isset($text_features['editor'][$i]) ? wp_kses_post($text_features['editor'][$i]) : ""); ?>
+                                        <textarea rows="10" name="<?php echo $editor_id ?>" id="oercurr-additional-sections-editor-<?php echo ($i + 1) ?>"><?php echo $_val ?></textarea>
+                                        <script>
+                                        jQuery(window).load(function(){
+                                          wp.oldEditor.initialize('oercurr-additional-sections-editor-<?php echo (esc_html($i) + 1) ?>', {
+                                            tinymce: {
+                                               plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
+                                               toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
+                                               //toolbar2: 'spellchecker,wp_adv,listbuttons,styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
+                                               textareaRows : 10
+                                             },
+                                             quicktags: true,
+                                             mediaButtons: true,
+                                             teeny: true,
+                                             relativeUrls: false
+                                           });
+                                        });
+                                        </script>
+                                        */ ?>
+                                        
+                                        <?php
+                                        wp_editor( (isset($text_features['editor'][$i]) ? wp_kses_post($text_features['editor'][$i]) : ""),
+                                            'oercurr-additional-sections-editor-' . ($i + 1),
+                                            $settings = array(
+                                                'textarea_name' => $editor_id,
+                                                'media_buttons' => true,
+                                                'textarea_rows' => 10,
+                                                'drag_drop_upload' => true,
+                                                'teeny' => true, 
+                                                'relative_urls' => false,
+                                            )
+                                        );
+                                        ?>
+                                        
+                                      </div>
+                                        
+                                        
                                        <?php
+                                            /*
                                             echo '<div class="form-group">';
                                             echo '<input type="text" class="form-control" name="'.esc_attr($label_id).'" id="'.esc_attr($label_id).'" value="'.esc_attr($text_features['label'][$i]).'">';
                                             echo '</div>';
@@ -1065,6 +1145,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                 )
                                             );
                                             echo '</div>';
+                                            */
                                         ?>
                                         
                                     </div>
@@ -1888,6 +1969,26 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Description</label>
+                                                    
+                                                    <?php /*
+                                                    <textarea rows="10" name="oer_curriculum_primary_resources[description][]" id="oercurr-resource-student-1"></textarea>
+                                                    <script>
+                                                    jQuery(window).load(function(){
+                                                      wp.oldEditor.initialize("oercurr-resource-student-1", {
+                                                        tinymce: {
+                                                            plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
+                                                            toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
+                                                            //toolbar2: 'spellchecker,wp_adv,listbuttons,styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
+                                                         },
+                                                         quicktags: true,
+                                                         mediaButtons: true,
+                                                         teeny: true,
+                                                         relativeUrls: false
+                                                       });
+                                                    });
+                                                    </script>
+                                                    */ ?>
+                                                    
                                                     <?php wp_editor( '',
                                                         'oercurr-resource-student-1',
                                                         $settings = array(
@@ -1897,8 +1998,10 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                             'drag_drop_upload' => true,
                                                             'teeny' => true, 
                                                             'relative_urls' => false,
+                                                            'wpautop' => false
                                                         )
                                                     ); ?>
+                                                    
                                                 </div>
                                                 
                                             </div>
@@ -1986,8 +2089,10 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                 'drag_drop_upload' => true,
                                                 'teeny' => true, 
                                                 'relative_urls' => false,
+                                                'wpautop' => false
                                             )
                                         ); ?>
+                
                                     </div>
                                 </div>
                             </div>
@@ -1996,6 +2101,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {    
                             ?>
                             <!--Required Equipment Materials Module-->
+                            <?php ob_start(); // Start output buffer ?>
                             <div class="card col card-default oercurr-element-wrapper oercurr-required-materials" id="oercurr-required-materials">
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_required_materials]" class="element-order" value="<?php echo esc_attr($index); ?>">
                                 <div class="card-header">
@@ -2027,17 +2133,46 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                <input type="text" class="form-control" name="oer_curriculum_required_materials[label][]" placeholder="Label" id="oer_curriculum_additional_sections_label" value="">
                                            </div>
                                            <div class="form-group">
-                                               <?php wp_editor( '',
+                                               <div class="text-editor-group">
+                                                 
+                                                 <?php /*
+                                                 <?php wp_enqueue_editor(); wp_enqueue_media(); ?>
+                                                 <textarea rows="10" name="oer_curriculum_required_materials[editor][]" id="oercurr-required-material-section-1"></textarea>
+                                                 <script>
+                                                 jQuery(window).load(function(){
+                                                   wp.oldEditor.initialize("oercurr-required-material-section-1", {
+                                                      tinymce: {
+                                                        plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
+                                                        toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
+                                                        //toolbar2: 'spellchecker,wp_adv,listbuttons,styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
+                                                        textareaRows : 10
+                                                      },
+                                                      quicktags: true,
+                                                      mediaButtons: true,
+                                                      teeny: true,
+                                                      relativeUrls: false
+                                                    });
+                                                 });
+                                                 </script>
+                                                 */ ?>
+                                                 
+
+                                               <?php
+                                               wp_editor( '',
                                                    'oercurr-required-material-section-1',
                                                    $settings = array(
                                                        'textarea_name' => 'oer_curriculum_required_materials[editor][]',
                                                        'media_buttons' => true,
-                                                       'textarea_rows' => 10,
+                                                       'textarea_rows' => 6,
                                                        'drag_drop_upload' => true,
                                                        'teeny' => true, 
                                                        'relative_urls' => false,
+                                                       'wpautop' => false
                                                    )
-                                               ); ?>
+                                               ); 
+                                               ?>
+                                               
+                                               </div>
                                            </div>
                                         </div>
                                     </div>
@@ -2082,17 +2217,42 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                <input type="text" class="form-control" name="oer_curriculum_additional_sections[label][]" placeholder="Additional Section" id="oer_curriculum_additional_sections_label" value="">
                                            </div>
                                            <div class="form-group">
-                                               <?php wp_editor( '',
-                                                   'oercurr-additional-section-1',
-                                                   $settings = array(
-                                                       'textarea_name' => 'oer_curriculum_additional_sections[editor][]',
-                                                       'media_buttons' => true,
-                                                       'textarea_rows' => 6,
-                                                       'drag_drop_upload' => true,
-                                                       'teeny' => true, 
-                                                       'relative_urls' => false,
-                                                   )
-                                               ); ?>
+                                              <div class="text-editor-group">
+                                                 <?php /*
+                                                 <?php wp_enqueue_editor(); wp_enqueue_media(); ?>
+                                                 <textarea rows="10" name="oer_curriculum_additional_sections[editor][]" id="oercurr-additional-section-1"></textarea>
+                                                 <script>
+                                                 jQuery(window).load(function(){
+                                                   wp.oldEditor.initialize("oercurr-additional-section-1", {
+                                                      tinymce: {
+                                                        plugins : 'charmap colorpicker hr lists paste tabfocus textcolor fullscreen wordpress wpautoresize wpeditimage wpemoji wpgallery wplink wptextpattern',
+                                                        toolbar1: 'bold,italic,underline,blockquote,strikethrough,bullist,numlist,alignleft,aligncenter,alignright,undo,redo,link,fullscreen',
+                                                        //toolbar2: 'spellchecker,wp_adv,listbuttons,styleselect,strikethrough,hr,forecolor,pastetext,removeformat,charmap,outdent,indent,undo,redo,wp_help',
+                                                        textareaRows : 10
+                                                      },
+                                                      quicktags: true,
+                                                      mediaButtons: true,
+                                                      teeny: true,
+                                                      relativeUrls: false
+                                                    });
+                                                 });
+                                                 </script>
+                                                 */ ?>
+                                                 
+                                                 <?php wp_editor( '',
+                                                     'oercurr-additional-section-1',
+                                                     $settings = array(
+                                                         'textarea_name' => 'oer_curriculum_additional_sections[editor][]',
+                                                         'media_buttons' => true,
+                                                         'textarea_rows' => 6,
+                                                         'drag_drop_upload' => true,
+                                                         'teeny' => true, 
+                                                         'relative_urls' => false,
+                                                         'wpautop' => false
+                                                     )
+                                                 ); ?>
+                                                 
+                                              </div>
                                            </div>
                                         </div>
                                     </div>
@@ -2288,6 +2448,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                 'drag_drop_upload' => true,
                                                                 'teeny' => true, 
                                                                 'relative_urls' => false,
+                                                                'wpautop' => false
                                                             )
                                                         ); ?>
                                                     </div>
@@ -2417,6 +2578,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'drag_drop_upload' => true,
                                             'teeny' => true, 
                                             'relative_urls' => false,
+                                            'wpautop' => false
                                         )
                                     );
                                     ?>
@@ -2454,6 +2616,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'drag_drop_upload' => true,
                                             'teeny' => true, 
                                             'relative_urls' => false,
+                                            'wpautop' => false
                                         )
                                     );
                                     ?>
@@ -2491,6 +2654,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             'drag_drop_upload' => true,
                                             'teeny' => true, 
                                             'relative_urls' => false,
+                                            'wpautop' => false
                                         )
                                     );
                                     ?>
@@ -2695,39 +2859,11 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                 'drag_drop_upload' => true,
                                                 'teeny' => true, 
                                                 'relative_urls' => false,
+                                                'wpautop' => false
                                             )
                                         ); ?>
                                     </div>
-                                    <!--
-                                    <div class="form-group">
-                                        <label>Teacher Information</label>
-                                        <?php wp_editor( '',
-                                            'oercurr-resource-teacher-1',
-                                            $settings = array(
-                                                'textarea_name' => 'oer_curriculum_primary_resources[teacher_info][]',
-                                                'media_buttons' => true,
-                                                'textarea_rows' => 6,
-                                                'drag_drop_upload' => true,
-                                                'teeny' => true, 
-                                                'relative_urls' => false,
-                                            )
-                                        ); ?>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Student Information</label>
-                                        <?php wp_editor( '',
-                                            'oercurr-resource-student-1',
-                                            $settings = array(
-                                                'textarea_name' => 'oer_curriculum_primary_resources[student_info][]',
-                                                'media_buttons' => true,
-                                                'textarea_rows' => 6,
-                                                'drag_drop_upload' => true,
-                                                'teeny' => true, 
-                                                'relative_urls' => false,
-                                            )
-                                        ); ?>
-                                    </div>
-                                    -->
+                                    
                                 </div>
                             </div>
                         </div>
@@ -2798,6 +2934,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                     'drag_drop_upload' => true,
                                     'teeny' => true, 
                                     'relative_urls' => false,
+                                    'wpautop' => false
                                 )
                             ); ?>
                         </div>
@@ -2979,6 +3116,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                     'drag_drop_upload' => true,
                                                     'teeny' => true, 
                                                     'relative_urls' => false,
+                                                    'wpautop' => false
                                                 )
                                             ); ?>
                                         </div>

@@ -1,1 +1,2364 @@
-!function(e){function t(r){if(l[r])return l[r].exports;var c=l[r]={i:r,l:!1,exports:{}};return e[r].call(c.exports,c,c.exports,t),c.l=!0,c.exports}var l={};t.m=e,t.c=l,t.d=function(e,l,r){t.o(e,l)||Object.defineProperty(e,l,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var l=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(l,"a",l),l},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=0)}([function(e,t,l){"use strict";Object.defineProperty(t,"__esModule",{value:!0});l(1)},function(e,t,l){"use strict";var r=l(2),c=(l.n(r),l(3)),__=(l.n(c),wp.i18n.__),n=wp.blocks.registerBlockType,a=wp.blockEditor.InspectorControls,i=wp.components.PanelBody,s=wp.components,o=(s.CheckboxControl,s.RadioControl,s.TextControl,s.ToggleControl,s.SelectControl,[]),p="li",m=[1,2,3,4,5],d=[5,10,15,20,25,30,35,40,45,50],u=["middle","left","right"];n("cgb/block-curriculum-featured-block",{title:__("Curriculum Featured Block"),icon:"welcome-learn-more",description:__("Use this block to add OER curriculum and resources in a slider."),category:"oer-block-category",keywords:[__("curriculum-featured-block"),__("CGB Example"),__("create-guten-block")],attributes:{blockwidth:{type:"intiger",default:1170},blockid:{type:"string"},highlight:{type:"string",default:"resources"},selectedfeatured:{type:"string"},data:{type:"string"},resources:{type:"string"},curriculum:{type:"string"},blocktitle:{type:"string",default:"Featured"},searchstring:{type:"string"},resourcesubjects:{type:"object"},curriculumsubjects:{type:"object"},resourcesubjectfilter:{type:"string"},curriculumsubjectfilter:{type:"string"},filtertype:{type:"string"},minslides:{type:"intiger",default:1},maxslides:{type:"intiger",default:3},moveslides:{type:"intiger",default:1},slidewidth:{type:"intiger",default:375},slidemargin:{type:"intiger",default:20},slidealign:{type:"string",default:"left"},slidedesclength:{type:"intiger",default:oercurr_cfb_cgb_Global.slidedesclength},slideimageheight:{type:"intiger",default:oercurr_cfb_cgb_Global.slideimageheight}},edit:function(e){function t(e,t){if(!oercurr_cfb_cgb_Global.bxresetblocked){var r=e.target.getAttribute("fet");if(e.target.checked){var c=e.target.getAttribute("data");C.push([parseInt(c),r])}else{var n=parseInt(e.target.getAttribute("data")),a=C.findIndex(l(n));-1!=a&&C.splice(a,1)}o=[],C.map(function(e,t){var l=void 0;"cur"==e[1]?(l=k.curriculum.find(function(t){return t.id==parseInt(e[0])}),k.curriculum.indexOf(parseInt(e[0]))):(l=k.resources.find(function(t){return t.id==parseInt(e[0])}),k.resources.indexOf(parseInt(e[0]))),"undefined"!=typeof l&&o.push(Object.values(l))});var i="";C.map(function(e,t){void 0!==e[0]&&void 0!==e[1]&&(i+=""==i?e[0]+"|"+e[1]:","+e[0]+"|"+e[1])}),v({selectedfeatured:i}),curriculumfeatslider_reset(k.blockid,750,e.target)}}function l(e){return function(t){return t[0]===e}}function r(){p="li"==p?"div":"li",C=[],jQuery(".oercurr_cfb_inspector_feat_hlite_node").each(function(){var e=jQuery(this).attr("data"),t=jQuery(this).attr("typ");C.push([parseInt(e),t])}),o=[],C.map(function(e,t){var l=void 0;if("cur"==e[1]){l=k.curriculum.find(function(t){return t.id==parseInt(e[0])});k.curriculum.indexOf(parseInt(e[0]))}else{l=k.resources.find(function(t){return t.id==parseInt(e[0])});k.resources.indexOf(parseInt(e[0]))}"undefined"!=typeof l&&o.push(Object.values(l))});var e="";C.map(function(t,l){void 0!==t[0]&&void 0!==t[1]&&(e+=""==e?t[0]+"|"+t[1]:","+t[0]+"|"+t[1])}),v({selectedfeatured:e})}function c(){C=[],jQuery(".oercurr_cfb_inspector_feat_hlite_node.stay").each(function(){var e=jQuery(this).attr("data"),t=jQuery(this).attr("typ");C.push([parseInt(e),t])}),o=[],C.map(function(e,t){var l=void 0;if("cur"==e[1]){l=k.curriculum.find(function(t){return t.id==parseInt(e[0])});k.curriculum.indexOf(parseInt(e[0]))}else{l=k.resources.find(function(t){return t.id==parseInt(e[0])});k.resources.indexOf(parseInt(e[0]))}"undefined"!=typeof l&&o.push(Object.values(l))});var e="";C.map(function(t,l){void 0!==t[0]&&void 0!==t[1]&&(e+=""==e?t[0]+"|"+t[1]:","+t[0]+"|"+t[1])}),v({selectedfeatured:e})}function n(){var e=setInterval(function(){jQuery(".oercurr_cfb_inspector_feat_hlite_list").length&&(clearInterval(e),setTimeout(function(){sort()},500))},100)}function s(e,t){"res"==e.target.getAttribute("typ")?jQuery(".oercurr_cfb_inspector_feat_modal_resource_wrapper").hide(300,function(){jQuery(".oercurr_cfb_inspector_feat_modal_curriculum_wrapper").show(300)}):jQuery(".oercurr_cfb_inspector_feat_modal_curriculum_wrapper").hide(300,function(){jQuery(".oercurr_cfb_inspector_feat_modal_resource_wrapper").show(300)})}function _(e,t){var l=e.target.getAttribute("typ"),r=e.target.value;switch(l){case"minslides":v({minslides:parseInt(r)});break;case"maxslides":v({maxslides:parseInt(r)});break;case"moveslides":v({moveslides:parseInt(r)});break;case"slidewidth":v({slidewidth:parseInt(r)});break;case"slidemargin":v({slidemargin:parseInt(r)});break;case"slidealign":v({slidealign:r});break;case"slidedesclength":v({slidedesclength:parseInt(r)});break;case"slideimageheight":v({slideimageheight:parseInt(r)})}localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-minslides",k.minslides),localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-maxslides",k.maxslides),localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-moveslides",k.moveslides),localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-slidewidth",k.slidewidth),localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-slidemargin",k.slidemargin),localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-slidealign",k.slidealign),localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-slidedesclength",k.slidedesclength),localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-slideimageheight",k.slideimageheight),curriculumfeatslider_reset(k.blockid,750)}function b(e,t){var l=e.target.value;l=""==l?"":l;var r=e.target.getAttribute("blk");oercurr_cfb_cgb_Global["curriculum_feat_title_"+r]=l,v({blocktitle:l})}function f(e,t){var l=e.target.value.toLowerCase();v({resourcesubjectfilter:""}),v({curriculumsubjectfilter:""}),v({searchstring:l})}function g(e,t){var l=e.target.value;v({searchstring:""}),v(""!==l?{resourcesubjectfilter:l}:{resourcesubjectfilter:""})}function h(e,t){var l=e.target.value;v({searchstring:""}),v(""!==l?{curriculumsubjectfilter:l}:{curriculumsubjectfilter:""})}function w(e,t){v({resourcesubjectfilter:""}),v({curriculumsubjectfilter:""}),v({searchstring:""}),v("search"==k.filtertype?{filtertype:"subject"}:{filtertype:"search"})}function E(e,t){var l=e.target.value;v({blockwidth:l}),jQuery("#block-"+k.blockid).css({maxWidth:l+"px"}),localStorage.setItem("lpInspectorFeatBlockwidth-"+k.blockid,k.blockwidth)}var k=e.attributes,v=e.setAttributes,x=oercurr_cfb_cgb_Global.preview_url,y=0,I=0;if(wp.data.select("core/block-editor").getBlocks().map(function(e,t){if("cgb/block-curriculum-featured-block"==e.name){var l=((new Date).getTime(),e.clientId);wp.data.dispatch("core/block-editor").updateBlockAttributes(l,{blockid:l}),void 0===k.filtertype&&wp.data.dispatch("core/block-editor").updateBlockAttributes(l,{filtertype:"search"}),I++,y++}}),!k.blockid)return wp.element.createElement("img",{src:x,width:"100%"});curriculumfeatslider_loadall(y);var C=[];if("undefined"!==typeof k.selectedfeatured){k.selectedfeatured.split(",").map(function(e,t){var l=e.split("|");C.push([parseInt(l[0]),l[1]])})}if(k.resources,void 0!==k.data&&k.data||wp.apiFetch({url:"/wp-json/curriculum/feat/dataquery"}).then(function(e){v({data:e}),v({resourcesubjects:e[0]}),v({curriculumsubjects:e[1]}),v({resources:e[2]}),v({curriculum:e[3]})}),!k.data)return"Loading Featured Data...";var j=k.data,S=j[0],F=j[1],L=j[2],O=j[3];"undefined"!=typeof k.selectedfeatured?(o=[],C.map(function(e,t){var l=void 0;if("cur"==e[1]){l=k.curriculum.find(function(t){return t.id==parseInt(e[0])});k.curriculum.indexOf(parseInt(e[0]))}else{l=k.resources.find(function(t){return t.id==parseInt(e[0])});k.resources.indexOf(parseInt(e[0]))}"undefined"!=typeof l&&o.push(Object.values(l))})):o=[],localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-minslides",k.minslides),localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-maxslides",k.maxslides),localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-moveslides",k.moveslides),localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-slidewidth",k.slidewidth),localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-slidemargin",k.slidemargin),localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-slidealign",k.slidealign),localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-slidedesclength",k.slidedesclength),localStorage.setItem("lpInspectorFeatSliderSetting-"+k.blockid+"-slideimageheight",k.slideimageheight),jQuery("#block-"+k.blockid).css({maxWidth:k.blockwidth+"px"}),localStorage.setItem("lpInspectorFeatBlockwidth-"+k.blockid,k.blockwidth),jQuery(document).on("click",".oercurr_cfb_right_featuredwpr",function(e){var t=jQuery(e.target).closest(".block-editor-block-list__block").attr("data-block");wp.data.dispatch("core/block-editor").selectBlock(t)});var G=[1];return wp.element.createElement("div",null,wp.element.createElement(a,null,wp.element.createElement(i,{title:__("Curriculum Featured Block settings"),initialOpen:!0},wp.element.createElement("div",{class:"oercurr_cfb_inspector_wrapper"},wp.element.createElement("label",{class:"components-base-control__label",for:"oercurr_cfb_inspector_subject"},"Block Title:"),wp.element.createElement("input",{type:"text",onChange:b,class:"ls_inspector_feat_title",value:k.blocktitle,blk:k.blockid})),wp.element.createElement("div",{class:"oercurr_cfb_inspector_wrapper"},wp.element.createElement("label",{class:"components-base-control__label",for:"oercurr_cfb_inspector_subject"},"Block Width"),wp.element.createElement("input",{type:"number",onChange:E,class:"ls_inspector_feat_blockwidth",value:k.blockwidth,blk:k.blockid}),wp.element.createElement("label",{class:"components-base-control__label",for:"oercurr_cfb_inspector_subject"},wp.element.createElement("em",null,"Note: Block width setting is only used to simulate the frontend width at backend and will not affect the frontend."))),wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_resource_wrapper"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_content_main"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_wrapper_close"},wp.element.createElement("span",{class:"dashicons dashicons-no"})),wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_center"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_table"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_cell"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_search_wrapper"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_search_header"},"Resources"),G.map(function(e,t){return"subject"==k.filtertype?wp.element.createElement("input",{type:"button",onClick:w,class:"button",value:"Filter by subject"}):wp.element.createElement("input",{type:"button",onClick:w,class:"button",value:"Filter by search"})}),G.map(function(e,t){return"subject"==k.filtertype?wp.element.createElement("input",{type:"text",onChange:f,fet:"res",id:"oercurr_cfb_inspector_feat_search",class:"oercurr_cfb_inspector_feat_search",value:k.searchstring}):wp.element.createElement("select",{id:"oercurr_cfb_inspector_feat_subject_select",onChange:g,value:k.resourcesubjectfilter},wp.element.createElement("option",{value:""},"All"),S.map(function(e,t){return e.term_id==k.resourcesubjectfilter?0==e.parent?wp.element.createElement("option",{selected:"selected",value:e.term_id,class:"oercurr_cfb_inspector_feat_subject_select_bold"},e.name+" ("+e.cnt+")"):wp.element.createElement("option",{selected:"selected",value:e.term_id},"\u251c "+e.name+" ("+e.cnt+")"):0==e.parent?wp.element.createElement("option",{value:e.term_id,class:"oercurr_cfb_inspector_feat_subject_select_bold"},e.name+" ("+e.cnt+")"):wp.element.createElement("option",{value:e.term_id},"\u251c "+e.name+" ("+e.cnt+")")}))})),wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_content"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_content_subcontainer"},L.map(function(e,r){var c=C.findIndex(l(e.id)),n=k.searchstring,a=k.resourcesubjectfilter,i=e.title.toLowerCase(),s=e.tax.toString(),o=s.split("|");if(""!=k.searchstring&&k.searchstring){if(o.includes(a)){if(-1!==i.indexOf(n))return-1!=c?wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{checked:"checked",onClick:t,fet:"res",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),unescape(e.title)):wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{onClick:t,fet:"res",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),unescape(e.title))}else if(-1!==i.indexOf(n))return-1!=c?wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{checked:"checked",onClick:t,fet:"res",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),unescape(e.title)):wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{onClick:t,fet:"res",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),unescape(e.title))}else{if(""==a||void 0===a)return-1!=c?wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{checked:"checked",onClick:t,fet:"res",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),unescape(e.title)):wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{onClick:t,fet:"res",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),unescape(e.title));if(o.includes(a))return-1!=c?wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{checked:"checked",onClick:t,fet:"res",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),unescape(e.title)):wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{onClick:t,fet:"res",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),unescape(e.title))}}))),wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_search_footer"},wp.element.createElement("input",{type:"button",class:"button oercurr_cfb_inspector_feat_quickswitchbutton",onClick:s,typ:"res",value:"Curriculum lists >"})))))))),wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_curriculum_wrapper"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_content_main"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_wrapper_close"},wp.element.createElement("span",{class:"dashicons dashicons-no"})),wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_center"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_table"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_cell"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_search_wrapper"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_search_header"},"Curriculum"),G.map(function(e,t){return"subject"==k.filtertype?wp.element.createElement("input",{type:"button",onClick:w,class:"button",value:"Filter by subject"}):wp.element.createElement("input",{type:"button",onClick:w,class:"button",value:"Filter by search"})}),G.map(function(e,t){return"subject"==k.filtertype?wp.element.createElement("input",{type:"text",onChange:f,fet:"res",id:"oercurr_cfb_inspector_feat_search",class:"oercurr_cfb_inspector_feat_search",value:k.searchstring}):wp.element.createElement("select",{id:"oercurr_cfb_inspector_feat_subject_select",onChange:h,value:k.curriculumsubjectfilter},wp.element.createElement("option",{value:""},"All"),F.map(function(e,t){return e.term_id==k.curriculumsubjectfilter?0==e.parent?wp.element.createElement("option",{selected:"selected",value:e.term_id,class:"oercurr_cfb_inspector_feat_subject_select_bold"},e.name+" ("+e.cnt+")"):wp.element.createElement("option",{selected:"selected",value:e.term_id},"\u251c "+e.name+" ("+e.cnt+")"):0==e.parent?wp.element.createElement("option",{value:e.term_id,class:"oercurr_cfb_inspector_feat_subject_select_bold"},e.name+" ("+e.cnt+")"):wp.element.createElement("option",{value:e.term_id},"\u251c "+e.name+" ("+e.cnt+")")}))})),wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_content"},wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_modal_content_subcontainer"},O.map(function(e,r){var c=C.findIndex(l(e.id)),n=k.searchstring,a=k.curriculumsubjectfilter,i=e.title.toLowerCase(),s=e.tax.toString();if(""!=k.searchstring&&k.searchstring){if(-1!==s.indexOf(a)){if(-1!==i.indexOf(n))return-1!=c?wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{checked:"checked",onClick:t,fet:"cur",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),e.title):wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{onClick:t,fet:"cur",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),e.title)}else if(-1!==i.indexOf(n))return-1!=c?wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{checked:"checked",onClick:t,fet:"cur",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),e.title):wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{onClick:t,fet:"cur",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),e.title)}else{if(""==a||void 0===a)return-1!=c?wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{checked:"checked",onClick:t,fet:"cur",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),e.title):wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{onClick:t,fet:"cur",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),e.title);if(-1!==s.indexOf(a))return-1!=c?wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{checked:"checked",onClick:t,fet:"cur",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),e.title):wp.element.createElement("label",{class:"components-base-control__label ls_inspector_feat_modal_label",srch:e.title.toLowerCase()},wp.element.createElement("img",{src:oercurr_cfb_cgb_Global.pluginDirUrl+"images/preloader.gif"}),wp.element.createElement("input",{onClick:t,fet:"cur",id:"inspector-checkbox-control-"+r,idx:r,class:"ls_inspector_feat_modal_checkbox",type:"checkbox",data:e.id,tax:s}),e.title)}}))),wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_search_footer"},wp.element.createElement("input",{type:"button",class:"button oercurr_cfb_inspector_feat_quickswitchbutton",onClick:s,typ:"cur",value:"Resources lists >"})))))))),wp.element.createElement("div",{class:"oercurr_cfb_inspector_wrapper"},wp.element.createElement("label",{class:"components-base-control__label",for:"oercurr_cfb_inspector_subject"},"Featured List:"),wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_addbutton_wrapper"},wp.element.createElement("div",{class:"button oercurr_cfb_inspector_feat_addResources"},"Add Resources"),wp.element.createElement("div",{class:"button oercurr_cfb_inspector_feat_addCurriculum"},"Add Curriculum")),wp.element.createElement("div",{class:"oercurr_cfb_inspector_feat_hlite_list"},wp.element.createElement("div",{id:"oercurr_cfb_inspector_feat_hlite_featured",class:"oercurr_cfb_inspector_feat_hlite_featured"},o.map(function(e,t){return"li"==p?wp.element.createElement("div",{draggable:!0,onMouseup:r,class:"oercurr_cfb_inspector_feat_hlite_node stay "+e[6],data:e[0],typ:e[6]},e[1],wp.element.createElement("span",{class:"dashicons dashicons-dismiss"})):wp.element.createElement("li",{draggable:!0,onMouseup:r,class:"oercurr_cfb_inspector_feat_hlite_node stay "+e[6],data:e[0],typ:e[6]},e[1],wp.element.createElement("span",{class:"dashicons dashicons-dismiss"}))})),wp.element.createElement("div",{class:"button oercurr_cfb_inspector_feat_hlite_reposition_trigger",onClick:r,blkid:k.blockid}),wp.element.createElement("div",{class:"button oercurr_cfb_inspector_feat_hlite_remove_trigger",height:"0",width:"0",onClick:c,blkid:k.blockid}))),wp.element.createElement("div",{class:"oercurr_cfb_inspector_wrapper"},wp.element.createElement("label",{class:"components-base-control__label",for:"oercurr_cfb_inspector_subject"},"Slider Setting:"),wp.element.createElement("table",{class:"oercurr_cfb_inspector_feat_slider_setting",cellspacing:"2"},wp.element.createElement("tr",null,wp.element.createElement("td",null,wp.element.createElement("span",{class:"dashicons dashicons-info tooltipped"},wp.element.createElement("span",{class:"tooltiptext"},"The minimum number of slides to be shown. Slides will be sized down if slider becomes smaller than the original size.")),"Min. Slides:"),wp.element.createElement("td",null,wp.element.createElement("select",{id:"oercurr_cfb_inspector_feat_slider_minslides",onChange:_,typ:"minslides",value:k.minslides},m.map(function(e,t){return e==k.minslides?wp.element.createElement("option",{selected:!0,value:e},e):wp.element.createElement("option",{value:e},e)})))),wp.element.createElement("tr",null,wp.element.createElement("td",null,wp.element.createElement("span",{class:"dashicons dashicons-info tooltipped"},wp.element.createElement("span",{class:"tooltiptext"},"The maximum number of slides to be shown. Slides will be sized up if slider becomes larger than the original size.")),"Max. Slides:"),wp.element.createElement("td",null,wp.element.createElement("select",{id:"oercurr_cfb_inspector_feat_slider_maxslides",onChange:_,typ:"maxslides",value:k.maxslides},m.map(function(e,t){return e==k.maxslides?wp.element.createElement("option",{selected:!0,value:e},e):wp.element.createElement("option",{value:e},e)})))),wp.element.createElement("tr",null,wp.element.createElement("td",null,wp.element.createElement("span",{class:"dashicons dashicons-info tooltipped"},wp.element.createElement("span",{class:"tooltiptext"},"The number of slides to move on transition. This value must be greater than or equal to minSlides, and less than or equal to maxSlides. If value is greater than the fully-visible slides, then the count of fully-visible slides will be used.")),"Move Slides:"),wp.element.createElement("td",null,wp.element.createElement("select",{id:"oercurr_cfb_inspector_feat_slider_moveslides",onChange:_,typ:"moveslides",value:k.moveslides},m.map(function(e,t){return e==k.moveslides?wp.element.createElement("option",{selected:!0,value:e},e):wp.element.createElement("option",{value:e},e)})))),wp.element.createElement("tr",null,wp.element.createElement("td",null,wp.element.createElement("span",{class:"dashicons dashicons-info tooltipped"},wp.element.createElement("span",{class:"tooltiptext"},"Width of each slide.")),"Slide Width:"),wp.element.createElement("td",null,wp.element.createElement("input",{type:"number",id:"oercurr_cfb_inspector_feat_slider_slidewidth",typ:"slidewidth",onChange:_,value:k.slidewidth}))),wp.element.createElement("tr",null,wp.element.createElement("td",null,wp.element.createElement("span",{class:"dashicons dashicons-info tooltipped"},wp.element.createElement("span",{class:"tooltiptext"},"Space between slides")),"Slide Margin:"),wp.element.createElement("td",null,wp.element.createElement("select",{id:"oercurr_cfb_inspector_feat_slider_slidemargin",onChange:_,typ:"slidemargin",value:k.slidemargin},d.map(function(e,t){return e==k.slidemargin?wp.element.createElement("option",{selected:!0,value:e},e):wp.element.createElement("option",{value:e},e)})))),wp.element.createElement("tr",null,wp.element.createElement("td",null,wp.element.createElement("span",{class:"dashicons dashicons-info tooltipped"},wp.element.createElement("span",{class:"tooltiptext"},"Left, right or middle alignment")),"Alignmnet:"),wp.element.createElement("td",null,wp.element.createElement("select",{id:"oercurr_cfb_inspector_feat_slider_slidealign",onChange:_,typ:"slidealign",value:k.slidealign},u.map(function(e,t){return e==k.slidemargin?wp.element.createElement("option",{selected:!0,value:e},e):wp.element.createElement("option",{value:e},e)})))),wp.element.createElement("tr",null,wp.element.createElement("td",null,wp.element.createElement("span",{class:"dashicons dashicons-info tooltipped"},wp.element.createElement("span",{class:"tooltiptext"},"Length of description to display.")),"Description length:"),wp.element.createElement("td",null,wp.element.createElement("input",{type:"number",id:"oercurr_cfb_inspector_feat_slider_slidedesclength",typ:"slidedesclength",onChange:_,value:k.slidedesclength}))),wp.element.createElement("tr",null,wp.element.createElement("td",null,wp.element.createElement("span",{class:"dashicons dashicons-info tooltipped"},wp.element.createElement("span",{class:"tooltiptext"},"Adjust image height")),"Image height:"),wp.element.createElement("td",null,wp.element.createElement("input",{type:"number",id:"oercurr_cfb_inspector_feat_slider_slideimageheight",typ:"slideimageheight",onChange:_,value:k.slideimageheight}))))),wp.element.createElement("img",{className:"onload-hack-pp",height:"0",width:"0",onLoad:n,src:oercurr_cfb_cgb_Global.pluginDirUrl+"//images/default-img.jpg"}))),wp.element.createElement("div",{class:"oercurr_cfb_right_featuredwpr"},wp.element.createElement("div",{class:"oercurr-cfb-ftrdttl curriculum-feat-title_"+k.blockid},k.blocktitle),wp.element.createElement("ul",{class:"featuredwpr_bxslider featuredwpr_bxslider_"+k.blockid,blk:k.blockid},o.map(function(e,t){var l=e[2];return l.length>k.slidedesclength&&(l=unescape(l.substr(0,k.slidedesclength))+"..."),wp.element.createElement("li",{atrr:e[0]},wp.element.createElement("div",{class:"frtdsnglwpr"},wp.element.createElement("a",{href:e[3],tabindex:"-1"},wp.element.createElement("div",{class:"img"},wp.element.createElement("img",{src:e[4],alt:e[1]}))),wp.element.createElement("div",{class:"ttl"},wp.element.createElement("a",{href:e[3],tabindex:"-1"},e[1])),wp.element.createElement("div",{class:"desc"},l)))}))))},save:function(e){return null},example:{}})},function(e,t){},function(e,t){}]);
+let resources_arr = [];
+let feats = [];
+let poschangeinitiated = false;
+let prevelem = "li";
+const globalSettingOptions = [1, 2, 3, 4, 5];
+const globalSettingMargin = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+const globalSettingAlign = ["middle", "left", "right"];
+registerBlockType("oer-curriculum/block-curriculum-featured-block", {
+  // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+  title: __("Curriculum Featured Block"),
+  // Block title.
+  icon: "welcome-learn-more",
+  // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
+  description: __(
+    "Use this block to add OER curriculum and resources in a slider."
+  ),
+  category: "oer-block-category",
+  // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+  keywords: [
+    __("curriculum-featured-block"),
+    __("CGB Example"),
+    __("create-guten-block")
+  ],
+  attributes: {
+    blockwidth: {
+      type: "intiger",
+      default: 1170
+    },
+    blockid: {
+      type: "string"
+    },
+    highlight: {
+      type: "string",
+      default: "resources"
+    },
+    selectedfeatured: {
+      type: "string"
+    },
+    data: {
+      type: "string"
+    },
+    resources: {
+      type: "string"
+    },
+    curriculum: {
+      type: "string"
+    },
+    blocktitle: {
+      type: "string",
+      default: "Featured"
+    },
+    //SEARCH
+    searchstring: {
+      type: "string"
+    },
+    //FILTERING
+    resourcesubjects: {
+      type: "object"
+    },
+    curriculumsubjects: {
+      type: "object"
+    },
+    resourcesubjectfilter: {
+      type: "string"
+    },
+    curriculumsubjectfilter: {
+      type: "string"
+    },
+    filtertype: {
+      type: "string"
+    },
+    //SETTINGS
+    minslides: {
+      type: "intiger",
+      default: 1
+    },
+    maxslides: {
+      type: "intiger",
+      default: 3
+    },
+    moveslides: {
+      type: "intiger",
+      default: 1
+    },
+    slidewidth: {
+      type: "intiger",
+      default: 375
+    },
+    slidemargin: {
+      type: "intiger",
+      default: 20
+    },
+    slidealign: {
+      type: "string",
+      default: "left"
+    },
+    slidedesclength: {
+      type: "intiger",
+      default: oercurr_cfb_cgb_Global["slidedesclength"]
+    },
+    slideimageheight: {
+      type: "intiger",
+      default: oercurr_cfb_cgb_Global["slideimageheight"]
+    }
+  },
+  edit: function (props) {
+    const attributes = props.attributes;
+    const setAttributes = props.setAttributes;
+    const cfbprvhtm = oercurr_cfb_cgb_Global["preview_url"]; //SET BLOCK INSTANCE IDS
+
+    let featblockcount = 0;
+    let blkidx = 0;
+    const blocks = wp.data.select("core/block-editor").getBlocks(); //console.log('******************');
+
+    blocks.map((val, index) => {
+      if (val.name == "oer-curriculum/block-curriculum-featured-block") {
+        var uniq = "cfb" + new Date().getTime();
+        var cid = val.clientId;
+        wp.data.dispatch("core/block-editor").updateBlockAttributes(cid, {
+          blockid: cid
+        });
+
+        if (attributes.filtertype === undefined) {
+          wp.data.dispatch("core/block-editor").updateBlockAttributes(cid, {
+            filtertype: "search"
+          });
+        }
+
+        blkidx++;
+        featblockcount++;
+      }
+    }); // RETURN MESSAGE WHILE CATEGORIES AND CURRICULUMS ARE NOT YET FULLY LOADED
+
+    if (!attributes.blockid) {
+      return /*#__PURE__*/ React.createElement("img", {
+        src: cfbprvhtm,
+        width: "100%"
+      });
+    }
+
+    curriculumfeatslider_loadall(featblockcount); //convert comma delimitted to array
+
+    let highlighted = [];
+
+    if (typeof attributes.selectedfeatured !== "undefined") {
+      const tmparr = attributes.selectedfeatured.split(",");
+      tmparr.map((arr, index) => {
+        const rowarr = arr.split("|");
+        highlighted.push([parseInt(rowarr[0]), rowarr[1]]);
+      });
+    }
+
+    let resources_arr = [];
+    resources_arr = attributes.resources;
+    /*
+     0 - Resource taxonomy
+     1 - Curriculum taxonomy
+     2 - Resource List
+     3 - Curriculum List
+     */
+
+    /* GET ALL DATA */
+
+    if (attributes.data === undefined || !attributes.data) {
+      wp.apiFetch({
+        url: "/wp-json/curriculum/feat/dataquery"
+      }).then((data) => {
+        setAttributes({
+          data: data
+        });
+        setAttributes({
+          resourcesubjects: data[0]
+        });
+        setAttributes({
+          curriculumsubjects: data[1]
+        });
+        setAttributes({
+          resources: data[2]
+        });
+        setAttributes({
+          curriculum: data[3]
+        });
+      });
+    }
+
+    if (!attributes.data) {
+      return "Loading Featured Data...";
+    }
+
+    let data_arr = attributes.data;
+    let res_subj_arr = data_arr[0];
+    let cur_subj_arr = data_arr[1];
+    let res_list_arr = data_arr[2];
+    let cur_list_arr = data_arr[3];
+    /* SET RESOURCES LIST ATTRIBUTES */
+
+    /*
+    if(!attributes.resources){
+    wp.apiFetch({ url: '/wp-json/curriculum/feat/resourcequery' }).then(resources =>{  setAttributes({resources: resources })  })
+    }
+    if(!attributes.resources){ return 'Loading resources...'; }	
+    let res_list_arr = [];
+    res_list_arr = attributes.resources;
+    */
+
+    /* SET CURRICULUM LIST ATTRIBUTES */
+
+    /*
+      if(!attributes.curriculum){
+    	wp.apiFetch({ url: '/wp-json/curriculum/feat/curriculumquery' }).then(resources =>{  setAttributes({curriculum: resources })  })
+    }
+    if(!attributes.curriculum){ return 'Loading curriculum...'; }
+    let cur_list_arr = [];
+      cur_list_arr = attributes.curriculum;
+      */
+
+    /* SET RESOURCE SUBJECTS LIST ATTRIBUTES */
+
+    /*
+    if(!attributes.resourcesubjects){
+    wp.apiFetch({ url: '/wp-json/curriculum/feat/taxquery?posttype=resource' }).then(taxonimies =>{  setAttributes({resourcesubjects: taxonimies })  })
+    }
+    if(!attributes.resourcesubjects){ return 'Loading Subjects...'; }
+    let res_subj_arr = [];
+    res_subj_arr = attributes.resourcesubjects;
+    */
+
+    /* SET CURRICULUM SUBJECTS LIST ATTRIBUTES */
+
+    /*
+    if(!attributes.curriculumsubjects){
+    wp.apiFetch({ url: '/wp-json/curriculum/feat/taxquery?posttype=oer-curriculum' }).then(taxonimies =>{  setAttributes({curriculumsubjects: taxonimies })  })
+    }
+    if(!attributes.curriculumsubjects){ return 'Loading Subjects...'; }
+    let cur_subj_arr = [];
+    cur_subj_arr = attributes.curriculumsubjects;
+    */
+
+    function updateHighlight(newValue, index) {
+      if (oercurr_cfb_cgb_Global["bxresetblocked"]) {
+        return;
+      }
+
+      const type = newValue.target.getAttribute("fet");
+
+      if (newValue.target.checked) {
+        const selfeat = newValue.target.getAttribute("data");
+        highlighted.push([parseInt(selfeat), type]);
+      } else {
+        let todel = parseInt(newValue.target.getAttribute("data"));
+        let ex = highlighted.findIndex(findMatch(todel));
+
+        if (ex != -1) {
+          highlighted.splice(ex, 1);
+        }
+      }
+
+      feats = [];
+      highlighted.map((feat, index) => {
+        let obj;
+        let idx;
+
+        if (feat[1] == "cur") {
+          obj = attributes.curriculum.find(
+            (obj) => obj.id == parseInt(feat[0])
+          );
+          idx = attributes.curriculum.indexOf(parseInt(feat[0]));
+        } else {
+          obj = attributes.resources.find((obj) => obj.id == parseInt(feat[0]));
+          idx = attributes.resources.indexOf(parseInt(feat[0]));
+        }
+
+        if (typeof obj != "undefined") {
+          feats.push(Object.values(obj));
+        }
+      });
+      let str = "";
+      highlighted.map((hlite, index) => {
+        if (hlite[0] !== undefined && hlite[1] !== undefined) {
+          if (str == "") {
+            str += hlite[0] + "|" + hlite[1];
+          } else {
+            str += "," + hlite[0] + "|" + hlite[1];
+          }
+        }
+      });
+      setAttributes({
+        selectedfeatured: str
+      });
+      curriculumfeatslider_reset(attributes.blockid, 750, newValue.target);
+    }
+
+    function findMatch(todel) {
+      return function (innerArr) {
+        return innerArr[0] === todel;
+      };
+    } //console.log(attributes.resources);
+    //console.log(attributes.selectedfeatured);
+    //console.log(attributes.curriculum);
+    //const feats = attributes.selectedfeatured.split(',');
+    //console.log(highlighted);
+
+    function updateposition() {
+      prevelem = prevelem == "li" ? "div" : "li";
+      highlighted = [];
+      jQuery(".oercurr_cfb_inspector_feat_hlite_node").each(function () {
+        let h_id = jQuery(this).attr("data");
+        let h_tp = jQuery(this).attr("typ");
+        highlighted.push([parseInt(h_id), h_tp]);
+      });
+      feats = [];
+      highlighted.map((feat, index) => {
+        let obj;
+
+        if (feat[1] == "cur") {
+          obj = attributes.curriculum.find(
+            (obj) => obj.id == parseInt(feat[0])
+          );
+          const idx = attributes.curriculum.indexOf(parseInt(feat[0]));
+        } else {
+          obj = attributes.resources.find((obj) => obj.id == parseInt(feat[0]));
+          const idx = attributes.resources.indexOf(parseInt(feat[0]));
+        }
+
+        if (typeof obj != "undefined") {
+          feats.push(Object.values(obj));
+        }
+      });
+      let str = "";
+      highlighted.map((hlite, index) => {
+        if (hlite[0] !== undefined && hlite[1] !== undefined) {
+          if (str == "") {
+            str += hlite[0] + "|" + hlite[1];
+          } else {
+            str += "," + hlite[0] + "|" + hlite[1];
+          }
+        }
+      });
+      setAttributes({
+        selectedfeatured: str
+      });
+    }
+
+    function removefeatured() {
+      highlighted = [];
+      jQuery(".oercurr_cfb_inspector_feat_hlite_node.stay").each(function () {
+        let h_id = jQuery(this).attr("data");
+        let h_tp = jQuery(this).attr("typ");
+        highlighted.push([parseInt(h_id), h_tp]);
+      });
+      feats = [];
+      highlighted.map((feat, index) => {
+        let obj;
+
+        if (feat[1] == "cur") {
+          obj = attributes.curriculum.find(
+            (obj) => obj.id == parseInt(feat[0])
+          );
+          const idx = attributes.curriculum.indexOf(parseInt(feat[0]));
+        } else {
+          obj = attributes.resources.find((obj) => obj.id == parseInt(feat[0]));
+          const idx = attributes.resources.indexOf(parseInt(feat[0]));
+        }
+
+        if (typeof obj != "undefined") {
+          feats.push(Object.values(obj));
+        }
+      });
+      let str = "";
+      highlighted.map((hlite, index) => {
+        if (hlite[0] !== undefined && hlite[1] !== undefined) {
+          if (str == "") {
+            str += hlite[0] + "|" + hlite[1];
+          } else {
+            str += "," + hlite[0] + "|" + hlite[1];
+          }
+        }
+      });
+      setAttributes({
+        selectedfeatured: str
+      });
+    } //console.log(highlighted);
+    //console.log(typeof attributes.selectedfeatured);
+
+    if (typeof attributes.selectedfeatured != "undefined") {
+      feats = [];
+      highlighted.map((feat, index) => {
+        let obj;
+
+        if (feat[1] == "cur") {
+          obj = attributes.curriculum.find(
+            (obj) => obj.id == parseInt(feat[0])
+          );
+          const idx = attributes.curriculum.indexOf(parseInt(feat[0]));
+        } else {
+          obj = attributes.resources.find((obj) => obj.id == parseInt(feat[0]));
+          const idx = attributes.resources.indexOf(parseInt(feat[0]));
+        }
+
+        if (typeof obj != "undefined") {
+          feats.push(Object.values(obj));
+        }
+      });
+    } else {
+      feats = [];
+    }
+
+    function onInspectorLoad() {
+      var featexist = setInterval(function () {
+        if (jQuery(".oercurr_cfb_inspector_feat_hlite_list").length) {
+          clearInterval(featexist);
+          setTimeout(function () {
+            sort();
+          }, 500);
+        }
+      }, 100); // check every 100ms
+    }
+
+    function onModalQuickButton(elem, index) {
+      var type = elem.target.getAttribute("typ");
+
+      if (type == "res") {
+        jQuery(".oercurr_cfb_inspector_feat_modal_resource_wrapper").hide(
+          300,
+          function () {
+            jQuery(".oercurr_cfb_inspector_feat_modal_curriculum_wrapper").show(
+              300
+            );
+          }
+        );
+      } else {
+        jQuery(".oercurr_cfb_inspector_feat_modal_curriculum_wrapper").hide(
+          300,
+          function () {
+            jQuery(".oercurr_cfb_inspector_feat_modal_resource_wrapper").show(
+              300
+            );
+          }
+        );
+      }
+    }
+    /*
+    minslides
+    maxslides
+    moveslides
+    slidewidth
+    slidemargin
+    */
+
+    function onSettingChange(elem, index) {
+      var type = elem.target.getAttribute("typ");
+      var val = elem.target.value;
+
+      switch (type) {
+        case "minslides":
+          setAttributes({
+            minslides: parseInt(val)
+          });
+          break;
+
+        case "maxslides":
+          setAttributes({
+            maxslides: parseInt(val)
+          });
+          break;
+
+        case "moveslides":
+          setAttributes({
+            moveslides: parseInt(val)
+          });
+          break;
+
+        case "slidewidth":
+          setAttributes({
+            slidewidth: parseInt(val)
+          });
+          break;
+
+        case "slidemargin":
+          setAttributes({
+            slidemargin: parseInt(val)
+          });
+          break;
+
+        case "slidealign":
+          setAttributes({
+            slidealign: val
+          });
+          break;
+
+        case "slidedesclength":
+          setAttributes({
+            slidedesclength: parseInt(val)
+          });
+          break;
+
+        case "slideimageheight":
+          setAttributes({
+            slideimageheight: parseInt(val)
+          });
+          break;
+      }
+
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-minslides",
+        attributes.minslides
+      );
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-maxslides",
+        attributes.maxslides
+      );
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-moveslides",
+        attributes.moveslides
+      );
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidewidth",
+        attributes.slidewidth
+      );
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidemargin",
+        attributes.slidemargin
+      );
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidealign",
+        attributes.slidealign
+      );
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" +
+          attributes.blockid +
+          "-slidedesclength",
+        attributes.slidedesclength
+      );
+      localStorage.setItem(
+        "lpInspectorFeatSliderSetting-" +
+          attributes.blockid +
+          "-slideimageheight",
+        attributes.slideimageheight
+      );
+      curriculumfeatslider_reset(attributes.blockid, 750);
+    }
+
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-minslides",
+      attributes.minslides
+    );
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-maxslides",
+      attributes.maxslides
+    );
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-moveslides",
+      attributes.moveslides
+    );
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidewidth",
+      attributes.slidewidth
+    );
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidemargin",
+      attributes.slidemargin
+    );
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidealign",
+      attributes.slidealign
+    );
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidedesclength",
+      attributes.slidedesclength
+    );
+    localStorage.setItem(
+      "lpInspectorFeatSliderSetting-" +
+        attributes.blockid +
+        "-slideimageheight",
+      attributes.slideimageheight
+    );
+
+    function onTitleChange(elem, index) {
+      var blktitle = elem.target.value;
+      blktitle = blktitle == "" ? "" : blktitle;
+      var blkid = elem.target.getAttribute("blk");
+      oercurr_cfb_cgb_Global["curriculum_feat_title_" + blkid] = blktitle;
+      setAttributes({
+        blocktitle: blktitle
+      });
+    }
+
+    function onSearch(elem, index) {
+      var searchstring = elem.target.value.toLowerCase();
+      setAttributes({
+        resourcesubjectfilter: ""
+      });
+      setAttributes({
+        curriculumsubjectfilter: ""
+      });
+      setAttributes({
+        searchstring: searchstring
+      });
+    }
+
+    function onResourceFilterSubject(elem, index) {
+      var val = elem.target.value;
+      setAttributes({
+        searchstring: ""
+      });
+
+      if (val !== "") {
+        //console.log('SEARCHSTRING:'+val);
+        setAttributes({
+          resourcesubjectfilter: val
+        });
+      } else {
+        //console.log('SEARCHSTRING Blnk:'+val);
+        setAttributes({
+          resourcesubjectfilter: ""
+        });
+      }
+    }
+
+    function onCurriculumFilterSubject(elem, index) {
+      var val = elem.target.value;
+      setAttributes({
+        searchstring: ""
+      });
+
+      if (val !== "") {
+        //console.log('SEARCHSTRING:'+val);
+        setAttributes({
+          curriculumsubjectfilter: val
+        });
+      } else {
+        //console.log('SEARCHSTRING Blnk:'+val);
+        setAttributes({
+          curriculumsubjectfilter: ""
+        });
+      }
+    }
+
+    function onFilterSearchToggle(elem, index) {
+      //console.log('FILTER TOGGLE: '+attributes.filtertype)
+      setAttributes({
+        resourcesubjectfilter: ""
+      });
+      setAttributes({
+        curriculumsubjectfilter: ""
+      });
+      setAttributes({
+        searchstring: ""
+      });
+
+      if (attributes.filtertype == "search") {
+        setAttributes({
+          filtertype: "subject"
+        });
+      } else {
+        setAttributes({
+          filtertype: "search"
+        });
+      }
+    }
+
+    function onBlockWidthChange(elem, index) {
+      var val = elem.target.value;
+      setAttributes({
+        blockwidth: val
+      });
+      jQuery("#block-" + attributes.blockid).css({
+        maxWidth: val + "px"
+      });
+      localStorage.setItem(
+        "lpInspectorFeatBlockwidth-" + attributes.blockid,
+        attributes.blockwidth
+      );
+    }
+
+    jQuery("#block-" + attributes.blockid).css({
+      maxWidth: attributes.blockwidth + "px"
+    });
+    localStorage.setItem(
+      "lpInspectorFeatBlockwidth-" + attributes.blockid,
+      attributes.blockwidth
+    );
+    jQuery(document).on(
+      "click",
+      ".oercurr_cfb_right_featuredwpr",
+      function (e) {
+        var curblkid = jQuery(e.target)
+          .closest(".block-editor-block-list__block")
+          .attr("data-block");
+        wp.data.dispatch("core/block-editor").selectBlock(curblkid);
+      }
+    ); //console.log(attributes.blockid);
+    //console.log(highlighted);
+    //console.log(attributes.selectedfeatured);
+    //console.log(attributes.blockid);
+    //console.log(feats);
+    //console.log(res_subj_arr);
+    //console.log(cur_subj_arr);
+    //console.log(attributes.minslides);
+    //console.log(attributes.maxslides);
+    //console.log(attributes.moveslides);
+    //console.log(attributes.slidewidth);
+    //console.log(attributes.slidemargin);
+    //const highlightDropdownOptions = ['resources','curriculum'];
+    //const dropClass = (attributes.highlight == 'resources')? 'button oercurr_cfb_inspector_feat_addResources': 'button oercurr_cfb_inspector_feat_addCurriculum';
+    //const dropText = (attributes.highlight == 'resources')? 'Resources': 'Curriculum';
+
+    let looper = [1];
+    return /*#__PURE__*/ React.createElement(
+      "div",
+      null,
+      /*#__PURE__*/ React.createElement(
+        InspectorControls,
+        null,
+        /*#__PURE__*/ React.createElement(
+          PanelBody,
+          {
+            title: __("Curriculum Featured Block settings"),
+            initialOpen: true
+          },
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oercurr_cfb_inspector_wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "label",
+              {
+                class: "components-base-control__label",
+                for: "oercurr_cfb_inspector_subject"
+              },
+              "Block Title:"
+            ),
+            /*#__PURE__*/ React.createElement("input", {
+              type: "text",
+              onChange: onTitleChange,
+              class: "ls_inspector_feat_title",
+              value: attributes.blocktitle,
+              blk: attributes.blockid
+            })
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oercurr_cfb_inspector_wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "label",
+              {
+                class: "components-base-control__label",
+                for: "oercurr_cfb_inspector_subject"
+              },
+              "Block Width"
+            ),
+            /*#__PURE__*/ React.createElement("input", {
+              type: "number",
+              onChange: onBlockWidthChange,
+              class: "ls_inspector_feat_blockwidth",
+              value: attributes.blockwidth,
+              blk: attributes.blockid
+            }),
+            /*#__PURE__*/ React.createElement(
+              "label",
+              {
+                class: "components-base-control__label",
+                for: "oercurr_cfb_inspector_subject"
+              },
+              /*#__PURE__*/ React.createElement(
+                "em",
+                null,
+                "Note: Block width setting is only used to simulate the frontend width at backend and will not affect the frontend."
+              )
+            )
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oercurr_cfb_inspector_feat_modal_resource_wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "oercurr_cfb_inspector_feat_modal_content_main"
+              },
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "oercurr_cfb_inspector_feat_modal_wrapper_close"
+                },
+                /*#__PURE__*/ React.createElement("span", {
+                  class: "dashicons dashicons-no"
+                })
+              ),
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "oercurr_cfb_inspector_feat_modal_center"
+                },
+                /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class: "oercurr_cfb_inspector_feat_modal_table"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "oercurr_cfb_inspector_feat_modal_cell"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "div",
+                      {
+                        class: "oercurr_cfb_inspector_feat_modal"
+                      },
+                      /*#__PURE__*/ React.createElement(
+                        "div",
+                        {
+                          class: "oercurr_cfb_inspector_feat_search_wrapper"
+                        },
+                        /*#__PURE__*/ React.createElement(
+                          "div",
+                          {
+                            class: "oercurr_cfb_inspector_feat_search_header"
+                          },
+                          "Resources"
+                        ),
+                        looper.map((tmp, index) => {
+                          if (attributes.filtertype == "subject") {
+                            return /*#__PURE__*/ React.createElement("input", {
+                              type: "button",
+                              onClick: onFilterSearchToggle,
+                              class: "button",
+                              value: "Filter by subject"
+                            });
+                          } else {
+                            return /*#__PURE__*/ React.createElement("input", {
+                              type: "button",
+                              onClick: onFilterSearchToggle,
+                              class: "button",
+                              value: "Filter by search"
+                            });
+                          }
+                        }),
+                        looper.map((tmp, index) => {
+                          if (attributes.filtertype == "subject") {
+                            return /*#__PURE__*/ React.createElement("input", {
+                              type: "text",
+                              onChange: onSearch,
+                              fet: "res",
+                              id: "oercurr_cfb_inspector_feat_search",
+                              class: "oercurr_cfb_inspector_feat_search",
+                              value: attributes.searchstring
+                            });
+                          } else {
+                            return /*#__PURE__*/ React.createElement(
+                              "select",
+                              {
+                                id: "oercurr_cfb_inspector_feat_subject_select",
+                                onChange: onResourceFilterSubject,
+                                value: attributes.resourcesubjectfilter
+                              },
+                              /*#__PURE__*/ React.createElement(
+                                "option",
+                                {
+                                  value: ""
+                                },
+                                "All"
+                              ),
+                              res_subj_arr.map((subject, index) => {
+                                if (
+                                  subject.term_id ==
+                                  attributes.resourcesubjectfilter
+                                ) {
+                                  if (subject.parent == 0) {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        selected: "selected",
+                                        value: subject.term_id,
+                                        class:
+                                          "oercurr_cfb_inspector_feat_subject_select_bold"
+                                      },
+                                      subject.name + " (" + subject.cnt + ")"
+                                    );
+                                  } else {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        selected: "selected",
+                                        value: subject.term_id
+                                      },
+                                      "├ " +
+                                        subject.name +
+                                        " (" +
+                                        subject.cnt +
+                                        ")"
+                                    );
+                                  }
+                                } else {
+                                  if (subject.parent == 0) {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        value: subject.term_id,
+                                        class:
+                                          "oercurr_cfb_inspector_feat_subject_select_bold"
+                                      },
+                                      subject.name + " (" + subject.cnt + ")"
+                                    );
+                                  } else {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        value: subject.term_id
+                                      },
+                                      "├ " +
+                                        subject.name +
+                                        " (" +
+                                        subject.cnt +
+                                        ")"
+                                    );
+                                  }
+                                }
+                              })
+                            );
+                          }
+                        })
+                      ),
+                      /*#__PURE__*/ React.createElement(
+                        "div",
+                        {
+                          class: "oercurr_cfb_inspector_feat_modal_content"
+                        },
+                        /*#__PURE__*/ React.createElement(
+                          "div",
+                          {
+                            class:
+                              "oercurr_cfb_inspector_feat_modal_content_subcontainer"
+                          },
+                          res_list_arr.map((resource, index) => {
+                            let tex = highlighted.findIndex(
+                              findMatch(resource.id)
+                            );
+                            let str = attributes.searchstring;
+                            let flt = attributes.resourcesubjectfilter;
+                            let ttl = resource.title.toLowerCase();
+                            let tax = resource.tax.toString();
+                            var taxarray = tax.split("|");
+
+                            if (
+                              attributes.searchstring == "" ||
+                              !attributes.searchstring
+                            ) {
+                              //empty search string
+                              if (flt != "" && flt !== undefined) {
+                                if (taxarray.includes(flt)) {
+                                  // Subject Matched
+                                  //if( tax.indexOf(flt) !== -1 ){ // Subject Matched
+                                  if (tex != -1) {
+                                    // Checked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: resource.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          oercurr_cfb_cgb_Global[
+                                            "pluginDirUrl"
+                                          ] + "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          checked: "checked",
+                                          onClick: updateHighlight,
+                                          fet: "res",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: resource.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      unescape(resource.title)
+                                    );
+                                  } else {
+                                    //Unchecked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: resource.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          oercurr_cfb_cgb_Global[
+                                            "pluginDirUrl"
+                                          ] + "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          onClick: updateHighlight,
+                                          fet: "res",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: resource.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      unescape(resource.title)
+                                    );
+                                  }
+                                }
+                              } else {
+                                if (tex != -1) {
+                                  // Checked
+                                  return /*#__PURE__*/ React.createElement(
+                                    "label",
+                                    {
+                                      class:
+                                        "components-base-control__label ls_inspector_feat_modal_label",
+                                      srch: resource.title.toLowerCase()
+                                    },
+                                    /*#__PURE__*/ React.createElement("img", {
+                                      src:
+                                        oercurr_cfb_cgb_Global["pluginDirUrl"] +
+                                        "/images/preloader.gif"
+                                    }),
+                                    /*#__PURE__*/ React.createElement("input", {
+                                      checked: "checked",
+                                      onClick: updateHighlight,
+                                      fet: "res",
+                                      id: "inspector-checkbox-control-" + index,
+                                      idx: index,
+                                      class: "ls_inspector_feat_modal_checkbox",
+                                      type: "checkbox",
+                                      data: resource.id,
+                                      tax: tax
+                                    }),
+                                    unescape(resource.title)
+                                  );
+                                } else {
+                                  //Unchecked
+                                  return /*#__PURE__*/ React.createElement(
+                                    "label",
+                                    {
+                                      class:
+                                        "components-base-control__label ls_inspector_feat_modal_label",
+                                      srch: resource.title.toLowerCase()
+                                    },
+                                    /*#__PURE__*/ React.createElement("img", {
+                                      src:
+                                        oercurr_cfb_cgb_Global["pluginDirUrl"] +
+                                        "/images/preloader.gif"
+                                    }),
+                                    /*#__PURE__*/ React.createElement("input", {
+                                      onClick: updateHighlight,
+                                      fet: "res",
+                                      id: "inspector-checkbox-control-" + index,
+                                      idx: index,
+                                      class: "ls_inspector_feat_modal_checkbox",
+                                      type: "checkbox",
+                                      data: resource.id,
+                                      tax: tax
+                                    }),
+                                    unescape(resource.title)
+                                  );
+                                }
+                              }
+                            } else {
+                              //search string is provided
+                              if (taxarray.includes(flt)) {
+                                // Subject Matched
+                                //if(tax.indexOf(flt) !== -1){ // subject filter matched
+                                if (ttl.indexOf(str) !== -1) {
+                                  // search string matched
+                                  if (tex != -1) {
+                                    // Checked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: resource.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          oercurr_cfb_cgb_Global[
+                                            "pluginDirUrl"
+                                          ] + "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          checked: "checked",
+                                          onClick: updateHighlight,
+                                          fet: "res",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: resource.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      unescape(resource.title)
+                                    );
+                                  } else {
+                                    return (
+                                      /*#__PURE__*/
+                                      // Unchecked
+                                      React.createElement(
+                                        "label",
+                                        {
+                                          class:
+                                            "components-base-control__label ls_inspector_feat_modal_label",
+                                          srch: resource.title.toLowerCase()
+                                        },
+                                        /*#__PURE__*/ React.createElement(
+                                          "img",
+                                          {
+                                            src:
+                                              oercurr_cfb_cgb_Global[
+                                                "pluginDirUrl"
+                                              ] + "/images/preloader.gif"
+                                          }
+                                        ),
+                                        /*#__PURE__*/ React.createElement(
+                                          "input",
+                                          {
+                                            onClick: updateHighlight,
+                                            fet: "res",
+                                            id:
+                                              "inspector-checkbox-control-" +
+                                              index,
+                                            idx: index,
+                                            class:
+                                              "ls_inspector_feat_modal_checkbox",
+                                            type: "checkbox",
+                                            data: resource.id,
+                                            tax: tax
+                                          }
+                                        ),
+                                        unescape(resource.title)
+                                      )
+                                    );
+                                  }
+                                }
+                              } else {
+                                //subject filter mismatch
+                                if (ttl.indexOf(str) !== -1) {
+                                  // search string matched
+                                  if (tex != -1) {
+                                    // Checked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: resource.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          oercurr_cfb_cgb_Global[
+                                            "pluginDirUrl"
+                                          ] + "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          checked: "checked",
+                                          onClick: updateHighlight,
+                                          fet: "res",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: resource.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      unescape(resource.title)
+                                    );
+                                  } else {
+                                    return (
+                                      /*#__PURE__*/
+                                      // Unchecked
+                                      React.createElement(
+                                        "label",
+                                        {
+                                          class:
+                                            "components-base-control__label ls_inspector_feat_modal_label",
+                                          srch: resource.title.toLowerCase()
+                                        },
+                                        /*#__PURE__*/ React.createElement(
+                                          "img",
+                                          {
+                                            src:
+                                              oercurr_cfb_cgb_Global[
+                                                "pluginDirUrl"
+                                              ] + "/images/preloader.gif"
+                                          }
+                                        ),
+                                        /*#__PURE__*/ React.createElement(
+                                          "input",
+                                          {
+                                            onClick: updateHighlight,
+                                            fet: "res",
+                                            id:
+                                              "inspector-checkbox-control-" +
+                                              index,
+                                            idx: index,
+                                            class:
+                                              "ls_inspector_feat_modal_checkbox",
+                                            type: "checkbox",
+                                            data: resource.id,
+                                            tax: tax
+                                          }
+                                        ),
+                                        unescape(resource.title)
+                                      )
+                                    );
+                                  }
+                                }
+                              }
+                            }
+                          })
+                        )
+                      ),
+                      /*#__PURE__*/ React.createElement(
+                        "div",
+                        {
+                          class: "oercurr_cfb_inspector_feat_search_footer"
+                        },
+                        /*#__PURE__*/ React.createElement("input", {
+                          type: "button",
+                          class:
+                            "button oercurr_cfb_inspector_feat_quickswitchbutton",
+                          onClick: onModalQuickButton,
+                          typ: "res",
+                          value: "Curriculum lists >"
+                        })
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oercurr_cfb_inspector_feat_modal_curriculum_wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "oercurr_cfb_inspector_feat_modal_content_main"
+              },
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "oercurr_cfb_inspector_feat_modal_wrapper_close"
+                },
+                /*#__PURE__*/ React.createElement("span", {
+                  class: "dashicons dashicons-no"
+                })
+              ),
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "oercurr_cfb_inspector_feat_modal_center"
+                },
+                /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class: "oercurr_cfb_inspector_feat_modal_table"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "oercurr_cfb_inspector_feat_modal_cell"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "div",
+                      {
+                        class: "oercurr_cfb_inspector_feat_modal"
+                      },
+                      /*#__PURE__*/ React.createElement(
+                        "div",
+                        {
+                          class: "oercurr_cfb_inspector_feat_search_wrapper"
+                        },
+                        /*#__PURE__*/ React.createElement(
+                          "div",
+                          {
+                            class: "oercurr_cfb_inspector_feat_search_header"
+                          },
+                          "Curriculum"
+                        ),
+                        looper.map((tmp, index) => {
+                          if (attributes.filtertype == "subject") {
+                            return /*#__PURE__*/ React.createElement("input", {
+                              type: "button",
+                              onClick: onFilterSearchToggle,
+                              class: "button",
+                              value: "Filter by subject"
+                            });
+                          } else {
+                            return /*#__PURE__*/ React.createElement("input", {
+                              type: "button",
+                              onClick: onFilterSearchToggle,
+                              class: "button",
+                              value: "Filter by search"
+                            });
+                          }
+                        }),
+                        looper.map((tmp, index) => {
+                          if (attributes.filtertype == "subject") {
+                            return /*#__PURE__*/ React.createElement("input", {
+                              type: "text",
+                              onChange: onSearch,
+                              fet: "res",
+                              id: "oercurr_cfb_inspector_feat_search",
+                              class: "oercurr_cfb_inspector_feat_search",
+                              value: attributes.searchstring
+                            });
+                          } else {
+                            return /*#__PURE__*/ React.createElement(
+                              "select",
+                              {
+                                id: "oercurr_cfb_inspector_feat_subject_select",
+                                onChange: onCurriculumFilterSubject,
+                                value: attributes.curriculumsubjectfilter
+                              },
+                              /*#__PURE__*/ React.createElement(
+                                "option",
+                                {
+                                  value: ""
+                                },
+                                "All"
+                              ),
+                              cur_subj_arr.map((subject, index) => {
+                                if (
+                                  subject.term_id ==
+                                  attributes.curriculumsubjectfilter
+                                ) {
+                                  if (subject.parent == 0) {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        selected: "selected",
+                                        value: subject.term_id,
+                                        class:
+                                          "oercurr_cfb_inspector_feat_subject_select_bold"
+                                      },
+                                      subject.name + " (" + subject.cnt + ")"
+                                    );
+                                  } else {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        selected: "selected",
+                                        value: subject.term_id
+                                      },
+                                      "├ " +
+                                        subject.name +
+                                        " (" +
+                                        subject.cnt +
+                                        ")"
+                                    );
+                                  }
+                                } else {
+                                  if (subject.parent == 0) {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        value: subject.term_id,
+                                        class:
+                                          "oercurr_cfb_inspector_feat_subject_select_bold"
+                                      },
+                                      subject.name + " (" + subject.cnt + ")"
+                                    );
+                                  } else {
+                                    return /*#__PURE__*/ React.createElement(
+                                      "option",
+                                      {
+                                        value: subject.term_id
+                                      },
+                                      "├ " +
+                                        subject.name +
+                                        " (" +
+                                        subject.cnt +
+                                        ")"
+                                    );
+                                  }
+                                }
+                              })
+                            );
+                          }
+                        })
+                      ),
+                      /*#__PURE__*/ React.createElement(
+                        "div",
+                        {
+                          class: "oercurr_cfb_inspector_feat_modal_content"
+                        },
+                        /*#__PURE__*/ React.createElement(
+                          "div",
+                          {
+                            class:
+                              "oercurr_cfb_inspector_feat_modal_content_subcontainer"
+                          },
+                          cur_list_arr.map((curriculum, index) => {
+                            let tex = highlighted.findIndex(
+                              findMatch(curriculum.id)
+                            );
+                            let str = attributes.searchstring;
+                            let flt = attributes.curriculumsubjectfilter;
+                            let ttl = curriculum.title.toLowerCase();
+                            let tax = curriculum.tax.toString();
+
+                            if (
+                              attributes.searchstring == "" ||
+                              !attributes.searchstring
+                            ) {
+                              //empty search string
+                              if (flt != "" && flt !== undefined) {
+                                if (tax.indexOf(flt) !== -1) {
+                                  // Subject Matched
+                                  if (tex != -1) {
+                                    // Checked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: curriculum.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          oercurr_cfb_cgb_Global[
+                                            "pluginDirUrl"
+                                          ] + "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          checked: "checked",
+                                          onClick: updateHighlight,
+                                          fet: "cur",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: curriculum.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      curriculum.title
+                                    );
+                                  } else {
+                                    //Unchecked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: curriculum.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          oercurr_cfb_cgb_Global[
+                                            "pluginDirUrl"
+                                          ] + "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          onClick: updateHighlight,
+                                          fet: "cur",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: curriculum.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      curriculum.title
+                                    );
+                                  }
+                                }
+                              } else {
+                                if (tex != -1) {
+                                  // Checked
+                                  return /*#__PURE__*/ React.createElement(
+                                    "label",
+                                    {
+                                      class:
+                                        "components-base-control__label ls_inspector_feat_modal_label",
+                                      srch: curriculum.title.toLowerCase()
+                                    },
+                                    /*#__PURE__*/ React.createElement("img", {
+                                      src:
+                                        oercurr_cfb_cgb_Global["pluginDirUrl"] +
+                                        "/images/preloader.gif"
+                                    }),
+                                    /*#__PURE__*/ React.createElement("input", {
+                                      checked: "checked",
+                                      onClick: updateHighlight,
+                                      fet: "cur",
+                                      id: "inspector-checkbox-control-" + index,
+                                      idx: index,
+                                      class: "ls_inspector_feat_modal_checkbox",
+                                      type: "checkbox",
+                                      data: curriculum.id,
+                                      tax: tax
+                                    }),
+                                    curriculum.title
+                                  );
+                                } else {
+                                  //Unchecked
+                                  return /*#__PURE__*/ React.createElement(
+                                    "label",
+                                    {
+                                      class:
+                                        "components-base-control__label ls_inspector_feat_modal_label",
+                                      srch: curriculum.title.toLowerCase()
+                                    },
+                                    /*#__PURE__*/ React.createElement("img", {
+                                      src:
+                                        oercurr_cfb_cgb_Global["pluginDirUrl"] +
+                                        "/images/preloader.gif"
+                                    }),
+                                    /*#__PURE__*/ React.createElement("input", {
+                                      onClick: updateHighlight,
+                                      fet: "cur",
+                                      id: "inspector-checkbox-control-" + index,
+                                      idx: index,
+                                      class: "ls_inspector_feat_modal_checkbox",
+                                      type: "checkbox",
+                                      data: curriculum.id,
+                                      tax: tax
+                                    }),
+                                    curriculum.title
+                                  );
+                                }
+                              }
+                            } else {
+                              //search string is provided
+                              if (tax.indexOf(flt) !== -1) {
+                                // subject filter matched
+                                if (ttl.indexOf(str) !== -1) {
+                                  // search string matched
+                                  if (tex != -1) {
+                                    // Checked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: curriculum.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          oercurr_cfb_cgb_Global[
+                                            "pluginDirUrl"
+                                          ] + "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          checked: "checked",
+                                          onClick: updateHighlight,
+                                          fet: "cur",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: curriculum.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      curriculum.title
+                                    );
+                                  } else {
+                                    return (
+                                      /*#__PURE__*/
+                                      // Unchecked
+                                      React.createElement(
+                                        "label",
+                                        {
+                                          class:
+                                            "components-base-control__label ls_inspector_feat_modal_label",
+                                          srch: curriculum.title.toLowerCase()
+                                        },
+                                        /*#__PURE__*/ React.createElement(
+                                          "img",
+                                          {
+                                            src:
+                                              oercurr_cfb_cgb_Global[
+                                                "pluginDirUrl"
+                                              ] + "/images/preloader.gif"
+                                          }
+                                        ),
+                                        /*#__PURE__*/ React.createElement(
+                                          "input",
+                                          {
+                                            onClick: updateHighlight,
+                                            fet: "cur",
+                                            id:
+                                              "inspector-checkbox-control-" +
+                                              index,
+                                            idx: index,
+                                            class:
+                                              "ls_inspector_feat_modal_checkbox",
+                                            type: "checkbox",
+                                            data: curriculum.id,
+                                            tax: tax
+                                          }
+                                        ),
+                                        curriculum.title
+                                      )
+                                    );
+                                  }
+                                }
+                              } else {
+                                //subject filter mismatch
+                                if (ttl.indexOf(str) !== -1) {
+                                  // search string matched
+                                  if (tex != -1) {
+                                    // Checked
+                                    return /*#__PURE__*/ React.createElement(
+                                      "label",
+                                      {
+                                        class:
+                                          "components-base-control__label ls_inspector_feat_modal_label",
+                                        srch: curriculum.title.toLowerCase()
+                                      },
+                                      /*#__PURE__*/ React.createElement("img", {
+                                        src:
+                                          oercurr_cfb_cgb_Global[
+                                            "pluginDirUrl"
+                                          ] + "/images/preloader.gif"
+                                      }),
+                                      /*#__PURE__*/ React.createElement(
+                                        "input",
+                                        {
+                                          checked: "checked",
+                                          onClick: updateHighlight,
+                                          fet: "cur",
+                                          id:
+                                            "inspector-checkbox-control-" +
+                                            index,
+                                          idx: index,
+                                          class:
+                                            "ls_inspector_feat_modal_checkbox",
+                                          type: "checkbox",
+                                          data: curriculum.id,
+                                          tax: tax
+                                        }
+                                      ),
+                                      curriculum.title
+                                    );
+                                  } else {
+                                    return (
+                                      /*#__PURE__*/
+                                      // Unchecked
+                                      React.createElement(
+                                        "label",
+                                        {
+                                          class:
+                                            "components-base-control__label ls_inspector_feat_modal_label",
+                                          srch: curriculum.title.toLowerCase()
+                                        },
+                                        /*#__PURE__*/ React.createElement(
+                                          "img",
+                                          {
+                                            src:
+                                              oercurr_cfb_cgb_Global[
+                                                "pluginDirUrl"
+                                              ] + "/images/preloader.gif"
+                                          }
+                                        ),
+                                        /*#__PURE__*/ React.createElement(
+                                          "input",
+                                          {
+                                            onClick: updateHighlight,
+                                            fet: "cur",
+                                            id:
+                                              "inspector-checkbox-control-" +
+                                              index,
+                                            idx: index,
+                                            class:
+                                              "ls_inspector_feat_modal_checkbox",
+                                            type: "checkbox",
+                                            data: curriculum.id,
+                                            tax: tax
+                                          }
+                                        ),
+                                        curriculum.title
+                                      )
+                                    );
+                                  }
+                                }
+                              }
+                            }
+                          })
+                        )
+                      ),
+                      /*#__PURE__*/ React.createElement(
+                        "div",
+                        {
+                          class: "oercurr_cfb_inspector_feat_search_footer"
+                        },
+                        /*#__PURE__*/ React.createElement("input", {
+                          type: "button",
+                          class:
+                            "button oercurr_cfb_inspector_feat_quickswitchbutton",
+                          onClick: onModalQuickButton,
+                          typ: "cur",
+                          value: "Resources lists >"
+                        })
+                      )
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oercurr_cfb_inspector_wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "label",
+              {
+                class: "components-base-control__label",
+                for: "oercurr_cfb_inspector_subject"
+              },
+              "Featured List:"
+            ),
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "oercurr_cfb_inspector_feat_addbutton_wrapper"
+              },
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "button oercurr_cfb_inspector_feat_addResources"
+                },
+                "Add Resources"
+              ),
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "button oercurr_cfb_inspector_feat_addCurriculum"
+                },
+                "Add Curriculum"
+              )
+            ),
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "oercurr_cfb_inspector_feat_hlite_list"
+              },
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  id: "oercurr_cfb_inspector_feat_hlite_featured",
+                  class: "oercurr_cfb_inspector_feat_hlite_featured"
+                },
+                feats.map((feat, index) => {
+                  if (prevelem == "li") {
+                    return /*#__PURE__*/ React.createElement(
+                      "div",
+                      {
+                        draggable: true,
+                        onMouseup: updateposition,
+                        class:
+                          "oercurr_cfb_inspector_feat_hlite_node stay " +
+                          feat[6],
+                        data: feat[0],
+                        typ: feat[6]
+                      },
+                      feat[1],
+                      /*#__PURE__*/ React.createElement("span", {
+                        class: "dashicons dashicons-dismiss"
+                      })
+                    );
+                  } else {
+                    return /*#__PURE__*/ React.createElement(
+                      "li",
+                      {
+                        draggable: true,
+                        onMouseup: updateposition,
+                        class:
+                          "oercurr_cfb_inspector_feat_hlite_node stay " +
+                          feat[6],
+                        data: feat[0],
+                        typ: feat[6]
+                      },
+                      feat[1],
+                      /*#__PURE__*/ React.createElement("span", {
+                        class: "dashicons dashicons-dismiss"
+                      })
+                    );
+                  }
+                })
+              ),
+              /*#__PURE__*/ React.createElement("div", {
+                class:
+                  "button oercurr_cfb_inspector_feat_hlite_reposition_trigger",
+                onClick: updateposition,
+                blkid: attributes.blockid
+              }),
+              /*#__PURE__*/ React.createElement("div", {
+                class: "button oercurr_cfb_inspector_feat_hlite_remove_trigger",
+                height: "0",
+                width: "0",
+                onClick: removefeatured,
+                blkid: attributes.blockid
+              })
+            )
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oercurr_cfb_inspector_wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "label",
+              {
+                class: "components-base-control__label",
+                for: "oercurr_cfb_inspector_subject"
+              },
+              "Slider Setting:"
+            ),
+            /*#__PURE__*/ React.createElement(
+              "table",
+              {
+                class: "oercurr_cfb_inspector_feat_slider_setting",
+                cellspacing: "2"
+              },
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "The minimum number of slides to be shown. Slides will be sized down if slider becomes smaller than the original size."
+                    )
+                  ),
+                  "Min. Slides:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "select",
+                    {
+                      id: "oercurr_cfb_inspector_feat_slider_minslides",
+                      onChange: onSettingChange,
+                      typ: "minslides",
+                      value: attributes.minslides
+                    },
+                    globalSettingOptions.map((incr, index) => {
+                      let ret =
+                        incr == attributes.minslides
+                          ? /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                selected: true,
+                                value: incr
+                              },
+                              incr
+                            )
+                          : /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                value: incr
+                              },
+                              incr
+                            );
+                      return ret;
+                    })
+                  )
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "The maximum number of slides to be shown. Slides will be sized up if slider becomes larger than the original size."
+                    )
+                  ),
+                  "Max. Slides:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "select",
+                    {
+                      id: "oercurr_cfb_inspector_feat_slider_maxslides",
+                      onChange: onSettingChange,
+                      typ: "maxslides",
+                      value: attributes.maxslides
+                    },
+                    globalSettingOptions.map((incr, index) => {
+                      let ret =
+                        incr == attributes.maxslides
+                          ? /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                selected: true,
+                                value: incr
+                              },
+                              incr
+                            )
+                          : /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                value: incr
+                              },
+                              incr
+                            );
+                      return ret;
+                    })
+                  )
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "The number of slides to move on transition. This value must be greater than or equal to minSlides, and less than or equal to maxSlides. If value is greater than the fully-visible slides, then the count of fully-visible slides will be used."
+                    )
+                  ),
+                  "Move Slides:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "select",
+                    {
+                      id: "oercurr_cfb_inspector_feat_slider_moveslides",
+                      onChange: onSettingChange,
+                      typ: "moveslides",
+                      value: attributes.moveslides
+                    },
+                    globalSettingOptions.map((incr, index) => {
+                      let ret =
+                        incr == attributes.moveslides
+                          ? /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                selected: true,
+                                value: incr
+                              },
+                              incr
+                            )
+                          : /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                value: incr
+                              },
+                              incr
+                            );
+                      return ret;
+                    })
+                  )
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "Width of each slide."
+                    )
+                  ),
+                  "Slide Width:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement("input", {
+                    type: "number",
+                    id: "oercurr_cfb_inspector_feat_slider_slidewidth",
+                    typ: "slidewidth",
+                    onChange: onSettingChange,
+                    value: attributes.slidewidth
+                  })
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "Space between slides"
+                    )
+                  ),
+                  "Slide Margin:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "select",
+                    {
+                      id: "oercurr_cfb_inspector_feat_slider_slidemargin",
+                      onChange: onSettingChange,
+                      typ: "slidemargin",
+                      value: attributes.slidemargin
+                    },
+                    globalSettingMargin.map((incr, index) => {
+                      let ret =
+                        incr == attributes.slidemargin
+                          ? /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                selected: true,
+                                value: incr
+                              },
+                              incr
+                            )
+                          : /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                value: incr
+                              },
+                              incr
+                            );
+                      return ret;
+                    })
+                  )
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "Left, right or middle alignment"
+                    )
+                  ),
+                  "Alignmnet:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "select",
+                    {
+                      id: "oercurr_cfb_inspector_feat_slider_slidealign",
+                      onChange: onSettingChange,
+                      typ: "slidealign",
+                      value: attributes.slidealign
+                    },
+                    globalSettingAlign.map((incr, index) => {
+                      let ret =
+                        incr == attributes.slidemargin
+                          ? /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                selected: true,
+                                value: incr
+                              },
+                              incr
+                            )
+                          : /*#__PURE__*/ React.createElement(
+                              "option",
+                              {
+                                value: incr
+                              },
+                              incr
+                            );
+                      return ret;
+                    })
+                  )
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "Length of description to display."
+                    )
+                  ),
+                  "Description length:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement("input", {
+                    type: "number",
+                    id: "oercurr_cfb_inspector_feat_slider_slidedesclength",
+                    typ: "slidedesclength",
+                    onChange: onSettingChange,
+                    value: attributes.slidedesclength
+                  })
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "tr",
+                null,
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "span",
+                    {
+                      class: "dashicons dashicons-info tooltipped"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "span",
+                      {
+                        class: "tooltiptext"
+                      },
+                      "Adjust image height"
+                    )
+                  ),
+                  "Image height:"
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "td",
+                  null,
+                  /*#__PURE__*/ React.createElement("input", {
+                    type: "number",
+                    id: "oercurr_cfb_inspector_feat_slider_slideimageheight",
+                    typ: "slideimageheight",
+                    onChange: onSettingChange,
+                    value: attributes.slideimageheight
+                  })
+                )
+              )
+            )
+          ),
+          /*#__PURE__*/ React.createElement("img", {
+            // onload hack fires when block is added
+            className: "onload-hack-pp",
+            height: "0",
+            width: "0",
+            onLoad: onInspectorLoad,
+            src:
+              oercurr_cfb_cgb_Global["pluginDirUrl"] +
+              "//images/default-img.jpg"
+          })
+        )
+      ),
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          class: "oercurr_cfb_right_featuredwpr"
+        },
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class:
+              "oercurr-cfb-ftrdttl curriculum-feat-title_" + attributes.blockid
+          },
+          attributes.blocktitle
+        ),
+        /*#__PURE__*/ React.createElement(
+          "ul",
+          {
+            class:
+              "featuredwpr_bxslider featuredwpr_bxslider_" + attributes.blockid,
+            blk: attributes.blockid
+          },
+          feats.map((feat, index) => {
+            //let ctnt = feat[2].replace(/<[^>]+>/g, '');
+            let ctnt = feat[2];
+
+            if (ctnt.length > attributes.slidedesclength) {
+              ctnt =
+                unescape(ctnt.substr(0, attributes.slidedesclength)) + "...";
+            } //console.log(feat);
+
+            return /*#__PURE__*/ React.createElement(
+              "li",
+              {
+                atrr: feat[0]
+              },
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "frtdsnglwpr"
+                },
+                /*#__PURE__*/ React.createElement(
+                  "a",
+                  {
+                    href: feat[3],
+                    tabindex: "-1"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "img"
+                    },
+                    /*#__PURE__*/ React.createElement("img", {
+                      src: feat[4],
+                      alt: feat[1]
+                    })
+                  )
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class: "ttl"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "a",
+                    {
+                      href: feat[3],
+                      tabindex: "-1"
+                    },
+                    feat[1]
+                  )
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class: "desc"
+                  },
+                  ctnt
+                )
+              )
+            );
+          })
+        )
+      )
+    );
+  },
+
+  /**
+   * The save function defines the way in which the different attributes should be combined
+   * into the final markup, which is then serialized by Gutenberg into post_content.
+   *
+   * The "save" property must be specified and must be a valid function.
+   *
+   * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+   *
+   * @param {Object} props Props.
+   * @returns {Mixed} JSX Frontend HTML.
+   */
+  save: (props) => {
+    return null;
+  },
+  example: {}
+});

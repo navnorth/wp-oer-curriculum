@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="lpSelectStandardSaveBtn" class="btn btn-default btn-sm" data-dismiss="modal">Select</button>
+                <button type="button" id="lpSelectStandardSaveBtn" class="button btn-default btn-sm" data-dismiss="modal">Select</button>
             </div>
         </div>
     </div>

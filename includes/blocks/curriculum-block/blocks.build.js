@@ -1,1 +1,1259 @@
-!function(e){function r(c){if(t[c])return t[c].exports;var l=t[c]={i:c,l:!1,exports:{}};return e[c].call(l.exports,l,l.exports,r),l.l=!0,l.exports}var t={};r.m=e,r.c=t,r.d=function(e,t,c){r.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:c})},r.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return r.d(t,"a",t),t},r.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},r.p="",r(r.s=0)}([function(e,r,t){"use strict";Object.defineProperty(r,"__esModule",{value:!0});t(1)},function(e,r,t){"use strict";var c=t(2),l=(t.n(c),t(3)),__=(t.n(l),wp.i18n.__),n=wp.blocks.registerBlockType,a=wp.blockEditor.InspectorControls,u=wp.components.PanelBody,o=wp.components,s=(o.CheckboxControl,o.RadioControl,o.TextControl,o.ToggleControl,o.SelectControl,wp.data.withSelect,5),i="modified";(0,wp.data.dispatch)("core").addEntities([{name:"taxquery",kind:"curriculum/v2",baseURL:"/curriculum/v2/taxquery"}]),n("cgb/block-curriculum-block",{title:__("Curriculum Block"),icon:"welcome-learn-more",description:__("Use this block to add a list of curriculum based on subject"),category:"oer-block-category",keywords:[__("curriculum-block"),__("CGB Example"),__("create-guten-block")],attributes:{blockid:{type:"string"},curriculums:{type:"object"},categories:{type:"object"},selectedCategory:{type:"string"},postsPerPage:{type:"string"},sortBy:{type:"string"}},edit:function(e){function r(e,r){if(e.target.checked)p.push(e.target.getAttribute("data"));else{var t=p.indexOf(parseInt(e.target.getAttribute("data")));t>-1&&p.splice(t,1)}n({selectedCategory:p.toString()}),s=l.postsPerPage,i=l.sortBy;var c="";c="title"==i?"asc":"desc",""!=p?wp.apiFetch({url:"/wp-json/curriculum/v2/taxquery?perpage="+s+"&terms="+p+"&orderby="+i+"&order="+c}).then(function(e){n({curriculums:e})}):wp.apiFetch({url:"/wp-json/curriculum/v2/taxquery?terms=0"}).then(function(e){n({curriculums:e})})}function t(e){n({postsPerPage:e.target.value}),s=e.target.value;var r="";r="title"==i?"asc":"desc",""!=p?wp.apiFetch({url:"/wp-json/curriculum/v2/taxquery?perpage="+s+"&terms="+p+"&orderby="+i+"&order="+r}).then(function(e){n({curriculums:e})}):wp.apiFetch({url:"/wp-json/curriculum/v2/taxquery?terms=0"}).then(function(e){n({curriculums:e})})}function c(e){n({sortBy:e.target.value}),i=e.target.value;var r="";r="title"==i?"asc":"desc",""!=p?wp.apiFetch({url:"/wp-json/curriculum/v2/taxquery?perpage="+s+"&terms="+p+"&orderby="+i+"&order="+r}).then(function(e){n({curriculums:e})}):wp.apiFetch({url:"/wp-json/curriculum/v2/taxquery?terms=0"}).then(function(e){n({curriculums:e})})}var l=e.attributes,n=e.setAttributes,o=oercurr_cb_cgb_Global.preview_url;if(wp.data.select("core/block-editor").getBlocks().map(function(e){if("cgb/block-curriculum-block"==e.name){var r="cb"+(new Date).getTime(),t=e.clientId;wp.data.select("core/block-editor").getBlockAttributes(t).blockid||wp.data.dispatch("core/block-editor").updateBlockAttributes(t,{blockid:r,postsPerPage:5,sortBy:"modified"})}}),!l.blockid&&!l.postsPerPage&&!l.sortBy)return wp.element.createElement("img",{src:o,width:"100%"});var p=[];if("undefined"!=typeof l.selectedCategory){var m=l.selectedCategory.split(","),_=m.indexOf("");_>-1&&m.splice(_,1),m.map(function(e){p.push(parseInt(e))})}if(l.postsPerPage?s=l.postsPerPage:n({postsPerPage:s}),l.sortBy?i=l.sortBy:n({sortBy:i}),l.categories||wp.apiFetch({url:"/wp-json/curriculum/v2/catquery"}).then(function(e){n({categories:e})}),!l.categories)return"Loading categories...";if(l.categories&&0===l.categories.length)return"No categories found, please add some!";var d=[];if(d=l.categories,!l.curriculums){var b="";s=l.postsPerPage,i=l.sortBy,b="title"==i?"asc":"desc",""!=p?wp.apiFetch({url:"/wp-json/curriculum/v2/taxquery?perpage="+s+"&terms="+p+"&orderby="+i+"&order="+b}).then(function(e){n({curriculums:e})}):wp.apiFetch({url:"/wp-json/curriculum/v2/taxquery?terms=0"}).then(function(e){n({curriculums:e})})}if(!l.curriculums&&""!=l.selectedCategory)return"Loading curriculum ...";var w=[];if(!(w=l.curriculums)&&0!=w.length)return"Loading curriculum ....";jQuery(document).on("click",".oer_curriculum_inspector_sbjt_addSubjects",function(e){jQuery(".oer_curriculum_inspector_sbjt_modal_resource_wrapper").show(300)}),jQuery(document).on("click",".oer_curriculum_inspector_sbjt_modal_wrapper_close",function(e){jQuery(".oer_curriculum_inspector_sbjt_modal_resource_wrapper").hide(300)}),jQuery(document).on("keyup",function(e){var r=e.keyCode?e.keyCode:e.which,t=jQuery(".oer_curriculum_inspector_wrapper .oer_curriculum_inspector_sbjt_modal_resource_wrapper");t.is(":visible")&&27==r&&t.hide(300)});var g=[5,10,15,20,25,30],f={date:"Date Added",modified:"Date Updated",title:"Title a-z"},v="undefined"==typeof l.curriculums.length?0:l.curriculums.length;return wp.element.createElement("div",null,wp.element.createElement(a,null,wp.element.createElement(u,{title:__("Curriculum Block settings"),initialOpen:!0},wp.element.createElement("div",{class:"oer_curriculum_inspector_wrapper"},wp.element.createElement("div",{class:"oer_curriculum_inspector_sbjt_modal_resource_wrapper"},wp.element.createElement("div",{class:"oer_curriculum_inspector_sbjt_modal_content_main"},wp.element.createElement("div",{class:"oer_curriculum_inspector_sbjt_modal_wrapper_close"},wp.element.createElement("span",{class:"dashicons dashicons-no"})),wp.element.createElement("div",{class:"oer_curriculum_inspector_sbjt_modal_center"},wp.element.createElement("div",{class:"oer_curriculum_inspector_sbjt_modal_table"},wp.element.createElement("div",{class:"oer_curriculum_inspector_sbjt_modal_cell"},wp.element.createElement("div",{class:"oer_curriculum_inspector_sbjt_modal"},wp.element.createElement("div",{class:"oer_curriculum_inspector_sbjt_search_header"},"Subjects"),wp.element.createElement("div",{class:"oer_curriculum_inspector_sbjt_search_wrapper"},wp.element.createElement("div",{class:"oer_curriculum_inspector_subject"},d.map(function(e,t){return wp.element.createElement("label",{class:"components-base-control__label ls_inspector_subject_label "+e.level},wp.element.createElement("input",{checked:"undefined"!=typeof p&&-1!=p.indexOf(e.term_id)?"checked":"",id:"inspector-checkbox-control-"+t,class:"ls_inspector_subject_checkbox "+e.level,type:"checkbox",data:e.term_id,parent:e.parent,onClick:r}),e.name+" ("+e.cnt+")")}))),wp.element.createElement("div",{class:"oer_curriculum_inspector_sbjt_search_footer"})))))))),wp.element.createElement("div",{class:"oer_curriculum_inspector_wrapper"},wp.element.createElement("label",{class:"components-base-control__label",for:"oer_curriculum_inspector_subject"},"Subjects:"),wp.element.createElement("div",{class:"oer_curriculum_inspector_sbjt_addbutton_wrapper"},wp.element.createElement("div",{class:"button oer_curriculum_inspector_sbjt_addSubjects"},"Add Subjects"))),wp.element.createElement("div",{class:"oer_curriculum_inspector_wrapper oer_curriculum_inspector_Postperpage"},wp.element.createElement("label",{class:"components-base-control__label",for:"oer_curriculum_inspector_postperpage_select"},"Posts Per Page:"),wp.element.createElement("select",{id:"oer_curriculum_inspector_postperpage_select",onChange:t,value:s},g.map(function(e,r){return s==e?wp.element.createElement("option",{selected:!0,value:e},e):wp.element.createElement("option",{value:e},e)}))),wp.element.createElement("div",{class:"oer_curriculum_inspector_wrapper oer_curriculum_inspector_Postperpage"},wp.element.createElement("label",{class:"components-base-control__label",for:"oer_curriculum_inspector_postperpage_select"},"Sort By:"),wp.element.createElement("select",{id:"oer_curriculum_inspector_sortby_select",onChange:c,value:i},Object.keys(f).map(function(e){return i==e?wp.element.createElement("option",{value:e,checked:!0},f[e]):wp.element.createElement("option",{value:e},f[e])}))))),wp.element.createElement("div",{class:"oercurr-blk-main editor"},wp.element.createElement("div",{class:"oercurr-blk-topbar"},wp.element.createElement("div",{class:"oercurr-blk-topbar-left"},wp.element.createElement("span",null,"Browse All ",v," Curriculums")),wp.element.createElement("div",{class:"oercurr-blk-topbar-right"},wp.element.createElement("div",{class:"oercurr-blk-topbar-display-box"},wp.element.createElement("div",{class:"oercurr-blk-topbar-display-text"},wp.element.createElement("span",null,"Show ",s),wp.element.createElement("a",{href:"#"},wp.element.createElement("i",{class:"fa fa-th-list","aria-hidden":"true"}))),wp.element.createElement("ul",{class:"oercurr-blk-topbar-display-option oercurr-blk-topbar-option"},g.map(function(e,r){return s==e?wp.element.createElement("li",{class:"selected"},wp.element.createElement("a",{href:"#",ret:e},e)):wp.element.createElement("li",null,wp.element.createElement("a",{href:"#",ret:e},e))}))),wp.element.createElement("div",{class:"oercurr-blk-topbar-sort-box"},wp.element.createElement("div",{class:"oercurr-blk-topbar-sort-text"},wp.element.createElement("span",null,"Sort by: ",f[i]),wp.element.createElement("a",{href:"#"},wp.element.createElement("i",{class:"fa fa-sort","aria-hidden":"true"}))),wp.element.createElement("ul",{class:"oercurr-blk-topbar-sort-option oercurr-blk-topbar-option"},Object.keys(f).map(function(e){return i==e?wp.element.createElement("li",{class:"selected"},wp.element.createElement("a",{href:"#",ret:e},f[e])):wp.element.createElement("li",null,wp.element.createElement("a",{href:"#",ret:e},f[e]))}))))),wp.element.createElement("div",{id:"oer_curriculum_cur_blk_content_wrapper",class:"oercurr-blk-wrapper"},wp.element.createElement("div",{id:"oercurr-blk-content_drop"},w.map(function(e,r){if(l.curriculums.length>0){var t=e.content.replace(/<[^>]+>/g,"");t.length<=180?t+="....":t=t.substr(1,180)+"...";var c=0,n="";return""!=e.oer_curriculum_grades?e.oer_curriculum_grades.length>1?(n="Grades: ",c=e.oer_curriculum_grades[0]+"-"+e.oer_curriculum_grades[e.oer_curriculum_grades.length-1]):(n="Grade: ",c=e.oer_curriculum_grades):(n="",c=""),wp.element.createElement("div",{class:"oercurr-blk-row"},wp.element.createElement("a",{href:e.link,class:"oercurr-blk-left",target:"_new"},wp.element.createElement("img",{src:e.featured_image_url,alt:""})),wp.element.createElement("div",{class:"oercurr-blk-right"},wp.element.createElement("div",{class:"ttl"},wp.element.createElement("a",{href:e.link,target:"_new"},e.title)),wp.element.createElement("div",{class:"oercurr-postmeta"},wp.element.createElement("span",{class:"oercurr-postmeta-grades"},wp.element.createElement("strong",null,n),c)),wp.element.createElement("div",{class:"desc"},t),wp.element.createElement("div",{class:"oercurr-tags tagcloud"},e.tagsv2.map(function(e,r){var t=e.split("|");return wp.element.createElement("span",null,wp.element.createElement("a",{href:oercurr_cb_cgb_Global.base_url+"/tag/"+t[1],alt:"",class:"button",target:"_new"},t[0]))}))))}})))))},save:function(e){return null},example:{}})},function(e,r){},function(e,r){}]);
+/**
+ * BLOCK: curriculum-block
+ *
+ * Registering a basic block with Gutenberg.
+ * Simple block, renders and saves the same content without any interactivity.
+ */
+//  Import CSS.
+const { __ } = wp.i18n; // Import __() from wp.i18n
+
+const { registerBlockType } = wp.blocks; // Import registerBlockType() from wp.blocks
+
+const { InspectorControls } = wp.blockEditor;
+const { PanelBody } = wp.components;
+const {
+  CheckboxControl,
+  RadioControl,
+  TextControl,
+  ToggleControl,
+  SelectControl
+} = wp.components;
+const { withSelect } = wp.data;
+let selcat = [];
+const parentcatlist = []; //register custom Rest Endpoint as Entity
+
+var dispatch = wp.data.dispatch;
+dispatch("core").addEntities([
+  {
+    name: "taxquery",
+    // route name
+    kind: "curriculum/v2",
+    // namespace
+    baseURL: "/curriculum/v2/taxquery" // API path without /wp-json
+  }
+]);
+registerBlockType("oer-curriculum/block-curriculum-block", {
+  // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+  title: __("Curriculum List"),
+  // Block title.
+  icon: "welcome-learn-more",
+  // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
+  description: __(
+    "Use this block to add a list of curriculum based on subject"
+  ),
+  category: "oer-block-category",
+  // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
+  keywords: [__("curriculum-list"), __("curriculum"), __("list")],
+  attributes: {
+    blockid: {
+      type: "string"
+    },
+    curriculums: {
+      type: "array"
+    },
+    curriculumlength: {
+      type: "integer"
+    },
+    categories: {
+      type: "array"
+    },
+    selectedCategory: {
+      type: "string"
+    },
+    displayOption: {
+      type: "array",
+      default: [2, 5, 10, 15, 20, 25, 30]
+    },
+    selper: {
+      type: "string",
+      default: "5"
+    },
+    selsrt: {
+      type: "string",
+      default: "modified"
+    },
+    sortOption: {
+      type: "object",
+      default: [
+        {
+          date: "Date Added",
+          modified: "Date Updated",
+          title: "Title a-z"
+        }
+      ]
+    }
+  },
+
+  /**
+   * The edit function describes the structure of your block in the context of the editor.
+   * This represents what the editor will render when the block is used.
+   *
+   * The "edit" property must be a valid function.
+   *
+   * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
+   *
+   * @param {Object} props Props.
+   * @returns {Mixed} JSX Component.
+   */
+  edit: function (props) {
+    const attributes = props.attributes;
+    const setAttributes = props.setAttributes;
+    const prvhtm = oercurr_cb_cgb_Global["preview_url"]; //SET BLOCK INSTANCE IDS
+
+    const blocks = wp.data.select("core/block-editor").getBlocks();
+    blocks.map((val) => {
+      if (val.name == "oer-curriculum/block-curriculum-block") {
+        var uniq = "cb" + new Date().getTime();
+        var cid = val.clientId;
+        var attr = wp.data.select("core/block-editor").getBlockAttributes(cid);
+        /*
+                if (!attr.blockid) {
+                  wp.data.dispatch("core/block-editor").updateBlockAttributes(cid, {
+                    blockid: uniq,
+                    //postsPerPage: 5,
+                    //sortBy: "modified"
+                  });
+                }
+          */
+      }
+    }); // RETURN MESSAGE WHILE CATEGORIES AND CURRICULUMS ARE NOT YET FULLY LOADED
+
+    let selcat = [];
+
+    if (typeof attributes.selectedCategory != "undefined") {
+      const tmp = attributes.selectedCategory.split(",");
+      const ix = tmp.indexOf("");
+
+      if (ix > -1) {
+        tmp.splice(ix, 1);
+      }
+
+      tmp.map((cat) => {
+        selcat.push(parseInt(cat));
+      });
+    }
+    /* SET CATEGORIES ATTRIBUTES */
+
+    if (!attributes.categories) {
+      wp.apiFetch({
+        url: "/wp-json/curriculum/v2/catquery"
+      }).then((categories) => {
+        setAttributes({
+          categories: categories
+        });
+      });
+    } // Display while categories attribute is still empty
+
+    if (!attributes.categories) {
+      return "Loading categories...";
+    } // Display if categories attributes is not empty but contains blank record
+
+    if (attributes.categories && attributes.categories.length === 0) {
+      return "No categories found, please add some!";
+    }
+
+    let cat_arr = [];
+    cat_arr = attributes.categories; //console.log(cat_arr);
+
+    /* SET CURRICULUM ATTRIBUTES */
+
+    if (!attributes.curriculums) {
+      let ord = "";
+
+      if (attributes.selsrt == "title") {
+        ord = "asc";
+      } else {
+        ord = "desc";
+      }
+
+      if (selcat != "") {
+        wp.apiFetch({
+          url:
+            "/wp-json/curriculum/v2/taxquery?perpage=" +
+            attributes.selper +
+            "&terms=" +
+            selcat +
+            "&orderby=" +
+            attributes.selsrt +
+            "&order=" +
+            ord
+        }).then((curriculums) => {
+          setAttributes({
+            curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
+          });
+        });
+      } else {
+        wp.apiFetch({
+          url: "/wp-json/curriculum/v2/taxquery?terms=0"
+        }).then((curriculums) => {
+          setAttributes({
+            curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
+          });
+        });
+      }
+    } // RETURN MESSAGE WHILE CATEGORIES AND CURRICULUMS ARE NOT YET FULLY LOADED
+
+    if (!attributes.curriculums && attributes.selectedCategory != "") {
+      return "Loading curriculum ...";
+    }
+
+    let cur_arr = [];
+    cur_arr = attributes.curriculums;
+
+    if (!cur_arr && cur_arr.length != 0) {
+      return "Loading curriculum ....";
+    }
+
+    jQuery(document).on(
+      "click",
+      ".oer_curriculum_inspector_sbjt_addSubjects",
+      function (e) {
+        if (
+          jQuery(".interface-complementary-area.edit-post-sidebar").length == 0
+        ) {
+          jQuery(
+            ".edit-post-header__settings .interface-pinned-items button"
+          ).trigger("click");
+        }
+
+        jQuery(".oer_curriculum_inspector_sbjt_modal_resource_wrapper").show(
+          300
+        );
+      }
+    );
+    jQuery(document).on(
+      "click",
+      ".oer_curriculum_inspector_sbjt_modal_wrapper_close",
+      function (e) {
+        jQuery(".oer_curriculum_inspector_sbjt_modal_resource_wrapper").hide(
+          300
+        );
+      }
+    );
+    jQuery(document).on("keyup", function (event) {
+      var keycode = event.keyCode ? event.keyCode : event.which;
+      var target = jQuery(
+        ".oer_curriculum_inspector_wrapper .oer_curriculum_inspector_sbjt_modal_resource_wrapper"
+      );
+
+      if (target.is(":visible") && keycode == 27) {
+        // pressed escape key while model is visible
+        target.hide(300);
+      }
+    });
+
+    function onChangeCheckboxField(newValue, index) {
+      if (newValue.target.checked) {
+        selcat.push(newValue.target.getAttribute("data"));
+      } else {
+        const ex = selcat.indexOf(
+          parseInt(newValue.target.getAttribute("data"))
+        );
+
+        if (ex > -1) {
+          selcat.splice(ex, 1);
+        }
+      }
+
+      console.log("###4");
+      setAttributes({
+        selectedCategory: selcat.toString()
+      });
+      localStorage.setItem(
+        "selectedCategory-" + attributes.blockid,
+        selcat.toString()
+      );
+      let ord = attributes.selsrt == "title" ? "asc" : "desc";
+
+      if (selcat != "") {
+        wp.apiFetch({
+          url:
+            "/wp-json/curriculum/v2/taxquery?perpage=" +
+            attributes.selper +
+            "&terms=" +
+            selcat +
+            "&orderby=" +
+            attributes.selsrt +
+            "&order=" +
+            ord
+        }).then((curriculums) => {
+          setAttributes({
+            curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
+          });
+        });
+      } else {
+        console.log("###7");
+        wp.apiFetch({
+          url: "/wp-json/curriculum/v2/taxquery?terms=0"
+        }).then((curriculums) => {
+          setAttributes({
+            curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
+          });
+        });
+      }
+    }
+
+    function updatePostsPerPage(e) {
+      setAttributes({
+        selper: e.target.value
+      });
+      localStorage.setItem(
+        "postsPerPage-" + attributes.blockid,
+        e.target.value
+      );
+      var tmp_selper = e.target.value;
+      let ord = attributes.selsrt == "title" ? "asc" : "desc";
+
+      if (selcat != "") {
+        wp.apiFetch({
+          url:
+            "/wp-json/curriculum/v2/taxquery?perpage=" +
+            tmp_selper +
+            "&terms=" +
+            selcat +
+            "&orderby=" +
+            attributes.selsrt +
+            "&order=" +
+            ord
+        }).then((curriculums) => {
+          setAttributes({
+            curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
+          });
+        });
+      } else {
+        wp.apiFetch({
+          url: "/wp-json/curriculum/v2/taxquery?terms=0"
+        }).then((curriculums) => {
+          setAttributes({
+            curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
+          });
+        });
+      }
+    }
+
+    function updateSortby(e) {
+      /*setAttributes({sortBy: e.target.value});*/
+      var tmp_selsrt = e.target.value;
+      setAttributes({
+        selsrt: e.target.value
+      });
+      localStorage.setItem("sortBy-" + attributes.selsrt, e.target.value);
+      let ord = tmp_selsrt == "title" ? "asc" : "desc";
+
+      if (selcat != "") {
+        wp.apiFetch({
+          url:
+            "/wp-json/curriculum/v2/taxquery?perpage=" +
+            attributes.selper +
+            "&terms=" +
+            selcat +
+            "&orderby=" +
+            tmp_selsrt +
+            "&order=" +
+            ord
+        }).then((curriculums) => {
+          setAttributes({
+            curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
+          });
+        });
+      } else {
+        wp.apiFetch({
+          url: "/wp-json/curriculum/v2/taxquery?terms=0"
+        }).then((curriculums) => {
+          setAttributes({
+            curriculums: curriculums
+          });
+          setAttributes({
+            curriculumlength: parseInt(curriculums.length)
+          });
+        });
+      }
+    }
+
+
+    let SubjectPicker = /*#__PURE__*/ React.createElement(
+      "div",
+      {
+        class: "oer_curriculum_inspector_wrapper"
+      },
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          class: "oer_curriculum_inspector_sbjt_modal_resource_wrapper"
+        },
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class: "oer_curriculum_inspector_sbjt_modal_content_main"
+          },
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oer_curriculum_inspector_sbjt_modal_wrapper_close"
+            },
+            /*#__PURE__*/ React.createElement("span", {
+              class: "dashicons dashicons-no"
+            })
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oer_curriculum_inspector_sbjt_modal_center"
+            },
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "oer_curriculum_inspector_sbjt_modal_table"
+              },
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "oer_curriculum_inspector_sbjt_modal_cell"
+                },
+                /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class: "oer_curriculum_inspector_sbjt_modal"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "oer_curriculum_inspector_sbjt_search_header"
+                    },
+                    "Subjects"
+                  ),
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "oer_curriculum_inspector_sbjt_search_wrapper"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "div",
+                      {
+                        class: "oer_curriculum_inspector_subject"
+                      },
+                      attributes.categories.map((cat, index) => {
+                        return /*#__PURE__*/ React.createElement(
+                          "label",
+                          {
+                            class:
+                              "components-base-control__label ls_inspector_subject_label " +
+                              cat.level
+                          },
+                          /*#__PURE__*/ React.createElement("input", {
+                            checked:
+                              typeof selcat != "undefined" &&
+                              selcat.indexOf(cat.term_id) != -1
+                                ? "checked"
+                                : "",
+                            id: "inspector-checkbox-control-" + index,
+                            class: "ls_inspector_subject_checkbox " + cat.level,
+                            type: "checkbox",
+                            data: cat.term_id,
+                            parent: cat.parent,
+                            onClick: onChangeCheckboxField
+                          }),
+                          cat.name + " (" + cat.cnt + ")"
+                        );
+                      })
+                    )
+                  ),
+                  /*#__PURE__*/ React.createElement("div", {
+                    class: "oer_curriculum_inspector_sbjt_search_footer"
+                  })
+                )
+              )
+            )
+          )
+        )
+      )
+    ); // Inspector Controls
+
+    let InspectorControlVar = /*#__PURE__*/ React.createElement(
+      InspectorControls,
+      null,
+      /*#__PURE__*/ React.createElement(
+        PanelBody,
+        {
+          title: __("Curriculum Block settings"),
+          initialOpen: true
+        },
+        SubjectPicker,
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class: "oer_curriculum_inspector_wrapper"
+          },
+          /*#__PURE__*/ React.createElement(
+            "label",
+            {
+              class: "components-base-control__label",
+              for: "oer_curriculum_inspector_subject"
+            },
+            "Subjects:"
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oer_curriculum_inspector_sbjt_addbutton_wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "button oer_curriculum_inspector_sbjt_addSubjects"
+              },
+              "Add Subjects"
+            )
+          )
+        ),
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class:
+              "oer_curriculum_inspector_wrapper oer_curriculum_inspector_Postperpage"
+          },
+          /*#__PURE__*/ React.createElement(
+            "label",
+            {
+              class: "components-base-control__label",
+              for: "oer_curriculum_inspector_postperpage_select"
+            },
+            "Posts Per Page:"
+          ),
+          /*#__PURE__*/ React.createElement(
+            "select",
+            {
+              id: "oer_curriculum_inspector_postperpage_select",
+              onChange: updatePostsPerPage,
+              value: attributes.selper
+            },
+            attributes.displayOption.map((incr, index) => {
+              if (attributes.selper == incr) {
+                return /*#__PURE__*/ React.createElement(
+                  "option",
+                  {
+                    selected: true,
+                    value: incr
+                  },
+                  incr
+                );
+              } else {
+                return /*#__PURE__*/ React.createElement(
+                  "option",
+                  {
+                    value: incr
+                  },
+                  incr
+                );
+              }
+            })
+          )
+        ),
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class:
+              "oer_curriculum_inspector_wrapper oer_curriculum_inspector_Postperpage"
+          },
+          /*#__PURE__*/ React.createElement(
+            "label",
+            {
+              class: "components-base-control__label",
+              for: "oer_curriculum_inspector_postperpage_select"
+            },
+            "Sort By:"
+          ),
+          /*#__PURE__*/ React.createElement(
+            "select",
+            {
+              id: "oer_curriculum_inspector_sortby_select",
+              onChange: updateSortby,
+              value: attributes.selsrt
+            },
+            Object.keys(attributes.sortOption[0]).map((key) => {
+              if (attributes.selsrt == key) {
+                return /*#__PURE__*/ React.createElement(
+                  "option",
+                  {
+                    value: key,
+                    checked: true
+                  },
+                  attributes.sortOption[0][key]
+                );
+              } else {
+                return /*#__PURE__*/ React.createElement(
+                  "option",
+                  {
+                    value: key
+                  },
+                  attributes.sortOption[0][key]
+                );
+              }
+            })
+          )
+        )
+      )
+    ); // Top Bar
+
+    let oercurrTopbar = /*#__PURE__*/ React.createElement(
+      "div",
+      {
+        class: "oercurr-blk-topbar"
+      },
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          class: "oercurr-blk-topbar-left"
+        },
+        /*#__PURE__*/ React.createElement(
+          "span",
+          null,
+          "Browse All ",
+          attributes.curriculumlength,
+          " Curriculums"
+        )
+      ),
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          class: "oercurr-blk-topbar-right"
+        },
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class: "oercurr-blk-topbar-display-box"
+          },
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oercurr-blk-topbar-display-text"
+            },
+            /*#__PURE__*/ React.createElement(
+              "span",
+              null,
+              "Show ",
+              attributes.selper
+            ),
+            /*#__PURE__*/ React.createElement(
+              "a",
+              {
+                href: "#"
+              },
+              /*#__PURE__*/ React.createElement("i", {
+                class: "fa fa-th-list",
+                "aria-hidden": "true"
+              })
+            )
+          ),
+          /*#__PURE__*/ React.createElement(
+            "ul",
+            {
+              class:
+                "oercurr-blk-topbar-display-option oercurr-blk-topbar-option"
+            },
+            attributes.displayOption.map((incr, index) => {
+              if (attributes.selper == incr) {
+                return /*#__PURE__*/ React.createElement(
+                  "li",
+                  {
+                    class: "selected"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "a",
+                    {
+                      href: "#",
+                      ret: incr
+                    },
+                    incr
+                  )
+                );
+              } else {
+                return /*#__PURE__*/ React.createElement(
+                  "li",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "a",
+                    {
+                      href: "#",
+                      ret: incr
+                    },
+                    incr
+                  )
+                );
+              }
+            })
+          )
+        ),
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class: "oercurr-blk-topbar-sort-box"
+          },
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oercurr-blk-topbar-sort-text"
+            },
+            /*#__PURE__*/ React.createElement(
+              "span",
+              null,
+              "Sort by: ",
+              attributes.sortOption[0][attributes.selsrt]
+            ),
+            /*#__PURE__*/ React.createElement(
+              "a",
+              {
+                href: "#"
+              },
+              /*#__PURE__*/ React.createElement("i", {
+                class: "fa fa-sort",
+                "aria-hidden": "true"
+              })
+            )
+          ),
+          /*#__PURE__*/ React.createElement(
+            "ul",
+            {
+              class: "oercurr-blk-topbar-sort-option oercurr-blk-topbar-option"
+            },
+            Object.keys(attributes.sortOption[0]).map((key) => {
+              if (attributes.selsrt == key) {
+                return /*#__PURE__*/ React.createElement(
+                  "li",
+                  {
+                    class: "selected"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "a",
+                    {
+                      href: "#",
+                      ret: key
+                    },
+                    attributes.sortOption[0][key]
+                  )
+                );
+              } else {
+                return /*#__PURE__*/ React.createElement(
+                  "li",
+                  null,
+                  /*#__PURE__*/ React.createElement(
+                    "a",
+                    {
+                      href: "#",
+                      ret: key
+                    },
+                    attributes.sortOption[0][key]
+                  )
+                );
+              }
+            })
+          )
+        )
+      )
+    );
+
+    if (attributes.curriculums.length < 1) {
+      return /*#__PURE__*/ React.createElement(
+        "div",
+        null,
+        InspectorControlVar,
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class: "oercurr-blk-main editor",
+            blockid: attributes.blockid
+          },
+          oercurrTopbar,
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              id: "oer_curriculum_cur_blk_content_wrapper",
+              class: "oercurr-blk-wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                id: "oercurr-blk-content_drop"
+              },
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  id: "oercurr-blk-content_placeholder"
+                },
+                /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class:
+                      "button oer_curriculum_inspector_sbjt_addSubjects prvw"
+                  },
+                  /*#__PURE__*/ React.createElement("span", {
+                    class: "dashicons dashicons-plus"
+                  }),
+                  "\xA0\xA0Click here to add curriculum"
+                )
+              )
+            )
+          )
+        )
+      );
+    } else {
+      return /*#__PURE__*/ React.createElement(
+        "div",
+        null,
+        InspectorControlVar,
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class: "oercurr-blk-main editor",
+            blockid: attributes.blockid
+          },
+          oercurrTopbar,
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              id: "oer_curriculum_cur_blk_content_wrapper",
+              class: "oercurr-blk-wrapper"
+            },
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                id: "oercurr-blk-content_drop"
+              },
+              attributes.curriculums.map((post, index) => {
+                let ctnt = post.content.replace(/<[^>]+>/g, "");
+
+                if (ctnt.length <= 180) {
+                  ctnt = ctnt + "....";
+                } else {
+                  ctnt = ctnt.substr(1, 180) + "...";
+                }
+
+                let grd = 0;
+                let grdtxt = "";
+
+                if (post.oer_curriculum_grades != "") {
+                  if (post.oer_curriculum_grades.length > 1) {
+                    grdtxt = "Grades: ";
+                    grd =
+                      post.oer_curriculum_grades[0] +
+                      "-" +
+                      post.oer_curriculum_grades[
+                        post.oer_curriculum_grades.length - 1
+                      ];
+                  } else {
+                    grdtxt = "Grade: ";
+                    grd = post.oer_curriculum_grades;
+                  }
+                } else {
+                  grdtxt = "";
+                  grd = "";
+                }
+
+                return /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class: "oercurr-blk-row"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "a",
+                    {
+                      href: post.link,
+                      class: "oercurr-blk-left",
+                      target: "_new",
+                      rel: "noopener"
+                    },
+                    /*#__PURE__*/ React.createElement("img", {
+                      src: post.featured_image_url,
+                      alt: ""
+                    })
+                  ),
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "oercurr-blk-right"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "div",
+                      {
+                        class: "ttl"
+                      },
+                      /*#__PURE__*/ React.createElement(
+                        "a",
+                        {
+                          href: post.link,
+                          target: "_new"
+                        },
+                        post.title
+                      )
+                    ),
+                    /*#__PURE__*/ React.createElement(
+                      "div",
+                      {
+                        class: "oercurr-postmeta"
+                      },
+                      /*#__PURE__*/ React.createElement(
+                        "span",
+                        {
+                          class: "oercurr-postmeta-grades"
+                        },
+                        /*#__PURE__*/ React.createElement(
+                          "strong",
+                          null,
+                          grdtxt
+                        ),
+                        grd
+                      )
+                    ),
+                    /*#__PURE__*/ React.createElement(
+                      "div",
+                      {
+                        class: "desc"
+                      },
+                      ctnt
+                    ),
+                    /*#__PURE__*/ React.createElement(
+                      "div",
+                      {
+                        class: "oercurr-tags tagcloud"
+                      },
+                      post.tagsv2.map((posttags, index) => {
+                        let tgar = posttags.split("|");
+                        return /*#__PURE__*/ React.createElement(
+                          "span",
+                          null,
+                          /*#__PURE__*/ React.createElement(
+                            "a",
+                            {
+                              href:
+                                oercurr_cb_cgb_Global["base_url"] +
+                                "/tag/" +
+                                tgar[1],
+                              alt: "",
+                              class: "button",
+                              target: "_new"
+                            },
+                            tgar[0]
+                          )
+                        );
+                      })
+                    )
+                  )
+                );
+              })
+            )
+          )
+        )
+      );
+    } //}else{
+  },
+  save: (props) => {
+    const attributes = props.attributes;
+    const setAttributes = props.setAttributes;
+    return /*#__PURE__*/ React.createElement(
+      "div",
+      {
+        class: "oercurr-blk-main editor",
+        blockid: attributes.blockid
+      },
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          class: "oercurr-blk-topbar"
+        },
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class: "oercurr-blk-topbar-left"
+          },
+          /*#__PURE__*/ React.createElement(
+            "span",
+            {
+              class: "oercurr-blk-topbar-left-count"
+            },
+            "Browse All ",
+            attributes.curriculumlength,
+            " Curriculums"
+          )
+        ),
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class: "oercurr-blk-topbar-right"
+          },
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oercurr-blk-topbar-display-box"
+            },
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "oercurr-blk-topbar-display-text"
+              },
+              /*#__PURE__*/ React.createElement(
+                "span",
+                null,
+                "Show ",
+                attributes.selper
+              ),
+              /*#__PURE__*/ React.createElement(
+                "a",
+                {
+                  href: "#"
+                },
+                /*#__PURE__*/ React.createElement("i", {
+                  class: "fa fa-th-list",
+                  "aria-hidden": "true"
+                })
+              )
+            ),
+            /*#__PURE__*/ React.createElement(
+              "ul",
+              {
+                class:
+                  "oercurr-blk-topbar-display-option oercurr-blk-topbar-option"
+              },
+              attributes.displayOption.map((incr, index) => {
+                if (attributes.selper == incr) {
+                  return /*#__PURE__*/ React.createElement(
+                    "li",
+                    {
+                      class: "selected"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "a",
+                      {
+                        href: "#",
+                        ret: incr
+                      },
+                      incr
+                    )
+                  );
+                } else {
+                  return /*#__PURE__*/ React.createElement(
+                    "li",
+                    null,
+                    /*#__PURE__*/ React.createElement(
+                      "a",
+                      {
+                        href: "#",
+                        ret: incr
+                      },
+                      incr
+                    )
+                  );
+                }
+              })
+            )
+          ),
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              class: "oercurr-blk-topbar-sort-box"
+            },
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "oercurr-blk-topbar-sort-text"
+              },
+              /*#__PURE__*/ React.createElement(
+                "span",
+                null,
+                "Sort by: ",
+                attributes.sortOption[0][attributes.selsrt]
+              ),
+              /*#__PURE__*/ React.createElement(
+                "a",
+                {
+                  href: "#"
+                },
+                /*#__PURE__*/ React.createElement("i", {
+                  class: "fa fa-sort",
+                  "aria-hidden": "true"
+                })
+              )
+            ),
+            /*#__PURE__*/ React.createElement(
+              "ul",
+              {
+                class:
+                  "oercurr-blk-topbar-sort-option oercurr-blk-topbar-option"
+              },
+              Object.keys(attributes.sortOption[0]).map((key) => {
+                if (attributes.selsrt == key) {
+                  return /*#__PURE__*/ React.createElement(
+                    "li",
+                    {
+                      class: "selected"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "a",
+                      {
+                        href: "#",
+                        ret: key
+                      },
+                      attributes.sortOption[0][key]
+                    )
+                  );
+                } else {
+                  return /*#__PURE__*/ React.createElement(
+                    "li",
+                    null,
+                    /*#__PURE__*/ React.createElement(
+                      "a",
+                      {
+                        href: "#",
+                        ret: key
+                      },
+                      attributes.sortOption[0][key]
+                    )
+                  );
+                }
+              })
+            )
+          )
+        ),
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            id: "oer_curriculum_cur_blk_content_wrapper",
+            class: "oercurr-blk-wrapper"
+          },
+          /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              id: "oercurr-blk-content_drop"
+            },
+            attributes.curriculums.map((post, index) => {
+              let ctnt = post.content.replace(/<[^>]+>/g, "");
+
+              if (ctnt.length <= 180) {
+                ctnt = ctnt + "....";
+              } else {
+                ctnt = ctnt.substr(1, 180) + "...";
+              }
+
+              let grd = 0;
+              let grdtxt = "";
+
+              if (post.oer_curriculum_grades != "") {
+                if (post.oer_curriculum_grades.length > 1) {
+                  grdtxt = "Grades: ";
+                  grd =
+                    post.oer_curriculum_grades[0] +
+                    "-" +
+                    post.oer_curriculum_grades[
+                      post.oer_curriculum_grades.length - 1
+                    ];
+                } else {
+                  grdtxt = "Grade: ";
+                  grd = post.oer_curriculum_grades;
+                }
+              } else {
+                grdtxt = "";
+                grd = "";
+              }
+
+              return /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "oercurr-blk-row"
+                },
+                /*#__PURE__*/ React.createElement(
+                  "a",
+                  {
+                    href: post.link,
+                    class: "oercurr-blk-left",
+                    target: "_new",
+                    rel: "noopener"
+                  },
+                  /*#__PURE__*/ React.createElement("img", {
+                    src: post.featured_image_url,
+                    alt: ""
+                  })
+                ),
+                /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class: "oercurr-blk-right"
+                  },
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "ttl"
+                    },
+                    /*#__PURE__*/ React.createElement(
+                      "a",
+                      {
+                        href: post.link,
+                        target: "_new",
+                        rel: "noopener"
+                      },
+                      post.title
+                    )
+                  ),
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "desc"
+                    },
+                    ctnt
+                  ),
+                  /*#__PURE__*/ React.createElement(
+                    "div",
+                    {
+                      class: "oercurr-tags tagcloud"
+                    },
+                    post.tagsv2.map((posttags, index) => {
+                      let tgar = posttags.split("|");
+                      return /*#__PURE__*/ React.createElement(
+                        "span",
+                        null,
+                        /*#__PURE__*/ React.createElement(
+                          "a",
+                          {
+                            href:
+                              oercurr_cb_cgb_Global["base_url"] +
+                              "/tag/" +
+                              tgar[1],
+                            alt: "",
+                            class: "button",
+                            target: "_new",
+                            rel: "noopener"
+                          },
+                          tgar[0]
+                        )
+                      );
+                    })
+                  )
+                )
+              );
+            })
+          )
+        )
+      )
+    );
+  },
+  example: () => {}
+});

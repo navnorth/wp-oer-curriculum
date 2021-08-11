@@ -98,7 +98,7 @@ function oercurr_cfb_block_assets() { // phpcs:ignore
      * @since 1.16.0
      */
     register_block_type(
-        'cgb/block-curriculum-featured-block', array(
+        'oer-curriculum/block-curriculum-featured-block', array(
             // Enqueue blocks.style.build.css on both frontend & backend.
             'style'         => 'curriculum_featured_block-cgb-style-css',
             // Enqueue blocks.build.js in the editor only.
@@ -136,7 +136,7 @@ function oercurr_cfb_render_featured_block($attributes, $ajx=false){
             $_slideimageheight = (!isset($attributes['slideimageheight']))? OERCURR_CFB_BLK_SLIDE_IMG_HEIGHT: sanitize_text_field($attributes['slideimageheight']);
             $_ret .= '<div class="oercurr_cfb_right_featuredwpr">';
                 $_title = (isset($attributes['blocktitle']))? sanitize_text_field($attributes['blocktitle']): 'Featured';
-                $_ret .= '<div class="oercurr-ftrdttl curriculum-feat-title_'.sanitize_text_field($attributes['blockid']).'">'.esc_html($_title).'</div>';
+                $_ret .= '<div class="oercurr-cfb-ftrdttl curriculum-feat-title_'.sanitize_text_field($attributes['blockid']).'">'.esc_html($_title).'</div>';
                 $_ret .= '<ul class="featuredwpr_bxslider_front featuredwpr_bxslider_front_'.sanitize_text_field($attributes['blockid']).'" blk="'.sanitize_text_field($attributes['blockid']).'" style="visibility:hidden;">';
 
                         foreach($feats as $val){
@@ -206,7 +206,9 @@ function oercurr_cfb_render_featured_block($attributes, $ajx=false){
                                     $_sngsldmgn = (!isset($attributes['slidemargin']))? 20 : sanitize_text_field($attributes['slidemargin']);
                                     $_sngsldwdt = (!isset($attributes['slidewidth']))? (375 + $_sngsldmgn) : (sanitize_text_field($attributes['slidewidth']) + $_sngsldmgn);
                                     $_ret .= 'let whlsldwdt = sldcnt * '.$_sngsldwdt.';';
-
+                                    $_ret .= 'jQuery(".featuredwpr_bxslider_front_'.sanitize_text_field($attributes['blockid']) .'").css("width",(whlsldwdt +50));';
+                                    
+                                    
                             $_ret .= '}';
                             
                     $_ret .= '});';
@@ -599,7 +601,7 @@ function oercurr_cfb_initiate_admin_bx_slider() {
                 let bxidx = jQuery('.featuredwpr_bxslider_'+blkid).attr('idx');
                 let dtc = jQuery('.curriculum-feat-title_'+blkid).detach();
 
-                jQuery('.featuredwpr_bxslider_'+blkid).parents('.bx-viewport').siblings('.oercurr-ftrdttl').remove();
+                jQuery('.featuredwpr_bxslider_'+blkid).parents('.bx-viewport').siblings('.oercurr-cfb-ftrdttl').remove();
 
                 let bxslidewidth = (isNaN(localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidewidth")))? 375: localStorage.getItem("lpInspectorFeatSliderSetting-"+blkid+"-slidewidth");
 
