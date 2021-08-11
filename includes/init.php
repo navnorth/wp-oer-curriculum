@@ -13,8 +13,8 @@ function oercurr_create_menu_item() {
     $labels = array(
         'name'          => esc_html_x('Curriculum', 'post type general name'),
         'singular_name' => esc_html_x('Curriculum', 'post type singular name'),
-        'add_new'       => esc_html_x('Add New Curriculum', 'book'),
-        'add_new_item'  => esc_html__('Add New Curriculum'),
+        'add_new'       => esc_html__('Add New Curriculum', OERCURR_CURRICULUM_SLUG),
+        'add_new_item'  => esc_html__('Add New Curriculum',OERCURR_CURRICULUM_SLUG),
         'edit_item'     => esc_html__('Edit Curriculum'),
         'new_item'      => esc_html__('Create Curriculum'),
         'all_items'     => esc_html__('All Curriculum'),
@@ -42,10 +42,11 @@ function oercurr_create_menu_item() {
     );
 
     register_post_type('oer-curriculum', $args);
-
+    if(!get_option('oer_curriculum_details_curmetset_label')){oercurr_add_setting_options('oer_curriculum_details','label','Details');}
     if(!get_option('oer_curriculum_type_curmetset_label')){oercurr_add_setting_options('oer_curriculum_type','label','Type');}
     if(!get_option('oer_curriculum_type_other_curmetset_label')){oercurr_add_setting_options('oer_curriculum_type_other','label','Other Type');}
     if(!get_option('oer_curriculum_authors_curmetset_label')){oercurr_add_setting_options('oer_curriculum_authors','label','Author');}
+    if(!get_option('oer_curriculum_standardsandobjectives_curmetset_label')){oercurr_add_setting_options('oer_curriculum_standardsandobjectives','label','Standards and Objectives');}
     if(!get_option('oer_curriculum_primary_resources_curmetset_label')){oercurr_add_setting_options('oer_curriculum_primary_resources','label','Primary Resources');}
     if(!get_option('oer_curriculum_iq_curmetset_label')){oercurr_add_setting_options('oer_curriculum_iq','label','Investigative Question');}
     if(!get_option('oer_curriculum_required_materials_curmetset_label')){oercurr_add_setting_options('oer_curriculum_required_materials','label','Required Equipment Materials');}
@@ -64,10 +65,12 @@ function oercurr_create_menu_item() {
     if(!get_option('oer_curriculum_related_curriculum_2_curmetset_label')){oercurr_add_setting_options('oer_curriculum_related_curriculum_2','label','Related Curriculum 2');}
     if(!get_option('oer_curriculum_related_curriculum_3_curmetset_label')){oercurr_add_setting_options('oer_curriculum_related_curriculum_3','label','Related Curriculum 3');}
 
-
+    
+    if(!get_option('oer_curriculum_details_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_details','enable','checked');}
     if(!get_option('oer_curriculum_type_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_type','enable','checked');}
     if(!get_option('oer_curriculum_type_other_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_type_other','enable','checked');}
     if(!get_option('oer_curriculum_authors_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_authors','enable','checked');}
+    if(!get_option('oer_curriculum_standardsandobjectives_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_standardsandobjectives','enable','checked');}
     if(!get_option('oer_curriculum_primary_resources_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_primary_resources','enable','checked');}
     if(!get_option('oer_curriculum_iq_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_iq','enable','checked');}
     if(!get_option('oer_curriculum_required_materials_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_required_materials','enable','checked');}
