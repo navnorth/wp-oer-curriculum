@@ -345,7 +345,7 @@ function oercurr_load_textdomain() {
 
 // Limit blocks in 'oer-curriculum'' post type
 function wpse_allowed_block_types($allowed_block_types, $post) {
-    if($post->post_type == 'oer-curriculum') {
+    if(get_post_type() == 'oer-curriculum' && (isset($_GET['action']) && $_GET['action'] == 'edit')) {
         return array(
           'core/paragraph',
           'core/image',
