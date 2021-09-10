@@ -172,21 +172,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
       wp.apiFetch({
         url: "/wp-json/curriculum/feat/dataquery"
       }).then((data) => {
-        setAttributes({
-          data: data
-        });
-        setAttributes({
-          resourcesubjects: data[0]
-        });
-        setAttributes({
-          curriculumsubjects: data[1]
-        });
-        setAttributes({
-          resources: data[2]
-        });
-        setAttributes({
-          curriculum: data[3]
-        });
+        setAttributes({data: data, resourcesubjects: data[0], curriculumsubjects: data[1], resources: data[2], curriculum: data[3] })  
       });
     }
 
@@ -479,13 +465,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
     function onSearch(elem, index) {
       var searchstring = elem.target.value.toLowerCase();
       setAttributes({
-        resourcesubjectfilter: ""
-      });
-      setAttributes({
-        curriculumsubjectfilter: ""
-      });
-      setAttributes({
-        searchstring: searchstring
+        resourcesubjectfilter: "", curriculumsubjectfilter: "", searchstring: searchstring
       });
     }
 
@@ -524,15 +504,8 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
     }
 
     function onFilterSearchToggle(elem, index) {
-      setAttributes({
-        resourcesubjectfilter: ""
-      });
-      setAttributes({
-        curriculumsubjectfilter: ""
-      });
-      setAttributes({
-        searchstring: ""
-      });
+      //console.log('FILTER TOGGLE: '+attributes.filtertype)
+      setAttributes({resourcesubjectfilter: "", curriculumsubjectfilter: "", searchstring: ""});
 
       if (attributes.filtertype == "search") {
         setAttributes({
