@@ -178,23 +178,13 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
             "&order=" +
             ord
         }).then((curriculums) => {
-          setAttributes({
-            curriculums: curriculums
-          });
-          setAttributes({
-            curriculumlength: parseInt(curriculums.length)
-          });
+          setAttributes({ curriculums: curriculums, curriculumlength: parseInt(curriculums.length) });
         });
       } else {
         wp.apiFetch({
           url: "/wp-json/curriculum/v2/taxquery?terms=0"
         }).then((curriculums) => {
-          setAttributes({
-            curriculums: curriculums
-          });
-          setAttributes({
-            curriculumlength: parseInt(curriculums.length)
-          });
+          setAttributes({ curriculums: curriculums, curriculumlength: parseInt(curriculums.length) });
         });
       }
     } // RETURN MESSAGE WHILE CATEGORIES AND CURRICULUMS ARE NOT YET FULLY LOADED
@@ -283,24 +273,14 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
             "&order=" +
             ord
         }).then((curriculums) => {
-          setAttributes({
-            curriculums: curriculums
-          });
-          setAttributes({
-            curriculumlength: parseInt(curriculums.length)
-          });
+          setAttributes({ curriculums: curriculums, curriculumlength: parseInt(curriculums.length) });
         });
       } else {
         console.log("###7");
         wp.apiFetch({
           url: "/wp-json/curriculum/v2/taxquery?terms=0"
         }).then((curriculums) => {
-          setAttributes({
-            curriculums: curriculums
-          });
-          setAttributes({
-            curriculumlength: parseInt(curriculums.length)
-          });
+          setAttributes({ curriculums: curriculums, curriculumlength: parseInt(curriculums.length) });
         });
       }
     }
@@ -328,23 +308,13 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
             "&order=" +
             ord
         }).then((curriculums) => {
-          setAttributes({
-            curriculums: curriculums
-          });
-          setAttributes({
-            curriculumlength: parseInt(curriculums.length)
-          });
+          setAttributes({ curriculums: curriculums, curriculumlength: parseInt(curriculums.length) });
         });
       } else {
         wp.apiFetch({
           url: "/wp-json/curriculum/v2/taxquery?terms=0"
         }).then((curriculums) => {
-          setAttributes({
-            curriculums: curriculums
-          });
-          setAttributes({
-            curriculumlength: parseInt(curriculums.length)
-          });
+          setAttributes({ curriculums: curriculums, curriculumlength: parseInt(curriculums.length) });
         });
       }
     }
@@ -370,23 +340,13 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
             "&order=" +
             ord
         }).then((curriculums) => {
-          setAttributes({
-            curriculums: curriculums
-          });
-          setAttributes({
-            curriculumlength: parseInt(curriculums.length)
-          });
+          setAttributes({ curriculums: curriculums, curriculumlength: parseInt(curriculums.length) });
         });
       } else {
         wp.apiFetch({
           url: "/wp-json/curriculum/v2/taxquery?terms=0"
         }).then((curriculums) => {
-          setAttributes({
-            curriculums: curriculums
-          });
-          setAttributes({
-            curriculumlength: parseInt(curriculums.length)
-          });
+          setAttributes({ curriculums: curriculums, curriculumlength: parseInt(curriculums.length) });
         });
       }
     }
