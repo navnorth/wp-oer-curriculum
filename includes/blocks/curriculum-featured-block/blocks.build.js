@@ -249,12 +249,8 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
           }
         }
       });
-      setAttributes({
-        featlist: feats
-      });
-      setAttributes({
-        selectedfeatured: str
-      });
+      setAttributes({ featlist: feats, selectedfeatured: str });
+      
       oercurr_bx_container_width = jQuery(
         ".curriculum-feat-title_" + attributes.blockid
       ).width();
@@ -308,12 +304,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
           }
         }
       });
-      setAttributes({
-        featlist: feats
-      });
-      setAttributes({
-        selectedfeatured: str
-      });
+      setAttributes({ featlist: feats,selectedfeatured: str });
     }
 
     function removefeatured() {
@@ -351,12 +342,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
           }
         }
       });
-      setAttributes({
-        featlist: feats
-      });
-      setAttributes({
-        selectedfeatured: str
-      });
+      setAttributes({ featlist: feats,selectedfeatured: str });
     }
 
     if (typeof attributes.selectedfeatured != "undefined") {
