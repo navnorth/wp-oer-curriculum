@@ -506,7 +506,9 @@ function oercurr_cfb_initiate_admin_bx_slider() {
     									lpInspectorFeatSliderIndexSave($slideElm, oldIndex, newIndex, elmblkid)
     								}
     							});
-    						}
+    						}else{
+                  jQuery('.ls_inspector_feat_modal_checkbox').attr("disabled", false);
+                }
     							
     			}, speed);
     		}
