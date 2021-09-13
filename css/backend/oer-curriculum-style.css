@@ -237,6 +237,7 @@ li.oer_sbstndard {position: relative;display: block;float: left;width: 100%;}
 .oer_sbstndard input[type="checkbox"] {position: absolute;top: 7px;}
 ul.oer-standard-list div {padding-left: 20px;float: left;width: 100%;}
 .oer_stndrd_desc {padding-left: 0px !important;}
+li.lev1.oer_sbstndard >.oer_stndrd_desc {padding-left: 20px !important;}
 li.oer_sbstndard div ul li input[type="checkbox"] {position: absolute;left: 0px;top: 8px;}
 li.oer_sbstndard div ul li {
     float: left;

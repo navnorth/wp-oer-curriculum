@@ -1134,6 +1134,7 @@ function oercurr_add_text_feature_callback() {
                                     'drag_drop_upload' => true,
                                     'teeny' => true,
                                     'relative_urls' => false,
+                                    'skin' => false
                                 )
                             );
                             echo ob_get_clean();
