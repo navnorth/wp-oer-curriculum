@@ -2,9 +2,9 @@
 Contributors: navigationnorth, joehobson, johnpaulbalagolan, josepheneldas
 Tags: curriculum, education, learning, teaching, OER, Open Educational Resources
 Requires at least: 4.9
-Tested up to: 5.7
+Tested up to: 5.8
 Requires PHP: 7.0
-Stable tag: 0.5.0
+Stable tag: 0.5.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -56,6 +56,10 @@ This is an intermittent issue in Firefox. Installing the Classic Editor fixes th
 4. Subject Areas settings page for managing curriculum subjects
 
 == Changelog ==
+
+= 0.5.1 =
+* Limited the description field to WordPress core blocks only in oer-curriculum post type.
+* Changed namespace so that wp.org will be able to read the block meta data properly.
 
 = 0.5.0 =
 * Initial release

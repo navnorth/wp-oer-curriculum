@@ -27,7 +27,7 @@ dispatch("core").addEntities([
     baseURL: "/curriculum/v2/taxquery" // API path without /wp-json
   }
 ]);
-registerBlockType("cgb/block-curriculum-block", {
+registerBlockType("oer-curriculum/block-curriculum-block", {
   // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
   title: __("Curriculum Block"),
   // Block title.
@@ -82,7 +82,7 @@ registerBlockType("cgb/block-curriculum-block", {
 
     const blocks = wp.data.select("core/block-editor").getBlocks();
     blocks.map((val) => {
-      if (val.name == "cgb/block-curriculum-block") {
+      if (val.name == "oer-curriculum/block-curriculum-block") {
         var uniq = "cb" + new Date().getTime();
         var cid = val.clientId;
         var attr = wp.data.select("core/block-editor").getBlockAttributes(cid);

@@ -88,7 +88,7 @@ function oercurr_cb_block_assets() { // phpcs:ignore
      * @since 1.16.0
      */
     register_block_type(
-        'cgb/block-curriculum-block', array(
+        'oer-curriculum/block-curriculum-block', array(
             // Enqueue front.script.build.js on both frontend & backend.
             'script'        => 'curriculum_block-front-js',
             // Enqueue blocks.style.build.css on both frontend & backend.
