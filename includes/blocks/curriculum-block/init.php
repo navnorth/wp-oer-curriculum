@@ -55,13 +55,14 @@ function oercurr_cb_block_assets() { // phpcs:ignore
     );
 
     // Register block editor styles for backend.
-    wp_register_style(
-        'curriculum_block-cgb-block-editor-css', // Handle.
-        plugins_url( '/curriculum-block/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
-        array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-        null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
-    );
-    
+    if(get_current_post_type() == 'oer-curriculum') {
+      wp_register_style(
+          'curriculum_block-cgb-block-editor-css', // Handle.
+          plugins_url( '/curriculum-block/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
+          array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
+          null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
+      );
+    }
     
     
     // WP Localized globals. Use dynamic PHP stuff in JavaScript via `oercurr_cb_cgb_Global` object.
@@ -114,6 +115,16 @@ function oercurr_cb_block_assets() { // phpcs:ignore
             //'render_callback' => 'oercurr_cb_render_posts_block'
         )
     );
+}
+
+function get_current_post_type() {
+  $pstyp = '';
+  if( (isset($_GET['action']) && $_GET['action'] == 'edit')  &&  isset($_GET['post']) ){ //Edit age
+    $pstyp = get_post_type($_GET['post']);
+  }elseif( isset($_GET['post_type']) ){
+    $pstyp = $_GET['post_type'];
+  }
+  return $pstyp;
 }
 
 function oercurr_cb_render_posts_block($attributes){

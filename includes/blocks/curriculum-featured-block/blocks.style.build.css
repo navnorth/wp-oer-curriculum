@@ -251,7 +251,7 @@ option.oercurr_cfb_inspector_feat_subject_select_bold {
 }
 .editor-styles-wrapper ul, .editor-styles-wrapper ol {
     padding-left: 0 !important;
-    margin-left: 0 !important;
+    /*margin-left: 0 !important;*/
 }
 
 .oercurr-cfb-ftrdttl {float:none !important;}

@@ -43,6 +43,51 @@ div.oercurr-blk-wrapper {
 	overflow-y: auto !important
 }
 
+.oercurr-tc-details-description ul,
+.oercurr-tc-details-description ol {
+	margin-left:0px;
+}
+.oercurr-tc-details-description ul li,
+.oercurr-tc-details-description ol li {
+	list-style: inside;
+	margin-left:0px;
+}
+.oercurr-tc-details-description ol li {
+	list-style-type: lower-numeric;
+}
+
+#tcHiddenFields ul li,
+#tcHiddenFields ol li {
+	margin-left:0px;
+}
+
+.oercurr-tc-details-description figure.wp-block-table {
+	margin-bottom:20px;
+}
+
+.oercurr-tc-details-description figure.wp-block-table table {
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.oercurr-tc-details-description figure.wp-block-table figcaption {
+	margin-top:0px;
+}
+
+.ps-info-description ul,
+.ps-info-description ol {
+	margin-left:0px;
+}
+.ps-info-description ul li,
+.ps-info-description ol li {
+	list-style: inside;
+	margin-left:0px;
+}
+.ps-info-description ol li {
+	list-style-type: lower-numeric;
+}
+
+
 #oercurr-blk-content_placeholder {
  text-align: center;
  padding: 40px 0px;
