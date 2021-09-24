@@ -1,0 +1,19 @@
+p {
+    line-height: 1.5em !important;
+    font-size: 16px !important;
+    color: #333 !important;
+}
+
+p span{
+    line-height: 1.5em !important;
+    font-size: 16px !important;
+    color: #333 !important;
+}
+
+ul li, ol li {
+  list-style-position:inside;
+}
+
+ul, ol {
+  padding-left:0px;
+}

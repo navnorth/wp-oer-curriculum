@@ -84,8 +84,7 @@ function oercurr_create_menu_item() {
     if(!get_option('oer_curriculum_related_curriculum_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_related_curriculum','enable','checked');}
     if(!get_option('oer_curriculum_related_curriculum_1_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_related_curriculum_1','enable','checked');}
     if(!get_option('oer_curriculum_related_curriculum_2_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_related_curriculum_2','enable','checked');}
-    if(!get_option('oer_curriculum_related_curriculum_3_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_related_curriculum_3','enable','checked');}
-
+    if(!get_option('oer_curriculum_related_curriculum_3_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_related_curriculum_3','enable','checked');}  
 }
 
 function oercurr_custom_meta_boxes() {
@@ -287,7 +286,12 @@ function oercurr_enqueue_admin_assets() {
   	    }
         wp_enqueue_script( 'media-upload' );
         wp_register_script('oercurr-script', OERCURR_CURRICULUM_URL . 'js/backend/oer-curriculum.js', array( 'jquery','media-upload' ));
-        wp_localize_script('oercurr-script','lpScript', array("image_placeholder_url" => OERCURR_CURRICULUM_URL.'images/oer-curriculum-person-placeholder.png'));
+        wp_localize_script('oercurr-script','lpScript',
+          [
+            "image_placeholder_url" => OERCURR_CURRICULUM_URL.'images/oer-curriculum-person-placeholder.png',
+            'pluginDirUrl' => OERCURR_CURRICULUM_URL
+          ]
+        );
         wp_enqueue_script('oercurr-script');
         wp_enqueue_script('oercurr-resource-selector-script', OERCURR_CURRICULUM_URL . 'js/backend/oer-curriculum-resource-selector.js' , array('jquery') , null, true);
         //wp_enqueue_script('oercurr-cfb-admin-jqueryui-core', admin_url( 'wp-includes/js/jquery/ui/core.min.js' ) ,array('jquery') , null, true);
@@ -1184,3 +1188,15 @@ function oercurr_settings_callback_func(){
 }
 
 add_filter( 'wp_default_editor', function(){return "text";} );
+
+function wpse120831_mce_css( $mce_css ) {
+  if(is_admin()){
+    if ( ! empty( $mce_css ) )
+        $mce_css .= ',';
+        
+    $mce_css .= OERCURR_CURRICULUM_URL."css/backend/oer-curriculum-mce-style.css";
+  }
+  return $mce_css;
+}
+
+add_filter( 'mce_css', 'wpse120831_mce_css' );

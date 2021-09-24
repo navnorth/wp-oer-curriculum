@@ -818,10 +818,15 @@ jQuery(document).ready(function ($) {
                         tinymce.execCommand( 'mceRemoveEditor', false, 'oercurr-resource-teacher-' + total_form_box );
                         tinymce.execCommand( 'mceAddEditor', false, 'oercurr-resource-teacher-' + total_form_box );
                         quicktags({ id: 'oercurr-resource-teacher-' + total_form_box });
-                        
-                        tinymce.execCommand( 'mceRemoveEditor', false, 'oercurr-resource-student-' + total_form_box );
-                        tinymce.execCommand( 'mceAddEditor', false, 'oercurr-resource-student-' + total_form_box );
                         quicktags({ id: 'oercurr-resource-student-' + total_form_box });
+                        tinyMCE.init({
+                            plugins: "lists link fullscreen",
+                            selector: "textarea#oercurr-resource-student-" + total_form_box,
+                            content_css: lpScript['pluginDirUrl']+"/css/backend/oer-curriculum-mce-style.css",
+                            mode: 'exact',
+                            menubar: false,
+                            toolbar: 'bold italic underline blockquote strikethrough bullist numlist alignleft  aligncenter alignright undo redo link fullscreen'
+                        });
                     }
 
                     // Toggle reorder button
@@ -955,9 +960,15 @@ jQuery(document).ready(function ($) {
                     } else {
                         $('.oercurr-section-element-panel').html(response).tinymce_textareas();
                     }
-                    tinymce.execCommand( 'mceRemoveEditor', false, editor_prefix + id );
-                    tinymce.execCommand( 'mceAddEditor', false, editor_prefix + id );
                     quicktags({ id: editor_prefix + id });
+                    tinyMCE.init({
+                        plugins: "lists link fullscreen",
+                        selector: "textarea#"+editor_prefix + id,
+                        content_css: lpScript['pluginDirUrl']+"/css/backend/oer-curriculum-mce-style.css",
+                        mode: 'exact',
+                        menubar: false,
+                        toolbar: 'bold italic underline blockquote strikethrough bullist numlist alignleft  aligncenter alignright undo redo link fullscreen'
+                    });
                     $('#oercurr-required-materials .oercurr-remove-section').removeAttr('disabled');
                     OerCurriculum.toggleUpDownButton();
                 });
@@ -984,9 +995,15 @@ jQuery(document).ready(function ($) {
                   } else {
                       $('.oercurr-section-element-panel').html(response).tinymce_textareas();
                   }
-                  tinymce.execCommand( 'mceRemoveEditor', false, editor_prefix + id );
-                  tinymce.execCommand( 'mceAddEditor', false, editor_prefix + id );
                   quicktags({ id: editor_prefix + id });
+                  tinyMCE.init({
+                      plugins: "lists link fullscreen",
+                      selector: "textarea#"+editor_prefix + id,
+                      content_css: "/wp-content/plugins/wp-curriculum/css/backend/oer-curriculum-mce-style.css",
+                      mode: 'exact',
+                      menubar: false,
+                      toolbar: 'bold italic underline blockquote strikethrough bullist numlist alignleft  aligncenter alignright undo redo link fullscreen'
+                  });
                   $('#oercurr-additional-sections .oercurr-remove-section').removeAttr('disabled');
                   OerCurriculum.toggleUpDownButton();
               });
