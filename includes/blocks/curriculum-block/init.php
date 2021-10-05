@@ -55,7 +55,7 @@ function oercurr_cb_block_assets() { // phpcs:ignore
     );
 
     // Register block editor styles for backend.
-    if(get_current_post_type() == 'oer-curriculum') {
+    if(get_current_post_type() == 'oer-curriculum' || get_current_post_type() == 'page' || get_current_post_type() == 'post') {
       wp_register_style(
           'curriculum_block-cgb-block-editor-css', // Handle.
           plugins_url( '/curriculum-block/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
