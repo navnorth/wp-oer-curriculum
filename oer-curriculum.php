@@ -31,7 +31,7 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
+global $wp_version;
 //defining the url,path and slug for the plugin
 define( 'OERCURR_CURRICULUM_URL', plugin_dir_url(__FILE__) );
 define( 'OERCURR_CURRICULUM_PATH', plugin_dir_path(__FILE__) );
@@ -345,7 +345,7 @@ function oercurr_load_textdomain() {
 
 // Limit blocks in 'oer-curriculum'' post type
 function wpse_allowed_block_types($allowed_block_types, $post) {
-    if($post->post_type == 'oer-curriculum') {
+    if(get_post_type() == 'oer-curriculum' && (isset($_GET['action']) && $_GET['action'] == 'edit')) {
         return array(
           'core/paragraph',
           'core/image',
@@ -370,4 +370,9 @@ function wpse_allowed_block_types($allowed_block_types, $post) {
         return $allowed_block_types;
     }
 }
-add_filter('allowed_block_types', 'wpse_allowed_block_types', 10, 2);
+
+if ( version_compare( $wp_version, '5.8', '>=' ) ) {
+	add_filter( 'allowed_block_types_all', 'wpse_allowed_block_types', 10, 2);
+}else{
+  add_filter( 'allowed_block_types', 'wpse_allowed_block_types', 10, 2);
+}
