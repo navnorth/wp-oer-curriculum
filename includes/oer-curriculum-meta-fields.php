@@ -75,7 +75,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                     foreach ($elements_orders as $elementKey => $value) {
                         if($elementKey == 'oer_curriculum_introduction_order') {?>
                             <li class="list-group-item">
-                                <a href="#oercurr-introduction-group" title="Introduction">Introduction</a>
+                                <a href="#oercurr-introduction-group" title="Introduction"><?php __('Introduction',OERCURR_CURRICULUM_SLUG); ?></a>
                             </li>
                         <?php } elseif ($elementKey == 'oer_curriculum_authors_order') {
                             if (($author_set && $author_enabled) || !$author_set) {
@@ -83,7 +83,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             <li class="list-group-item">
                                 <a href="#oercurr-authors" title="Lesson Times">
                                     <?php
-                                    echo esc_html(oercurr_get_field_label('oer_curriculum_authors'));
+                                    echo esc_html__(oercurr_get_field_label('oer_curriculum_authors'),OERCURR_CURRICULUM_SLUG);
                                     ?>
                                 </a>
                             </li>
@@ -95,7 +95,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             <li class="list-group-item">
                                 <a href="#oercurr-primary-resources" title="Primary Resources">
                                     <?php
-                                    echo esc_html(oercurr_get_field_label('oer_curriculum_primary_resources'));
+                                    echo esc_html__(oercurr_get_field_label('oer_curriculum_primary_resources'),OERCURR_CURRICULUM_SLUG);
                                     ?>
                                 </a>
                             </li>
@@ -107,7 +107,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             <li class="list-group-item">
                                 <a href="#oercurr-materials" class="js-scroll-trigger" title="Materials">
                                 <?php
-                                echo esc_html(oercurr_get_field_label('oer_curriculum_oer_materials'));
+                                echo esc_html__(oercurr_get_field_label('oer_curriculum_oer_materials'),OERCURR_CURRICULUM_SLUG);
                                 ?>
                                 </a>
                             </li>
@@ -116,36 +116,36 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             if (($iq_set && $iq_enabled) || !$iq_set) {
                             ?>
                             <li class="list-group-item">
-                                <a href="#oercurr-iq" title="Investigative Question"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_iq')); ?></a>
+                                <a href="#oercurr-iq" title="Investigative Question"><?php echo esc_html__(oercurr_get_field_label('oer_curriculum_iq'),OERCURR_CURRICULUM_SLUG); ?></a>
                             </li>
                         <?php }
                         } elseif ($elementKey == 'oer_curriculum_required_materials') {
                             if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) {
                             ?>
                             <li class="list-group-item">
-                                <a href="#oercurr-required-materials" title="Required Materials"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_required_materials'));  ?></a>
+                                <a href="#oercurr-required-materials" title="Required Materials"><?php echo esc_html__(oercurr_get_field_label('oer_curriculum_required_materials'),OERCURR_CURRICULUM_SLUG);  ?></a>
                             </li>
                         <?php }
                         } elseif ($elementKey == 'oer_curriculum_additional_sections') {
                             if (($additional_sections_set && $additional_sections_enabled) || !$additional_sections_set) {
                             ?>
                             <li class="list-group-item">
-                                <a href="#oercurr-additional-sections" title="Additional Sections"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_additional_sections'));  ?></a>
+                                <a href="#oercurr-additional-sections" title="Additional Sections"><?php echo esc_html__(oercurr_get_field_label('oer_curriculum_additional_sections'),OERCURR_CURRICULUM_SLUG);  ?></a>
                             </li>
                         <?php }
                         } elseif ($elementKey == 'oer_curriculum_lesson_times_order') {?>
                             <li class="list-group-item">
-                                <a href="#oercurr-times-group" title="Lesson Times">Lesson Times</a>
+                                <a href="#oercurr-times-group" title="Lesson Times"><?php __('Lesson Times',OERCURR_CURRICULUM_SLUG); ?></a>
                             </li>
                         <?php } elseif ($elementKey == 'oer_curriculum_standard_order') {
                              if (($standards_set && $standards_enabled) || !$standards_set) { ?>
                             <li class="list-group-item">
-                                <a href="#oercurr-standards-group" title="Standards and Objectives"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_standards'));  ?></a>
+                                <a href="#oercurr-standards-group" title="Standards and Objectives"><?php echo esc_html__(oercurr_get_field_label('oer_curriculum_standards'),OERCURR_CURRICULUM_SLUG);  ?></a>
                             </li>
                         <?php }
                         } elseif ($elementKey == 'oer_curriculum_activities_order') {?>
                             <li class="list-group-item">
-                                <a href="#oercurr-activities-group" title="Activities in this Lesson">Activities in this Lesson</a>
+                                <a href="#oercurr-activities-group" title="Activities in this Lesson"><?php __('Activities in this Lesson',OERCURR_CURRICULUM_SLUG); ?></a>
                                 <ul class="list-group sidebar-lesson-activities-title">
                                     <?php
                                     if(!empty($oer_curriculum_activity_title)) {
@@ -167,15 +167,15 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             </li>
                         <?php } elseif ($elementKey == 'oer_curriculum_summative_order') {?>
                             <li class="list-group-item">
-                                <a href="#oercurr-summative-group" title="Summative Assessment">Summative Assessment</a>
+                                <a href="#oercurr-summative-group" title="Summative Assessment"><?php __('Summative Assessment',OERCURR_CURRICULUM_SLUG); ?></a>
                             </li>
                         <?php } elseif (strpos($elementKey, 'oer_curriculum_custom_editor_teacher_background') !== false) {?>
                             <li class="list-group-item">
-                                <a href="#oercurr-custom-editor-group-teacher-background" title="Teacher Background">Teacher Background</a>
+                                <a href="#oercurr-custom-editor-group-teacher-background" title="Teacher Background"><?php __('Teacher Background',OERCURR_CURRICULUM_SLUG); ?></a>
                             </li>
                         <?php } elseif (strpos($elementKey, 'oer_curriculum_custom_editor_student_background') !== false) {?>
                             <li class="list-group-item">
-                                <a href="#oercurr-custom-editor-group-student-background" title="Student Background">Student Background</a>
+                                <a href="#oercurr-custom-editor-group-student-background" title="Student Background"><?php __('Student Background',OERCURR_CURRICULUM_SLUG); ?></a>
                             </li>
                        <?php } 
                     }
@@ -183,45 +183,45 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                         $elements_orders = array();
                 } else { ?>
                     <li class="list-group-item">
-                        <a href="#oercurr-introduction-group" title="Introduction">Introduction</a>
+                        <a href="#oercurr-introduction-group" title="Introduction"><?php __('Introduction',OERCURR_CURRICULUM_SLUG); ?></a>
                     </li>
                     <?php if (($author_set && $author_enabled) || !$author_set) { ?>
                     <li class="list-group-item">
-                        <a href="#oercurr-authors" title="Authors"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_authors')); ?></a>
+                        <a href="#oercurr-authors" title="Authors"><?php echo esc_html__(oercurr_get_field_label('oer_curriculum_authors'),OERCURR_CURRICULUM_SLUG); ?></a>
                     </li>
                     <?php } ?>
                     <?php if (oercurr_is_oer_plugin_installed()){ ?>
                     <?php if (($primary_resources_set && $primary_resources_enabled) || !$primary_resources_set) { ?>
                     <li class="list-group-item">
-                        <a href="#oercurr-primary-resources" title="Primary Resources"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_primary_resources')); ?></a>
+                        <a href="#oercurr-primary-resources" title="Primary Resources"><?php echo esc_html__(oercurr_get_field_label('oer_curriculum_primary_resources'),OERCURR_CURRICULUM_SLUG); ?></a>
                     </li>
                     <?php } ?>
                     <?php } ?>
                     <?php if (($materials_set  && $materials_enabled ) || !$materials_set ) { ?>
                     <li class="list-group-item">
-                        <a href="#oercurr-materials" title="Materials"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_oer_materials')); ?></a>
+                        <a href="#oercurr-materials" title="Materials"><?php echo esc_html__(oercurr_get_field_label('oer_curriculum_oer_materials'),OERCURR_CURRICULUM_SLUG); ?></a>
                     </li>
                     <?php } ?>
                     <?php if (($iq_set && $iq_enabled) || !$iq_set) { ?>
                     <li class="list-group-item">
-                        <a href="#oercurr-iq" title="Investigative Question"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_iq')); ?></a>
+                        <a href="#oercurr-iq" title="Investigative Question"><?php echo esc_html__(oercurr_get_field_label('oer_curriculum_iq'),OERCURR_CURRICULUM_SLUG); ?></a>
                     </li>
                     <?php } ?>
                     <?php if (($req_materials_set && $req_materials_enabled) || !$req_materials_set) { ?>
                      <li class="list-group-item">
-                        <a href="#oercurr-required-materials" title="Required Materials"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_required_materials')); ?></a>
+                        <a href="#oercurr-required-materials" title="Required Materials"><?php echo esc_html__(oercurr_get_field_label('oer_curriculum_required_materials'),OERCURR_CURRICULUM_SLUG); ?></a>
                     </li>
                      <?php } ?>
                     <li class="list-group-item">
-                        <a href="#oercurr-times-group" title="Lesson Times">Lesson Times</a>
+                        <a href="#oercurr-times-group" title="Lesson Times"><?php __('Lesson Times',OERCURR_CURRICULUM_SLUG); ?></a>
                     </li>
                     <?php if (($standards_set && $standards_enabled) || !$standards_set) { ?>
                     <li class="list-group-item">
-                        <a href="#oercurr-standards-group" title="Standards and Objectives"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_standards'));  ?></a>
+                        <a href="#oercurr-standards-group" title="Standards and Objectives"><?php echo esc_html__(oercurr_get_field_label('oer_curriculum_standards'),OERCURR_CURRICULUM_SLUG);  ?></a>
                     </li>
                     <?php } ?>
                     <li class="list-group-item">
-                        <a href="#oercurr-activities-group" title="Activities in this Lesson">Activities in this Lesson</a>
+                        <a href="#oercurr-activities-group" title="Activities in this Lesson"><?php __('Activities in this Lesson',OERCURR_CURRICULUM_SLUG); ?></a>
                         <ul class="list-group sidebar-lesson-activities-title">
                             <?php
                             if(!empty($oer_curriculum_activity_title)) {
@@ -242,11 +242,11 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                         </ul>
                     </li>
                     <li class="list-group-item">
-                        <a href="#oercurr-summative-group" title="Summative Assessment">Summative Assessment</a>
+                        <a href="#oercurr-summative-group" title="Summative Assessment"><?php __('Summative Assessment',OERCURR_CURRICULUM_SLUG); ?></a>
                     </li>
                 <?php }?>
                 <li class="list-group-item">
-                    <a href="#oer_curriculum_meta_related" title="Related Curriculum">Related Curriculum</a>
+                    <a href="#oer_curriculum_meta_related" title="Related Curriculum"><?php __('Related Curriculum',OERCURR_CURRICULUM_SLUG); ?></a>
                 </li>
             </ul>
         </div>
@@ -255,7 +255,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
             <div class="card col card-default oercurr-element-wrapper oercurr-details-group" id="oercurr-details-group">
                 <div class="card-header">
                     <h3 class="card-title oercurr-module-title">
-                        <?php echo esc_html(oercurr_get_field_label('oer_curriculum_details')); ?>
+                        <?php echo esc_html__(oercurr_get_field_label('oer_curriculum_details'),OERCURR_CURRICULUM_SLUG); ?>
                     </h3>
                 </div>
                 <div class="card-body">
@@ -295,7 +295,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                         </select>
                     </div>
                     <div class="form-group other-type-group<?php echo esc_attr($xclass); ?>">
-                        <label for="oer_curriculum_type_other"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_type_other')); ?></label>
+                        <label for="oer_curriculum_type_other"><?php echo esc_html__(oercurr_get_field_label('oer_curriculum_type_other'),OERCURR_CURRICULUM_SLUG); ?></label>
                         <input type="text"
                                class="form-control"
                                name="oer_curriculum_type_other"
@@ -349,7 +349,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_authors_order]" class="element-order" value="<?php echo esc_attr($value);?>">
                                 <div class="card-header">
                                     <h3 class="card-title oercurr-module-title">
-                                        <?php echo esc_html(oercurr_get_field_label('oer_curriculum_authors')); ?>
+                                        <?php echo esc_html__(oercurr_get_field_label('oer_curriculum_authors'),OERCURR_CURRICULUM_SLUG); ?>
                                         <span class="oercurr-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -472,7 +472,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_primary_resources]" class="element-order" value="<?php echo esc_attr($value);?>">
                             <div class="card-header">
                                 <h3 class="card-title oercurr-module-title">
-                                    <?php echo esc_html(oercurr_get_field_label('oer_curriculum_primary_resources')); ?>
+                                    <?php echo esc_html__(oercurr_get_field_label('oer_curriculum_primary_resources'),OERCURR_CURRICULUM_SLUG); ?>
                                     <span class="oercurr-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -651,7 +651,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                     </div>
                                           <?php } ?>
                                                     <div class="form-group">
-                                                        <label>Title</label>
+                                                        <label><?php _e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
                                                           <input type="text"
                                                               class="form-control"
                                                               name="oer_curriculum_primary_resources[title][]"
@@ -803,7 +803,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_oer_materials]" class="element-order" value="3">
                             <div class="card-header">
                                 <h3 class="card-title oercurr-module-title">
-                                    <?php echo esc_html(get_option('oer_curriculum_oer_materials_curmetset_label')) ?>
+                                    <?php echo esc_html__(get_option('oer_curriculum_oer_materials_curmetset_label'),OERCURR_CURRICULUM_SLUG) ?>
                                     <span class="oercurr-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -882,7 +882,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_iq]" class="element-order" value="<?php echo esc_attr($value);?>">
                             <div class="card-header">
                                 <h3 class="card-title oercurr-module-title">
-                                    <?php echo esc_html(oercurr_get_field_label('oer_curriculum_iq')); ?>
+                                    <?php echo esc_html__(oercurr_get_field_label('oer_curriculum_iq'),OERCURR_CURRICULUM_SLUG); ?>
                                     <span class="oercurr-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -892,7 +892,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label>Investigative Question</label>
+                                    <label><?php esc_html_e('Investigative Question',OERCURR_CURRICULUM_SLUG); ?></label>
                                     <input type="text"
                                            name="oer_curriculum_iq[question]"
                                            maxlength="512"
@@ -931,7 +931,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_required_materials]" class="element-order" value="<?php echo esc_attr($value); ?>">
                             <div class="card-header">
                                 <h3 class="card-title oercurr-module-title">
-                                <?php echo trim(esc_html(get_option('oer_curriculum_required_materials_curmetset_label')),' ') ?>
+                                <?php echo trim(esc_html__(get_option('oer_curriculum_required_materials_curmetset_label'),OERCURR_CURRICULUM_SLUG),' ') ?>
                                     <span class="oercurr-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1053,7 +1053,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_additional_sections]" class="element-order" value="<?php echo esc_attr($value); ?>">
                             <div class="card-header">
                                 <h3 class="card-title oercurr-module-title">
-                                <?php echo esc_html(oercurr_get_field_label('oer_curriculum_additional_sections')); ?>
+                                <?php echo esc_html__(oercurr_get_field_label('oer_curriculum_additional_sections'),OERCURR_CURRICULUM_SLUG); ?>
                                     <span class="oercurr-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1280,7 +1280,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             <input type="hidden" name="oer_curriculum_order[oer_curriculum_standard_order]" class="element-order" value="<?php echo esc_attr($value); ?>">
                             <div class="card-header">
                                 <h3 class="card-title oercurr-module-title">
-                                    <?php echo esc_html(oercurr_get_field_label('oer_curriculum_standardsandobjectives')); ?>
+                                    <?php echo esc_html__(oercurr_get_field_label('oer_curriculum_standardsandobjectives'),OERCURR_CURRICULUM_SLUG); ?>
                                     <span class="oercurr-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1548,7 +1548,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             <input type="hidden" name="oer_curriculum_order[<?php echo esc_attr($elementKey); ?>]" class="element-order" value="<?php echo esc_attr($value); ?>" value="1">
                             <div class="card-header">
                                 <h3 class="card-title oercurr-module-title">
-                                    <?php echo esc_html($oer_curriculum_custom_editor['title']); ?>
+                                    <?php echo esc_html__($oer_curriculum_custom_editor['title'],OERCURR_CURRICULUM_SLUG); ?>
                                     <span class="oercurr-sortable-handle">
                                         <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                         <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1587,7 +1587,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 <input type="hidden" name="oer_curriculum_order[<?php echo esc_attr($elementKey); ?>]" class="element-order" value="<?php echo esc_attr($value); ?>" value="1">
                                 <div class="card-header">
                                     <h3 class="card-title oercurr-module-title">
-                                        <?php echo esc_html($oer_curriculum_custom_editor['title']); ?>
+                                        <?php echo esc_html__($oer_curriculum_custom_editor['title'],OERCURR_CURRICULUM_SLUG); ?>
                                         <span class="oercurr-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1597,7 +1597,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 </div>
                                 <div class="card-body">
                                      <div class="form-group">
-                                        <label>Title</label>
+                                        <label><?php esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
                                         <input type="text" name="oer_curriculum_custom_editor_<?php echo esc_attr($value); ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" value="<?php echo esc_attr($oer_curriculum_custom_editor['title']); ?>" />
                                     </div>
                                     <div class="form-group">
@@ -1812,7 +1812,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_authors_order]" class="element-order" value="<?php echo esc_attr($index); ?>">
                                 <div class="card-header">
                                     <h3 class="card-title oercurr-module-title">
-                                        <?php echo esc_html(oercurr_get_field_label('oer_curriculum_authors')); ?>
+                                        <?php echo esc_html__(oercurr_get_field_label('oer_curriculum_authors'),OERCURR_CURRICULUM_SLUG); ?>
                                         <span class="oercurr-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1895,7 +1895,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_primary_resources]" class="element-order" value="<?php echo esc_attr($index); ?>">
                                 <div class="card-header">
                                     <h3 class="card-title oercurr-module-title">
-                                        <?php echo esc_attr(oercurr_get_field_label('oer_curriculum_primary_resources')); ?>
+                                        <?php echo esc_attr__(oercurr_get_field_label('oer_curriculum_primary_resources'),OERCURR_CURRICULUM_SLUG); ?>
                                         <span class="oercurr-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -1967,7 +1967,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Title</label>
+                                                    <label><?php esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
                                                       <input type="text"
                                                           class="form-control"
                                                           name="oer_curriculum_primary_resources[title][]"
@@ -1975,7 +1975,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                           value="">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Description</label>
+                                                    <label><?php esc_html_e('Description',OERCURR_CURRICULUM_SLUG); ?></label>
                                                     
                                                     <?php /*
                                                     <textarea rows="10" name="oer_curriculum_primary_resources[description][]" id="oercurr-resource-student-1"></textarea>
@@ -2041,7 +2041,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_oer_materials]" class="element-order" value="<?php echo esc_attr($index); ?>">
                                 <div class="card-header">
                                     <h3 class="card-title oercurr-module-title">
-                                        <?php echo esc_html(oercurr_get_field_label('oer_curriculum_oer_materials')); ?>
+                                        <?php echo esc_html__(oercurr_get_field_label('oer_curriculum_oer_materials'),OERCURR_CURRICULUM_SLUG); ?>
                                         <span class="oercurr-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2067,7 +2067,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_iq]" class="element-order" value="<?php echo esc_attr($index); ?>">
                                 <div class="card-header">
                                     <h3 class="card-title oercurr-module-title">
-                                        <?php echo esc_html(oercurr_get_field_label('oer_curriculum_iq')); ?>
+                                        <?php echo esc_html__(oercurr_get_field_label('oer_curriculum_iq'),OERCURR_CURRICULUM_SLUG); ?>
                                         <span class="oercurr-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2077,7 +2077,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 </div>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label>Investigative Question</label>
+                                        <label><?php esc_html_e('Investigative Question',OERCURR_CURRICULUM_SLUG); ?></label>
                                         <input type="text"
                                                name="oer_curriculum_iq[question]"
                                                maxlength="512"
@@ -2113,7 +2113,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_required_materials]" class="element-order" value="<?php echo esc_attr($index); ?>">
                                 <div class="card-header">
                                     <h3 class="card-title oercurr-module-title">                                        
-                                        <?php echo esc_html(oercurr_get_field_label('oer_curriculum_required_materials')); ?>
+                                        <?php echo esc_html__(oercurr_get_field_label('oer_curriculum_required_materials'),OERCURR_CURRICULUM_SLUG); ?>
                                         <span class="oercurr-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2197,7 +2197,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 <input type="hidden" name="oer_curriculum_order[oer_curriculum_additional_sections]" class="element-order" value="<?php echo esc_attr($index); ?>">
                                 <div class="card-header">
                                     <h3 class="card-title oercurr-module-title">                                        
-                                        <?php echo esc_html(oercurr_get_field_label('oer_curriculum_additional_sections')); ?>
+                                        <?php echo esc_html__(oercurr_get_field_label('oer_curriculum_additional_sections'),OERCURR_CURRICULUM_SLUG); ?>
                                         <span class="oercurr-sortable-handle">
                                             <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                             <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2360,7 +2360,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                     } ?>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <h4>Related Instructional Objectives (<span title="Students will be able to...">SWBAT...</span>)</h4>
+                                            <h4><?php esc_html_e('Related Instructional Objectives',OERCURR_CURRICULUM_SLUG); ?> (<span title="Students will be able to...">SWBAT...</span>)</h4>
                                         </div>
                                         <div class="row col-12 oercurr-related-objective-row" id="oercurr-related-objective-row">
                                             <div class="col-md-9">
@@ -2707,7 +2707,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                     <input type="hidden" name="oer_curriculum_order[oer_curriculum_authors_order]" class="element-order" value="2">
                     <div class="card-header">
                         <h3 class="card-title oercurr-module-title">
-                            <?php echo esc_html(oercurr_get_field_label('oer_curriculum_authors')); ?>
+                            <?php echo esc_html__(oercurr_get_field_label('oer_curriculum_authors'),OERCURR_CURRICULUM_SLUG); ?>
                             <span class="oercurr-sortable-handle">
                                 <i class="fa fa-arrow-down reorder-down" aria-hidden="true"></i>
                                 <i class="fa fa-arrow-up reorder-up" aria-hidden="true"></i>
@@ -2922,7 +2922,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label>Investigative Question</label>
+                            <label><?php esc_html_e("Investigative Question", OERCURR_CURRICULUM_SLUG); ?></label>
                             <input type="text"
                                    name="oer_curriculum_iq[question]"
                                    maxlength="512"
@@ -3031,7 +3031,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                         <?php } ?>
                         <div class="row">
                             <div class="col-md-12">
-                                <h4>Related Instructional Objectives (<span title="Students will be able to...">SWBAT...</span>)</h4>
+                                <h4><?php esc_html_e('Related Instructional Objectives',OERCURR_CURRICULUM_SLUG); ?> (<span title="Students will be able to...">SWBAT...</span>)</h4>
                             </div>
                             <div class="row col-12 oercurr-related-objective-row" id="oercurr-related-objective-row">
                                 <div class="col-md-9">

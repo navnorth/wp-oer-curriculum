@@ -130,7 +130,7 @@ function oercurr_plugin_activation_notice()
     )
     {?>
         <div class="notice notice-success is-dismissible" id="oer-curriculum-dismissible">
-            <p>Thank you for installing the <strong>OER Curriculum</strong> plugin.</p>
+            <p><?php _e('Thank you for installing the', OERCURR_CURRICULUM_SLUG); ?> <strong><?php _e('OER Curriculum',OERCURR_CURRICULUM_SLUG); ?></strong> <?php _e('plugin',OERCURR_CURRICULUM_SLUG); ?>.</p>
         </div>
     <?php }
 

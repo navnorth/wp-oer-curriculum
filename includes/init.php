@@ -11,15 +11,15 @@ add_action('init', 'oercurr_create_menu_item');
 function oercurr_create_menu_item() {
     global $_use_gutenberg;
     $labels = array(
-        'name'          => esc_html_x('Curriculum', 'post type general name'),
-        'singular_name' => esc_html_x('Curriculum', 'post type singular name'),
+        'name'          => esc_html_x('Curriculum', 'post type general name', OERCURR_CURRICULUM_SLUG),
+        'singular_name' => esc_html_x('Curriculum', 'post type singular name', OERCURR_CURRICULUM_SLUG),
         'add_new'       => esc_html__('Add New Curriculum', OERCURR_CURRICULUM_SLUG),
         'add_new_item'  => esc_html__('Add New Curriculum',OERCURR_CURRICULUM_SLUG),
-        'edit_item'     => esc_html__('Edit Curriculum'),
-        'new_item'      => esc_html__('Create Curriculum'),
-        'all_items'     => esc_html__('All Curriculum'),
-        'view_item'     => esc_html__('View Curriculum'),
-        'search_items'  => esc_html__('Search'),
+        'edit_item'     => esc_html__('Edit Curriculum', OERCURR_CURRICULUM_SLUG),
+        'new_item'      => esc_html__('Create Curriculum', OERCURR_CURRICULUM_SLUG),
+        'all_items'     => esc_html__('All Curriculum', OERCURR_CURRICULUM_SLUG),
+        'view_item'     => esc_html__('View Curriculum', OERCURR_CURRICULUM_SLUG),
+        'search_items'  => esc_html__('Search', OERCURR_CURRICULUM_SLUG),
         'menu_name'     => 'Curriculum'
     );
 
@@ -95,7 +95,7 @@ function oercurr_custom_meta_boxes() {
     $grade_levels_set = (trim(get_option('oer_curriculum_grades_curmetset_label'),' ') != '')?true:false;
     $grade_levels_enabled = (get_option('oer_curriculum_grades_curmetset_enable')=='checked')?true:false;
     if ($grade_levels_enabled) {
-      add_meta_box( 'oer_curriculum_meta_grades', get_option('oer_curriculum_grades_curmetset_label'), 'oercurr_grade_level_callback', 'oer-curriculum', 'side', 'high' );
+      add_meta_box( 'oer_curriculum_meta_grades', __(get_option('oer_curriculum_grades_curmetset_label'),OERCURR_CURRICULUM_SLUG), 'oercurr_grade_level_callback', 'oer-curriculum', 'side', 'high' );
     }
 
     // Appropriate Age Levels
@@ -103,7 +103,7 @@ function oercurr_custom_meta_boxes() {
     $age_levels_enabled = (get_option('oer_curriculum_age_levels_curmetset_enable')=='checked')?true:false;
     if ($age_levels_enabled) {
         $label = get_option('oer_curriculum_age_levels_curmetset_label');
-        add_meta_box( 'oer_curriculum_meta_age_levels', $label , 'oercurr_age_levels_callback', 'oer-curriculum', 'side', 'high' );
+        add_meta_box( 'oer_curriculum_meta_age_levels', __($label,OERCURR_CURRICULUM_SLUG) , 'oercurr_age_levels_callback', 'oer-curriculum', 'side', 'high' );
     }
 
     //Suggested Instructional Time
@@ -111,16 +111,16 @@ function oercurr_custom_meta_boxes() {
     $suggested_time_enabled = (get_option('oer_curriculum_suggested_instructional_time_curmetset_enable')=='checked')?true:false;
     if (($suggested_time_set && $suggested_time_enabled) || !$suggested_time_set) {
         $label = get_option('oer_curriculum_suggested_instructional_time_curmetset_label');
-        add_meta_box( 'oer_curriculum_meta_suggested_time', $label, 'oercurr_suggested_time_callback', 'oer-curriculum', 'side', 'high' );
+        add_meta_box( 'oer_curriculum_meta_suggested_time', __($label.OERCURR_CURRICULUM_SLUG), 'oercurr_suggested_time_callback', 'oer-curriculum', 'side', 'high' );
     }
-    add_meta_box('oer_curriculum_meta_boxid', 'Lesson Meta Fields', 'oercurr_meta_fields_callback', 'oer-curriculum', 'advanced');
+    add_meta_box('oer_curriculum_meta_boxid', __('Lesson Meta Fields',OERCURR_CURRICULUM_SLUG), 'oercurr_meta_fields_callback', 'oer-curriculum', 'advanced');
 
     // Add a download copy option
     $download_copy_set = (trim(get_option('oer_curriculum_download_copy_curmetset_label'),' ') != '')?true:false;
     $download_copy_enabled = (get_option('oer_curriculum_download_copy_curmetset_enable')=='checked')?true:false;
     if($download_copy_enabled){
         $label = get_option('oer_curriculum_download_copy_curmetset_label');
-      add_meta_box( 'oer_curriculum_meta_download_copy', $label , 'oercurr_download_copy_callback', 'oer-curriculum', 'side', 'high' );
+      add_meta_box( 'oer_curriculum_meta_download_copy', __($label,OERCURR_CURRICULUM_SLUG) , 'oercurr_download_copy_callback', 'oer-curriculum', 'side', 'high' );
     }
     // Add Related Curriculum metabox
     $related_curriculum_set = (trim(get_option('oer_curriculum_related_curriculum_curmetset_label'),' ') != '')?true:false;
@@ -139,7 +139,7 @@ function oercurr_custom_meta_boxes() {
         }
         if ($related_curriculum_enabled) {
             $label = oercurr_get_field_label('oer_curriculum_related_curriculum');
-            add_meta_box('oer_curriculum_meta_related', $label, 'oercurr_related_curriculum_callback', 'oer-curriculum', 'advanced');
+            add_meta_box('oer_curriculum_meta_related', __($label,OERCURR_CURRICULUM_SLUG), 'oercurr_related_curriculum_callback', 'oer-curriculum', 'advanced');
         }
     }
 }
@@ -1182,7 +1182,7 @@ add_action( 'admin_footer', 'oercurr_add_modals_to_footer', 10 );
 
 
 function oercurr_add_curriculum_settings(){
-    add_submenu_page('edit.php?post_type=oer-curriculum','Settings','Settings','add_users','oer_curriculum_settings','oercurr_settings_callback_func');
+    add_submenu_page('edit.php?post_type=oer-curriculum',__('Settings',OERCURR_CURRICULUM_SLUG),__('Settings',OERCURR_CURRICULUM_SLUG),'add_users','oer_curriculum_settings','oercurr_settings_callback_func');
 }
 add_action( 'admin_menu', 'oercurr_add_curriculum_settings' );
 
