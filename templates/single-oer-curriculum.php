@@ -53,10 +53,16 @@
       $oer_sensitive = true;
   }
   
+  $oer_curriculum_details_set = (get_option('oer_curriculum_details_curmetset_label'))?true:false;
+  $oer_curriculum_details_enabled = (get_option('oer_curriculum_details_curmetset_enable') == 'checked')?true:false;
   $oer_curriculum_type_set = (get_option('oer_curriculum_type_curmetset_label'))?true:false;
   $oer_curriculum_type_enabled = (get_option('oer_curriculum_type_curmetset_enable') == 'checked')?true:false;
   $type_other_set = (trim(get_option('oer_curriculum_type_other_curmetset_label'),' ') != '')?true:false;
   $type_other_enabled = (get_option('oer_curriculum_type_other_curmetset_enable')=='checked')?true:false;
+  $author_set = (get_option('oer_curriculum_authors_curmetset_label'))?true:false;
+  $author_enabled = (get_option('oer_curriculum_authors_curmetset_enable') == 'checked')?true:false;
+  $oer_curriculum_standardsandobjectives_set = (get_option('oer_curriculum_standardsandobjectives_curmetset_label'))?true:false;
+  $oer_curriculum_standardsandobjectives_enabled = (get_option('oer_curriculum_standardsandobjectives_curmetset_enable') == 'checked')?true:false;
   $primary_resources_set = (trim(get_option('oer_curriculum_primary_resources_curmetset_label'),' ') != '')?true:false;
   $primary_resources_enabled = (get_option('oer_curriculum_primary_resources_curmetset_enable')=='checked')?true:false;
   $iq_set = (trim(get_option('oer_curriculum_iq_curmetset_label'),' ') != '')?true:false;
@@ -66,12 +72,9 @@
   $additional_sections_set = (trim(get_option('oer_curriculum_additional_sections_curmetset_label'),' ') != '')?true:false;
   $additional_sections_enabled = (get_option('oer_curriculum_additional_sections_curmetset_enable')=='checked')?true:false;
   $addtl_materials_set = (trim(get_option('oer_curriculum_oer_materials_curmetset_label'),' ') != '')?true:false;
-  $addtl_materials_enabled = (get_option('oer_curriculum_oer_materials_curmetset_enable')=='checked')?true:false;
-  
+  $addtl_materials_enabled = (get_option('oer_curriculum_oer_materials_curmetset_enable')=='checked')?true:false;  
   $related_curriculum_label = (get_option('oer_curriculum_related_curriculum_curmetset_label'))?true:false;
   $related_curriculum_enabled = (get_option('oer_curriculum_related_curriculum_curmetset_enable') == 'checked')?true:false;
-  $author_set = (get_option('oer_curriculum_authors_curmetset_label'))?true:false;
-  $author_enabled = (get_option('oer_curriculum_authors_curmetset_enable') == 'checked')?true:false;
   $standards_set = (get_option('oer_curriculum_standards_curmetset_label'))?true:false;
   $standards_enabled = (get_option('oer_curriculum_standards_curmetset_enable') == 'checked')?true:false;
   $objectives_set = (get_option('oer_curriculum_related_objective_curmetset_label'))?true:false;
