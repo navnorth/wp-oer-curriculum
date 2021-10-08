@@ -50,7 +50,7 @@ function oercurr_show_general_settings(){
     oercurr_save_general_setting(); ?>
     <div class="oercurr-plugin-body">
         <div class="oercurr-plugin-row">
-            <div class="oer-row-left">Use the options below to update general plugin options.</div>
+            <div class="oer-row-left"><?php esc_html_e('Use the options below to update general plugin options.',OERCURR_CURRICULUM_SLUG) ?></div>
             <div class="oer-row-right"></div>
         </div>
         <div class="oercurr-plugin-row">
@@ -58,9 +58,9 @@ function oercurr_show_general_settings(){
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Option</th>
-                            <th>Value</th>
-                            <th>Enabled</th>
+                            <th><?php esc_html_e('Field Name',OERCURR_CURRICULUM_SLUG)?></th>
+                            <th><?php esc_html_e('Value',OERCURR_CURRICULUM_SLUG)?></th>
+                            <th><?php esc_html_e('Enabled',OERCURR_CURRICULUM_SLUG)?></th>                      
                         </tr>
                     </thead>
                     <tbody>
@@ -75,7 +75,7 @@ function oercurr_show_general_settings(){
                             </tr>
                     </tbody>
                 </table>
-                <p class="submit"><input type="submit" name="oer_curriculum_general_setting_submit" id="submit" class="button button-primary" value="Save General Options"></p></form>
+                <p class="submit"><input type="submit" name="oer_curriculum_general_setting_submit" id="submit" class="button button-primary" value="<?php esc_html_e('Save General Options',OERCURR_CURRICULUM_SLUG) ?>"></p></form>
             </form>
         </div>
     </div>
@@ -125,7 +125,7 @@ function oercurr_show_metadata_settings() {
 <div class="oercurr-plugin-body">
     <div class="oercurr-plugin-row">
         <div class="oer-row-left">
-            <?php esc_html_e("Use the options below to update metadata field options.", OER_SLUG); ?>
+            <?php esc_html_e("Use the options below to update metadata field options.", OERCURR_CURRICULUM_SLUG); ?>
         </div>
         <div class="oer-row-right">
         </div>
@@ -135,9 +135,9 @@ function oercurr_show_metadata_settings() {
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Field Name</th>
-                        <th>Label</th>
-                        <th>Enabled</th>
+                        <th><?php esc_html_e('Field Name',OERCURR_CURRICULUM_SLUG)?></th>
+                        <th><?php esc_html_e('Label',OERCURR_CURRICULUM_SLUG)?></th>
+                        <th><?php esc_html_e('Enabled',OERCURR_CURRICULUM_SLUG)?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -168,7 +168,7 @@ function oercurr_show_metadata_settings() {
                     } ?>
                 </tbody>
             </table>
-            <?php submit_button("Save Metadata Options"); ?>
+            <?php submit_button(esc_html__("Save Metadata Options",OERCURR_CURRICULUM_SLUG)); ?>
         </form>
     </div>
 </div>

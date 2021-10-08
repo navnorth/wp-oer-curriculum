@@ -2,17 +2,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OER Curriculum\n"
 "POT-Creation-Date: 2021-04-23 19:37+0800\n"
-"PO-Revision-Date: 2021-05-17 14:01+0800\n"
+"PO-Revision-Date: 2021-10-08 19:09+0800\n"
 "Last-Translator: \n"
 "Language-Team: Navigation North\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: es_ES\n"
-"X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;_n_noop;_nx_noop;translate_nooped_plural;number_format_i18n;date_i18n;esc_html__;esc_html__;esc_html_x;esc_attr__;esc_attr_e;esc_attr_x\n"
+"X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;_n_noop;_nx_noop;"
+"translate_nooped_plural;number_format_i18n;date_i18n;esc_html__;esc_html__;"
+"esc_html_x;esc_attr__;esc_attr_e;esc_attr_x\n"
 
 msgid "Details"
 msgstr "Detalles"
@@ -53,7 +55,7 @@ msgstr "Actividades de esta lección"
 msgid "Summative Assessment"
 msgstr "Evaluación sumativa"
 
-msgid "Assessment Type(s):"
+msgid "Assessment Type(s)"
 msgstr "Tipo (s) de evaluación"
 
 msgid "Other"
@@ -65,9 +67,8 @@ msgstr "Lista de texto"
 msgid "Materials"
 msgstr "Materiales"
 
-#, fuzzy
 msgid "Vocabulary List"
-msgstr "Lista de texto"
+msgstr "Lista de vocabulario"
 
 msgid "You have not selected any academic standards"
 msgstr "No ha seleccionado ningún estándar académico"
@@ -85,7 +86,7 @@ msgid "Authors"
 msgstr "Autoras"
 
 msgid "Primary Resources"
-msgstr "Pregunta de investigación"
+msgstr "Recursos primarios"
 
 msgid "Investigative Question"
 msgstr "Pregunta de investigación"
@@ -105,6 +106,9 @@ msgstr "Más información"
 msgid "Use the options below to update metadata field options."
 msgstr "Utilice las siguientes opciones para actualizar las opciones del campo de metadatos."
 
+msgid "Use the options below to update general plugin options."
+msgstr "Utilice las siguientes opciones para actualizar las opciones generales del complemento."
+
 msgid "Inquiry Sets"
 msgstr "Conjuntos de consulta"
 
@@ -117,6 +121,125 @@ msgstr "Sujetos"
 msgid "SEE MORE +"
 msgstr "VER MÁS +"
 
-#, fuzzy
 msgid "Text"
 msgstr "Texto"
+
+msgid "Add More"
+msgstr "Añadir más"
+
+msgid "Add Objective"
+msgstr "Agregar objetivo"
+
+msgid "Framework Excerpt"
+msgstr "Extracto del marco"
+
+msgid "Thumbnail Image"
+msgstr "Imagen en miniatura"
+
+msgid "Set Thumbnail"
+msgstr "Establecer miniatura"
+
+msgid "Sensitive Material"
+msgstr "Material sensible"
+
+msgid "Potentially Sensitive Material"
+msgstr "Material potencialmente sensible"
+
+msgid "Add New Curriculum"
+msgstr "Agregar nuevo plan de estudios"
+
+msgid "Add a Resource"
+msgstr "Agregar un recurso"
+
+msgid "Add Textbox"
+msgstr "Agregar cuadro de texto"
+
+msgid "Add Materials"
+msgstr "Agregar materiales"
+
+msgid "Save Metadata Options"
+msgstr "Guardar opciones de metadatos"
+
+msgid "Field Name"
+msgstr "Nombre del campo"
+
+msgid "Label"
+msgstr "Etiqueta"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "Enabled"
+msgstr "Activado"
+
+msgid "Save General Options"
+msgstr "Guardar opciones generales"
+
+msgid "Curriculum"
+msgstr "Plan de estudios"
+
+msgid "All Curriculum"
+msgstr "Todo el plan de estudios"
+
+msgid "Subject Areas"
+msgstr "Áreas temáticas"
+
+msgid "Settings"
+msgstr "Configuracion"
+
+msgid "Thank you for installing the"
+msgstr "Gracias por instalar el"
+
+msgid "plugin"
+msgstr "complemento"
+
+msgid "Lesson Meta Fields"
+msgstr "Campos de meta de la lección"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "Other Type"
+msgstr "Otro tipo"
+
+msgid "Required Equipment Materials"
+msgstr "Materiales necesarios para el equipo"
+
+msgid "Additional Sections"
+msgstr "Secciones adicionales"
+
+msgid "Grade Level"
+msgstr "Nivel de grado"
+
+msgid "Appropriate Age Levels"
+msgstr "Niveles de edad apropiados"
+
+msgid "Suggested Instructional Time"
+msgstr "Tiempo de instrucción sugerido"
+
+msgid "Related Instructional Objectives"
+msgstr "Objetivos de instrucción relacionados"
+
+msgid "Download Copy"
+msgstr "Descargar copia"
+
+msgid "Additional Materials"
+msgstr "Materiales adicionales"
+
+msgid "Related Curriculum"
+msgstr "Plan de estudios relacionado"
+
+msgid "Title"
+msgstr "Título"
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Related Curriculum 1"
+msgstr "Plan de estudios relacionado 1"
+
+msgid "Related Curriculum 2"
+msgstr "Plan de estudios relacionado 2"
+
+msgid "Related Curriculum 3"
+msgstr "Plan de estudios relacionado 3"
