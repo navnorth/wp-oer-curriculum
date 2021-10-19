@@ -42,6 +42,37 @@ function oercurr_create_menu_item() {
     );
 
     register_post_type('oer-curriculum', $args);
+    
+
+  	$labels = array(
+      'name'              => esc_html__( 'Grade Level',OERCURR_CURRICULUM_SLUG ),
+	    'singular_name'     => esc_html_x( 'Grade Level', 'taxonomy singular name', OERCURR_CURRICULUM_SLUG ),
+	    'search_items'      => esc_html__( 'Search '.'Grade Levels',OERCURR_CURRICULUM_SLUG ),
+	    'all_items'         => esc_html__( 'All '.'Grade Levels', OERCURR_CURRICULUM_SLUG ),
+	    'parent_item'       => esc_html__( 'Parent '.'Grade Level',OERCURR_CURRICULUM_SLUG ),
+	    'parent_item_colon' => esc_html__( 'Parent '.'Grade Level'.':',OERCURR_CURRICULUM_SLUG ),
+	    'edit_item'         => esc_html__( 'Edit '.'Grade Level', OERCURR_CURRICULUM_SLUG ),
+	    'update_item'       => esc_html__( 'Update '.'Grade Level', OERCURR_CURRICULUM_SLUG ),
+	    'add_new_item'      => esc_html__( 'Add New '.'Grade Level',OERCURR_CURRICULUM_SLUG),
+	    'new_item_name'     => esc_html__( 'New Genre '.'Grade Level',OERCURR_CURRICULUM_SLUG),
+	    'menu_name'         => esc_html__( 'Grade Levels',OERCURR_CURRICULUM_SLUG ),
+    );
+    
+    $args = array(
+	    'hierarchical'      => true,
+	    'labels'            => $labels,
+	    'show_ui'           => true,
+	    'show_admin_column' => true,
+	    'query_var'         => true,
+	    'rewrite'           => array( 'slug' => 'curriculum-grade-level' ),
+    );
+    
+    $args['show_in_rest'] = ($_use_gutenberg=="on" or $_use_gutenberg=="1")? true: false;
+
+    register_taxonomy( 'curriculum-grade-level', array( 'oer-curriculum' ), $args );
+    
+    
+    
     if(!get_option('oer_curriculum_details_curmetset_label')){oercurr_add_setting_options('oer_curriculum_details','label','Details');}
     if(!get_option('oer_curriculum_type_curmetset_label')){oercurr_add_setting_options('oer_curriculum_type','label','Type');}
     if(!get_option('oer_curriculum_type_other_curmetset_label')){oercurr_add_setting_options('oer_curriculum_type_other','label','Other Type');}
@@ -92,11 +123,12 @@ function oercurr_create_menu_item() {
 
 function oercurr_custom_meta_boxes() {
     // Grade Levels
+    /*
     $grade_levels_set = (trim(get_option('oer_curriculum_grades_curmetset_label'),' ') != '')?true:false;
     $grade_levels_enabled = (get_option('oer_curriculum_grades_curmetset_enable')=='checked')?true:false;
     if ($grade_levels_enabled) {
       add_meta_box( 'oer_curriculum_meta_grades', __(get_option('oer_curriculum_grades_curmetset_label'),OERCURR_CURRICULUM_SLUG), 'oercurr_grade_level_callback', 'oer-curriculum', 'side', 'high' );
-    }
+    } */
 
     // Appropriate Age Levels
     $age_levels_set = (trim(get_option('oer_curriculum_age_levels_curmetset_label'),' ') != '')?true:false;
