@@ -284,3 +284,4 @@ li.oer_sbstndard div ul li {
 .oercurr-element-wrapper >.card-header h3 .oercurr-remove-module {background-color: #ffffff !important;border-color: #ffffff !important;}
 .oercurr-element-wrapper >.card-header h3 .oercurr-remove-module .fa {color: #007cba !important;}
 .oercurr-element-wrapper >.card-header h3 .oercurr-remove-module:hover .fa {color: #bd2130 !important;}
+.oercurr_settings_form table tr th {display: none;}

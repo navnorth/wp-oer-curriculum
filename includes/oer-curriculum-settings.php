@@ -21,10 +21,10 @@ global $message, $type;
     				}
     			}
           
-          //Set Default screenshots to disabled
-    			delete_option('oercurr_setup');
+          //Disable setup notification
+    			update_option('oer_curriculum_setup_notification',false);
     			//Redirect to main settings page
-    			wp_safe_redirect( admin_url( 'edit.php?post_type=oer-curriculum&page=oer_curriculum_settings&tab=setup' ) );
+    			wp_safe_redirect( admin_url( 'edit.php?post_type=oer-curriculum&page=oer_curriculum_settings&tab=general' ) );
 
         }
         
@@ -32,7 +32,7 @@ global $message, $type;
 
 ?>
 <div class="wrap">
-
+    <div id="icon-themes" class="oer-logo"><img src="<?php echo esc_url(OERCURR_CURRICULUM_URL); ?>images/oercurr-settings-logo.png" /></div>
     <h2><?php esc_html_e("Settings - OER Curriculum", OERCURR_CURRICULUM_SLUG); ?></h2>
     <?php settings_errors(); ?>
 
@@ -43,7 +43,9 @@ global $message, $type;
     <h2 class="nav-tab-wrapper">
         <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e("General", OERCURR_CURRICULUM_SLUG); ?></a>
         <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=metadata" class="nav-tab <?php echo $active_tab == 'metadata' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e("Metadata Fields", OERCURR_CURRICULUM_SLUG); ?></a>
-        <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=setup" class="nav-tab <?php echo $active_tab == 'metadata' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e("Setup", OERCURR_CURRICULUM_SLUG); ?></a>
+        <?php if(get_option('oer_curriculum_setup_notification')){ ?>
+          <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=setup" class="nav-tab <?php echo $active_tab == 'setup' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e("Setup", OERCURR_CURRICULUM_SLUG); ?></a>
+        <?php } ?>
     </h2>
 
     <?php
@@ -71,35 +73,32 @@ global $message, $type;
 
 
 function oercurr_show_setup_settings() {
+  if (!is_admin()) exit;
 	global $message, $type;
 	?>
-<div class="oer-plugin-body">
-	<div class="oer-plugin-row">
-		<div class="oer-row-left">
-			<?php _e("When first setting up the plugin, the following options will give you the base set of data to see how everything works. All of these options will be available to you in other settings and features at a later time if you want to skip any or all of these options.", OERCURR_CURRICULUM_SLUG); ?>
-			<div class="oer-import-row">
-			<h2 class="hidden"></h2>
-			<?php if ($message) { ?>
-			<div class="notice notice-<?php echo esc_attr($type); ?> is-dismissible">
-			    <p><?php echo $message; ?></p>
-			</div>
-			<?php } ?>
-			</div>
-		</div>
-		<div class="oer-row-right">
-			<strong><?php _e("Support Options", OERCURR_CURRICULUM_SLUG); ?></strong>
-			<ul>
-				<li><a href="https://www.wp-oer.com/get-help/" target="_blank"><?php _e("WP OER Plugin Support", OERCURR_CURRICULUM_SLUG); ?></a></li>
-			</ul>
-		</div>
-	</div>
-	<div class="oer-plugin-row">
-		<form method="post" class="oer_settings_form" action="options.php"  onsubmit="return processInitialSettings(this)">
-			<?php settings_fields("oercurr_setup_settings"); ?>
-			<?php do_settings_sections("oercurr_setup_settings_section"); ?>
-			<?php submit_button('Continue', 'primary setup-continue'); ?>
-		</form>
-	</div>
+  <div class="oercurr-plugin-body">
+  	<div class="oercurr-plugin-row">
+  		<div class="oer-row-left">
+  			<?php _e("When first setting up the plugin, the following options will give you the base set of data to see how everything works. All of these options will be available to you in other settings and features at a later time if you want to skip any or all of these options.", OERCURR_CURRICULUM_SLUG); ?>
+  			<div class="oer-import-row">
+  			<h2 class="hidden"></h2>
+  			<?php if ($message) { ?>
+  			<div class="notice notice-<?php echo esc_attr($type); ?> is-dismissible">
+  			    <p><?php echo $message; ?></p>
+  			</div>
+  			<?php } ?>
+  			</div>
+  		</div>
+  		
+  	</div>
+  	<div class="oercurr-plugin-row">
+  		<form method="post" class="oercurr_settings_form" action="options.php"  onsubmit="return processInitialSettings(this)">
+  			<?php settings_fields("oercurr_setup_settings"); ?>
+  			<?php do_settings_sections("oercurr_setup_settings_section"); ?>
+  			<?php submit_button('Continue', 'primary setup-continue'); ?>
+  		</form>
+  	</div>
+  </div>
 </div>
 <?php
 }

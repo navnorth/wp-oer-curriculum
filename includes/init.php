@@ -63,15 +63,14 @@ function oercurr_create_menu_item() {
 	    'labels'            => $labels,
 	    'show_ui'           => true,
 	    'show_admin_column' => true,
+      'show_in_rest'		  => true,
 	    'query_var'         => true,
 	    'rewrite'           => array( 'slug' => 'curriculum-grade-level' ),
+      'sort'              => true,
+      'orderby'           => 'term_order',
     );
-    
-    $args['show_in_rest'] = ($_use_gutenberg=="on" or $_use_gutenberg=="1")? true: false;
 
     register_taxonomy( 'curriculum-grade-level', array( 'oer-curriculum' ), $args );
-    
-    
     
     if(!get_option('oer_curriculum_details_curmetset_label')){oercurr_add_setting_options('oer_curriculum_details','label','Details');}
     if(!get_option('oer_curriculum_type_curmetset_label')){oercurr_add_setting_options('oer_curriculum_type','label','Type');}
@@ -119,6 +118,24 @@ function oercurr_create_menu_item() {
     if(!get_option('oer_curriculum_related_curriculum_1_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_related_curriculum_1','enable','checked');}
     if(!get_option('oer_curriculum_related_curriculum_2_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_related_curriculum_2','enable','checked');}
     if(!get_option('oer_curriculum_related_curriculum_3_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_related_curriculum_3','enable','checked');}  
+}
+
+// Display grade levels according to term_order in block editor sidebar
+add_filter('rest_resource-grade-level_query','oercur_sort_grade_levels', 10, 2);
+function oercur_sort_grade_levels($args, $request){
+	$args['orderby'] = "term_order";
+	return $args;
+}
+
+// Change order of grade level display on both edit tags page and in classic editor
+add_filter( 'get_terms_args', 'oercurr_sort_grade_level_terms', 10, 2 );
+function oercurr_sort_grade_level_terms( $args, $taxonomies ){
+	global $pagenow;
+	if (is_admin() && ($pagenow=='edit-tags.php' || $pagenow == 'post-new.php' || $pagenow == 'post.php') && in_array('curriculum-grade-level',$taxonomies) ){
+		$args['orderby'] = 'term_order';
+    	$args['order'] = 'ASC';
+	}
+  return $args;
 }
 
 function oercurr_custom_meta_boxes() {
@@ -332,7 +349,10 @@ function oercurr_enqueue_admin_assets() {
         //wp_enqueue_script('oercurr-cfb-admin-jqueryui-core', admin_url( 'wp-includes/js/jquery/ui/core.min.js' ) ,array('jquery') , null, true);
         wp_enqueue_script('oercurr-cfb-admin-jqueryui-sortable', admin_url( 'wp-includes/js/jquery/ui/sortable.min.js' ) ,array('jquery, oercurr-cfb-admin-jqueryui-core') , null, true);
   }
-
+  
+  
+  wp_enqueue_script('oercurr-resource-selector-script', OERCURR_CURRICULUM_URL . 'js/backend/oercurr-admin.js' , array('jquery') , null, true);
+    
 }
 
 function oercurr_dequeue_oer_scripts(){
@@ -1028,9 +1048,8 @@ if (! function_exists('oercurr_create_dynamic_materials_module')) {
  */
 add_action('wp_ajax_oercurr_dismiss_notice_callback', 'oercurr_dismiss_notice_callback');
 add_action('wp_ajax_nopriv_oercurr_dismiss_notice_callback', 'oercurr_dismiss_notice_callback');
-
 function oercurr_dismiss_notice_callback() {
-    update_option('oer_curriculum_setup_notification', true);
+    update_option('oer_curriculum_setup_notification',false);
 }
 
 /**

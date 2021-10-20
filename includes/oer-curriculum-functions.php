@@ -533,7 +533,7 @@ function oercurr_importDefaultGradeLevels(){
 			"12" => "12"
 			);
 	foreach($_arr as $_key => $_val){
-		if ( !term_exists($_val,"resource-grade-level") ) {
+		if ( !term_exists($_val,"curriculum-grade-level") ) {
 			wp_insert_term(
 			    $_val,   // the term 
 			    'curriculum-grade-level', // the taxonomy
@@ -544,7 +544,7 @@ function oercurr_importDefaultGradeLevels(){
 			);
 		}
 	}
-	$message = __("Successfully imported default grade_levels.", OER_SLUG);
+	$message = __("Successfully imported default grade_levels.", OERCURR_CURRICULUM_SLUG);
 	$type = "success";
 	$response = array('message' => $message, 'type' => $type);
 	return $response;
