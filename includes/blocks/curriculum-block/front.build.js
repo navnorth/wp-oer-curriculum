@@ -98,9 +98,6 @@ function updatepostdisplay(instanceparent){
   		'per'      : localStorage.getItem('postsPerPage-'+bid),
   		'srt'      : localStorage.getItem('sortBy-'+bid),
   	};
-    //console.log('SEL CAT:'+localStorage.getItem('selectedCategory-'+bid));
-    //console.log('SEL PER:'+localStorage.getItem('postsPerPage-'+bid));
-    //console.log('SEL SRT:'+localStorage.getItem('sortBy-'+bid));
     jQuery.ajax({
   		type:'POST',
   		url: curriculum_block_ajax_object.ajaxurl,
@@ -122,7 +119,6 @@ function updatepostdisplay(instanceparent){
   		},
   		error: function(XMLHttpRequest, textStatus, errorThrown) {
         setTimeout(function(){
-          console.log('close preloader2');
           instanceparent.find('.lp_cur_blk_content_preloader_table').hide(300);
         }, 300);
   		}
@@ -155,7 +151,6 @@ function lpCurSaveToLocalAttribute(key, val, kcode=null, target=null){
       }
     }
   }
-  //console.log(localStorage.getItem(key));
 }
 
 function lpCurTogleOptions(target, kcode = 13){

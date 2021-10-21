@@ -504,7 +504,6 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
     }
 
     function onFilterSearchToggle(elem, index) {
-      //console.log('FILTER TOGGLE: '+attributes.filtertype)
       setAttributes({resourcesubjectfilter: "", curriculumsubjectfilter: "", searchstring: ""});
 
       if (attributes.filtertype == "search") {

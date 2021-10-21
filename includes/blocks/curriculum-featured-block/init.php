@@ -585,7 +585,6 @@ function initiate_frontend_bx_slider(){
       jQuery(window).resize(function() {
 			    clearTimeout(oercurr_responsive[cfb_blkid]);
 			    oercurr_responsive[cfb_blkid] = setTimeout(function(){
-            console.log('Resixe IT!');
               oercurr_sldr[cfb_blkid].reloadSlider({
                 minSlides: parseInt(oercurr_cfb_minslides),
         	      maxSlides: parseInt(oercurr_cfb_maxslides),
