@@ -456,7 +456,7 @@ if (! function_exists('oercurr_grade_level')){
         
         global $post; 
         $grades = array();
-        $grade_terms = get_the_terms( $post->ID, 'curriculum-grade-level' );
+        $grade_terms = get_the_terms( $post->ID, OERCURR_GRADE_LEVEL_TAX_SLUG );
         
         if (is_array($grade_terms)){
             foreach($grade_terms as $grade){
@@ -533,10 +533,10 @@ function oercurr_importDefaultGradeLevels(){
 			"12" => "12"
 			);
 	foreach($_arr as $_key => $_val){
-		if ( !term_exists($_val,"curriculum-grade-level") ) {
+		if ( !term_exists($_val,OERCURR_GRADE_LEVEL_TAX_SLUG) ) {
 			wp_insert_term(
 			    $_val,   // the term 
-			    'curriculum-grade-level', // the taxonomy
+			    OERCURR_GRADE_LEVEL_TAX_SLUG, // the taxonomy
 			    array(
 			    	'description' => '',
 			        'slug' => $_key

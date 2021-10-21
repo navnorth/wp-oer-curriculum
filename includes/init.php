@@ -35,7 +35,7 @@ function oercurr_create_menu_item() {
         'query_var'             => true,
         'menu_position'         => 26,
         'menu_icon'             => 'dashicons-welcome-learn-more',
-        'taxonomies'            => array('post_tag', 'resource-subject-area'),
+        'taxonomies'            => array('post_tag', 'resource-subject-area', OERCURR_GRADE_LEVEL_TAX_SLUG),
         'supports'              => array('title', 'editor', 'thumbnail', 'revisions'),
         'register_meta_box_cb'  => 'oercurr_custom_meta_boxes',
         'show_in_rest'          => true
@@ -43,34 +43,36 @@ function oercurr_create_menu_item() {
 
     register_post_type('oer-curriculum', $args);
     
-
-  	$labels = array(
-      'name'              => esc_html__( 'Grade Level',OERCURR_CURRICULUM_SLUG ),
-	    'singular_name'     => esc_html_x( 'Grade Level', 'taxonomy singular name', OERCURR_CURRICULUM_SLUG ),
-	    'search_items'      => esc_html__( 'Search '.'Grade Levels',OERCURR_CURRICULUM_SLUG ),
-	    'all_items'         => esc_html__( 'All '.'Grade Levels', OERCURR_CURRICULUM_SLUG ),
-	    'parent_item'       => esc_html__( 'Parent '.'Grade Level',OERCURR_CURRICULUM_SLUG ),
-	    'parent_item_colon' => esc_html__( 'Parent '.'Grade Level'.':',OERCURR_CURRICULUM_SLUG ),
-	    'edit_item'         => esc_html__( 'Edit '.'Grade Level', OERCURR_CURRICULUM_SLUG ),
-	    'update_item'       => esc_html__( 'Update '.'Grade Level', OERCURR_CURRICULUM_SLUG ),
-	    'add_new_item'      => esc_html__( 'Add New '.'Grade Level',OERCURR_CURRICULUM_SLUG),
-	    'new_item_name'     => esc_html__( 'New Genre '.'Grade Level',OERCURR_CURRICULUM_SLUG),
-	    'menu_name'         => esc_html__( 'Grade Levels',OERCURR_CURRICULUM_SLUG ),
-    );
     
-    $args = array(
-	    'hierarchical'      => true,
-	    'labels'            => $labels,
-	    'show_ui'           => true,
-	    'show_admin_column' => true,
-      'show_in_rest'		  => true,
-	    'query_var'         => true,
-	    'rewrite'           => array( 'slug' => 'curriculum-grade-level' ),
-      'sort'              => true,
-      'orderby'           => 'term_order',
-    );
-
-    register_taxonomy( 'curriculum-grade-level', array( 'oer-curriculum' ), $args );
+    if(OERCURR_INDI_GRADE_LEVEL){
+    	$labels = array(
+        'name'              => esc_html__( 'Grade Level',OERCURR_CURRICULUM_SLUG ),
+  	    'singular_name'     => esc_html_x( 'Grade Level', 'taxonomy singular name', OERCURR_CURRICULUM_SLUG ),
+  	    'search_items'      => esc_html__( 'Search '.'Grade Levels',OERCURR_CURRICULUM_SLUG ),
+  	    'all_items'         => esc_html__( 'All '.'Grade Levels', OERCURR_CURRICULUM_SLUG ),
+  	    'parent_item'       => esc_html__( 'Parent '.'Grade Level',OERCURR_CURRICULUM_SLUG ),
+  	    'parent_item_colon' => esc_html__( 'Parent '.'Grade Level'.':',OERCURR_CURRICULUM_SLUG ),
+  	    'edit_item'         => esc_html__( 'Edit '.'Grade Level', OERCURR_CURRICULUM_SLUG ),
+  	    'update_item'       => esc_html__( 'Update '.'Grade Level', OERCURR_CURRICULUM_SLUG ),
+  	    'add_new_item'      => esc_html__( 'Add New '.'Grade Level',OERCURR_CURRICULUM_SLUG),
+  	    'new_item_name'     => esc_html__( 'New Genre '.'Grade Level',OERCURR_CURRICULUM_SLUG),
+  	    'menu_name'         => esc_html__( 'Grade Levels',OERCURR_CURRICULUM_SLUG ),
+      );
+      
+      $args = array(
+  	    'hierarchical'      => true,
+  	    'labels'            => $labels,
+  	    'show_ui'           => true,
+  	    'show_admin_column' => true,
+        'show_in_rest'		  => true,
+  	    'query_var'         => true,
+  	    'rewrite'           => array( 'slug' => OERCURR_GRADE_LEVEL_TAX_SLUG ),
+        'sort'              => true,
+        'orderby'           => 'term_order',
+      );
+    
+      register_taxonomy( OERCURR_GRADE_LEVEL_TAX_SLUG, array( 'oer-curriculum' ), $args );
+    }
     
     if(!get_option('oer_curriculum_details_curmetset_label')){oercurr_add_setting_options('oer_curriculum_details','label','Details');}
     if(!get_option('oer_curriculum_type_curmetset_label')){oercurr_add_setting_options('oer_curriculum_type','label','Type');}
@@ -131,7 +133,7 @@ function oercur_sort_grade_levels($args, $request){
 add_filter( 'get_terms_args', 'oercurr_sort_grade_level_terms', 10, 2 );
 function oercurr_sort_grade_level_terms( $args, $taxonomies ){
 	global $pagenow;
-	if (is_admin() && ($pagenow=='edit-tags.php' || $pagenow == 'post-new.php' || $pagenow == 'post.php') && in_array('curriculum-grade-level',$taxonomies) ){
+	if (is_admin() && ($pagenow=='edit-tags.php' || $pagenow == 'post-new.php' || $pagenow == 'post.php') && in_array(OERCURR_GRADE_LEVEL_TAX_SLUG,$taxonomies) ){
 		$args['orderby'] = 'term_order';
     	$args['order'] = 'ASC';
 	}

@@ -42,6 +42,12 @@ define( 'OERCURR_CURRICULUM_PLUGIN_NAME', 'OER Curriculum Plugin' );
 define( 'OERCURR_CURRICULUM_ADMIN_PLUGIN_NAME', 'OER Curriculum Plugin');
 define( 'OERCURR_CURRICULUM_VERSION', '0.5.0' );
 
+define( 'OERCURR_INDI_GRADE_LEVEL', false);  // set to true to use native grade levels
+if(OERCURR_INDI_GRADE_LEVEL){
+  define('OERCURR_GRADE_LEVEL_TAX_SLUG', 'curriculum-grade-level'); 
+}else{
+  define('OERCURR_GRADE_LEVEL_TAX_SLUG', 'resource-grade-level');
+}
 include_once(OERCURR_CURRICULUM_PATH.'includes/oer-curriculum-functions.php');
 include_once(OERCURR_CURRICULUM_PATH.'includes/init.php');
 
@@ -52,6 +58,7 @@ global $oer_curriculum_default_structure;
 global $oer_convert_info;
 global $oer_curriculum_deleted_fields;
 global $root_slug;
+
 $oer_curriculum_default_structure = array(
     'oer_curriculum_authors_order',
     'oer_curriculum_standard_order',
@@ -124,7 +131,7 @@ register_activation_hook( __FILE__, 'oercurr_plugin_activate' );
 add_action( 'admin_notices', 'oercurr_plugin_activation_notice');
 function oercurr_plugin_activation_notice(){
     global $post;
-    //if(isset($post->post_type) && $post->post_type=='oer-curriculum'){
+    if(OERCURR_INDI_GRADE_LEVEL){
       if(get_option('oer_curriculum_setup_notification')){      
         $setup_button = '<form class="inline-form" style="display:inline;text-align: right; float: right; width: 20%; margin-top: 3px;" method="post" action="'.admin_url( 'edit.php?post_type=oer-curriculum&page=oer_curriculum_settings&tab=setup').'"><input type="hidden" name="oer_setup" value="1" /><input type="submit" class="button-primary" value="Setup" /></form>';
     	  ?>
@@ -133,7 +140,7 @@ function oercurr_plugin_activation_notice(){
     		</div>
     	<?php  
       }
-    //}
+    }
 
 }
 

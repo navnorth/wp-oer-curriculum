@@ -43,7 +43,7 @@ global $message, $type;
     <h2 class="nav-tab-wrapper">
         <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e("General", OERCURR_CURRICULUM_SLUG); ?></a>
         <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=metadata" class="nav-tab <?php echo $active_tab == 'metadata' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e("Metadata Fields", OERCURR_CURRICULUM_SLUG); ?></a>
-        <?php if(get_option('oer_curriculum_setup_notification')){ ?>
+        <?php if(get_option('oer_curriculum_setup_notification') && OERCURR_INDI_GRADE_LEVEL){ ?>
           <a href="?post_type=oer-curriculum&page=oer_curriculum_settings&tab=setup" class="nav-tab <?php echo $active_tab == 'setup' ? 'nav-tab-active' : ''; ?>"><?php esc_html_e("Setup", OERCURR_CURRICULUM_SLUG); ?></a>
         <?php } ?>
     </h2>
