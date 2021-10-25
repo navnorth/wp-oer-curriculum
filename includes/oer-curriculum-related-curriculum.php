@@ -5,6 +5,7 @@ global $post;
 global $wpdb;
 global $inquiryset_post;
 
+$inquiryset_post = $post;
 $inquiry = get_post_meta($inquiryset_post->ID,'oer_curriculum_related_curriculum');
 $inquiry = ((is_array($inquiry)&& count($inquiry)>0)?$inquiry[0]:array());
 ?>
