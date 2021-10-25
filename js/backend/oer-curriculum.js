@@ -1198,8 +1198,8 @@ jQuery(window).bind("load", function() {
   let MetaboxeRenderInterval = setInterval(function(){
     MetaboxeRenderIntervalCntr++;
     if(jQuery('.edit-post-layout__metaboxes').length){
-      //jQuery('.handle-order-lower').removeClass('hidden');
-      //jQuery('.handle-order-higher').removeClass('hidden');
+      jQuery('.handle-order-lower').removeClass('hidden');
+      jQuery('.handle-order-higher').removeClass('hidden');
     }else{
       if(MetaboxeRenderIntervalCntr > 1800){clearInterval(MetaboxeRenderInterval)};
     }
