@@ -1170,6 +1170,19 @@ jQuery(document).ready(function ($) {
     OerCurriculum.removeFeaturedImageInResourceSelection();
     OerCurriculum.switchToVisualWorkaround();
     
+
+    /* Float Secton Anchor */
+    let oercurrMetaboxScrollCntr = 0;
+    let oercurrMetaboxScroll = setInterval(function(){
+      oercurrMetaboxScrollCntr++;
+      var scrtop = jQuery("#oer_curriculum_meta_boxid").offset().top;
+      if(scrtop < 11){
+        jQuery('.oer_curriculum_left_column').addClass('float');
+        jQuery('.oer_curriculum_left_column .list-group').width(jQuery('.oer_curriculum_left_column').width());
+      }else{
+          jQuery('.oer_curriculum_left_column').removeClass('float');
+      }
+    }, 100);
     
     jQuery(document).on('click','.handle-order-higher',function(e){
       oercurr_reinstate_editor_content_on_move(this);
