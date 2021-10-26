@@ -381,9 +381,7 @@ jQuery(document).ready(function ($) {
         // Dismiss the plugin installation message
         dismissInstallNotice: function () {
             /* $(document).on('click', '#oercurr-dismissible-notice .notice-dismiss', function () {
-                console.log('whe');
                 $.post(ajaxurl, {action:'oercurr_dismiss_notice_callback'}).done(function (response) {
-
                 });
             }); */
         },
@@ -1170,19 +1168,34 @@ jQuery(document).ready(function ($) {
     OerCurriculum.removeFeaturedImageInResourceSelection();
     OerCurriculum.switchToVisualWorkaround();
     
-
     /* Float Secton Anchor */
-    let oercurrMetaboxScrollCntr = 0;
-    let oercurrMetaboxScroll = setInterval(function(){
-      oercurrMetaboxScrollCntr++;
-      var scrtop = jQuery("#oer_curriculum_meta_boxid").offset().top;
-      if(scrtop < 11){
-        jQuery('.oer_curriculum_left_column').addClass('float');
-        jQuery('.oer_curriculum_left_column .list-group').width(jQuery('.oer_curriculum_left_column').width());
-      }else{
-          jQuery('.oer_curriculum_left_column').removeClass('float');
+    let oercurrMetaboxScrollTargetCntr = 0;
+    let oercurrMetaboxScrollTarget = setInterval(function(){
+      oercurrMetaboxScrollTargetCntr++;
+      var target_elm = jQuery('.interface-interface-skeleton__content');
+      if(target_elm.length){
+        // target element presence is confirmed, load event listeners
+        clearInterval(oercurrMetaboxScrollTarget);
+        document.querySelector('.interface-interface-skeleton__content').addEventListener('scroll', () => {
+          var scrtop = jQuery("#oer_curriculum_meta_boxid").offset().top;
+          if(scrtop < 11){
+            jQuery('.oer_curriculum_left_column').addClass('float');
+            jQuery('.oer_curriculum_left_column .list-group').width(jQuery('.oer_curriculum_left_column').width());
+          }else{
+              jQuery('.oer_curriculum_left_column').removeClass('float');
+          }
+        });      
+        window.addEventListener('resize', function () {
+          jQuery('.oer_curriculum_left_column .list-group').width(jQuery('.oer_curriculum_left_column').width());
+        })
+        // terminate observer if target element is not loaded within 3 minutes
+        if(oercurrMetaboxScrollTargetCntr > 1800){
+          clearInterval(oercurrMetaboxScrollTarget);
+        }
       }
     }, 100);
+
+    
     
     jQuery(document).on('click','.handle-order-higher',function(e){
       oercurr_reinstate_editor_content_on_move(this);
