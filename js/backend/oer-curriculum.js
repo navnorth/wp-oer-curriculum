@@ -1169,6 +1169,41 @@ jQuery(document).ready(function ($) {
     OerCurriculum.addFeaturedImageOnResourceTextBox();
     OerCurriculum.removeFeaturedImageInResourceSelection();
     OerCurriculum.switchToVisualWorkaround();
+    
+    
+    jQuery(document).on('click','.handle-order-higher',function(e){
+      oercurr_reinstate_editor_content_on_move(this);
+    })
+    
+    jQuery(document).on('click','.handle-order-lower',function(e){
+      oercurr_reinstate_editor_content_on_move(this);
+    })
+    
+    function oercurr_reinstate_editor_content_on_move(obj){
+      if(jQuery(obj).closest('.postbox').find('.oer_curriculum_meta_wrapper .oercurr-element-wrapper .form-group iframe').length){
+        setTimeout(function(){
+          jQuery('.edit-post-layout__metaboxes .oercurr-element-wrapper .form-group iframe').each(function(index,obj){
+            var elmid = jQuery(obj).attr('id').replace("_ifr", "");
+            tinymce.execCommand( 'mceRemoveEditor', false, elmid);
+            tinymce.execCommand( 'mceAddEditor', false, elmid );
+          })
+        }, 1300);
+      }
+    }
+    
+});
+
+jQuery(window).bind("load", function() { 
+  let MetaboxeRenderIntervalCntr = 0;
+  let MetaboxeRenderInterval = setInterval(function(){
+    MetaboxeRenderIntervalCntr++;
+    if(jQuery('.edit-post-layout__metaboxes').length){
+      jQuery('.handle-order-lower').removeClass('hidden');
+      jQuery('.handle-order-higher').removeClass('hidden');
+    }else{
+      if(MetaboxeRenderIntervalCntr > 1800){clearInterval(MetaboxeRenderInterval)};
+    }
+  }, 100);
 });
 
 //Process Initial Setup
