@@ -153,7 +153,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
     }
 
     let cat_arr = [];
-    cat_arr = attributes.categories; //console.log(cat_arr);
+    cat_arr = attributes.categories; //
 
     /* SET CURRICULUM ATTRIBUTES */
 
@@ -251,7 +251,6 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
         }
       }
 
-      console.log("###4");
       setAttributes({
         selectedCategory: selcat.toString()
       });
@@ -276,7 +275,6 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
           setAttributes({ curriculums: curriculums, curriculumlength: parseInt(curriculums.length) });
         });
       } else {
-        console.log("###7");
         wp.apiFetch({
           url: "/wp-json/curriculum/v2/taxquery?terms=0"
         }).then((curriculums) => {

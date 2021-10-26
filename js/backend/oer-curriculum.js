@@ -380,12 +380,14 @@ jQuery(document).ready(function ($) {
 
         // Dismiss the plugin installation message
         dismissInstallNotice: function () {
-            $(document).on('click', '#oercurr-dismissible', function () {
-                $.post(ajaxurl, {action:'oer_curriculum_dismiss_notice_callback'}).done(function (response) {
+            /* $(document).on('click', '#oercurr-dismissible-notice .notice-dismiss', function () {
+                console.log('whe');
+                $.post(ajaxurl, {action:'oercurr_dismiss_notice_callback'}).done(function (response) {
 
                 });
-            });
+            }); */
         },
+        
         // Add more author
         addMoreAuthor: function () {
             $(document).on('click', '#oercurr-add-more-author', function () {

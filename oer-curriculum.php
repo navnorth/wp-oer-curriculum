@@ -42,6 +42,12 @@ define( 'OERCURR_CURRICULUM_PLUGIN_NAME', 'OER Curriculum Plugin' );
 define( 'OERCURR_CURRICULUM_ADMIN_PLUGIN_NAME', 'OER Curriculum Plugin');
 define( 'OERCURR_CURRICULUM_VERSION', '0.5.0' );
 
+define( 'OERCURR_INDI_GRADE_LEVEL', false);  // set to true to use native grade levels
+if(OERCURR_INDI_GRADE_LEVEL){
+  define('OERCURR_GRADE_LEVEL_TAX_SLUG', 'curriculum-grade-level'); 
+}else{
+  define('OERCURR_GRADE_LEVEL_TAX_SLUG', 'resource-grade-level');
+}
 include_once(OERCURR_CURRICULUM_PATH.'includes/oer-curriculum-functions.php');
 include_once(OERCURR_CURRICULUM_PATH.'includes/init.php');
 
@@ -52,6 +58,7 @@ global $oer_curriculum_default_structure;
 global $oer_convert_info;
 global $oer_curriculum_deleted_fields;
 global $root_slug;
+
 $oer_curriculum_default_structure = array(
     'oer_curriculum_authors_order',
     'oer_curriculum_standard_order',
@@ -113,6 +120,7 @@ function oercurr_check_parent_plugin()
 function oercurr_plugin_activate()
 {
     //Activation code
+    update_option('oer_curriculum_setup_notification', true);
 }
 register_activation_hook( __FILE__, 'oercurr_plugin_activate' );
 
@@ -121,18 +129,18 @@ register_activation_hook( __FILE__, 'oercurr_plugin_activate' );
  * @since 0.1.0
  */
 add_action( 'admin_notices', 'oercurr_plugin_activation_notice');
-function oercurr_plugin_activation_notice()
-{
+function oercurr_plugin_activation_notice(){
     global $post;
-    if(
-        (isset($post->post_type) && $post->post_type=='oer-curriculum') &&
-        !get_option('oer_curriculum_setup_notification')
-    )
-    {?>
-        <div class="notice notice-success is-dismissible" id="oer-curriculum-dismissible">
-            <p><?php _e('Thank you for installing the', OERCURR_CURRICULUM_SLUG); ?> <strong><?php _e('OER Curriculum',OERCURR_CURRICULUM_SLUG); ?></strong> <?php _e('plugin',OERCURR_CURRICULUM_SLUG); ?>.</p>
-        </div>
-    <?php }
+    if(OERCURR_INDI_GRADE_LEVEL){
+      if(get_option('oer_curriculum_setup_notification')){      
+        $setup_button = '<form class="inline-form" style="display:inline;text-align: right; float: right; width: 20%; margin-top: 3px;" method="post" action="'.admin_url( 'edit.php?post_type=oer-curriculum&page=oer_curriculum_settings&tab=setup').'"><input type="hidden" name="oer_setup" value="1" /><input type="submit" class="button-primary" value="Setup" /></form>';
+    	  ?>
+    		<div id="oercurr-dismissible-notice" class="updated notice is-dismissible" style="padding-top:5px;padding-bottom:5px;overflow:hidden;">
+    			<p style="width:75%;float:left;">Thank you for installing the <a href="https://wordpress.org/plugins/oer-curriculum/" target="_blank">OER-CURRICULUM</a> plugin. If you need support, please visit our site or the forums. <?php echo $setup_button; ?></p>
+    		</div>
+    	<?php  
+      }
+    }
 
 }
 
@@ -180,6 +188,7 @@ function oercurr_add_rewrites()
     $wp_rewrite->init();
     $wp_rewrite->flush_rules();
     update_option('oer_curriculum_rewrite_rules', true);
+    
 }
 
 add_filter( 'query_vars', 'oercurr_add_query_vars' );
@@ -376,3 +385,165 @@ if ( version_compare( $wp_version, '5.8', '>=' ) ) {
 }else{
   add_filter( 'allowed_block_types', 'wpse_allowed_block_types', 10, 2);
 }
+
+
+add_action( 'admin_init' , 'oercurr_setup_settings' );
+function oercurr_setup_settings(){
+  
+  //Create Setup Section
+	add_settings_section(
+		'oercurr_setup_settings',
+		'',
+		'oercurr_setup_settings_callback',
+		'oercurr_setup_settings_section'
+	);
+  
+  //Add Settings field for Import Default Grade Levels
+	add_settings_field(
+		'oercurr_import_default_grade_levels',
+		'',
+		'oercurr_setup_settings_field',
+		'oercurr_setup_settings_section',
+		'oercurr_setup_settings',
+		array(
+			'uid' => 'oercurr_import_default_grade_levels',
+			'type' => 'checkbox',
+			'value' => '0',
+			'default' => false,
+      'checked' => false,
+			'name' =>  __('Import Default Grade Levels', OERCURR_CURRICULUM_SLUG),
+			'description' => __('A general listing of K-12 grade levels.', OERCURR_CURRICULUM_SLUG)
+		)
+	);
+  
+  register_setting( 'oercurr_setup_settings' , 'oercurr_import_default_grade_levels' );
+  
+}
+
+//Setup Setting Callback
+function oercurr_setup_settings_callback(){
+  
+
+}
+
+
+function oercurr_setup_settings_field( $arguments ) {
+  $selected = "";
+	$size = "";
+	$class = "";
+	$disabled = "";
+
+	$value = get_option($arguments['uid']);
+
+	if (isset($arguments['indent'])){
+		echo '<div class="indent">';
+	}
+
+	if (isset($arguments['class'])) {
+		$class = $arguments['class'];
+		$class = " class='".$class."' ";
+	}
+
+	if (isset($arguments['pre_html'])) {
+		echo $arguments['pre_html'];
+	}
+
+	switch($arguments['type']){
+		case "textbox":
+			$size = 'size="50"';
+			if (isset($arguments['title']))
+				$title = $arguments['title'];
+			echo '<label for="'.$arguments['uid'].'"><strong>'.$title.'</strong></label><input name="'.$arguments['uid'].'" id="'.$arguments['uid'].'" type="'.$arguments['type'].'" value="' . $value . '" ' . $size . ' ' .  $selected . ' />';
+			break;
+		case "checkbox":
+			$display_value = "";
+			$selected = "";
+
+			if ($value=="1" || $value=="on"){
+				$selected = "checked='checked'";
+				$display_value = "value='1'";
+			} elseif ($value===false){
+				$selected = "";
+				if (isset($arguments['default'])) {
+					if ($arguments['default']==true){
+						$selected = "checked='checked'";
+					}
+				}
+			} else {
+				$selected = "";
+			}
+
+			if (isset($arguments['disabled'])){
+				if ($arguments['disabled']==true)
+					$disabled = " disabled";
+			}
+
+			echo '<input name="'.$arguments['uid'].'" id="'.$arguments['uid'].'" '.$class.' type="'.$arguments['type'].'" ' . $display_value . ' ' . $size . ' ' .  $selected . ' ' . $disabled . '  /><label for="'.$arguments['uid'].'"><strong>'.$arguments['name'].'</strong></label>';
+			break;
+		case "select":
+			if (isset($arguments['name']))
+				$title = $arguments['name'];
+			echo '<label for="'.$arguments['uid'].'"><strong>'.$title.'</strong></label>';
+			echo '<select name="'.$arguments['uid'].'" id="'.$arguments['uid'].'">';
+
+			if (isset($arguments['options']))
+				$options = $arguments['options'];
+
+			foreach($options as $key=>$desc){
+				$selected = "";
+				if ($value===false){
+					if ($key==$arguments['default'])
+						$selected = " selected";
+				} else {
+					if ($key==$value)
+						$selected = " selected";
+				}
+				$disabled = "";
+				switch ($key){
+					case 3:
+						if(!shortcode_exists('wonderplugin_pdf'))
+							$disabled = " disabled";
+						break;
+					case 4:
+						if (!shortcode_exists('pdf-embedder'))
+							$disabled = " disabled";
+						break;
+					case 5:
+						if(!shortcode_exists('pdfviewer'))
+							$disabled = " disabled";
+						break;
+					default:
+						break;
+				}
+				echo '<option value="'.$key.'"'.$selected.''.$disabled.'>'.$desc.'</option>';
+			}
+
+			echo '<select>';
+			break;
+		case "textarea":
+			echo '<label for="'.$arguments['uid'].'"><h3><strong>'.$arguments['name'];
+			if (isset($arguments['inline_description']))
+				echo '<span class="inline-desc">'.$arguments['inline_description'].'</span>';
+			echo '</strong></h3></label>';
+			echo '<textarea name="'.$arguments['uid'].'" id="'.$arguments['uid'].'" rows="10">' . $value . '</textarea>';
+			break;
+		default:
+			break;
+	}
+
+	//Show Helper Text if specified
+	if (isset($arguments['helper'])) {
+		printf( '<span class="helper"> %s</span>' , $arguments['helper'] );
+	}
+
+	//Show Description if specified
+	if( isset($arguments['description']) ){
+		printf( '<p class="description">%s</p>', $arguments['description'] );
+	}
+
+	if (isset($arguments['indent'])){
+		echo '</div>';
+	}
+}
+
+
