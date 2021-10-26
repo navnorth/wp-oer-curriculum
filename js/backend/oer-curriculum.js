@@ -380,12 +380,14 @@ jQuery(document).ready(function ($) {
 
         // Dismiss the plugin installation message
         dismissInstallNotice: function () {
-            $(document).on('click', '#oercurr-dismissible', function () {
-                $.post(ajaxurl, {action:'oer_curriculum_dismiss_notice_callback'}).done(function (response) {
+            /* $(document).on('click', '#oercurr-dismissible-notice .notice-dismiss', function () {
+                console.log('whe');
+                $.post(ajaxurl, {action:'oercurr_dismiss_notice_callback'}).done(function (response) {
 
                 });
-            });
+            }); */
         },
+        
         // Add more author
         addMoreAuthor: function () {
             $(document).on('click', '#oercurr-add-more-author', function () {
@@ -1167,26 +1169,41 @@ jQuery(document).ready(function ($) {
     OerCurriculum.addFeaturedImageOnResourceTextBox();
     OerCurriculum.removeFeaturedImageInResourceSelection();
     OerCurriculum.switchToVisualWorkaround();
-
-    
-    jQuery(document).on('scroll','.interface-interface-skeleton__content',function(){
-      var scrtop = jQuery("#oer_curriculum_meta_boxid").scrollTop();
-      console.log('w:'+scrtop);
-    });
     
     
-    let oercurrMetaboxScrollCntr = 0;
-    let oercurrMetaboxScroll = setInterval(function(){
-      oercurrMetaboxScrollCntr++;
-      var scrtop = jQuery("#oer_curriculum_meta_boxid").offset().top;
-      if(scrtop < 11){
-        jQuery('.oer_curriculum_left_column').addClass('float');
-        jQuery('.oer_curriculum_left_column .list-group').width(jQuery('.oer_curriculum_left_column').width());
-      }else{
-        jQuery('.oer_curriculum_left_column').removeClass('float');
+    jQuery(document).on('click','.handle-order-higher',function(e){
+      oercurr_reinstate_editor_content_on_move(this);
+    })
+    
+    jQuery(document).on('click','.handle-order-lower',function(e){
+      oercurr_reinstate_editor_content_on_move(this);
+    })
+    
+    function oercurr_reinstate_editor_content_on_move(obj){
+      if(jQuery(obj).closest('.postbox').find('.oer_curriculum_meta_wrapper .oercurr-element-wrapper .form-group iframe').length){
+        setTimeout(function(){
+          jQuery('.edit-post-layout__metaboxes .oercurr-element-wrapper .form-group iframe').each(function(index,obj){
+            var elmid = jQuery(obj).attr('id').replace("_ifr", "");
+            tinymce.execCommand( 'mceRemoveEditor', false, elmid);
+            tinymce.execCommand( 'mceAddEditor', false, elmid );
+          })
+        }, 1300);
       }
-    }, 100);
-      
+    }
+    
+});
+
+jQuery(window).bind("load", function() { 
+  let MetaboxeRenderIntervalCntr = 0;
+  let MetaboxeRenderInterval = setInterval(function(){
+    MetaboxeRenderIntervalCntr++;
+    if(jQuery('.edit-post-layout__metaboxes').length){
+      jQuery('.handle-order-lower').removeClass('hidden');
+      jQuery('.handle-order-higher').removeClass('hidden');
+    }else{
+      if(MetaboxeRenderIntervalCntr > 1800){clearInterval(MetaboxeRenderInterval)};
+    }
+  }, 100);
 });
 
 //Process Initial Setup
