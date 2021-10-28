@@ -59,7 +59,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
 ?>
 <div class="oer_curriculum_meta_wrapper">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 oer_curriculum_left_column">
             <ul class="list-group">
                 <?php
                 if (!empty($elements_orders) || isset($oer_curriculum_default_structure)) {
@@ -246,7 +246,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                     </li>
                 <?php }?>
                 <li class="list-group-item">
-                    <a href="#oer_curriculum_meta_related" title="Related Curriculum"><?php __('Related Curriculum',OERCURR_CURRICULUM_SLUG); ?></a>
+                    <a href="#oer_curriculum_meta_related" title="Related Curriculum"><?php echo esc_html__(oercurr_get_field_label('oer_curriculum_related_curriculum'),OERCURR_CURRICULUM_SLUG); ?></a>
                 </li>
             </ul>
         </div>
