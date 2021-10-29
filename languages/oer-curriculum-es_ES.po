@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OER Curriculum\n"
 "POT-Creation-Date: 2021-04-23 19:37+0800\n"
-"PO-Revision-Date: 2021-10-08 19:09+0800\n"
+"PO-Revision-Date: 2021-10-29 21:53+0800\n"
 "Last-Translator: \n"
 "Language-Team: Navigation North\n"
 "Language: es_ES\n"
@@ -12,9 +12,7 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;_n_noop;_nx_noop;"
-"translate_nooped_plural;number_format_i18n;date_i18n;esc_html__;esc_html__;"
-"esc_html_x;esc_attr__;esc_attr_e;esc_attr_x\n"
+"X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;_n_noop;_nx_noop;translate_nooped_plural;number_format_i18n;date_i18n;esc_html__;esc_html__;esc_html_x;esc_attr__;esc_attr_e;esc_attr_x\n"
 
 msgid "Details"
 msgstr "Detalles"
@@ -145,8 +143,26 @@ msgstr "Material sensible"
 msgid "Potentially Sensitive Material"
 msgstr "Material potencialmente sensible"
 
+msgid "Curriculum"
+msgstr "Plan de estudios"
+
 msgid "Add New Curriculum"
 msgstr "Agregar nuevo plan de estudios"
+
+msgid "Edit Curriculum"
+msgstr "Editar plan de estudios"
+
+msgid "Create Curriculum"
+msgstr "Crear plan de estudios"
+
+msgid "All Curriculum"
+msgstr "Todo el plan de estudios"
+
+msgid "View Curriculum"
+msgstr "Ver plan de estudios"
+
+msgid "Search"
+msgstr "Buscar"
 
 msgid "Add a Resource"
 msgstr "Agregar un recurso"
@@ -175,14 +191,8 @@ msgstr "Activado"
 msgid "Save General Options"
 msgstr "Guardar opciones generales"
 
-msgid "Curriculum"
-msgstr "Plan de estudios"
-
-msgid "All Curriculum"
-msgstr "Todo el plan de estudios"
-
 msgid "Subject Areas"
-msgstr "Áreas temáticas"
+msgstr "Áreas temáticase"
 
 msgid "Settings"
 msgstr "Configuracion"
@@ -210,6 +220,30 @@ msgstr "Secciones adicionales"
 
 msgid "Grade Level"
 msgstr "Nivel de grado"
+
+msgid "Search Grade Levels"
+msgstr "Buscar niveles de grado"
+
+msgid "All Grade Levels"
+msgstr "Todos los niveles de grado"
+
+msgid "Parent Grade Level"
+msgstr "Nivel de grado de los padres"
+
+msgid "Edit Grade Level"
+msgstr "Editar nivel de grado"
+
+msgid "Update Grade Level"
+msgstr "Actualizar el nivel de grado"
+
+msgid "Add New Grade Level"
+msgstr "Agregar nuevo nivel de grado"
+
+msgid "New Grade Level"
+msgstr "Nuevo nivel de grado"
+
+msgid "Grade Levels"
+msgstr "Niveles de grado"
 
 msgid "Appropriate Age Levels"
 msgstr "Niveles de edad apropiados"
@@ -243,3 +277,57 @@ msgstr "Plan de estudios relacionado 2"
 
 msgid "Related Curriculum 3"
 msgstr "Plan de estudios relacionado 3"
+
+msgid "Select"
+msgstr "Buscar"
+
+msgid "Select Standards"
+msgstr "Seleccionar estándares"
+
+msgid "Change Resource"
+msgstr "Cambiar recurso"
+
+msgid "Select Resource"
+msgstr "Seleccionar recurso"
+
+msgid "Select Curriculum"
+msgstr "Seleccionar plan de estudios"
+
+msgid "Select Type"
+msgstr "Seleccionar Tipo"
+
+msgid "Age Levels"
+msgstr "Niveles de edad"
+
+msgid "Suggested Time"
+msgstr "Hora sugerida"
+
+msgid "Select Document"
+msgstr "Seleccionar documento"
+
+msgid "Metadata Fields"
+msgstr "Campos de metadatos"
+
+msgid "Delete Module"
+msgstr "Eliminar módulo"
+
+msgid "These items will be permanently deleted and cannot be recovered. Are you sure"
+msgstr "Estos elementos se eliminarán de forma permanente y no se podrán recuperar. Está seguro"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Yes, Delete"
+msgstr "Sí, eliminar"
+
+msgid "Text Title"
+msgstr "Título del texto"
+
+msgid "Resource Title"
+msgstr "Título del recurso"
+
+msgid "Change Thumbnail"
+msgstr "Cambiar miniatura"
+
+msgid "You have not selected a resource"
+msgstr "No has seleccionado un recurso"

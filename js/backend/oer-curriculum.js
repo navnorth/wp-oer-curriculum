@@ -1099,7 +1099,7 @@ jQuery(document).ready(function ($) {
                     
                     input.val(attachment.url);
                     imageholder.append('<img src="' + attachment.url + '" class="resource-thumbnail" width="200"><span class="btn btn-danger btn-sm oercurr-remove-source-featured-image" title="Remove Thumbnail"><i class="fas fa-minus-circle"></i></span>');
-                    btn.text("Change Thumbnail");
+                    btn.text(lpScript.txtChangeThumbnail);
                 });
                 
                 frame.open();
@@ -1120,7 +1120,7 @@ jQuery(document).ready(function ($) {
                 input.val("");
                 imageholder.find("img").remove();
                 btn.remove();
-                metabox.find('button.oer_curriculum_primary_resources_thumbnail_button').text("Set Thumbnail");
+                metabox.find('button.oer_curriculum_primary_resources_thumbnail_button').text(lpScript.txtSetThumbnail);
             });
         },
         
@@ -1230,6 +1230,22 @@ jQuery(window).bind("load", function() {
       if(MetaboxeRenderIntervalCntr > 1800){clearInterval(MetaboxeRenderInterval)};
     }
   }, 100);
+  
+  //custom taxonomy duplicate $message
+  jQuery(document).on('click','.editor-post-taxonomies__hierarchical-terms-submit',function(e){
+    var inputval = jQuery(this).siblings('input.editor-post-taxonomies__hierarchical-terms-input').val();
+    console.log(inputval);
+    if(inputval != ""){
+      jQuery(this).closest('.components-panel__body').find('.editor-post-taxonomies__hierarchical-terms-list .editor-post-taxonomies__hierarchical-terms-choice').each(function(index,obj){
+        if(inputval == jQuery(obj).text()){
+          console.log(jQuery(obj).text() + ' -> match');
+        }else{
+          console.log(jQuery(obj).text());
+        }
+      })
+    }
+  })
+  
 });
 
 //Process Initial Setup
