@@ -345,7 +345,12 @@ function oercurr_enqueue_admin_assets() {
             "image_placeholder_url" => OERCURR_CURRICULUM_URL.'images/oer-curriculum-person-placeholder.png',
             'pluginDirUrl' => OERCURR_CURRICULUM_URL,
             'txtSetThumbnail' => esc_html__('Set Thumbnail', OERCURR_CURRICULUM_SLUG),
-            'txtChangeThumbnail' => esc_html__('Change Thumbnail', OERCURR_CURRICULUM_SLUG)
+            'txtChangeThumbnail' => esc_html__('Change Thumbnail', OERCURR_CURRICULUM_SLUG),
+            'txtUseMaterial' => esc_html__('Use Material', OERCURR_CURRICULUM_SLUG),
+            'txtUseMaterials' => esc_html__('Use Materials', OERCURR_CURRICULUM_SLUG),
+            'txtSelectMaterial' => esc_html__("Select Material", OERCURR_CURRICULUM_SLUG),
+            'txtSelectMaterials' => esc_html__("Select Materials", OERCURR_CURRICULUM_SLUG),
+            'txtAddMaterials' => esc_html__("Use Materials", OERCURR_CURRICULUM_SLUG)
           ]
         );
         wp_enqueue_script('oercurr-script');

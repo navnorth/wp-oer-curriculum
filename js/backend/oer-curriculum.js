@@ -526,8 +526,8 @@ jQuery(document).ready(function ($) {
                     return;
                 }
                 materialFrame = wp.media({
-                    title: 'Select Materials',
-                    button: { text: 'Use Materials' },
+                    title: lpScript.txtSelectMaterials,
+                    button: { text: lpScript.txtUseMaterials },
                     //library: { type: [ 'image' ] },
                     multiple:'add'
                 });
@@ -661,8 +661,8 @@ jQuery(document).ready(function ($) {
                     return;
                 }
                 materialFrame = wp.media({
-                    title: 'Select Material',
-                    button: { text: 'Use Material' },
+                    title: lpScript.txtSelectMaterial,
+                    button: { text: lpScript.txtUseMaterial },
                     multiple: false
                 });
 
@@ -772,9 +772,9 @@ jQuery(document).ready(function ($) {
                     return;
                 }
                 materialFrame = wp.media({
-                    title: 'Select Material',
+                    title: lpScript.txtSelectMaterial,
                     library: { type: [ 'application/msword', 'application/pdf' ] },
-                    button: { text: 'Use Material' },
+                    button: { text: lpScript.txtUseMaterial},
                     multiple: false
                 });
 
@@ -825,7 +825,10 @@ jQuery(document).ready(function ($) {
                             content_css: lpScript['pluginDirUrl']+"/css/backend/oer-curriculum-mce-style.css",
                             mode: 'exact',
                             menubar: false,
-                            toolbar: 'bold italic underline blockquote strikethrough bullist numlist alignleft  aligncenter alignright undo redo link fullscreen'
+                            toolbar: 'bold italic underline blockquote strikethrough bullist numlist alignleft  aligncenter alignright undo redo link fullscreen',
+                            content_langs: [
+                              { title: 'Spanish', code: 'es' }
+                            ]
                         });
                     }
 

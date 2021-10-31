@@ -1036,7 +1036,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 }
                                 ?>
                                 <div class="button-row form-group">
-                                    <button id="addMatlBtn" class="btn btn-primary"><?php esc_html_e("Add Section", OERCURR_CURRICULUM_SLUG); ?></button>
+                                    <button id="addMatlBtn" class="btn btn-primary"><?php esc_html_e("Add Materials", OERCURR_CURRICULUM_SLUG); ?></button>
                                 </div>
                             </div>
                         </div>

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OER Curriculum\n"
 "POT-Creation-Date: 2021-04-23 19:37+0800\n"
-"PO-Revision-Date: 2021-10-29 21:53+0800\n"
+"PO-Revision-Date: 2021-10-31 18:44+0800\n"
 "Last-Translator: \n"
 "Language-Team: Navigation North\n"
 "Language: es_ES\n"
@@ -331,3 +331,15 @@ msgstr "Cambiar miniatura"
 
 msgid "You have not selected a resource"
 msgstr "No has seleccionado un recurso"
+
+msgid "Select Materials"
+msgstr "Seleccionar materiales"
+
+msgid "Use Materials"
+msgstr "Utilizar materiales"
+
+msgid "Use Material"
+msgstr "Material de uso"
+
+msgid "Select Material"
+msgstr "Seleccionar material"
