@@ -123,7 +123,7 @@ function oercurr_create_menu_item() {
 }
 
 // Display grade levels according to term_order in block editor sidebar
-add_filter('rest_resource-grade-level_query','oercur_sort_grade_levels', 10, 2);
+add_filter('rest_'.OERCURR_GRADE_LEVEL_TAX_SLUG.'_query','oercur_sort_grade_levels', 10, 2);
 function oercur_sort_grade_levels($args, $request){
 	$args['orderby'] = "term_order";
 	return $args;
