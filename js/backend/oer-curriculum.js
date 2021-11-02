@@ -433,8 +433,8 @@ jQuery(document).ready(function ($) {
                 }
 
                 frame = wp.media({
-                    title: 'Select Author Picture',
-                    button: { text: 'Use Picture' },
+                    title: lpScript.txtSelectAuthorPicture,
+                    button: { text: lpScript.txtUsePicture },
                     library: { type: [ 'image' ] },
                     multiple:false
                 });
@@ -1241,9 +1241,9 @@ jQuery(window).bind("load", function() {
     if(inputval != ""){
       jQuery(this).closest('.components-panel__body').find('.editor-post-taxonomies__hierarchical-terms-list .editor-post-taxonomies__hierarchical-terms-choice').each(function(index,obj){
         if(inputval == jQuery(obj).text()){
-          console.log(jQuery(obj).text() + ' -> match');
+          //console.log(jQuery(obj).text() + ' -> match');
         }else{
-          console.log(jQuery(obj).text());
+          //console.log(jQuery(obj).text());
         }
       })
     }

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OER Curriculum\n"
 "POT-Creation-Date: 2021-04-23 19:37+0800\n"
-"PO-Revision-Date: 2021-10-31 18:44+0800\n"
+"PO-Revision-Date: 2021-11-02 21:15+0800\n"
 "Last-Translator: \n"
 "Language-Team: Navigation North\n"
 "Language: es_ES\n"
@@ -82,6 +82,9 @@ msgstr "Antecedentes del estudiante"
 
 msgid "Authors"
 msgstr "Autoras"
+
+msgid "Resources"
+msgstr "Recursos"
 
 msgid "Primary Resources"
 msgstr "Recursos primarios"
@@ -200,6 +203,9 @@ msgstr "Configuracion"
 msgid "Thank you for installing the"
 msgstr "Gracias por instalar el"
 
+msgid "plugin. If you need support, please visit our site or the forums."
+msgstr "enchufar. Si necesita ayuda, visite nuestro sitio o los foros."
+
 msgid "plugin"
 msgstr "complemento"
 
@@ -311,8 +317,14 @@ msgstr "Campos de metadatos"
 msgid "Delete Module"
 msgstr "Eliminar módulo"
 
+msgid "Delete Primary Resource"
+msgstr "Eliminar recurso principal"
+
 msgid "These items will be permanently deleted and cannot be recovered. Are you sure"
 msgstr "Estos elementos se eliminarán de forma permanente y no se podrán recuperar. Está seguro"
+
+msgid "Are yor sure want to do this"
+msgstr "Estás segura de querer hacer esto"
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -343,3 +355,45 @@ msgstr "Material de uso"
 
 msgid "Select Material"
 msgstr "Seleccionar material"
+
+msgid "Setup"
+msgstr "Configuración"
+
+msgid "Select Author Picture"
+msgstr "Seleccionar imagen de autor"
+
+msgid "Use Picture"
+msgstr "Usar imagen"
+
+msgid "When first setting up the plugin, the following options will give you the base set of data to see how everything works. All of these options will be available to you in other settings and features at a later time if you want to skip any or all of these options."
+msgstr "Cuando configure el complemento por primera vez, las siguientes opciones le proporcionarán el conjunto básico de datos para ver cómo funciona todo. Todas estas opciones estarán disponibles para usted en otras configuraciones y funciones en un momento posterior si desea omitir alguna o todas estas opciones."
+
+msgid "Import Default Grade Levels"
+msgstr "Importar niveles de grado predeterminados"
+
+msgid "A general listing of K-12 grade levels"
+msgstr "Una lista general de los niveles de grado K-12"
+
+msgid "Continue"
+msgstr "Continuar"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Role"
+msgstr "Papel"
+
+msgid "Author URL"
+msgstr "URL del autor"
+
+msgid "Institution"
+msgstr "Institución"
+
+msgid "Institution URL"
+msgstr "URL de la institución"
+
+msgid "Search page here"
+msgstr "Buscar página aquí"
+
+msgid "Delete Author"
+msgstr "Eliminar autor"

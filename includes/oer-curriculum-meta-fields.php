@@ -383,7 +383,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                     <input type="text"
                                                                            class="form-control"
                                                                            name="oer_curriculum_authors[name][]"
-                                                                           placeholder="Name"
+                                                                           placeholder= "<?php _e('Name', OERCURR_CURRICULUM_SLUG) ?>"
                                                                            value="<?php echo esc_attr($authorName);?>"
                                                                     >
                                                                 </div>
@@ -393,7 +393,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                     <input type="text"
                                                                            class="form-control"
                                                                            name="oer_curriculum_authors[role][]"
-                                                                           placeholder="Role"
+                                                                           placeholder="<?php _e('Role', OERCURR_CURRICULUM_SLUG) ?>"
                                                                            value="<?php echo isset($authors['role'][$authorKey]) ? esc_attr($authors['role'][$authorKey]) : "";?>"
                                                                     >
                                                                 </div>
@@ -403,7 +403,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                     <input type="text"
                                                                            class="form-control"
                                                                            name="oer_curriculum_authors[author_url][]"
-                                                                           placeholder="Author URL"
+                                                                           placeholder="<?php _e('Author URL', OERCURR_CURRICULUM_SLUG) ?>"
                                                                            value="<?php echo isset($authors['author_url'][$authorKey]) ? esc_attr($authors['author_url'][$authorKey]) : "";?>"
                                                                     >
                                                                 </div>
@@ -413,7 +413,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                     <input type="text"
                                                                            class="form-control"
                                                                            name="oer_curriculum_authors[institution][]"
-                                                                           placeholder="Institution"
+                                                                           placeholder="<?php _e('Institution', OERCURR_CURRICULUM_SLUG) ?>"
                                                                            value="<?php echo isset($authors['institution'][$authorKey]) ? esc_attr($authors['institution'][$authorKey]) : "";?>"
                                                                     >
                                                                 </div>
@@ -423,7 +423,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                     <input type="text"
                                                                            class="form-control"
                                                                            name="oer_curriculum_authors[institution_url][]"
-                                                                           placeholder="Institution URL"
+                                                                           placeholder="<?php _e('Institution URL', OERCURR_CURRICULUM_SLUG) ?>"
                                                                            value="<?php echo isset($authors['institution_url'][$authorKey]) ? esc_attr($authors['institution_url'][$authorKey]) : "";?>"
                                                                     >
                                                                 </div>
@@ -539,7 +539,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <div class="oer_curriculum_primary_resources_image_wrappper">
-                                                                  <label>Resource</label>
+                                                                  <label><?php esc_html_e('Resource', OERCURR_CURRICULUM_SLUG) ?></label>
                                                               
                                                                   <?php $btn_text = (htmlspecialchars($resource) > '')? esc_html__('Change Resource', OERCURR_CURRICULUM_SLUG) : esc_html__('Select Resource', OERCURR_CURRICULUM_SLUG); ?>
                                                                   
@@ -655,7 +655,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                           <input type="text"
                                                               class="form-control"
                                                               name="oer_curriculum_primary_resources[title][]"
-                                                              placeholder="<?php echo esc_html_e('Resource Title',OERCURR_CURRICULUM_SLUG); ?>"
+                                                              placeholder="<?php esc_html_e('Resource Title',OERCURR_CURRICULUM_SLUG); ?>"
                                                               value="<?php echo isset($primary_resources['title'][$resourceKey]) ? esc_attr($primary_resources['title'][$resourceKey]) : "";?>">
                                                     </div>
 
@@ -750,11 +750,11 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label><?php echo esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
+                                                    <label><?php esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
                                                       <input type="text"
                                                           class="form-control"
                                                           name="oer_curriculum_primary_resources[title][]"
-                                                          placeholder="<?php echo esc_html_e('Resource Title',OERCURR_CURRICULUM_SLUG); ?>"
+                                                          placeholder="<?php esc_html_e('Resource Title',OERCURR_CURRICULUM_SLUG); ?>"
                                                           value="<?php echo isset($primary_resources['title'][$resourceKey]) ? esc_attr($primary_resources['title'][$resourceKey]) : "";?>">
                                                 </div>
                                                 <div class="form-group">
@@ -1558,7 +1558,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                             </div>
                             <div class="card-body">
                                  <div class="form-group">
-                                    <label><?php echo esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
+                                    <label><?php esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
                                     <input type="text" name="<?php echo esc_attr($elementKey); ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" value="<?php echo esc_attr($oer_curriculum_custom_editor['title']); ?>" />
                                 </div>
                                 <div class="form-group">
@@ -1840,27 +1840,27 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                 <div class="row oercurr-authors-element-row">
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="oer_curriculum_authors[name][]" placeholder="Name">
+                                                            <input type="text" class="form-control" name="oer_curriculum_authors[name][]" placeholder="<?php _e('Name', OERCURR_CURRICULUM_SLUG) ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="oer_curriculum_authors[role][]" placeholder="Role">
+                                                            <input type="text" class="form-control" name="oer_curriculum_authors[role][]" placeholder="<?php _e('Role', OERCURR_CURRICULUM_SLUG) ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="oer_curriculum_authors[author_url][]" placeholder="Author URL">
+                                                            <input type="text" class="form-control" name="oer_curriculum_authors[author_url][]" placeholder="<?php _e('Author URL', OERCURR_CURRICULUM_SLUG) ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="oer_curriculum_authors[institution][]" placeholder="Institution">
+                                                            <input type="text" class="form-control" name="oer_curriculum_authors[institution][]" placeholder="<?php _e('Institution', OERCURR_CURRICULUM_SLUG) ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="oer_curriculum_authors[institution_url][]" placeholder="Institution URL">
+                                                            <input type="text" class="form-control" name="oer_curriculum_authors[institution_url][]" placeholder="<?php _e('Institution URL', OERCURR_CURRICULUM_SLUG) ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
@@ -1924,14 +1924,14 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                 <div class="col-md-12">
                                                     <label><?php esc_html_e("Thumbnail Image",OERCURR_CURRICULUM_SLUG) ?></label>
                                                     <div class="oer_primary_resource_thumbnail_holder"></div>
-                                                    <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                                    <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image"><?php esc_html_e("Set Thumbnail",OERCURR_CURRICULUM_SLUG) ?></button>
                                                     <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
                                                 </div></div>
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <div class="oer_curriculum_primary_resources_image_wrappper">
-                                                              <label>Resource</label>
+                                                              <label><?php esc_html_e('Resource', OERCURR_CURRICULUM_SLUG) ?></label>
                                                               <?php
                                                               $posts = get_posts([
                                                                   'post_type' => 'resource',
@@ -1948,7 +1948,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                 <div class="oer_curriculum_primary_resources_image_display">
                                                                   <div class="oer_curriculum_primary_resources_display"></div>
                                                                   <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="">
-                                                                  <input type="button" class="button oercurr-resource-selector-button" value="Select Resource">
+                                                                  <input type="button" class="button oercurr-resource-selector-button" value="<?php esc_html_e("Select Resource",OERCURR_CURRICULUM_SLUG) ?>">
                                                                 </div>
                                                               </div>
                                                             </div>
@@ -1971,7 +1971,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                       <input type="text"
                                                           class="form-control"
                                                           name="oer_curriculum_primary_resources[title][]"
-                                                          placeholder="<?php echo esc_html_e('Resource Title',OERCURR_CURRICULUM_SLUG); ?>"
+                                                          placeholder="<?php esc_html_e('Resource Title',OERCURR_CURRICULUM_SLUG); ?>"
                                                           value="">
                                                 </div>
                                                 <div class="form-group">
@@ -2571,7 +2571,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 </div>
                                 <div class="card-body">
                                      <div class="form-group">
-                                        <label><?php echo esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
+                                        <label><?php esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
                                         <input type="text" name="<?php echo esc_attr($module); ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" />
                                     </div>
                                     <div class="form-group">
@@ -2609,7 +2609,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 </div>
                                 <div class="card-body">
                                      <div class="form-group">
-                                        <label><?php echo esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
+                                        <label><?php esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
                                         <input type="text" name="<?php echo esc_attr($module); ?>[title]" maxlength="512" class="form-control" placeholder="" />
                                     </div>
                                     <div class="form-group">
@@ -2647,7 +2647,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 </div>
                                 <div class="card-body">
                                      <div class="form-group">
-                                        <label><?php echo esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
+                                        <label><?php esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
                                         <input type="text" name="<?php echo esc_attr($module); ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" />
                                     </div>
                                     <div class="form-group">
@@ -2735,27 +2735,27 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                     <div class="row oercurr-authors-element-row">
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="oer_curriculum_authors[name][]" placeholder="Name">
+                                                <input type="text" class="form-control" name="oer_curriculum_authors[name][]" placeholder="<?php _e('Name', OERCURR_CURRICULUM_SLUG) ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="oer_curriculum_authors[role][]" placeholder="Role">
+                                                <input type="text" class="form-control" name="oer_curriculum_authors[role][]" placeholder="<?php _e('Role', OERCURR_CURRICULUM_SLUG) ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="oer_curriculum_authors[author_url][]" placeholder="Author URL">
+                                                <input type="text" class="form-control" name="oer_curriculum_authors[author_url][]" placeholder="<?php _e('Author URL', OERCURR_CURRICULUM_SLUG) ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="oer_curriculum_authors[institution][]" placeholder="Institution">
+                                                <input type="text" class="form-control" name="oer_curriculum_authors[institution][]" placeholder="<?php _e('Institution', OERCURR_CURRICULUM_SLUG) ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
-                                                <input type="text" class="form-control" name="oer_curriculum_authors[institution_url][]" placeholder="Institution URL">
+                                                <input type="text" class="form-control" name="oer_curriculum_authors[institution_url][]" placeholder="<?php _e('Institution URL', OERCURR_CURRICULUM_SLUG) ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -2848,11 +2848,11 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label><?php echo esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
+                                        <label><?php esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
                                           <input type="text"
                                               class="form-control"
                                               name="oer_curriculum_primary_resources[title][]"
-                                              placeholder="<?php echo esc_html_e('Resource Title',OERCURR_CURRICULUM_SLUG); ?>"
+                                              placeholder="<?php esc_html_e('Resource Title',OERCURR_CURRICULUM_SLUG); ?>"
                                               value="<?php echo isset($primary_resources['title'][$resourceKey]) ? esc_attr($primary_resources['title'][$resourceKey]) : "";?>">
                                     </div>
                                     <div class="form-group">

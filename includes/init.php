@@ -350,7 +350,9 @@ function oercurr_enqueue_admin_assets() {
             'txtUseMaterials' => esc_html__('Use Materials', OERCURR_CURRICULUM_SLUG),
             'txtSelectMaterial' => esc_html__("Select Material", OERCURR_CURRICULUM_SLUG),
             'txtSelectMaterials' => esc_html__("Select Materials", OERCURR_CURRICULUM_SLUG),
-            'txtAddMaterials' => esc_html__("Use Materials", OERCURR_CURRICULUM_SLUG)
+            'txtAddMaterials' => esc_html__("Use Materials", OERCURR_CURRICULUM_SLUG),
+            'txtSelectAuthorPicture' => esc_html__("Select Author Picture", OERCURR_CURRICULUM_SLUG),
+            'txtUsePicture' => esc_html__("Use Picture", OERCURR_CURRICULUM_SLUG),
           ]
         );
         wp_enqueue_script('oercurr-script');
@@ -722,7 +724,7 @@ function oercurr_add_more_prime_resource_callback() {
                 <div class="col-md-7">
                     <label><?php esc_html_e("Thumbnail Image",OERCURR_CURRICULUM_SLUG) ?></label>
                     <div class="oer_primary_resource_thumbnail_holder"></div>
-                    <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image"><?php echo esc_html_e("Set Thumbnail",OERCURR_CURRICULUM_SLUG) ?></button>
+                    <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image"><?php esc_html_e("Set Thumbnail",OERCURR_CURRICULUM_SLUG) ?></button>
                     <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
                 </div>
             </div>
@@ -738,7 +740,7 @@ function oercurr_add_more_prime_resource_callback() {
                               <div class="oer_curriculum_primary_resources_image_display">
                                 <div class="oer_curriculum_primary_resources_display"><p><?php esc_html_e('You have not selected a resource', OERCURR_CURRICULUM_SLUG) ?></p></div>
                                 <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="">
-                                <input type="button" class="button oercurr-resource-selector-button" value="<?php echo esc_html_e("Select Resource",OERCURR_CURRICULUM_SLUG) ?>">
+                                <input type="button" class="button oercurr-resource-selector-button" value="<?php esc_html_e("Select Resource",OERCURR_CURRICULUM_SLUG) ?>">
                               </div>
                             </div>
                           </div>
@@ -778,7 +780,7 @@ function oercurr_add_more_prime_resource_callback() {
                               <div class="col-md-7">
                                   <label><?php esc_html_e("Thumbnail Image",OERCURR_CURRICULUM_SLUG) ?></label>
                                   <div class="oer_primary_resource_thumbnail_holder"></div>
-                                  <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image"><?php echo esc_html_e("Set Thumbnail",OERCURR_CURRICULUM_SLUG) ?></button>
+                                  <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image"><?php esc_html_e("Set Thumbnail",OERCURR_CURRICULUM_SLUG) ?></button>
                                   <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
                               </div>
                               <div class="col-md-5">
@@ -800,15 +802,15 @@ function oercurr_add_more_prime_resource_callback() {
       ?>
       
                       <div class="form-group">
-                          <label><?php echo esc_html_e("Title",OERCURR_CURRICULUM_SLUG) ?></label>
+                          <label><?php esc_html_e("Title",OERCURR_CURRICULUM_SLUG) ?></label>
                           <input type="text"
                           class="form-control"
                           name="oer_curriculum_primary_resources[title][]"
-                          placeholder="<?php echo esc_html_e("Resource Title",OERCURR_CURRICULUM_SLUG) ?>"
+                          placeholder="<?php esc_html_e("Resource Title",OERCURR_CURRICULUM_SLUG) ?>"
                           value="">
                       </div>
                       <div class="form-group">
-                          <label><?php echo esc_html_e("Description",OERCURR_CURRICULUM_SLUG) ?></label>
+                          <label><?php esc_html_e("Description",OERCURR_CURRICULUM_SLUG) ?></label>
 
                               <?php
                               ob_start(); // Start output buffer
@@ -915,7 +917,7 @@ ob_start(); // Start output buffer
         </div>
         <div class="card-body">
             <div class="form-group">
-                <label><?php echo esc_html_e("Title",OERCURR_CURRICULUM_SLUG) ?></label>
+                <label><?php esc_html_e("Title",OERCURR_CURRICULUM_SLUG) ?></label>
                 <input type="text" name="oer_curriculum_custom_editor_<?php echo esc_attr($id) ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" />
             </div>
             <div class="form-group">
