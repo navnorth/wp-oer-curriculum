@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OER Curriculum\n"
 "POT-Creation-Date: 2021-04-23 19:37+0800\n"
-"PO-Revision-Date: 2021-11-02 21:15+0800\n"
+"PO-Revision-Date: 2021-11-03 18:33+0800\n"
 "Last-Translator: \n"
 "Language-Team: Navigation North\n"
 "Language: es_ES\n"
@@ -397,3 +397,34 @@ msgstr "Buscar página aquí"
 
 msgid "Delete Author"
 msgstr "Eliminar autor"
+
+#: OER CURRICULUM TRANSLATIONS
+msgid "Curriculum Block Settings"
+msgstr "Configuración del bloque del plan de estudios"
+
+msgid "Add Subjects"
+msgstr "Agregar temas"
+
+msgid "Posts Per Page"
+msgstr "Publicaciones por página"
+
+msgid "Sort By"
+msgstr "Ordenar por"
+
+msgid "Date Added"
+msgstr "Fecha Agregada"
+
+msgid "Date Updated"
+msgstr "Fecha actualizada"
+
+msgid "Title a-z"
+msgstr "Título a-z"
+
+msgid "Browse All"
+msgstr "Examinar todo"
+
+msgid "Curriculums"
+msgstr "Plan de estudios"
+
+msgid "Show"
+msgstr "Monstrar"

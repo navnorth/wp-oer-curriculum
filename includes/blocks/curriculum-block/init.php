@@ -31,7 +31,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function oercur_cb_enqueue_script_function(){
     wp_enqueue_script( 'curriculum_block-front-js', plugins_url( '/curriculum-block/front.build.js', dirname( __FILE__ ) ), array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),'1.0.1' , true );
-    wp_localize_script( 'curriculum_block-front-js', 'curriculum_block_ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+    wp_localize_script( 'curriculum_block-front-js', 'curriculum_block_ajax_object', array( 
+       'ajaxurl' => admin_url( 'admin-ajax.php' ),
+       'Posts Per Page' => __('Posts Per Page',OERCURR_CURRICULUM_SLUG),
+   		 'Sort By' => __('Sort By',OERCURR_CURRICULUM_SLUG),
+   		 'Date Added' => __('Date Added',OERCURR_CURRICULUM_SLUG),
+   		 'Date Updated' => __('Date Updated',OERCURR_CURRICULUM_SLUG),
+   		 'Title a-z' => __('Title a-z',OERCURR_CURRICULUM_SLUG),
+   		 'Browse All' => __('Browse All',OERCURR_CURRICULUM_SLUG),
+   		 'Curriculums' => __('Curriculums',OERCURR_CURRICULUM_SLUG),
+   		 'Show' => __('Show',OERCURR_CURRICULUM_SLUG),
+    ) );
 }
 add_action( 'wp_enqueue_scripts', 'oercur_cb_enqueue_script_function' );
 
@@ -53,6 +63,13 @@ function oercurr_cb_block_assets() { // phpcs:ignore
         null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
         true // Enqueue the script in the footer.
     );
+    
+    wp_localize_script('oercurr_cb_block-cgb-js','oercurr_clb_Script',
+      [
+        "txtclbCurriculumBlockSettings" => esc_html__("Curriculum Block Settings", OERCURR_CURRICULUM_SLUG),
+        "txtclbSubjects" => esc_html__("Subjects", OERCURR_CURRICULUM_SLUG),
+      ]
+    );
 
     // Register block editor styles for backend.
     if(get_current_post_type() == 'oer-curriculum' || get_current_post_type() == 'page' || get_current_post_type() == 'post') {
@@ -64,6 +81,23 @@ function oercurr_cb_block_assets() { // phpcs:ignore
       );
     }
     
+    wp_localize_script(
+  		'oercurr_cb_block-cgb-js',
+  		'oercurr_clb_translations', // Array containing dynamic data for a JS Global.
+  		[
+  			'Curriculum Block settings' => __('Curriculum Block Settings',OERCURR_CURRICULUM_SLUG),
+  			'Subjects' => __('Subjects',OERCURR_CURRICULUM_SLUG),
+  			'Add Subjects' => __('Add Subjects',OERCURR_CURRICULUM_SLUG),
+  			'Posts Per Page' => __('Posts Per Page',OERCURR_CURRICULUM_SLUG),
+  			'Sort By' => __('Sort By',OERCURR_CURRICULUM_SLUG),
+  			'Date Added' => __('Date Added',OERCURR_CURRICULUM_SLUG),
+  			'Date Updated' => __('Date Updated',OERCURR_CURRICULUM_SLUG),
+  			'Title a-z' => __('Title a-z',OERCURR_CURRICULUM_SLUG),
+  			'Browse All' => __('Browse All',OERCURR_CURRICULUM_SLUG),
+  			'Curriculums' => __('Curriculums',OERCURR_CURRICULUM_SLUG),
+  			'Show' => __('Show',OERCURR_CURRICULUM_SLUG),
+  		]
+  	);
     
     // WP Localized globals. Use dynamic PHP stuff in JavaScript via `oercurr_cb_cgb_Global` object.
     wp_localize_script(

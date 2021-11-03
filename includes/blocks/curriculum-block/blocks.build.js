@@ -153,7 +153,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
     }
 
     let cat_arr = [];
-    cat_arr = attributes.categories; //
+    cat_arr = attributes.categories;
 
     /* SET CURRICULUM ATTRIBUTES */
 
@@ -251,6 +251,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
         }
       }
 
+      console.log("###4");
       setAttributes({
         selectedCategory: selcat.toString()
       });
@@ -323,7 +324,8 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
       setAttributes({
         selsrt: e.target.value
       });
-      localStorage.setItem("sortBy-" + attributes.selsrt, e.target.value);
+      var selsrttxt = jQuery(e.target).find(":selected").text();
+      localStorage.setItem("sortBy-" + attributes.selsrt, selsrttxt);
       let ord = tmp_selsrt == "title" ? "asc" : "desc";
 
       if (selcat != "") {
@@ -349,6 +351,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
       }
     }
 
+    // RETURN MESSAGE WHILE CATEGORIES AND CURRICULUMS ARE NOT YET FULLY LOADED
 
     let SubjectPicker = /*#__PURE__*/ React.createElement(
       "div",
@@ -399,7 +402,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                     {
                       class: "oer_curriculum_inspector_sbjt_search_header"
                     },
-                    "Subjects"
+                    oercurr_clb_translations.Subjects
                   ),
                   /*#__PURE__*/ React.createElement(
                     "div",
@@ -454,7 +457,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
       /*#__PURE__*/ React.createElement(
         PanelBody,
         {
-          title: __("Curriculum Block settings"),
+          title: __(oercurr_clb_translations["Curriculum Block settings"]),
           initialOpen: true
         },
         SubjectPicker,
@@ -469,7 +472,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
               class: "components-base-control__label",
               for: "oer_curriculum_inspector_subject"
             },
-            "Subjects:"
+            __(oercurr_clb_translations["Subjects"]) + ":"
           ),
           /*#__PURE__*/ React.createElement(
             "div",
@@ -481,7 +484,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
               {
                 class: "button oer_curriculum_inspector_sbjt_addSubjects"
               },
-              "Add Subjects"
+              __(oercurr_clb_translations["Add Subjects"])
             )
           )
         ),
@@ -497,7 +500,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
               class: "components-base-control__label",
               for: "oer_curriculum_inspector_postperpage_select"
             },
-            "Posts Per Page:"
+            __(oercurr_clb_translations["PostsPerPage"]) + ":"
           ),
           /*#__PURE__*/ React.createElement(
             "select",
@@ -540,7 +543,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
               class: "components-base-control__label",
               for: "oer_curriculum_inspector_postperpage_select"
             },
-            "Sort By:"
+            __(oercurr_clb_translations["SortBy"]) + ":"
           ),
           /*#__PURE__*/ React.createElement(
             "select",
@@ -557,7 +560,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                     value: key,
                     checked: true
                   },
-                  attributes.sortOption[0][key]
+                  __(oercurr_clb_translations[attributes.sortOption[0][key]])
                 );
               } else {
                 return /*#__PURE__*/ React.createElement(
@@ -565,7 +568,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                   {
                     value: key
                   },
-                  attributes.sortOption[0][key]
+                  __(oercurr_clb_translations[attributes.sortOption[0][key]])
                 );
               }
             })
@@ -587,9 +590,11 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
         /*#__PURE__*/ React.createElement(
           "span",
           null,
-          "Browse All ",
-          attributes.curriculumlength,
-          " Curriculums"
+          __(oercurr_clb_translations["Browse All"]) +
+            " " +
+            attributes.curriculumlength +
+            " " +
+            __(oercurr_clb_translations["Curriculums"])
         )
       ),
       /*#__PURE__*/ React.createElement(
@@ -610,8 +615,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
             /*#__PURE__*/ React.createElement(
               "span",
               null,
-              "Show ",
-              attributes.selper
+              __(oercurr_clb_translations["Show"]) + " " + attributes.selper
             ),
             /*#__PURE__*/ React.createElement(
               "a",
@@ -676,8 +680,13 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
             /*#__PURE__*/ React.createElement(
               "span",
               null,
-              "Sort by: ",
-              attributes.sortOption[0][attributes.selsrt]
+              __(oercurr_clb_translations["Sort By"]) +
+                ": " +
+                __(
+                  oercurr_clb_translations[
+                    attributes.sortOption[0][attributes.selsrt]
+                  ]
+                )
             ),
             /*#__PURE__*/ React.createElement(
               "a",
@@ -708,7 +717,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                       href: "#",
                       ret: key
                     },
-                    attributes.sortOption[0][key]
+                    __(oercurr_clb_translations[attributes.sortOption[0][key]])
                   )
                 );
               } else {
@@ -721,7 +730,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                       href: "#",
                       ret: key
                     },
-                    attributes.sortOption[0][key]
+                    __(oercurr_clb_translations[attributes.sortOption[0][key]])
                   )
                 );
               }
@@ -949,9 +958,11 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
             {
               class: "oercurr-blk-topbar-left-count"
             },
-            "Browse All ",
-            attributes.curriculumlength,
-            " Curriculums"
+            __(oercurr_clb_translations["Browse All"]) +
+              " " +
+              attributes.curriculumlength +
+              " " +
+              __(oercurr_clb_translations["Curriculums"])
           )
         ),
         /*#__PURE__*/ React.createElement(
@@ -972,8 +983,7 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
               /*#__PURE__*/ React.createElement(
                 "span",
                 null,
-                "Show ",
-                attributes.selper
+                __(oercurr_clb_translations["Show"]) + " " + attributes.selper
               ),
               /*#__PURE__*/ React.createElement(
                 "a",
@@ -1038,8 +1048,13 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
               /*#__PURE__*/ React.createElement(
                 "span",
                 null,
-                "Sort by: ",
-                attributes.sortOption[0][attributes.selsrt]
+                __(oercurr_clb_translations["Sort By"]) +
+                  ": " +
+                  __(
+                    oercurr_clb_translations[
+                      attributes.sortOption[0][attributes.selsrt]
+                    ]
+                  )
               ),
               /*#__PURE__*/ React.createElement(
                 "a",
@@ -1071,7 +1086,9 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                         href: "#",
                         ret: key
                       },
-                      attributes.sortOption[0][key]
+                      __(
+                        oercurr_clb_translations[attributes.sortOption[0][key]]
+                      )
                     )
                   );
                 } else {
@@ -1084,7 +1101,9 @@ registerBlockType("oer-curriculum/block-curriculum-block", {
                         href: "#",
                         ret: key
                       },
-                      attributes.sortOption[0][key]
+                      __(
+                        oercurr_clb_translations[attributes.sortOption[0][key]]
+                      )
                     )
                   );
                 }
