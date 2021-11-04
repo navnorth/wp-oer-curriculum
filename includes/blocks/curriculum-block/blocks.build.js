@@ -34,12 +34,12 @@ dispatch("core").addEntities([
 ]);
 registerBlockType("oer-curriculum/block-curriculum-block", {
   // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-  title: __("Curriculum List"),
+  title: __(oercurr_clb_translations['Curriculum List']),
   // Block title.
   icon: "welcome-learn-more",
   // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
   description: __(
-    "Use this block to add a list of curriculum based on subject"
+    oercurr_clb_translations["Use this block to add a list of curriculum based on subject"]
   ),
   category: "oer-block-category",
   // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.

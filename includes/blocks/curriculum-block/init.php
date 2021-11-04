@@ -85,7 +85,9 @@ function oercurr_cb_block_assets() { // phpcs:ignore
   		'oercurr_cb_block-cgb-js',
   		'oercurr_clb_translations', // Array containing dynamic data for a JS Global.
   		[
-  			'Curriculum Block settings' => __('Curriculum Block Settings',OERCURR_CURRICULUM_SLUG),
+  			'Curriculum List' => __('Curriculum List',OERCURR_CURRICULUM_SLUG),
+        'Use this block to add a list of curriculum based on subject' => __('Use this block to add a list of curriculum based on subject',OERCURR_CURRICULUM_SLUG),
+        'Curriculum Block settings' => __('Curriculum Block Settings',OERCURR_CURRICULUM_SLUG),
   			'Subjects' => __('Subjects',OERCURR_CURRICULUM_SLUG),
   			'Add Subjects' => __('Add Subjects',OERCURR_CURRICULUM_SLUG),
   			'Posts Per Page' => __('Posts Per Page',OERCURR_CURRICULUM_SLUG),

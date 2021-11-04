@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OER Curriculum\n"
 "POT-Creation-Date: 2021-04-23 19:37+0800\n"
-"PO-Revision-Date: 2021-11-03 18:33+0800\n"
+"PO-Revision-Date: 2021-11-04 12:57+0800\n"
 "Last-Translator: \n"
 "Language-Team: Navigation North\n"
 "Language: es_ES\n"
@@ -399,6 +399,12 @@ msgid "Delete Author"
 msgstr "Eliminar autor"
 
 #: OER CURRICULUM TRANSLATIONS
+msgid "Curriculum List"
+msgstr "Lista de planes de estudio"
+
+msgid "Use this block to add a list of curriculum based on subject"
+msgstr "Utilice este bloque para agregar una lista de planes de estudios según la materia"
+
 msgid "Curriculum Block Settings"
 msgstr "Configuración del bloque del plan de estudios"
 
@@ -428,3 +434,91 @@ msgstr "Plan de estudios"
 
 msgid "Show"
 msgstr "Monstrar"
+
+#: FEATURED CURRICULUM TRANSLATIONS
+msgid "Featured Curriculum Slider"
+msgstr "Deslizador de planes de estudio destacados"
+
+msgid "Use this block to add OER curriculum and resources in a slider"
+msgstr "Utilice este bloque para agregar el currículo y los recursos de REA en un control deslizante"
+
+msgid "Curriculum Featured Block settings"
+msgstr "Configuración del bloque destacado del plan de estudios"
+
+msgid "Block Title"
+msgstr "Título del bloque"
+
+msgid "Block Width"
+msgstr "Ancho de bloque"
+
+msgid "Note: Block width setting is only used to simulate the frontend width at backend and will not affect the frontend"
+msgstr "Nota: La configuración del ancho del bloque solo se usa para simular el ancho de la interfaz en el backend y no afectará a la interfaz"
+
+msgid "Featured List"
+msgstr "Lista destacada"
+
+msgid "Add Resources"
+msgstr "Agregar recursos"
+
+msgid "Add Curriculum"
+msgstr "Agregar plan de estudios"
+
+msgid "Slider Setting"
+msgstr "Configuración del control deslizante"
+
+msgid "Min. Slides"
+msgstr "Min. Diapositivas"
+
+msgid "Max. Slides"
+msgstr "Max. Diapositivas"
+
+msgid "Move Slides"
+msgstr "Mover diapositivas"
+
+msgid "Slide Width"
+msgstr "Ancho de diapositiva"
+
+msgid "Slide Margin"
+msgstr "Margen de diapositiva"
+
+msgid "Description length"
+msgstr "Longitud de la descripción"
+
+msgid "Image height"
+msgstr "Altura de imagen"
+
+msgid "Resources lists"
+msgstr "Listas de recursos"
+
+msgid "Curriculum lists"
+msgstr "Listas de planes de estudios"
+
+msgid "Filter by search"
+msgstr "Filtrar por búsqueda"
+
+msgid "Filter by subject"
+msgstr "Filtrar por tema"
+
+msgid "All"
+msgstr "Todos"
+
+msgid "The minimum number of slides to be shown. Slides will be sized down if slider becomes smaller than the original size"
+msgstr "El número mínimo de diapositivas que se mostrarán. El tamaño de las diapositivas se reducirá si el control deslizante se vuelve más pequeño que el tamaño original"
+
+msgid "The maximum number of slides to be shown. Slides will be sized up if slider becomes larger than the original size"
+msgstr "El número máximo de diapositivas que se mostrarán. El tamaño de las diapositivas aumentará si el control deslizante se vuelve más grande que el tamaño original"
+
+msgid "The number of slides to move on transition. This value must be greater than or equal to minSlides, and less than or equal to maxSlides. If value is greater than the fully-visible slides, then the count of fully-visible slides will be used"
+msgstr "El número de diapositivas que se moverán en la transición. Este valor debe ser mayor o igual que minSlides y menor o igual que maxSlides. Si el valor es mayor que las diapositivas completamente visibles, se utilizará el recuento de diapositivas completamente visibles"
+
+msgid "Width of each slide"
+msgstr "Ancho de cada diapositiva"
+
+msgid "Space between slides"
+msgstr "Espacio entre diapositivas"
+
+msgid "Length of description to display"
+msgstr "Longitud de la descripción para mostrar"
+
+msgid "Adjust image height"
+msgstr "Ajustar la altura de la imagen"
