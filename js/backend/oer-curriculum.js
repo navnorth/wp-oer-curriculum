@@ -309,42 +309,50 @@ jQuery(document).ready(function ($) {
         // Show/Hide up/down button
         toggleUpDownButton: function() {
             // Hide the up button in the first child
-            $('.reorder-up').removeClass('hide');
-            $('.reorder-down').removeClass('hide');
-            $('.reorder-up').first().addClass('hide');
-            $('.reorder-down').last().addClass('hide');
+            $('.reorder-up').show();
+            $('.reorder-down').show();
+            $('.reorder-up').first().hide();
+            $('.reorder-down').last().hide();
 
             // Toggle Activity button order
-            $('.activity-reorder-up').removeClass('hide');
-            $('.activity-reorder-down').removeClass('hide');
-            $('.activity-reorder-up').first().addClass('hide');
-            $('.activity-reorder-down').last().addClass('hide');
+            $('.activity-reorder-up').show();
+            $('.activity-reorder-down').show();
+            $('.activity-reorder-up').first().hide();
+            $('.activity-reorder-down').last().hide();
 
             // Toggle button from author module
             // Hide up button from first element
             // hide down button from last element
-            $('.author-reorder-up').removeClass('hide');
-            $('.author-reorder-down').removeClass('hide');
-            $('.author-reorder-up').first().addClass('hide');
-            $('.author-reorder-down').last().addClass('hide');
+            $('.author-reorder-up').show();
+            $('.author-reorder-down').show();
+            $('.author-reorder-up').first().hide();
+            $('.author-reorder-down').last().hide();
 
             // Show / Hide button on Materials module
-            $('.material-reorder-up').removeClass('hide');
-            $('.material-reorder-down').removeClass('hide');
-            $('.material-reorder-up').first().addClass('hide');
-            $('.material-reorder-down').last().addClass('hide');
+            $('.material-reorder-up').show();
+            $('.material-reorder-down').show();
+            $('.material-reorder-up').first().hide();
+            $('.material-reorder-down').last().hide();
 
             // Show / Hide button on Resource module
-            $('.resource-reorder-up').removeClass('hide');
-            $('.resource-reorder-down').removeClass('hide');
-            $('.resource-reorder-up').first().addClass('hide');
-            $('.resource-reorder-down').last().addClass('hide');
+            $('.resource-reorder-up').show();
+            $('.resource-reorder-down').show();
+            $('.resource-reorder-up').first().hide();
+            $('.resource-reorder-down').last().hide();
             
             // Show / Hide button on Additional Section module
-            $('.section-reorder-up').removeClass('hide');
-            $('.section-reorder-down').removeClass('hide');
-            $('.section-reorder-up').first().addClass('hide');
-            $('.section-reorder-down').last().addClass('hide');
+            $('#oercurr-additional-sections .section-reorder-up').show();
+            $('#oercurr-additional-sections .section-reorder-down').show();
+            $('#oercurr-additional-sections .section-reorder-up').first().hide();
+            $('#oercurr-additional-sections .section-reorder-down').last().hide();
+            
+            // Show / Hide button on Required Materials Section module
+            $('#oercurr-required-materials .section-reorder-up').show();
+            $('#oercurr-required-materials .section-reorder-down').show();
+            $('#oercurr-required-materials .section-reorder-up').first().hide();
+            $('#oercurr-required-materials .section-reorder-down').last().hide();
+            
+            
         },
 
         // Create dynamic module
@@ -419,6 +427,7 @@ jQuery(document).ready(function ($) {
                         // Disable delete button for author
                         
                         oercurr_RefreshSectionDeleteButtons(jQuery(".oercurr-author-element-wrapper").find('.oercurr-remove-author'));
+                        OerCurriculum.toggleUpDownButton();
                     });
             });
         },
@@ -701,6 +710,7 @@ jQuery(document).ready(function ($) {
                         if($('.oercurr-material-element-wrapper').length === 1) {
                             $('.oercurr-remove-material').attr('disabled', 'disabled');
                         }
+                        OerCurriculum.toggleUpDownButton();
                     });
             });
         },
@@ -867,6 +877,7 @@ jQuery(document).ready(function ($) {
                         if($('.oercurr-primary-source-element-wrapper').length === 1) {
                             $('.oercurr-remove-source').attr('disabled', 'disabled');
                         }
+                        OerCurriculum.toggleUpDownButton();
                     });
             });
         },
@@ -1048,7 +1059,7 @@ jQuery(document).ready(function ($) {
                         
                         oercurr_RefreshSectionDeleteButtons(jQuery("#oercurr-required-materials").find('.oercurr-remove-section'));
                         oercurr_RefreshSectionDeleteButtons(jQuery("#oercurr-additional-sections").find('.oercurr-remove-section'));
-                        
+                        OerCurriculum.toggleUpDownButton();
                         
                     });
             });
