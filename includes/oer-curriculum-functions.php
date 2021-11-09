@@ -777,7 +777,7 @@ if (! function_exists('oercurr_get_field_label')){
 // Get Curriculum Type
 if (! function_exists('oercurr_get_curriculum_type')){
     function oercurr_get_curriculum_type($value = ""){
-        $html = '<option value="">Select Type</option>';
+        $html = '<option value="">'.esc_html__('Select Type', OERCURR_CURRICULUM_SLUG).'</option>';
         $types = array(
             "Brief Activity",
             "Full Lesson",

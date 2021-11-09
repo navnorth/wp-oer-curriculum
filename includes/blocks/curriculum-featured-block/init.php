@@ -56,6 +56,44 @@ function oercurr_cfb_block_assets() { // phpcs:ignore
         null, 
         true
     );
+    
+    wp_localize_script(
+  			'curriculum_featured_block-cgb-block-js',
+  			'oercurr_cfb_translations', // Array containing dynamic data for a JS Global.
+  			array(
+  					'Featured Curriculum Slider' => __('Featured Curriculum Slider',OERCURR_CURRICULUM_SLUG),
+  					'Use this block to add OER curriculum and resources in a slider' => __('Use this block to add OER curriculum and resources in a slider',OERCURR_CURRICULUM_SLUG),
+  					'Curriculum Featured Block settings' => __('Curriculum Featured Block settings',OERCURR_CURRICULUM_SLUG),
+  					'Block Title' => __('Block Title',OERCURR_CURRICULUM_SLUG),
+  					'Block Width' => __('Block Width',OERCURR_CURRICULUM_SLUG),
+  					'Note: Block width setting is only used to simulate the frontend width at backend and will not affect the frontend' => __('Note: Block width setting is only used to simulate the frontend width at backend and will not affect the frontend',OERCURR_CURRICULUM_SLUG),
+  					'Featured List' => __('Featured List',OERCURR_CURRICULUM_SLUG),
+  					'Add Resources' => __('Add Resources',OERCURR_CURRICULUM_SLUG),
+  					'Add Curriculum' => __('Add Curriculum',OERCURR_CURRICULUM_SLUG),
+  					'Slider Setting' => __('Slider Setting',OERCURR_CURRICULUM_SLUG),
+  					'Min. Slides' => __('Min. Slides',OERCURR_CURRICULUM_SLUG),
+  					'MinSlideInfo' => __('The minimum number of slides to be shown. Slides will be sized down if slider becomes smaller than the original size',OERCURR_CURRICULUM_SLUG),
+  					'Max. Slides' => __('Max. Slides',OERCURR_CURRICULUM_SLUG),
+  					'MaxSlideInfo' => __('The maximum number of slides to be shown. Slides will be sized up if slider becomes larger than the original size',OERCURR_CURRICULUM_SLUG),
+  					'Move Slides' => __('Move Slides',OERCURR_CURRICULUM_SLUG),
+  					'MoveSlidesInfo' => __('The number of slides to move on transition. This value must be greater than or equal to minSlides, and less than or equal to maxSlides. If value is greater than the fully-visible slides, then the count of fully-visible slides will be used',OERCURR_CURRICULUM_SLUG),
+  					'Slide Width' => __('Slide Width',OERCURR_CURRICULUM_SLUG),
+  					'SlideWidthInfo' => __('Width of each slide',OERCURR_CURRICULUM_SLUG),
+  					'Slide Margin' => __('Slide Margin',OERCURR_CURRICULUM_SLUG),
+  					'SlideMarginInfo' => __('Space between slides',OERCURR_CURRICULUM_SLUG),
+  					'Description length' => __('Description length',OERCURR_CURRICULUM_SLUG),
+  					'DescriptionLengthInfo' => __('Length of description to display',OERCURR_CURRICULUM_SLUG),
+  					'Image height' => __('Image height',OERCURR_CURRICULUM_SLUG),
+  					'ImageHeightInfo' => __('Adjust image height',OERCURR_CURRICULUM_SLUG),
+  					'Resources' => __('Resources',OERCURR_CURRICULUM_SLUG),
+  					'Curriculum' => __('Curriculum',OERCURR_CURRICULUM_SLUG),
+  					'Resources lists' => __('Resources lists',OERCURR_CURRICULUM_SLUG),
+  					'Curriculum lists' => __('Curriculum lists',OERCURR_CURRICULUM_SLUG),
+  					'Filter by subject' => __('Filter by subject',OERCURR_CURRICULUM_SLUG),
+  					'Filter by search' => __('Filter by search',OERCURR_CURRICULUM_SLUG),
+  					'All' => __('All',OERCURR_CURRICULUM_SLUG),
+  			)
+  	);
 
     // Register block editor styles for backend.
     wp_register_style(

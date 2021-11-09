@@ -42,7 +42,7 @@ define( 'OERCURR_CURRICULUM_PLUGIN_NAME', 'OER Curriculum Plugin' );
 define( 'OERCURR_CURRICULUM_ADMIN_PLUGIN_NAME', 'OER Curriculum Plugin');
 define( 'OERCURR_CURRICULUM_VERSION', '0.5.0' );
 
-define( 'OERCURR_INDI_GRADE_LEVEL', false);  // set to true to use native grade levels
+define( 'OERCURR_INDI_GRADE_LEVEL', true);  // set to true to use native grade levels
 if(OERCURR_INDI_GRADE_LEVEL){
   define('OERCURR_GRADE_LEVEL_TAX_SLUG', 'curriculum-grade-level'); 
 }else{
@@ -133,11 +133,15 @@ function oercurr_plugin_activation_notice(){
     global $post;
     if(OERCURR_INDI_GRADE_LEVEL){
       if(get_option('oer_curriculum_setup_notification')){      
-        $setup_button = '<form class="inline-form" style="display:inline;text-align: right; float: right; width: 20%; margin-top: 3px;" method="post" action="'.admin_url( 'edit.php?post_type=oer-curriculum&page=oer_curriculum_settings&tab=setup').'"><input type="hidden" name="oer_setup" value="1" /><input type="submit" class="button-primary" value="Setup" /></form>';
+        $setup_button = '<form class="inline-form" style="display:inline;text-align: right; float: right; width: 20%; margin-top: 3px;" method="post" action="'.admin_url( 'edit.php?post_type=oer-curriculum&page=oer_curriculum_settings&tab=setup').'"><input type="hidden" name="oer_setup" value="1" /><input type="submit" class="button-primary" value="'.esc_html__('Setup', OERCURR_CURRICULUM_SLUG).'" /></form>';
     	  ?>
     		<div id="oercurr-dismissible-notice" class="updated notice is-dismissible" style="padding-top:5px;padding-bottom:5px;overflow:hidden;">
-    			<p style="width:75%;float:left;">Thank you for installing the <a href="https://wordpress.org/plugins/oer-curriculum/" target="_blank">OER-CURRICULUM</a> plugin. If you need support, please visit our site or the forums. <?php echo $setup_button; ?></p>
-    		</div>
+    			<?php
+          $oercurr_setup_message_1 = esc_html__('Thank you for installing the', OERCURR_CURRICULUM_SLUG);
+          $oercurr_setup_message_2 = esc_html__('plugin. If you need support, please visit our site or the forums.', OERCURR_CURRICULUM_SLUG);
+          ?>
+          <p style="width:75%;float:left;"><?php echo $oercurr_setup_message_1 ?> <a href="https://wordpress.org/plugins/oer-curriculum/" target="_blank">OER-CURRICULUM</a> <?php echo $oercurr_setup_message_2 ?> <?php echo $setup_button; ?></p>
+        </div>
     	<?php  
       }
     }
@@ -412,7 +416,7 @@ function oercurr_setup_settings(){
 			'default' => false,
       'checked' => false,
 			'name' =>  __('Import Default Grade Levels', OERCURR_CURRICULUM_SLUG),
-			'description' => __('A general listing of K-12 grade levels.', OERCURR_CURRICULUM_SLUG)
+			'description' => __('A general listing of K-12 grade levels', OERCURR_CURRICULUM_SLUG)
 		)
 	);
   

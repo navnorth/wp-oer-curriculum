@@ -61,7 +61,8 @@ jQuery( document ).ready(function() {
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
         var val = jQuery(this).attr('ret');
         var bid = jQuery(this).parents('.oercurr-blk-main').attr('blockid');
-        lpCurSaveToLocalAttribute("sortBy-"+bid, val);
+        var selsrttxt = jQuery(this).text();
+        lpCurSaveToLocalAttribute("sortBy-"+bid, selsrttxt);
         var target = jQuery(this).parent();
         resetSelection(target);
     });
@@ -98,6 +99,9 @@ function updatepostdisplay(instanceparent){
   		'per'      : localStorage.getItem('postsPerPage-'+bid),
   		'srt'      : localStorage.getItem('sortBy-'+bid),
   	};
+    console.log('SEL CAT:'+localStorage.getItem('selectedCategory-'+bid));
+    console.log('SEL PER:'+localStorage.getItem('postsPerPage-'+bid));
+    console.log('SEL SRT:'+localStorage.getItem('sortBy-'+bid));
     jQuery.ajax({
   		type:'POST',
   		url: curriculum_block_ajax_object.ajaxurl,
@@ -107,9 +111,9 @@ function updatepostdisplay(instanceparent){
         var instance = jQuery('[blockid="'+bid+'"]');
           if(typeof cgbGlobal == 'undefined'){ 
             instanceparent.find('#oercurr-blk-content_drop').html(response['data']);
-            instanceparent.find('.oercurr-blk-topbar-display-text span').text('show : '+localStorage.getItem('postsPerPage-'+bid));
-            instanceparent.find('.oercurr-blk-topbar-sort-text span').text('Sort by: '+localStorage.getItem('sortBy-'+bid));
-            instanceparent.find('.oercurr-blk-topbar-left span').text('Browse All '+response['cnt']+' Curriculums');
+            instanceparent.find('.oercurr-blk-topbar-display-text span').text(curriculum_block_ajax_object['Show']+': '+localStorage.getItem('postsPerPage-'+bid));
+            instanceparent.find('.oercurr-blk-topbar-sort-text span').text(curriculum_block_ajax_object['Sort By']+': '+localStorage.getItem('sortBy-'+bid));
+            instanceparent.find('.oercurr-blk-topbar-left span').text(curriculum_block_ajax_object['Browse All']+' '+response['cnt']+' '+curriculum_block_ajax_object['Curriculums']);
           }
       
           setTimeout(function(){
@@ -119,6 +123,7 @@ function updatepostdisplay(instanceparent){
   		},
   		error: function(XMLHttpRequest, textStatus, errorThrown) {
         setTimeout(function(){
+          console.log('close preloader2');
           instanceparent.find('.lp_cur_blk_content_preloader_table').hide(300);
         }, 300);
   		}
@@ -151,6 +156,7 @@ function lpCurSaveToLocalAttribute(key, val, kcode=null, target=null){
       }
     }
   }
+  //console.log(localStorage.getItem(key));
 }
 
 function lpCurTogleOptions(target, kcode = 13){

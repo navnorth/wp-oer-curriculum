@@ -95,7 +95,7 @@ function oercurr_show_setup_settings() {
   		<form method="post" class="oercurr_settings_form" action="options.php"  onsubmit="return processInitialSettings(this)">
   			<?php settings_fields("oercurr_setup_settings"); ?>
   			<?php do_settings_sections("oercurr_setup_settings_section"); ?>
-  			<?php submit_button('Continue', 'primary setup-continue'); ?>
+  			<?php submit_button(__('Continue',OERCURR_CURRICULUM_SLUG), 'primary setup-continue'); ?>
   		</form>
   	</div>
   </div>

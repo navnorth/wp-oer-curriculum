@@ -48,14 +48,14 @@ function oercurr_create_menu_item() {
     	$labels = array(
         'name'              => esc_html__( 'Grade Level',OERCURR_CURRICULUM_SLUG ),
   	    'singular_name'     => esc_html_x( 'Grade Level', 'taxonomy singular name', OERCURR_CURRICULUM_SLUG ),
-  	    'search_items'      => esc_html__( 'Search '.'Grade Levels',OERCURR_CURRICULUM_SLUG ),
-  	    'all_items'         => esc_html__( 'All '.'Grade Levels', OERCURR_CURRICULUM_SLUG ),
-  	    'parent_item'       => esc_html__( 'Parent '.'Grade Level',OERCURR_CURRICULUM_SLUG ),
-  	    'parent_item_colon' => esc_html__( 'Parent '.'Grade Level'.':',OERCURR_CURRICULUM_SLUG ),
-  	    'edit_item'         => esc_html__( 'Edit '.'Grade Level', OERCURR_CURRICULUM_SLUG ),
-  	    'update_item'       => esc_html__( 'Update '.'Grade Level', OERCURR_CURRICULUM_SLUG ),
-  	    'add_new_item'      => esc_html__( 'Add New '.'Grade Level',OERCURR_CURRICULUM_SLUG),
-  	    'new_item_name'     => esc_html__( 'New Genre '.'Grade Level',OERCURR_CURRICULUM_SLUG),
+  	    'search_items'      => esc_html__( 'Search Grade Levels',OERCURR_CURRICULUM_SLUG ),
+  	    'all_items'         => esc_html__( 'All Grade Levels', OERCURR_CURRICULUM_SLUG ),
+  	    'parent_item'       => esc_html__( 'Parent Grade Level',OERCURR_CURRICULUM_SLUG ),
+  	    'parent_item_colon' => esc_html__( 'Parent Grade Level'.':',OERCURR_CURRICULUM_SLUG ),
+  	    'edit_item'         => esc_html__( 'Edit Grade Level', OERCURR_CURRICULUM_SLUG ),
+  	    'update_item'       => esc_html__( 'Update Grade Level', OERCURR_CURRICULUM_SLUG ),
+  	    'add_new_item'      => esc_html__( 'Add New Grade Level',OERCURR_CURRICULUM_SLUG),
+  	    'new_item_name'     => esc_html__( 'New Grade Level',OERCURR_CURRICULUM_SLUG),
   	    'menu_name'         => esc_html__( 'Grade Levels',OERCURR_CURRICULUM_SLUG ),
       );
       
@@ -162,7 +162,7 @@ function oercurr_custom_meta_boxes() {
     $suggested_time_enabled = (get_option('oer_curriculum_suggested_instructional_time_curmetset_enable')=='checked')?true:false;
     if (($suggested_time_set && $suggested_time_enabled) || !$suggested_time_set) {
         $label = get_option('oer_curriculum_suggested_instructional_time_curmetset_label');
-        add_meta_box( 'oer_curriculum_meta_suggested_time', __($label.OERCURR_CURRICULUM_SLUG), 'oercurr_suggested_time_callback', 'oer-curriculum', 'side', 'high' );
+        add_meta_box( 'oer_curriculum_meta_suggested_time', __($label,OERCURR_CURRICULUM_SLUG), 'oercurr_suggested_time_callback', 'oer-curriculum', 'side', 'high' );
     }
     add_meta_box('oer_curriculum_meta_boxid', __('Lesson Meta Fields',OERCURR_CURRICULUM_SLUG), 'oercurr_meta_fields_callback', 'oer-curriculum', 'advanced');
 
@@ -214,7 +214,7 @@ function oercurr_age_levels_callback(){
 
     echo '<div class="form-group oer_curriculum_age_levels">';
     echo '<div class="input-group full-width">';
-    echo '<input type="text" class="form-control" name="oer_curriculum_age_levels" placeholder="Age Levels" value="'. esc_attr($oer_curriculum_age_levels) .'">';
+    echo '<input type="text" class="form-control" name="oer_curriculum_age_levels" placeholder="'.esc_html__('Age Levels', OERCURR_CURRICULUM_SLUG).'" value="'. esc_attr($oer_curriculum_age_levels) .'">';
     echo '</div>';
     echo '</div>';
 }
@@ -228,7 +228,7 @@ function oercurr_suggested_time_callback(){
 
     echo '<div class="form-group oer_curriculum_age_levels">';
     echo '<div class="input-group full-width">';
-    echo '<input type="text" class="form-control" name="oer_curriculum_suggested_instructional_time" placeholder="Suggested Time" value="'. esc_attr($oer_curriculum_suggested_time) .'">';
+    echo '<input type="text" class="form-control" name="oer_curriculum_suggested_instructional_time" placeholder="'.esc_html__('Suggested Time', OERCURR_CURRICULUM_SLUG).'" value="'. esc_attr($oer_curriculum_suggested_time) .'">';
     echo '</div>';
     echo '</div>';
 }
@@ -293,16 +293,16 @@ function oercurr_download_copy_callback() {
     $oer_curriculum_download_copy_document = (isset($post_meta_data['oer_curriculum_download_copy_document'][0]) ? $post_meta_data['oer_curriculum_download_copy_document'][0] : '');
     ?><div class="form-group"><?php
     ?><div class="input-group full-width"><?php
-    ?><input type="hidden" class="form-control" name="oer_curriculum_download_copy_document" placeholder="Select Document" value="<?php echo esc_url($oer_curriculum_download_copy_document) ?>"><?php
+    ?><input type="hidden" class="form-control" name="oer_curriculum_download_copy_document" placeholder="<?php echo esc_html__('Select Document', OERCURR_CURRICULUM_SLUG) ?>" value="<?php echo esc_url($oer_curriculum_download_copy_document) ?>"><?php
     if (!empty($oer_curriculum_download_copy_document)){
       ?>
         <div class="oercurr-selected-section"><a href="<?php echo esc_url($oer_curriculum_download_copy_document) ?>" target="_blank"><?php echo esc_url($oer_curriculum_download_copy_document) ?></a> <span class="oercurr-remove-download-copy" title="Remove copy"><i class="fas fa-trash-alt"></i></span></div>
-        <span class="oercurr-select-label oercurr-hidden">Select Document</span> <div class="input-group-addon oercurr-download-copy-icon oercurr-hidden" title="Select Material"><i class="fa fa-upload"></i></div>
+        <span class="oercurr-select-label oercurr-hidden"><?php echo esc_html__('Select Document', OERCURR_CURRICULUM_SLUG) ?></span> <div class="input-group-addon oercurr-download-copy-icon oercurr-hidden" title="Select Material"><i class="fa fa-upload"></i></div>
       <?php
     } else {
       ?>
         <div class="oercurr-selected-section oercurr-hidden"><a href="" target="_blank"></a> <span class="oercurr-remove-download-copy"><i class="fas fa-trash-alt"></i></span></div>
-        <span class="oercurr-select-label">Select Document</span> <div class="input-group-addon oercurr-download-copy-icon" title="Select Material"><i class="fa fa-upload"></i></div>
+        <span class="oercurr-select-label"><?php echo esc_html__('Select Document', OERCURR_CURRICULUM_SLUG) ?></span> <div class="input-group-addon oercurr-download-copy-icon" title="Select Material"><i class="fa fa-upload"></i></div>
       <?php
     }
     ?></div></div><?php
@@ -343,7 +343,16 @@ function oercurr_enqueue_admin_assets() {
         wp_localize_script('oercurr-script','lpScript',
           [
             "image_placeholder_url" => OERCURR_CURRICULUM_URL.'images/oer-curriculum-person-placeholder.png',
-            'pluginDirUrl' => OERCURR_CURRICULUM_URL
+            'pluginDirUrl' => OERCURR_CURRICULUM_URL,
+            'txtSetThumbnail' => esc_html__('Set Thumbnail', OERCURR_CURRICULUM_SLUG),
+            'txtChangeThumbnail' => esc_html__('Change Thumbnail', OERCURR_CURRICULUM_SLUG),
+            'txtUseMaterial' => esc_html__('Use Material', OERCURR_CURRICULUM_SLUG),
+            'txtUseMaterials' => esc_html__('Use Materials', OERCURR_CURRICULUM_SLUG),
+            'txtSelectMaterial' => esc_html__("Select Material", OERCURR_CURRICULUM_SLUG),
+            'txtSelectMaterials' => esc_html__("Select Materials", OERCURR_CURRICULUM_SLUG),
+            'txtAddMaterials' => esc_html__("Use Materials", OERCURR_CURRICULUM_SLUG),
+            'txtSelectAuthorPicture' => esc_html__("Select Author Picture", OERCURR_CURRICULUM_SLUG),
+            'txtUsePicture' => esc_html__("Use Picture", OERCURR_CURRICULUM_SLUG),
           ]
         );
         wp_enqueue_script('oercurr-script');
@@ -700,7 +709,7 @@ function oercurr_add_more_prime_resource_callback() {
       <div class="card col card-default oercurr-primary-resource-element-wrapper" id="oercurr-primary-resource-element-wrapper-<?php echo esc_attr($totalElements) ?>">
           <div class="card-header">
               <h3 class="card-title oercurr-module-title">
-                  Resource
+                  <?php esc_html_e('Resource',OERCURR_CURRICULUM_SLUG); ?>
                   <span class="oercurr-sortable-handle">
                       <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
                       <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
@@ -723,15 +732,15 @@ function oercurr_add_more_prime_resource_callback() {
                   <div class="col-md-6">
                       <div class="form-group">
                           <div class="oer_curriculum_primary_resources_image_wrappper">
-                            <label>Resource</label>
+                            <label><?php esc_html_e('Resource', OERCURR_CURRICULUM_SLUG) ?></label>
                             <div class="oer_curriculum_primary_resources_image">
                               <div class="oer_curriculum_primary_resources_image_preloader" style="display:none;">
                                 <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                               </div>
                               <div class="oer_curriculum_primary_resources_image_display">
-                                <div class="oer_curriculum_primary_resources_display"><p>You have not selected a resource</p></div>
+                                <div class="oer_curriculum_primary_resources_display"><p><?php esc_html_e('You have not selected a resource', OERCURR_CURRICULUM_SLUG) ?></p></div>
                                 <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="">
-                                <input type="button" class="button oercurr-resource-selector-button" value="Select Resource">
+                                <input type="button" class="button oercurr-resource-selector-button" value="<?php esc_html_e("Select Resource",OERCURR_CURRICULUM_SLUG) ?>">
                               </div>
                             </div>
                           </div>
@@ -755,7 +764,7 @@ function oercurr_add_more_prime_resource_callback() {
               <div class="card col card-default oercurr-primary-resource-element-wrapper" id="oercurr-primary-resource-element-wrapper-<?php echo esc_attr($totalElements) ?>">
                   <div class="card-header">
                       <h3 class="card-title oercurr-module-title">
-                          Texbox
+                          <?php esc_html_e('Texbox',OERCURR_CURRICULUM_SLUG); ?>
                           <span class="oercurr-sortable-handle">
                               <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
                               <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
@@ -793,15 +802,15 @@ function oercurr_add_more_prime_resource_callback() {
       ?>
       
                       <div class="form-group">
-                          <label>Title</label>
+                          <label><?php esc_html_e("Title",OERCURR_CURRICULUM_SLUG) ?></label>
                           <input type="text"
                           class="form-control"
                           name="oer_curriculum_primary_resources[title][]"
-                          placeholder="Resource Title"
+                          placeholder="<?php esc_html_e("Resource Title",OERCURR_CURRICULUM_SLUG) ?>"
                           value="">
                       </div>
                       <div class="form-group">
-                          <label>Description</label>
+                          <label><?php esc_html_e("Description",OERCURR_CURRICULUM_SLUG) ?></label>
 
                               <?php
                               ob_start(); // Start output buffer
@@ -908,7 +917,7 @@ ob_start(); // Start output buffer
         </div>
         <div class="card-body">
             <div class="form-group">
-                <label>Title</label>
+                <label><?php esc_html_e("Title",OERCURR_CURRICULUM_SLUG) ?></label>
                 <input type="text" name="oer_curriculum_custom_editor_<?php echo esc_attr($id) ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" />
             </div>
             <div class="form-group">
@@ -1179,7 +1188,7 @@ function oercurr_add_text_feature_callback() {
        </div>
        <div class="card-body">
            <div class="form-group">
-               <input type="text" class="form-control" name="<?php echo esc_attr($label_id) ?>" id="<?php echo esc_attr($label_id) ?>" placeholder="Text Title">
+               <input type="text" class="form-control" name="<?php echo esc_attr($label_id) ?>" id="<?php echo esc_attr($label_id) ?>" placeholder="<?php echo esc_html__('Text Title', OERCURR_CURRICULUM_SLUG) ?>">
            </div>
            <div class="form-group">
                <div class="text-editor-group">

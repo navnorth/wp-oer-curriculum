@@ -8,21 +8,23 @@ const globalSettingMargin = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
 const globalSettingAlign = ["middle", "left", "right"];
 registerBlockType("oer-curriculum/block-curriculum-featured-block", {
   // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-  title: __("Featured Curriculum Slider"),
+  title: __(oercurr_cfb_translations["Featured Curriculum Slider"]),
   // Block title.
   icon: "welcome-learn-more",
   // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
   description: __(
-    "Use this block to add OER curriculum and resources in a slider."
+    oercurr_cfb_translations[
+      "Use this block to add OER curriculum and resources in a slider"
+    ]
   ),
   category: "oer-block-category",
   // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
   keywords: [
-    __( 'featured curriculum slider' ),
-		__( 'featured' ),
-		__( 'curriculum' ),
-		__( 'slider' ),
-	],
+    __("featured curriculum slider"),
+    __("featured"),
+    __("curriculum"),
+    __("slider")
+  ],
   attributes: {
     blockwidth: {
       type: "intiger",
@@ -135,18 +137,15 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
         blkidx++;
         featblockcount++;
       }
-    });
-    
-    // RETURN MESSAGE WHILE CATEGORIES AND CURRICULUMS ARE NOT YET FULLY LOADED
+    }); // RETURN MESSAGE WHILE CATEGORIES AND CURRICULUMS ARE NOT YET FULLY LOADED
+
     /*
-    if (!attributes.blockid) {
-      return React.createElement("img", {
-        src: cfbprvhtm,
-        width: "100%"
-      });
-    } //convert comma delimitted to array
+    if(!attributes.blockid){
+      return <img src={cfbprvhtm} width="100%"/>;
+    }
     */
-    
+    //convert comma delimitted to array
+
     let highlighted = [];
 
     if (typeof attributes.selectedfeatured !== "undefined") {
@@ -172,7 +171,13 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
       wp.apiFetch({
         url: "/wp-json/curriculum/feat/dataquery"
       }).then((data) => {
-        setAttributes({data: data, resourcesubjects: data[0], curriculumsubjects: data[1], resources: data[2], curriculum: data[3] })  
+        setAttributes({
+          data: data,
+          resourcesubjects: data[0],
+          curriculumsubjects: data[1],
+          resources: data[2],
+          curriculum: data[3]
+        });
       });
     }
 
@@ -235,8 +240,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
           }
         }
       });
-      setAttributes({ featlist: feats, selectedfeatured: str });
-      
+      setAttributes({
+        featlist: feats,
+        selectedfeatured: str
+      });
       oercurr_bx_container_width = jQuery(
         ".curriculum-feat-title_" + attributes.blockid
       ).width();
@@ -290,7 +297,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
           }
         }
       });
-      setAttributes({ featlist: feats,selectedfeatured: str });
+      setAttributes({
+        featlist: feats,
+        selectedfeatured: str
+      });
     }
 
     function removefeatured() {
@@ -328,7 +338,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
           }
         }
       });
-      setAttributes({ featlist: feats,selectedfeatured: str });
+      setAttributes({
+        featlist: feats,
+        selectedfeatured: str
+      });
     }
 
     if (typeof attributes.selectedfeatured != "undefined") {
@@ -465,7 +478,9 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
     function onSearch(elem, index) {
       var searchstring = elem.target.value.toLowerCase();
       setAttributes({
-        resourcesubjectfilter: "", curriculumsubjectfilter: "", searchstring: searchstring
+        resourcesubjectfilter: "",
+        curriculumsubjectfilter: "",
+        searchstring: searchstring
       });
     }
 
@@ -504,7 +519,11 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
     }
 
     function onFilterSearchToggle(elem, index) {
-      setAttributes({resourcesubjectfilter: "", curriculumsubjectfilter: "", searchstring: ""});
+      setAttributes({
+        resourcesubjectfilter: "",
+        curriculumsubjectfilter: "",
+        searchstring: ""
+      });
 
       if (attributes.filtertype == "search") {
         setAttributes({
@@ -591,7 +610,9 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
         /*#__PURE__*/ React.createElement(
           PanelBody,
           {
-            title: __("Curriculum Featured Block settings"),
+            title: __(
+              oercurr_cfb_translations["Curriculum Featured Block settings"]
+            ),
             initialOpen: true
           },
           /*#__PURE__*/ React.createElement(
@@ -605,7 +626,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                 class: "components-base-control__label",
                 for: "oercurr_cfb_inspector_subject"
               },
-              "Block Title:"
+              oercurr_cfb_translations["Block Title"] + ":"
             ),
             /*#__PURE__*/ React.createElement("input", {
               type: "text",
@@ -626,7 +647,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                 class: "components-base-control__label",
                 for: "oercurr_cfb_inspector_subject"
               },
-              "Block Width"
+              oercurr_cfb_translations["Block Width"] + ":"
             ),
             /*#__PURE__*/ React.createElement("input", {
               type: "number",
@@ -644,7 +665,9 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
               /*#__PURE__*/ React.createElement(
                 "em",
                 null,
-                "Note: Block width setting is only used to simulate the frontend width at backend and will not affect the frontend."
+                oercurr_cfb_translations[
+                  "Note: Block width setting is only used to simulate the frontend width at backend and will not affect the frontend"
+                ] + "."
               )
             )
           ),
@@ -697,7 +720,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                           {
                             class: "oercurr_cfb_inspector_feat_search_header"
                           },
-                          "Resources"
+                          oercurr_cfb_translations["Resources"]
                         ),
                         looper.map((tmp, index) => {
                           if (attributes.filtertype == "subject") {
@@ -705,14 +728,16 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                               type: "button",
                               onClick: onFilterSearchToggle,
                               class: "button",
-                              value: "Filter by subject"
+                              value:
+                                oercurr_cfb_translations["Filter by subject"]
                             });
                           } else {
                             return /*#__PURE__*/ React.createElement("input", {
                               type: "button",
                               onClick: onFilterSearchToggle,
                               class: "button",
-                              value: "Filter by search"
+                              value:
+                                oercurr_cfb_translations["Filter by search"]
                             });
                           }
                         }),
@@ -739,7 +764,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                                 {
                                   value: ""
                                 },
-                                "All"
+                                oercurr_cfb_translations["All"]
                               ),
                               res_subj_arr.map((subject, index) => {
                                 if (
@@ -1133,7 +1158,8 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                             "button oercurr_cfb_inspector_feat_quickswitchbutton",
                           onClick: onModalQuickButton,
                           typ: "res",
-                          value: "Curriculum lists >"
+                          value:
+                            oercurr_cfb_translations["Curriculum lists"] + " >"
                         })
                       )
                     )
@@ -1191,7 +1217,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                           {
                             class: "oercurr_cfb_inspector_feat_search_header"
                           },
-                          "Curriculum"
+                          oercurr_cfb_translations["Curriculum"]
                         ),
                         looper.map((tmp, index) => {
                           if (attributes.filtertype == "subject") {
@@ -1199,14 +1225,16 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                               type: "button",
                               onClick: onFilterSearchToggle,
                               class: "button",
-                              value: "Filter by subject"
+                              value:
+                                oercurr_cfb_translations["Filter by subject"]
                             });
                           } else {
                             return /*#__PURE__*/ React.createElement("input", {
                               type: "button",
                               onClick: onFilterSearchToggle,
                               class: "button",
-                              value: "Filter by search"
+                              value:
+                                oercurr_cfb_translations["Filter by search"]
                             });
                           }
                         }),
@@ -1624,7 +1652,8 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                             "button oercurr_cfb_inspector_feat_quickswitchbutton",
                           onClick: onModalQuickButton,
                           typ: "cur",
-                          value: "Resources lists >"
+                          value:
+                            oercurr_cfb_translations["Resources lists"] + " >"
                         })
                       )
                     )
@@ -1644,7 +1673,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                 class: "components-base-control__label",
                 for: "oercurr_cfb_inspector_subject"
               },
-              "Featured List:"
+              oercurr_cfb_translations["Featured List"] + ":"
             ),
             /*#__PURE__*/ React.createElement(
               "div",
@@ -1656,14 +1685,14 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                 {
                   class: "button oercurr_cfb_inspector_feat_addResources"
                 },
-                "Add Resources"
+                oercurr_cfb_translations["Add Resources"]
               ),
               /*#__PURE__*/ React.createElement(
                 "div",
                 {
                   class: "button oercurr_cfb_inspector_feat_addCurriculum"
                 },
-                "Add Curriculum"
+                oercurr_cfb_translations["Add Curriculum"]
               )
             ),
             /*#__PURE__*/ React.createElement(
@@ -1741,7 +1770,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                 class: "components-base-control__label",
                 for: "oercurr_cfb_inspector_subject"
               },
-              "Slider Setting:"
+              oercurr_cfb_translations["Slider Setting"] + ":"
             ),
             /*#__PURE__*/ React.createElement(
               "table",
@@ -1765,10 +1794,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                       {
                         class: "tooltiptext"
                       },
-                      "The minimum number of slides to be shown. Slides will be sized down if slider becomes smaller than the original size."
+                      oercurr_cfb_translations["MinSlideInfo"] + "."
                     )
                   ),
-                  "Min. Slides:"
+                  oercurr_cfb_translations["Min. Slides"] + ":"
                 ),
                 /*#__PURE__*/ React.createElement(
                   "td",
@@ -1820,10 +1849,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                       {
                         class: "tooltiptext"
                       },
-                      "The maximum number of slides to be shown. Slides will be sized up if slider becomes larger than the original size."
+                      oercurr_cfb_translations["MaxSlideInfo"] + "."
                     )
                   ),
-                  "Max. Slides:"
+                  oercurr_cfb_translations["Max. Slides"] + ":"
                 ),
                 /*#__PURE__*/ React.createElement(
                   "td",
@@ -1875,10 +1904,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                       {
                         class: "tooltiptext"
                       },
-                      "The number of slides to move on transition. This value must be greater than or equal to minSlides, and less than or equal to maxSlides. If value is greater than the fully-visible slides, then the count of fully-visible slides will be used."
+                      oercurr_cfb_translations["MoveSlidesInfo"] + "."
                     )
                   ),
-                  "Move Slides:"
+                  oercurr_cfb_translations["Move Slides"] + ":"
                 ),
                 /*#__PURE__*/ React.createElement(
                   "td",
@@ -1930,10 +1959,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                       {
                         class: "tooltiptext"
                       },
-                      "Width of each slide."
+                      oercurr_cfb_translations["SlideWidthInfo"] + "."
                     )
                   ),
-                  "Slide Width:"
+                  oercurr_cfb_translations["Slide Width"] + ":"
                 ),
                 /*#__PURE__*/ React.createElement(
                   "td",
@@ -1963,10 +1992,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                       {
                         class: "tooltiptext"
                       },
-                      "Space between slides"
+                      oercurr_cfb_translations["SlideMarginInfo"] + "."
                     )
                   ),
-                  "Slide Margin:"
+                  oercurr_cfb_translations["Slide Margin"] + ":"
                 ),
                 /*#__PURE__*/ React.createElement(
                   "td",
@@ -2018,10 +2047,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                       {
                         class: "tooltiptext"
                       },
-                      "Length of description to display."
+                      oercurr_cfb_translations["DescriptionLengthInfo"] + "."
                     )
                   ),
-                  "Description length:"
+                  oercurr_cfb_translations["Description length"] + ":"
                 ),
                 /*#__PURE__*/ React.createElement(
                   "td",
@@ -2051,10 +2080,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                       {
                         class: "tooltiptext"
                       },
-                      "Adjust image height"
+                      oercurr_cfb_translations["ImageHeightInfo"] + "."
                     )
                   ),
-                  "Image height:"
+                  oercurr_cfb_translations["Image height"] + ":"
                 ),
                 /*#__PURE__*/ React.createElement(
                   "td",

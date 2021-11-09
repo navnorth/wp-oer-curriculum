@@ -433,8 +433,8 @@ jQuery(document).ready(function ($) {
                 }
 
                 frame = wp.media({
-                    title: 'Select Author Picture',
-                    button: { text: 'Use Picture' },
+                    title: lpScript.txtSelectAuthorPicture,
+                    button: { text: lpScript.txtUsePicture },
                     library: { type: [ 'image' ] },
                     multiple:false
                 });
@@ -526,8 +526,8 @@ jQuery(document).ready(function ($) {
                     return;
                 }
                 materialFrame = wp.media({
-                    title: 'Select Materials',
-                    button: { text: 'Use Materials' },
+                    title: lpScript.txtSelectMaterials,
+                    button: { text: lpScript.txtUseMaterials },
                     //library: { type: [ 'image' ] },
                     multiple:'add'
                 });
@@ -661,8 +661,8 @@ jQuery(document).ready(function ($) {
                     return;
                 }
                 materialFrame = wp.media({
-                    title: 'Select Material',
-                    button: { text: 'Use Material' },
+                    title: lpScript.txtSelectMaterial,
+                    button: { text: lpScript.txtUseMaterial },
                     multiple: false
                 });
 
@@ -772,9 +772,9 @@ jQuery(document).ready(function ($) {
                     return;
                 }
                 materialFrame = wp.media({
-                    title: 'Select Material',
+                    title: lpScript.txtSelectMaterial,
                     library: { type: [ 'application/msword', 'application/pdf' ] },
-                    button: { text: 'Use Material' },
+                    button: { text: lpScript.txtUseMaterial},
                     multiple: false
                 });
 
@@ -825,7 +825,10 @@ jQuery(document).ready(function ($) {
                             content_css: lpScript['pluginDirUrl']+"/css/backend/oer-curriculum-mce-style.css",
                             mode: 'exact',
                             menubar: false,
-                            toolbar: 'bold italic underline blockquote strikethrough bullist numlist alignleft  aligncenter alignright undo redo link fullscreen'
+                            toolbar: 'bold italic underline blockquote strikethrough bullist numlist alignleft  aligncenter alignright undo redo link fullscreen',
+                            content_langs: [
+                              { title: 'Spanish', code: 'es' }
+                            ]
                         });
                     }
 
@@ -1099,7 +1102,7 @@ jQuery(document).ready(function ($) {
                     
                     input.val(attachment.url);
                     imageholder.append('<img src="' + attachment.url + '" class="resource-thumbnail" width="200"><span class="btn btn-danger btn-sm oercurr-remove-source-featured-image" title="Remove Thumbnail"><i class="fas fa-minus-circle"></i></span>');
-                    btn.text("Change Thumbnail");
+                    btn.text(lpScript.txtChangeThumbnail);
                 });
                 
                 frame.open();
@@ -1120,7 +1123,7 @@ jQuery(document).ready(function ($) {
                 input.val("");
                 imageholder.find("img").remove();
                 btn.remove();
-                metabox.find('button.oer_curriculum_primary_resources_thumbnail_button').text("Set Thumbnail");
+                metabox.find('button.oer_curriculum_primary_resources_thumbnail_button').text(lpScript.txtSetThumbnail);
             });
         },
         
@@ -1230,6 +1233,22 @@ jQuery(window).bind("load", function() {
       if(MetaboxeRenderIntervalCntr > 1800){clearInterval(MetaboxeRenderInterval)};
     }
   }, 100);
+  
+  //custom taxonomy duplicate $message
+  jQuery(document).on('click','.editor-post-taxonomies__hierarchical-terms-submit',function(e){
+    var inputval = jQuery(this).siblings('input.editor-post-taxonomies__hierarchical-terms-input').val();
+    console.log(inputval);
+    if(inputval != ""){
+      jQuery(this).closest('.components-panel__body').find('.editor-post-taxonomies__hierarchical-terms-list .editor-post-taxonomies__hierarchical-terms-choice').each(function(index,obj){
+        if(inputval == jQuery(obj).text()){
+          //console.log(jQuery(obj).text() + ' -> match');
+        }else{
+          //console.log(jQuery(obj).text());
+        }
+      })
+    }
+  })
+  
 });
 
 //Process Initial Setup
