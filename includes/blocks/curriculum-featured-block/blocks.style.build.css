@@ -437,3 +437,8 @@ padding-right: 0px !important;
 
 
 .oercurr-cfb-attrhide {display:none !important;}
+.oercurr_cfb_inspector_feat_addResources, 
+.oercurr_cfb_inspector_feat_addCurriculum {
+  margin:0px 0px 5px 0px !important;
+}
+
