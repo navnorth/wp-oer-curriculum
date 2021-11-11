@@ -2,9 +2,9 @@
 Contributors: navigationnorth, joehobson, johnpaulbalagolan, josepheneldas
 Tags: curriculum, education, learning, teaching, OER, Open Educational Resources
 Requires at least: 4.9
-Tested up to: 5.8
+Tested up to: 5.8.1
 Requires PHP: 7.0
-Stable tag: 0.5.1
+Stable tag: 0.5.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
