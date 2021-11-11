@@ -56,10 +56,17 @@ This is an intermittent issue in Firefox. Installing the Classic Editor fixes th
 4. Subject Areas settings page for managing curriculum subjects
 
 == Changelog ==
+= 0.5.2 =
+* Added text internationalization
+* Added Grade Levels settings and customization
+* Curriculum Blocks refactor and responsive display improvements
+* Curriculum Editor display improvements
+* Updated the Readme Block Names
+* Tested up to WP 5.8.1
 
 = 0.5.1 =
-* Limited the description field to WordPress core blocks only in oer-curriculum post type.
-* Changed namespace so that wp.org will be able to read the block meta data properly.
+* Limited the description field to WordPress core blocks only in oer-curriculum post type
+* Changed namespace so that wp.org can read the block meta data properly
 
 = 0.5.0 =
 * Initial release
