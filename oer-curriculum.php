@@ -3,7 +3,7 @@
  Plugin Name:        OER Curriculum
  Plugin URI:         https://www.wp-oer.com/curriculum
  Description:        Manage and display collections of Open Educational Resources in lesson plans or curriculums with alignment to Common Core State Standards.
- Version:            0.5.1
+ Version:            0.5.2
  Requires at least:  4.4
  Requires PHP:       7.0
  Author:             Navigation North

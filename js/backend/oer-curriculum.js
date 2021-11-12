@@ -830,11 +830,12 @@ jQuery(document).ready(function ($) {
                         quicktags({ id: 'oercurr-resource-teacher-' + total_form_box });
                         quicktags({ id: 'oercurr-resource-student-' + total_form_box });
                         tinyMCE.init({
-                            plugins: "lists link fullscreen",
+                            plugins: "lists link fullscreen imagetools",
                             selector: "textarea#oercurr-resource-student-" + total_form_box,
                             content_css: lpScript['pluginDirUrl']+"/css/backend/oer-curriculum-mce-style.css",
                             mode: 'exact',
                             menubar: false,
+                            relative_urls : false,
                             toolbar: 'bold italic underline blockquote strikethrough bullist numlist alignleft  aligncenter alignright undo redo link fullscreen',
                             content_langs: [
                               { title: 'Spanish', code: 'es' }
@@ -850,10 +851,11 @@ jQuery(document).ready(function ($) {
               $.fn.tinymce_textareas = function(){
                 tinyMCE.init({
                     //plugins: 'print preview fullpage powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable',
-                    plugins: 'lists link fullscreen',
+                    plugins: 'lists link fullscreen imagetools',
                     skin: 'lightgray',
                     mode: 'exact',
                     menubar: false,
+                    relative_urls : false,
                     toolbar: 'bold italic underline blockquote strikethrough numlist bullist alignleft aligncenter alignright undo redo link fullscreen'
                 });
             }
@@ -976,11 +978,12 @@ jQuery(document).ready(function ($) {
                     }
                     quicktags({ id: editor_prefix + id });
                     tinyMCE.init({
-                        plugins: "lists link fullscreen",
+                        plugins: "lists link fullscreen imagetools",
                         selector: "textarea#"+editor_prefix + id,
                         content_css: lpScript['pluginDirUrl']+"/css/backend/oer-curriculum-mce-style.css",
                         mode: 'exact',
                         menubar: false,
+                        relative_urls : false,
                         toolbar: 'bold italic underline blockquote strikethrough bullist numlist alignleft  aligncenter alignright undo redo link fullscreen'
                     });
                     $('#oercurr-required-materials .oercurr-remove-section').removeAttr('disabled');
@@ -1011,11 +1014,12 @@ jQuery(document).ready(function ($) {
                   }
                   quicktags({ id: editor_prefix + id });
                   tinyMCE.init({
-                      plugins: "lists link fullscreen",
+                      plugins: "lists link fullscreen imagetools",
                       selector: "textarea#"+editor_prefix + id,
                       content_css: "/wp-content/plugins/wp-curriculum/css/backend/oer-curriculum-mce-style.css",
                       mode: 'exact',
                       menubar: false,
+                      relative_urls : false,
                       toolbar: 'bold italic underline blockquote strikethrough bullist numlist alignleft  aligncenter alignright undo redo link fullscreen'
                   });
                   $('#oercurr-additional-sections .oercurr-remove-section').removeAttr('disabled');
