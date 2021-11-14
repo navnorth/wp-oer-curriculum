@@ -51,8 +51,8 @@ if(OERCURR_INDI_GRADE_LEVEL){
 include_once(OERCURR_CURRICULUM_PATH.'includes/oer-curriculum-functions.php');
 include_once(OERCURR_CURRICULUM_PATH.'includes/init.php');
 
-require_once(OERCURR_CURRICULUM_PATH.'includes/blocks/curriculum-block/init.php');
-require_once(OERCURR_CURRICULUM_PATH.'includes/blocks/curriculum-featured-block/init.php');
+//require_once(OERCURR_CURRICULUM_PATH.'includes/blocks/curriculum-block/init.php');
+//require_once(OERCURR_CURRICULUM_PATH.'includes/blocks/curriculum-featured-block/init.php');
 
 global $oer_curriculum_default_structure;
 global $oer_convert_info;
@@ -550,4 +550,27 @@ function oercurr_setup_settings_field( $arguments ) {
 	}
 }
 
+/*
+* Add OER Block Category
+*/
+if (!function_exists('wp_oer_block_category')) {
 
+  function wp_oer_block_category( $categories ) {
+    return array_merge(
+  		$categories,[
+  			[
+  				'slug'  => 'oer-block-category',
+  				'title' => __( 'OER Blocks', 'oer-block-category' ),
+  			],
+  		]
+  	);  
+  }
+
+  // Supporting older version of Wordpress - WP_Block_Editor_Context is only introduced in WP 5.8
+  if ( class_exists( 'WP_Block_Editor_Context' ) ) {
+  	add_filter( 'block_categories_all', 'wp_oer_block_category', 10, 2);
+  } else {
+  	add_filter( 'block_categories', 'wp_oer_block_category', 10, 2);
+  }
+
+}
