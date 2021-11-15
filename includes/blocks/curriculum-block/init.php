@@ -31,7 +31,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function oercur_cb_enqueue_script_function(){
     wp_enqueue_script( 'curriculum_block-front-js', plugins_url( '/curriculum-block/front.build.js', dirname( __FILE__ ) ), array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),'1.0.1' , true );
-    wp_localize_script( 'curriculum_block-front-js', 'curriculum_block_ajax_object', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+    wp_localize_script( 'curriculum_block-front-js', 'curriculum_block_ajax_object', array( 
+       'ajaxurl' => admin_url( 'admin-ajax.php' ),
+       'Posts Per Page' => __('Posts Per Page',OERCURR_CURRICULUM_SLUG),
+   		 'Sort By' => __('Sort By',OERCURR_CURRICULUM_SLUG),
+   		 'Date Added' => __('Date Added',OERCURR_CURRICULUM_SLUG),
+   		 'Date Updated' => __('Date Updated',OERCURR_CURRICULUM_SLUG),
+   		 'Title a-z' => __('Title a-z',OERCURR_CURRICULUM_SLUG),
+   		 'Browse All' => __('Browse All',OERCURR_CURRICULUM_SLUG),
+   		 'Curriculums' => __('Curriculums',OERCURR_CURRICULUM_SLUG),
+   		 'Show' => __('Show',OERCURR_CURRICULUM_SLUG),
+    ) );
 }
 add_action( 'wp_enqueue_scripts', 'oercur_cb_enqueue_script_function' );
 
@@ -53,16 +63,43 @@ function oercurr_cb_block_assets() { // phpcs:ignore
         null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
         true // Enqueue the script in the footer.
     );
+    
+    wp_localize_script('oercurr_cb_block-cgb-js','oercurr_clb_Script',
+      [
+        "txtclbCurriculumBlockSettings" => esc_html__("Curriculum Block Settings", OERCURR_CURRICULUM_SLUG),
+        "txtclbSubjects" => esc_html__("Subjects", OERCURR_CURRICULUM_SLUG),
+      ]
+    );
 
     // Register block editor styles for backend.
-    wp_register_style(
-        'curriculum_block-cgb-block-editor-css', // Handle.
-        plugins_url( '/curriculum-block/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
-        array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-        null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
-    );
+    if(get_current_post_type() == 'oer-curriculum' || get_current_post_type() == 'page' || get_current_post_type() == 'post') {
+      wp_register_style(
+          'curriculum_block-cgb-block-editor-css', // Handle.
+          plugins_url( '/curriculum-block/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
+          array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
+          null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
+      );
+    }
     
-    
+    wp_localize_script(
+  		'oercurr_cb_block-cgb-js',
+  		'oercurr_clb_translations', // Array containing dynamic data for a JS Global.
+  		[
+  			'Curriculum List' => __('Curriculum List',OERCURR_CURRICULUM_SLUG),
+        'Use this block to add a list of curriculum based on subject' => __('Use this block to add a list of curriculum based on subject',OERCURR_CURRICULUM_SLUG),
+        'Curriculum Block settings' => __('Curriculum Block Settings',OERCURR_CURRICULUM_SLUG),
+  			'Subjects' => __('Subjects',OERCURR_CURRICULUM_SLUG),
+  			'Add Subjects' => __('Add Subjects',OERCURR_CURRICULUM_SLUG),
+  			'Posts Per Page' => __('Posts Per Page',OERCURR_CURRICULUM_SLUG),
+  			'Sort By' => __('Sort By',OERCURR_CURRICULUM_SLUG),
+  			'Date Added' => __('Date Added',OERCURR_CURRICULUM_SLUG),
+  			'Date Updated' => __('Date Updated',OERCURR_CURRICULUM_SLUG),
+  			'Title a-z' => __('Title a-z',OERCURR_CURRICULUM_SLUG),
+  			'Browse All' => __('Browse All',OERCURR_CURRICULUM_SLUG),
+  			'Curriculums' => __('Curriculums',OERCURR_CURRICULUM_SLUG),
+  			'Show' => __('Show',OERCURR_CURRICULUM_SLUG),
+  		]
+  	);
     
     // WP Localized globals. Use dynamic PHP stuff in JavaScript via `oercurr_cb_cgb_Global` object.
     wp_localize_script(
@@ -111,12 +148,22 @@ function oercurr_cb_block_assets() { // phpcs:ignore
         				'default' => false,
         			),
         		),
-            'render_callback' => 'oercurr_cb_render_posts_block'
+            //'render_callback' => 'oercurr_cb_render_posts_block'
         )
     );
 }
 
-function oercurr_cb_render_posts_block($attributes, $ajx=false){
+function get_current_post_type() {
+  $pstyp = '';
+  if( (isset($_GET['action']) && $_GET['action'] == 'edit')  &&  isset($_GET['post']) ){ //Edit age
+    $pstyp = get_post_type($_GET['post']);
+  }elseif( isset($_GET['post_type']) ){
+    $pstyp = $_GET['post_type'];
+  }
+  return $pstyp;
+}
+
+function oercurr_cb_render_posts_block($attributes){
     
     $bid = $attributes['blockid'];
     $ord = ($attributes['sortBy'] == 'title')? 'ASC': 'DESC';    
@@ -142,82 +189,10 @@ function oercurr_cb_render_posts_block($attributes, $ajx=false){
     $_wrapper = '';
     $_content = get_curriculum_block_content($posts,$attributes);
     
-    ob_start();
-    ?>
-    <div class="oercurr-blk-main" blockid="<?php echo esc_html($bid) ?>">
-        <script>
-                localStorage.setItem("selectedCategory-<?php echo esc_html($bid) ?>", "<?php echo esc_html($attributes['selectedCategory']) ?>");
-                localStorage.setItem("postsPerPage-<?php echo esc_html($bid) ?>", "<?php echo esc_html($attributes['postsPerPage']) ?>");
-                localStorage.setItem("sortBy-<?php echo esc_html($bid) ?>", "<?php echo esc_html($attributes['sortBy']) ?>");
-        </script>
-        <div class="oercurr-blk-topbar">   
-            <div class="oercurr-blk-topbar-left">
-                <span>Browse All <?php echo esc_html($_count) ?> Curriculums</span>
-            </div><div class="oercurr-blk-topbar-right">
-                    <div class="oercurr-blk-topbar-display-box">
-                        <div class="oercurr-blk-topbar-display-text"><span>Show <?php echo esc_html($attributes['postsPerPage']) ?></span><a href="#"><i class="fa fa-th-list" aria-hidden="true"></i></a></div>
-                        <ul class="oercurr-blk-topbar-display-option oercurr-blk-topbar-option" style="display:none;">
-                          <?php
-                              for ($i=5; $i <=30; $i+=5){ 
-                                   if($i == $attributes['postsPerPage']){ ?>
-                                       <li class="selected"><a href="#" ret="<?php echo esc_html($i) ?>"><?php echo esc_html($i) ?></a></li>
-                                   <?php }else{ ?>
-                                       <li><a href="#" ret="<?php echo esc_html($i) ?>"><?php echo esc_html($i) ?></a></li>
-                                   <?php }
-                              }
-                          ?>
-                        </ul>
-                    </div>                
-                    <div class="oercurr-blk-topbar-sort-box">
-                        <div class="oercurr-blk-topbar-sort-text"><span>Sort by: <?php echo esc_html($attributes['sortBy'])?></span><a href="#"><i class="fa fa-sort" aria-hidden="true"></i></a></div>
-                        <ul class="oercurr-blk-topbar-sort-option oercurr-blk-topbar-option" style="display:none;">
-                                    <?php $_sel = ($attributes['sortBy'] == 'date')? 'class="selected"':''; ?>
-                                    <li <?php echo esc_html($_sel) ?>><a href="#" ret="date">Date Added</a></li>
-                                    <?php $_sel = ($attributes['sortBy'] == 'modified')? 'class="selected"':''; ?>
-                                    <li '.esc_html($_sel).'><a href="#" ret="modified">Date Updated</a></li>
-                                    <?php $_sel = ($attributes['sortBy'] == 'title')? 'class="selected"':''; ?>
-                                    <li '.esc_html($_sel).'><a href="#" ret="title">Title a-z</a></li>
-                        </ul>
-                    </div>                   
-            </div>
-        </div>
-    
-        <div id="lp_cur_blk_content_wrapper"  class="oercurr-blk-wrapper">
-            <div id="oercurr-blk-content_drop">
-              <?php
-                if(!count($posts) > 0){
-                    $_wrapper = 'No Curriculum Found.';
-                }else{
-                    echo wp_kses_post($_content);
-                }
-              ?>
-            </div>
-            
-            <?php // Preloader Start  ?>
-            <div class="lp_cur_blk_content_preloader_table" style="display:none;">
-                <div class="lp_cur_blk_content_preloader_cell">
-                    <div class="lds-dual-ring"></div>
-                </div>
-                <div class="lp_cur_blk_content_preloader_overlay"></div>
-            </div>  
-            <?php // Preloader End  ?>
-            
-        </div>
-        
-    </div>
-    
-    <?php
-    
-    $_non_ajx_ret = ob_get_clean();
-    if(!$ajx){
-        $_ret = $_non_ajx_ret;
-    }else{
-        $_arr['cnt'] = esc_html($_count);
-        $_arr['data'] = wp_kses_post($_content);
-        $_ret = json_encode($_arr);
-    }
-    
-    
+    $_arr['cnt'] = esc_html($_count);
+    $_arr['data'] = wp_kses_post($_content);
+    $_ret = json_encode($_arr);
+
     return $_ret;
     
 }
@@ -283,7 +258,7 @@ function oercurr_cb_rebuild_post_block(){
     $_arr['selectedCategory'] = sanitize_text_field($_POST['sel']);
     $_arr['postsPerPage']     = sanitize_text_field($_POST['per']);
     $_arr['sortBy']           = sanitize_text_field($_POST['srt']);   
-    echo oercurr_cb_render_posts_block($_arr, true);
+    echo oercurr_cb_render_posts_block($_arr);
     die();
 }
 add_action( 'wp_ajax_oercurr_cb_rebuild_post_block', 'oercurr_cb_rebuild_post_block' );

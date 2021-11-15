@@ -1,5 +1,6 @@
 let resources_arr = [];
 let feats = [];
+let tmp_feats = [];
 let poschangeinitiated = false;
 let prevelem = "li";
 const globalSettingOptions = [1, 2, 3, 4, 5];
@@ -7,19 +8,22 @@ const globalSettingMargin = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
 const globalSettingAlign = ["middle", "left", "right"];
 registerBlockType("oer-curriculum/block-curriculum-featured-block", {
   // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-  title: __("Curriculum Featured Block"),
+  title: __(oercurr_cfb_translations["Featured Curriculum Slider"]),
   // Block title.
   icon: "welcome-learn-more",
   // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
   description: __(
-    "Use this block to add OER curriculum and resources in a slider."
+    oercurr_cfb_translations[
+      "Use this block to add OER curriculum and resources in a slider"
+    ]
   ),
   category: "oer-block-category",
   // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
   keywords: [
-    __("curriculum-featured-block"),
-    __("CGB Example"),
-    __("create-guten-block")
+    __("featured curriculum slider"),
+    __("featured"),
+    __("curriculum"),
+    __("slider")
   ],
   attributes: {
     blockwidth: {
@@ -48,6 +52,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
     blocktitle: {
       type: "string",
       default: "Featured"
+    },
+    featlist: {
+      type: "array",
+      default: []
     },
     //SEARCH
     searchstring: {
@@ -106,12 +114,12 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
   edit: function (props) {
     const attributes = props.attributes;
     const setAttributes = props.setAttributes;
-    const cfbprvhtm = oercurr_cfb_cgb_Global["preview_url"]; //SET BLOCK INSTANCE IDS
+    const cfbprvhtm = oercurr_cfb_cgb_Global["preview_url"];
+    let oercurr_bx_container_width; //SET BLOCK INSTANCE IDS
 
     let featblockcount = 0;
     let blkidx = 0;
-    const blocks = wp.data.select("core/block-editor").getBlocks(); //console.log('******************');
-
+    const blocks = wp.data.select("core/block-editor").getBlocks();
     blocks.map((val, index) => {
       if (val.name == "oer-curriculum/block-curriculum-featured-block") {
         var uniq = "cfb" + new Date().getTime();
@@ -131,14 +139,12 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
       }
     }); // RETURN MESSAGE WHILE CATEGORIES AND CURRICULUMS ARE NOT YET FULLY LOADED
 
-    if (!attributes.blockid) {
-      return /*#__PURE__*/ React.createElement("img", {
-        src: cfbprvhtm,
-        width: "100%"
-      });
+    /*
+    if(!attributes.blockid){
+      return <img src={cfbprvhtm} width="100%"/>;
     }
-
-    curriculumfeatslider_loadall(featblockcount); //convert comma delimitted to array
+    */
+    //convert comma delimitted to array
 
     let highlighted = [];
 
@@ -166,18 +172,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
         url: "/wp-json/curriculum/feat/dataquery"
       }).then((data) => {
         setAttributes({
-          data: data
-        });
-        setAttributes({
-          resourcesubjects: data[0]
-        });
-        setAttributes({
-          curriculumsubjects: data[1]
-        });
-        setAttributes({
-          resources: data[2]
-        });
-        setAttributes({
+          data: data,
+          resourcesubjects: data[0],
+          curriculumsubjects: data[1],
+          resources: data[2],
           curriculum: data[3]
         });
       });
@@ -192,55 +190,13 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
     let cur_subj_arr = data_arr[1];
     let res_list_arr = data_arr[2];
     let cur_list_arr = data_arr[3];
-    /* SET RESOURCES LIST ATTRIBUTES */
-
-    /*
-    if(!attributes.resources){
-    wp.apiFetch({ url: '/wp-json/curriculum/feat/resourcequery' }).then(resources =>{  setAttributes({resources: resources })  })
-    }
-    if(!attributes.resources){ return 'Loading resources...'; }	
-    let res_list_arr = [];
-    res_list_arr = attributes.resources;
-    */
-
-    /* SET CURRICULUM LIST ATTRIBUTES */
-
-    /*
-      if(!attributes.curriculum){
-    	wp.apiFetch({ url: '/wp-json/curriculum/feat/curriculumquery' }).then(resources =>{  setAttributes({curriculum: resources })  })
-    }
-    if(!attributes.curriculum){ return 'Loading curriculum...'; }
-    let cur_list_arr = [];
-      cur_list_arr = attributes.curriculum;
-      */
-
-    /* SET RESOURCE SUBJECTS LIST ATTRIBUTES */
-
-    /*
-    if(!attributes.resourcesubjects){
-    wp.apiFetch({ url: '/wp-json/curriculum/feat/taxquery?posttype=resource' }).then(taxonimies =>{  setAttributes({resourcesubjects: taxonimies })  })
-    }
-    if(!attributes.resourcesubjects){ return 'Loading Subjects...'; }
-    let res_subj_arr = [];
-    res_subj_arr = attributes.resourcesubjects;
-    */
-
-    /* SET CURRICULUM SUBJECTS LIST ATTRIBUTES */
-
-    /*
-    if(!attributes.curriculumsubjects){
-    wp.apiFetch({ url: '/wp-json/curriculum/feat/taxquery?posttype=oer-curriculum' }).then(taxonimies =>{  setAttributes({curriculumsubjects: taxonimies })  })
-    }
-    if(!attributes.curriculumsubjects){ return 'Loading Subjects...'; }
-    let cur_subj_arr = [];
-    cur_subj_arr = attributes.curriculumsubjects;
-    */
+    oercurr_bx_container_width = jQuery(
+      ".curriculum-feat-title_" + attributes.blockid
+    ).width();
+    curriculumfeatslider_loadall(featblockcount, oercurr_bx_container_width);
 
     function updateHighlight(newValue, index) {
-      if (oercurr_cfb_cgb_Global["bxresetblocked"]) {
-        return;
-      }
-
+      //if(oercurr_cfb_cgb_Global['bxresetblocked']){return;}
       const type = newValue.target.getAttribute("fet");
 
       if (newValue.target.checked) {
@@ -285,20 +241,25 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
         }
       });
       setAttributes({
+        featlist: feats,
         selectedfeatured: str
       });
-      curriculumfeatslider_reset(attributes.blockid, 750, newValue.target);
+      oercurr_bx_container_width = jQuery(
+        ".curriculum-feat-title_" + attributes.blockid
+      ).width();
+      curriculumfeatslider_reset(
+        attributes.blockid,
+        750,
+        newValue.target,
+        oercurr_bx_container_width
+      );
     }
 
     function findMatch(todel) {
       return function (innerArr) {
         return innerArr[0] === todel;
       };
-    } //console.log(attributes.resources);
-    //console.log(attributes.selectedfeatured);
-    //console.log(attributes.curriculum);
-    //const feats = attributes.selectedfeatured.split(',');
-    //console.log(highlighted);
+    }
 
     function updateposition() {
       prevelem = prevelem == "li" ? "div" : "li";
@@ -337,6 +298,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
         }
       });
       setAttributes({
+        featlist: feats,
         selectedfeatured: str
       });
     }
@@ -377,13 +339,14 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
         }
       });
       setAttributes({
+        featlist: feats,
         selectedfeatured: str
       });
-    } //console.log(highlighted);
-    //console.log(typeof attributes.selectedfeatured);
+    }
 
     if (typeof attributes.selectedfeatured != "undefined") {
       feats = [];
+      tmp_feats = [];
       highlighted.map((feat, index) => {
         let obj;
 
@@ -399,10 +362,17 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
 
         if (typeof obj != "undefined") {
           feats.push(Object.values(obj));
+          tmp_feats.push(obj);
         }
       });
     } else {
       feats = [];
+    }
+
+    if (tmp_feats.length > 0 && attributes.featlist === undefined) {
+      setAttributes({
+        featlist: Object.values(tmp_feats)
+      });
     }
 
     function onInspectorLoad() {
@@ -439,13 +409,6 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
         );
       }
     }
-    /*
-    minslides
-    maxslides
-    moveslides
-    slidewidth
-    slidemargin
-    */
 
     function onSettingChange(elem, index) {
       var type = elem.target.getAttribute("typ");
@@ -500,80 +463,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
           });
           break;
       }
-
-      localStorage.setItem(
-        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-minslides",
-        attributes.minslides
-      );
-      localStorage.setItem(
-        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-maxslides",
-        attributes.maxslides
-      );
-      localStorage.setItem(
-        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-moveslides",
-        attributes.moveslides
-      );
-      localStorage.setItem(
-        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidewidth",
-        attributes.slidewidth
-      );
-      localStorage.setItem(
-        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidemargin",
-        attributes.slidemargin
-      );
-      localStorage.setItem(
-        "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidealign",
-        attributes.slidealign
-      );
-      localStorage.setItem(
-        "lpInspectorFeatSliderSetting-" +
-          attributes.blockid +
-          "-slidedesclength",
-        attributes.slidedesclength
-      );
-      localStorage.setItem(
-        "lpInspectorFeatSliderSetting-" +
-          attributes.blockid +
-          "-slideimageheight",
-        attributes.slideimageheight
-      );
-      curriculumfeatslider_reset(attributes.blockid, 750);
     }
-
-    localStorage.setItem(
-      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-minslides",
-      attributes.minslides
-    );
-    localStorage.setItem(
-      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-maxslides",
-      attributes.maxslides
-    );
-    localStorage.setItem(
-      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-moveslides",
-      attributes.moveslides
-    );
-    localStorage.setItem(
-      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidewidth",
-      attributes.slidewidth
-    );
-    localStorage.setItem(
-      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidemargin",
-      attributes.slidemargin
-    );
-    localStorage.setItem(
-      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidealign",
-      attributes.slidealign
-    );
-    localStorage.setItem(
-      "lpInspectorFeatSliderSetting-" + attributes.blockid + "-slidedesclength",
-      attributes.slidedesclength
-    );
-    localStorage.setItem(
-      "lpInspectorFeatSliderSetting-" +
-        attributes.blockid +
-        "-slideimageheight",
-      attributes.slideimageheight
-    );
 
     function onTitleChange(elem, index) {
       var blktitle = elem.target.value;
@@ -588,12 +478,8 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
     function onSearch(elem, index) {
       var searchstring = elem.target.value.toLowerCase();
       setAttributes({
-        resourcesubjectfilter: ""
-      });
-      setAttributes({
-        curriculumsubjectfilter: ""
-      });
-      setAttributes({
+        resourcesubjectfilter: "",
+        curriculumsubjectfilter: "",
         searchstring: searchstring
       });
     }
@@ -605,12 +491,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
       });
 
       if (val !== "") {
-        //console.log('SEARCHSTRING:'+val);
         setAttributes({
           resourcesubjectfilter: val
         });
       } else {
-        //console.log('SEARCHSTRING Blnk:'+val);
         setAttributes({
           resourcesubjectfilter: ""
         });
@@ -624,12 +508,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
       });
 
       if (val !== "") {
-        //console.log('SEARCHSTRING:'+val);
         setAttributes({
           curriculumsubjectfilter: val
         });
       } else {
-        //console.log('SEARCHSTRING Blnk:'+val);
         setAttributes({
           curriculumsubjectfilter: ""
         });
@@ -637,14 +519,9 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
     }
 
     function onFilterSearchToggle(elem, index) {
-      //console.log('FILTER TOGGLE: '+attributes.filtertype)
       setAttributes({
-        resourcesubjectfilter: ""
-      });
-      setAttributes({
-        curriculumsubjectfilter: ""
-      });
-      setAttributes({
+        resourcesubjectfilter: "",
+        curriculumsubjectfilter: "",
         searchstring: ""
       });
 
@@ -689,23 +566,41 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
           .attr("data-block");
         wp.data.dispatch("core/block-editor").selectBlock(curblkid);
       }
-    ); //console.log(attributes.blockid);
-    //console.log(highlighted);
-    //console.log(attributes.selectedfeatured);
-    //console.log(attributes.blockid);
-    //console.log(feats);
-    //console.log(res_subj_arr);
-    //console.log(cur_subj_arr);
-    //console.log(attributes.minslides);
-    //console.log(attributes.maxslides);
-    //console.log(attributes.moveslides);
-    //console.log(attributes.slidewidth);
-    //console.log(attributes.slidemargin);
-    //const highlightDropdownOptions = ['resources','curriculum'];
-    //const dropClass = (attributes.highlight == 'resources')? 'button oercurr_cfb_inspector_feat_addResources': 'button oercurr_cfb_inspector_feat_addCurriculum';
-    //const dropText = (attributes.highlight == 'resources')? 'Resources': 'Curriculum';
-
+    );
     let looper = [1];
+
+    if (jQuery(".curriculum-feat-attr_" + attributes.blockid).text()) {
+      setTimeout(function () {
+        oercurr_bx_container_width = jQuery(
+          ".curriculum-feat-title_" + attributes.blockid
+        ).width();
+        curriculumfeatslider_reset(
+          attributes.blockid,
+          "300",
+          null,
+          oercurr_bx_container_width
+        );
+      }, 100);
+    }
+
+    let tmpattr =
+      '{"minslides":' +
+      attributes.minslides +
+      ',"maxslides":' +
+      attributes.maxslides +
+      ',"moveslides":' +
+      attributes.moveslides +
+      ',"slidewidth":' +
+      attributes.slidewidth +
+      ',"slidemargin":' +
+      attributes.slidemargin +
+      ',"slidealign":"' +
+      attributes.slidealign +
+      '","slidedesclength":' +
+      attributes.slidedesclength +
+      ',"slideimageheight":' +
+      attributes.slideimageheight +
+      "}";
     return /*#__PURE__*/ React.createElement(
       "div",
       null,
@@ -715,7 +610,9 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
         /*#__PURE__*/ React.createElement(
           PanelBody,
           {
-            title: __("Curriculum Featured Block settings"),
+            title: __(
+              oercurr_cfb_translations["Curriculum Featured Block settings"]
+            ),
             initialOpen: true
           },
           /*#__PURE__*/ React.createElement(
@@ -729,7 +626,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                 class: "components-base-control__label",
                 for: "oercurr_cfb_inspector_subject"
               },
-              "Block Title:"
+              oercurr_cfb_translations["Block Title"] + ":"
             ),
             /*#__PURE__*/ React.createElement("input", {
               type: "text",
@@ -750,7 +647,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                 class: "components-base-control__label",
                 for: "oercurr_cfb_inspector_subject"
               },
-              "Block Width"
+              oercurr_cfb_translations["Block Width"] + ":"
             ),
             /*#__PURE__*/ React.createElement("input", {
               type: "number",
@@ -768,7 +665,9 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
               /*#__PURE__*/ React.createElement(
                 "em",
                 null,
-                "Note: Block width setting is only used to simulate the frontend width at backend and will not affect the frontend."
+                oercurr_cfb_translations[
+                  "Note: Block width setting is only used to simulate the frontend width at backend and will not affect the frontend"
+                ] + "."
               )
             )
           ),
@@ -821,7 +720,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                           {
                             class: "oercurr_cfb_inspector_feat_search_header"
                           },
-                          "Resources"
+                          oercurr_cfb_translations["Resources"]
                         ),
                         looper.map((tmp, index) => {
                           if (attributes.filtertype == "subject") {
@@ -829,14 +728,16 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                               type: "button",
                               onClick: onFilterSearchToggle,
                               class: "button",
-                              value: "Filter by subject"
+                              value:
+                                oercurr_cfb_translations["Filter by subject"]
                             });
                           } else {
                             return /*#__PURE__*/ React.createElement("input", {
                               type: "button",
                               onClick: onFilterSearchToggle,
                               class: "button",
-                              value: "Filter by search"
+                              value:
+                                oercurr_cfb_translations["Filter by search"]
                             });
                           }
                         }),
@@ -863,7 +764,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                                 {
                                   value: ""
                                 },
-                                "All"
+                                oercurr_cfb_translations["All"]
                               ),
                               res_subj_arr.map((subject, index) => {
                                 if (
@@ -1257,7 +1158,8 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                             "button oercurr_cfb_inspector_feat_quickswitchbutton",
                           onClick: onModalQuickButton,
                           typ: "res",
-                          value: "Curriculum lists >"
+                          value:
+                            oercurr_cfb_translations["Curriculum lists"] + " >"
                         })
                       )
                     )
@@ -1315,7 +1217,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                           {
                             class: "oercurr_cfb_inspector_feat_search_header"
                           },
-                          "Curriculum"
+                          oercurr_cfb_translations["Curriculum"]
                         ),
                         looper.map((tmp, index) => {
                           if (attributes.filtertype == "subject") {
@@ -1323,14 +1225,16 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                               type: "button",
                               onClick: onFilterSearchToggle,
                               class: "button",
-                              value: "Filter by subject"
+                              value:
+                                oercurr_cfb_translations["Filter by subject"]
                             });
                           } else {
                             return /*#__PURE__*/ React.createElement("input", {
                               type: "button",
                               onClick: onFilterSearchToggle,
                               class: "button",
-                              value: "Filter by search"
+                              value:
+                                oercurr_cfb_translations["Filter by search"]
                             });
                           }
                         }),
@@ -1748,7 +1652,8 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                             "button oercurr_cfb_inspector_feat_quickswitchbutton",
                           onClick: onModalQuickButton,
                           typ: "cur",
-                          value: "Resources lists >"
+                          value:
+                            oercurr_cfb_translations["Resources lists"] + " >"
                         })
                       )
                     )
@@ -1768,7 +1673,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                 class: "components-base-control__label",
                 for: "oercurr_cfb_inspector_subject"
               },
-              "Featured List:"
+              oercurr_cfb_translations["Featured List"] + ":"
             ),
             /*#__PURE__*/ React.createElement(
               "div",
@@ -1780,14 +1685,14 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                 {
                   class: "button oercurr_cfb_inspector_feat_addResources"
                 },
-                "Add Resources"
+                oercurr_cfb_translations["Add Resources"]
               ),
               /*#__PURE__*/ React.createElement(
                 "div",
                 {
                   class: "button oercurr_cfb_inspector_feat_addCurriculum"
                 },
-                "Add Curriculum"
+                oercurr_cfb_translations["Add Curriculum"]
               )
             ),
             /*#__PURE__*/ React.createElement(
@@ -1801,7 +1706,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                   id: "oercurr_cfb_inspector_feat_hlite_featured",
                   class: "oercurr_cfb_inspector_feat_hlite_featured"
                 },
-                feats.map((feat, index) => {
+                attributes.featlist.map((feat, index) => {
                   if (prevelem == "li") {
                     return /*#__PURE__*/ React.createElement(
                       "div",
@@ -1865,7 +1770,7 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                 class: "components-base-control__label",
                 for: "oercurr_cfb_inspector_subject"
               },
-              "Slider Setting:"
+              oercurr_cfb_translations["Slider Setting"] + ":"
             ),
             /*#__PURE__*/ React.createElement(
               "table",
@@ -1889,10 +1794,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                       {
                         class: "tooltiptext"
                       },
-                      "The minimum number of slides to be shown. Slides will be sized down if slider becomes smaller than the original size."
+                      oercurr_cfb_translations["MinSlideInfo"] + "."
                     )
                   ),
-                  "Min. Slides:"
+                  oercurr_cfb_translations["Min. Slides"] + ":"
                 ),
                 /*#__PURE__*/ React.createElement(
                   "td",
@@ -1944,10 +1849,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                       {
                         class: "tooltiptext"
                       },
-                      "The maximum number of slides to be shown. Slides will be sized up if slider becomes larger than the original size."
+                      oercurr_cfb_translations["MaxSlideInfo"] + "."
                     )
                   ),
-                  "Max. Slides:"
+                  oercurr_cfb_translations["Max. Slides"] + ":"
                 ),
                 /*#__PURE__*/ React.createElement(
                   "td",
@@ -1999,10 +1904,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                       {
                         class: "tooltiptext"
                       },
-                      "The number of slides to move on transition. This value must be greater than or equal to minSlides, and less than or equal to maxSlides. If value is greater than the fully-visible slides, then the count of fully-visible slides will be used."
+                      oercurr_cfb_translations["MoveSlidesInfo"] + "."
                     )
                   ),
-                  "Move Slides:"
+                  oercurr_cfb_translations["Move Slides"] + ":"
                 ),
                 /*#__PURE__*/ React.createElement(
                   "td",
@@ -2054,10 +1959,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                       {
                         class: "tooltiptext"
                       },
-                      "Width of each slide."
+                      oercurr_cfb_translations["SlideWidthInfo"] + "."
                     )
                   ),
-                  "Slide Width:"
+                  oercurr_cfb_translations["Slide Width"] + ":"
                 ),
                 /*#__PURE__*/ React.createElement(
                   "td",
@@ -2087,10 +1992,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                       {
                         class: "tooltiptext"
                       },
-                      "Space between slides"
+                      oercurr_cfb_translations["SlideMarginInfo"] + "."
                     )
                   ),
-                  "Slide Margin:"
+                  oercurr_cfb_translations["Slide Margin"] + ":"
                 ),
                 /*#__PURE__*/ React.createElement(
                   "td",
@@ -2142,65 +2047,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                       {
                         class: "tooltiptext"
                       },
-                      "Left, right or middle alignment"
+                      oercurr_cfb_translations["DescriptionLengthInfo"] + "."
                     )
                   ),
-                  "Alignmnet:"
-                ),
-                /*#__PURE__*/ React.createElement(
-                  "td",
-                  null,
-                  /*#__PURE__*/ React.createElement(
-                    "select",
-                    {
-                      id: "oercurr_cfb_inspector_feat_slider_slidealign",
-                      onChange: onSettingChange,
-                      typ: "slidealign",
-                      value: attributes.slidealign
-                    },
-                    globalSettingAlign.map((incr, index) => {
-                      let ret =
-                        incr == attributes.slidemargin
-                          ? /*#__PURE__*/ React.createElement(
-                              "option",
-                              {
-                                selected: true,
-                                value: incr
-                              },
-                              incr
-                            )
-                          : /*#__PURE__*/ React.createElement(
-                              "option",
-                              {
-                                value: incr
-                              },
-                              incr
-                            );
-                      return ret;
-                    })
-                  )
-                )
-              ),
-              /*#__PURE__*/ React.createElement(
-                "tr",
-                null,
-                /*#__PURE__*/ React.createElement(
-                  "td",
-                  null,
-                  /*#__PURE__*/ React.createElement(
-                    "span",
-                    {
-                      class: "dashicons dashicons-info tooltipped"
-                    },
-                    /*#__PURE__*/ React.createElement(
-                      "span",
-                      {
-                        class: "tooltiptext"
-                      },
-                      "Length of description to display."
-                    )
-                  ),
-                  "Description length:"
+                  oercurr_cfb_translations["Description length"] + ":"
                 ),
                 /*#__PURE__*/ React.createElement(
                   "td",
@@ -2230,10 +2080,10 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
                       {
                         class: "tooltiptext"
                       },
-                      "Adjust image height"
+                      oercurr_cfb_translations["ImageHeightInfo"] + "."
                     )
                   ),
-                  "Image height:"
+                  oercurr_cfb_translations["Image height"] + ":"
                 ),
                 /*#__PURE__*/ React.createElement(
                   "td",
@@ -2270,6 +2120,14 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
           "div",
           {
             class:
+              "oercurr-cfb-attrhide curriculum-feat-attr_" + attributes.blockid
+          },
+          encodeURI(tmpattr)
+        ),
+        /*#__PURE__*/ React.createElement(
+          "div",
+          {
+            class:
               "oercurr-cfb-ftrdttl curriculum-feat-title_" + attributes.blockid
           },
           attributes.blocktitle
@@ -2281,14 +2139,14 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
               "featuredwpr_bxslider featuredwpr_bxslider_" + attributes.blockid,
             blk: attributes.blockid
           },
-          feats.map((feat, index) => {
+          attributes.featlist.map((feat, index) => {
             //let ctnt = feat[2].replace(/<[^>]+>/g, '');
             let ctnt = feat[2];
 
             if (ctnt.length > attributes.slidedesclength) {
               ctnt =
                 unescape(ctnt.substr(0, attributes.slidedesclength)) + "...";
-            } //console.log(feat);
+            }
 
             return /*#__PURE__*/ React.createElement(
               "li",
@@ -2358,7 +2216,114 @@ registerBlockType("oer-curriculum/block-curriculum-featured-block", {
    * @returns {Mixed} JSX Frontend HTML.
    */
   save: (props) => {
-    return null;
+    const attributes = props.attributes;
+    const setAttributes = props.setAttributes;
+    let tmpattr =
+      '{"minslides":' +
+      attributes.minslides +
+      ',"maxslides":' +
+      attributes.maxslides +
+      ',"moveslides":' +
+      attributes.moveslides +
+      ',"slidewidth":' +
+      attributes.slidewidth +
+      ',"slidemargin":' +
+      attributes.slidemargin +
+      ',"slidealign":"' +
+      attributes.slidealign +
+      '","slidedesclength":' +
+      attributes.slidedesclength +
+      ',"slideimageheight":' +
+      attributes.slideimageheight +
+      "}";
+    return /*#__PURE__*/ React.createElement(
+      "div",
+      {
+        class: "oercurr_cfb_right_featuredwpr"
+      },
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          class:
+            "oercurr-cfb-attrhide curriculum-feat-attr_" + attributes.blockid
+        },
+        encodeURI(tmpattr)
+      ),
+      /*#__PURE__*/ React.createElement(
+        "div",
+        {
+          class:
+            "oercurr-cfb-ftrdttl curriculum-feat-title_" + attributes.blockid
+        },
+        attributes.blocktitle
+      ),
+      /*#__PURE__*/ React.createElement(
+        "ul",
+        {
+          class:
+            "featuredwpr_bxslider featuredwpr_bxslider_" + attributes.blockid,
+          blk: attributes.blockid
+        },
+        attributes.featlist.map((feat, index) => {
+          let ctnt = feat[2];
+
+          if (ctnt.length > attributes.slidedesclength) {
+            ctnt = unescape(ctnt.substr(0, attributes.slidedesclength)) + "...";
+          }
+
+          return /*#__PURE__*/ React.createElement(
+            "li",
+            {
+              atrr: feat[0]
+            },
+            /*#__PURE__*/ React.createElement(
+              "div",
+              {
+                class: "frtdsnglwpr"
+              },
+              /*#__PURE__*/ React.createElement(
+                "a",
+                {
+                  href: feat[3],
+                  tabindex: "-1"
+                },
+                /*#__PURE__*/ React.createElement(
+                  "div",
+                  {
+                    class: "img"
+                  },
+                  /*#__PURE__*/ React.createElement("img", {
+                    src: feat[4],
+                    alt: feat[1]
+                  })
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "ttl"
+                },
+                /*#__PURE__*/ React.createElement(
+                  "a",
+                  {
+                    href: feat[3],
+                    tabindex: "-1"
+                  },
+                  feat[1]
+                )
+              ),
+              /*#__PURE__*/ React.createElement(
+                "div",
+                {
+                  class: "desc"
+                },
+                ctnt
+              )
+            )
+          );
+        })
+      )
+    );
   },
   example: {}
 });

@@ -53,10 +53,16 @@
       $oer_sensitive = true;
   }
   
+  $oer_curriculum_details_set = (get_option('oer_curriculum_details_curmetset_label'))?true:false;
+  $oer_curriculum_details_enabled = (get_option('oer_curriculum_details_curmetset_enable') == 'checked')?true:false;
   $oer_curriculum_type_set = (get_option('oer_curriculum_type_curmetset_label'))?true:false;
   $oer_curriculum_type_enabled = (get_option('oer_curriculum_type_curmetset_enable') == 'checked')?true:false;
   $type_other_set = (trim(get_option('oer_curriculum_type_other_curmetset_label'),' ') != '')?true:false;
   $type_other_enabled = (get_option('oer_curriculum_type_other_curmetset_enable')=='checked')?true:false;
+  $author_set = (get_option('oer_curriculum_authors_curmetset_label'))?true:false;
+  $author_enabled = (get_option('oer_curriculum_authors_curmetset_enable') == 'checked')?true:false;
+  $oer_curriculum_standardsandobjectives_set = (get_option('oer_curriculum_standardsandobjectives_curmetset_label'))?true:false;
+  $oer_curriculum_standardsandobjectives_enabled = (get_option('oer_curriculum_standardsandobjectives_curmetset_enable') == 'checked')?true:false;
   $primary_resources_set = (trim(get_option('oer_curriculum_primary_resources_curmetset_label'),' ') != '')?true:false;
   $primary_resources_enabled = (get_option('oer_curriculum_primary_resources_curmetset_enable')=='checked')?true:false;
   $iq_set = (trim(get_option('oer_curriculum_iq_curmetset_label'),' ') != '')?true:false;
@@ -65,13 +71,12 @@
   $req_materials_enabled = (get_option('oer_curriculum_required_materials_curmetset_enable')=='checked')?true:false;
   $additional_sections_set = (trim(get_option('oer_curriculum_additional_sections_curmetset_label'),' ') != '')?true:false;
   $additional_sections_enabled = (get_option('oer_curriculum_additional_sections_curmetset_enable')=='checked')?true:false;
+  $grade_sections_set = (trim(get_option('oer_curriculum_grades_curmetset_label'),' ') != '')?true:false;
+  $grade_sections_enabled = (get_option('oer_curriculum_grades_curmetset_enable')=='checked')?true:false;
   $addtl_materials_set = (trim(get_option('oer_curriculum_oer_materials_curmetset_label'),' ') != '')?true:false;
-  $addtl_materials_enabled = (get_option('oer_curriculum_oer_materials_curmetset_enable')=='checked')?true:false;
-  
+  $addtl_materials_enabled = (get_option('oer_curriculum_oer_materials_curmetset_enable')=='checked')?true:false;  
   $related_curriculum_label = (get_option('oer_curriculum_related_curriculum_curmetset_label'))?true:false;
   $related_curriculum_enabled = (get_option('oer_curriculum_related_curriculum_curmetset_enable') == 'checked')?true:false;
-  $author_set = (get_option('oer_curriculum_authors_curmetset_label'))?true:false;
-  $author_enabled = (get_option('oer_curriculum_authors_curmetset_enable') == 'checked')?true:false;
   $standards_set = (get_option('oer_curriculum_standards_curmetset_label'))?true:false;
   $standards_enabled = (get_option('oer_curriculum_standards_curmetset_enable') == 'checked')?true:false;
   $objectives_set = (get_option('oer_curriculum_related_objective_curmetset_label'))?true:false;
@@ -307,23 +312,28 @@
                       <div id="tcHiddenFields" class="tc-hidden-fields collapse">
                           <?php
                           // Grade Level Display
-                          $oer_curriculum_grade = oercurr_grade_level($post->ID);
-                          if (!empty($oer_curriculum_grade)){
-                              ?>
-                              <div class="form-field">
-                                  <span class="oercurr-tc-label">Grade Level:</span> <span class="oercurr-tc-value"><?php echo esc_html($oer_curriculum_grade); ?></span>
-                              </div>
-                              <?php
+                          
+                          if (($grade_sections_set && $grade_sections_enabled) || !$grade_sections_set) {
+                            $grade_section_label = oercurr_get_field_label('oer_curriculum_grades');
+                            $oer_curriculum_grade = oercurr_grade_level($post->ID);
+                            if (!empty($oer_curriculum_grade)){
+                                ?>
+                                <div class="form-field">
+                                    <span class="oercurr-tc-label"><?php echo esc_html($grade_section_label); ?>:</span>
+                                    <span class="oercurr-tc-value"><?php echo esc_html($oer_curriculum_grade); ?></span>
+                                </div>
+                                <?php
+                            }
                           }
-
+                          
                           // Investigative Question
                           if (($iq_set && $iq_enabled) || !$iq_set) {
-                              $iq_label = oercurr_get_field_label('oer_curriculum_iq_curmetset_label');
+                              $iq_label = oercurr_get_field_label('oer_curriculum_iq');
                               $iq_data = (isset($post_meta_data['oer_curriculum_iq'][0]) ? unserialize($post_meta_data['oer_curriculum_iq'][0]) : "");
                               if (!empty($iq_data)){
                               ?>
                               <div class="form-field">
-                                  <div><span class="oercurr-tc-label"><?php echo wp_kses_post($iq_data['question']); ?></span></div>
+                                  <div><span class="oercurr-tc-label"><?php echo esc_html($iq_label); ?>:</span></div>
                                   <div><span class="oercurr-tc-value"><?php echo wp_kses_post($iq_data['excerpt']); ?></span></div>
                               </div>
                               <?php

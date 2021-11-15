@@ -240,6 +240,8 @@ jQuery(document).ready(function() {
       jQuery(this).parent('.oercurr-tc-details-description').append('<div class="oercurr-excerpt-collapsible-pseudo-less">'+ls+'</div>');  
       jQuery(this).parent('.oercurr-tc-details-description').append('<div class="oercurr-excerpt-collapsible-pseudo-more">'+mr+'</div>');  
       jQuery(this).height(jQuery(this).height());
+    }else{
+      jQuery(this).html(content);
     }
   });
   

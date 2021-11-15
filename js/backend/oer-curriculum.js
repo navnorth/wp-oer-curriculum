@@ -309,42 +309,50 @@ jQuery(document).ready(function ($) {
         // Show/Hide up/down button
         toggleUpDownButton: function() {
             // Hide the up button in the first child
-            $('.reorder-up').removeClass('hide');
-            $('.reorder-down').removeClass('hide');
-            $('.reorder-up').first().addClass('hide');
-            $('.reorder-down').last().addClass('hide');
+            $('.reorder-up').show();
+            $('.reorder-down').show();
+            $('.reorder-up').first().hide();
+            $('.reorder-down').last().hide();
 
             // Toggle Activity button order
-            $('.activity-reorder-up').removeClass('hide');
-            $('.activity-reorder-down').removeClass('hide');
-            $('.activity-reorder-up').first().addClass('hide');
-            $('.activity-reorder-down').last().addClass('hide');
+            $('.activity-reorder-up').show();
+            $('.activity-reorder-down').show();
+            $('.activity-reorder-up').first().hide();
+            $('.activity-reorder-down').last().hide();
 
             // Toggle button from author module
             // Hide up button from first element
             // hide down button from last element
-            $('.author-reorder-up').removeClass('hide');
-            $('.author-reorder-down').removeClass('hide');
-            $('.author-reorder-up').first().addClass('hide');
-            $('.author-reorder-down').last().addClass('hide');
+            $('.author-reorder-up').show();
+            $('.author-reorder-down').show();
+            $('.author-reorder-up').first().hide();
+            $('.author-reorder-down').last().hide();
 
             // Show / Hide button on Materials module
-            $('.material-reorder-up').removeClass('hide');
-            $('.material-reorder-down').removeClass('hide');
-            $('.material-reorder-up').first().addClass('hide');
-            $('.material-reorder-down').last().addClass('hide');
+            $('.material-reorder-up').show();
+            $('.material-reorder-down').show();
+            $('.material-reorder-up').first().hide();
+            $('.material-reorder-down').last().hide();
 
             // Show / Hide button on Resource module
-            $('.resource-reorder-up').removeClass('hide');
-            $('.resource-reorder-down').removeClass('hide');
-            $('.resource-reorder-up').first().addClass('hide');
-            $('.resource-reorder-down').last().addClass('hide');
+            $('.resource-reorder-up').show();
+            $('.resource-reorder-down').show();
+            $('.resource-reorder-up').first().hide();
+            $('.resource-reorder-down').last().hide();
             
             // Show / Hide button on Additional Section module
-            $('.section-reorder-up').removeClass('hide');
-            $('.section-reorder-down').removeClass('hide');
-            $('.section-reorder-up').first().addClass('hide');
-            $('.section-reorder-down').last().addClass('hide');
+            $('#oercurr-additional-sections .section-reorder-up').show();
+            $('#oercurr-additional-sections .section-reorder-down').show();
+            $('#oercurr-additional-sections .section-reorder-up').first().hide();
+            $('#oercurr-additional-sections .section-reorder-down').last().hide();
+            
+            // Show / Hide button on Required Materials Section module
+            $('#oercurr-required-materials .section-reorder-up').show();
+            $('#oercurr-required-materials .section-reorder-down').show();
+            $('#oercurr-required-materials .section-reorder-up').first().hide();
+            $('#oercurr-required-materials .section-reorder-down').last().hide();
+            
+            
         },
 
         // Create dynamic module
@@ -380,12 +388,12 @@ jQuery(document).ready(function ($) {
 
         // Dismiss the plugin installation message
         dismissInstallNotice: function () {
-            $(document).on('click', '#oercurr-dismissible', function () {
-                $.post(ajaxurl, {action:'oer_curriculum_dismiss_notice_callback'}).done(function (response) {
-
+            /* $(document).on('click', '#oercurr-dismissible-notice .notice-dismiss', function () {
+                $.post(ajaxurl, {action:'oercurr_dismiss_notice_callback'}).done(function (response) {
                 });
-            });
+            }); */
         },
+        
         // Add more author
         addMoreAuthor: function () {
             $(document).on('click', '#oercurr-add-more-author', function () {
@@ -417,6 +425,7 @@ jQuery(document).ready(function ($) {
                         // Disable delete button for author
                         
                         oercurr_RefreshSectionDeleteButtons(jQuery(".oercurr-author-element-wrapper").find('.oercurr-remove-author'));
+                        OerCurriculum.toggleUpDownButton();
                     });
             });
         },
@@ -433,8 +442,8 @@ jQuery(document).ready(function ($) {
                 }
 
                 frame = wp.media({
-                    title: 'Select Author Picture',
-                    button: { text: 'Use Picture' },
+                    title: lpScript.txtSelectAuthorPicture,
+                    button: { text: lpScript.txtUsePicture },
                     library: { type: [ 'image' ] },
                     multiple:false
                 });
@@ -526,8 +535,8 @@ jQuery(document).ready(function ($) {
                     return;
                 }
                 materialFrame = wp.media({
-                    title: 'Select Materials',
-                    button: { text: 'Use Materials' },
+                    title: lpScript.txtSelectMaterials,
+                    button: { text: lpScript.txtUseMaterials },
                     //library: { type: [ 'image' ] },
                     multiple:'add'
                 });
@@ -661,8 +670,8 @@ jQuery(document).ready(function ($) {
                     return;
                 }
                 materialFrame = wp.media({
-                    title: 'Select Material',
-                    button: { text: 'Use Material' },
+                    title: lpScript.txtSelectMaterial,
+                    button: { text: lpScript.txtUseMaterial },
                     multiple: false
                 });
 
@@ -699,6 +708,7 @@ jQuery(document).ready(function ($) {
                         if($('.oercurr-material-element-wrapper').length === 1) {
                             $('.oercurr-remove-material').attr('disabled', 'disabled');
                         }
+                        OerCurriculum.toggleUpDownButton();
                     });
             });
         },
@@ -772,9 +782,9 @@ jQuery(document).ready(function ($) {
                     return;
                 }
                 materialFrame = wp.media({
-                    title: 'Select Material',
+                    title: lpScript.txtSelectMaterial,
                     library: { type: [ 'application/msword', 'application/pdf' ] },
-                    button: { text: 'Use Material' },
+                    button: { text: lpScript.txtUseMaterial},
                     multiple: false
                 });
 
@@ -818,10 +828,19 @@ jQuery(document).ready(function ($) {
                         tinymce.execCommand( 'mceRemoveEditor', false, 'oercurr-resource-teacher-' + total_form_box );
                         tinymce.execCommand( 'mceAddEditor', false, 'oercurr-resource-teacher-' + total_form_box );
                         quicktags({ id: 'oercurr-resource-teacher-' + total_form_box });
-                        
-                        tinymce.execCommand( 'mceRemoveEditor', false, 'oercurr-resource-student-' + total_form_box );
-                        tinymce.execCommand( 'mceAddEditor', false, 'oercurr-resource-student-' + total_form_box );
                         quicktags({ id: 'oercurr-resource-student-' + total_form_box });
+                        tinyMCE.init({
+                            plugins: "lists link fullscreen imagetools",
+                            selector: "textarea#oercurr-resource-student-" + total_form_box,
+                            content_css: lpScript['pluginDirUrl']+"/css/backend/oer-curriculum-mce-style.css",
+                            mode: 'exact',
+                            menubar: false,
+                            relative_urls : false,
+                            toolbar: 'bold italic underline blockquote strikethrough bullist numlist alignleft  aligncenter alignright undo redo link fullscreen',
+                            content_langs: [
+                              { title: 'Spanish', code: 'es' }
+                            ]
+                        });
                     }
 
                     // Toggle reorder button
@@ -832,10 +851,11 @@ jQuery(document).ready(function ($) {
               $.fn.tinymce_textareas = function(){
                 tinyMCE.init({
                     //plugins: 'print preview fullpage powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable',
-                    plugins: 'lists link fullscreen',
+                    plugins: 'lists link fullscreen imagetools',
                     skin: 'lightgray',
                     mode: 'exact',
                     menubar: false,
+                    relative_urls : false,
                     toolbar: 'bold italic underline blockquote strikethrough numlist bullist alignleft aligncenter alignright undo redo link fullscreen'
                 });
             }
@@ -860,6 +880,7 @@ jQuery(document).ready(function ($) {
                         if($('.oercurr-primary-source-element-wrapper').length === 1) {
                             $('.oercurr-remove-source').attr('disabled', 'disabled');
                         }
+                        OerCurriculum.toggleUpDownButton();
                     });
             });
         },
@@ -955,9 +976,16 @@ jQuery(document).ready(function ($) {
                     } else {
                         $('.oercurr-section-element-panel').html(response).tinymce_textareas();
                     }
-                    tinymce.execCommand( 'mceRemoveEditor', false, editor_prefix + id );
-                    tinymce.execCommand( 'mceAddEditor', false, editor_prefix + id );
                     quicktags({ id: editor_prefix + id });
+                    tinyMCE.init({
+                        plugins: "lists link fullscreen imagetools",
+                        selector: "textarea#"+editor_prefix + id,
+                        content_css: lpScript['pluginDirUrl']+"/css/backend/oer-curriculum-mce-style.css",
+                        mode: 'exact',
+                        menubar: false,
+                        relative_urls : false,
+                        toolbar: 'bold italic underline blockquote strikethrough bullist numlist alignleft  aligncenter alignright undo redo link fullscreen'
+                    });
                     $('#oercurr-required-materials .oercurr-remove-section').removeAttr('disabled');
                     OerCurriculum.toggleUpDownButton();
                 });
@@ -984,9 +1012,16 @@ jQuery(document).ready(function ($) {
                   } else {
                       $('.oercurr-section-element-panel').html(response).tinymce_textareas();
                   }
-                  tinymce.execCommand( 'mceRemoveEditor', false, editor_prefix + id );
-                  tinymce.execCommand( 'mceAddEditor', false, editor_prefix + id );
                   quicktags({ id: editor_prefix + id });
+                  tinyMCE.init({
+                      plugins: "lists link fullscreen imagetools",
+                      selector: "textarea#"+editor_prefix + id,
+                      content_css: "/wp-content/plugins/wp-curriculum/css/backend/oer-curriculum-mce-style.css",
+                      mode: 'exact',
+                      menubar: false,
+                      relative_urls : false,
+                      toolbar: 'bold italic underline blockquote strikethrough bullist numlist alignleft  aligncenter alignright undo redo link fullscreen'
+                  });
                   $('#oercurr-additional-sections .oercurr-remove-section').removeAttr('disabled');
                   OerCurriculum.toggleUpDownButton();
               });
@@ -1029,7 +1064,7 @@ jQuery(document).ready(function ($) {
                         
                         oercurr_RefreshSectionDeleteButtons(jQuery("#oercurr-required-materials").find('.oercurr-remove-section'));
                         oercurr_RefreshSectionDeleteButtons(jQuery("#oercurr-additional-sections").find('.oercurr-remove-section'));
-                        
+                        OerCurriculum.toggleUpDownButton();
                         
                     });
             });
@@ -1082,7 +1117,7 @@ jQuery(document).ready(function ($) {
                     
                     input.val(attachment.url);
                     imageholder.append('<img src="' + attachment.url + '" class="resource-thumbnail" width="200"><span class="btn btn-danger btn-sm oercurr-remove-source-featured-image" title="Remove Thumbnail"><i class="fas fa-minus-circle"></i></span>');
-                    btn.text("Change Thumbnail");
+                    btn.text(lpScript.txtChangeThumbnail);
                 });
                 
                 frame.open();
@@ -1103,7 +1138,7 @@ jQuery(document).ready(function ($) {
                 input.val("");
                 imageholder.find("img").remove();
                 btn.remove();
-                metabox.find('button.oer_curriculum_primary_resources_thumbnail_button').text("Set Thumbnail");
+                metabox.find('button.oer_curriculum_primary_resources_thumbnail_button').text(lpScript.txtSetThumbnail);
             });
         },
         
@@ -1150,6 +1185,85 @@ jQuery(document).ready(function ($) {
     OerCurriculum.addFeaturedImageOnResourceTextBox();
     OerCurriculum.removeFeaturedImageInResourceSelection();
     OerCurriculum.switchToVisualWorkaround();
+    
+    /* Float Secton Anchor */
+    let oercurrMetaboxScrollTargetCntr = 0;
+    let oercurrMetaboxScrollTarget = setInterval(function(){
+      oercurrMetaboxScrollTargetCntr++;
+      var target_elm = jQuery('.interface-interface-skeleton__content');
+      if(target_elm.length){
+        // target element presence is confirmed, load event listeners
+        clearInterval(oercurrMetaboxScrollTarget);
+        document.querySelector('.interface-interface-skeleton__content').addEventListener('scroll', () => {
+          var scrtop = jQuery("#oer_curriculum_meta_boxid").offset().top;
+          if(scrtop < 11){
+            jQuery('.oer_curriculum_left_column').addClass('float');
+            jQuery('.oer_curriculum_left_column .list-group').width(jQuery('.oer_curriculum_left_column').width());
+          }else{
+              jQuery('.oer_curriculum_left_column').removeClass('float');
+          }
+        });      
+        window.addEventListener('resize', function () {
+          jQuery('.oer_curriculum_left_column .list-group').width(jQuery('.oer_curriculum_left_column').width());
+        })
+        // terminate observer if target element is not loaded within 3 minutes
+        if(oercurrMetaboxScrollTargetCntr > 1800){
+          clearInterval(oercurrMetaboxScrollTarget);
+        }
+      }
+    }, 100);
+
+    
+    
+    jQuery(document).on('click','.handle-order-higher',function(e){
+      oercurr_reinstate_editor_content_on_move(this);
+    })
+    
+    jQuery(document).on('click','.handle-order-lower',function(e){
+      oercurr_reinstate_editor_content_on_move(this);
+    })
+    
+    function oercurr_reinstate_editor_content_on_move(obj){
+      if(jQuery(obj).closest('.postbox').find('.oer_curriculum_meta_wrapper .oercurr-element-wrapper .form-group iframe').length){
+        setTimeout(function(){
+          jQuery('.edit-post-layout__metaboxes .oercurr-element-wrapper .form-group iframe').each(function(index,obj){
+            var elmid = jQuery(obj).attr('id').replace("_ifr", "");
+            tinymce.execCommand( 'mceRemoveEditor', false, elmid);
+            tinymce.execCommand( 'mceAddEditor', false, elmid );
+          })
+        }, 1300);
+      }
+    }
+    
+});
+
+jQuery(window).bind("load", function() { 
+  let MetaboxeRenderIntervalCntr = 0;
+  let MetaboxeRenderInterval = setInterval(function(){
+    MetaboxeRenderIntervalCntr++;
+    if(jQuery('.edit-post-layout__metaboxes').length){
+      jQuery('.handle-order-lower').removeClass('hidden');
+      jQuery('.handle-order-higher').removeClass('hidden');
+    }else{
+      if(MetaboxeRenderIntervalCntr > 1800){clearInterval(MetaboxeRenderInterval)};
+    }
+  }, 100);
+  
+  //custom taxonomy duplicate $message
+  jQuery(document).on('click','.editor-post-taxonomies__hierarchical-terms-submit',function(e){
+    var inputval = jQuery(this).siblings('input.editor-post-taxonomies__hierarchical-terms-input').val();
+    console.log(inputval);
+    if(inputval != ""){
+      jQuery(this).closest('.components-panel__body').find('.editor-post-taxonomies__hierarchical-terms-list .editor-post-taxonomies__hierarchical-terms-choice').each(function(index,obj){
+        if(inputval == jQuery(obj).text()){
+          //console.log(jQuery(obj).text() + ' -> match');
+        }else{
+          //console.log(jQuery(obj).text());
+        }
+      })
+    }
+  })
+  
 });
 
 //Process Initial Setup

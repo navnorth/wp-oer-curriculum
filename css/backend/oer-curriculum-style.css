@@ -237,6 +237,7 @@ li.oer_sbstndard {position: relative;display: block;float: left;width: 100%;}
 .oer_sbstndard input[type="checkbox"] {position: absolute;top: 7px;}
 ul.oer-standard-list div {padding-left: 20px;float: left;width: 100%;}
 .oer_stndrd_desc {padding-left: 0px !important;}
+li.lev1.oer_sbstndard >.oer_stndrd_desc {padding-left: 20px !important;}
 li.oer_sbstndard div ul li input[type="checkbox"] {position: absolute;left: 0px;top: 8px;}
 li.oer_sbstndard div ul li {
     float: left;
@@ -283,3 +284,17 @@ li.oer_sbstndard div ul li {
 .oercurr-element-wrapper >.card-header h3 .oercurr-remove-module {background-color: #ffffff !important;border-color: #ffffff !important;}
 .oercurr-element-wrapper >.card-header h3 .oercurr-remove-module .fa {color: #007cba !important;}
 .oercurr-element-wrapper >.card-header h3 .oercurr-remove-module:hover .fa {color: #bd2130 !important;}
+.oercurr_settings_form table tr th {display: none;}
+
+.post-type-oer-curriculum .components-base-control__field {position: relative;}
+.post-type-oer-curriculum  span.components-checkbox-control__input-container {position: absolute;top: 0px;}
+.post-type-oer-curriculum  label.components-checkbox-control__label {padding-left: 25px;}
+
+.oer_curriculum_left_column.float {
+    position: relative;
+}
+
+.oer_curriculum_left_column.float .list-group {
+    position: fixed;
+    top: 67px;
+}

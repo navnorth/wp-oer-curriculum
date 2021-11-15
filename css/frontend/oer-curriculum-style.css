@@ -54,6 +54,7 @@ body.single-oer-curriculum {
     margin:5px 0;
     line-height: 24px;
     position:relative;
+    min-height: 40px;
 }
 .oercurr-tc-authors-list.padded-right {padding-right: 55px;}
 .oercurr-tc-details-description {

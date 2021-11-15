@@ -5,6 +5,7 @@ global $post;
 global $wpdb;
 global $inquiryset_post;
 
+$inquiryset_post = $post;
 $inquiry = get_post_meta($inquiryset_post->ID,'oer_curriculum_related_curriculum');
 $inquiry = ((is_array($inquiry)&& count($inquiry)>0)?$inquiry[0]:array());
 ?>
@@ -22,9 +23,9 @@ $inquiry = ((is_array($inquiry)&& count($inquiry)>0)?$inquiry[0]:array());
                             $label = get_option('oer_curriculum_related_curriculum_'.$i.'_curmetset_label');
                             ?>
                             <div class="form-group">
-                                <label for="relatedInquirySet<?php echo esc_html($i); ?>"><?php echo esc_html($label); ?></label>
+                                <label for="relatedInquirySet<?php echo esc_html($i); ?>"><?php echo esc_html__($label,OERCURR_CURRICULUM_SLUG); ?></label>
                                 <select name="oer_curriculum_related_curriculum[]" id="relatedInquirySet<?php echo esc_html($i); ?>" class="form-control">
-                                    <option value="0">-- Select Curriculum --</option>
+                                    <option value="0">-- <?php echo esc_html__('Select Curriculum', OERCURR_CURRICULUM_SLUG) ?> --</option>
                                     <?php if (count($inquirysets)>0) {
                                         foreach($inquirysets as $inquiryset) {
                                     ?>

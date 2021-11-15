@@ -269,7 +269,8 @@ $type = (isset($type[0]))?$type[0]:'textbox';
                     if (!empty($prev_title))
                         echo esc_html($prev_title);
                     else
-                        echo esc_html($prev_resource->post_title);
+                        if (!empty($prev_resource->post_title))
+                          echo esc_html($prev_resource->post_title);
                     ?>
                 </span>
             </span>
@@ -303,7 +304,8 @@ $type = (isset($type[0]))?$type[0]:'textbox';
                         if (!empty($next_title))
                             echo esc_html($next_title);
                         else
-                            echo esc_html($next_resource->post_title);
+                            if (!empty($next_resource->post_title))
+                              echo esc_html($next_resource->post_title);
 
                     ?>
                 </span>

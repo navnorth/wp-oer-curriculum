@@ -444,6 +444,7 @@ if (! function_exists('oercurr_title_from_slug')){
 
 if (! function_exists('oercurr_grade_level')){
     function oercurr_grade_level($inquiry_set_id){
+        /*
         $grades = get_post_meta($inquiry_set_id, "oer_curriculum_grades", true);
         if(empty($grades)){
           $_tmp = '';
@@ -451,6 +452,45 @@ if (! function_exists('oercurr_grade_level')){
           $_tmp = oercurr_grade_levels($grades);
         }  
         return $_tmp;
+        */
+        
+        global $post; 
+        $grades = array();
+        $grade_terms = get_the_terms( $post->ID, OERCURR_GRADE_LEVEL_TAX_SLUG );
+        
+        if (is_array($grade_terms)){
+            foreach($grade_terms as $grade){
+                $grades[] = $grade->slug;
+            }
+        }
+        
+        return implode(', ', $grades);
+        /*
+        if(is_array($grades) && !empty($grades) && array_filter($grades))
+        {
+            $option_set = false;
+            if (get_option('oer_grade_label'))
+                $option_set = true;
+        ?>
+            <div class="form-field">
+                <span class="oercurr-tc-label"><?php
+                if (!$option_set){
+                    if (count($grades)>1)
+                        _e("Grade Levels:", OER_SLUG);
+                    else
+                        _e("Grade Level:", OER_SLUG);
+                } else
+                        echo get_option('oer_grade_label').":";
+                ?></span>
+                <span class="oercurr-tc-value">
+                <?php
+                echo oer_grade_levels($grades);
+                ?>
+                </span>
+            </div>
+        <?php }
+        */
+        
     }
 }
 
@@ -472,6 +512,42 @@ function oercurr_sort_grade_level($a, $b) {
     }
 
 
+}
+
+//Import Default Grade Levels
+function oercurr_importDefaultGradeLevels(){
+	$_arr = array(
+			"pre-k" => "Pre-K",
+			"k" => "K (Kindergarten)",
+			"1" => "1",
+			"2" => "2",
+			"3" => "3",
+			"4" => "4",
+			"5" => "5",
+			"6" => "6",
+			"7" => "7",
+			"8" => "8",
+			"9" => "9",
+			"10" => "10",
+			"11" => "11",
+			"12" => "12"
+			);
+	foreach($_arr as $_key => $_val){
+		if ( !term_exists($_val,OERCURR_GRADE_LEVEL_TAX_SLUG) ) {
+			wp_insert_term(
+			    $_val,   // the term 
+			    OERCURR_GRADE_LEVEL_TAX_SLUG, // the taxonomy
+			    array(
+			    	'description' => '',
+			        'slug' => $_key
+			    )
+			);
+		}
+	}
+	$message = __("Successfully imported default grade_levels.", OERCURR_CURRICULUM_SLUG);
+	$type = "success";
+	$response = array('message' => $message, 'type' => $type);
+	return $response;
 }
 
 function oercurr_grade_levels($grade_levels){
@@ -701,7 +777,7 @@ if (! function_exists('oercurr_get_field_label')){
 // Get Curriculum Type
 if (! function_exists('oercurr_get_curriculum_type')){
     function oercurr_get_curriculum_type($value = ""){
-        $html = '<option value="">Select Type</option>';
+        $html = '<option value="">'.esc_html__('Select Type', OERCURR_CURRICULUM_SLUG).'</option>';
         $types = array(
             "Brief Activity",
             "Full Lesson",

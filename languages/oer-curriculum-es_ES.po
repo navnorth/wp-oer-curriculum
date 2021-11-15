@@ -2,16 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OER Curriculum\n"
 "POT-Creation-Date: 2021-04-23 19:37+0800\n"
-"PO-Revision-Date: 2021-05-17 14:01+0800\n"
+"PO-Revision-Date: 2021-11-04 12:57+0800\n"
 "Last-Translator: \n"
 "Language-Team: Navigation North\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.0\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: es_ES\n"
 "X-Poedit-KeywordsList: __;_e;_x;_ex;_n;_nx;_n_noop;_nx_noop;translate_nooped_plural;number_format_i18n;date_i18n;esc_html__;esc_html__;esc_html_x;esc_attr__;esc_attr_e;esc_attr_x\n"
 
 msgid "Details"
@@ -53,7 +53,7 @@ msgstr "Actividades de esta lección"
 msgid "Summative Assessment"
 msgstr "Evaluación sumativa"
 
-msgid "Assessment Type(s):"
+msgid "Assessment Type(s)"
 msgstr "Tipo (s) de evaluación"
 
 msgid "Other"
@@ -65,9 +65,8 @@ msgstr "Lista de texto"
 msgid "Materials"
 msgstr "Materiales"
 
-#, fuzzy
 msgid "Vocabulary List"
-msgstr "Lista de texto"
+msgstr "Lista de vocabulario"
 
 msgid "You have not selected any academic standards"
 msgstr "No ha seleccionado ningún estándar académico"
@@ -84,8 +83,11 @@ msgstr "Antecedentes del estudiante"
 msgid "Authors"
 msgstr "Autoras"
 
+msgid "Resources"
+msgstr "Recursos"
+
 msgid "Primary Resources"
-msgstr "Pregunta de investigación"
+msgstr "Recursos primarios"
 
 msgid "Investigative Question"
 msgstr "Pregunta de investigación"
@@ -105,6 +107,9 @@ msgstr "Más información"
 msgid "Use the options below to update metadata field options."
 msgstr "Utilice las siguientes opciones para actualizar las opciones del campo de metadatos."
 
+msgid "Use the options below to update general plugin options."
+msgstr "Utilice las siguientes opciones para actualizar las opciones generales del complemento."
+
 msgid "Inquiry Sets"
 msgstr "Conjuntos de consulta"
 
@@ -117,6 +122,403 @@ msgstr "Sujetos"
 msgid "SEE MORE +"
 msgstr "VER MÁS +"
 
-#, fuzzy
 msgid "Text"
 msgstr "Texto"
+
+msgid "Add More"
+msgstr "Añadir más"
+
+msgid "Add Objective"
+msgstr "Agregar objetivo"
+
+msgid "Framework Excerpt"
+msgstr "Extracto del marco"
+
+msgid "Thumbnail Image"
+msgstr "Imagen en miniatura"
+
+msgid "Set Thumbnail"
+msgstr "Establecer miniatura"
+
+msgid "Sensitive Material"
+msgstr "Material sensible"
+
+msgid "Potentially Sensitive Material"
+msgstr "Material potencialmente sensible"
+
+msgid "Curriculum"
+msgstr "Plan de estudios"
+
+msgid "Add New Curriculum"
+msgstr "Agregar nuevo plan de estudios"
+
+msgid "Edit Curriculum"
+msgstr "Editar plan de estudios"
+
+msgid "Create Curriculum"
+msgstr "Crear plan de estudios"
+
+msgid "All Curriculum"
+msgstr "Todo el plan de estudios"
+
+msgid "View Curriculum"
+msgstr "Ver plan de estudios"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "Add a Resource"
+msgstr "Agregar un recurso"
+
+msgid "Add Textbox"
+msgstr "Agregar cuadro de texto"
+
+msgid "Add Materials"
+msgstr "Agregar materiales"
+
+msgid "Save Metadata Options"
+msgstr "Guardar opciones de metadatos"
+
+msgid "Field Name"
+msgstr "Nombre del campo"
+
+msgid "Label"
+msgstr "Etiqueta"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "Enabled"
+msgstr "Activado"
+
+msgid "Save General Options"
+msgstr "Guardar opciones generales"
+
+msgid "Subject Areas"
+msgstr "Áreas temáticase"
+
+msgid "Settings"
+msgstr "Configuracion"
+
+msgid "Thank you for installing the"
+msgstr "Gracias por instalar el"
+
+msgid "plugin. If you need support, please visit our site or the forums."
+msgstr "enchufar. Si necesita ayuda, visite nuestro sitio o los foros."
+
+msgid "plugin"
+msgstr "complemento"
+
+msgid "Lesson Meta Fields"
+msgstr "Campos de meta de la lección"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "Other Type"
+msgstr "Otro tipo"
+
+msgid "Required Equipment Materials"
+msgstr "Materiales necesarios para el equipo"
+
+msgid "Additional Sections"
+msgstr "Secciones adicionales"
+
+msgid "Grade Level"
+msgstr "Nivel de grado"
+
+msgid "Search Grade Levels"
+msgstr "Buscar niveles de grado"
+
+msgid "All Grade Levels"
+msgstr "Todos los niveles de grado"
+
+msgid "Parent Grade Level"
+msgstr "Nivel de grado de los padres"
+
+msgid "Edit Grade Level"
+msgstr "Editar nivel de grado"
+
+msgid "Update Grade Level"
+msgstr "Actualizar el nivel de grado"
+
+msgid "Add New Grade Level"
+msgstr "Agregar nuevo nivel de grado"
+
+msgid "New Grade Level"
+msgstr "Nuevo nivel de grado"
+
+msgid "Grade Levels"
+msgstr "Niveles de grado"
+
+msgid "Appropriate Age Levels"
+msgstr "Niveles de edad apropiados"
+
+msgid "Suggested Instructional Time"
+msgstr "Tiempo de instrucción sugerido"
+
+msgid "Related Instructional Objectives"
+msgstr "Objetivos de instrucción relacionados"
+
+msgid "Download Copy"
+msgstr "Descargar copia"
+
+msgid "Additional Materials"
+msgstr "Materiales adicionales"
+
+msgid "Related Curriculum"
+msgstr "Plan de estudios relacionado"
+
+msgid "Title"
+msgstr "Título"
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Related Curriculum 1"
+msgstr "Plan de estudios relacionado 1"
+
+msgid "Related Curriculum 2"
+msgstr "Plan de estudios relacionado 2"
+
+msgid "Related Curriculum 3"
+msgstr "Plan de estudios relacionado 3"
+
+msgid "Select"
+msgstr "Buscar"
+
+msgid "Select Standards"
+msgstr "Seleccionar estándares"
+
+msgid "Change Resource"
+msgstr "Cambiar recurso"
+
+msgid "Select Resource"
+msgstr "Seleccionar recurso"
+
+msgid "Select Curriculum"
+msgstr "Seleccionar plan de estudios"
+
+msgid "Select Type"
+msgstr "Seleccionar Tipo"
+
+msgid "Age Levels"
+msgstr "Niveles de edad"
+
+msgid "Suggested Time"
+msgstr "Hora sugerida"
+
+msgid "Select Document"
+msgstr "Seleccionar documento"
+
+msgid "Metadata Fields"
+msgstr "Campos de metadatos"
+
+msgid "Delete Module"
+msgstr "Eliminar módulo"
+
+msgid "Delete Primary Resource"
+msgstr "Eliminar recurso principal"
+
+msgid "These items will be permanently deleted and cannot be recovered. Are you sure"
+msgstr "Estos elementos se eliminarán de forma permanente y no se podrán recuperar. Está seguro"
+
+msgid "Are yor sure want to do this"
+msgstr "Estás segura de querer hacer esto"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Yes, Delete"
+msgstr "Sí, eliminar"
+
+msgid "Text Title"
+msgstr "Título del texto"
+
+msgid "Resource Title"
+msgstr "Título del recurso"
+
+msgid "Change Thumbnail"
+msgstr "Cambiar miniatura"
+
+msgid "You have not selected a resource"
+msgstr "No has seleccionado un recurso"
+
+msgid "Select Materials"
+msgstr "Seleccionar materiales"
+
+msgid "Use Materials"
+msgstr "Utilizar materiales"
+
+msgid "Use Material"
+msgstr "Material de uso"
+
+msgid "Select Material"
+msgstr "Seleccionar material"
+
+msgid "Setup"
+msgstr "Configuración"
+
+msgid "Select Author Picture"
+msgstr "Seleccionar imagen de autor"
+
+msgid "Use Picture"
+msgstr "Usar imagen"
+
+msgid "When first setting up the plugin, the following options will give you the base set of data to see how everything works. All of these options will be available to you in other settings and features at a later time if you want to skip any or all of these options."
+msgstr "Cuando configure el complemento por primera vez, las siguientes opciones le proporcionarán el conjunto básico de datos para ver cómo funciona todo. Todas estas opciones estarán disponibles para usted en otras configuraciones y funciones en un momento posterior si desea omitir alguna o todas estas opciones."
+
+msgid "Import Default Grade Levels"
+msgstr "Importar niveles de grado predeterminados"
+
+msgid "A general listing of K-12 grade levels"
+msgstr "Una lista general de los niveles de grado K-12"
+
+msgid "Continue"
+msgstr "Continuar"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Role"
+msgstr "Papel"
+
+msgid "Author URL"
+msgstr "URL del autor"
+
+msgid "Institution"
+msgstr "Institución"
+
+msgid "Institution URL"
+msgstr "URL de la institución"
+
+msgid "Search page here"
+msgstr "Buscar página aquí"
+
+msgid "Delete Author"
+msgstr "Eliminar autor"
+
+#: OER CURRICULUM TRANSLATIONS
+msgid "Curriculum List"
+msgstr "Lista de planes de estudio"
+
+msgid "Use this block to add a list of curriculum based on subject"
+msgstr "Utilice este bloque para agregar una lista de planes de estudios según la materia"
+
+msgid "Curriculum Block Settings"
+msgstr "Configuración del bloque del plan de estudios"
+
+msgid "Add Subjects"
+msgstr "Agregar temas"
+
+msgid "Posts Per Page"
+msgstr "Publicaciones por página"
+
+msgid "Sort By"
+msgstr "Ordenar por"
+
+msgid "Date Added"
+msgstr "Fecha Agregada"
+
+msgid "Date Updated"
+msgstr "Fecha actualizada"
+
+msgid "Title a-z"
+msgstr "Título a-z"
+
+msgid "Browse All"
+msgstr "Examinar todo"
+
+msgid "Curriculums"
+msgstr "Plan de estudios"
+
+msgid "Show"
+msgstr "Monstrar"
+
+#: FEATURED CURRICULUM TRANSLATIONS
+msgid "Featured Curriculum Slider"
+msgstr "Deslizador de planes de estudio destacados"
+
+msgid "Use this block to add OER curriculum and resources in a slider"
+msgstr "Utilice este bloque para agregar el currículo y los recursos de REA en un control deslizante"
+
+msgid "Curriculum Featured Block settings"
+msgstr "Configuración del bloque destacado del plan de estudios"
+
+msgid "Block Title"
+msgstr "Título del bloque"
+
+msgid "Block Width"
+msgstr "Ancho de bloque"
+
+msgid "Note: Block width setting is only used to simulate the frontend width at backend and will not affect the frontend"
+msgstr "Nota: La configuración del ancho del bloque solo se usa para simular el ancho de la interfaz en el backend y no afectará a la interfaz"
+
+msgid "Featured List"
+msgstr "Lista destacada"
+
+msgid "Add Resources"
+msgstr "Agregar recursos"
+
+msgid "Add Curriculum"
+msgstr "Agregar plan de estudios"
+
+msgid "Slider Setting"
+msgstr "Configuración del control deslizante"
+
+msgid "Min. Slides"
+msgstr "Min. Diapositivas"
+
+msgid "Max. Slides"
+msgstr "Max. Diapositivas"
+
+msgid "Move Slides"
+msgstr "Mover diapositivas"
+
+msgid "Slide Width"
+msgstr "Ancho de diapositiva"
+
+msgid "Slide Margin"
+msgstr "Margen de diapositiva"
+
+msgid "Description length"
+msgstr "Longitud de la descripción"
+
+msgid "Image height"
+msgstr "Altura de imagen"
+
+msgid "Resources lists"
+msgstr "Listas de recursos"
+
+msgid "Curriculum lists"
+msgstr "Listas de planes de estudios"
+
+msgid "Filter by search"
+msgstr "Filtrar por búsqueda"
+
+msgid "Filter by subject"
+msgstr "Filtrar por tema"
+
+msgid "All"
+msgstr "Todos"
+
+msgid "The minimum number of slides to be shown. Slides will be sized down if slider becomes smaller than the original size"
+msgstr "El número mínimo de diapositivas que se mostrarán. El tamaño de las diapositivas se reducirá si el control deslizante se vuelve más pequeño que el tamaño original"
+
+msgid "The maximum number of slides to be shown. Slides will be sized up if slider becomes larger than the original size"
+msgstr "El número máximo de diapositivas que se mostrarán. El tamaño de las diapositivas aumentará si el control deslizante se vuelve más grande que el tamaño original"
+
+msgid "The number of slides to move on transition. This value must be greater than or equal to minSlides, and less than or equal to maxSlides. If value is greater than the fully-visible slides, then the count of fully-visible slides will be used"
+msgstr "El número de diapositivas que se moverán en la transición. Este valor debe ser mayor o igual que minSlides y menor o igual que maxSlides. Si el valor es mayor que las diapositivas completamente visibles, se utilizará el recuento de diapositivas completamente visibles"
+
+msgid "Width of each slide"
+msgstr "Ancho de cada diapositiva"
+
+msgid "Space between slides"
+msgstr "Espacio entre diapositivas"
+
+msgid "Length of description to display"
+msgstr "Longitud de la descripción para mostrar"
+
+msgid "Adjust image height"
+msgstr "Ajustar la altura de la imagen"

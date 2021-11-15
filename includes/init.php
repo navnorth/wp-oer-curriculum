@@ -11,15 +11,15 @@ add_action('init', 'oercurr_create_menu_item');
 function oercurr_create_menu_item() {
     global $_use_gutenberg;
     $labels = array(
-        'name'          => esc_html_x('Curriculum', 'post type general name'),
-        'singular_name' => esc_html_x('Curriculum', 'post type singular name'),
-        'add_new'       => esc_html_x('Add New Curriculum', 'book'),
-        'add_new_item'  => esc_html__('Add New Curriculum'),
-        'edit_item'     => esc_html__('Edit Curriculum'),
-        'new_item'      => esc_html__('Create Curriculum'),
-        'all_items'     => esc_html__('All Curriculum'),
-        'view_item'     => esc_html__('View Curriculum'),
-        'search_items'  => esc_html__('Search'),
+        'name'          => esc_html_x('Curriculum', 'post type general name', OERCURR_CURRICULUM_SLUG),
+        'singular_name' => esc_html_x('Curriculum', 'post type singular name', OERCURR_CURRICULUM_SLUG),
+        'add_new'       => esc_html__('Add New Curriculum', OERCURR_CURRICULUM_SLUG),
+        'add_new_item'  => esc_html__('Add New Curriculum',OERCURR_CURRICULUM_SLUG),
+        'edit_item'     => esc_html__('Edit Curriculum', OERCURR_CURRICULUM_SLUG),
+        'new_item'      => esc_html__('Create Curriculum', OERCURR_CURRICULUM_SLUG),
+        'all_items'     => esc_html__('All Curriculum', OERCURR_CURRICULUM_SLUG),
+        'view_item'     => esc_html__('View Curriculum', OERCURR_CURRICULUM_SLUG),
+        'search_items'  => esc_html__('Search', OERCURR_CURRICULUM_SLUG),
         'menu_name'     => 'Curriculum'
     );
 
@@ -35,17 +35,50 @@ function oercurr_create_menu_item() {
         'query_var'             => true,
         'menu_position'         => 26,
         'menu_icon'             => 'dashicons-welcome-learn-more',
-        'taxonomies'            => array('post_tag', 'resource-subject-area'),
+        'taxonomies'            => array('post_tag', 'resource-subject-area', OERCURR_GRADE_LEVEL_TAX_SLUG),
         'supports'              => array('title', 'editor', 'thumbnail', 'revisions'),
         'register_meta_box_cb'  => 'oercurr_custom_meta_boxes',
         'show_in_rest'          => true
     );
 
     register_post_type('oer-curriculum', $args);
-
+    
+    
+    if(OERCURR_INDI_GRADE_LEVEL){
+    	$labels = array(
+        'name'              => esc_html__( 'Grade Level',OERCURR_CURRICULUM_SLUG ),
+  	    'singular_name'     => esc_html_x( 'Grade Level', 'taxonomy singular name', OERCURR_CURRICULUM_SLUG ),
+  	    'search_items'      => esc_html__( 'Search Grade Levels',OERCURR_CURRICULUM_SLUG ),
+  	    'all_items'         => esc_html__( 'All Grade Levels', OERCURR_CURRICULUM_SLUG ),
+  	    'parent_item'       => esc_html__( 'Parent Grade Level',OERCURR_CURRICULUM_SLUG ),
+  	    'parent_item_colon' => esc_html__( 'Parent Grade Level'.':',OERCURR_CURRICULUM_SLUG ),
+  	    'edit_item'         => esc_html__( 'Edit Grade Level', OERCURR_CURRICULUM_SLUG ),
+  	    'update_item'       => esc_html__( 'Update Grade Level', OERCURR_CURRICULUM_SLUG ),
+  	    'add_new_item'      => esc_html__( 'Add New Grade Level',OERCURR_CURRICULUM_SLUG),
+  	    'new_item_name'     => esc_html__( 'New Grade Level',OERCURR_CURRICULUM_SLUG),
+  	    'menu_name'         => esc_html__( 'Grade Levels',OERCURR_CURRICULUM_SLUG ),
+      );
+      
+      $args = array(
+  	    'hierarchical'      => true,
+  	    'labels'            => $labels,
+  	    'show_ui'           => true,
+  	    'show_admin_column' => true,
+        'show_in_rest'		  => true,
+  	    'query_var'         => true,
+  	    'rewrite'           => array( 'slug' => OERCURR_GRADE_LEVEL_TAX_SLUG ),
+        'sort'              => true,
+        'orderby'           => 'term_order',
+      );
+    
+      register_taxonomy( OERCURR_GRADE_LEVEL_TAX_SLUG, array( 'oer-curriculum' ), $args );
+    }
+    
+    if(!get_option('oer_curriculum_details_curmetset_label')){oercurr_add_setting_options('oer_curriculum_details','label','Details');}
     if(!get_option('oer_curriculum_type_curmetset_label')){oercurr_add_setting_options('oer_curriculum_type','label','Type');}
     if(!get_option('oer_curriculum_type_other_curmetset_label')){oercurr_add_setting_options('oer_curriculum_type_other','label','Other Type');}
     if(!get_option('oer_curriculum_authors_curmetset_label')){oercurr_add_setting_options('oer_curriculum_authors','label','Author');}
+    if(!get_option('oer_curriculum_standardsandobjectives_curmetset_label')){oercurr_add_setting_options('oer_curriculum_standardsandobjectives','label','Standards and Objectives');}
     if(!get_option('oer_curriculum_primary_resources_curmetset_label')){oercurr_add_setting_options('oer_curriculum_primary_resources','label','Primary Resources');}
     if(!get_option('oer_curriculum_iq_curmetset_label')){oercurr_add_setting_options('oer_curriculum_iq','label','Investigative Question');}
     if(!get_option('oer_curriculum_required_materials_curmetset_label')){oercurr_add_setting_options('oer_curriculum_required_materials','label','Required Equipment Materials');}
@@ -64,10 +97,12 @@ function oercurr_create_menu_item() {
     if(!get_option('oer_curriculum_related_curriculum_2_curmetset_label')){oercurr_add_setting_options('oer_curriculum_related_curriculum_2','label','Related Curriculum 2');}
     if(!get_option('oer_curriculum_related_curriculum_3_curmetset_label')){oercurr_add_setting_options('oer_curriculum_related_curriculum_3','label','Related Curriculum 3');}
 
-
+    
+    if(!get_option('oer_curriculum_details_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_details','enable','checked');}
     if(!get_option('oer_curriculum_type_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_type','enable','checked');}
     if(!get_option('oer_curriculum_type_other_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_type_other','enable','checked');}
     if(!get_option('oer_curriculum_authors_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_authors','enable','checked');}
+    if(!get_option('oer_curriculum_standardsandobjectives_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_standardsandobjectives','enable','checked');}
     if(!get_option('oer_curriculum_primary_resources_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_primary_resources','enable','checked');}
     if(!get_option('oer_curriculum_iq_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_iq','enable','checked');}
     if(!get_option('oer_curriculum_required_materials_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_required_materials','enable','checked');}
@@ -84,24 +119,42 @@ function oercurr_create_menu_item() {
     if(!get_option('oer_curriculum_related_curriculum_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_related_curriculum','enable','checked');}
     if(!get_option('oer_curriculum_related_curriculum_1_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_related_curriculum_1','enable','checked');}
     if(!get_option('oer_curriculum_related_curriculum_2_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_related_curriculum_2','enable','checked');}
-    if(!get_option('oer_curriculum_related_curriculum_3_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_related_curriculum_3','enable','checked');}
+    if(!get_option('oer_curriculum_related_curriculum_3_curmetset_enable')){oercurr_add_setting_options('oer_curriculum_related_curriculum_3','enable','checked');}  
+}
 
+// Display grade levels according to term_order in block editor sidebar
+add_filter('rest_'.OERCURR_GRADE_LEVEL_TAX_SLUG.'_query','oercur_sort_grade_levels', 10, 2);
+function oercur_sort_grade_levels($args, $request){
+	$args['orderby'] = "term_order";
+	return $args;
+}
+
+// Change order of grade level display on both edit tags page and in classic editor
+add_filter( 'get_terms_args', 'oercurr_sort_grade_level_terms', 10, 2 );
+function oercurr_sort_grade_level_terms( $args, $taxonomies ){
+	global $pagenow;
+	if (is_admin() && ($pagenow=='edit-tags.php' || $pagenow == 'post-new.php' || $pagenow == 'post.php') && in_array(OERCURR_GRADE_LEVEL_TAX_SLUG,$taxonomies) ){
+		$args['orderby'] = 'term_order';
+    	$args['order'] = 'ASC';
+	}
+  return $args;
 }
 
 function oercurr_custom_meta_boxes() {
     // Grade Levels
+    /*
     $grade_levels_set = (trim(get_option('oer_curriculum_grades_curmetset_label'),' ') != '')?true:false;
     $grade_levels_enabled = (get_option('oer_curriculum_grades_curmetset_enable')=='checked')?true:false;
     if ($grade_levels_enabled) {
-      add_meta_box( 'oer_curriculum_meta_grades', get_option('oer_curriculum_grades_curmetset_label'), 'oercurr_grade_level_callback', 'oer-curriculum', 'side', 'high' );
-    }
+      add_meta_box( 'oer_curriculum_meta_grades', __(get_option('oer_curriculum_grades_curmetset_label'),OERCURR_CURRICULUM_SLUG), 'oercurr_grade_level_callback', 'oer-curriculum', 'side', 'high' );
+    } */
 
     // Appropriate Age Levels
     $age_levels_set = (trim(get_option('oer_curriculum_age_levels_curmetset_label'),' ') != '')?true:false;
     $age_levels_enabled = (get_option('oer_curriculum_age_levels_curmetset_enable')=='checked')?true:false;
     if ($age_levels_enabled) {
         $label = get_option('oer_curriculum_age_levels_curmetset_label');
-        add_meta_box( 'oer_curriculum_meta_age_levels', $label , 'oercurr_age_levels_callback', 'oer-curriculum', 'side', 'high' );
+        add_meta_box( 'oer_curriculum_meta_age_levels', __($label,OERCURR_CURRICULUM_SLUG) , 'oercurr_age_levels_callback', 'oer-curriculum', 'side', 'high' );
     }
 
     //Suggested Instructional Time
@@ -109,16 +162,16 @@ function oercurr_custom_meta_boxes() {
     $suggested_time_enabled = (get_option('oer_curriculum_suggested_instructional_time_curmetset_enable')=='checked')?true:false;
     if (($suggested_time_set && $suggested_time_enabled) || !$suggested_time_set) {
         $label = get_option('oer_curriculum_suggested_instructional_time_curmetset_label');
-        add_meta_box( 'oer_curriculum_meta_suggested_time', $label, 'oercurr_suggested_time_callback', 'oer-curriculum', 'side', 'high' );
+        add_meta_box( 'oer_curriculum_meta_suggested_time', __($label,OERCURR_CURRICULUM_SLUG), 'oercurr_suggested_time_callback', 'oer-curriculum', 'side', 'high' );
     }
-    add_meta_box('oer_curriculum_meta_boxid', 'Lesson Meta Fields', 'oercurr_meta_fields_callback', 'oer-curriculum', 'advanced');
+    add_meta_box('oer_curriculum_meta_boxid', __('Lesson Meta Fields',OERCURR_CURRICULUM_SLUG), 'oercurr_meta_fields_callback', 'oer-curriculum', 'advanced');
 
     // Add a download copy option
     $download_copy_set = (trim(get_option('oer_curriculum_download_copy_curmetset_label'),' ') != '')?true:false;
     $download_copy_enabled = (get_option('oer_curriculum_download_copy_curmetset_enable')=='checked')?true:false;
     if($download_copy_enabled){
         $label = get_option('oer_curriculum_download_copy_curmetset_label');
-      add_meta_box( 'oer_curriculum_meta_download_copy', $label , 'oercurr_download_copy_callback', 'oer-curriculum', 'side', 'high' );
+      add_meta_box( 'oer_curriculum_meta_download_copy', __($label,OERCURR_CURRICULUM_SLUG) , 'oercurr_download_copy_callback', 'oer-curriculum', 'side', 'high' );
     }
     // Add Related Curriculum metabox
     $related_curriculum_set = (trim(get_option('oer_curriculum_related_curriculum_curmetset_label'),' ') != '')?true:false;
@@ -137,7 +190,7 @@ function oercurr_custom_meta_boxes() {
         }
         if ($related_curriculum_enabled) {
             $label = oercurr_get_field_label('oer_curriculum_related_curriculum');
-            add_meta_box('oer_curriculum_meta_related', $label, 'oercurr_related_curriculum_callback', 'oer-curriculum', 'advanced');
+            add_meta_box('oer_curriculum_meta_related', __($label,OERCURR_CURRICULUM_SLUG), 'oercurr_related_curriculum_callback', 'oer-curriculum', 'advanced');
         }
     }
 }
@@ -161,7 +214,7 @@ function oercurr_age_levels_callback(){
 
     echo '<div class="form-group oer_curriculum_age_levels">';
     echo '<div class="input-group full-width">';
-    echo '<input type="text" class="form-control" name="oer_curriculum_age_levels" placeholder="Age Levels" value="'. esc_attr($oer_curriculum_age_levels) .'">';
+    echo '<input type="text" class="form-control" name="oer_curriculum_age_levels" placeholder="'.esc_html__('Age Levels', OERCURR_CURRICULUM_SLUG).'" value="'. esc_attr($oer_curriculum_age_levels) .'">';
     echo '</div>';
     echo '</div>';
 }
@@ -175,7 +228,7 @@ function oercurr_suggested_time_callback(){
 
     echo '<div class="form-group oer_curriculum_age_levels">';
     echo '<div class="input-group full-width">';
-    echo '<input type="text" class="form-control" name="oer_curriculum_suggested_instructional_time" placeholder="Suggested Time" value="'. esc_attr($oer_curriculum_suggested_time) .'">';
+    echo '<input type="text" class="form-control" name="oer_curriculum_suggested_instructional_time" placeholder="'.esc_html__('Suggested Time', OERCURR_CURRICULUM_SLUG).'" value="'. esc_attr($oer_curriculum_suggested_time) .'">';
     echo '</div>';
     echo '</div>';
 }
@@ -240,16 +293,16 @@ function oercurr_download_copy_callback() {
     $oer_curriculum_download_copy_document = (isset($post_meta_data['oer_curriculum_download_copy_document'][0]) ? $post_meta_data['oer_curriculum_download_copy_document'][0] : '');
     ?><div class="form-group"><?php
     ?><div class="input-group full-width"><?php
-    ?><input type="hidden" class="form-control" name="oer_curriculum_download_copy_document" placeholder="Select Document" value="<?php echo esc_url($oer_curriculum_download_copy_document) ?>"><?php
+    ?><input type="hidden" class="form-control" name="oer_curriculum_download_copy_document" placeholder="<?php echo esc_html__('Select Document', OERCURR_CURRICULUM_SLUG) ?>" value="<?php echo esc_url($oer_curriculum_download_copy_document) ?>"><?php
     if (!empty($oer_curriculum_download_copy_document)){
       ?>
         <div class="oercurr-selected-section"><a href="<?php echo esc_url($oer_curriculum_download_copy_document) ?>" target="_blank"><?php echo esc_url($oer_curriculum_download_copy_document) ?></a> <span class="oercurr-remove-download-copy" title="Remove copy"><i class="fas fa-trash-alt"></i></span></div>
-        <span class="oercurr-select-label oercurr-hidden">Select Document</span> <div class="input-group-addon oercurr-download-copy-icon oercurr-hidden" title="Select Material"><i class="fa fa-upload"></i></div>
+        <span class="oercurr-select-label oercurr-hidden"><?php echo esc_html__('Select Document', OERCURR_CURRICULUM_SLUG) ?></span> <div class="input-group-addon oercurr-download-copy-icon oercurr-hidden" title="Select Material"><i class="fa fa-upload"></i></div>
       <?php
     } else {
       ?>
         <div class="oercurr-selected-section oercurr-hidden"><a href="" target="_blank"></a> <span class="oercurr-remove-download-copy"><i class="fas fa-trash-alt"></i></span></div>
-        <span class="oercurr-select-label">Select Document</span> <div class="input-group-addon oercurr-download-copy-icon" title="Select Material"><i class="fa fa-upload"></i></div>
+        <span class="oercurr-select-label"><?php echo esc_html__('Select Document', OERCURR_CURRICULUM_SLUG) ?></span> <div class="input-group-addon oercurr-download-copy-icon" title="Select Material"><i class="fa fa-upload"></i></div>
       <?php
     }
     ?></div></div><?php
@@ -287,13 +340,30 @@ function oercurr_enqueue_admin_assets() {
   	    }
         wp_enqueue_script( 'media-upload' );
         wp_register_script('oercurr-script', OERCURR_CURRICULUM_URL . 'js/backend/oer-curriculum.js', array( 'jquery','media-upload' ));
-        wp_localize_script('oercurr-script','lpScript', array("image_placeholder_url" => OERCURR_CURRICULUM_URL.'images/oer-curriculum-person-placeholder.png'));
+        wp_localize_script('oercurr-script','lpScript',
+          [
+            "image_placeholder_url" => OERCURR_CURRICULUM_URL.'images/oer-curriculum-person-placeholder.png',
+            'pluginDirUrl' => OERCURR_CURRICULUM_URL,
+            'txtSetThumbnail' => esc_html__('Set Thumbnail', OERCURR_CURRICULUM_SLUG),
+            'txtChangeThumbnail' => esc_html__('Change Thumbnail', OERCURR_CURRICULUM_SLUG),
+            'txtUseMaterial' => esc_html__('Use Material', OERCURR_CURRICULUM_SLUG),
+            'txtUseMaterials' => esc_html__('Use Materials', OERCURR_CURRICULUM_SLUG),
+            'txtSelectMaterial' => esc_html__("Select Material", OERCURR_CURRICULUM_SLUG),
+            'txtSelectMaterials' => esc_html__("Select Materials", OERCURR_CURRICULUM_SLUG),
+            'txtAddMaterials' => esc_html__("Use Materials", OERCURR_CURRICULUM_SLUG),
+            'txtSelectAuthorPicture' => esc_html__("Select Author Picture", OERCURR_CURRICULUM_SLUG),
+            'txtUsePicture' => esc_html__("Use Picture", OERCURR_CURRICULUM_SLUG),
+          ]
+        );
         wp_enqueue_script('oercurr-script');
         wp_enqueue_script('oercurr-resource-selector-script', OERCURR_CURRICULUM_URL . 'js/backend/oer-curriculum-resource-selector.js' , array('jquery') , null, true);
         //wp_enqueue_script('oercurr-cfb-admin-jqueryui-core', admin_url( 'wp-includes/js/jquery/ui/core.min.js' ) ,array('jquery') , null, true);
         wp_enqueue_script('oercurr-cfb-admin-jqueryui-sortable', admin_url( 'wp-includes/js/jquery/ui/sortable.min.js' ) ,array('jquery, oercurr-cfb-admin-jqueryui-core') , null, true);
   }
-
+  
+  
+  wp_enqueue_script('oercurr-resource-selector-script', OERCURR_CURRICULUM_URL . 'js/backend/oercurr-admin.js' , array('jquery') , null, true);
+    
 }
 
 function oercurr_dequeue_oer_scripts(){
@@ -639,7 +709,7 @@ function oercurr_add_more_prime_resource_callback() {
       <div class="card col card-default oercurr-primary-resource-element-wrapper" id="oercurr-primary-resource-element-wrapper-<?php echo esc_attr($totalElements) ?>">
           <div class="card-header">
               <h3 class="card-title oercurr-module-title">
-                  Resource
+                  <?php esc_html_e('Resource',OERCURR_CURRICULUM_SLUG); ?>
                   <span class="oercurr-sortable-handle">
                       <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
                       <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
@@ -652,9 +722,9 @@ function oercurr_add_more_prime_resource_callback() {
           <div class="card-body">
             <div class="row">
                 <div class="col-md-7">
-                    <label>Thumbnail Image</label>
+                    <label><?php esc_html_e("Thumbnail Image",OERCURR_CURRICULUM_SLUG) ?></label>
                     <div class="oer_primary_resource_thumbnail_holder"></div>
-                    <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                    <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image"><?php esc_html_e("Set Thumbnail",OERCURR_CURRICULUM_SLUG) ?></button>
                     <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
                 </div>
             </div>
@@ -662,15 +732,15 @@ function oercurr_add_more_prime_resource_callback() {
                   <div class="col-md-6">
                       <div class="form-group">
                           <div class="oer_curriculum_primary_resources_image_wrappper">
-                            <label>Resource</label>
+                            <label><?php esc_html_e('Resource', OERCURR_CURRICULUM_SLUG) ?></label>
                             <div class="oer_curriculum_primary_resources_image">
                               <div class="oer_curriculum_primary_resources_image_preloader" style="display:none;">
                                 <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                               </div>
                               <div class="oer_curriculum_primary_resources_image_display">
-                                <div class="oer_curriculum_primary_resources_display"><p>You have not selected a resource</p></div>
+                                <div class="oer_curriculum_primary_resources_display"><p><?php esc_html_e('You have not selected a resource', OERCURR_CURRICULUM_SLUG) ?></p></div>
                                 <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="">
-                                <input type="button" class="button oercurr-resource-selector-button" value="Select Resource">
+                                <input type="button" class="button oercurr-resource-selector-button" value="<?php esc_html_e("Select Resource",OERCURR_CURRICULUM_SLUG) ?>">
                               </div>
                             </div>
                           </div>
@@ -682,7 +752,7 @@ function oercurr_add_more_prime_resource_callback() {
                               <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="<?php echo esc_attr($prType) ?> ">
                               <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
                               <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
-                              Sensitive Material
+                              <?php esc_html_e("Sensitive Material",OERCURR_CURRICULUM_SLUG) ?>
                           </label>
                       </div>
                   </div>
@@ -694,7 +764,7 @@ function oercurr_add_more_prime_resource_callback() {
               <div class="card col card-default oercurr-primary-resource-element-wrapper" id="oercurr-primary-resource-element-wrapper-<?php echo esc_attr($totalElements) ?>">
                   <div class="card-header">
                       <h3 class="card-title oercurr-module-title">
-                          Texbox
+                          <?php esc_html_e('Texbox',OERCURR_CURRICULUM_SLUG); ?>
                           <span class="oercurr-sortable-handle">
                               <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
                               <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
@@ -708,9 +778,9 @@ function oercurr_add_more_prime_resource_callback() {
                       <div class="form-group">
                           <div class="row">
                               <div class="col-md-7">
-                                  <label>Thumbnail Image</label>
+                                  <label><?php esc_html_e("Thumbnail Image",OERCURR_CURRICULUM_SLUG) ?></label>
                                   <div class="oer_primary_resource_thumbnail_holder"></div>
-                                  <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image">Set Thumbnail</button>
+                                  <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image"><?php esc_html_e("Set Thumbnail",OERCURR_CURRICULUM_SLUG) ?></button>
                                   <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
                               </div>
                               <div class="col-md-5">
@@ -720,7 +790,7 @@ function oercurr_add_more_prime_resource_callback() {
                                           <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="<?php echo esc_attr($prType) ?>">
                                           <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
                                           <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
-                                          Sensitive Material
+                                          <?php esc_html_e("Sensitive Material",OERCURR_CURRICULUM_SLUG) ?>
                                       </label>
                                   </div>
                               </div>
@@ -732,15 +802,15 @@ function oercurr_add_more_prime_resource_callback() {
       ?>
       
                       <div class="form-group">
-                          <label>Title</label>
+                          <label><?php esc_html_e("Title",OERCURR_CURRICULUM_SLUG) ?></label>
                           <input type="text"
                           class="form-control"
                           name="oer_curriculum_primary_resources[title][]"
-                          placeholder="Resource Title"
+                          placeholder="<?php esc_html_e("Resource Title",OERCURR_CURRICULUM_SLUG) ?>"
                           value="">
                       </div>
                       <div class="form-group">
-                          <label>Description</label>
+                          <label><?php esc_html_e("Description",OERCURR_CURRICULUM_SLUG) ?></label>
 
                               <?php
                               ob_start(); // Start output buffer
@@ -847,7 +917,7 @@ ob_start(); // Start output buffer
         </div>
         <div class="card-body">
             <div class="form-group">
-                <label>Title</label>
+                <label><?php esc_html_e("Title",OERCURR_CURRICULUM_SLUG) ?></label>
                 <input type="text" name="oer_curriculum_custom_editor_<?php echo esc_attr($id) ?>[title]" maxlength="512" class="form-control" placeholder="Text Module Title" />
             </div>
             <div class="form-group">
@@ -989,9 +1059,8 @@ if (! function_exists('oercurr_create_dynamic_materials_module')) {
  */
 add_action('wp_ajax_oercurr_dismiss_notice_callback', 'oercurr_dismiss_notice_callback');
 add_action('wp_ajax_nopriv_oercurr_dismiss_notice_callback', 'oercurr_dismiss_notice_callback');
-
 function oercurr_dismiss_notice_callback() {
-    update_option('oer_curriculum_setup_notification', true);
+    update_option('oer_curriculum_setup_notification',false);
 }
 
 /**
@@ -1119,7 +1188,7 @@ function oercurr_add_text_feature_callback() {
        </div>
        <div class="card-body">
            <div class="form-group">
-               <input type="text" class="form-control" name="<?php echo esc_attr($label_id) ?>" id="<?php echo esc_attr($label_id) ?>" placeholder="Text Title">
+               <input type="text" class="form-control" name="<?php echo esc_attr($label_id) ?>" id="<?php echo esc_attr($label_id) ?>" placeholder="<?php echo esc_html__('Text Title', OERCURR_CURRICULUM_SLUG) ?>">
            </div>
            <div class="form-group">
                <div class="text-editor-group">
@@ -1134,6 +1203,7 @@ function oercurr_add_text_feature_callback() {
                                     'drag_drop_upload' => true,
                                     'teeny' => true,
                                     'relative_urls' => false,
+                                    'skin' => false
                                 )
                             );
                             echo ob_get_clean();
@@ -1174,7 +1244,7 @@ add_action( 'admin_footer', 'oercurr_add_modals_to_footer', 10 );
 
 
 function oercurr_add_curriculum_settings(){
-    add_submenu_page('edit.php?post_type=oer-curriculum','Settings','Settings','add_users','oer_curriculum_settings','oercurr_settings_callback_func');
+    add_submenu_page('edit.php?post_type=oer-curriculum',__('Settings',OERCURR_CURRICULUM_SLUG),__('Settings',OERCURR_CURRICULUM_SLUG),'add_users','oer_curriculum_settings','oercurr_settings_callback_func');
 }
 add_action( 'admin_menu', 'oercurr_add_curriculum_settings' );
 
@@ -1182,4 +1252,16 @@ function oercurr_settings_callback_func(){
     include_once( OERCURR_CURRICULUM_PATH."includes/oer-curriculum-settings.php" );
 }
 
-add_filter( 'wp_default_editor', function(){return "html";} );
+add_filter( 'wp_default_editor', function(){return "text";} );
+
+function wpse120831_mce_css( $mce_css ) {
+  if(is_admin()){
+    if ( ! empty( $mce_css ) )
+        $mce_css .= ',';
+        
+    $mce_css .= OERCURR_CURRICULUM_URL."css/backend/oer-curriculum-mce-style.css";
+  }
+  return $mce_css;
+}
+
+add_filter( 'mce_css', 'wpse120831_mce_css' );
