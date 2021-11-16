@@ -1,5 +1,5 @@
 {
-"domain": "my-text-domain",
+"domain": "oer-curriculum",
 "locale_data": {
 
 	"oer-curriculum": {
@@ -418,7 +418,10 @@
         ],
         "Curriculums": [
             "Plan de estudios"
-        ]
+        ],
+				"Curriculum Featured Block settings":[
+						"Para bailar labamba"
+				],
     }
 
      }

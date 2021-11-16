@@ -27,8 +27,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @uses {wp-editor} for WP editor styles.
  * @since 1.0.0
  */
- 
-
  function oer_curriculum_oer_curriculum_block_block_init() {
  	register_block_type( __DIR__ );
  }
@@ -334,3 +332,40 @@ if ( ! defined( 'ABSPATH' ) ) {
    return ob_get_clean();
    
  }
+
+
+ function oercurr_list_blk_load_translations(){
+ 	?>
+ 	<script>
+ 	document.addEventListener("DOMContentLoaded", function(event) {
+ 		
+ 		window.oercurr_clb_global = {
+ 			"locale": "<?php echo get_locale() ?>",
+ 			"baseurl": "<?php echo get_home_url() ?>",
+ 			"translations": {
+ 				"Curriculum List": "Lista de planes de estudios",
+ 				"Use this block to add a list of curriculum based on subject": "Utilice este bloque para agregar una lista de planes de estudios según la materia",
+ 				"Curriculum Block settings": "Configuración del bloque del plan de estudios",
+ 				"Subjects": "Sujetos",
+ 				"Add Subjects":"Agregar temas",
+ 				"Posts Per Page": "Publicaciones por página",
+ 				"Sort By": "Ordenar por",
+ 				"Date Added": "Fecha Agregada",
+ 				"Date Updated": "Fecha actualizada",
+ 				"Title a-z": "Título a-z",
+ 				"Browse All": "Examinar todo",
+ 				"Curriculums": "Plan de estudios",
+ 				"Show": "Show"
+ 			}
+ 		}
+ 		
+ 		window.oercurr_clb_t = function (txt){
+ 			return (oercurr_clb_global.locale == 'es_ES')? oercurr_clb_global.translations[txt]: txt;
+ 		}
+
+ 	})
+ 	</script>
+ 	<?php
+ }
+ add_action( 'admin_head', 'oercurr_list_blk_load_translations');
+ add_action( 'wp_head', 'oercurr_list_blk_load_translations');

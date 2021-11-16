@@ -1,0 +1,117 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "oer-curriculum/oer-curriculum-featured-block",
+	"version": "0.5.2",
+	"title": "Featured Curriculum Slider",
+	"category": "oer-block-category",
+	"icon": "welcome-learn-more",
+	"description": "Use this block to add OER curriculum and resources in a slider",
+	"supports": {
+		"html": false
+	},
+	"attributes":{
+    "blockwidth":{
+      "type": "intiger",
+      "default":1170
+		},
+		"blockid":{
+			"type": "string"
+		},
+		"highlight":{
+			"type": "string",
+      "default": "resources"
+		},
+		"selectedfeatured":{
+			"type": "string"
+		},
+    "data":{
+			"type": "string"
+		},
+		"resources":{
+			"type": "string"
+		},
+		"curriculum":{
+			"type": "string"
+		},
+    "blocktitle":{
+			"type": "string",
+      "default": "Featured"
+		},
+    "featlist":{
+      "type": "array",
+      "default": []
+    },
+    "searchstring":{
+      "type": "string"
+    },
+    "resourcesubjects":{
+      "type": "object"
+    },
+    "curriculumsubjects":{
+      "type": "object"
+    },
+    "resourcesubjectfilter":{
+      "type": "string"
+    },
+    "curriculumsubjectfilter":{
+      "type": "string"
+    },
+    "filtertype":{
+      "type": "string"
+    },
+    "minslides":{
+			"type": "intiger",
+      "default": 1
+		},
+    "maxslides":{
+			"type": "intiger",
+      "default": 3
+		},
+    "moveslides":{
+			"type": "intiger",
+      "default": 1
+		},
+    "slidewidth":{
+			"type": "intiger",
+      "default": 375
+		},
+    "slidemargin":{
+			"type": "intiger",
+      "default": 20
+		},
+    "slidealign":{
+			"type": "string",
+      "default": "left"
+		},
+    "slidedesclength":{
+      "type": "intiger",
+      "default": 150
+		},
+    "slideimageheight":{
+      "type": "intiger",
+      "default": 225
+		},
+		"resetBlocked":{
+			"type": "boolean",
+      "default": false
+		}, 
+		"slideDescLen":{
+			"type": "integer",
+      "default": 150
+		}, 
+		"SlideBlockWidth":{
+			"type": "integer",
+      "default": 150
+		}, 
+		"SlideImageWidth":{
+			"type": "integer",
+      "default": 225
+		}
+    
+	},
+	"textdomain": "oer-curriculum",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}

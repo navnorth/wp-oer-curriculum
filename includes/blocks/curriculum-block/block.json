@@ -48,24 +48,6 @@
 		},
 		"getLocal":{
 			"type": "array"
-		},
-		"translations": {
-			"type": "array",
-			"default": [{
-				"Curriculum List": "Lista de planes de estudios",
-				"Use this block to add a list of curriculum based on subject": "Utilice este bloque para agregar una lista de planes de estudios según la materia",
-				"Curriculum Block settings": "Configuración del bloque del plan de estudios",
-				"Subjects": "Sujetos",
-				"Add Subjects":"Agregar temas",
-				"Posts Per Page": "Publicaciones por página",
-				"Sort By": "Ordenar por",
-				"Date Added": "Fecha Agregada",
-				"Date Updated": "Fecha actualizada",
-				"Title a-z": "Título a-z",
-				"Browse All": "Examinar todo",
-				"Curriculums": "Plan de estudios",
-				"Show": "Show"
-			}]
 		}
 	},
 	"textdomain": "oer-curriculum",
