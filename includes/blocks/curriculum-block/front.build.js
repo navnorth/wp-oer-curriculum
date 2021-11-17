@@ -39,7 +39,7 @@ jQuery( document ).ready(function() {
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
         var bid = jQuery(this).parents('.oercurr-blk-main').attr('blockid');
         var val = jQuery(this).attr('ret');
-        var selpertxt = oercurr_clb_t('Show') +': '+ val;   
+        var selpertxt = oercurr__t('Show') +': '+ val;   
         jQuery("#"+bid).attr('selper',val);
         lpCurSaveToLocalAttribute(bid, "selper", val, selpertxt);
         var target = jQuery(this).parent();
@@ -50,7 +50,7 @@ jQuery( document ).ready(function() {
         var keycode = (e.keyCode ? e.keyCode : e.which);
         var bid = jQuery(this).parents('.oercurr-blk-main').attr('blockid');
         var val = jQuery(this).attr('ret');
-        var selpertxt = oercurr_clb_t('Show') +': '+ val;
+        var selpertxt = oercurr__t('Show') +': '+ val;
         jQuery("#"+bid).attr('selper',val);
         var target = jQuery(this).parent();
         lpCurSaveToLocalAttribute(bid, "selper", val, selpertxt, keycode, target);
@@ -63,7 +63,7 @@ jQuery( document ).ready(function() {
         var val = jQuery(this).attr('ret');
         var bid = jQuery(this).parents('.oercurr-blk-main').attr('blockid');
         jQuery("#"+bid).attr('selsrt',val);
-        var selsrttxt = oercurr_clb_t('Sort By') +': '+ jQuery(this).text();
+        var selsrttxt = oercurr__t('Sort By') +': '+ jQuery(this).text();
         lpCurSaveToLocalAttribute(bid, "selsrt", val, selsrttxt);
         var target = jQuery(this).parent();
         resetSelection(target);
@@ -74,7 +74,7 @@ jQuery( document ).ready(function() {
         var bid = jQuery(this).parents('.oercurr-blk-main').attr('blockid');
         var val = jQuery(this).attr('ret');
         jQuery("#"+bid).attr('selsrt',val);
-        var selsrttxt = oercurr_clb_t('Sort By') +': '+ jQuery(this).text();
+        var selsrttxt = oercurr__t('Sort By') +': '+ jQuery(this).text();
         var target = jQuery(this).parent();
         lpCurSaveToLocalAttribute(bid, "selsrt", val, selsrttxt, keycode, target);
     });

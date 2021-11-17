@@ -574,3 +574,42 @@ if (!function_exists('wp_oer_block_category')) {
   }
 
 }
+
+
+function oercurr_load_i18n_translations_function(){
+  $oercurr_i18n_locale = get_locale();
+  $oercurr_i18n_json_path = OERCURR_CURRICULUM_PATH."/languages/oer-curriculum-".$oercurr_i18n_locale.".json";
+  if (file_exists($oercurr_i18n_json_path)) {
+    $oercurr_i18n_translations = file_get_contents(OERCURR_CURRICULUM_PATH."/languages/oer-curriculum-".$oercurr_i18n_locale.".json");
+  }else{
+    $oercurr_i18n_translations = file_get_contents(OERCURR_CURRICULUM_PATH."/languages/oer-curriculum-en_US.json");
+  }
+  ?>
+  <script>
+  	document.addEventListener("DOMContentLoaded", function(event) {
+      
+      window.oercurr_global = {
+        "baseurl": "<?php echo get_home_url() ?>",
+  			"pluginurl": "<?php echo OERCURR_CURRICULUM_URL ?>",
+  			"plugindir": "<?php echo OERCURR_CURRICULUM_PATH ?>"
+      }
+      
+    	window.oercurr_i18n_arr = <?php echo $oercurr_i18n_translations ?>;
+      window.oercurr_i18n_locale = '<?php echo $oercurr_i18n_locale ?>';
+      ret = '';
+      window.oercurr__t = function (txt){      
+        switch(oercurr_i18n_locale) {
+          case 'es_ES':
+            ret = (typeof oercurr_i18n_arr[txt] !== 'undefined')? oercurr_i18n_arr[txt] : txt;        
+            break;
+          default:
+            ret = txt;
+        }
+  			return ret;
+  		}
+    })
+  </script>
+  <?php
+}
+add_action( 'admin_head', 'oercurr_load_i18n_translations_function');
+add_action( 'wp_head', 'oercurr_load_i18n_translations_function');
