@@ -40,7 +40,7 @@ define( 'OERCURR_CURRICULUM_FILE',__FILE__);
 // Plugin Name and Version
 define( 'OERCURR_CURRICULUM_PLUGIN_NAME', 'OER Curriculum Plugin' );
 define( 'OERCURR_CURRICULUM_ADMIN_PLUGIN_NAME', 'OER Curriculum Plugin');
-define( 'OERCURR_CURRICULUM_VERSION', '0.5.0' );
+define( 'OERCURR_CURRICULUM_VERSION', '0.5.2' );
 
 define( 'OERCURR_INDI_GRADE_LEVEL', true);  // set to true to use native grade levels
 if(OERCURR_INDI_GRADE_LEVEL){
