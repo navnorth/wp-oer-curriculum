@@ -284,7 +284,7 @@ add_action( 'rest_api_init', 'oercurr_add_meta_to_api');
 function oercurr_add_meta_to_api() {
     // Register Grade Levels to REST API
     register_rest_field( 'oer-curriculum',
-                'oer_curriculum_grades',
+                'oer_curriculum_grades_tax',
                 array(
                 'get_callback' => 'oercurr_rest_get_meta_field',
                 'update_callback' => null,
@@ -317,7 +317,8 @@ function oercurr_retrieve_rootslug(){
 }
 
 function oercurr_rest_get_meta_field($inquiryset, $field, $request){
-    if ($field=="oer_curriculum_grades") {
+    if ($field=="oer_curriculum_grades_tax") {
+        /*
         $grades = get_post_meta($inquiryset['id'], $field, true);
                 if (is_array($grades))
                     $grades = $grades[0];
@@ -331,6 +332,8 @@ function oercurr_rest_get_meta_field($inquiryset, $field, $request){
                     $grade_level = "Grade ".$grades;
 
                 return $grade_level;
+        */
+        return get_the_terms($inquiryset['id'], 'curriculum-grade-level');
     } else
         return get_post_meta($inquiryset['id'], $field, true);
 }
