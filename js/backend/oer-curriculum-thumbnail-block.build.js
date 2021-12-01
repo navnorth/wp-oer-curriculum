@@ -226,7 +226,7 @@ var oerCurriculumSets = function (_Component) {
 
 wp.blocks.registerBlockType('oer-curriculum/curriculum-thumbnail-block', {
     title: 'Curriculum Thumbnail Block',
-    category: 'common',
+    category: 'oer-block-category',
     icon: 'welcome-learn-more',
     attributes: {
         selectedInquirySet: { type: 'number', default: 0 },
