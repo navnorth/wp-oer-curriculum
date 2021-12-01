@@ -119,18 +119,23 @@ var oerCurriculumSets = function (_Component) {
                 return item.id == parseInt(value);
             });
             var image_url = oer_curriculum_thumbnail_block_localized.theme_path + '/images/default-image.png';
-console.log(image_url);
             this.setState({ selectedInquirySet: parseInt(value), post: post });
 
             if (post.featured_image_url) {
                 image_url = post.featured_image_url;
             }
+                
+            let dlmtd = '';
+            post.oer_curriculum_grades_tax.map(function(item, i){
+              dlmtd = (dlmtd == '')? item['name']: dlmtd+', '+item['name']
+            })
+
 
             this.props.setAttributes({
                 selectedInquirySet: parseInt(value),
                 title: post.title.rendered,
                 link: post.link,
-                grade: post.oer_curriculum_grades,
+                grade: dlmtd,
                 featuredImage: image_url
             });
         }
