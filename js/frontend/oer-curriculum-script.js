@@ -79,11 +79,13 @@ jQuery(window).load(function() {
     });
     
     $(document).on("show.bs.collapse", '#tcHiddenFields.collapse', function (){
-        $('#see-more-link').text("SEE LESS -");
+      setTimeout(function(){
+        $('#see-more-link').html(oercurr__t('SEE LESS')+' <i class="fa fa-chevron-up"></i>');
+      }, 500);
     });
     
     $(document).on("hide.bs.collapse", '#tcHiddenFields.collapse', function (){
-        $('#see-more-link').text("SEE MORE +");
+        $('#see-more-link').html(oercurr__t('SEE MORE')+' <i class="fa fa-chevron-down"></i>');
     });
     
     $(document).on("show.bs.collapse", '.oercurr-subject-hidden.collapse', function (){
