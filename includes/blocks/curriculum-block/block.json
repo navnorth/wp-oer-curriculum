@@ -1,0 +1,57 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "oer-curriculum/oer-curriculum-block",
+	"version": "0.5.2",
+	"title": "Curriculum List",
+	"category": "oer-block-category",
+	"icon": "welcome-learn-more",
+	"description": "Use this block to add a list of curriculum based on subject",
+	"supports": {
+		"html": true
+	},
+	"attributes": {
+		"blockid": {
+			"type": "string"
+		},
+		"curriculums": {
+			"type": "array"
+		},
+		"curriculumlength": {
+			"type": "integer"
+		},
+		"categories": {
+			"type": "array"
+		},
+		"selectedCategory": {
+			"type": "string"
+		},
+		"displayOption": {
+			"type": "array",
+			"default": [2, 5, 10, 15, 20, 25, 30]
+		},
+		"selper":{
+			"type": "string",
+			"default": "5"
+		},
+		"selsrt":{
+			"type": "string",
+			"default": "modified"
+		},
+		"sortOption": {
+			"type": "object",
+			"default": [{
+				"date": "Date Added",
+				"modified": "Date Updated",
+				"title": "Title a-z"
+			}]
+		},
+		"getLocal":{
+			"type": "array"
+		}
+	},
+	"textdomain": "oer-curriculum",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}

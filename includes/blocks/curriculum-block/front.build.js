@@ -1,7 +1,4 @@
 jQuery( document ).ready(function() {
-  
-  
-  
 
     // DISPLAY BOX
     jQuery(document).on('click','.oercurr-blk-topbar-display-text>a',function(e){
@@ -41,8 +38,10 @@ jQuery( document ).ready(function() {
     jQuery(document).on('click','.oercurr-blk-topbar-display-option li a',function(e){
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
         var bid = jQuery(this).parents('.oercurr-blk-main').attr('blockid');
-        var val = jQuery(this).attr('ret');      
-        lpCurSaveToLocalAttribute("postsPerPage-"+bid, val);
+        var val = jQuery(this).attr('ret');
+        var selpertxt = oercurr__t('Show') +': '+ val;   
+        jQuery("#"+bid).attr('selper',val);
+        lpCurSaveToLocalAttribute(bid, "selper", val, selpertxt);
         var target = jQuery(this).parent();
         resetSelection(target);
     });  
@@ -51,8 +50,10 @@ jQuery( document ).ready(function() {
         var keycode = (e.keyCode ? e.keyCode : e.which);
         var bid = jQuery(this).parents('.oercurr-blk-main').attr('blockid');
         var val = jQuery(this).attr('ret');
+        var selpertxt = oercurr__t('Show') +': '+ val;
+        jQuery("#"+bid).attr('selper',val);
         var target = jQuery(this).parent();
-        lpCurSaveToLocalAttribute("postsPerPage-"+bid, val, keycode, target);
+        lpCurSaveToLocalAttribute(bid, "selper", val, selpertxt, keycode, target);
     });
     
     
@@ -61,8 +62,9 @@ jQuery( document ).ready(function() {
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
         var val = jQuery(this).attr('ret');
         var bid = jQuery(this).parents('.oercurr-blk-main').attr('blockid');
-        var selsrttxt = jQuery(this).text();
-        lpCurSaveToLocalAttribute("sortBy-"+bid, selsrttxt);
+        jQuery("#"+bid).attr('selsrt',val);
+        var selsrttxt = oercurr__t('Sort By') +': '+ jQuery(this).text();
+        lpCurSaveToLocalAttribute(bid, "selsrt", val, selsrttxt);
         var target = jQuery(this).parent();
         resetSelection(target);
     });
@@ -71,8 +73,10 @@ jQuery( document ).ready(function() {
         var keycode = (e.keyCode ? e.keyCode : e.which);
         var bid = jQuery(this).parents('.oercurr-blk-main').attr('blockid');
         var val = jQuery(this).attr('ret');
+        jQuery("#"+bid).attr('selsrt',val);
+        var selsrttxt = oercurr__t('Sort By') +': '+ jQuery(this).text();
         var target = jQuery(this).parent();
-        lpCurSaveToLocalAttribute("sortBy-"+bid, val, keycode, target);
+        lpCurSaveToLocalAttribute(bid, "selsrt", val, selsrttxt, keycode, target);
     });
   
     
@@ -93,15 +97,20 @@ function updatepostdisplay(instanceparent){
     
     var bid = instanceparent.attr('blockid');
     instanceparent.find('.lp_cur_blk_content_preloader_table').show(300);
+    
+    var oercurr_blk_selcat = instanceparent.attr('selcat');
+    var oercurr_blk_selper = instanceparent.attr('selper');
+    var oercurr_blk_selsrt = instanceparent.attr('selsrt');
+    
     var dta = {
   		'action' 	 : 'oercurr_cb_rebuild_post_block',
-  		'sel'      : localStorage.getItem('selectedCategory-'+bid),
-  		'per'      : localStorage.getItem('postsPerPage-'+bid),
-  		'srt'      : localStorage.getItem('sortBy-'+bid),
+  		'sel'      : oercurr_blk_selcat,
+  		'per'      : oercurr_blk_selper,
+  		'srt'      : oercurr_blk_selsrt,
   	};
-    console.log('SEL CAT:'+localStorage.getItem('selectedCategory-'+bid));
-    console.log('SEL PER:'+localStorage.getItem('postsPerPage-'+bid));
-    console.log('SEL SRT:'+localStorage.getItem('sortBy-'+bid));
+    //console.log('SEL CAT:'+oercurr_blk_selcat);
+    //console.log('SEL PER:'+oercurr_blk_selper);
+    //console.log('SEL SRT:'+oercurr_blk_selsrt);
     jQuery.ajax({
   		type:'POST',
   		url: curriculum_block_ajax_object.ajaxurl,
@@ -111,8 +120,6 @@ function updatepostdisplay(instanceparent){
         var instance = jQuery('[blockid="'+bid+'"]');
           if(typeof cgbGlobal == 'undefined'){ 
             instanceparent.find('#oercurr-blk-content_drop').html(response['data']);
-            instanceparent.find('.oercurr-blk-topbar-display-text span').text(curriculum_block_ajax_object['Show']+': '+localStorage.getItem('postsPerPage-'+bid));
-            instanceparent.find('.oercurr-blk-topbar-sort-text span').text(curriculum_block_ajax_object['Sort By']+': '+localStorage.getItem('sortBy-'+bid));
             instanceparent.find('.oercurr-blk-topbar-left span').text(curriculum_block_ajax_object['Browse All']+' '+response['cnt']+' '+curriculum_block_ajax_object['Curriculums']);
           }
       
@@ -123,7 +130,7 @@ function updatepostdisplay(instanceparent){
   		},
   		error: function(XMLHttpRequest, textStatus, errorThrown) {
         setTimeout(function(){
-          console.log('close preloader2');
+          //console.log('close preloader2');
           instanceparent.find('.lp_cur_blk_content_preloader_table').hide(300);
         }, 300);
   		}
@@ -132,14 +139,23 @@ function updatepostdisplay(instanceparent){
 }
 
 
-function lpCurSaveToLocalAttribute(key, val, kcode=null, target=null){
+function lpCurSaveToLocalAttribute(bid, typ, val, disp=null, kcode=null, target=null){
+
   if(kcode==null){ //click
-    
-      localStorage.setItem(key, val);
+      
+      if(typ == 'selper'){
+        jQuery("#"+bid).find('.oercurr-blk-topbar-display-text span').text(disp);
+      }else{
+        jQuery("#"+bid).find('.oercurr-blk-topbar-sort-text span').text(disp);
+      }
       
   }else{
     if(kcode == '13'){ 
-      localStorage.setItem(key, val); 
+      if(typ == 'selper'){
+        jQuery("#"+bid).find('.oercurr-blk-topbar-display-text span').text(disp);
+      }else{
+        jQuery("#"+bid).find('.oercurr-blk-topbar-sort-text span').text(disp);
+      }
       if(target != 'null'){
         resetSelection(target);
       }

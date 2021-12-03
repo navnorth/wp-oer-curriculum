@@ -1,169 +1,61 @@
 <?php
 /**
- * Blocks Initializer
+ * Plugin Name:       Featured Curriculum Slider Old
+ * Description:       Use this block to add OER curriculum and resources in a slider
+ * Requires at least: 5.8
+ * Requires PHP:      7.0
+ * Version:           0.5.2
+ * Author:            The WordPress Contributors
+ * License:           GPL-2.0-or-later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       oer-curriculum-featured-block
  *
- * Enqueue CSS/JS of all the blocks.
- *
- * @since   1.0.0
- * @package CGB
+ * @package           oer-curriculum
  */
-
-// Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
-}
+ 
+ define( 'OERCURR_CFB_BLK_BX_RESET_BLOCKED', false );
+ define( 'OERCURR_CFB_BLK_SLIDE_DESC_LEN', 150 );
+ define( 'OERCURR_CFB_BLK_BLOCK_WIDTH', 150 );
+ define( 'OERCURR_CFB_BLK_SLIDE_IMG_HEIGHT', 225 );
 
 /**
- * Enqueue Gutenberg block assets for both frontend + backend.
+ * Registers the block using the metadata loaded from the `block.json` file.
+ * Behind the scenes, it registers also all assets so they can be enqueued
+ * through the block editor in the corresponding context.
  *
- * Assets enqueued:
- * 1. blocks.style.build.css - Frontend + Backend.
- * 2. blocks.build.js - Backend.
- * 3. blocks.editor.build.css - Backend.
- *
- * @uses {wp-blocks} for block type registration & related functions.
- * @uses {wp-element} for WP Element abstraction — structure of blocks.
- * @uses {wp-i18n} to internationalize the block's text.
- * @uses {wp-editor} for WP editor styles.
- * @since 1.0.0
+ * @see https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/writing-your-first-block-type/
  */
-define( 'OERCURR_CFB_CURRICULUM_URL', plugin_dir_url(__FILE__) );
-define( 'OERCURR_CFB_BLK_PLUGIN_DIR_PATH', plugin_dir_path( __DIR__ ) );
-
-define( 'OERCURR_CFB_BLK_PLUGIN_DIR_URL', OERCURR_CURRICULUM_URL."/includes/blocks/curriculum-featured-block" );
-define( 'OERCURR_CFB_BLK_BASE_URL', get_home_url() );
-
-define( 'OERCURR_CFB_BLK_CURRICULUM_PLUGIN_URL', OERCURR_CURRICULUM_URL );
-define( 'OERCURR_CFB_BLK_BX_RESET_BLOCKED', false );
-define( 'OERCURR_CFB_BLK_SLIDE_DESC_LEN', 150 );
-define( 'OERCURR_CFB_BLK_BLOCK_WIDTH', 150 );
-define( 'OERCURR_CFB_BLK_SLIDE_IMG_HEIGHT', 225 );
-
-function oercurr_cfb_block_assets() { // phpcs:ignore
-    // Register block styles for both frontend + backend.
-    wp_register_style(
-        'curriculum_featured_block-cgb-style-css', // Handle.
-        plugins_url( '/curriculum-featured-block/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
-        is_admin() ? array( 'wp-editor' ) : null, 
-        null
-    );
-
-    // Register block editor script for backend.
-    wp_register_script(
-        'curriculum_featured_block-cgb-block-js', // Handle.
-        plugins_url( '/curriculum-featured-block/blocks.build.js', dirname( __FILE__ ) ),
-        array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), 
-        null, 
-        true
-    );
-    
-    wp_localize_script(
-  			'curriculum_featured_block-cgb-block-js',
-  			'oercurr_cfb_translations', // Array containing dynamic data for a JS Global.
-  			array(
-  					'Featured Curriculum Slider' => __('Featured Curriculum Slider',OERCURR_CURRICULUM_SLUG),
-  					'Use this block to add OER curriculum and resources in a slider' => __('Use this block to add OER curriculum and resources in a slider',OERCURR_CURRICULUM_SLUG),
-  					'Curriculum Featured Block settings' => __('Curriculum Featured Block settings',OERCURR_CURRICULUM_SLUG),
-  					'Block Title' => __('Block Title',OERCURR_CURRICULUM_SLUG),
-  					'Block Width' => __('Block Width',OERCURR_CURRICULUM_SLUG),
-  					'Note: Block width setting is only used to simulate the frontend width at backend and will not affect the frontend' => __('Note: Block width setting is only used to simulate the frontend width at backend and will not affect the frontend',OERCURR_CURRICULUM_SLUG),
-  					'Featured List' => __('Featured List',OERCURR_CURRICULUM_SLUG),
-  					'Add Resources' => __('Add Resources',OERCURR_CURRICULUM_SLUG),
-  					'Add Curriculum' => __('Add Curriculum',OERCURR_CURRICULUM_SLUG),
-  					'Slider Setting' => __('Slider Setting',OERCURR_CURRICULUM_SLUG),
-  					'Min. Slides' => __('Min. Slides',OERCURR_CURRICULUM_SLUG),
-  					'MinSlideInfo' => __('The minimum number of slides to be shown. Slides will be sized down if slider becomes smaller than the original size',OERCURR_CURRICULUM_SLUG),
-  					'Max. Slides' => __('Max. Slides',OERCURR_CURRICULUM_SLUG),
-  					'MaxSlideInfo' => __('The maximum number of slides to be shown. Slides will be sized up if slider becomes larger than the original size',OERCURR_CURRICULUM_SLUG),
-  					'Move Slides' => __('Move Slides',OERCURR_CURRICULUM_SLUG),
-  					'MoveSlidesInfo' => __('The number of slides to move on transition. This value must be greater than or equal to minSlides, and less than or equal to maxSlides. If value is greater than the fully-visible slides, then the count of fully-visible slides will be used',OERCURR_CURRICULUM_SLUG),
-  					'Slide Width' => __('Slide Width',OERCURR_CURRICULUM_SLUG),
-  					'SlideWidthInfo' => __('Width of each slide',OERCURR_CURRICULUM_SLUG),
-  					'Slide Margin' => __('Slide Margin',OERCURR_CURRICULUM_SLUG),
-  					'SlideMarginInfo' => __('Space between slides',OERCURR_CURRICULUM_SLUG),
-  					'Description length' => __('Description length',OERCURR_CURRICULUM_SLUG),
-  					'DescriptionLengthInfo' => __('Length of description to display',OERCURR_CURRICULUM_SLUG),
-  					'Image height' => __('Image height',OERCURR_CURRICULUM_SLUG),
-  					'ImageHeightInfo' => __('Adjust image height',OERCURR_CURRICULUM_SLUG),
-  					'Resources' => __('Resources',OERCURR_CURRICULUM_SLUG),
-  					'Curriculum' => __('Curriculum',OERCURR_CURRICULUM_SLUG),
-  					'Resources lists' => __('Resources lists',OERCURR_CURRICULUM_SLUG),
-  					'Curriculum lists' => __('Curriculum lists',OERCURR_CURRICULUM_SLUG),
-  					'Filter by subject' => __('Filter by subject',OERCURR_CURRICULUM_SLUG),
-  					'Filter by search' => __('Filter by search',OERCURR_CURRICULUM_SLUG),
-  					'All' => __('All',OERCURR_CURRICULUM_SLUG),
-  			)
-  	);
-
-    // Register block editor styles for backend.
-    wp_register_style(
-        'curriculum_featured_block-cgb-block-editor-css', // Handle.
-        plugins_url( '/curriculum-featured-block/blocks.editor.build.css', dirname( __FILE__ ) ),
-        array( 'wp-edit-blocks' ),
-        null
-    );
-
-
-    // WP Localized globals. Use dynamic PHP stuff in JavaScript via `oercurr_cfb_cgb_Global` object.
-    wp_localize_script(
-        'curriculum_featured_block-cgb-block-js',
-        'oercurr_cfb_cgb_Global', // Array containing dynamic data for a JS Global.
-        [
-            'pluginDirPath' => OERCURR_CFB_BLK_PLUGIN_DIR_PATH,
-            //'pluginDirUrl' => plugin_dir_url( __DIR__ ),
-            'pluginDirUrl' => OERCURR_CFB_BLK_PLUGIN_DIR_URL,
-            'base_url' => OERCURR_CFB_BLK_BASE_URL,
-            'curriculum_plugin_url' => OERCURR_CFB_BLK_CURRICULUM_PLUGIN_URL,
-            'bxresetblocked' => OERCURR_CFB_BLK_BX_RESET_BLOCKED,
-            'slidedesclength' => OERCURR_CFB_BLK_SLIDE_DESC_LEN,
-            'blockwidth' => OERCURR_CFB_BLK_BLOCK_WIDTH,
-            'slideimageheight' => OERCURR_CFB_BLK_SLIDE_IMG_HEIGHT,
-            'preview_url' => OERCURR_CURRICULUM_URL.'includes/blocks/curriculum-featured-block/images/blockpreview.png',
-            // Add more data here that you want to access from `oercurr_cfb_cgb_Global` object.
-        ]
-    );
-
-
-
-
-    /**
-     * Register Gutenberg block on server-side.
-     *
-     * Register the block on server-side to ensure that the block
-     * scripts and styles for both frontend and backend are
-     * enqueued when the editor loads.
-     *
-     * @link https://wordpress.org/gutenberg/handbook/blocks/writing-your-first-block-type#enqueuing-block-scripts
-     * @since 1.16.0
-     */
-    register_block_type(
-        'oer-curriculum/block-curriculum-featured-block', array(
-            // Enqueue blocks.style.build.css on both frontend & backend.
-            'style'         => 'curriculum_featured_block-cgb-style-css',
-            // Enqueue blocks.build.js in the editor only.
-            'editor_script' => 'curriculum_featured_block-cgb-block-js',
-            // Enqueue blocks.editor.build.css in the editor only.
-            'editor_style'  => 'curriculum_featured_block-cgb-block-editor-css',
-            //'render_callback' => 'oercurr_cfb_render_featured_block'
-        )
-    );
+function oer_curriculum_oer_curriculum_featured_block_block_init() {
+	register_block_type( __DIR__ );
 }
+add_action( 'init', 'oer_curriculum_oer_curriculum_featured_block_block_init' );
 
-// Hook: Block assets.
-add_action( 'init', 'oercurr_cfb_block_assets' );
 
-function oercurr_cfb_additional_script_front( $hook ) {
-    wp_enqueue_style('curriculum-feat-block-jquery-bxslider-css', OERCURR_CURRICULUM_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.css');
-    wp_enqueue_script('curriculum-feat-block-jquery-bxslider-js', OERCURR_CURRICULUM_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.js',array('jquery'), '1.0' );
+
+
+
+// Add inline CSS in the admin head with the style tag
+function oercurr_featured_slider_data_function() {
+    echo '<meta id="oercurr_featured_slider_data" base_url ="'.get_home_url().'" plugin_url="'.OERCURR_CURRICULUM_URL.'" plugin_dir="'.plugin_dir_path(__FILE__).'" locale="'.get_locale().'" >';
+}
+add_action( 'admin_head', 'oercurr_featured_slider_data_function' );
+
+
+
+
+function oercurr_cfb_additional_script_front( ) {
+    wp_enqueue_style('curriculum-feat-block-front-jquery-bxslider-css', OERCURR_CURRICULUM_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.css');
+    wp_enqueue_script('curriculum-feat-block-front-jquery-bxslider-js', OERCURR_CURRICULUM_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.js',array('jquery'), '1.0' );
 }
 add_action( 'wp_enqueue_scripts', 'oercurr_cfb_additional_script_front' );
 
-function oercurr_cfb_additional_script( $hook ) {
-    //wp_enqueue_style('curriculum-feat-block-resource-category-style-css', OER_URL.'css/resource-category-style.css');
-    wp_enqueue_style('curriculum-feat-block-jquery-bxslider-css', OERCURR_CURRICULUM_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.css');
-    wp_enqueue_script('curriculum-feat-block-jquery-bxslider-js', OERCURR_CURRICULUM_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.js',array('jquery'), '1.0' );
+function oercurr_cfb_additional_script( ) {
+    wp_enqueue_style('curriculum-feat-block-backend-jquery-bxslider-css', OERCURR_CURRICULUM_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.css');
+    wp_enqueue_script('curriculum-feat-block-backend-jquery-bxslider-js', OERCURR_CURRICULUM_URL.'includes/blocks/curriculum-featured-block/jquery.bxslider.js',array('jquery'), '1.0' );
 }
 add_action( 'admin_enqueue_scripts', 'oercurr_cfb_additional_script' );
+
+
 
 // Register a REST route
 add_action( 'rest_api_init', function () {
@@ -174,7 +66,6 @@ add_action( 'rest_api_init', function () {
                         'permission_callback' => '__return_true'
     ) );
 });
-
 
 function oercurr_cfb_dataquery(){
 
@@ -405,19 +296,24 @@ function oercurr_cfb_initiate_admin_bx_slider() {
     if ( $pagenow == 'post.php' || $pagenow == 'post-new.php' ) {
         ?>
         <script>
-
+				
+				var oercurr_cfb_cgb_Global = [];
         var curriculumfeatsliders = new Array();
-      var curriculumfeatbxconfig;
+        var curriculumfeatbxconfig;
         let newblockadded = true;
 
         jQuery(document).ready(function(){
-
+					
           jQuery(document).on('click','.oercurr_cfb_inspector_feat_addResources',function(e){
             jQuery('.oercurr_cfb_inspector_feat_modal_resource_wrapper').show(300);
           });
 
           jQuery(document).on('click','.oercurr_cfb_inspector_feat_addCurriculum',function(e){
             jQuery('.oercurr_cfb_inspector_feat_modal_curriculum_wrapper').show(300);
+          });
+					
+					jQuery(document).on('click','.oercurr_cfb_inspector_feat_add_resource_curriculum',function(e){
+            jQuery('.oercurr_cfb_inspector_feat_modal_resource_wrapper').show(300);
           });
 
           jQuery(document).on('click','.oercurr_cfb_inspector_feat_modal_wrapper_close span.dashicons',function(e){

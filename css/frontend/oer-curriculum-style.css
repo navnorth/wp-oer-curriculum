@@ -853,8 +853,35 @@ div#tcHiddenFields {float: left;}
   }
 }
 .see-more-row .center { text-align:center; }
-.see-more-row .see-more-link, .see-more-row .see-more-link:active { font-size:14px; font-weight:bold; line-height:19px; cursor:pointer; text-decoration:none; }
-.see-more-row .see-more-link:hover { text-decoration:underline; }
+.see-more-row span {
+    display: inline-block;
+    /*border: 2px solid #ca3c08;*/
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    padding: 2px 2px 2px 5px;
+}
+.see-more-row .see-more-link,
+.see-more-row .see-more-link:active,
+.see-more-row .see-more-link:focus {
+  display: block;
+  font-size:17px;
+  font-weight:bold;
+  line-height:17px;
+  cursor:pointer; 
+  text-decoration:none;
+  position: relative;
+  padding-right: 22px;
+}
+.row.see-more-row p {
+    margin-bottom: 20px;
+}
+a#see-more-link i.fa {
+    position: absolute;
+    top: -1px;
+    right:0px;
+    margin-left: 4px;
+}
 .oercurr-source-type {
     position: absolute;
     right: 0;
@@ -1322,6 +1349,7 @@ img.attachment-inquiry-set-featured {
     border-radius: 6px;
     overflow: hidden;
     margin-bottom: 10px;
+    width: 100%;
 }
 
 .oercurr-resource-container {

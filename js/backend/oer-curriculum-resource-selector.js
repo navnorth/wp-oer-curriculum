@@ -28,13 +28,7 @@ jQuery( document ).ready(function() {
             var p_type = response['p_type'];
             var p_imgtyp = response['p_imgtyp'];
             var p_imgurl = response['p_img'];
-            
-            console.log(p_title);
-            console.log(p_url);
-            console.log(p_resourceurl);
-            console.log(p_type);
-            console.log(p_imgtyp);
-            console.log(p_imgurl);
+
             
             //set images
             if(p_title){
