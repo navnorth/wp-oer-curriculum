@@ -1,10 +1,10 @@
 === OER Curriculum ===
 Contributors: navigationnorth, joehobson, johnpaulbalagolan, josepheneldas
 Tags: curriculum, education, learning, teaching, OER, Open Educational Resources
-Requires at least: 4.9
-Tested up to: 5.8.1
+Requires at least: 4.4
+Tested up to: 5.8.2
 Requires PHP: 7.0
-Stable tag: 0.5.2
+Stable tag: 0.5.3
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -56,6 +56,10 @@ This is an intermittent issue in Firefox. Installing the Classic Editor fixes th
 4. Subject Areas settings page for managing curriculum subjects
 
 == Changelog ==
+= 0.5.3 =
+* Updated the block information on WP.org Plugins page
+* Tested up to WP 5.8.2
+
 = 0.5.2 =
 * Added text internationalization
 * Added Grade Levels settings and customization
@@ -70,3 +74,6 @@ This is an intermittent issue in Firefox. Installing the Classic Editor fixes th
 
 = 0.5.0 =
 * Initial release
+
+== Upgrade Notice ==
+No upgrades at this time.
