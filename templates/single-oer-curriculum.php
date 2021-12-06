@@ -525,7 +525,7 @@
           </div>
       </div>
       <div class="row see-more-row">
-          <p class="center"><span><a id="see-more-link" class="see-more-link" role="button" data-toggle="collapse" href="#tcHiddenFields" aria-expanded="false" aria-controls="tcHiddenFields"><?php esc_html_e("SEE MORE +",OERCURR_CURRICULUM_SLUG); ?></a></span></p>
+          <p class="center"><span><a id="see-more-link" class="see-more-link" role="button" data-toggle="collapse" href="#tcHiddenFields" aria-expanded="false" aria-controls="tcHiddenFields"><?php esc_html_e("SEE MORE",OERCURR_CURRICULUM_SLUG); ?><i class="fa fa-chevron-down"></i></a></span></p>
       </div>
       <?php if($primary_resources_enabled){ ?>
       <div class="row oercurr-primary-sources-row">

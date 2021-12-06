@@ -8,6 +8,7 @@
     background: rgba(0, 0, 0, 0.80);
     line-height: 1.8em;
 }
+.oercurr-related-grades.hide{display:none;}
 .custom-bg-dark-inquiry-sets { height: 15px; }
 .oercurr-related-set-description {
     padding: 16px;

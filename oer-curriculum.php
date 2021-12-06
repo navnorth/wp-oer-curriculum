@@ -3,7 +3,7 @@
  Plugin Name:        OER Curriculum
  Plugin URI:         https://www.wp-oer.com/curriculum
  Description:        Manage and display collections of Open Educational Resources in lesson plans or curriculums with alignment to Common Core State Standards.
- Version:            0.5.2
+ Version:            0.5.3
  Requires at least:  4.4
  Requires PHP:       7.0
  Author:             Navigation North
@@ -40,7 +40,7 @@ define( 'OERCURR_CURRICULUM_FILE',__FILE__);
 // Plugin Name and Version
 define( 'OERCURR_CURRICULUM_PLUGIN_NAME', 'OER Curriculum Plugin' );
 define( 'OERCURR_CURRICULUM_ADMIN_PLUGIN_NAME', 'OER Curriculum Plugin');
-define( 'OERCURR_CURRICULUM_VERSION', '0.5.0' );
+define( 'OERCURR_CURRICULUM_VERSION', '0.5.3' );
 
 define( 'OERCURR_INDI_GRADE_LEVEL', true);  // set to true to use native grade levels
 if(OERCURR_INDI_GRADE_LEVEL){
@@ -284,7 +284,7 @@ add_action( 'rest_api_init', 'oercurr_add_meta_to_api');
 function oercurr_add_meta_to_api() {
     // Register Grade Levels to REST API
     register_rest_field( 'oer-curriculum',
-                'oer_curriculum_grades',
+                'oer_curriculum_grades_tax',
                 array(
                 'get_callback' => 'oercurr_rest_get_meta_field',
                 'update_callback' => null,
@@ -317,7 +317,8 @@ function oercurr_retrieve_rootslug(){
 }
 
 function oercurr_rest_get_meta_field($inquiryset, $field, $request){
-    if ($field=="oer_curriculum_grades") {
+    if ($field=="oer_curriculum_grades_tax") {
+        /*
         $grades = get_post_meta($inquiryset['id'], $field, true);
                 if (is_array($grades))
                     $grades = $grades[0];
@@ -331,6 +332,8 @@ function oercurr_rest_get_meta_field($inquiryset, $field, $request){
                     $grade_level = "Grade ".$grades;
 
                 return $grade_level;
+        */
+        return get_the_terms($inquiryset['id'], 'curriculum-grade-level');
     } else
         return get_post_meta($inquiryset['id'], $field, true);
 }
@@ -550,4 +553,66 @@ function oercurr_setup_settings_field( $arguments ) {
 	}
 }
 
+/*
+* Add OER Block Category
+*/
+if (!function_exists('wp_oer_block_category')) {
 
+  function wp_oer_block_category( $categories ) {
+    return array_merge(
+  		$categories,[
+  			[
+  				'slug'  => 'oer-block-category',
+  				'title' => __( 'OER Blocks', 'oer-block-category' ),
+  			],
+  		]
+  	);  
+  }
+
+  // Supporting older version of Wordpress - WP_Block_Editor_Context is only introduced in WP 5.8
+  if ( class_exists( 'WP_Block_Editor_Context' ) ) {
+  	add_filter( 'block_categories_all', 'wp_oer_block_category', 10, 2);
+  } else {
+  	add_filter( 'block_categories', 'wp_oer_block_category', 10, 2);
+  }
+
+}
+
+
+function oercurr_load_i18n_translations_function(){
+  $oercurr_i18n_locale = get_locale();
+  $oercurr_i18n_json_path = OERCURR_CURRICULUM_PATH."/languages/oer-curriculum-".$oercurr_i18n_locale.".json";
+  if (file_exists($oercurr_i18n_json_path)) {
+    $oercurr_i18n_translations = file_get_contents(OERCURR_CURRICULUM_PATH."/languages/oer-curriculum-".$oercurr_i18n_locale.".json");
+  }else{
+    $oercurr_i18n_translations = file_get_contents(OERCURR_CURRICULUM_PATH."/languages/oer-curriculum-en_US.json");
+  }
+  ?>
+  <script>
+  	document.addEventListener("DOMContentLoaded", function(event) {
+      
+      window.oercurr_global = {
+        "baseurl": "<?php echo get_home_url() ?>",
+  			"pluginurl": "<?php echo OERCURR_CURRICULUM_URL ?>",
+  			"plugindir": "<?php echo OERCURR_CURRICULUM_PATH ?>"
+      }
+      
+    	window.oercurr_i18n_arr = <?php echo $oercurr_i18n_translations ?>;
+      window.oercurr_i18n_locale = '<?php echo $oercurr_i18n_locale ?>';
+      ret = '';
+      window.oercurr__t = function (txt){      
+        switch(oercurr_i18n_locale) {
+          case 'es_ES':
+            ret = (typeof oercurr_i18n_arr[txt] !== 'undefined')? oercurr_i18n_arr[txt] : txt;        
+            break;
+          default:
+            ret = txt;
+        }
+  			return ret;
+  		}
+    })
+  </script>
+  <?php
+}
+add_action( 'admin_head', 'oercurr_load_i18n_translations_function');
+add_action( 'wp_head', 'oercurr_load_i18n_translations_function');

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OER Curriculum\n"
 "POT-Creation-Date: 2021-04-23 19:37+0800\n"
-"PO-Revision-Date: 2021-11-04 12:57+0800\n"
+"PO-Revision-Date: 2021-11-18 14:37+0800\n"
 "Last-Translator: \n"
 "Language-Team: Navigation North\n"
 "Language: es_ES\n"
@@ -119,8 +119,11 @@ msgstr "Ver ítem"
 msgid "Subjects"
 msgstr "Sujetos"
 
-msgid "SEE MORE +"
-msgstr "VER MÁS +"
+msgid "SEE MORE"
+msgstr "VER MÁS"
+
+msgid "SEE LESS"
+msgstr "VER MENOS"
 
 msgid "Text"
 msgstr "Texto"
@@ -469,20 +472,38 @@ msgstr "Configuración del control deslizante"
 msgid "Min. Slides"
 msgstr "Min. Diapositivas"
 
+msgid "The minimum number of slides to be shown. Slides will be sized down if slider becomes smaller than the original size"
+msgstr "El número mínimo de diapositivas que se mostrarán. El tamaño de las diapositivas se reducirá si el control deslizante se vuelve más pequeño que el tamaño original"
+
 msgid "Max. Slides"
 msgstr "Max. Diapositivas"
+
+msgid "The maximum number of slides to be shown. Slides will be sized up if slider becomes larger than the original size"
+msgstr "El número máximo de diapositivas que se mostrarán. El tamaño de las diapositivas aumentará si el control deslizante se vuelve más grande que el tamaño original"
 
 msgid "Move Slides"
 msgstr "Mover diapositivas"
 
+msgid "The number of slides to move during transition. This value must be greater than or equal to minSlides, and less than or equal to maxSlides. If the value is greater than fully visible slides, the fully visible slide count will be used"
+msgstr "El número de diapositivas a mover durante la transición. Este valor debe ser mayor o igual que minSlides, y menor o igual que maxSlides. Si el valor es mayor que diapositivas totalmente visibles, se utilizará el número de diapositivas totalmente visibles"
+
 msgid "Slide Width"
 msgstr "Ancho de diapositiva"
+
+msgid "Width of each slide"
+msgstr "Ancho de cada diapositiva"
 
 msgid "Slide Margin"
 msgstr "Margen de diapositiva"
 
+msgid "Space between slides"
+msgstr "Espacio entre diapositivas"
+
 msgid "Description length"
 msgstr "Longitud de la descripción"
+
+msgid "Length of description to display"
+msgstr "Longitud de la descripción para mostrar"
 
 msgid "Image height"
 msgstr "Altura de imagen"
@@ -502,23 +523,8 @@ msgstr "Filtrar por tema"
 msgid "All"
 msgstr "Todos"
 
-msgid "The minimum number of slides to be shown. Slides will be sized down if slider becomes smaller than the original size"
-msgstr "El número mínimo de diapositivas que se mostrarán. El tamaño de las diapositivas se reducirá si el control deslizante se vuelve más pequeño que el tamaño original"
-
-msgid "The maximum number of slides to be shown. Slides will be sized up if slider becomes larger than the original size"
-msgstr "El número máximo de diapositivas que se mostrarán. El tamaño de las diapositivas aumentará si el control deslizante se vuelve más grande que el tamaño original"
-
-msgid "The number of slides to move on transition. This value must be greater than or equal to minSlides, and less than or equal to maxSlides. If value is greater than the fully-visible slides, then the count of fully-visible slides will be used"
-msgstr "El número de diapositivas que se moverán en la transición. Este valor debe ser mayor o igual que minSlides y menor o igual que maxSlides. Si el valor es mayor que las diapositivas completamente visibles, se utilizará el recuento de diapositivas completamente visibles"
-
-msgid "Width of each slide"
-msgstr "Ancho de cada diapositiva"
-
-msgid "Space between slides"
-msgstr "Espacio entre diapositivas"
-
-msgid "Length of description to display"
-msgstr "Longitud de la descripción para mostrar"
-
 msgid "Adjust image height"
 msgstr "Ajustar la altura de la imagen"
+
+msgid "Curriculum Block settings"
+msgstr "Configuración del bloque del plan de estudios"

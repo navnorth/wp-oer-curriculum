@@ -118,19 +118,34 @@ var oerCurriculumSets = function (_Component) {
             var post = this.state.posts.find(function (item) {
                 return item.id == parseInt(value);
             });
-            var image_url = oer_curriculum_thumbnail_block_localized.theme_path + '/images/default-image.png';
-console.log(image_url);
+            let image_url = oer_curriculum_thumbnail_block_localized.theme_path + '/images/default-image.png';
+            let oercurr_grades = '';
+            let oercurr_title = '';
+            let oercurr_link = '';
             this.setState({ selectedInquirySet: parseInt(value), post: post });
-
-            if (post.featured_image_url) {
-                image_url = post.featured_image_url;
+            
+            if (typeof post !== 'undefined'){
+              if (post.featured_image_url) {
+                    image_url = post.featured_image_url;
+              }
+              if(post.oer_curriculum_grades_tax){
+                post.oer_curriculum_grades_tax.map(function(item, i){
+                  oercurr_grades = (oercurr_grades == '')? item['name']: oercurr_grades+', '+item['name']
+                })
+              }
+              if(post.title.rendered){
+                oercurr_title = post.title.rendered;
+              }
+              if(post.title.link){
+                oercurr_title = post.link;
+              }
             }
 
             this.props.setAttributes({
                 selectedInquirySet: parseInt(value),
-                title: post.title.rendered,
-                link: post.link,
-                grade: post.oer_curriculum_grades,
+                title: oercurr_title,
+                link: oercurr_link,
+                grade: oercurr_grades,
                 featuredImage: image_url
             });
         }
@@ -194,7 +209,7 @@ console.log(image_url);
                     ),
                     wp.element.createElement(
                         'div',
-                        { className: 'oercurr-related-grades' },
+                        { className: this.props.attributes.grade? 'oercurr-related-grades': 'oercurr-related-grades hide' },
                         wp.element.createElement(
                             'span',
                             null,
@@ -221,7 +236,7 @@ console.log(image_url);
 
 wp.blocks.registerBlockType('oer-curriculum/curriculum-thumbnail-block', {
     title: 'Curriculum Thumbnail Block',
-    category: 'common',
+    category: 'oer-block-category',
     icon: 'welcome-learn-more',
     attributes: {
         selectedInquirySet: { type: 'number', default: 0 },
