@@ -10,6 +10,7 @@
 	"supports": {
 		"html": false
 	},
+	"textdomain": "oer-curriculum",
 	"attributes": {
 			"selectedInquirySet": { "type": "intiger", "default": 0 },
 			"title": { "type": "string" },

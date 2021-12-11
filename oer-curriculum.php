@@ -247,7 +247,6 @@ function oercurr_add_inquiry_set_rest_args() {
 add_action('init', 'oercurr_enqueue_inquiry_set_block');
 function oercurr_enqueue_inquiry_set_block(){
     global $post;
-    wp_enqueue_script( 'wp-api' );
     /*
     wp_enqueue_script(
         'curriculum-thumbnail-block-js',
