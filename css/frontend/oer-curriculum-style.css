@@ -71,6 +71,9 @@ body.single-oer-curriculum {
     margin-bottom: 10px;
     
 }
+.oercurr-tc-details-description .wp-block-image {
+    display: block;
+}
 .oercurr-tc-details-standards-list .oercurr-tc-details-standard a {
     color: #fff;
     text-decoration: underline;
@@ -1326,7 +1329,7 @@ a#see-more-link i.fa {
 .oercurr-tc-details-description.collapsible{position:relative;}
 .oercurr-excerpt-collapsible-pseudo,
 .oercurr-excerpt-collapsible-pseudo-less,
-.oercurr-excerpt-collapsible-pseudo-more {display:none;}
+.oercurr-excerpt-collapsible-pseudo-more {display:none; float:left;}
 .oercurr-excerpt-collapsible p, .oercurr-excerpt-collapsible-pseudo p, .oercurr-excerpt-collapsible-pseudo-less p, .oercurr-excerpt-collapsible-pseudo-more p,
 .oercurr-excerpt-collapsible ul, .oercurr-excerpt-collapsible-pseudo ul, .oercurr-excerpt-collapsible-pseudo-less ul, .oercurr-excerpt-collapsible-pseudo-more ul {
   display: block !important; 
@@ -1342,6 +1345,15 @@ a.oercurr-morelink {display: inline-block !important;background: transparent !im
   -ms-transition:   all .2s ease-in-out;
   transition:       all .2s ease-in-out;
 }
+
+.oercurr-excerpt-collapsible img,
+.oercurr-excerpt-collapsible-pseudo img,
+.oercurr-excerpt-collapsible-pseudo-less img,
+.oercurr-excerpt-collapsible-pseudo-more img {
+  float:left;
+  margin:0px 10px 10px 0px;
+}
+
 /* Curriculum Description Excerpt Transition Start */
 
 img.attachment-inquiry-set-featured {
@@ -1358,4 +1370,16 @@ img.attachment-inquiry-set-featured {
 
 .collapse.show{
   display:block !important;
+}
+
+.oercurr-excerpt-collapsible .has-text-align-left img{
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.oercurr-excerpt-collapsible .has-text-align-right img {
+    float: right;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }

@@ -235,8 +235,9 @@ jQuery(document).ready(function() {
   var ellipsestext = " ..."; var moretext = "(read more)"; var lesstext = "(read less)";
   jQuery('.oercurr-excerpt-collapsible').each(function(e) {
     var content = jQuery(this).siblings('.oercurr-excerpt-collapsible-pseudo').html();
-    if(content.length > showChar) {
-      var ls = content.substr(0, showChar)+'<span class="oercurr-moreellipses">'+ellipsestext+'</span>&nbsp;<a href="" class="oercurr-morelink">' + moretext + '</a>';
+    var lsContent = jQuery("<div>").html(content).text();
+    if(lsContent.length > showChar) {
+      var ls = lsContent.substr(0, showChar)+'<span class="oercurr-moreellipses">'+ellipsestext+'</span>&nbsp;<a href="" class="oercurr-morelink">' + moretext + '</a>';
       var mr = content+'&nbsp;<a href="" class="oercurr-morelink less">' + lesstext + '</a>';
       jQuery(this).html(ls);
       jQuery(this).parent('.oercurr-tc-details-description').append('<div class="oercurr-excerpt-collapsible-pseudo-less">'+ls+'</div>');  
