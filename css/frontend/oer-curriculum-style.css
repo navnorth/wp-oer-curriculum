@@ -245,6 +245,7 @@ span.selected-standard-pill:last-child {
     background-color: #851738;
 }
 .oercurr-tc-author { margin-left: 10px; }
+.oercurr-tc-author,
 .oercurr-tc-author a {
     font-size: 14px !important;
     transition: all .2s ease-in;
