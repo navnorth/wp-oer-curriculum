@@ -548,6 +548,8 @@ function oercurr_save_custom_fields() {
                   }
               }
               update_post_meta($post->ID, 'oer_curriculum_oer_materials', $_sanitized_oer_materials);
+            }else{
+              delete_post_meta($post->ID, 'oer_curriculum_oer_materials');
             }
 
             if (isset($_POST['oer_curriculum_grades'])) {
