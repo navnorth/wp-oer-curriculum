@@ -477,9 +477,11 @@
                           
                           foreach($authors['name'] as $author){
                               $author_url = $authors['author_url'][$aIndex];
+                              
                               if ($aIndex>0)
                                   echo ", ";
-                              if (isset($author_url))
+                                  
+                              if (strlen(trim($author_url)) > 0)
                                   echo "<span class='oercurr-tc-author'><a href='".esc_url($author_url)."'>".esc_html($authors['name'][$aIndex])."</a></span>";
                               else
                                   echo "<span class='oercurr-tc-author'>".esc_html($authors['name'][$aIndex])."</span>";
