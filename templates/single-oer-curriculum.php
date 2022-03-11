@@ -457,10 +457,12 @@
                   </div>
               </div>
               <div class="col-xl-4 col-lg-5 col-md-5 col-sm-12 featured-image padding-right-0">
+                  <?php $keywordsWrapperClassname = 'extend' ?>
                   <?php the_post_thumbnail('inquiry-set-featured'); ?>
                   <?php $_feat_info_padding = ($oer_curriculum_download_copy_document && $download_copy_enabled)? 'padded-right' : ''; ?>
                   <div class="oercurr-tc-authors-list <?php echo esc_html($_feat_info_padding) ?>">
-                  <?php if (($author_set && $author_enabled) || !$author_set) { ?>
+                  <?php 
+                  if (($author_set && $author_enabled) || !$author_set) { ?>
                       <?php
                       $author_display = false;
                       foreach($authors as $author){
@@ -471,7 +473,7 @@
                       }
                       if ($author_display){
                           ?>
-                           <span class="oercurr-author-label"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_authors')); ?></span>
+                           <span class="oercurr-author-label"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_authors')); ?>:</span>
                           <?php 
                           $aIndex = 0;
                           
@@ -488,10 +490,15 @@
                                   
                               $aIndex++;
                           }
-                      } 
+                      }else{
+                        $keywordsWrapperClassname = '';
+                      }
                       ?>
                       
-                  <?php } ?>
+                  <?php 
+                  }else{
+                      $keywordsWrapperClassname = '';
+                  } ?>
                   
                   <?php if ($oer_curriculum_download_copy_document && $download_copy_enabled): ?>
                   <div class="oercurr-tc-controls">
@@ -511,7 +518,7 @@
                   if(!empty($keywords))
                   {
                   ?>
-                  <div class="oercurr-tc-keywords <?php echo esc_attr($_feat_info_padding) ?>">
+                  <div class="oercurr-tc-keywords <?php echo esc_attr($_feat_info_padding).' '.$keywordsWrapperClassname ?>">
                       <div class="oer_curriculum_keywords_container tagcloud">
                       <?php
                           foreach($keywords as $keyword)
