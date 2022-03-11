@@ -830,7 +830,7 @@ jQuery(document).ready(function ($) {
                         quicktags({ id: 'oercurr-resource-teacher-' + total_form_box });
                         quicktags({ id: 'oercurr-resource-student-' + total_form_box });
                         tinyMCE.init({
-                            plugins: "lists link fullscreen imagetools",
+                            plugins: "lists link fullscreen",
                             selector: "textarea#oercurr-resource-student-" + total_form_box,
                             content_css: lpScript['pluginDirUrl']+"/css/backend/oer-curriculum-mce-style.css",
                             mode: 'exact',
@@ -850,8 +850,8 @@ jQuery(document).ready(function ($) {
 
               $.fn.tinymce_textareas = function(){
                 tinyMCE.init({
-                    //plugins: 'print preview fullpage powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable',
-                    plugins: 'lists link fullscreen imagetools',
+                    //plugins: 'print preview fullpage powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable',
+                    plugins: 'lists link fullscreen',
                     skin: 'lightgray',
                     mode: 'exact',
                     menubar: false,
@@ -978,7 +978,7 @@ jQuery(document).ready(function ($) {
                     }
                     quicktags({ id: editor_prefix + id });
                     tinyMCE.init({
-                        plugins: "lists link fullscreen imagetools",
+                        plugins: "lists link fullscreen",
                         selector: "textarea#"+editor_prefix + id,
                         content_css: lpScript['pluginDirUrl']+"/css/backend/oer-curriculum-mce-style.css",
                         mode: 'exact',
@@ -1014,7 +1014,7 @@ jQuery(document).ready(function ($) {
                   }
                   quicktags({ id: editor_prefix + id });
                   tinyMCE.init({
-                      plugins: "lists link fullscreen imagetools",
+                      plugins: "lists link fullscreen",
                       selector: "textarea#"+editor_prefix + id,
                       content_css: "/wp-content/plugins/wp-curriculum/css/backend/oer-curriculum-mce-style.css",
                       mode: 'exact',
