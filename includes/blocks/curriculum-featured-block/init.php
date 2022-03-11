@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name:       Featured Curriculum Slider Old
+ * Plugin Name:       Featured Curriculum Slider
  * Description:       Use this block to add OER curriculum and resources in a slider
- * Requires at least: 5.8
+ * Requires at least: 5.7.4
  * Requires PHP:      7.0
  * Version:           0.5.2
  * Author:            The WordPress Contributors
@@ -17,21 +17,51 @@
  define( 'OERCURR_CFB_BLK_SLIDE_DESC_LEN', 150 );
  define( 'OERCURR_CFB_BLK_BLOCK_WIDTH', 150 );
  define( 'OERCURR_CFB_BLK_SLIDE_IMG_HEIGHT', 225 );
+ 
+ /**
+  * Registers the block using the metadata loaded from the `block.json` file.
+  * Behind the scenes, it registers also all assets so they can be enqueued
+  * through the block editor in the corresponding context.
+  *
+  * @see https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/writing-your-first-block-type/
+  */
 
-/**
- * Registers the block using the metadata loaded from the `block.json` file.
- * Behind the scenes, it registers also all assets so they can be enqueued
- * through the block editor in the corresponding context.
- *
- * @see https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/writing-your-first-block-type/
- */
-function oer_curriculum_oer_curriculum_featured_block_block_init() {
+global $wp_version;
+/*Load Plugin last (Remove when loaded from another plugin)*/
+function oer_curriculum_cfs_plugin_last() {
+	$wp_path_to_this_file = preg_replace('/(.*)plugins\/(.*)$/', WP_PLUGIN_DIR."/$2", __FILE__);
+	$this_plugin = plugin_basename(trim($wp_path_to_this_file));
+	$active_plugins = get_option('active_plugins');
+	$this_plugin_key = array_search($this_plugin, $active_plugins);
+        array_splice($active_plugins, $this_plugin_key, 1);
+        array_push($active_plugins, $this_plugin);
+        update_option('active_plugins', $active_plugins);
+}
+add_action("activated_plugin", "oer_curriculum_cfs_plugin_last");
+
+function oer_curriculum_featured_slider_block_init() {
 	register_block_type( __DIR__ );
 }
-add_action( 'init', 'oer_curriculum_oer_curriculum_featured_block_block_init' );
 
+function oer_curriculum_featured_slider_block_init_legacy(){
+	wp_register_script('oercurr_cfs_block_js', plugin_dir_url( __FILE__ ).'/build/index.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), null, true	);
+	wp_register_style('oercurr_cfs_block_editor_css', plugin_dir_url( __FILE__ ).'/build/index.css',array( 'wp-edit-blocks' ),null);
+	wp_register_style('oercurr_cfs_block_front_css', plugin_dir_url( __FILE__ ).'/build/style-index.css',array( 'wp-edit-blocks' ),null);
+	wp_localize_script('oercurr_cfs_block_js', 'oercurr_cfb_legacy_marker', ['legacy' => 'true']);
+  register_block_type(
+		'oer-curriculum/oer-curriculum-featured-block', array(
+			'editor_script' => 'oercurr_cfs_block_js',
+			'editor_style'  => 'oercurr_cfs_block_editor_css',
+			'style'         => 'oercurr_cfs_block_front_css'
+		)
+	);
+}
 
-
+if($wp_version < 5.8){
+	add_action( 'init', 'oer_curriculum_featured_slider_block_init_legacy' );
+}else{
+	add_action( 'init', 'oer_curriculum_featured_slider_block_init' );
+}
 
 
 // Add inline CSS in the admin head with the style tag

@@ -27,11 +27,32 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @uses {wp-editor} for WP editor styles.
  * @since 1.0.0
  */
- function oer_curriculum_oer_curriculum_block_block_init() {
+ 
+ global $wp_version;
+
+ function oer_curriculum_list_block_init() {
  	register_block_type( __DIR__ );
  }
- add_action( 'init', 'oer_curriculum_oer_curriculum_block_block_init' );
 
+ function oer_curriculum_list_block_init_legacy(){
+ 	wp_register_script('oercurr_clb_block_js', plugin_dir_url( __FILE__ ).'/build/index.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), null, true	);
+ 	wp_register_style('oercurr_clb_block_editor_css', plugin_dir_url( __FILE__ ).'/build/index.css',array( 'wp-edit-blocks' ),null);
+ 	wp_register_style('oercurr_clb_block_front_css', plugin_dir_url( __FILE__ ).'/build/style-index.css',array( 'wp-edit-blocks' ),null);
+ 	wp_localize_script('oercurr_clb_block_js', 'oercurr_clb_legacy_marker', ['legacy' => 'true']);
+ 	register_block_type(
+ 		'oer-curriculum/oer-curriculum-block', array(
+ 			'editor_script' => 'oercurr_clb_block_js',
+ 			'editor_style'  => 'oercurr_clb_block_editor_css',
+ 			'style'         => 'oercurr_clb_block_front_css'
+ 		)
+ 	);
+ }
+
+ if($wp_version < 5.8){
+ 	add_action( 'init', 'oer_curriculum_list_block_init_legacy' );
+ }else{
+ 	add_action( 'init', 'oer_curriculum_list_block_init' );
+ }
 
  function oercur_cb_enqueue_script_function(){
  	wp_enqueue_script( 'curriculum_block-front-js',OERCURR_CURRICULUM_URL.'/includes/blocks/curriculum-block/front.build.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'jquery' ),'1.0.1' , true );

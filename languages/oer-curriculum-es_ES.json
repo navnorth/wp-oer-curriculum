@@ -169,5 +169,7 @@
   "Filter by subject": "Filtrar por tema",
   "All": "Todos",
   "Adjust image height": "Ajustar la altura de la imagen",
-  "Curriculum Block settings": "Configuración del bloque del plan de estudios"
+  "Curriculum Block settings": "Configuración del bloque del plan de estudios",
+  "Curriculum Thumbnail Block settings": "Configuración del bloque de miniaturas del plan de estudios",
+  "Use this block to add OER curriculum thumbnail": "Utilice este bloque para añadir la miniatura del plan de estudios de OER"
 }
