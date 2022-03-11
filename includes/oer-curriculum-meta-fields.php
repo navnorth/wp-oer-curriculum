@@ -701,80 +701,101 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             </div>
                                         <?php }
                                     } else {?>
-                                        <div class="card col card-default oercurr-primary-source-element-wrapper">
-                                            <div class="card-header">
-                                                <h3 class="card-title oercurr-module-title">
-                                                    <?php esc_html_e("Resource", OERCURR_CURRICULUM_SLUG); ?>
-                                                    <span class="oercurr-sortable-handle">
-                                                    <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
-                                                    <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
-                                                </span>
-                                                    <span class="btn btn-danger btn-sm oercurr-remove-source"
-                                                          title="Delete"
-                                                          disabled="disabled"
-                                                    ><i class="fa fa-trash"></i> </span>
-                                                </h3>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                    <?php
-                                                    $posts = get_posts([
-                                                        'post_type' => 'resource',
-                                                        'post_status' => 'publish',
-                                                        'numberposts' => -1,
-                                                        'orderby' => 'title',
-                                                        'order'    => 'ASC'
-                                                    ]);
-                                                    ?>
-                                                    <select name="oer_curriculum_primary_resources[resource][]" itm="3" class="form-control">
-                                                        <option><?php echo esc_html__('Select Resource', OERCURR_CURRICULUM_SLUG) ?></option>
-                                                        <?php
-                                                        if (count($posts)) {
-                                                            foreach ($posts as $post) {
-                                                                echo '<option value="'.esc_attr($post->post_title).'">'.esc_html($post->post_title).'</option>';
-                                                            }
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <div class="checkbox pull-right">
-                                                        <label>
-                                                            <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="resource">
-                                                            <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
-                                                            <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
-                                                            <?php esc_html_e("Sensitive Material",OERCURR_CURRICULUM_SLUG) ?>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label><?php esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
-                                                      <input type="text"
-                                                          class="form-control"
-                                                          name="oer_curriculum_primary_resources[title][]"
-                                                          placeholder="<?php esc_html_e('Resource Title',OERCURR_CURRICULUM_SLUG); ?>"
-                                                          value="<?php echo isset($primary_resources['title'][$resourceKey]) ? esc_attr($primary_resources['title'][$resourceKey]) : "";?>">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label><?php esc_html_e('Description',OERCURR_CURRICULUM_SLUG); ?></label>
-                                                    <?php wp_editor( '',
-                                                        'oercurr-resource-student-1',
-                                                        $settings = array(
-                                                            'textarea_name' => 'oer_curriculum_primary_resources[description][]',
-                                                            'media_buttons' => true,
-                                                            'textarea_rows' => 6,
-                                                            'drag_drop_upload' => true,
-                                                            'teeny' => true, 
-                                                            'relative_urls' => false,
-                                                            'wpautop' => false
-                                                        )
-                                                    ); ?>
-                                                </div>
+                        
+
+                                                        <div class="card col card-default oercurr-primary-resource-element-wrapper">
+                                                            <div class="card-header">
+                                                                <h3 class="card-title oercurr-module-title">
+                                                                    <?php esc_html_e("Resource", OERCURR_CURRICULUM_SLUG); ?>
+                                                                    <span class="oercurr-sortable-handle">
+                                                                    <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
+                                                                    <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
+                                                                </span>
+                                                                    <span class="btn btn-danger btn-sm oercurr-remove-source"
+                                                                          title="Delete"
+                                                                          disabled="disabled"
+                                                                    ><i class="fa fa-trash"></i> </span>
+                                                                </h3>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <label><?php esc_html_e("Thumbnail Image",OERCURR_CURRICULUM_SLUG) ?></label>
+                                                                    <div class="oer_primary_resource_thumbnail_holder"></div>
+                                                                    <button name="oer_curriculum_primary_resources_thumbnail_button" class="oer_curriculum_primary_resources_thumbnail_button" class="ui-button" alt="Set Thumbnail Image"><?php esc_html_e("Set Thumbnail",OERCURR_CURRICULUM_SLUG) ?></button>
+                                                                    <input type="hidden" name="oer_curriculum_primary_resources[image][]" class="oer_primary_resourceurl" value="" />
+                                                                </div></div>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div class="form-group">
+                                                                            <div class="oer_curriculum_primary_resources_image_wrappper">
+                                                                              <label><?php esc_html_e('Resource', OERCURR_CURRICULUM_SLUG) ?></label>
+                                                                              <?php
+                                                                              $posts = get_posts([
+                                                                                  'post_type' => 'resource',
+                                                                                  'post_status' => 'publish',
+                                                                                  'numberposts' => -1,
+                                                                                  'orderby' => 'title',
+                                                                                  'order'    => 'ASC'
+                                                                              ]);
+                                                                              ?>
+                                                                              <div class="oer_curriculum_primary_resources_image">
+                                                                                <div class="oer_curriculum_primary_resources_image_preloader" style="display:none;">
+                                                                                  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                                                                                </div>
+                                                                                <div class="oer_curriculum_primary_resources_image_display">
+                                                                                  <div class="oer_curriculum_primary_resources_display"></div>
+                                                                                  <input type="hidden" name="oer_curriculum_primary_resources[resource][]" value="">
+                                                                                  <input type="button" class="button oercurr-resource-selector-button" value="<?php esc_html_e("Select Resource",OERCURR_CURRICULUM_SLUG) ?>">
+                                                                                </div>
+                                                                              </div>
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-5">
+                                                                        <div class="checkbox pull-right">
+                                                                            <label>
+                                                                                <input type="hidden" name="oer_curriculum_primary_resources[field_type][]" value="resource">
+                                                                                <input type="hidden" name="oer_curriculum_primary_resources[sensitive_material_value][]" value="no">
+                                                                                <input type="checkbox" name="oer_curriculum_primary_resources[sensitive_material][]" value="yes">
+                                                                                <?php esc_html_e("Sensitive Material",OERCURR_CURRICULUM_SLUG) ?>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label><?php esc_html_e('Title',OERCURR_CURRICULUM_SLUG); ?></label>
+                                                                      <input type="text"
+                                                                          class="form-control"
+                                                                          name="oer_curriculum_primary_resources[title][]"
+                                                                          placeholder="<?php esc_html_e('Resource Title',OERCURR_CURRICULUM_SLUG); ?>"
+                                                                          value="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label><?php esc_html_e('Description',OERCURR_CURRICULUM_SLUG); ?></label>
+                                                                    
+                                                                    <?php wp_editor( '',
+                                                                        'oercurr-resource-student-1',
+                                                                        $settings = array(
+                                                                            'textarea_name' => 'oer_curriculum_primary_resources[description][]',
+                                                                            'media_buttons' => true,
+                                                                            'textarea_rows' => 6,
+                                                                            'drag_drop_upload' => true,
+                                                                            'teeny' => true, 
+                                                                            'relative_urls' => false,
+                                                                            'wpautop' => false
+                                                                        )
+                                                                    ); ?>
+                                                                    
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                  
+                                                    
                                                 
-                                            </div>
-                                        </div>
+
                                     <?php }?>
                                 </div>
                                 <div class="row">
