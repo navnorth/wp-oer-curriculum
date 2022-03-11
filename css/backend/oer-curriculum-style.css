@@ -298,3 +298,16 @@ li.oer_sbstndard div ul li {
     position: fixed;
     top: 67px;
 }
+
+
+.wp-block-paragraph.has-text-align-left img {
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.wp-block-paragraph.has-text-align-right img {
+    float: right;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
