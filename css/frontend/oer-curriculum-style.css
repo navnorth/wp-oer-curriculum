@@ -327,7 +327,7 @@ span.selected-standard-pill:last-child {
     color: #ED4141;
     font-size: 20px !important;
 }
-.sensitive-source p { margin:0px; }
+.sensitive-source p { margin:0px !important; }
 .custom-bg-dark {
     background: #283d47 !important;
 }
