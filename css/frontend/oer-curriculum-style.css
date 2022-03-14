@@ -62,7 +62,7 @@ body.single-oer-curriculum {
     font-size: 14px;
     line-height:18px;
 }
-.oercurr-tc-details-description p { color:#333 !important; font-size:14px; line-height:18px; margin:0px; }
+.oercurr-tc-details-description p { color:#333 !important; font-size:14px; line-height:18px; margin:0px;clear:left;}
 .oercurr-tc-details-standards-list { padding:20px 0; }
 .oercurr-tc-details-standards-list .oercurr-tc-details-standard {
     display: inline-block;
