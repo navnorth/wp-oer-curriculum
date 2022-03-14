@@ -289,6 +289,7 @@ li.oer_sbstndard div ul li {
 .post-type-oer-curriculum .components-base-control__field {position: relative;}
 .post-type-oer-curriculum  span.components-checkbox-control__input-container {position: absolute;top: 0px;}
 .post-type-oer-curriculum  label.components-checkbox-control__label {padding-left: 25px;}
+.post-type-oer-curriculum .wp-block {clear: both;}
 
 .oer_curriculum_left_column.float {
     position: relative;
