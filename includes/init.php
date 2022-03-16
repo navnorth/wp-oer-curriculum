@@ -362,7 +362,7 @@ function oercurr_enqueue_admin_assets() {
   }
   
   
-  wp_enqueue_script('oercurr-resource-selector-script', OERCURR_CURRICULUM_URL . 'js/backend/oercurr-admin.js' , array('jquery') , null, true);
+  wp_enqueue_script('oercurr-resource-admin-script', OERCURR_CURRICULUM_URL . 'js/backend/oercurr-admin.js' , array('jquery') , null, true);
     
 }
 
