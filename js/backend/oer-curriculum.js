@@ -825,8 +825,8 @@ jQuery(document).ready(function ($) {
                     }
                     
                     if (typeof( tinymce ) == "object" && typeof( tinymce.execCommand ) == "function" ) {
-                        tinymce.execCommand( 'mceRemoveEditor', false, 'oercurr-resource-teacher-' + total_form_box );
-                        tinymce.execCommand( 'mceAddEditor', false, 'oercurr-resource-teacher-' + total_form_box );
+                        tinymce.execCommand( 'mceRemoveEditor', false, 'oercurr-resource-student-' + total_form_box );
+                        tinymce.execCommand( 'mceAddEditor', false, 'oercurr-resource-student-' + total_form_box );
                         quicktags({ id: 'oercurr-resource-teacher-' + total_form_box });
                         quicktags({ id: 'oercurr-resource-student-' + total_form_box });
                         tinyMCE.init({
