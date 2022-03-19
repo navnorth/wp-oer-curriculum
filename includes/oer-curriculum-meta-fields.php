@@ -702,7 +702,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                         <?php }
                                     } else {?>
                         
-
+                                                        <?php /*
                                                         <div class="card col card-default oercurr-primary-resource-element-wrapper">
                                                             <div class="card-header">
                                                                 <h3 class="card-title oercurr-module-title">
@@ -792,7 +792,7 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                                                 
                                                             </div>
                                                         </div>
-                                                  
+                                                        */ ?>
                                                     
                                                 
 
