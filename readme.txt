@@ -2,9 +2,9 @@
 Contributors: navigationnorth, joehobson, johnpaulbalagolan, josepheneldas
 Tags: curriculum, education, learning, teaching, OER, Open Educational Resources
 Requires at least: 4.4
-Tested up to: 5.8.2
+Tested up to: 5.9.0
 Requires PHP: 7.0
-Stable tag: 0.5.3
+Stable tag: 0.5.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -56,6 +56,17 @@ This is an intermittent issue in Firefox. Installing the Classic Editor fixes th
 4. Subject Areas settings page for managing curriculum subjects
 
 == Changelog ==
+= 0.5.4 =
+* Made blocks backwards compatible
+* Improved description expand and collapse
+* Improved Author section display
+* Removed default primary resource input form
+* Fixed issue with deleting Additional Materials
+* Fixed display and alignment issues
+* Fixed WYSIWYG imagetools plugin
+* Fixed WYSIWYG Fullscreen display
+* Fixed WYSIWYG white font issue
+
 = 0.5.3 =
 * Updated the block information on WP.org Plugins page
 * Tested up to WP 5.8.2
