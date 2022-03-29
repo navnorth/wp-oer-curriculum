@@ -1,0 +1,28 @@
+{
+	"$schema": "https://json.schemastore.org/block.json",
+	"apiVersion": 2,
+	"name": "oer-curriculum/oer-curriculum-thumbnail-block",
+	"version": "0.1.0",
+	"title": "Curriculum Thumbnail Block",
+	"category": "oer-block-category",
+	"icon": "welcome-learn-more",
+	"description": "Use this block to add OER curriculum thumbnail",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "oer-curriculum",
+	"attributes": {
+			"selectedInquirySet": { "type": "intiger", "default": 0 },
+			"title": { "type": "string" },
+			"link": { "type": "string" },
+			"grade": { "type": "string" },
+			"featuredImage": { "type": "string", "default": "default" },
+			"option": {"type": "array"},
+			"status": {"type": "string", "default":""},
+			"openInNewTab": {"type": "boolean","default": false}
+	},
+	"textdomain": "oer-curriculum-thumbnail-block",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}

@@ -528,3 +528,9 @@ msgstr "Ajustar la altura de la imagen"
 
 msgid "Curriculum Block settings"
 msgstr "Configuración del bloque del plan de estudios"
+
+msgid "Curriculum Thumbnail Block settings"
+msgstr "Configuración del bloque de miniaturas del plan de estudios"
+
+msgid "Use this block to add OER curriculum thumbnail"
+msgstr "Utilice este bloque para agregar la miniatura del plan de estudios de OER"

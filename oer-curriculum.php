@@ -3,7 +3,7 @@
  Plugin Name:        OER Curriculum
  Plugin URI:         https://www.wp-oer.com/curriculum
  Description:        Manage and display collections of Open Educational Resources in lesson plans or curriculums with alignment to Common Core State Standards.
- Version:            0.5.3
+ Version:            0.5.4
  Requires at least:  4.4
  Requires PHP:       7.0
  Author:             Navigation North
@@ -40,7 +40,7 @@ define( 'OERCURR_CURRICULUM_FILE',__FILE__);
 // Plugin Name and Version
 define( 'OERCURR_CURRICULUM_PLUGIN_NAME', 'OER Curriculum Plugin' );
 define( 'OERCURR_CURRICULUM_ADMIN_PLUGIN_NAME', 'OER Curriculum Plugin');
-define( 'OERCURR_CURRICULUM_VERSION', '0.5.3' );
+define( 'OERCURR_CURRICULUM_VERSION', '0.5.4' );
 
 define( 'OERCURR_INDI_GRADE_LEVEL', true);  // set to true to use native grade levels
 if(OERCURR_INDI_GRADE_LEVEL){
@@ -53,6 +53,7 @@ include_once(OERCURR_CURRICULUM_PATH.'includes/init.php');
 
 require_once(OERCURR_CURRICULUM_PATH.'includes/blocks/curriculum-block/init.php');
 require_once(OERCURR_CURRICULUM_PATH.'includes/blocks/curriculum-featured-block/init.php');
+require_once(OERCURR_CURRICULUM_PATH.'includes/blocks/curriculum-thumbnail-block/init.php');
 
 global $oer_curriculum_default_structure;
 global $oer_convert_info;
@@ -246,6 +247,7 @@ function oercurr_add_inquiry_set_rest_args() {
 add_action('init', 'oercurr_enqueue_inquiry_set_block');
 function oercurr_enqueue_inquiry_set_block(){
     global $post;
+    /*
     wp_enqueue_script(
         'curriculum-thumbnail-block-js',
         OERCURR_CURRICULUM_URL . "/js/backend/oer-curriculum-thumbnail-block.build.js",
@@ -258,6 +260,7 @@ function oercurr_enqueue_inquiry_set_block(){
             "theme_path" => get_template_directory_uri()
         )
     );
+    
     wp_enqueue_style(
         'curriculum-thumbnail-block-css-backend',
         OERCURR_CURRICULUM_URL . "/css/backend/oer-curriculum-thumbnail-block-editor.css",
@@ -270,7 +273,7 @@ function oercurr_enqueue_inquiry_set_block(){
   		is_admin() ? array( 'wp-editor' ) : null, // Dependency to include the CSS after it.
   		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
   	);
-
+    */
 
     /* Register Thumbnail Block */
     register_block_type('oer-curriculum/curriculum-thumbnail-block', array(

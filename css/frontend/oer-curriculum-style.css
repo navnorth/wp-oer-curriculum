@@ -51,10 +51,9 @@ body.single-oer-curriculum {
 .oercurr-tc-authors-list {
     font-weight: 600;
     font-size: 18px !important;
-    margin:5px 0;
+    margin:6px 0 5px 0;
     line-height: 24px;
     position:relative;
-    min-height: 40px;
 }
 .oercurr-tc-authors-list.padded-right {padding-right: 55px;}
 .oercurr-tc-details-description {
@@ -63,13 +62,16 @@ body.single-oer-curriculum {
     font-size: 14px;
     line-height:18px;
 }
-.oercurr-tc-details-description p { color:#333 !important; font-size:14px; line-height:18px; margin:0px; }
+.oercurr-tc-details-description p { color:#333 !important; font-size:14px; line-height:18px; margin:0px;clear:left;}
 .oercurr-tc-details-standards-list { padding:20px 0; }
 .oercurr-tc-details-standards-list .oercurr-tc-details-standard {
     display: inline-block;
     margin-right: 35px;
     margin-bottom: 10px;
     
+}
+.oercurr-tc-details-description .wp-block-image {
+    display: block;
 }
 .oercurr-tc-details-standards-list .oercurr-tc-details-standard a {
     color: #fff;
@@ -125,6 +127,9 @@ body.single-oer-curriculum {
     padding-right: 55px;
     float: left;
     width: 100%;
+}
+.oercurr-tc-keywords.padded-right.extend{
+    padding-right:0px;
 }
 .tc-sensitive-material-section i {
     color: #ED4141;
@@ -242,6 +247,7 @@ span.selected-standard-pill:last-child {
     background-color: #851738;
 }
 .oercurr-tc-author { margin-left: 10px; }
+.oercurr-tc-author,
 .oercurr-tc-author a {
     font-size: 14px !important;
     transition: all .2s ease-in;
@@ -321,7 +327,7 @@ span.selected-standard-pill:last-child {
     color: #ED4141;
     font-size: 20px !important;
 }
-.sensitive-source p { margin:0px; }
+.sensitive-source p { margin:0px !important; }
 .custom-bg-dark {
     background: #283d47 !important;
 }
@@ -782,6 +788,11 @@ h4.oercurr-tc-field-heading span.oer_curriculum_related_fields, h4.tc-related-cu
 .tc-related-curriculum-details ul.tc-related-curriculum-list li a:focus { text-decoration: underline; }
 .oercurr-author-label, .oercurr-tc-label, .oercurr-tc-label-heading { margin-right:10px; font-size:14px; /*color:#4F4F4F;*/ font-weight:bold; text-transform: uppercase; }
 .oercurr-tc-author a { font-size:14px; }
+.oercurr-tc-authors-list .oercurr-author-label, 
+.oercurr-tc-authors-list .oercurr-tc-author {
+    line-height: 38px;
+    margin-right:0px;
+}
 .oercurr-tc-standards-list, .tc-related-curriculum-list, .oercurr-tc-subject-areas-list, .oercurr-tc-objectives-list { padding-left:0; margin-top: 0px; margin-bottom: 0px; padding-bottom:15px;}
 .oercurr-tc-standards-list li, .oercurr-tc-subject-areas-list li, .oercurr-tc-objectives-list li { list-style:none; font-size:14px; }
 .oercurr-tc-standards-list li a, .oercurr-tc-subject-areas-list li a { text-decoration: none; }
@@ -1326,7 +1337,7 @@ a#see-more-link i.fa {
 .oercurr-tc-details-description.collapsible{position:relative;}
 .oercurr-excerpt-collapsible-pseudo,
 .oercurr-excerpt-collapsible-pseudo-less,
-.oercurr-excerpt-collapsible-pseudo-more {display:none;}
+.oercurr-excerpt-collapsible-pseudo-more {display:none; float:left;}
 .oercurr-excerpt-collapsible p, .oercurr-excerpt-collapsible-pseudo p, .oercurr-excerpt-collapsible-pseudo-less p, .oercurr-excerpt-collapsible-pseudo-more p,
 .oercurr-excerpt-collapsible ul, .oercurr-excerpt-collapsible-pseudo ul, .oercurr-excerpt-collapsible-pseudo-less ul, .oercurr-excerpt-collapsible-pseudo-more ul {
   display: block !important; 
@@ -1342,6 +1353,15 @@ a.oercurr-morelink {display: inline-block !important;background: transparent !im
   -ms-transition:   all .2s ease-in-out;
   transition:       all .2s ease-in-out;
 }
+
+.oercurr-excerpt-collapsible img,
+.oercurr-excerpt-collapsible-pseudo img,
+.oercurr-excerpt-collapsible-pseudo-less img,
+.oercurr-excerpt-collapsible-pseudo-more img {
+  float:left;
+  margin:0px 10px 10px 0px;
+}
+
 /* Curriculum Description Excerpt Transition Start */
 
 img.attachment-inquiry-set-featured {
@@ -1358,4 +1378,16 @@ img.attachment-inquiry-set-featured {
 
 .collapse.show{
   display:block !important;
+}
+
+.oercurr-excerpt-collapsible .has-text-align-left img{
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.oercurr-excerpt-collapsible .has-text-align-right img {
+    float: right;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }

@@ -362,7 +362,7 @@ function oercurr_enqueue_admin_assets() {
   }
   
   
-  wp_enqueue_script('oercurr-resource-selector-script', OERCURR_CURRICULUM_URL . 'js/backend/oercurr-admin.js' , array('jquery') , null, true);
+  wp_enqueue_script('oercurr-resource-admin-script', OERCURR_CURRICULUM_URL . 'js/backend/oercurr-admin.js' , array('jquery') , null, true);
     
 }
 
@@ -548,6 +548,8 @@ function oercurr_save_custom_fields() {
                   }
               }
               update_post_meta($post->ID, 'oer_curriculum_oer_materials', $_sanitized_oer_materials);
+            }else{
+              delete_post_meta($post->ID, 'oer_curriculum_oer_materials');
             }
 
             if (isset($_POST['oer_curriculum_grades'])) {
@@ -764,7 +766,7 @@ function oercurr_add_more_prime_resource_callback() {
               <div class="card col card-default oercurr-primary-resource-element-wrapper" id="oercurr-primary-resource-element-wrapper-<?php echo esc_attr($totalElements) ?>">
                   <div class="card-header">
                       <h3 class="card-title oercurr-module-title">
-                          <?php esc_html_e('Texbox',OERCURR_CURRICULUM_SLUG); ?>
+                          <?php esc_html_e('Textbox',OERCURR_CURRICULUM_SLUG); ?>
                           <span class="oercurr-sortable-handle">
                               <i class="fa fa-arrow-down resource-reorder-down" aria-hidden="true"></i>
                               <i class="fa fa-arrow-up resource-reorder-up" aria-hidden="true"></i>
@@ -823,6 +825,7 @@ function oercurr_add_more_prime_resource_callback() {
                                       'drag_drop_upload' => true,
                                       'teeny' => true,
                                       'relative_urls' => false,
+                                      'wpautop' => false
                                   )
                               );
                               echo ob_get_clean();

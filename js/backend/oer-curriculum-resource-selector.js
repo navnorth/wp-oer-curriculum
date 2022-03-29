@@ -135,6 +135,37 @@ jQuery( document ).ready(function() {
 		  jQuery('head').append(style);
 		}
 	});
+  
+  //TinyMCE fullscreen Observer
+  setTimeout(function(){
+    let oercurr_elemToObserve = document.querySelectorAll(".mce-tinymce");
+    for (let i = 0; i < oercurr_elemToObserve.length; i++) {
+        let oercurr_tinymce_fullscreen_observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                let oercurr_target_mce_class_state = mutation.target.classList.contains('mce-fullscreen');              
+                if(jQuery(window).width() < 783){
+                  if(oercurr_target_mce_class_state){
+                    jQuery('.interface-interface-skeleton__header').hide();
+                    jQuery('.interface-interface-skeleton__sidebar').hide();
+                  }else{
+                    jQuery('.interface-interface-skeleton__header').show();
+                    jQuery('.interface-interface-skeleton__sidebar').show();
+                  }
+                }else{
+                  if(oercurr_target_mce_class_state){
+                    jQuery('.interface-interface-skeleton__header').hide();
+                    jQuery('.interface-interface-skeleton__sidebar').hide();
+                  }else{
+                    jQuery('.interface-interface-skeleton__header').show();
+                    jQuery('.interface-interface-skeleton__sidebar').show();
+                  }
+                }
+            });
+        });
+        oercurr_tinymce_fullscreen_observer.observe(oercurr_elemToObserve[i], { attributes: true });
+    }
+  }, 2000);
+
 
 });
 
