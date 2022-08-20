@@ -157,7 +157,7 @@
                           if (($related_curriculum_label && $related_curriculum_enabled) || !$related_curriculum_label) {
                       ?>
                       <div class="tc-related-curriculum-section">
-                          <a href="#collapse_oer_curriculum_related_curriculum" data-toggle="collapse" class="tc_oer_curriculum_collapse_button collapsed" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          <a href="#collapse_oer_curriculum_related_curriculum" data-bs-toggle="collapse" class="tc_oer_curriculum_collapse_button collapsed" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <h4 class="tc-related-curriculum-section-heading clearfix">
                                 <span class="oer_curriculum_related_fields"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_related_curriculum')); ?></span><span class="oer_curriculum_acicon"></span>
                             </h4>
@@ -187,7 +187,7 @@
                            if (($standards_set && $standards_enabled) || !$standards_set) {
                       ?>
                       <div class="oercurr-tc-standards">
-                          <a href="#collapse_oer_curriculum_standards" data-toggle="collapse" class="tc_oer_curriculum_collapse_button collapsed" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          <a href="#collapse_oer_curriculum_standards" data-bs-toggle="collapse" class="tc_oer_curriculum_collapse_button collapsed" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <h4 class="oercurr-tc-field-heading clearfix">
                                 <span class="oer_curriculum_related_fields"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_standards')); ?></span><span class="oer_curriculum_acicon"></span>
                             </h4>
@@ -224,7 +224,7 @@
                                       foreach($stds as $std){
                                           if (isset($std['core_standard_id'])) {
                                               echo "<li>";
-                                                  echo '<a class="oercurr-standard-toggle" data-toggle="collapse" href="#core-standard-'.esc_attr($std['core_standard_id']).'">'.esc_html($std['core_standard_name']).' <i class="fas fa-caret-right"></i></a>';
+                                                  echo '<a class="oercurr-standard-toggle" data-bs-toggle="collapse" href="#core-standard-'.esc_attr($std['core_standard_id']).'">'.esc_html($std['core_standard_name']).' <i class="fas fa-caret-right"></i></a>';
                                               ?>
                                               <div class="collapse oercurr-tc-details-standard" id="core-standard-<?php echo esc_attr($std['core_standard_id']); ?>">
                                               <?php
@@ -259,7 +259,7 @@
                           if (!empty($post_terms)) {
                       ?>
                       <div class="oercurr-tc-subject-areas">
-                         <a href="#collapse_oer_curriculum_subjects" class="tc_oer_curriculum_collapse_button collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                         <a href="#collapse_oer_curriculum_subjects" class="tc_oer_curriculum_collapse_button collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
                            <h4 class="oercurr-tc-field-heading clearfix">
                                 <span class="oer_curriculum_related_fields"><?php esc_html_e("Subjects",OERCURR_CURRICULUM_SLUG); ?></span><span class="oer_curriculum_acicon"></span>
                             </h4>
@@ -278,7 +278,7 @@
                                       else
                                           echo '<li>'.wp_kses_post($subject).'</li>';
                                       if (($i==2) && ($cnt>2))
-                                          echo '<li><a class="see-more-subjects" data-toggle="collapse" data-count="'.esc_attr($moreCnt).'" href=".oercurr-subject-hidden">SEE '.esc_attr($moreCnt).' MORE +</a></li>';
+                                          echo '<li><a class="see-more-subjects" data-bs-toggle="collapse" data-count="'.esc_attr($moreCnt).'" href=".oercurr-subject-hidden">SEE '.esc_attr($moreCnt).' MORE +</a></li>';
                                       $i++;
                                   }
                                   ?>
@@ -299,7 +299,7 @@
                         endforeach;            
                         if ($_tmp_html > ''): ?>
                         <div class="oercurr-tc-objectives">
-                          <a href="#collapse_oer_curriculum_objectives" class="tc_oer_curriculum_collapse_button collapsed" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          <a href="#collapse_oer_curriculum_objectives" class="tc_oer_curriculum_collapse_button collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <h4 class="oercurr-tc-field-heading clearfix"><span class="oer_curriculum_related_fields"><?php echo esc_html(oercurr_get_field_label('oer_curriculum_related_objective')); ?></span><span class="oer_curriculum_acicon"></span></h4>
                           </a>                
                           <div class="oercurr-tc-objectives-details clearfix collapse" id="collapse_oer_curriculum_objectives">
@@ -534,7 +534,7 @@
           </div>
       </div>
       <div class="row see-more-row">
-          <p class="center"><span><a id="see-more-link" class="see-more-link" role="button" data-toggle="collapse" href="#tcHiddenFields" aria-expanded="false" aria-controls="tcHiddenFields"><?php esc_html_e("SEE MORE",OERCURR_CURRICULUM_SLUG); ?><i class="fa fa-chevron-down"></i></a></span></p>
+          <p class="center"><span><a id="see-more-link" class="see-more-link" role="button" data-bs-toggle="collapse" href="#tcHiddenFields" aria-expanded="false" aria-controls="tcHiddenFields"><?php esc_html_e("SEE MORE",OERCURR_CURRICULUM_SLUG); ?><i class="fa fa-chevron-down"></i></a></span></p>
       </div>
       <?php if($primary_resources_enabled){ ?>
       <div class="row oercurr-primary-sources-row">
