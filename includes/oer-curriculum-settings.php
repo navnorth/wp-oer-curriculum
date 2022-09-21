@@ -147,7 +147,7 @@ function oercurr_save_general_setting(){
     if (!isset( $_POST['oer_curriculum_general_setting'] )) return;
     $_arr = array();
     foreach ($_POST['oer_curriculum_general_setting'] as $key => $genset){
-        if(!in_array($genset)) $_arr[$key] = $genset;
+        if(!in_array($genset, $_arr)) $_arr[$key] = $genset;
     }
     if(!get_option('oer_curriculum_general_setting')){
         add_option('oer_curriculum_general_setting', json_encode($_arr));
