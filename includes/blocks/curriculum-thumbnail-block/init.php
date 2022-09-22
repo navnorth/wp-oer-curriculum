@@ -139,6 +139,7 @@ function oercurr_rest_get_specific_curriculum($inquiryset){
 }
 
 function oercurr_rest_get_curriculum_posts(){
+	$_curlist = array(); 
 	$args = array(
 		'posts_per_page' => -1,
 		'post_type' => 'oer-curriculum',
@@ -147,7 +148,7 @@ function oercurr_rest_get_curriculum_posts(){
 	);
 	$posts = get_posts( $args );
 	if($posts){
-			$_curlist = array(); $i=0;
+			$i=0;
 			foreach($posts as $post){
 					
 					$_tmp_image = get_the_post_thumbnail_url($post->ID,'medium');
