@@ -27,7 +27,26 @@
   */
 
 function oer_curriculum_featured_slider_block_init() {
-	register_block_type( __DIR__ );
+    wp_enqueue_script("wp-api");
+    $dir = dirname(__FILE__);
+    $script_asset_path = "$dir/build/index.asset.php";
+    
+    $index_js     = 'build/index.js';
+    $script_asset = require( $script_asset_path );
+    wp_register_script(
+        'oercurr_cfs_block_js',
+        plugins_url( $index_js, __FILE__ ),
+        $script_asset['dependencies'],
+        $script_asset['version']
+    );
+    wp_localize_script( 'oercurr_cfs_block_js', 'curr_cfs_block', array( 'home_url' => home_url() ) );
+
+    register_block_type( 
+        __DIR__,
+        array(
+            'editor_script' => 'oercurr_cfs_block_js'
+        )
+    );
 }
 
 function oer_curriculum_featured_slider_block_init_legacy(){

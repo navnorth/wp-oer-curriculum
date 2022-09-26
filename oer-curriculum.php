@@ -207,18 +207,20 @@ function oercurr_add_query_vars( $vars ){
 add_action( 'template_include' , 'oercurr_assign_standard_template' );
 function oercurr_assign_standard_template($template) {
     global $wp_query;
-  global $root_slug;
+    global $root_slug;
     $url_path = trim(parse_url(add_query_arg(array()), PHP_URL_PATH), '/');
 
     status_header(200);
 
-    if ( strpos( $url_path, $root_slug ) !== false && get_query_var($root_slug) && get_query_var('source')) {
+    //if ( strpos( $url_path, $root_slug ) !== false && get_query_var($root_slug) && get_query_var('source')) {
+    if ( strpos( $url_path, $root_slug ) !== false && get_query_var('source')) {
         $wp_query->is_404 = false;
         $template = locate_template('templates/primary-source.php', true);
         if (!$template) {
             $template = dirname(__FILE__) . '/templates/primary-source.php';
         }
-    } elseif ( strpos( $url_path, $root_slug ) !== false && get_query_var($root_slug) && get_query_var('module')) {
+    //} elseif ( strpos( $url_path, $root_slug ) !== false && get_query_var($root_slug) && get_query_var('module')) {
+    } elseif ( strpos( $url_path, $root_slug ) !== false && get_query_var('module')) {
         $wp_query->is_404 = false;
         $template = locate_template('templates/module.php', true);
         if (!$template) {
