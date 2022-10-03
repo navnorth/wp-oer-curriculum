@@ -352,7 +352,7 @@ function oercurr_cfb_initiate_admin_bx_slider() {
             jQuery('.oercurr_cfb_inspector_feat_modal_resource_wrapper').show(300);
           });
 
-          jQuery(document).on('click','.oercurr_cfb_inspector_feat_modal_wrapper_close span.dashicons',function(e){
+          jQuery(document).on('click','.oercurr_cfb_inspector_feat_modal_wrapper_close span.dashicons, .oercurr_cfb_inspector_feat_modal_btn, .oercurr_cfb_inspector_feat_curr_modal_btn',function(e){
             jQuery('.oercurr_cfb_inspector_feat_modal_resource_wrapper').hide(300);
             jQuery('.oercurr_cfb_inspector_feat_modal_curriculum_wrapper').hide(300);
           })
