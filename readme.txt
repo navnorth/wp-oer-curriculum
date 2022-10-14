@@ -2,9 +2,9 @@
 Contributors: navigationnorth, joehobson, johnpaulbalagolan, josepheneldas
 Tags: curriculum, education, learning, teaching, OER, Open Educational Resources
 Requires at least: 4.4
-Tested up to: 5.9.0
+Tested up to: 6.0.2
 Requires PHP: 7.0
-Stable tag: 0.5.4
+Stable tag: 0.5.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -56,6 +56,14 @@ This is an intermittent issue in Firefox. Installing the Classic Editor fixes th
 4. Subject Areas settings page for managing curriculum subjects
 
 == Changelog ==
+= 0.5.5 =
+* Fixed the in_array PHP error on the plugin's general settings page
+* Fixed the display issue on the primary source related to permalinks
+* Fixed the register_test_route error issue on the Curriculum List Block when the WordPress instance is a subdirectory
+* Fixed the selection and display issues on the Featured Curriculum Slider block when editing
+* Fixed the 404 error on the Curriculum Thumbnail block
+* Tested up to WP 6.0.2
+
 = 0.5.4 =
 * Made blocks backwards compatible
 * Improved description expand and collapse

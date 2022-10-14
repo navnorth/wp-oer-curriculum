@@ -3,7 +3,7 @@
  Plugin Name:        OER Curriculum
  Plugin URI:         https://www.wp-oer.com/curriculum
  Description:        Manage and display collections of Open Educational Resources in lesson plans or curriculums with alignment to Common Core State Standards.
- Version:            0.5.4
+ Version:            0.5.5
  Requires at least:  4.4
  Requires PHP:       7.0
  Author:             Navigation North
@@ -40,7 +40,7 @@ define( 'OERCURR_CURRICULUM_FILE',__FILE__);
 // Plugin Name and Version
 define( 'OERCURR_CURRICULUM_PLUGIN_NAME', 'OER Curriculum Plugin' );
 define( 'OERCURR_CURRICULUM_ADMIN_PLUGIN_NAME', 'OER Curriculum Plugin');
-define( 'OERCURR_CURRICULUM_VERSION', '0.5.4' );
+define( 'OERCURR_CURRICULUM_VERSION', '0.5.5' );
 
 define( 'OERCURR_INDI_GRADE_LEVEL', true);  // set to true to use native grade levels
 if(OERCURR_INDI_GRADE_LEVEL){
@@ -207,18 +207,20 @@ function oercurr_add_query_vars( $vars ){
 add_action( 'template_include' , 'oercurr_assign_standard_template' );
 function oercurr_assign_standard_template($template) {
     global $wp_query;
-  global $root_slug;
+    global $root_slug;
     $url_path = trim(parse_url(add_query_arg(array()), PHP_URL_PATH), '/');
 
     status_header(200);
 
-    if ( strpos( $url_path, $root_slug ) !== false && get_query_var($root_slug) && get_query_var('source')) {
+    //if ( strpos( $url_path, $root_slug ) !== false && get_query_var($root_slug) && get_query_var('source')) {
+    if ( strpos( $url_path, $root_slug ) !== false && get_query_var('source')) {
         $wp_query->is_404 = false;
         $template = locate_template('templates/primary-source.php', true);
         if (!$template) {
             $template = dirname(__FILE__) . '/templates/primary-source.php';
         }
-    } elseif ( strpos( $url_path, $root_slug ) !== false && get_query_var($root_slug) && get_query_var('module')) {
+    //} elseif ( strpos( $url_path, $root_slug ) !== false && get_query_var($root_slug) && get_query_var('module')) {
+    } elseif ( strpos( $url_path, $root_slug ) !== false && get_query_var('module')) {
         $wp_query->is_404 = false;
         $template = locate_template('templates/module.php', true);
         if (!$template) {

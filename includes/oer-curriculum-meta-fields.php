@@ -1326,6 +1326,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                         <button type="button"
                                                 id="oercurr-select-standard"
                                                 class="btn btn-primary"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#lpOerStandardModal"
                                         ><?php esc_html_e("Select Standards", OERCURR_CURRICULUM_SLUG); ?></button>
                                     </div>
                                 </div>
@@ -2374,6 +2376,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                             <button type="button"
                                                     id="oercurr-select-standard"
                                                     class="btn btn-primary"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#lpOerStandardModal"
                                             ><?php esc_html_e("Select Standards", OERCURR_CURRICULUM_SLUG); ?></button>
                                         </div>
                                     </div>
@@ -3046,6 +3050,8 @@ $objectives_enabled = (get_option('oer_curriculum_related_objective_curmetset_en
                                 <button type="button"
                                         id="oercurr-select-standard"
                                         class="btn btn-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#lpOerStandardModal"
                                 ><?php esc_html_e("Select Standards", OERCURR_CURRICULUM_SLUG); ?></button>
                             </div>
                         </div>

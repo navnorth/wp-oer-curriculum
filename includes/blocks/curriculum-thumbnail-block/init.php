@@ -24,7 +24,26 @@
 global $wp_version;
 
 function oer_curriculum_thumbnail_block_init() {
-	register_block_type( __DIR__ );
+	wp_enqueue_script("wp-api");
+    $dir = dirname(__FILE__);
+    $script_asset_path = "$dir/build/index.asset.php";
+    
+    $index_js     = 'build/index.js';
+    $script_asset = require( $script_asset_path );
+    wp_register_script(
+        'oercurr_ctb_block_js',
+        plugins_url( $index_js, __FILE__ ),
+        $script_asset['dependencies'],
+        $script_asset['version']
+    );
+    wp_localize_script( 'oercurr_ctb_block_js', 'curr_ctb_block', array( 'home_url' => home_url() ) );
+
+    register_block_type( 
+        __DIR__,
+        array(
+            'editor_script' => 'oercurr_ctb_block_js'
+        )
+    );
 }
 
 function oer_curriculum_thumbnail_block_init_legacy(){
@@ -139,6 +158,7 @@ function oercurr_rest_get_specific_curriculum($inquiryset){
 }
 
 function oercurr_rest_get_curriculum_posts(){
+	$_curlist = array(); 
 	$args = array(
 		'posts_per_page' => -1,
 		'post_type' => 'oer-curriculum',
@@ -147,7 +167,7 @@ function oercurr_rest_get_curriculum_posts(){
 	);
 	$posts = get_posts( $args );
 	if($posts){
-			$_curlist = array(); $i=0;
+			$i=0;
 			foreach($posts as $post){
 					
 					$_tmp_image = get_the_post_thumbnail_url($post->ID,'medium');
